@@ -4,7 +4,7 @@
 
 {description}
 
-## Team Name
+## Team Burton
 
 {team members and roles}
 
