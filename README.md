@@ -6,13 +6,60 @@
 
 ## Team Burton
 
-{team members and roles}
+#Art
 
-Feel free to link any existing Linked.in Profiles or Portfolio Websites.
+Ava Blixt | [LinkedIn](https://www.linkedin.com/in/ava-blixt-6830aa195/) [Portfolio]()
+
+Ella Schoultz | [LinkedIn](https://www.linkedin.com/in/ella-schoultz/) [Portfolio]()
+
+Mathilda Christiansson | [LinkedIn](https://www.linkedin.com/in/mathilda-christiansson-107048220/) [Portfolio]()
+
+Olof Forsgren | [Portfolio]()
+
+
+
+#Design
+
+Hugo Molander | [LinkedIn](https://www.linkedin.com/in/-hugo-molander/) [Portfolio]()
+
+Jack Fors Ahlberg | [LinkedIn](https://www.linkedin.com/in/jack-fors-ahlberg-9a8657221/) [Portfolio]()
+
+Joakim Blomstrand | [LinkedIn](https://www.linkedin.com/in/joakim-blomstrand-218417227/) [Portfolio]()
+
+Lucas Olsson | [LinkedIn](https://www.linkedin.com/in/lucasolsson/) [Portfolio]()
+
+
+#Sound
+
+Anton Spetze | [Portfolio]()
+
+Carl Johansson | [Portfolio]()
+
+Ludvig Frendin | [LinkedIn](https://www.linkedin.com/in/ludvig-frendin-10b5b023a/) [Portfolio]()
+
+
+#Programming
+
+Harry Heath | [LinkedIn](https://www.linkedin.com/in/hmtheath/) [Portfolio]()
+
+Jonathan Jonsson | [Portfolio]()
+
+Mattias Lönnqvist | [LinkedIn](linkedin.com/in/mattias-lönnqvist-a12929230/) [Portfolio]()
+
+Maxim Thellenberg | [Portfolio]()
+
+Nadia Dahlberg | [LinkedIn]() [Portfolio](https://www.linkedin.com/in/nadia-dahlberg-681663237/)
+
+Pavel Sarmiento | [LinkedIn](https://www.linkedin.com/in/pavel-sarmiento-5483661a3/) [Portfolio]()
+
+Toofan Tahmouresi | [LinkedIn](https://www.linkedin.com/in/toofantah/) [Portfolio]()
+
+
+
 
 ## Design Documents
 
-{gdd}
+[Level Design Document](https://docs.google.com/document/d/175BH6Gn55kEokYSTSJycJg5dB4U4uDsKR7SMqzGB4cQ/)
 
 {tdd}
 
