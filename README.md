@@ -26,7 +26,7 @@ Jack Fors Ahlberg | [LinkedIn](https://www.linkedin.com/in/jack-fors-ahlberg-9a8
 
 Joakim Blomstrand | [LinkedIn](https://www.linkedin.com/in/joakim-blomstrand-218417227/) 
 
-Lucas Olsson | [LinkedIn](https://www.linkedin.com/in/lucasolsson/) 
+Lucas Olsson | [LinkedIn](https://www.linkedin.com/in/lucasolsson/) [Portfolio](https://www.lucasolsson.se/)
 
 
 ## Sound
@@ -40,7 +40,7 @@ Ludvig Frendin | [LinkedIn](https://www.linkedin.com/in/ludvig-frendin-10b5b023a
 
 ## Programming
 
-Harry Heath | [LinkedIn](https://www.linkedin.com/in/hmtheath/) 
+Harry Heath | [LinkedIn](https://www.linkedin.com/in/hmtheath/) [Portfolio](https://whatsrunningroundmyhead.wordpress.com/portfolio/)
 
 Jonathan Jonsson | [LinkedIn](https://www.linkedin.com/in/jonathan-jonsson-50346a44/)
 
