@@ -42,7 +42,7 @@ Ludvig Frendin | [LinkedIn](https://www.linkedin.com/in/ludvig-frendin-10b5b023a
 
 Harry Heath | [LinkedIn](https://www.linkedin.com/in/hmtheath/) 
 
-Jonathan Jonsson 
+Jonathan Jonsson | [LinkedIn](https://www.linkedin.com/in/jonathan-jonsson-50346a44/)
 
 Mattias Lönnqvist | [LinkedIn](linkedin.com/in/mattias-lönnqvist-a12929230/) 
 
