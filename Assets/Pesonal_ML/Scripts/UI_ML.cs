@@ -11,13 +11,17 @@ using UnityEngine.UI;
 public class UI_ML : MonoBehaviour
 {
     private Button saveButton;
+    private Button loadButton;
     private TMP_InputField field;
     private string _saveName;
     
     void Start()
     {
         saveButton = GetComponentsInChildren<Button>()[0];
+        loadButton = GetComponentsInChildren<Button>()[1];
         saveButton.onClick.AddListener(SaveStuff);
+        loadButton.onClick.AddListener(LoadStuff);
+        
         field = GetComponentInChildren<TMP_InputField>();
         field.onValueChanged.AddListener(SetName);
     }
@@ -31,9 +35,24 @@ public class UI_ML : MonoBehaviour
     private void OnDisable()
     {
         saveButton.onClick.RemoveAllListeners();
+        loadButton.onClick.RemoveAllListeners();
         field.onValueChanged.RemoveAllListeners();
     }
 
+    private void LoadStuff()
+    {
+        var path = Application.dataPath + "/Resources/EditorSaveFiles/" + _saveName + ".txt";
+    
+        if (!File.Exists(path))
+        {
+            Debug.Log("No such file");
+            return;
+        }
+
+        var output = JsonConvert
+            .DeserializeObject<List<SaveClass>>(File.ReadAllText(path));
+    }
+    
     private void SaveStuff()
     {
        var tiles =  GameObject.FindGameObjectsWithTag("ATile");
@@ -52,14 +71,14 @@ public class UI_ML : MonoBehaviour
        }
        
        var output = JsonConvert.SerializeObject(saveFile);
-       var path = Application.dataPath + "/Resources/EditorSaveFiles/Test.txt";
+       if (_saveName == "")
+       {
+           _saveName = "DEFAULT";
+       }
+       
+       var path = Application.dataPath + "/Resources/EditorSaveFiles/" + _saveName + ".txt";
        Debug.Log(path);
        File.WriteAllText(path, output);
     }
     
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
