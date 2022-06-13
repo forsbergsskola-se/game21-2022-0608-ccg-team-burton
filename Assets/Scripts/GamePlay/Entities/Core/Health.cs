@@ -2,33 +2,40 @@ using UnityEngine;
 
 namespace Entity
 {
-    public class Health : MonoBehaviour
+    /// <summary>
+    /// Health class, which enables things to be damaged or healed.
+    /// </summary>
+    public class Health : MonoBehaviour, IDamageable
     {
-
         [SerializeField]
         private int _health;
-        private int currentHealth { get; set; }
         private bool IsDead { get; set; }
-
-        private void OnDeath()
+        public int CurrentHealth
         {
-            IsDead = true;
-            gameObject.SetActive(false); // disable player here
+            get => _health;
+            set => _health = value;
         }
 
         private void Start()
         {
-            currentHealth = _health;
+            CurrentHealth = _health;
         }
 
         public void ModifyHealth(int damage)
         {
-            currentHealth += damage;
-            Debug.Log($"New health for {name}: {currentHealth}");
-            if (currentHealth <= 0)
-            {
+            CurrentHealth += damage;
+            Debug.Log($"New health for {name}: {CurrentHealth}");
+            
+            if (CurrentHealth <= 0)
                 OnDeath();
-            }
+            
         }
+        
+        private void OnDeath()
+        {
+            IsDead = true;
+            gameObject.SetActive(false); //Make death-script and make either event or something
+        }
+
     }
 }
