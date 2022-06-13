@@ -8,6 +8,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class UI_ML : MonoBehaviour
 {
     private Button saveButton;
@@ -49,8 +50,21 @@ public class UI_ML : MonoBehaviour
             return;
         }
 
+        DeleteAllTiles();
+        
         var output = JsonConvert
             .DeserializeObject<List<SaveClass>>(File.ReadAllText(path));
+    }
+
+
+    private void DeleteAllTiles()
+    {
+        var tiles =  GameObject.FindGameObjectsWithTag("ATile");
+
+        foreach (var t in tiles)
+        {
+            Destroy(t);
+        }
     }
     
     private void SaveStuff()
@@ -77,7 +91,7 @@ public class UI_ML : MonoBehaviour
        }
        
        var path = Application.dataPath + "/Resources/EditorSaveFiles/" + _saveName + ".txt";
-       Debug.Log(path);
+     
        File.WriteAllText(path, output);
     }
     

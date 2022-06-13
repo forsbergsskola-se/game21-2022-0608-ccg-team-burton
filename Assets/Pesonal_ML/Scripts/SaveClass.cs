@@ -7,6 +7,7 @@ public class SaveClass
 {
     [JsonProperty("posX")] 
     public float PositionX { get; set; }
+    
     [JsonProperty("posY")] 
     public float PositionY { get; set; }
 
