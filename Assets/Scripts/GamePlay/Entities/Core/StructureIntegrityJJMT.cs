@@ -12,4 +12,10 @@ public class StructureIntegrityJJMT : MonoBehaviour, IDamageableJJMT
         Health +=  damage;
         Debug.Log($"New structure integrity: {Health}");    
     }
+
+    public bool IsDead { get; set; }
+    public void OnDeath()
+    {
+        throw new System.NotImplementedException();
+    }
 }

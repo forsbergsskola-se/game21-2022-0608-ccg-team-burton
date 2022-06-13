@@ -9,6 +9,12 @@ namespace Entity
         [SerializeField]
         private int _health;
         public int Health { get; set; }
+        public bool IsDead { get; set; }
+        public void OnDeath()
+        {
+            gameObject.SetActive(false);
+        }
+
 
         private void Start()
         {
@@ -18,7 +24,14 @@ namespace Entity
         public void ModifyHealth(int damage)
         {
             Health += damage;
-            Debug.Log($"New health: {Health}");    
+            Debug.Log($"New health for {name}: {Health}");
+            if (Health <= 0)
+            {
+                IsDead = true;
+                //Todo: Call destroyer
+                OnDeath();
+            }
         }
+
     }
 }

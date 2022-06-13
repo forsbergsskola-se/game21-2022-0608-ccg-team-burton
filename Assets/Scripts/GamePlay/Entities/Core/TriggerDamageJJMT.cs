@@ -9,9 +9,17 @@ using UnityEngine;
 public class TriggerDamageJJMT : MonoBehaviour
 {
     private int _damage = 1;
-    private void OnTriggerEnter2D(Collider2D col)
+
+    private void OnCollisionEnter2D(Collision2D col)
     {
-            Debug.Log("Deal damage");
-            col.GetComponent<IDamageableJJMT>().ModifyHealth(-_damage);
+        if (col.gameObject.CompareTag("Entity"))
+        {
+         
+            Debug.Log($"Deal damage by {name}");
+            col.gameObject.GetComponent<IDamageableJJMT>().ModifyHealth(-_damage); // This is hopw you dewal damage to an IDamageable
+
+        }
+        
     }
+    
 }
