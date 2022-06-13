@@ -27,8 +27,8 @@ public class Interact_ML : MonoBehaviour
 
     private void SpawnAThing()
     {
-        var aPlace  = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,800);
-        Debug.Log(aPlace);
+        var aPlace  = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,depth);
+       // Debug.Log(aPlace);
         var placePos = Input.mousePosition + new Vector3(0, 0, 0);
         Instantiate(testObject, aPlace, Quaternion.identity);
     }
