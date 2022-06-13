@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
@@ -50,8 +52,9 @@ public class UI_ML : MonoBehaviour
        }
        
        var output = JsonConvert.SerializeObject(saveFile);
-       
-       Debug.Log(output);
+       var path = Application.dataPath + "/Resources/EditorSaveFiles/Test.txt";
+       Debug.Log(path);
+       File.WriteAllText(path, output);
     }
     
     // Update is called once per frame
