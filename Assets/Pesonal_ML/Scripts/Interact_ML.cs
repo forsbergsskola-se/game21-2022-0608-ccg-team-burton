@@ -29,6 +29,9 @@ public class Interact_ML : MonoBehaviour
     {
         
         var aPlace  = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,depth);
+        var aPlace2 = Camera.main.ScreenPointToRay(Input.mousePosition);
+        
+        
        
         var placePos = Input.mousePosition + new Vector3(0, 0, 0);
         Instantiate(testObject, aPlace, Quaternion.identity);

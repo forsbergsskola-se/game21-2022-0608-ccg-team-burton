@@ -50,11 +50,11 @@ public class GridMesh : MonoBehaviour
         meshRenderer.material = new Material(Shader.Find("Sprites/Default"));
         meshRenderer.material.color = Color.white;
     }
-
+    
 
     private void Update()
     {
-        Debug.Log(Input.mousePosition);
+        
     }
 
     public void WhereIsPoint(Vector3 thePoint)
