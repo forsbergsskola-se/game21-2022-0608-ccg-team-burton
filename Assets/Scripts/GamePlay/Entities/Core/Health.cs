@@ -13,9 +13,9 @@ namespace Entity
         [SerializeField]
         [Tooltip("The amount of time the entity is invulnerable after being hit")]
         private float _invulnerablilityTime;
-
         private bool _invulnerable;
         private bool IsDead { get; set; }
+
         public int CurrentHealth
         {
             get => _health;
@@ -29,19 +29,18 @@ namespace Entity
 
         public void ModifyHealth(int healthValueChange)
         {
-            if (_invulnerable && healthValueChange <= 0) 
-                    return; //if healthValueChange <=0 --> it is damage and if _invulnerable --> return and apply nop damage. 
+            if (_invulnerable && healthValueChange <= 0) //if healthValueChange <=0 --> it is damage and if _invulnerable --> return and apply no damage. 
+                    return;  
                 
             CurrentHealth += healthValueChange;
             
             if(!_invulnerable && healthValueChange <=0)
-                StartCoroutine(InvulFrameTimer(_invulnerablilityTime));
+                StartCoroutine(InvulnFrameTimer(_invulnerablilityTime));
         
             Debug.Log($"New health for {name}: {CurrentHealth}");
             
             if (CurrentHealth <= 0)
                 OnDeath();
-            
         }
         
         private void OnDeath() //TODO: Move to own script?
@@ -50,11 +49,12 @@ namespace Entity
             gameObject.SetActive(false); //Make death-script and make event or something
         }
 
-
-        private IEnumerator InvulFrameTimer(float InvulframeCoolDown)
+        private IEnumerator InvulnFrameTimer(float invulnFrameTimer)
         {
             _invulnerable = true;
-            yield return new WaitForSeconds(InvulframeCoolDown);
+            GetComponent<SpriteRenderer>().color = Color.magenta;
+            yield return new WaitForSeconds(invulnFrameTimer);
+            GetComponent<SpriteRenderer>().color = Color.white;
             _invulnerable = false;
         }
     }

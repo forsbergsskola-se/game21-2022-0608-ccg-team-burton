@@ -309,9 +309,13 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1846255034, guid: d4501ed3e14888d4a86cc890e1327544, type: 3}
-      propertyPath: _invulnerablilityTime
-      value: 3
+    - target: {fileID: 1846255033, guid: d4501ed3e14888d4a86cc890e1327544, type: 3}
+      propertyPath: m_Size.x
+      value: 0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846255033, guid: d4501ed3e14888d4a86cc890e1327544, type: 3}
+      propertyPath: m_Size.y
+      value: 0.14
       objectReference: {fileID: 0}
     - target: {fileID: 3363829458322299821, guid: d4501ed3e14888d4a86cc890e1327544,
         type: 3}
@@ -326,12 +330,12 @@ PrefabInstance:
     - target: {fileID: 3363829458322299823, guid: d4501ed3e14888d4a86cc890e1327544,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.118
+      value: 0.038
       objectReference: {fileID: 0}
     - target: {fileID: 3363829458322299823, guid: d4501ed3e14888d4a86cc890e1327544,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.987
+      value: 1.664
       objectReference: {fileID: 0}
     - target: {fileID: 3363829458322299823, guid: d4501ed3e14888d4a86cc890e1327544,
         type: 3}
@@ -388,6 +392,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemyJJ
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092391886403041091, guid: 0967cd6e571c40f47aad45916241a83c,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092391886403041091, guid: 0967cd6e571c40f47aad45916241a83c,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.14
       objectReference: {fileID: 0}
     - target: {fileID: 7739943621394771302, guid: 0967cd6e571c40f47aad45916241a83c,
         type: 3}
