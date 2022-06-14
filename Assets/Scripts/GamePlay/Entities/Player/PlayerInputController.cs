@@ -31,8 +31,8 @@ namespace GamePlay.Entities.Player
         
         private void HandleInput()
         {
-            WalkInput = Input.GetAxisRaw("Horizontal");
-
+            WalkInput = Input.GetAxis("Horizontal");
+            
             switch (WalkRightInput)
             {
                 case true when WalkLeftInput: // pressing both keeps player still
