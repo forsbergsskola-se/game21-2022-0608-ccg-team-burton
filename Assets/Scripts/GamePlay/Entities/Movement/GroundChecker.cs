@@ -6,7 +6,7 @@ namespace GamePlay.Entities.Movement
     {
         public bool IsGrounded;
         [SerializeField] private float _groundCheckLength = 1f;
-        [SerializeField] private float _groundCheckRadius = 0.5f;
+        [SerializeField] private float _groundCheckRadius = 1f;
         [SerializeField] private LayerMask _groundLayers;
 
         private void Update()
@@ -18,9 +18,9 @@ namespace GamePlay.Entities.Movement
         private void CheckIfGrounded()
         {
             var pos = transform.position;
-            var ray = new Ray(pos, Vector3.down);
-                
-            IsGrounded = Physics.SphereCast(ray, _groundCheckRadius, _groundCheckLength, _groundLayers);
+            var ray = new Vector2(pos.x, pos.y);
+
+            IsGrounded = Physics2D.CircleCast(ray, _groundCheckRadius, Vector2.down, _groundCheckLength, _groundLayers);
             Debug.DrawRay(pos, Vector3.down * _groundCheckLength, Color.magenta);
         }
 
