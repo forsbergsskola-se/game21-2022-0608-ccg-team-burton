@@ -51,10 +51,12 @@ namespace Entity
 
         private IEnumerator InvulnFrameTimer(float invulnFrameTimer)
         {
+            //TODO: Temp visualization for IFrame (Color stuff)
             _invulnerable = true;
-            GetComponent<SpriteRenderer>().color = Color.magenta;
+            var orgColor = GetComponent<SpriteRenderer>().color;             //Temp visualization for IFrame (Color stuff)
+            GetComponent<SpriteRenderer>().color = Color.magenta;             //Temp visualization for IFrame (Color stuff)
             yield return new WaitForSeconds(invulnFrameTimer);
-            GetComponent<SpriteRenderer>().color = Color.white;
+            GetComponent<SpriteRenderer>().color = orgColor;             //Temp visualization for IFrame (Color stuff)
             _invulnerable = false;
         }
     }

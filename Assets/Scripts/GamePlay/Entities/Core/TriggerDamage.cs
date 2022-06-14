@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Temporary script for damaging the player. Should be modified or removed.
 /// </summary>
-public class TriggerDamage : MonoBehaviour //TODO: To be replaced with whatever damages the player, enemy, barrel and so on
+public class TriggerDamage : MonoBehaviour
 {
     private int _damage = 1; 
 
