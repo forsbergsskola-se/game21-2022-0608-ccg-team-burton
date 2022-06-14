@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace Entity
     /// </summary>
     public class Health : MonoBehaviour, IDamageable
     {
+        public Action<int> OnHealthChanged;
         [SerializeField]
         private int _health;
         [SerializeField]
@@ -33,6 +35,8 @@ namespace Entity
                     return;  
                 
             CurrentHealth += healthValueChange;
+            OnHealthChanged?.Invoke(CurrentHealth);
+            
             
             if(!_invulnerable && healthValueChange <=0)
                 StartCoroutine(InvulnFrameTimer(_invulnerablilityTime));

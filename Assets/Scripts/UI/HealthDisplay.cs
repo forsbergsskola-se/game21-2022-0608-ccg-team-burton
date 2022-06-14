@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Entity;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,14 +12,22 @@ public class HealthDisplay : MonoBehaviour
     public int health;
     
     public Health playerHealth;
-    
-    public Image[] hearts;
-    
 
-    private void Update()
+    public Image[] hearts;
+
+    void OnEnable()
     {
-        health = playerHealth.CurrentHealth;
-        
+        playerHealth.OnHealthChanged += UpdateHealthUI;
+    }
+
+    private void OnDisable()
+    {
+        playerHealth.OnHealthChanged -= UpdateHealthUI;
+    }
+
+
+    private void UpdateHealthUI(int health)
+    {
         for (int i = 0; i < hearts.Length; i++)
         {
             if (i < health)
