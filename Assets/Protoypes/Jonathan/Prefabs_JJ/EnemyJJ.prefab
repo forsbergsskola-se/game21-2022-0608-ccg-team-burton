@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 5092391886403041095}
   - component: {fileID: 1244182070}
   - component: {fileID: 1244182076}
+  - component: {fileID: 1244182077}
   m_Layer: 7
   m_Name: EnemyJJ
   m_TagString: Untagged
@@ -68,7 +69,7 @@ Transform:
   m_Children:
   - {fileID: 1290065831}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1973306092194232709
 SpriteRenderer:
@@ -193,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62179065a33a8c43879a7035312207e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 3
+  _health: 10
   _invulnerablilityTime: 1
 --- !u!114 &1244182070
 MonoBehaviour:
@@ -226,3 +227,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _combat: {fileID: 1244182070}
+--- !u!114 &1244182077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2797134400201430873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f7349ab52cfd8a44a35f135cdb49303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseKnockback: 1
+  knockbackDuration: 3

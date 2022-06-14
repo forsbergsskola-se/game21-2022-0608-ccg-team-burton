@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeTriggerJJ : MonoBehaviour
+public class MeleeAttackTickerJJ : MonoBehaviour
 {
  [SerializeField]
  private Combat _combat;

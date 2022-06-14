@@ -57,10 +57,10 @@ namespace Entity
         {
             //TODO: Temp visualization for IFrame (Color stuff)
             _invulnerable = true;
-            var orgColor = GetComponent<SpriteRenderer>().color;             //Temp visualization for IFrame (Color stuff)
+            var originalColor = GetComponent<SpriteRenderer>().color;             //Temp visualization for IFrame (Color stuff)
             GetComponent<SpriteRenderer>().color = Color.magenta;             //Temp visualization for IFrame (Color stuff)
             yield return new WaitForSeconds(invulnFrameTimer);
-            GetComponent<SpriteRenderer>().color = orgColor;             //Temp visualization for IFrame (Color stuff)
+            GetComponent<SpriteRenderer>().color = originalColor;             //Temp visualization for IFrame (Color stuff)
             _invulnerable = false;
         }
     }
