@@ -21,6 +21,7 @@ public class Combat : MonoBehaviour
             //deal Damage!
             enemy.GetComponent<IDamageable>()?.ModifyHealth(-1); // damage goes here!
             Debug.Log($"{enemy.name} Got Hit!");
+            enemy.GetComponent<Knockback>().DoKnockback(attackPoint.position);
         }
     }
     private void OnDrawGizmosSelected()

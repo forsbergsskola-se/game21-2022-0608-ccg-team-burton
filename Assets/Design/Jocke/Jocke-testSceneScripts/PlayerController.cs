@@ -13,8 +13,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        float Hinput = Input.GetAxis("Horizontal");
-        direction.x = Hinput * speed;
+        float hinput = Input.GetAxis("Horizontal");
+        direction.x = hinput * speed;
         bool isGrounded = Physics.CheckSphere(groundCheck.position, 0.15f, groundLayer);
         controller.Move(direction * Time.deltaTime);
 
