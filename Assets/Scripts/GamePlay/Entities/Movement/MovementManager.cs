@@ -32,18 +32,32 @@ namespace GamePlay.Entities.Movement
         private void Update()
         {
             HandleWalking();
+            HandleJumping();
+        }
+
+
+        private void HandleJumping()
+        {
+            if (!_commandContainer.JumpCommand) return;
+            if (!_groundChecker.IsGrounded) return;
+            
+            _rb.AddForce(Vector2.up * jumpForce);
         }
 
 
         private void HandleWalking()
         {
+            var movementSpeed = 0f;
             if (_groundChecker.IsGrounded)
-                baseMovementSpeed = airborneMovementSpeed;
+                movementSpeed = baseMovementSpeed;
 
-            if (_groundChecker.IsGrounded && _commandContainer.JumpCommand)
-                baseMovementSpeed = chargingJumpSpeed;
+            /*if (_groundChecker.IsGrounded && _commandContainer.JumpCommand)
+                movementSpeed = chargingJumpSpeed;*/
 
-            _rb.velocity = new Vector3(_commandContainer.walkCommand * baseMovementSpeed, _rb.velocity.y, 0);
+            else if (!_groundChecker.IsGrounded)
+                movementSpeed = airborneMovementSpeed;
+
+            _rb.velocity = new Vector3(_commandContainer.walkCommand * movementSpeed, _rb.velocity.y, 0);
         }
     }
     
