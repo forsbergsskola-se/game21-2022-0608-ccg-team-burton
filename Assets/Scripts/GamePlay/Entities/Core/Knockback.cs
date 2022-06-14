@@ -1,28 +1,36 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public class Knockback : MonoBehaviour
+namespace Entity
 {
-    [SerializeField]
-    private float _knockbackForce;
-
-    public float KnockbackForce
+ /// <summary>
+ /// Knockback script. The knockback has a base knockback.
+ /// The knockback is also affected by a multiplier that can come from thing calling the knockback (e.g. Werapon knockback multiplier)
+ /// </summary>
+    [RequireComponent(typeof(Rigidbody2D))]
+    public class Knockback : MonoBehaviour
     {
-        get => _knockbackForce;
-        set => _knockbackForce = value;
-    }
+        [SerializeField]
+        private float baseKnockback = 1f;
 
-    [SerializeField]
-    private Rigidbody2D _rb2d;
-    
-    public void DoKnockback(Vector3 hitposition)
-    {
-        Debug.Log("Knockback");
-        var knockbackDir = (transform.position - hitposition).normalized;
-        
-        _rb2d.AddForce(knockbackDir * KnockbackForce, ForceMode2D.Impulse);
+        [SerializeField]
+        private float knockbackDuration;
+ 
+        public void DoKnockBack(Rigidbody2D hitTargetRb2d, Vector3 hitPosition, float knockbackMultiplier)
+        {
+            var knockBackDir = (transform.position - hitPosition).normalized;
+            var originalVelocity = hitTargetRb2d.velocity;
+            hitTargetRb2d.velocity = knockBackDir * (baseKnockback * knockbackMultiplier);
+            StartCoroutine(HaltKnockBack(hitTargetRb2d,knockbackDuration, originalVelocity));
+        }
+
+        private IEnumerator HaltKnockBack(Rigidbody2D hitTargetRb2d, float knockbackDuration, Vector2 originalVelocity)
+        {
+            Debug.Log(knockbackDuration);
+            yield return new WaitForSeconds(knockbackDuration);
+            hitTargetRb2d.velocity = originalVelocity;
+        }
 
     }
+   
 }
