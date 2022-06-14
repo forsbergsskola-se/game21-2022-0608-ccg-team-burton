@@ -9,7 +9,7 @@ namespace Entity
     {
         public int CurrentHealth { get; set; }
 
-        public void ModifyHealth(int damage);
+        public void ModifyHealth(int healthValueChange);
     }
    
 }

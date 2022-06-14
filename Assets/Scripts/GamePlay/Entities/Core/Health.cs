@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Entity
@@ -9,6 +10,11 @@ namespace Entity
     {
         [SerializeField]
         private int _health;
+        [SerializeField]
+        [Tooltip("The amount of time the entity is invulnerable after being hit")]
+        private float _invulnerablilityTime;
+
+        private bool _invulnerable;
         private bool IsDead { get; set; }
         public int CurrentHealth
         {
@@ -21,9 +27,16 @@ namespace Entity
             CurrentHealth = _health;
         }
 
-        public void ModifyHealth(int damage)
+        public void ModifyHealth(int healthValueChange)
         {
-            CurrentHealth += damage;
+            if (_invulnerable && healthValueChange <= 0) 
+                    return; //if healthValueChange <=0 --> it is damage and if _invulnerable --> return and apply nop damage. 
+                
+            CurrentHealth += healthValueChange;
+            
+            if(!_invulnerable && healthValueChange <=0)
+                StartCoroutine(InvulFrameTimer(_invulnerablilityTime));
+        
             Debug.Log($"New health for {name}: {CurrentHealth}");
             
             if (CurrentHealth <= 0)
@@ -31,11 +44,18 @@ namespace Entity
             
         }
         
-        private void OnDeath()
+        private void OnDeath() //TODO: Move to own script?
         {
             IsDead = true;
-            gameObject.SetActive(false); //Make death-script and make either event or something
+            gameObject.SetActive(false); //Make death-script and make event or something
         }
 
+
+        private IEnumerator InvulFrameTimer(float InvulframeCoolDown)
+        {
+            _invulnerable = true;
+            yield return new WaitForSeconds(InvulframeCoolDown);
+            _invulnerable = false;
+        }
     }
 }
