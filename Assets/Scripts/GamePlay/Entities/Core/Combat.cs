@@ -19,7 +19,8 @@ public class Combat : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             //deal Damage!
-            Debug.Log("Enemy Got Hit!");
+            enemy.GetComponent<IDamageable>()?.ModifyHealth(-1); // damage goes here!
+            Debug.Log($"{enemy.name} Got Hit!");
         }
     }
     private void OnDrawGizmosSelected()
