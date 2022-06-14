@@ -18,14 +18,14 @@ namespace GamePlay.Entities.Movement
         public float jumpForce;
         
 
-        private void Start()
+        private void Awake()
         {
-            _animator = gameObject.GetComponent<Animator>();
-            _renderer = gameObject.GetComponent<SpriteRenderer>();
-            _collider = gameObject.GetComponent<CircleCollider2D>();
-            
-            if (gameObject.GetComponent<Rigidbody2D>())
-                _rb = gameObject.GetComponent<Rigidbody2D>();
+            //_animator = gameObject.GetComponent<Animator>();
+            _renderer = GetComponent<SpriteRenderer>();
+            _collider = GetComponent<CapsuleCollider2D>();
+            _commandContainer = GetComponent<CommandContainer>();
+            _groundChecker = GetComponent<GroundChecker>();
+            _rb = GetComponent<Rigidbody2D>();
         }
 
         
@@ -43,7 +43,7 @@ namespace GamePlay.Entities.Movement
             if (_groundChecker.IsGrounded && _commandContainer.JumpCommand)
                 baseMovementSpeed = chargingJumpSpeed;
 
-            _rb.velocity = new Vector2(_commandContainer.walkCommand * baseMovementSpeed, _rb.velocity.y);
+            _rb.velocity = new Vector3(_commandContainer.walkCommand * baseMovementSpeed, _rb.velocity.y, 0);
         }
     }
     
