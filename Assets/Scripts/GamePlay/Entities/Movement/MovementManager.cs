@@ -12,11 +12,22 @@ namespace GamePlay.Entities.Movement
         private CommandContainer _commandContainer;
         private GroundChecker _groundChecker;
 
-        public float baseMovementSpeed;
-        public float airborneMovementSpeed;
-        public float chargingJumpSpeed;
-        public float jumpForce;
+        #region Walking;
+        [Header("WALKING")]
+        public float BaseMovementSpeed;
+        #endregion
+
+        #region Jumping;
+        [Header("JUMPING")]
+        public float AirborneMovementSpeed;
+        [HideInInspector] public float chargingJumpSpeed;
+        public float JumpForce;
+        private Vector3 _lastPos;
+        public Vector3 _jumpVelocity { get; private set; }
         
+        #endregion
+        
+
 
         private void Awake()
         {
@@ -28,11 +39,19 @@ namespace GamePlay.Entities.Movement
             _rb = GetComponent<Rigidbody2D>();
         }
 
-        
+
         private void Update()
         {
+            CalculateJumpVelocity();
             HandleWalking();
             HandleJumping();
+        }
+
+        private void CalculateJumpVelocity()
+        {
+            var pos = transform.position;
+            _jumpVelocity = (pos - _lastPos) / Time.deltaTime;
+            _lastPos = pos;
         }
 
 
@@ -40,29 +59,23 @@ namespace GamePlay.Entities.Movement
         {
             if (!_commandContainer.JumpCommand) return;
             if (!_groundChecker.IsGrounded) return;
-            
-            _rb.AddForce(Vector2.up * jumpForce);
+
+            _rb.AddForce(Vector2.up * JumpForce);
         }
 
 
         private void HandleWalking()
         {
-            var movementSpeed = 0f;
-            if (_groundChecker.IsGrounded)
-                movementSpeed = baseMovementSpeed;
-
-            /*if (_groundChecker.IsGrounded && _commandContainer.JumpCommand)
+            var movementSpeed = _groundChecker.IsGrounded switch
+            {
+                true => BaseMovementSpeed,
+                /*if (_groundChecker.IsGrounded && _commandContainer.JumpCommand)
                 movementSpeed = chargingJumpSpeed;*/
+                false => AirborneMovementSpeed
+            };
 
-            else if (!_groundChecker.IsGrounded)
-                movementSpeed = airborneMovementSpeed;
-
-            _rb.velocity = new Vector3(_commandContainer.walkCommand * movementSpeed, _rb.velocity.y, 0);
+            _rb.velocity = new Vector3(_commandContainer.WalkCommand * movementSpeed, _rb.velocity.y, 0);
         }
     }
-    
-    
-    
-    
 }
 
