@@ -14,7 +14,7 @@ namespace GamePlay.Entities.Movement
 
         #region Walking;
         [Header("WALKING")]
-        public float BaseMovementSpeed;
+        private float _baseMovementSpeed;
         public float Acceleration = 80f;
         public float DeAcceleration = 55f;
         public float WalkClamp = 12f;
@@ -79,16 +79,16 @@ namespace GamePlay.Entities.Movement
             if (_commandContainer.WalkCommand != 0)
             {
                 // set walk speed
-                BaseMovementSpeed = _commandContainer.WalkCommand * Acceleration * Time.deltaTime;
-                _rb.velocity = new Vector2(BaseMovementSpeed, _rb.velocity.y);
+                _baseMovementSpeed = _commandContainer.WalkCommand * Acceleration * Time.deltaTime;
+                _rb.velocity = new Vector2(_baseMovementSpeed, _rb.velocity.y);
 
                 // clamp walk speed
-                BaseMovementSpeed = Mathf.Clamp(BaseMovementSpeed, -WalkClamp, WalkClamp);
+                _baseMovementSpeed = Mathf.Clamp(_baseMovementSpeed, -WalkClamp, WalkClamp);
             }
 
             else
-                BaseMovementSpeed = Mathf.MoveTowards // slow down when no input
-                    (BaseMovementSpeed, 0, DeAcceleration * Time.deltaTime);
+                _baseMovementSpeed = Mathf.MoveTowards // slow down when no input
+                    (_baseMovementSpeed, 0, DeAcceleration * Time.deltaTime);
         }
     }
 }
