@@ -108,8 +108,8 @@ public class Patrol : State_ML
 
 public class Pursue : State_ML
 {
-    public Pursue(GameObject npc, GameObject patrolNodes, Enemy_Eyes detector)
-        : base(npc,   detector)
+    public Pursue(GameObject npc, Enemy_Eyes detector)
+        : base(npc, detector)
     {
         Name = STATE.Pursue;
     }

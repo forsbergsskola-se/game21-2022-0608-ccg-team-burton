@@ -21,12 +21,17 @@ public class Enemy_AI : MonoBehaviour
 
     private void Update()
     {
-     //   _currentStateMl = _currentStateMl.Process();
+        _currentStateMl = _currentStateMl.Process();
     }
 
     public void GroundGone()
     {
         gameObject.transform.Rotate(new Vector3(0,0,1), 180);
+    }
+    
+    public void PlayerSpotted()
+    {
+        _currentStateMl = new Pursue(gameObject)
     }
     
     

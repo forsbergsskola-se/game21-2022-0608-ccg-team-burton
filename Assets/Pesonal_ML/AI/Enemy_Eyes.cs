@@ -7,11 +7,7 @@ public class Enemy_Eyes : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            
-        }
-        if (other.gameObject.CompareTag("Grounded"))
-        {
-            Debug.Log("More ground");
+            gameObject.GetComponentInParent<Enemy_AI>().PlayerSpotted();
         }
     }
 
