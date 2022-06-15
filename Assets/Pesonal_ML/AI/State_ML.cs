@@ -83,7 +83,6 @@ public class Idle : State_ML
 public class Patrol : State_ML
 {
     private int currentIndex = 0;
-//    private WaypointManager nodes;
     private bool incDec = true;
     public Patrol(GameObject npc, Enemy_Eyes detector)
         : base( npc,  detector)
@@ -93,9 +92,7 @@ public class Patrol : State_ML
     
     public override void Update()
     {
-        
-        CheckForDistance(); 
-        
+        CheckForDistance();
     }
 
     private void RotateSimple()
@@ -132,7 +129,6 @@ public class Attack : State_ML
         : base(npc, detector)
     {
         Name = STATE.Attack;
-      //  shooter = Npc.GetComponentInChildren<Shoot_Enemy>();
     }
 
     public override void PlayerDies()
