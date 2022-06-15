@@ -68,16 +68,18 @@ namespace GamePlay.Entities.Movement
 
         private void HandleWalking()
         {
-            //_rb.velocity = new Vector3(_commandContainer.WalkCommand * movementSpeed, _rb.velocity.y, 0);
-            _renderer.flipX = !(_commandContainer.WalkCommand >= 0); // flips sprite based on move direction
+            _renderer.flipX = _commandContainer.WalkCommand switch
+            {
+                > 0 => false, 
+                < 0 => true,
+                _ => _renderer.flipX
+            };
 
             if (_commandContainer.WalkCommand != 0)
             {
                 BaseMovementSpeed = _commandContainer.WalkCommand * Acceleration * Time.deltaTime;
                 _rb.velocity = new Vector2(BaseMovementSpeed, _rb.velocity.y);
             }
-
-
         }
     }
 }
