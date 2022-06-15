@@ -33,7 +33,12 @@ namespace GamePlay.Entities.Player
         {
             WalkInput = Input.GetAxis("Horizontal");
             
-            switch (WalkRightInput)
+            JumpInputDown = Input.GetKeyDown(KeyCode.Space);
+            JumpInputUp = Input.GetKeyUp(KeyCode.Space);
+            JumpInput = Input.GetKey(KeyCode.Space);
+            
+            
+            /*switch (WalkRightInput)
             {
                 case true when WalkLeftInput: // pressing both keeps player still
                     WalkInput = 0;
@@ -57,11 +62,7 @@ namespace GamePlay.Entities.Player
                         _noInput = true;
                     break;
                 }
-            }
-
-            JumpInputDown = Input.GetKeyDown(KeyCode.Space);
-            JumpInputUp = Input.GetKeyUp(KeyCode.Space);
-            JumpInput = Input.GetKey(KeyCode.Space);
+            }*/
         }
 
         
