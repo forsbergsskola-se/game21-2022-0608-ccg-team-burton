@@ -7,7 +7,6 @@ namespace GamePlay.Entities.Movement
     {
         private Animator _animator;
         private SpriteRenderer _renderer;
-        private Collider2D _collider;
         private Rigidbody2D _rb;
         private CommandContainer _commandContainer;
         private GroundChecker _groundChecker;
@@ -21,10 +20,13 @@ namespace GamePlay.Entities.Movement
         #endregion
 
         #region Jumping;
-        [Header("JUMPING")]
-        //public float AirborneMovementSpeed;
-        [HideInInspector] public float chargingJumpSpeed;
-        public float JumpForce;
+
+        [Header("JUMPING")] 
+        public float BaseJumpSpeed;
+        private float _jumpHeight;
+        public bool Jumping;
+
+
         private Vector3 _lastPos;
         public Vector3 _jumpVelocity { get; private set; }
         #endregion
@@ -35,7 +37,6 @@ namespace GamePlay.Entities.Movement
         {
             //_animator = gameObject.GetComponent<Animator>();
             _renderer = GetComponent<SpriteRenderer>();
-            _collider = GetComponent<CapsuleCollider2D>();
             _commandContainer = GetComponent<CommandContainer>();
             _groundChecker = GetComponent<GroundChecker>();
             _rb = GetComponent<Rigidbody2D>();
@@ -47,8 +48,8 @@ namespace GamePlay.Entities.Movement
         private void Update()
         {
             CalculateJumpVelocity();
-            HandleWalking();
             HandleJumping();
+            HandleWalking();
         }
 
         private void CalculateJumpVelocity()
@@ -61,9 +62,19 @@ namespace GamePlay.Entities.Movement
 
         private void HandleJumping()
         {
+
             if (!_commandContainer.JumpCommand) return;
-            if (!_groundChecker.IsGrounded) return;
-            _rb.AddForce(Vector2.up * JumpForce);
+            if (_groundChecker.IsGrounded)
+            {
+                _jumpHeight = BaseJumpSpeed * Time.deltaTime;
+                Jumping = true;
+                _rb.velocity = new Vector2(_baseMovementSpeed, _jumpHeight);
+            }
+            else
+            {
+                _jumpHeight = _baseMovementSpeed;
+                Jumping = false;
+            }
         }
 
 
@@ -80,8 +91,6 @@ namespace GamePlay.Entities.Movement
             {
                 // set walk speed
                 _baseMovementSpeed = _commandContainer.WalkCommand * Acceleration * Time.deltaTime;
-                _rb.velocity = new Vector2(_baseMovementSpeed, _rb.velocity.y);
-
                 // clamp walk speed
                 _baseMovementSpeed = Mathf.Clamp(_baseMovementSpeed, -WalkClamp, WalkClamp);
             }
@@ -89,6 +98,8 @@ namespace GamePlay.Entities.Movement
             else
                 _baseMovementSpeed = Mathf.MoveTowards // slow down when no input
                     (_baseMovementSpeed, 0, DeAcceleration * Time.deltaTime);
+            
+            _rb.velocity = new Vector2(_baseMovementSpeed, _rb.velocity.y);
         }
     }
 }
