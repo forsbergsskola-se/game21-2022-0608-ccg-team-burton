@@ -22,7 +22,7 @@ namespace GamePlay.Entities.Movement
 
         #region Jumping;
         [Header("JUMPING")]
-        public float AirborneMovementSpeed;
+        //public float AirborneMovementSpeed;
         [HideInInspector] public float chargingJumpSpeed;
         public float JumpForce;
         private Vector3 _lastPos;
