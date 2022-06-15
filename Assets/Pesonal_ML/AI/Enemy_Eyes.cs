@@ -3,20 +3,33 @@ using UnityEngine;
 
 public class Enemy_Eyes : MonoBehaviour
 {
+    public bool PlayerSeen { get; private set; }
+    public Vector3 PlayerPos { get; private set; }
+    private bool checkPlayerPos;
+    public Transform PlayerTrans { get; private set; }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            gameObject.GetComponentInParent<Enemy_AI>().PlayerSpotted();
+            PlayerSeen = true;
+            checkPlayerPos = true;
+            PlayerTrans = other.gameObject.transform;
         }
     }
-
-
+    
     private void OnTriggerExit2D(Collider2D other)
     {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            PlayerSeen = false;
+        }
+        
         if (other.gameObject.CompareTag("Grounded"))
         {
             gameObject.GetComponentInParent<Enemy_AI>().GroundGone();
         }
     }
+    
+    
 }

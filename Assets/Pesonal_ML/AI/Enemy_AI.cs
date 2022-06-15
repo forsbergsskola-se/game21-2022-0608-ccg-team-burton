@@ -5,21 +5,19 @@ using UnityEngine;
 
 public class Enemy_AI : MonoBehaviour
 {
-    private Vector3 testVector;
-    private bool rotate = true;
-    private bool move = false;
     private State_ML _currentStateMl;
     private Animator enemy_Anim;
     private bool currentFace = false;
-   
-    [SerializeField] private float moveSpeed = 5.0f;
+
+    [SerializeField] private EnemyVars_ML EnemyVars;
+    
     private Enemy_Eyes _detector;
 
     private void Start()
     {
         enemy_Anim = GetComponent<Animator>();
         _detector = GetComponentInChildren<Enemy_Eyes>();
-        _currentStateMl = new Patrol(gameObject,  _detector);
+        _currentStateMl = new Idle(gameObject, _detector, enemy_Anim);
         currentFace = gameObject.GetComponent<SpriteRenderer>().flipX;
     }
 
@@ -31,13 +29,13 @@ public class Enemy_AI : MonoBehaviour
     public void GroundGone()
     {
         currentFace = !currentFace;
-        gameObject.GetComponent<SpriteRenderer>().flipX = currentFace;
+        gameObject.transform.Rotate(Vector3.up, 180);
+     //   gameObject.GetComponent<SpriteRenderer>().flipX = currentFace;
     }
     
     public void PlayerSpotted()
     {
-        _currentStateMl = new Pursue(gameObject, _detector);
-        enemy_Anim.SetBool("ExitIdleState", true);
+        _currentStateMl = new Pursue(gameObject, _detector, enemy_Anim);
     }
     
     

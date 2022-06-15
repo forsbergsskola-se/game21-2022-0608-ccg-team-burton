@@ -159,12 +159,12 @@ PrefabInstance:
     - target: {fileID: 3363829458322299823, guid: bc9c5f82fed82ed4999335a6e3e3663b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.12
+      value: -13.37
       objectReference: {fileID: 0}
     - target: {fileID: 3363829458322299823, guid: bc9c5f82fed82ed4999335a6e3e3663b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.71
+      value: 5.78
       objectReference: {fileID: 0}
     - target: {fileID: 3363829458322299823, guid: bc9c5f82fed82ed4999335a6e3e3663b,
         type: 3}
@@ -479,7 +479,7 @@ PrefabInstance:
     - target: {fileID: 901905159867705364, guid: 0a938a170acdd094893607b0c4bf71ad,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.96
+      value: 4.35
       objectReference: {fileID: 0}
     - target: {fileID: 901905159867705364, guid: 0a938a170acdd094893607b0c4bf71ad,
         type: 3}
@@ -530,6 +530,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Dragon
+      objectReference: {fileID: 0}
+    - target: {fileID: 3790248974552351373, guid: 0a938a170acdd094893607b0c4bf71ad,
+        type: 3}
+      propertyPath: EnemyVars.MoveSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3790248974552351373, guid: 0a938a170acdd094893607b0c4bf71ad,
+        type: 3}
+      propertyPath: EnemyVars.AttackDistance
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3790248974552351373, guid: 0a938a170acdd094893607b0c4bf71ad,
+        type: 3}
+      propertyPath: EnemyVars.PursueDistance
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
