@@ -15,6 +15,8 @@ namespace GamePlay.Entities.Movement
         #region Walking;
         [Header("WALKING")]
         public float BaseMovementSpeed;
+        public float Acceleration = 80f;
+        public float DeAcceleration = 55f;
         #endregion
 
         #region Jumping;
@@ -24,7 +26,6 @@ namespace GamePlay.Entities.Movement
         public float JumpForce;
         private Vector3 _lastPos;
         public Vector3 _jumpVelocity { get; private set; }
-        
         #endregion
         
 
@@ -75,6 +76,11 @@ namespace GamePlay.Entities.Movement
             };
 
             _rb.velocity = new Vector3(_commandContainer.WalkCommand * movementSpeed, _rb.velocity.y, 0);
+            _renderer.flipX = !(_commandContainer.WalkCommand >= 0); // flips sprite based on move direction
+
+            //if (_commandContainer.WalkCommand != 0)
+            //movementSpeed = 
+
         }
     }
 }
