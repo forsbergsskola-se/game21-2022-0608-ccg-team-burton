@@ -17,8 +17,8 @@ public class LootBoxController : MonoBehaviour
          // Debug.Log(LootBoxSO);
          var table = LootBoxSO.PickLootTable();
          // Debug.Log(table);
-      
-         Debug.Log(table.PickItem());
+         var item = table.PickItem();
+         Debug.Log(item +" with rarity: " +item.Rarity);
       }
 
    }
