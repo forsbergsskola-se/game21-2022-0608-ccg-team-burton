@@ -38,6 +38,8 @@ namespace GamePlay.Entities.Movement
             _commandContainer = GetComponent<CommandContainer>();
             _groundChecker = GetComponent<GroundChecker>();
             _rb = GetComponent<Rigidbody2D>();
+            Acceleration *= 100f;
+            DeAcceleration *= 100f;
         }
 
 
@@ -60,26 +62,21 @@ namespace GamePlay.Entities.Movement
         {
             if (!_commandContainer.JumpCommand) return;
             if (!_groundChecker.IsGrounded) return;
-
             _rb.AddForce(Vector2.up * JumpForce);
         }
 
 
         private void HandleWalking()
         {
-            var movementSpeed = _groundChecker.IsGrounded switch
-            {
-                true => BaseMovementSpeed,
-                /*if (_groundChecker.IsGrounded && _commandContainer.JumpCommand)
-                movementSpeed = chargingJumpSpeed;*/
-                false => AirborneMovementSpeed
-            };
-
-            _rb.velocity = new Vector3(_commandContainer.WalkCommand * movementSpeed, _rb.velocity.y, 0);
+            //_rb.velocity = new Vector3(_commandContainer.WalkCommand * movementSpeed, _rb.velocity.y, 0);
             _renderer.flipX = !(_commandContainer.WalkCommand >= 0); // flips sprite based on move direction
 
-            //if (_commandContainer.WalkCommand != 0)
-            //movementSpeed = 
+            if (_commandContainer.WalkCommand != 0)
+            {
+                BaseMovementSpeed = _commandContainer.WalkCommand * Acceleration * Time.deltaTime;
+                _rb.velocity = new Vector2(BaseMovementSpeed, _rb.velocity.y);
+            }
+
 
         }
     }
