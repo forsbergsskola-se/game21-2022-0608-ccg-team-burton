@@ -33,12 +33,7 @@ namespace GamePlay.Entities.Player
         {
             WalkInput = Input.GetAxis("Horizontal");
             
-            JumpInputDown = Input.GetKeyDown(KeyCode.Space);
-            JumpInputUp = Input.GetKeyUp(KeyCode.Space);
-            JumpInput = Input.GetKey(KeyCode.Space);
-            
-            
-            /*switch (WalkRightInput)
+            switch (WalkRightInput)
             {
                 case true when WalkLeftInput: // pressing both keeps player still
                     WalkInput = 0;
@@ -62,15 +57,19 @@ namespace GamePlay.Entities.Player
                         _noInput = true;
                     break;
                 }
-            }*/
+            }
+
+            JumpInputDown = Input.GetKeyDown(KeyCode.Space);
+            JumpInputUp = Input.GetKeyUp(KeyCode.Space);
+            JumpInput = Input.GetKey(KeyCode.Space);
         }
 
         
         private void SetCommands()
         {
-            _commandContainer.walkCommand = WalkInput;
-            _commandContainer.walkLeftCommand = WalkLeftInput;
-            _commandContainer.walkRightCommand = WalkRightInput;
+            _commandContainer.WalkCommand = WalkInput;
+            _commandContainer.WalkLeftCommand = WalkLeftInput;
+            _commandContainer.WalkRightCommand = WalkRightInput;
             _commandContainer.JumpCommandDown = JumpInputDown;
             _commandContainer.JumpCommandUp = JumpInputUp;
             _commandContainer.JumpCommand = JumpInput;
