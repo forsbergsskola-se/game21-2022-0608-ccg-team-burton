@@ -32,33 +32,6 @@ namespace GamePlay.Entities.Player
         private void HandleInput()
         {
             WalkInput = Input.GetAxis("Horizontal");
-            
-            switch (WalkRightInput)
-            {
-                case true when WalkLeftInput: // pressing both keeps player still
-                    WalkInput = 0;
-                    _noInput = false;
-                    break;
-                
-                case true:
-                    WalkInput = 1;
-                    _noInput = false;
-                    break;
-                
-                default:
-                {
-                    if (WalkLeftInput)
-                    {
-                        WalkInput = -1;
-                        _noInput = false;
-                    }
-                    
-                    else
-                        _noInput = true;
-                    break;
-                }
-            }
-
             JumpInputDown = Input.GetKeyDown(KeyCode.Space);
             JumpInputUp = Input.GetKeyUp(KeyCode.Space);
             JumpInput = Input.GetKey(KeyCode.Space);
