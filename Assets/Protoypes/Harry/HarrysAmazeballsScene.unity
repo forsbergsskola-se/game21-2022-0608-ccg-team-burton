@@ -856,63 +856,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3186488170574280666, guid: db1c5200aff116249b2a75bf7bc32f90,
         type: 3}
-      propertyPath: JumpForce
-      value: 45
+      propertyPath: Acceleration
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: 3186488170574280666, guid: db1c5200aff116249b2a75bf7bc32f90,
         type: 3}
-      propertyPath: BaseMovementSpeed
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 3186488170574280666, guid: db1c5200aff116249b2a75bf7bc32f90,
-        type: 3}
-      propertyPath: AirborneMovementSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3186488170574280670, guid: db1c5200aff116249b2a75bf7bc32f90,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3186488170574280670, guid: db1c5200aff116249b2a75bf7bc32f90,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3186488170574280670, guid: db1c5200aff116249b2a75bf7bc32f90,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3186488170574280670, guid: db1c5200aff116249b2a75bf7bc32f90,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3186488170574280670, guid: db1c5200aff116249b2a75bf7bc32f90,
-        type: 3}
-      propertyPath: m_DrawMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3186488170574280670, guid: db1c5200aff116249b2a75bf7bc32f90,
-        type: 3}
-      propertyPath: m_MaskInteraction
-      value: 0
+      propertyPath: DeAcceleration
+      value: 5.2
       objectReference: {fileID: 0}
     - target: {fileID: 3186488170574280671, guid: db1c5200aff116249b2a75bf7bc32f90,
         type: 3}
       propertyPath: m_RootOrder
       value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3186488170574280671, guid: db1c5200aff116249b2a75bf7bc32f90,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: -0.20000002
-      objectReference: {fileID: 0}
-    - target: {fileID: 3186488170574280671, guid: db1c5200aff116249b2a75bf7bc32f90,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.20000002
       objectReference: {fileID: 0}
     - target: {fileID: 3186488170574280671, guid: db1c5200aff116249b2a75bf7bc32f90,
         type: 3}
@@ -964,36 +919,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3186488170574280671, guid: db1c5200aff116249b2a75bf7bc32f90,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: db1c5200aff116249b2a75bf7bc32f90, type: 3}
---- !u!1 &4159580346831538954 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3186488170574280641, guid: db1c5200aff116249b2a75bf7bc32f90,
-    type: 3}
-  m_PrefabInstance: {fileID: 1549627854265220299}
-  m_PrefabAsset: {fileID: 0}
---- !u!70 &4159580346831538968
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4159580346831538954}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 6.523304, y: 10.240001}
-  m_Direction: 0
 --- !u!1001 &5723524108116309350
 PrefabInstance:
   m_ObjectHideFlags: 0
