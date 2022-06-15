@@ -14,7 +14,7 @@ namespace Entity
         private float baseKnockback = 1f;
 
         [SerializeField]
-        private float knockbackDuration;
+        private float knockbackDuration=0.5f;
  
         public void DoKnockBack(Rigidbody2D hitTargetRb2d, Vector3 hitPosition, float knockbackMultiplier)
         {
