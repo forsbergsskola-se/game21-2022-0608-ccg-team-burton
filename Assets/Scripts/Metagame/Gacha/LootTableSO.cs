@@ -1,19 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Entity.Items;
+using Meta.Gacha;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Meta.Gacha
-{ 
-    
-[CreateAssetMenu(fileName = "Object table", menuName = "Object Table/Object table")]
-public class LootBoxTemplate : ScriptableObject
+[CreateAssetMenu(fileName = "LootTable", menuName = "Item System/LootTAble")]
+public class LootTableSO : ScriptableObject
 {
-    public float TotalProbabilityWeight;
+  public float TotalProbabilityWeight;
     [Space]
-    public List<LootTableData> LootTables;
-    private float pickedNumber;
+    public List<ItemData> ItemsList;
+    private float _pickedNumber;
 
     private void OnValidate()
     {
@@ -22,14 +22,14 @@ public class LootBoxTemplate : ScriptableObject
 
     private void ValidateTable()
     {
-        if (LootTables == null || LootTables.Count <= 0)
+        if (ItemsList is not {Count: > 0})
         {
             return;
         }
 
-        float currentProbabilityWeightMax = 0f;
+        var currentProbabilityWeightMax = 0f;
 
-        foreach (LootTableData go in LootTables)
+        foreach (ItemData go in ItemsList)
         {
             if (go.ProbabilityWeight < 0)
             {
@@ -44,34 +44,31 @@ public class LootBoxTemplate : ScriptableObject
             }
         }
         TotalProbabilityWeight = currentProbabilityWeightMax;
-        foreach (LootTableData go in LootTables)
+        foreach (var go in ItemsList)
         {
             go.ProbabilityPercent = go.ProbabilityWeight/TotalProbabilityWeight*100;
         }
     }
 
-    public ScriptableObject PickGO()
+    public ItemSO Pick()
     {
-        pickedNumber = Random.Range(0, TotalProbabilityWeight);
-        foreach (LootTableData go in LootTables)
+        _pickedNumber = Random.Range(0, TotalProbabilityWeight);
+        foreach (var go in ItemsList.Where(go => _pickedNumber > go.ProbabilityRangeFrom && _pickedNumber < go.ProbabilityRangeTo))
         {
-            if (pickedNumber > go.ProbabilityRangeFrom && pickedNumber < go.ProbabilityRangeTo)
+            if (go == null)
             {
-                if (go == null)
-                {
-                    Debug.LogError("ERROR: No gameobject set in table slot");
-                }
-                return go.LootTable;
+                Debug.LogError("ERROR: No gameobject set in table slot");
             }
+            return go.ItemSO;
         }
         Debug.LogError("GO couldn't be picked... Be sure that all of your active GameObject Tables (GO-class)  have assigned at least one GO! Returning NULL");
         //reset picked number in last method dependent on it (in this case, pick GO)
-        pickedNumber = 0;
+        _pickedNumber = 0;
         return null;
     }
 
     [Serializable]
-    public class LootTableData
+    public class ItemData
     {
         public float ProbabilityWeight;
         public float ProbabilityPercent;
@@ -79,9 +76,7 @@ public class LootBoxTemplate : ScriptableObject
         public float ProbabilityRangeFrom;
         [HideInInspector]
         public float ProbabilityRangeTo;
-        public ScriptableObject LootTable;
-    }
-}
-
-    
+        public ItemSO ItemSO;
+    }  
+   
 }

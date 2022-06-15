@@ -1,7 +1,6 @@
 namespace Entity.Items
 {
- 
-    enum Rarity
+    public enum Rarity
     {
         Common,
         Uncommon,

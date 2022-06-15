@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c1b0f2ee071c2b49a35b61c3c81f8ef, type: 3}
-  m_Name: CommonLootBox
+  m_Script: {fileID: 11500000, guid: b64321b44f705a740bd1c48dd404912b, type: 3}
+  m_Name: CommonLootTable
   m_EditorClassIdentifier: 
   TotalProbabilityWeight: 1
-  LootTables:
+  ItemsList:
   - ProbabilityWeight: 1
     ProbabilityPercent: 100
     ProbabilityRangeFrom: 0
     ProbabilityRangeTo: 1
-    lootTableSo: {fileID: 11400000, guid: 1fc4c9b2f497d01428418a66df31e1c1, type: 2}
+    ItemSO: {fileID: 11400000, guid: 2e82fdee59c3553498a86eb398b32db5, type: 2}
