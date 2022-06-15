@@ -7,8 +7,8 @@ using Meta.Gacha;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[CreateAssetMenu(fileName = "LootTable", menuName = "Item System/LootTAble")]
-public class LootTableSO : ScriptableObject
+[CreateAssetMenu(fileName = "ItemTable", menuName = "Item System/ItemTable")]
+public class ItemTableSO : ScriptableObject
 {
   public float TotalProbabilityWeight;
     [Space]
@@ -50,7 +50,7 @@ public class LootTableSO : ScriptableObject
         }
     }
 
-    public ItemSO Pick()
+    public ItemSO PickItem()
     {
         _pickedNumber = Random.Range(0, TotalProbabilityWeight);
         foreach (var go in ItemsList.Where(go => _pickedNumber > go.ProbabilityRangeFrom && _pickedNumber < go.ProbabilityRangeTo))
