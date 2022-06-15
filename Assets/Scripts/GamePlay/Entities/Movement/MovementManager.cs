@@ -81,10 +81,14 @@ namespace GamePlay.Entities.Movement
                 // set walk speed
                 BaseMovementSpeed = _commandContainer.WalkCommand * Acceleration * Time.deltaTime;
                 _rb.velocity = new Vector2(BaseMovementSpeed, _rb.velocity.y);
-                
+
                 // clamp walk speed
                 BaseMovementSpeed = Mathf.Clamp(BaseMovementSpeed, -WalkClamp, WalkClamp);
             }
+
+            else
+                BaseMovementSpeed = Mathf.MoveTowards // slow down when no input
+                    (BaseMovementSpeed, 0, DeAcceleration * Time.deltaTime);
         }
     }
 }
