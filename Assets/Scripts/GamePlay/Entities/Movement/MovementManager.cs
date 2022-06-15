@@ -73,7 +73,7 @@ namespace GamePlay.Entities.Movement
                 movementSpeed = chargingJumpSpeed;*/
                 false => AirborneMovementSpeed
             };
-
+            Debug.Log("movspeed: "+movementSpeed);
             _rb.velocity = new Vector3(_commandContainer.WalkCommand * movementSpeed, _rb.velocity.y, 0);
         }
     }

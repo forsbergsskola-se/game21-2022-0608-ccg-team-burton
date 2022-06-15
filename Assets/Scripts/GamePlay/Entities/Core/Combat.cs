@@ -34,7 +34,7 @@ public class Combat : MonoBehaviour
         //TODO: Cleanup - Getcomponent is inefficient but we need to get that particular enemy script. Looking into make this better.
         enemy.GetComponent<IDamageable>()?.ModifyHealth(-_meleeDamage); // TODO: Implement damage of weapon here
         Debug.Log($"{enemy.name} Got Hit!");
-        enemy.GetComponent<Knockback>()?.DoKnockBack(enemy.GetComponent<Rigidbody2D>(), attackPoint.position, _knockbackMultiplier); // TODO: Implement KnockbackMult of weapon here
+        GetComponent<Knockback>()?.DoKnockBack(enemy.GetComponent<Rigidbody2D>(), attackPoint.position, _knockbackMultiplier); // TODO: Implement KnockbackMult of weapon here
     }
 
     private void OnDrawGizmosSelected()

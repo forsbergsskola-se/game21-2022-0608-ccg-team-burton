@@ -11,17 +11,18 @@ namespace Entity
     public class Knockback : MonoBehaviour
     {
         [SerializeField]
-        private float baseKnockback = 1f;
+        private float _baseKnockback = 1f;
 
         [SerializeField]
-        private float knockbackDuration=0.5f;
+        private float _knockbackDuration=0.5f;
  
         public void DoKnockBack(Rigidbody2D hitTargetRb2d, Vector3 hitPosition, float knockbackMultiplier)
         {
-            var knockBackDir = (transform.position - hitPosition).normalized;
+            var knockBackDir = (hitTargetRb2d.transform.position - hitPosition).normalized;
             var originalVelocity = hitTargetRb2d.velocity;
-            hitTargetRb2d.velocity = knockBackDir * (baseKnockback * knockbackMultiplier);
-            StartCoroutine(HaltKnockBack(hitTargetRb2d,knockbackDuration, originalVelocity));
+            hitTargetRb2d.velocity = knockBackDir * (_baseKnockback * knockbackMultiplier);
+            Debug.DrawRay(hitPosition, knockBackDir, Color.red, 100f);
+            StartCoroutine(HaltKnockBack(hitTargetRb2d,_knockbackDuration, originalVelocity));
         }
 
         private IEnumerator HaltKnockBack(Rigidbody2D hitTargetRb2d, float knockbackDuration, Vector2 originalVelocity)
