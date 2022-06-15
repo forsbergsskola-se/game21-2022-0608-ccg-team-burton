@@ -9,6 +9,7 @@ public class Enemy_AI : MonoBehaviour
     private bool rotate = true;
     private bool move = false;
     private State_ML _currentStateMl;
+    private Animator enemy_Anim;
    
     [SerializeField] private float moveSpeed = 5.0f;
     private Enemy_Eyes _detector;
@@ -31,7 +32,7 @@ public class Enemy_AI : MonoBehaviour
     
     public void PlayerSpotted()
     {
-        _currentStateMl = new Pursue(gameObject)
+        _currentStateMl = new Pursue(gameObject, _detector);
     }
     
     
