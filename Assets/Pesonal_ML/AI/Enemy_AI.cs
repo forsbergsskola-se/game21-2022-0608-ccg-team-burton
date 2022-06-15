@@ -15,9 +15,11 @@ public class Enemy_AI : MonoBehaviour
 
     private void Start()
     {
+        EnemyVars._eyes = GetComponentInChildren<Enemy_Eyes>();
+        
         enemy_Anim = GetComponent<Animator>();
         _detector = GetComponentInChildren<Enemy_Eyes>();
-        _currentStateMl = new Idle(gameObject, _detector, enemy_Anim);
+        _currentStateMl = new Idle(gameObject, _detector, enemy_Anim, EnemyVars);
         currentFace = gameObject.GetComponent<SpriteRenderer>().flipX;
     }
 
@@ -35,7 +37,7 @@ public class Enemy_AI : MonoBehaviour
     
     public void PlayerSpotted()
     {
-        _currentStateMl = new Pursue(gameObject, _detector, enemy_Anim);
+        _currentStateMl = new Pursue(gameObject, _detector, enemy_Anim, EnemyVars);
     }
     
     

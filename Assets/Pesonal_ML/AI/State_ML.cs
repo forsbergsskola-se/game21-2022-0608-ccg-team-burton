@@ -14,6 +14,7 @@ public abstract class State_ML
     public GameObject PatrolNodes;
     protected Enemy_Eyes Detector;
     protected Animator _animator;
+    protected EnemyVars_ML EnemyVarsMl;
 
     public enum STATE
     {
@@ -25,11 +26,13 @@ public abstract class State_ML
         Enter, Update, Exit
     }
 
-    public State_ML(GameObject npc, Enemy_Eyes detector)
+    public State_ML(GameObject npc, Enemy_Eyes detector, Animator animator, EnemyVars_ML enemyVarsMl)
     {
         Stage = EVENT.Enter;
         Npc = npc;
         Detector = detector;
+        _animator = animator;
+        EnemyVarsMl = enemyVarsMl;
     }
 
     public virtual void Enter()
@@ -70,20 +73,19 @@ public class Idle : State_ML
 {
     private float time;
     
-    public Idle(GameObject npc, Enemy_Eyes detector, Animator animator)
-        : base( npc, detector)
+    public Idle(GameObject npc, Enemy_Eyes detector, Animator animator, EnemyVars_ML enemyVarsMl)
+        : base( npc, detector, animator, enemyVarsMl)
     {
         Name = STATE.Idle;
-        _animator = animator;
         Npc = npc;
     }
     
     public override void Update()
     {
-        time += Random.Range(0, 11);
-        if (time > 1000)
+        time += Time.deltaTime * Random.Range(0, 11);
+        if (time > 500)
         {
-            NextStateMl = new Patrol(Npc, Detector, _animator);
+            NextStateMl = new Patrol(Npc, Detector, _animator, EnemyVarsMl);
             Stage = EVENT.Exit;
         }
     }
@@ -94,11 +96,10 @@ public class Patrol : State_ML
 {
     private int currentIndex = 0;
     private bool incDec = true;
-    public Patrol(GameObject npc, Enemy_Eyes detector, Animator animator)
-        : base( npc,  detector)
+    public Patrol(GameObject npc, Enemy_Eyes detector, Animator animator, EnemyVars_ML enemyVarsMl)
+        : base( npc,  detector, animator, enemyVarsMl)
     {
         Name = STATE.Patrol;
-        _animator = animator;
         Npc = npc;
         Detector = detector;
     }
@@ -116,7 +117,7 @@ public class Patrol : State_ML
         if (Detector.PlayerSeen)
         {
             Stage = EVENT.Exit;
-            NextStateMl = new Pursue(Npc, Detector, _animator);
+            NextStateMl = new Pursue(Npc, Detector, _animator, EnemyVarsMl);
         }
     }
 
@@ -131,19 +132,14 @@ public class Patrol : State_ML
         Npc.transform.Rotate(Vector3.up, 180);
     }
     
-    
-    private void CheckForDistance()
-    {
-    }
 }
 
 public class Pursue : State_ML
 {
-    public Pursue(GameObject npc, Enemy_Eyes detector, Animator animator)
-        : base(npc, detector)
+    public Pursue(GameObject npc, Enemy_Eyes detector, Animator animator, EnemyVars_ML enemyVarsMl)
+        : base(npc, detector, animator, enemyVarsMl)
     {
         Name = STATE.Pursue;
-        _animator = animator;
         Detector = detector;
     }
 
@@ -152,24 +148,35 @@ public class Pursue : State_ML
         base.Update();
         Stage = EVENT.Update;
 
-        if (Vector3.Distance(Detector.PlayerTrans.position, Npc.gameObject.transform.position) < 2)
+        if (Vector3.Distance(Detector.PlayerTrans.position, Npc.gameObject.transform.position) < EnemyVarsMl.GetAttackDistance)
         {
-            NextStateMl = new Attack(Npc, Detector, _animator);    
+            NextStateMl = new Attack(Npc, Detector, _animator, EnemyVarsMl);    
         }
     }
 }
 
 public class Attack : State_ML
 {
-    public Attack(GameObject npc, Enemy_Eyes detector, Animator animator)
-        : base(npc, detector)
+    public Attack(GameObject npc, Enemy_Eyes detector, Animator animator, EnemyVars_ML enemyVarsMl)
+        : base(npc, detector, animator, enemyVarsMl)
     {
         Name = STATE.Attack;
-        _animator = animator;
     }
-    
+
+
+    public override void Enter()
+    {
+        base.Enter();
+        _animator.SetBool("EnterCombatMode", true);
+    }
+
     public override void Update()
     {
+        if (!EnemyVarsMl._eyes.PlayerSeen)
+        {
+            
+        }
+        
         _animator.SetInteger("AttackOne", 0);
     }
 }
