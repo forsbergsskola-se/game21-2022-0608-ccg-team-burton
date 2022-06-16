@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Entity.Hazard
 {
- 
     /// <summary>
     /// Temporary script for damaging the player. Should be modified or removed.
     /// </summary>
