@@ -33,30 +33,35 @@ namespace GamePlay.Entities.Player
         {
             WalkInput = Input.GetAxis("Horizontal");
             
-            switch (WalkRightInput)
+            // switch (WalkRightInput)
+            // {
+            //     case true when WalkLeftInput: // pressing both keeps player still
+            //         WalkInput = 0;
+            //         _noInput = false;
+            //         break;
+            //     
+            //     case true:
+            //         WalkInput = 1;
+            //         _noInput = false;
+            //         break;
+            //     
+            //     default:
+            //     {
+            //         if (WalkLeftInput)
+            //         {
+            //             WalkInput = -1;
+            //             _noInput = false;
+            //         }
+            //         
+            //         else
+            //             _noInput = true;
+            //         break;
+            //     }
+            // }
+
+            void OnPointerDown()
             {
-                case true when WalkLeftInput: // pressing both keeps player still
-                    WalkInput = 0;
-                    _noInput = false;
-                    break;
-                
-                case true:
-                    WalkInput = 1;
-                    _noInput = false;
-                    break;
-                
-                default:
-                {
-                    if (WalkLeftInput)
-                    {
-                        WalkInput = -1;
-                        _noInput = false;
-                    }
-                    
-                    else
-                        _noInput = true;
-                    break;
-                }
+                WalkInput = Input.GetAxis("Horizontal");
             }
 
             JumpInputDown = Input.GetKeyDown(KeyCode.Space);
