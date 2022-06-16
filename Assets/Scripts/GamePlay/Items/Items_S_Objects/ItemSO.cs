@@ -13,10 +13,9 @@ namespace Entity.Items
         public string ItemName;
         public Rarity Rarity;
         public float DropWeight;
-
         public int AttackDamage;
 
-        public WeaponType WeaponType;
+        
 
 
 
