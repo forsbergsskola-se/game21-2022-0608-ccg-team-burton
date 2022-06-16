@@ -83,7 +83,7 @@ public class Idle : State_ML
     public override void Update()
     {
         time += Time.deltaTime * Random.Range(0, 11);
-        if (time > 500)
+        if (time > 15)
         {
             NextStateMl = new Patrol(Npc, Detector, _animator, EnemyVarsMl);
             Stage = EVENT.Exit;
@@ -123,7 +123,7 @@ public class Patrol : State_ML
 
     private void SimpleMove()
     {
-        Npc.transform.position += Npc.transform.right * (Time.deltaTime * 0.5f);
+        Npc.transform.position += Npc.transform.right * (Time.deltaTime * EnemyVarsMl.GetMoveSpeed);
         
     }
     
@@ -157,6 +157,7 @@ public class Pursue : State_ML
 
 public class Attack : State_ML
 {
+    private float attackDelay;
     public Attack(GameObject npc, Enemy_Eyes detector, Animator animator, EnemyVars_ML enemyVarsMl)
         : base(npc, detector, animator, enemyVarsMl)
     {
@@ -177,6 +178,14 @@ public class Attack : State_ML
             
         }
         
-        _animator.SetInteger("AttackOne", 0);
+        
+        if (attackDelay >= EnemyVarsMl.GetAttackInterval)
+        {
+            _animator.SetInteger("Attack", 0);
+            
+            attackDelay -= EnemyVarsMl.GetAttackInterval;
+        }
+        
+        attackDelay += 0.5f * Time.deltaTime;
     }
 }
