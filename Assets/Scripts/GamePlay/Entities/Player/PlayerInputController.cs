@@ -1,4 +1,5 @@
 
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace GamePlay.Entities.Player
@@ -31,7 +32,22 @@ namespace GamePlay.Entities.Player
             //JumpInputDown = Input.GetKeyDown(KeyCode.Space);
             //JumpInputUp = Input.GetKeyUp(KeyCode.Space);
             JumpInput = Input.GetKeyDown(KeyCode.Space);
+            OnPointerDownLeft();
+            OnPointerUpLeft();
+
+
         }
+        public void OnPointerDownLeftButton()
+        {
+            
+        }
+        public  void OnPointerUpLeftButton()
+        {
+            
+        }
+        
+        
+        
 
         
         private void SetCommands()
