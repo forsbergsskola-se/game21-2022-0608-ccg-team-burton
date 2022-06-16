@@ -7,13 +7,13 @@ using UnityEngine;
 public class ItemCollector : MonoBehaviour{
 
     [SerializeField] TextMeshProUGUI cointText;
-    
+    [SerializeField] int cointValue;
     int coins = 0;
-    
+
     void OnTriggerEnter2D(Collider2D col){
         if (col.gameObject.CompareTag("Coin")){
             Destroy(col.gameObject);
-            coins++;
+            coins +=  cointValue;
             cointText.text = "Coins: " + coins;
         }
     }
