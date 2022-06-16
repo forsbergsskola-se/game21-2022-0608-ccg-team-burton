@@ -64,7 +64,7 @@ namespace GamePlay.Entities.Movement
         private void HandleJumping()
         {
 
-            if (!_commandContainer.JumpCommand) return;
+            if (!_commandContainer.JumpDownCommand) return;
             if (_groundChecker.IsGrounded)
             {
                 _jumpHeight = BaseJumpSpeed * Time.deltaTime;
