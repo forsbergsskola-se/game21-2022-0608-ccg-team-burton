@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 901905159867705366}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.16, y: 1.54, z: 0}
+  m_LocalPosition: {x: 0, y: -0.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -89,7 +89,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &4307379368069914207
 Animator:
   serializedVersion: 4
@@ -175,6 +175,7 @@ MonoBehaviour:
     MoveSpeed: 8
     AttackInterval: 2
     _eyes: {fileID: 0}
+    ArcCollider: {fileID: 0}
 --- !u!1001 &3771349586278283955
 PrefabInstance:
   m_ObjectHideFlags: 0

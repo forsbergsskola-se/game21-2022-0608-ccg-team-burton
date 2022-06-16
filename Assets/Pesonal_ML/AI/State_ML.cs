@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
+using Vector2 = UnityEngine.Vector2;
 
 public abstract class State_ML 
 {
@@ -86,7 +87,13 @@ public class Idle : State_ML
             Stage = EVENT.Exit;
         }
     }
-  
+
+    public override void Exit()
+    {
+        base.Exit();
+        _animator.SetBool("ExitIdleState", true);
+        
+    }
 }
 
 public class Patrol : State_ML
@@ -102,7 +109,6 @@ public class Patrol : State_ML
 
     public override void Enter()
     {
-        _animator.SetBool("ExitIdleState", true);
         base.Enter();
     }
 
@@ -126,16 +132,7 @@ public class Patrol : State_ML
             SimpleMove();
         }
     }
-
-    private void CheckForPlatforms()
-    {
-        EnemyVarsMl.ArcCollider.TestForJump = true;
-
-        if (EnemyVarsMl.ArcCollider.TileSpotted)
-        {
-            Debug.Log("Platform seen");
-        }
-    }
+    
     
     private void SimpleMove()
     {
@@ -218,6 +215,15 @@ public class Attack : State_ML
 }
 public class Jump : State_ML
 {
+    private bool makeJump;
+    private float maxAngle = 90;
+    private List<Vector2> arcPoints = new List<Vector2>();
+    private Vector2 currentPoint;
+    private Vector2 currentPlayerPos;
+    private float lerpValue;
+    private int pointCount;
+    private bool start;
+
     public Jump(GameObject npc, Animator animator, EnemyVars_ML enemyVarsMl) 
         : base(npc, animator, enemyVarsMl)
     {
@@ -231,17 +237,110 @@ public class Jump : State_ML
     
     public override void Update()
     {
-        if(!EnemyVarsMl.ArcCollider.TileSpotted)
-            EnemyVarsMl.ArcCollider.CalculatePoints();
-
-        else
+        if (!EnemyVarsMl.ArcCollider.TileSpotted && !start)
         {
-            
+            EnemyVarsMl.ArcCollider.CalculatePoints();
         }
+        
+        else if (EnemyVarsMl.ArcCollider.GetAngle > maxAngle && !start)
+        {
+            BackToPatrol();
+        }
+        else if (EnemyVarsMl.ArcCollider.SameTileSpotted)
+        {
+            Debug.Log("same tile");
+            BackToPatrol();
+        }
+        
+        else if(EnemyVarsMl.ArcCollider.TileSpotted && !EnemyVarsMl.ArcCollider.SameTileSpotted)
+        {
+            //SetArc();
+            MadeJump();
+           // makeJump = true;
+           // pointCount++;
+           // start = true;
+           // currentPoint = arcPoints[pointCount];
+           // currentPlayerPos = Npc.transform.position;
+           // Npc.GetComponent<Rigidbody2D>().simulated = false;
+
+        }
+       
+
+        if (makeJump && start) 
+        {
+            var currentPos = Vector2.Lerp(currentPlayerPos, currentPoint, lerpValue);
+            lerpValue += 6f * Time.deltaTime;
+
+            if (lerpValue > 0.95f)
+            {
+                lerpValue = 0;
+                
+                pointCount++;
+                if (pointCount < arcPoints.Count)
+                {
+                    currentPoint = arcPoints[pointCount];
+                    currentPlayerPos  = Npc.transform.position;
+                }
+
+                else
+                {
+                    MadeJump();
+                }
+            }
+            
+            Npc.transform.position = new Vector3(currentPos.x, currentPos.y);
+        
+        }
+        
     }
 
-    public void BackToPatrol()
+    public void MadeJump()
     {
+        SetArc();
+        var forward = Npc.gameObject.transform.right;
+        var impulse2 = EnemyVarsMl.ArcCollider.GetImpulse();
+        var diff = EnemyVarsMl.ArcCollider.TileHeightDifference;
+        if (diff < 0)
+        {
+            diff = 2;
+        }
         
+        else
+        {
+            diff *= 7;
+            diff = Mathf.Clamp(diff, 0, 7);
+        }
+        
+        var impulse = new Vector2(forward.x  * (EnemyVarsMl.ArcCollider.GetLengthDifference() * 0.75f), diff);
+        Debug.Log(EnemyVarsMl.ArcCollider.GetLengthDifference());
+        
+       // Debug.Log(arcPoints[0]);
+       // Debug.Log(arcPoints[^1]);
+       Npc.GetComponent<Rigidbody2D>().AddForce(impulse , ForceMode2D.Impulse); 
+       // Npc.GetComponent<Rigidbody2D>().AddForce(new Vector2(forward.x * 3f, 5f), ForceMode2D.Impulse);
+       // makeJump = true;
+        EnemyVarsMl.ArcCollider.ResetCollider();
+        
+        NextStateMl = new Idle(Npc, _animator, EnemyVarsMl);
+        Stage = EVENT.Exit;
+    }
+
+    private void SetArc()
+    {
+        var worldPos = Npc.transform.position;
+        
+        for (int i = 0; i < EnemyVarsMl.ArcCollider.GetNumberArcPoints() / 2; i++)
+        {
+            var  aPoint = EnemyVarsMl.ArcCollider.GetPoint(i);
+            arcPoints.Add(new Vector2(worldPos.x + aPoint.x, worldPos.y + aPoint.y));
+        }
+    }
+    
+    private void BackToPatrol()
+    {
+        Npc.transform.Rotate(Vector3.up, 180);
+        EnemyVarsMl.ArcCollider.ResetCollider();
+        NextStateMl = new Idle(Npc, _animator, EnemyVarsMl);
+        Stage = EVENT.Exit;
     }
 }

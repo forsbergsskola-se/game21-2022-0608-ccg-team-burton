@@ -6,7 +6,8 @@ public class Enemy_Eyes : MonoBehaviour
     public bool PlayerSeen { get; private set; }
     public bool GroundSeen { get; private set; }
     public Vector3 PlayerPos { get; private set; }
-    private bool checkPlayerPos;
+    public float Height { get; private set; }
+    
     public Transform PlayerTrans { get; private set; }
     
     private void OnTriggerEnter2D(Collider2D other)
@@ -14,14 +15,12 @@ public class Enemy_Eyes : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             PlayerSeen = true;
-            checkPlayerPos = true;
             PlayerTrans = other.gameObject.transform;
         }
         
         if (other.gameObject.CompareTag("Grounded"))
         {
-            checkPlayerPos = true;
-            PlayerTrans = other.gameObject.transform;
+            Height = other.gameObject.transform.position.y;
             GroundSeen = true;
         }
     }

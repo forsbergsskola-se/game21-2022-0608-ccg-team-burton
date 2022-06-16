@@ -14,6 +14,8 @@ public class Enemy_AI : MonoBehaviour
     private void Start()
     {
         EnemyVars._eyes = GetComponentInChildren<Enemy_Eyes>();
+        Debug.Log(EnemyVars._eyes.Height);
+        
         EnemyVars.ArcCollider = GetComponentInChildren<ArcCollider>();
         enemy_Anim = GetComponent<Animator>();
      
@@ -23,17 +25,6 @@ public class Enemy_AI : MonoBehaviour
     private void Update()
     {
         _currentStateMl = _currentStateMl.Process();
-    }
-
-    public void GroundGone()
-    {
-        
-     //   gameObject.GetComponent<SpriteRenderer>().flipX = currentFace;
-    }
-    
-    public void PlayerSpotted()
-    {
-        _currentStateMl = new Pursue(gameObject, enemy_Anim, EnemyVars);
     }
     
     
