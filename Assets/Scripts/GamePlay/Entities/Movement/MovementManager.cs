@@ -17,6 +17,7 @@ namespace GamePlay.Entities.Movement
         public float Acceleration = 80f;
         public float DeAcceleration = 55f;
         public float WalkClamp = 12f;
+
         #endregion
 
         #region Jumping;
@@ -93,6 +94,7 @@ namespace GamePlay.Entities.Movement
                 _baseMovementSpeed = _commandContainer.WalkCommand * Acceleration * Time.deltaTime;
                 // clamp walk speed
                 _baseMovementSpeed = Mathf.Clamp(_baseMovementSpeed, -WalkClamp, WalkClamp);
+
             }
 
             else
@@ -100,7 +102,10 @@ namespace GamePlay.Entities.Movement
                     (_baseMovementSpeed, 0, DeAcceleration * Time.deltaTime);
             
             _rb.velocity = new Vector2(_baseMovementSpeed, _rb.velocity.y);
+
         }
+
+        
     }
 }
 

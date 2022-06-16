@@ -12,3 +12,4 @@ namespace GamePlay.Entities.Player
         //public bool AttackCommand;
     }
 }
+

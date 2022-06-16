@@ -1,3 +1,5 @@
+
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace GamePlay.Entities.Player
@@ -10,7 +12,6 @@ namespace GamePlay.Entities.Player
         //public bool JumpInputUp { get; private set; }
         public bool JumpInput { get; private set; }
 
-        
         private void Awake()
         {
             _commandContainer = GetComponent<CommandContainer>();
@@ -31,7 +32,7 @@ namespace GamePlay.Entities.Player
             //JumpInputUp = Input.GetKeyUp(KeyCode.Space);
             JumpInput = Input.GetKeyDown(KeyCode.Space);
         }
-
+        
         
         private void SetCommands()
         {
