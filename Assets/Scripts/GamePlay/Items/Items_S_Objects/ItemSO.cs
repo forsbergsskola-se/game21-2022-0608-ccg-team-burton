@@ -28,7 +28,7 @@ namespace Entity.Items
                     ItemTypeEnum.Acid => 1f,
                     _ => 1f
                 },
-                Rarity.Uncommon => ItemType switchit
+                Rarity.Uncommon => ItemType switch
                 {
                     ItemTypeEnum.Standard => 2f,
                     ItemTypeEnum.Acid => 1.5f,
