@@ -214,10 +214,10 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   SwitchSettingsMigration: 1
-  HasSourceProject: 1
-  HasPlatforms: 1
+  HasSourceProject: 0
+  HasPlatforms: 0
   sourceProjectPath: ..///MobileGPSummer22.fspro
-  sourceBankPath: ../Build
+  sourceBankPath: Assets/StreamingAssets
   SourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
@@ -239,8 +239,12 @@ MonoBehaviour:
   VirtualChannelSettings: []
   RealChannelSettings: []
   Plugins: []
-  MasterBanks: []
-  Banks: []
+  MasterBanks:
+  - Desktop/Master
+  - Mobile/Master
+  Banks:
+  - Desktop/Music Bank
+  - Mobile/Music Bank
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
