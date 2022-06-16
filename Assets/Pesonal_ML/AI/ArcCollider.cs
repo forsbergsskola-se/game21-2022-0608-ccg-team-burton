@@ -10,20 +10,52 @@ public class ArcCollider : MonoBehaviour
     [SerializeField] private float gravity = 9.8f;
     [SerializeField] private float velocity = 9.8f;
     [SerializeField] private float angle = 30f;
+    public bool TileSpotted { get; private set; }
+    public bool announceTileSpotted;
+    private float currentDeg;
+
+    public bool TestForJump;
 
     void Start()
     {
+        currentDeg = angle;
         collider = GetComponent<EdgeCollider2D>();
     }
     
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("ATile"))
+        if (col.gameObject.CompareTag("Grounded"))
         {
-            
+            TileSpotted = true;
+        }
+    }
+    
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Grounded"))
+        {
+            TileSpotted = false;
         }
     }
 
+    public void Cycle()
+    {
+        for (int i = 0; i < 120; i++)
+        {
+            CalculatePoints();
+
+            if (TileSpotted)
+            {
+                TileSpotted = false;
+                announceTileSpotted = true;
+                break;
+            }
+            
+            angle++;
+        }
+        
+    }
+    
     private void CalculatePoints()
     {
         var something = 2 * velocity * Mathf.Sin(Mathf.Deg2Rad * angle) / gravity;
@@ -52,10 +84,13 @@ public class ArcCollider : MonoBehaviour
         return numbers;
     }
 
+
     private void Update()
     {
-        CalculatePoints();
-        angle += 1f * Time.deltaTime;
-
+        if (TestForJump)
+        {
+            CalculatePoints();
+            angle++;
+        }
     }
 }

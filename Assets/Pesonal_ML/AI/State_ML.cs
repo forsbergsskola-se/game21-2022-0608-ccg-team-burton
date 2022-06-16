@@ -18,7 +18,7 @@ public abstract class State_ML
 
     public enum STATE
     {
-        Idle, Patrol, Pursue, Attack, Rest,
+        Idle, Patrol, Pursue, Attack, Rest, Jump
     }
 
     public enum EVENT
@@ -83,7 +83,7 @@ public class Idle : State_ML
     public override void Update()
     {
         time += Time.deltaTime * Random.Range(0, 11);
-        if (time > 15)
+        if (time > 10)
         {
             NextStateMl = new Patrol(Npc, Detector, _animator, EnemyVarsMl);
             Stage = EVENT.Exit;
@@ -112,15 +112,34 @@ public class Patrol : State_ML
 
     public override void Update()
     {
-        SimpleMove();
-
+        
         if (Detector.PlayerSeen)
         {
             Stage = EVENT.Exit;
             NextStateMl = new Pursue(Npc, Detector, _animator, EnemyVarsMl);
         }
+
+        else if (!Detector.GroundSeen)
+        {
+            CheckForPlatforms();
+        }
+
+        else
+        {
+            SimpleMove();
+        }
     }
 
+    private void CheckForPlatforms()
+    {
+        EnemyVarsMl.ArcCollider.TestForJump = true;
+
+        if (EnemyVarsMl.ArcCollider.TileSpotted)
+        {
+            Debug.Log("Platform seen");
+        }
+    }
+    
     private void SimpleMove()
     {
         Npc.transform.position += Npc.transform.right * (Time.deltaTime * EnemyVarsMl.GetMoveSpeed);
@@ -145,13 +164,24 @@ public class Pursue : State_ML
 
     public override void Update()
     {
-        base.Update();
-        Stage = EVENT.Update;
-
+       
+        
         if (Vector3.Distance(Detector.PlayerTrans.position, Npc.gameObject.transform.position) < EnemyVarsMl.GetAttackDistance)
         {
-            NextStateMl = new Attack(Npc, Detector, _animator, EnemyVarsMl);    
+            NextStateMl = new Attack(Npc, Detector, _animator, EnemyVarsMl);
+            Stage = EVENT.Exit;
         }
+        else
+        {
+            SimpleMove();
+        }
+        
+    }
+    
+    private void SimpleMove()
+    {
+        Npc.transform.position += Npc.transform.right * (Time.deltaTime * EnemyVarsMl.GetMoveSpeed);
+        
     }
 }
 
@@ -168,7 +198,7 @@ public class Attack : State_ML
     public override void Enter()
     {
         base.Enter();
-        _animator.SetBool("EnterCombatMode", true);
+        _animator.SetBool("EnterCombat", true);
     }
 
     public override void Update()
@@ -187,5 +217,13 @@ public class Attack : State_ML
         }
         
         attackDelay += 0.5f * Time.deltaTime;
+    }
+    
+}
+public class Jump : State_ML
+{
+    public Jump(GameObject npc, Enemy_Eyes detector, Animator animator, EnemyVars_ML enemyVarsMl) 
+        : base(npc, detector, animator, enemyVarsMl)
+    {
     }
 }

@@ -20,7 +20,6 @@ public class Enemy_Eyes : MonoBehaviour
         
         if (other.gameObject.CompareTag("Grounded"))
         {
-            PlayerSeen = true;
             checkPlayerPos = true;
             PlayerTrans = other.gameObject.transform;
             GroundSeen = true;
