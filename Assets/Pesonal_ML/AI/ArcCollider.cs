@@ -27,6 +27,7 @@ public class ArcCollider : MonoBehaviour
         if (col.gameObject.CompareTag("Grounded"))
         {
             TileSpotted = true;
+            Debug.Log("Ground seen");
         }
     }
     
@@ -56,7 +57,7 @@ public class ArcCollider : MonoBehaviour
         
     }
     
-    private void CalculatePoints()
+    public void CalculatePoints()
     {
         var something = 2 * velocity * Mathf.Sin(Mathf.Deg2Rad * angle) / gravity;
         var points = FRange(0, something, 0.05f);
@@ -70,6 +71,8 @@ public class ArcCollider : MonoBehaviour
         }
       
         collider.points = vecs.ToArray();
+
+        angle+= Time.deltaTime * 3f;
     }
 
     private List<float> FRange(float start, float final, float increment)

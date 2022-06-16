@@ -11,8 +11,6 @@ public abstract class State_ML
     protected EVENT Stage;
     protected State_ML NextStateMl;
     protected GameObject Npc;
-    public GameObject PatrolNodes;
-    protected Enemy_Eyes Detector;
     protected Animator _animator;
     protected EnemyVars_ML EnemyVarsMl;
 
@@ -26,11 +24,10 @@ public abstract class State_ML
         Enter, Update, Exit
     }
 
-    public State_ML(GameObject npc, Enemy_Eyes detector, Animator animator, EnemyVars_ML enemyVarsMl)
+    public State_ML(GameObject npc, Animator animator, EnemyVars_ML enemyVarsMl)
     {
         Stage = EVENT.Enter;
         Npc = npc;
-        Detector = detector;
         _animator = animator;
         EnemyVarsMl = enemyVarsMl;
     }
@@ -73,8 +70,8 @@ public class Idle : State_ML
 {
     private float time;
     
-    public Idle(GameObject npc, Enemy_Eyes detector, Animator animator, EnemyVars_ML enemyVarsMl)
-        : base( npc, detector, animator, enemyVarsMl)
+    public Idle(GameObject npc, Animator animator, EnemyVars_ML enemyVarsMl)
+        : base( npc, animator, enemyVarsMl)
     {
         Name = STATE.Idle;
         Npc = npc;
@@ -85,7 +82,7 @@ public class Idle : State_ML
         time += Time.deltaTime * Random.Range(0, 11);
         if (time > 10)
         {
-            NextStateMl = new Patrol(Npc, Detector, _animator, EnemyVarsMl);
+            NextStateMl = new Patrol(Npc, _animator, EnemyVarsMl);
             Stage = EVENT.Exit;
         }
     }
@@ -96,12 +93,11 @@ public class Patrol : State_ML
 {
     private int currentIndex = 0;
     private bool incDec = true;
-    public Patrol(GameObject npc, Enemy_Eyes detector, Animator animator, EnemyVars_ML enemyVarsMl)
-        : base( npc,  detector, animator, enemyVarsMl)
+    public Patrol(GameObject npc, Animator animator, EnemyVars_ML enemyVarsMl)
+        : base( npc, animator, enemyVarsMl)
     {
         Name = STATE.Patrol;
         Npc = npc;
-        Detector = detector;
     }
 
     public override void Enter()
@@ -113,15 +109,16 @@ public class Patrol : State_ML
     public override void Update()
     {
         
-        if (Detector.PlayerSeen)
+        if (EnemyVarsMl._eyes.PlayerSeen)
         {
             Stage = EVENT.Exit;
-            NextStateMl = new Pursue(Npc, Detector, _animator, EnemyVarsMl);
+            NextStateMl = new Pursue(Npc, _animator, EnemyVarsMl);
         }
 
-        else if (!Detector.GroundSeen)
+        else if (!EnemyVarsMl._eyes.GroundSeen)
         {
-            CheckForPlatforms();
+            Stage = EVENT.Exit;
+            NextStateMl = new Jump(Npc, _animator, EnemyVarsMl);
         }
 
         else
@@ -155,20 +152,19 @@ public class Patrol : State_ML
 
 public class Pursue : State_ML
 {
-    public Pursue(GameObject npc, Enemy_Eyes detector, Animator animator, EnemyVars_ML enemyVarsMl)
-        : base(npc, detector, animator, enemyVarsMl)
+    public Pursue(GameObject npc,Animator animator, EnemyVars_ML enemyVarsMl)
+        : base(npc, animator, enemyVarsMl)
     {
         Name = STATE.Pursue;
-        Detector = detector;
     }
 
     public override void Update()
     {
        
         
-        if (Vector3.Distance(Detector.PlayerTrans.position, Npc.gameObject.transform.position) < EnemyVarsMl.GetAttackDistance)
+        if (Vector3.Distance(EnemyVarsMl._eyes.PlayerTrans.position, Npc.gameObject.transform.position) < EnemyVarsMl.GetAttackDistance)
         {
-            NextStateMl = new Attack(Npc, Detector, _animator, EnemyVarsMl);
+            NextStateMl = new Attack(Npc, _animator, EnemyVarsMl);
             Stage = EVENT.Exit;
         }
         else
@@ -188,8 +184,8 @@ public class Pursue : State_ML
 public class Attack : State_ML
 {
     private float attackDelay;
-    public Attack(GameObject npc, Enemy_Eyes detector, Animator animator, EnemyVars_ML enemyVarsMl)
-        : base(npc, detector, animator, enemyVarsMl)
+    public Attack(GameObject npc, Animator animator, EnemyVars_ML enemyVarsMl)
+        : base(npc, animator, enemyVarsMl)
     {
         Name = STATE.Attack;
     }
@@ -222,8 +218,30 @@ public class Attack : State_ML
 }
 public class Jump : State_ML
 {
-    public Jump(GameObject npc, Enemy_Eyes detector, Animator animator, EnemyVars_ML enemyVarsMl) 
-        : base(npc, detector, animator, enemyVarsMl)
+    public Jump(GameObject npc, Animator animator, EnemyVars_ML enemyVarsMl) 
+        : base(npc, animator, enemyVarsMl)
     {
+    }
+    
+    public override void Enter()
+    {
+        base.Enter();
+        _animator.SetBool("ExitIdleState", false);
+    }
+    
+    public override void Update()
+    {
+        if(!EnemyVarsMl.ArcCollider.TileSpotted)
+            EnemyVarsMl.ArcCollider.CalculatePoints();
+
+        else
+        {
+            
+        }
+    }
+
+    public void BackToPatrol()
+    {
+        
     }
 }

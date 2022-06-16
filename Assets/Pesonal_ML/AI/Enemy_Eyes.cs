@@ -35,7 +35,6 @@ public class Enemy_Eyes : MonoBehaviour
         
         if (other.gameObject.CompareTag("Grounded"))
         {
-            gameObject.GetComponentInParent<Enemy_AI>().GroundGone();
             GroundSeen = false;
         }
     }
