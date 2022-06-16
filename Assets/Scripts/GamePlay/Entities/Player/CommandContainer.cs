@@ -8,7 +8,8 @@ namespace GamePlay.Entities.Player
         // But in some cases we might want to use {HideInInspector} or getters/setters to hide these fields
 
         public float WalkCommand;
-        public bool JumpCommand;
+        public bool JumpUpCommand;
+        public bool JumpDownCommand;
         //public bool AttackCommand;
     }
 }
