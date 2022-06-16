@@ -7,6 +7,5 @@ namespace Entity.Items
         Rare,
         Epic,
         Legendary,
-        DEBUG
     }   
 }

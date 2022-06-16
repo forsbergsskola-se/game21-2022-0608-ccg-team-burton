@@ -75,10 +75,12 @@ public class ItemTableSO : ScriptableObject
     private void SetItemStats(ItemData go)
     {
         go.ItemSO.Rarity = tableRarity;
+
         if (tableRarity == Rarity.Common)
         {
             // go.ItemSO.AttackDamage = go.ItemSO.AttackDamage*
         }
+
     }
 
     [Serializable]
