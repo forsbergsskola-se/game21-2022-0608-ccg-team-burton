@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4334260088892593519}
   - component: {fileID: 4334260088892593512}
   - component: {fileID: 4334260088892593513}
+  - component: {fileID: 5723524109402921018}
   - component: {fileID: 4334260088892593517}
   - component: {fileID: 6406288623175395895}
   m_Layer: 8
@@ -37,7 +38,7 @@ Transform:
   m_Children:
   - {fileID: 8307004189526462849}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4334260088892593515
 SpriteRenderer:
@@ -122,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ffd5d2cecce7e442b2e42b3e17eef16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseMovementSpeed: 2
+  BaseMovementSpeed: 6
   AirborneMovementSpeed: 0
   chargingJumpSpeed: 10
   JumpForce: 0
@@ -157,6 +158,20 @@ MonoBehaviour:
   JumpCommandUp: 0
   JumpCommand: 0
   AttackCommand: 0
+--- !u!114 &5723524109402921018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4334260088892593524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f55e62af6b83f84d80e16ca5a1fae3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cointText: {fileID: 0}
+  cointValue: 0
 --- !u!50 &4334260088892593517
 Rigidbody2D:
   serializedVersion: 4
