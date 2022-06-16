@@ -58,16 +58,27 @@ public class ItemTableSO : ScriptableObject
         {
             if (go == null)
             {
-                Debug.LogError("ERROR: No gameobject set in table slot");
+                Debug.LogError("ERROR: No Object set in table slot");
             }
 
-            go.ItemSO.Rarity = tableRarity;
+            SetItemStats(go);
+            
+            
             return go.ItemSO;
         }
         Debug.LogError("GO couldn't be picked... Be sure that all of your active GameObject Tables (GO-class)  have assigned at least one GO! Returning NULL");
         //reset picked number in last method dependent on it (in this case, pick GO)
         _pickedNumber = 0;
         return null;
+    }
+
+    private void SetItemStats(ItemData go)
+    {
+        go.ItemSO.Rarity = tableRarity;
+        if (tableRarity == Rarity.Common)
+        {
+            // go.ItemSO.AttackDamage = go.ItemSO.AttackDamage*
+        }
     }
 
     [Serializable]

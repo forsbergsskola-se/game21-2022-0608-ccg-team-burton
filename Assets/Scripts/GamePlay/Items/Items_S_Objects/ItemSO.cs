@@ -14,15 +14,12 @@ namespace Entity.Items
         public Rarity Rarity;
         public float DropWeight;
 
+        public int AttackDamage;
 
-        // private void OnValidate()
-        // {
-        //     if (this.Rarity == Rarity.Common)
-        //     {
-        //         DropWeight = 400;
-        //     }
-        // }
+        public WeaponType WeaponType;
 
 
-    }   
+
+
+    }
 }
