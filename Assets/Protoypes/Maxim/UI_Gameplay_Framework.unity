@@ -451,12 +451,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5092391886403041089}
   m_PrefabAsset: {fileID: 0}
---- !u!50 &1244182074 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 5092391886403041096, guid: 0967cd6e571c40f47aad45916241a83c,
-    type: 3}
-  m_PrefabInstance: {fileID: 5092391886403041089}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1244182077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,8 +463,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f7349ab52cfd8a44a35f135cdb49303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _knockbackForce: 0
-  _rb2d: {fileID: 1244182074}
+  baseKnockback: 1
+  knockbackDuration: 0
 --- !u!1 &1591748794
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,12 +726,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3363829456543155736}
   m_PrefabAsset: {fileID: 0}
---- !u!50 &1961477182 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 1846255032, guid: d4501ed3e14888d4a86cc890e1327544,
-    type: 3}
-  m_PrefabInstance: {fileID: 3363829456543155736}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1961477188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,8 +738,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f7349ab52cfd8a44a35f135cdb49303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _knockbackForce: 0
-  _rb2d: {fileID: 1961477182}
+  baseKnockback: 1
+  knockbackDuration: 0
 --- !u!114 &1961477189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -765,10 +753,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
+  playerHealth: {fileID: 1961477193}
   hearts:
   - {fileID: 819210946}
   - {fileID: 232190307}
   - {fileID: 107090456}
+--- !u!114 &1961477193 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1961477185, guid: d4501ed3e14888d4a86cc890e1327544,
+    type: 3}
+  m_PrefabInstance: {fileID: 3363829456543155736}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961477179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a62179065a33a8c43879a7035312207e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3363829456543155736
 PrefabInstance:
   m_ObjectHideFlags: 0
