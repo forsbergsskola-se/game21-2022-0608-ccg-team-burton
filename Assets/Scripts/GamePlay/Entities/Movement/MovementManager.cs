@@ -108,18 +108,7 @@ namespace GamePlay.Entities.Movement
             
         }
 
-        // public void WalkingLeft()
-        // {
-        //     if (_commandContainer.WalkCommand > 0)
-        //     {
-        //         IsWalkingRight = true;
-        //     }
-        //     
-        //     else if (_commandContainer.WalkCommand <= 0)
-        //     {
-        //         IsWalkingLeft = false;
-        //     }
-        // }
+        
     }
 }
 

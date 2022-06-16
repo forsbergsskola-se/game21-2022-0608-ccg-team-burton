@@ -36,18 +36,7 @@ namespace GamePlay.Entities.Player
 
 
         }
-        public void OnPointerDownLeftButton()
-        {
-            
-        }
-        public  void OnPointerUpLeftButton()
-        {
-            
-        }
         
-        
-        
-
         
         private void SetCommands()
         {
