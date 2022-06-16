@@ -61,7 +61,8 @@ public class ItemTableSO : ScriptableObject
                 Debug.LogError("ERROR: No Object set in table slot");
             }
 
-            SetItemStats(go);
+            go.ItemSO.Rarity = tableRarity;
+            go.ItemSO.SetData();
             
             
             return go.ItemSO;
@@ -72,16 +73,7 @@ public class ItemTableSO : ScriptableObject
         return null;
     }
 
-    private void SetItemStats(ItemData go)
-    {
-        go.ItemSO.Rarity = tableRarity;
-
-        if (tableRarity == Rarity.Common)
-        {
-            // go.ItemSO.AttackDamage = go.ItemSO.AttackDamage*
-        }
-
-    }
+     
 
     [Serializable]
     public class ItemData

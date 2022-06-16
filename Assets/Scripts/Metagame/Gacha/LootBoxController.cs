@@ -8,27 +8,28 @@ using UnityEngine;
 public class LootBoxController : MonoBehaviour
 {
    public LootBoxSO LootBoxSO;
-
-
-
-   private int numberOfItemToSpawn = 1;
+   private int _numberOfItemToSpawn = 1;
 
    public void OpenBox()
    {
-      for (int i = 0; i < numberOfItemToSpawn; i++)
+      for (var i = 0; i < _numberOfItemToSpawn; i++)
       {
-         // Debug.Log(LootBoxSO);
-         var table = LootBoxSO.PickLootTable();
-         // Debug.Log(table);
-         var item = table.PickItem();
+         
+         //Play animation
+         
+         
+         var item = LootBoxSO.PickLootTable().PickItem();
 
-         Debug.Log(item +" with rarity: " +item.Rarity);
+         //Save items to player inventory         
+         
+         Debug.Log("--------------------------------------------");
          Debug.Log(item.name);
          Debug.Log($"Rarity: {item.Rarity}");
          Debug.Log($"Base Attack Damage: {item.BaseAttackDamage}");
          Debug.Log($"AttackModifier: x{item.AttackDamageMultiplier}");
          Debug.Log($"Total Damage: : {item.TotalAttackDamage}");
-         
+         Debug.Log("--------------------------------------------");
+
       }
 
    }

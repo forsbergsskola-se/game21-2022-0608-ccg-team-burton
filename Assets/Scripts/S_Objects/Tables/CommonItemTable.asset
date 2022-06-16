@@ -13,10 +13,15 @@ MonoBehaviour:
   m_Name: CommonItemTable
   m_EditorClassIdentifier: 
   tableRarity: 0
-  TotalProbabilityWeight: 1
+  TotalProbabilityWeight: 2
   ItemsList:
   - ProbabilityWeight: 1
-    ProbabilityPercent: 100
+    ProbabilityPercent: 50
     ProbabilityRangeFrom: 0
     ProbabilityRangeTo: 1
-    ItemSO: {fileID: 11400000, guid: af183daafaf2074449657248a87e1759, type: 2}
+    ItemSO: {fileID: 11400000, guid: 287955b179f5248dfa516c4d3b8f719f, type: 2}
+  - ProbabilityWeight: 1
+    ProbabilityPercent: 50
+    ProbabilityRangeFrom: 1
+    ProbabilityRangeTo: 2
+    ItemSO: {fileID: 11400000, guid: da982601c2b1d43459cfc5ac400655bc, type: 2}
