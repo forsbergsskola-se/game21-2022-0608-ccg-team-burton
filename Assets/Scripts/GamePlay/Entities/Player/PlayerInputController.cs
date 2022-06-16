@@ -12,7 +12,6 @@ namespace GamePlay.Entities.Player
         //public bool JumpInputUp { get; private set; }
         public bool JumpInput { get; private set; }
 
-        
         private void Awake()
         {
             _commandContainer = GetComponent<CommandContainer>();
@@ -32,8 +31,8 @@ namespace GamePlay.Entities.Player
             //JumpInputDown = Input.GetKeyDown(KeyCode.Space);
             //JumpInputUp = Input.GetKeyUp(KeyCode.Space);
             JumpInput = Input.GetKeyDown(KeyCode.Space);
-            OnPointerDownLeft();
-            OnPointerUpLeft();
+            // OnPointerDownLeft();
+            // OnPointerUpLeft();
 
 
         }
