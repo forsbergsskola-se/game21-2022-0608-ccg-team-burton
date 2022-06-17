@@ -1,18 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
+using GamePlay.Entities.Player;
 using UnityEngine;
 
 public class LeftButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private PlayerInputController _playerInputController;
+
+    private void Awake()
     {
-        
+        _playerInputController = FindObjectOfType<PlayerInputController>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+
+    public void OnPointerUpLeft()
     {
-        
+        _playerInputController.WalkLeftDownInput = true;
+        _playerInputController.WalkLeftUpInput = false;
+        Debug.Log("Walking left");
+    }
+    
+    
+    
+    public void OnPointerDownLeft()
+    {
+        _playerInputController.WalkLeftDownInput = false;
+        _playerInputController.WalkLeftUpInput = true;
+        Debug.Log("Stopped walking left");
     }
 }
