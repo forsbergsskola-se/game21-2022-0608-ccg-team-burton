@@ -15,7 +15,6 @@ public class LeftButton : MonoBehaviour
     public void OnPointerUpLeft()
     {
         _playerInputController.WalkLeftDownInput = true;
-        _playerInputController.WalkLeftUpInput = false;
         Debug.Log("Walking left");
     }
     
@@ -24,7 +23,6 @@ public class LeftButton : MonoBehaviour
     public void OnPointerDownLeft()
     {
         _playerInputController.WalkLeftDownInput = false;
-        _playerInputController.WalkLeftUpInput = true;
         Debug.Log("Stopped walking left");
     }
 }

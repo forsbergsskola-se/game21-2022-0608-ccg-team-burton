@@ -15,7 +15,6 @@ public class RightButton : MonoBehaviour
     public void OnPointerUpRight()
     {
         _playerInputController.WalkRightDownInput = true;
-        _playerInputController.WalkRightUpInput = false;
         Debug.Log("Walking right");
     }
     
@@ -24,7 +23,6 @@ public class RightButton : MonoBehaviour
     public void OnPointerDownRight()
     {
         _playerInputController.WalkRightDownInput = false;
-        _playerInputController.WalkRightUpInput = true;
         Debug.Log("Stopped walking right");
     }
 }
