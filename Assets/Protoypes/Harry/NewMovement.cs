@@ -142,6 +142,7 @@ namespace Protoypes.Harry
         
         private void FlipCharacter()
         {
+            // use sprite renderer flipX bool to flip sprite
             _renderer.flipX = _commandContainer.WalkCommand switch
             {
                 > 0 => false, // no flip if moving right

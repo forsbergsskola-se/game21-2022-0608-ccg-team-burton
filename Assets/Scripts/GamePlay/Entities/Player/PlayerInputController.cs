@@ -18,19 +18,17 @@ namespace GamePlay.Entities.Player
         
         private void Update()
         {
-            HandleInput();
-            SetCommands();
+            HandleInput(); // collect player inputs
+            SetCommands(); // assign inputs to commands
         }
         
         
         
         private void HandleInput()
         {
-            WalkInput = Input.GetAxis("Horizontal");
-            //JumpInputDown = Input.GetKeyDown(KeyCode.Space);
-            //JumpInputUp = Input.GetKeyUp(KeyCode.Space);
-            JumpDownInput = Input.GetKeyDown(KeyCode.Space);
-            JumpUpInput = Input.GetKey(KeyCode.Space);
+            WalkInput = Input.GetAxis("Horizontal"); // left and right
+            JumpDownInput = Input.GetKeyDown(KeyCode.Space); // jump pressed
+            JumpUpInput = Input.GetKey(KeyCode.Space); // jump released
         }
 
         
