@@ -30,10 +30,8 @@ namespace Protoypes.Harry
         [Header("JUMPING")] 
         public float _jumpHeight = 30;
         public float _jumpApexThreshold = 10f;
-        public float _jumpEndEarlyGravityModifier = 3;
         private float _currentVerticalSpeed;
 
-        private float _timeLeftGrounded;
         private bool _endedJumpEarly = true;
         private float _apexPoint; 
 
@@ -93,10 +91,8 @@ namespace Protoypes.Harry
             else
             {
                 // Add downward force while ascending if we ended the jump early
-                var fallSpeed = _endedJumpEarly && _currentVerticalSpeed > 0
-                    ? _fallSpeed * _jumpEndEarlyGravityModifier
-                    : _fallSpeed;
-
+                var fallSpeed = _fallSpeed;
+                
                 // Fall
                 _currentVerticalSpeed -= fallSpeed * Time.deltaTime;
 
@@ -128,12 +124,7 @@ namespace Protoypes.Harry
                 {
                     _currentVerticalSpeed = _jumpHeight;
                     _endedJumpEarly = false;
-                    _timeLeftGrounded = float.MinValue;
                 }
-                
-                // End the jump early if button released
-                if (!_groundChecker.IsGrounded && _commandContainer.JumpUpCommand && !_endedJumpEarly && _velocity.y > 0)
-                    _endedJumpEarly = true;
             }
             
             if (_groundChecker.IsRoofed)
