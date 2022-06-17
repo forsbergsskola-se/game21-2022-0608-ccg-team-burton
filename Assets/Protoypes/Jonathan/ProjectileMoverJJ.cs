@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectileMoverJJ : MonoBehaviour
@@ -18,7 +15,10 @@ public class ProjectileMoverJJ : MonoBehaviour
          _playerPosition = GameObject.FindWithTag("Player").transform.position;
          _fireDir = (_playerPosition -transform.position).normalized;
          _rb2d.velocity = _fireDir * (bulletSpeed * Time.deltaTime);
-
      }
 
+     private void OnCollisionEnter2D(Collision2D collision)
+     {
+         Destroy(gameObject); // bye bye
+     }
 }
