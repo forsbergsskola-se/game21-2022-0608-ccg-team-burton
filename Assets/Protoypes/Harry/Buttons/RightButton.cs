@@ -1,18 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
+using GamePlay.Entities.Player;
 using UnityEngine;
 
 public class RightButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private PlayerInputController _playerInputController;
+
+    private void Awake()
     {
-        
+        _playerInputController = FindObjectOfType<PlayerInputController>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+
+    public void OnPointerUpRight()
     {
-        
+        _playerInputController.WalkRightDownInput = true;
+        _playerInputController.WalkRightUpInput = false;
+        Debug.Log("Walking right");
+    }
+    
+    
+    
+    public void OnPointerDownRight()
+    {
+        _playerInputController.WalkRightDownInput = false;
+        _playerInputController.WalkRightUpInput = true;
+        Debug.Log("Stopped walking right");
     }
 }
