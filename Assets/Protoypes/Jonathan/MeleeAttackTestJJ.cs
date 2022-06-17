@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MeleeAttackTestJJ : MonoBehaviour
@@ -14,21 +12,15 @@ public class MeleeAttackTestJJ : MonoBehaviour
  private void Update()
  {
   if (Input.GetKeyDown(KeyCode.E) && _allowAttack)
-  {
-   StartCoroutine(CallAttack());
-   
-  }
+    StartCoroutine(CallAttack());
  }
 
 
  IEnumerator CallAttack()
  {
-  _combat.MeeleAttack();
+  _combat.MeleeAttack();
   _allowAttack = false;
   yield return new WaitForSeconds(2f);
   _allowAttack = true;
  }
- 
- 
- 
 }
