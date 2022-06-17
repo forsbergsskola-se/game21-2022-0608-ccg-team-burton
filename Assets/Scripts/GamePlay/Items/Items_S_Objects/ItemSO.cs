@@ -7,29 +7,21 @@ namespace Entity.Items
     {
         public string ItemName;
         public Rarity Rarity;
-        public ItemTypeEnum ItemType;
+        public ItemTypeSO itemTypeSo;
         
         [Header("Attack properties")]
         public int BaseAttackDamage; 
         public float AttackDamageMultiplier; 
         public float TotalAttackDamage;
-        private readonly SetItemAttackData _setItemAttackData;
 
-        public ItemSO()
-        {
-            _setItemAttackData = new SetItemAttackData(this);
-        }
-
-
-        private void OnValidate() // TO visualize changes in inspector
+        private void OnValidate() // To visualize changes in inspector
         {
             SetData();
         }
 
         public void SetData()
         {
-            _setItemAttackData.SetAttackDamageMultiplier();
-            
+           itemTypeSo.ScaleStats(this);
             TotalAttackDamage = BaseAttackDamage * AttackDamageMultiplier;
         }
     }

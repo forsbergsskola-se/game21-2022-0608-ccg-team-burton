@@ -1,19 +1,31 @@
-﻿using UnityEngine;
-
-namespace Entity.Items
+using Entity.Items;
+using UnityEngine;
+ 
+[CreateAssetMenu(fileName = "WeaponType", menuName = "Item System/WeaponType")]
+public class ItemTypeSO : ScriptableObject
 {
-    [CreateAssetMenu(fileName = "WeaponType", menuName = "Item System/New Weapon Type")]
-    public class ItemTypeSO : ScriptableObject
+    public float _baseDamageMultiplier;
+    public float _damageMultiplierStep;
+    
+    public void ScaleStats(ItemSO itemSo)
     {
-        [Header("Item type")] 
-        public ItemTypeEnum ItemType;
-        
-        
-        
-        
-        
-        
-        
+        itemSo.AttackDamageMultiplier = itemSo.Rarity switch
+        {
+            Rarity.Common => _baseDamageMultiplier,
+            Rarity.Uncommon => _baseDamageMultiplier+_damageMultiplierStep,
+            Rarity.Rare =>_baseDamageMultiplier+_damageMultiplierStep*2,
+            Rarity.Epic => _baseDamageMultiplier+_damageMultiplierStep*3,
+            Rarity.Legendary => _baseDamageMultiplier+_damageMultiplierStep*4,
+
+            _ => itemSo.AttackDamageMultiplier
+        };
         
     }
+    
+    
+    
+
 }
+ 
+
+ 

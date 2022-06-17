@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96f42b80b0d9ec41afcb864d19c9808, type: 3}
-  m_Name: Toy leg
+  m_Script: {fileID: 11500000, guid: a50704a8109e6cd45a1b4ccb160a9708, type: 3}
+  m_Name: Standard
   m_EditorClassIdentifier: 
-  ItemName: Toy leg
-  Rarity: 4
-  itemTypeSo: {fileID: 11400000, guid: a4b676c6990d61e468dedafce8380c14, type: 2}
-  BaseAttackDamage: 8
-  AttackDamageMultiplier: 5
-  TotalAttackDamage: 40
+  _baseDamageMultiplier: 1
+  _damageMultiplierStep: 1
