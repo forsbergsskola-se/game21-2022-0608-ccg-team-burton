@@ -27,8 +27,6 @@ namespace GamePlay.Entities.Player
         private void HandleInput()
         {
             WalkInput = Input.GetAxis("Horizontal"); // left and right
-            JumpDownInput = Input.GetKeyDown(KeyCode.Space); // jump pressed
-            JumpUpInput = Input.GetKey(KeyCode.Space); // jump released
         }
 
         
