@@ -17,7 +17,6 @@ namespace Protoypes.Harry
         public float _acceleration = 90;
         public float _moveClamp = 13; 
         public float _deAcceleration = 60f;
-        public float _apexBonus = 2;
         private float _currentHorizontalSpeed;
         
         
@@ -29,6 +28,7 @@ namespace Protoypes.Harry
         
         [Header("JUMPING")] 
         public float _jumpHeight = 30;
+        public float _apexBonus = 2;
         public float _jumpApexThreshold = 10f;
         private float _currentVerticalSpeed;
 
