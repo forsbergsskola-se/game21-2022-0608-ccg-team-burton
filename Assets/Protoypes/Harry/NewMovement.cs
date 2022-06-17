@@ -45,17 +45,18 @@ namespace Protoypes.Harry
         }
 
         
+        
         private void Update() 
         {
             _velocity = (transform.position - _lastPosition) / Time.deltaTime;
             _lastPosition = transform.position;
             
-            CalculateWalking(); 
-            CalculateJumpApex();
-            CalculateGravity(); 
-            CalculateJumping();
-            MoveCharacter();
-            FlipCharacter();
+            CalculateWalking(); // horizontal movement
+            CalculateJumpApex(); // vertical apex speed boost
+            CalculateGravity(); // fall speed
+            CalculateJumping(); // vertical movement
+            MoveCharacter(); // after all calculations are done, move the character
+            FlipCharacter(); // flip sprite based on where you're moving towards
         }
         
     
@@ -74,29 +75,27 @@ namespace Protoypes.Harry
                 var apexBonus = Mathf.Sign(_commandContainer.WalkCommand) * _apexBonus * _apexPoint;
                 _currentHorizontalSpeed += apexBonus * Time.deltaTime;
             }
-            else 
+            else // deAccelerate
                 _currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, 0, _deAcceleration * Time.deltaTime);
-
         }
 
+        
 
         private void CalculateGravity()
         {
             if (_groundChecker.IsGrounded)
             {
+                // clip out of ground
                 if (_currentVerticalSpeed < 0)
                     _currentVerticalSpeed = 0;
             }
 
             else
             {
-                // Add downward force while ascending if we ended the jump early
-                var fallSpeed = _fallSpeed;
-                
-                // Fall
-                _currentVerticalSpeed -= fallSpeed * Time.deltaTime;
+                // Fall Speed calculated
+                _currentVerticalSpeed -= _fallSpeed * Time.deltaTime;
 
-                // Clamp
+                // Clamp it
                 if (_currentVerticalSpeed < _fallClamp)
                     _currentVerticalSpeed = _fallClamp;
             }
@@ -108,7 +107,7 @@ namespace Protoypes.Harry
         {
             if (_groundChecker.IsGrounded)
             {
-                // Gets stronger the closer to the top of the jump
+                // Jump speed gets faster closer to apex
                 _apexPoint = Mathf.InverseLerp(_jumpApexThreshold, 0, Mathf.Abs(_velocity.y));
                 _fallSpeed = Mathf.Lerp(_minFallSpeed, _maxFallSpeed, _apexPoint);
             }
@@ -118,15 +117,12 @@ namespace Protoypes.Harry
 
         
         
-        private void CalculateJumping() {
+        private void CalculateJumping() 
+        {
             if (_commandContainer.JumpDownCommand && _groundChecker.IsGrounded)
-            {
-                {
-                    _currentVerticalSpeed = _jumpHeight;
-                    _endedJumpEarly = false;
-                }
-            }
-            
+                _currentVerticalSpeed = _jumpHeight;
+
+            // start falling if roof is hit
             if (_groundChecker.IsRoofed)
                 if (_currentVerticalSpeed > 0)
                     _currentVerticalSpeed = 0;
@@ -136,7 +132,8 @@ namespace Protoypes.Harry
 
         private void MoveCharacter()
         {
-            RawMovement = new Vector3(_currentHorizontalSpeed, _currentVerticalSpeed); // Used externally
+            // actually move the character
+            RawMovement = new Vector3(_currentHorizontalSpeed, _currentVerticalSpeed);
             var move = RawMovement * Time.deltaTime;
             transform.position = transform.position + Vector3.zero + move;
         }
@@ -147,9 +144,9 @@ namespace Protoypes.Harry
         {
             _renderer.flipX = _commandContainer.WalkCommand switch
             {
-                > 0 => false, 
-                < 0 => true,
-                _ => _renderer.flipX
+                > 0 => false, // no flip if moving right
+                < 0 => true, // flip is moving left
+                _ => _renderer.flipX // keep last flip bool if no move input
             };
         }
     }
