@@ -7,6 +7,8 @@ namespace GamePlay.Entities.Player
         public float WalkInput { get; private set; }
         public bool JumpDownInput;
         public bool JumpUpInput;
+        public bool AttackUpInput;
+        public bool AttackDownInput;
 
         
         private void Awake()

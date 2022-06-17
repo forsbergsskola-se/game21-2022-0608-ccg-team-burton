@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class LeftButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class LeftButtonOG : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 { 
     bool IsPressed = false;
     public GameObject player;
