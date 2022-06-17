@@ -14,12 +14,12 @@ public class Enemy_AI : MonoBehaviour
     private void Start()
     {
         EnemyVars._eyes = GetComponentInChildren<Enemy_Eyes>();
-        Debug.Log(EnemyVars._eyes.Height);
-        
+        EnemyVars.animator = GetComponent<Animator>();
+        EnemyVars.enemyRef = gameObject;
         EnemyVars.ArcCollider = GetComponentInChildren<ArcCollider>();
         enemy_Anim = GetComponent<Animator>();
      
-        _currentStateMl = new Idle(gameObject, enemy_Anim, EnemyVars);
+        _currentStateMl = new Idle(EnemyVars);
     }
 
     private void Update()

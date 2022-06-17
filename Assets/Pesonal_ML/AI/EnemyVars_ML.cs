@@ -3,6 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyType
+{
+    Melee,
+    Ranged,
+    Turret
+}
+
 [Serializable]
 public class EnemyVars_ML
 {
@@ -10,8 +17,12 @@ public class EnemyVars_ML
     [SerializeField] private float PursueDistance;
     [SerializeField] private float MoveSpeed;
     [SerializeField] private float AttackInterval;
-    public Enemy_Eyes _eyes;
-    public ArcCollider ArcCollider;
+    [SerializeField] private EnemyType EnemyType;
+    
+    [HideInInspector] public Enemy_Eyes _eyes;
+    [HideInInspector] public ArcCollider ArcCollider;
+    [HideInInspector] public Animator animator;
+    [HideInInspector] public GameObject enemyRef;
 
     public float GetAttackDistance => AttackDistance;
     public float GetPursueDistance => PursueDistance;

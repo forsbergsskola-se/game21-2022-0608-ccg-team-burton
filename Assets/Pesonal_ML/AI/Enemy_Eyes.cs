@@ -5,7 +5,6 @@ public class Enemy_Eyes : MonoBehaviour
 {
     public bool PlayerSeen { get; private set; }
     public bool GroundSeen { get; private set; }
-    public Vector3 PlayerPos { get; private set; }
     public float Height { get; private set; }
     
     public Transform PlayerTrans { get; private set; }
