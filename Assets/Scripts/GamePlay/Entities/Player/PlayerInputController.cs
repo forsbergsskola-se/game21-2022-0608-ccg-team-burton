@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 namespace GamePlay.Entities.Player
 {
@@ -36,8 +37,8 @@ namespace GamePlay.Entities.Player
 
             if (WalkLeftDownInput && WalkRightDownInput)
                 NoWalkInput = false;
-            
-            if (!NoWalkInput) return;
+
+            if (NoWalkInput) return;
             if (!WalkLeftDownInput && !WalkRightDownInput)
             {
                 NoWalkInput = true;
@@ -46,10 +47,10 @@ namespace GamePlay.Entities.Player
         }
         
         
-        
+
         private void HandleInput()
         {
-            //WalkInput = Input.GetAxis("Horizontal"); // left and right
+            WalkInput = Input.GetAxis("Horizontal"); // left and right
         }
 
         
