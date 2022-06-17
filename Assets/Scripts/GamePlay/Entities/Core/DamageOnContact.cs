@@ -18,11 +18,12 @@ namespace Entity.Hazard
             if (col.gameObject.CompareTag("Player"))
             {
                 Debug.Log($"{name} dealt damage to {col.gameObject.name}");
-                col.gameObject.GetComponent<Knockback>().DoKnockBack(col.gameObject.GetComponent<Rigidbody2D>(),
+                col.gameObject?.GetComponent<Knockback>().DoKnockBack(col.gameObject.GetComponent<Rigidbody2D>(),
                     -col.GetContact(0).normal, _knockbackMultiplier);
                 // Debug.DrawRay(col.GetContact(0).point, -col.GetContact(0).normal*100, Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f), 10f );
                 col.gameObject.GetComponent<IDamageable>().ModifyHealth(-_damage);
             }
         }
+        
     }   
 }
