@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class ProjectileMoverJJ : MonoBehaviour
 {
-    
-     Vector3 _playerPosition;
+    Vector3 _playerPosition;
      private Vector3 _fireDir;
      [SerializeField]
      private Rigidbody2D _rb2d;
