@@ -122,7 +122,7 @@ public class ArcCollider : MonoBehaviour
             var posY = velocity * Mathf.Sin(Mathf.Deg2Rad * angle) * p - (0.5f * gravity * p * p);
             vecs.Add(new Vector2(posX, posY));
         }
-        vecs.Add(new Vector2(vecs[vecs.Count - 1].x, vecs[vecs.Count - 1].y - 5));
+        vecs.Add(new Vector2(vecs[^1].x, vecs[^1].y - 5));
         
         
         collider.points = vecs.ToArray();

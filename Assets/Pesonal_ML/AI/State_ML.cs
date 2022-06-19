@@ -73,6 +73,7 @@ public class Idle : State_ML
     public Idle(EnemyVars_ML enemyVarsMl)
         : base(enemyVarsMl)
     {
+        Debug.Log("Idle state");
         Name = STATE.Idle;
     }
     
@@ -81,7 +82,11 @@ public class Idle : State_ML
         time += Time.deltaTime * Random.Range(0, 11);
         if (time > 10)
         {
-            NextStateMl = new Patrol(EnemyVarsMl);
+            if ((int) EnemyVarsMl.EnemyType < 2)
+            {
+                NextStateMl = new Patrol(EnemyVarsMl);
+            }
+
             Stage = EVENT.Exit;
         }
     }
@@ -89,8 +94,8 @@ public class Idle : State_ML
     public override void Exit()
     {
         base.Exit();
-      //  _animator.SetBool("ExitIdleState", true);
-        
+        EnemyVarsMl.animator.SetBool(Animator.StringToHash("ExitIdleState"), true);
+
     }
 }
 
@@ -102,13 +107,14 @@ public class Patrol : State_ML
     public Patrol(EnemyVars_ML enemyVarsMl)
         : base(enemyVarsMl)
     {
+        Debug.Log("Patrol state");
         Name = STATE.Patrol;
     }
 
     public override void Enter()
     {
         base.Enter();
-        EnemyVarsMl.animator.SetBool(Animator.StringToHash("ExitIdleState"), true);
+     //   EnemyVarsMl.animator.SetBool(Animator.StringToHash("ExitIdleState"), true);
     }
 
     public override void Update()
@@ -117,12 +123,15 @@ public class Patrol : State_ML
         if (EnemyVarsMl._eyes.PlayerSeen)
         {
             Stage = EVENT.Exit;
+           
             NextStateMl = new Pursue(EnemyVarsMl);
         }
 
         else if (!EnemyVarsMl._eyes.GroundSeen)
         {
             Stage = EVENT.Exit;
+            Debug.Log("Ground not seen");
+           
             NextStateMl = new Jump(EnemyVarsMl);
         }
 
@@ -147,16 +156,25 @@ public class Pursue : State_ML
     public Pursue(EnemyVars_ML enemyVarsMl)
         : base(enemyVarsMl)
     {
+        Debug.Log("Pursue state");
         Name = STATE.Pursue;
     }
 
     public override void Update()
     {
-        if (Vector3.Distance(EnemyVarsMl._eyes.PlayerTrans.position, EnemyVarsMl.enemyRef.gameObject.transform.position) < EnemyVarsMl.GetAttackDistance)
+        var distance = Vector3.Distance(EnemyVarsMl._eyes.PlayerTrans.position, EnemyVarsMl.enemyRef.gameObject.transform.position);
+        if (distance < EnemyVarsMl.GetAttackDistance)
         {
             NextStateMl = new Attack(EnemyVarsMl);
             Stage = EVENT.Exit;
         }
+        
+        else if (distance > EnemyVarsMl.GetAttackDistance + 6)
+        {
+            NextStateMl = new Patrol(EnemyVarsMl);
+            Stage = EVENT.Exit;
+        }
+        
         else
         {
             SimpleMove();
@@ -180,44 +198,47 @@ public class Attack : State_ML
     
     public override void Enter()
     {
+        Debug.Log("Attack state");
         base.Enter();
         EnemyVarsMl.animator.SetBool(Animator.StringToHash("EnterCombat"), true);
     }
 
     public override void Update()
     {
-
         if (!EnemyVarsMl._eyes.PlayerSeen)
         {
-          
             var dotProd = Vector3.Dot(EnemyVarsMl.enemyRef.transform.right, EnemyVarsMl._eyes.PlayerTrans.position);
-
+            
             if (dotProd < 1)
             {
-             //   TurnAround();
+                TurnAround();
+            }
+            else
+            {
+                Stage = EVENT.Exit;
+                NextStateMl = new Idle(EnemyVarsMl);
             }
         }
-        
         
         if (attackDelay >= EnemyVarsMl.GetAttackInterval && EnemyVarsMl._eyes.PlayerSeen)
         { 
             EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("MakeAttack"));
 
+            if (EnemyVarsMl.EnemyType == EnemyType.Ranged)
+            {
+                EffectsPool.RequestEffectStatic(EffectType.FireBall, EnemyVarsMl.enemyRef.transform.position);
+            }
+
             attackDelay -= EnemyVarsMl.GetAttackInterval;
         }
-
-        else
-        {
-            
-        //    EnemyVarsMl.animator.SetInteger("Attack", 3);
-        }
         
-        attackDelay += 0.5f * Time.deltaTime;
+        attackDelay += 1f * Time.deltaTime;
     }
 
     private void TurnAround()
     {
         EnemyVarsMl.enemyRef.transform.Rotate(Vector3.up, 180);
+        Stage = EVENT.Exit;
         NextStateMl = new Patrol(EnemyVarsMl);
     }
     
@@ -230,22 +251,19 @@ public class Attack : State_ML
 }
 public class Jump : State_ML
 {
-    private bool makeJump;
     private float maxAngle = 90;
-    private List<Vector2> arcPoints = new List<Vector2>();
-    private Vector2 currentPoint;
-    private Vector2 currentPlayerPos;
-    private float lerpValue;
-    private int pointCount;
     private bool start;
     private float jumpDelay = 2;
+    private Rigidbody2D body;
 
     public Jump(EnemyVars_ML enemyVarsMl) 
         : base(enemyVarsMl)
     {
+        Debug.Log("Jump state");
         Name = STATE.Jump;
+        body = EnemyVarsMl.enemyRef.GetComponent<Rigidbody2D>();
     }
-    
+  
     public override void Enter()
     {
         base.Enter();
@@ -272,54 +290,16 @@ public class Jump : State_ML
         {
             jumpDelay -= Time.deltaTime * 2f;
             
-            //SetArc();
-
             if (jumpDelay < 0)
             {
                 MakeJump();
             }
-            // makeJump = true;
-           // pointCount++;
-           // start = true;
-           // currentPoint = arcPoints[pointCount];
-           // currentPlayerPos = Npc.transform.position;
-           // Npc.GetComponent<Rigidbody2D>().simulated = false;
-
         }
-       
-
-        if (makeJump && start) 
-        {
-            var currentPos = Vector2.Lerp(currentPlayerPos, currentPoint, lerpValue);
-            lerpValue += 6f * Time.deltaTime;
-
-            if (lerpValue > 0.95f)
-            {
-                lerpValue = 0;
-                
-                pointCount++;
-                if (pointCount < arcPoints.Count)
-                {
-                    currentPoint = arcPoints[pointCount];
-                    currentPlayerPos  = EnemyVarsMl.enemyRef.transform.position;
-                }
-
-                else
-                {
-                    MakeJump();
-                }
-            }
-            
-            EnemyVarsMl.enemyRef.transform.position = new Vector3(currentPos.x, currentPos.y);
-        
-        }
-        
     }
 
     public void MakeJump()
     {
         EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("Jump"));
-        SetArc();
         var forward = EnemyVarsMl.enemyRef.gameObject.transform.right;
         var impulse2 = EnemyVarsMl.ArcCollider.GetImpulse();
         var diff = EnemyVarsMl.ArcCollider.TileHeightDifference;
@@ -336,22 +316,11 @@ public class Jump : State_ML
         
         var impulse = new Vector2(forward.x  * (EnemyVarsMl.ArcCollider.GetLengthDifference() * 0.75f), diff);
 
-        EnemyVarsMl.enemyRef.GetComponent<Rigidbody2D>().AddForce(impulse , ForceMode2D.Impulse); 
+        body.AddForce(impulse , ForceMode2D.Impulse); 
     
         EnemyVarsMl.ArcCollider.ResetCollider();
         NextStateMl = new Idle(EnemyVarsMl);
         Stage = EVENT.Exit;
-    }
-
-    private void SetArc()
-    {
-        var worldPos = EnemyVarsMl.enemyRef.transform.position;
-        
-        for (int i = 0; i < EnemyVarsMl.ArcCollider.GetNumberArcPoints() / 2; i++)
-        {
-            var  aPoint = EnemyVarsMl.ArcCollider.GetPoint(i);
-            arcPoints.Add(new Vector2(worldPos.x + aPoint.x, worldPos.y + aPoint.y));
-        }
     }
     
     private void BackToPatrol()
