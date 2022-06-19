@@ -897,6 +897,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 225003641}
+  - component: {fileID: 225003642}
   m_Layer: 5
   m_Name: Main Menu
   m_TagString: Untagged
@@ -928,6 +929,18 @@ RectTransform:
   m_AnchoredPosition: {x: -204.3123, y: 6.2642}
   m_SizeDelta: {x: 386.5879, y: 369.6613}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &225003642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225003640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94bbdf9546c532a41a9d1560fa124258, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &247719303
 GameObject:
   m_ObjectHideFlags: 0
@@ -1253,8 +1266,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -148, y: -164}
-  m_SizeDelta: {x: 100, y: 40}
+  m_AnchoredPosition: {x: -157.07962, y: -164}
+  m_SizeDelta: {x: 74.35, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &456256495
 MonoBehaviour:
@@ -1535,7 +1548,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -316.01172, y: 0, z: 0, w: 0}
+  m_margin: {x: -316.01172, y: 0, z: 288.19238, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1586,8 +1599,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -126.50458, y: 38.73581}
-  m_SizeDelta: {x: 160, y: 40}
+  m_AnchoredPosition: {x: -133.66, y: 38.73581}
+  m_SizeDelta: {x: 139.78, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &617784738
 MonoBehaviour:
@@ -1633,13 +1646,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 225003640}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 225003642}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: PlayGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2320,8 +2333,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -126.50458, y: -45.26419}
-  m_SizeDelta: {x: 160, y: 40}
+  m_AnchoredPosition: {x: -142.12158, y: -45.26419}
+  m_SizeDelta: {x: 115.882, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1497939470
 MonoBehaviour:
@@ -2518,8 +2531,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -126.50458, y: -129.26419}
-  m_SizeDelta: {x: 160, y: 40}
+  m_AnchoredPosition: {x: -146.11664, y: -129.26419}
+  m_SizeDelta: {x: 104.5959, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1545956490
 MonoBehaviour:
