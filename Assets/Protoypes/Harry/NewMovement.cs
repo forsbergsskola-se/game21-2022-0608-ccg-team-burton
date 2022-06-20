@@ -10,8 +10,10 @@ namespace Protoypes.Harry
         private Vector3 _velocity;
         private CommandContainer _commandContainer;
         private GroundChecker _groundChecker;
-        private Vector3 _lastPosition;
+        private Vector2 _lastPosition;
         private Vector3 RawMovement { get; set; }
+        private Rigidbody2D _rb;
+        private CapsuleCollider2D _collider;
 
         [Header("WALKING")] 
         public float _acceleration = 90;
@@ -41,6 +43,8 @@ namespace Protoypes.Harry
 
         private void Awake()
         {
+            _rb = GetComponent<Rigidbody2D>();
+            _collider = GetComponent<CapsuleCollider2D>();
             _commandContainer = GetComponent<CommandContainer>();
             _groundChecker = GetComponent<GroundChecker>();
             _renderer = GetComponent<SpriteRenderer>();
@@ -49,8 +53,8 @@ namespace Protoypes.Harry
         
         private void Update() 
         {
-            _velocity = (transform.position - _lastPosition) / Time.deltaTime;
-            _lastPosition = transform.position;
+            _velocity = (_rb.position - _lastPosition) / Time.deltaTime;
+            _lastPosition = _rb.position;
             
             CalculateWalking(); 
             CalculateJumpApex();
