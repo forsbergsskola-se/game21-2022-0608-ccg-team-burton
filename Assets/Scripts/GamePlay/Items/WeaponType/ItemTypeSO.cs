@@ -29,27 +29,33 @@ public class ItemTypeSO : ScriptableObject
         };
         itemSo.TotalAttackDamage = itemSo.BaseAttackDamage * itemSo.AttackDamageMultiplier;
 
-        itemSo.EffectValueRarityModifier = itemSo.Rarity switch
+        itemSo.EffectValueModifier = itemSo.Rarity switch
         {
             Rarity.Common => 0,
             Rarity.Uncommon => EffectValueStep,
             Rarity.Rare =>  EffectValueStep*2,
             Rarity.Epic =>  EffectValueStep*3,
             Rarity.Legendary =>  EffectValueStep*4,
-            _ => itemSo.EffectValueRarityModifier
+            _ => itemSo.EffectValueModifier
         };
-        itemSo.TotalEffectValue = itemSo.BaseEffectValue + itemSo.EffectValueRarityModifier;
+        if (itemSo.BaseEffectValue != 0)
+            itemSo.TotalEffectValue = itemSo.BaseEffectValue + itemSo.EffectValueModifier;
+        else
+            itemSo.TotalEffectValue = 0;
         
-        itemSo.EffectDurationRarityModifier = itemSo.Rarity switch
+        itemSo.EffectDurationModifier = itemSo.Rarity switch
         {
             Rarity.Common => 0,
             Rarity.Uncommon =>  EffectDurationStep,
             Rarity.Rare =>  EffectDurationStep*2,
             Rarity.Epic =>  EffectDurationStep*3,
             Rarity.Legendary => EffectDurationStep*4,
-            _ => itemSo.EffectValueRarityModifier
+            _ => itemSo.EffectValueModifier
         };
-        itemSo.TotalEffectDuration = itemSo.BaseEffectDuration + itemSo.EffectDurationRarityModifier;
+        if (itemSo.BaseEffectDuration != 0)
+            itemSo.TotalEffectDuration = itemSo.BaseEffectDuration + itemSo.EffectDurationModifier;
+        else
+            itemSo.TotalEffectDuration = 0;
     }
     
 }

@@ -20,8 +20,8 @@ namespace Entity.Items
         [Header("ITEM STATS (Auto-set)")] 
         [Header("Modifiers (Auto-calculated)")]
         public float AttackDamageMultiplier; 
-        public float EffectValueRarityModifier;
-        public float EffectDurationRarityModifier;
+        public float EffectValueModifier;
+        public float EffectDurationModifier;
 
         [Header("Totals (Auto-calculated)")]
         public float TotalAttackDamage;

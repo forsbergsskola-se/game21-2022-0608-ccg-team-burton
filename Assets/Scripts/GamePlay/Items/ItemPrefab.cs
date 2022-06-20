@@ -15,6 +15,10 @@ public class ItemPrefab : MonoBehaviour
         ItemSprite = item.ItemSprite;
         ItemDamage = item.TotalAttackDamage;
         
+        //if item.so.type == Acid {
+        //var effect = Add component<AcidLogic>()
+        //effect.setData(item.totaleffectvalue, item.totaleffectduration)
+        //}
     }
 
      
