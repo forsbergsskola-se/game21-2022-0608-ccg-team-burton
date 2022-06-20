@@ -12,15 +12,22 @@ namespace Entity.Items
 
         public ItemType itemType;
         
-        
-        
-        
-        
-        [Header("Attack properties")]
+        [Header("Set Item base data")]
         public int BaseAttackDamage; 
-        public float AttackDamageMultiplier; 
-        public float TotalAttackDamage;
+        public float BaseEffectValue;
+        public float BaseEffectDuration;
 
+        [Header("ITEM STATS (Auto-set)")] 
+        [Header("Modifiers (Auto-calculated)")]
+        public float AttackDamageMultiplier; 
+        public float EffectValueRarityModifier;
+        public float EffectDurationRarityModifier;
+
+        [Header("Totals (Auto-calculated)")]
+        public float TotalAttackDamage;
+        public float TotalEffectValue;
+        public float TotalEffectDuration;
+        
         private void OnValidate() // To visualize changes in inspector
         {
             SetData();
@@ -29,7 +36,6 @@ namespace Entity.Items
         public void SetData()
         {
            itemTypeSo.ScaleStats(this);
-            // TotalAttackDamage = BaseAttackDamage * AttackDamageMultiplier;
         }
     }
 }

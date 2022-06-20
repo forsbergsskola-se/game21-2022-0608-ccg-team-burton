@@ -13,8 +13,15 @@ MonoBehaviour:
   m_Name: Battery on a stick
   m_EditorClassIdentifier: 
   ItemName: Battery on a stick
-  Rarity: 4
+  Rarity: 0
   itemTypeSo: {fileID: 11400000, guid: 0d27e686fc09a5a4d9d21f07a3febcf4, type: 2}
+  ItemSprite: {fileID: 0}
   BaseAttackDamage: 4
-  AttackDamageMultiplier: 3
-  TotalAttackDamage: 12
+  BaseEffectValue: 4
+  BaseEffectDuration: 2
+  AttackDamageMultiplier: 1
+  EffectValueRarityModifier: 0
+  EffectDurationRarityModifier: 0
+  TotalAttackDamage: 4
+  TotalEffectValue: 4
+  TotalEffectDuration: 2

@@ -14,6 +14,7 @@ public class ItemPrefab : MonoBehaviour
     {
         ItemSprite = item.ItemSprite;
         ItemDamage = item.TotalAttackDamage;
+        
     }
 
      
