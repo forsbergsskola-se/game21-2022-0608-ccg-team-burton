@@ -19,7 +19,7 @@ public class ItemTypeSO : ScriptableObject
 
             _ => itemSo.AttackDamageMultiplier
         };
-        
+        itemSo.TotalAttackDamage = itemSo.BaseAttackDamage * itemSo.AttackDamageMultiplier;
     }
     
     

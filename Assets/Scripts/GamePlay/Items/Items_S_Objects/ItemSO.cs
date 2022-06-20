@@ -8,6 +8,13 @@ namespace Entity.Items
         public string ItemName;
         public Rarity Rarity;
         public ItemTypeSO itemTypeSo;
+        public Sprite ItemSprite;
+
+        public ItemType itemType;
+        
+        
+        
+        
         
         [Header("Attack properties")]
         public int BaseAttackDamage; 
@@ -22,7 +29,7 @@ namespace Entity.Items
         public void SetData()
         {
            itemTypeSo.ScaleStats(this);
-            TotalAttackDamage = BaseAttackDamage * AttackDamageMultiplier;
+            // TotalAttackDamage = BaseAttackDamage * AttackDamageMultiplier;
         }
     }
 }
