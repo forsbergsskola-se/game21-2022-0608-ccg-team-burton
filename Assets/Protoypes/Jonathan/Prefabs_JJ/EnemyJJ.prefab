@@ -182,6 +182,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2c96f8e501e4146bbe5fc365c74eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damage: 1
+  _knockbackMultiplier: 1
 --- !u!114 &5092391886403041095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +216,10 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 256
+  _meleeDamage: 1
+  _knockbackMultiplier: 1
+  DebugProjectile: {fileID: 0}
+  FirePoint: {fileID: 0}
 --- !u!114 &1244182076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,4 +246,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseKnockback: 1
-  knockbackDuration: 3
+  knockbackDuration: 1

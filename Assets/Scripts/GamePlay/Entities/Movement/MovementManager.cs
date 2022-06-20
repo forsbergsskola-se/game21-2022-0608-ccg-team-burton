@@ -7,24 +7,29 @@ namespace GamePlay.Entities.Movement
     {
         private Animator _animator;
         private SpriteRenderer _renderer;
-        private Collider2D _collider;
         private Rigidbody2D _rb;
         private CommandContainer _commandContainer;
         private GroundChecker _groundChecker;
 
         #region Walking;
         [Header("WALKING")]
-        public float BaseMovementSpeed;
+        private float _baseMovementSpeed;
+        public float Acceleration = 80f;
+        public float DeAcceleration = 55f;
+        public float WalkClamp = 12f;
+
         #endregion
 
         #region Jumping;
-        [Header("JUMPING")]
-        public float AirborneMovementSpeed;
-        [HideInInspector] public float chargingJumpSpeed;
-        public float JumpForce;
+
+        [Header("JUMPING")] 
+        public float BaseJumpSpeed;
+        private float _jumpHeight;
+        public bool Jumping;
+
+
         private Vector3 _lastPos;
         public Vector3 _jumpVelocity { get; private set; }
-        
         #endregion
         
 
@@ -33,18 +38,19 @@ namespace GamePlay.Entities.Movement
         {
             //_animator = gameObject.GetComponent<Animator>();
             _renderer = GetComponent<SpriteRenderer>();
-            _collider = GetComponent<CapsuleCollider2D>();
             _commandContainer = GetComponent<CommandContainer>();
             _groundChecker = GetComponent<GroundChecker>();
             _rb = GetComponent<Rigidbody2D>();
+            Acceleration *= 100f;
+            DeAcceleration *= 100f;
         }
 
 
         private void Update()
         {
             CalculateJumpVelocity();
-            HandleWalking();
             HandleJumping();
+            HandleWalking();
         }
 
         private void CalculateJumpVelocity()
@@ -57,25 +63,49 @@ namespace GamePlay.Entities.Movement
 
         private void HandleJumping()
         {
-            if (!_commandContainer.JumpCommand) return;
-            if (!_groundChecker.IsGrounded) return;
 
-            _rb.AddForce(Vector2.up * JumpForce);
+            if (!_commandContainer.JumpDownCommand) return;
+            if (_groundChecker.IsGrounded)
+            {
+                _jumpHeight = BaseJumpSpeed * Time.deltaTime;
+                Jumping = true;
+                _rb.velocity = new Vector2(_baseMovementSpeed, _jumpHeight);
+            }
+            else
+            {
+                _jumpHeight = _baseMovementSpeed;
+                Jumping = false;
+            }
         }
 
 
         private void HandleWalking()
         {
-            var movementSpeed = _groundChecker.IsGrounded switch
+            _renderer.flipX = _commandContainer.WalkCommand switch
             {
-                true => BaseMovementSpeed,
-                /*if (_groundChecker.IsGrounded && _commandContainer.JumpCommand)
-                movementSpeed = chargingJumpSpeed;*/
-                false => AirborneMovementSpeed
+                > 0 => false, 
+                < 0 => true,
+                _ => _renderer.flipX
             };
 
-            _rb.velocity = new Vector3(_commandContainer.WalkCommand * movementSpeed, _rb.velocity.y, 0);
+            if (_commandContainer.WalkCommand != 0)
+            {
+                // set walk speed
+                _baseMovementSpeed = _commandContainer.WalkCommand * Acceleration * Time.deltaTime;
+                // clamp walk speed
+                _baseMovementSpeed = Mathf.Clamp(_baseMovementSpeed, -WalkClamp, WalkClamp);
+
+            }
+
+            else
+                _baseMovementSpeed = Mathf.MoveTowards // slow down when no input
+                    (_baseMovementSpeed, 0, DeAcceleration * Time.deltaTime);
+            
+            _rb.velocity = new Vector2(_baseMovementSpeed, _rb.velocity.y);
+
         }
+
+        
     }
 }
 

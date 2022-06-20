@@ -5,21 +5,42 @@ namespace GamePlay.Entities.Movement
     public class GroundChecker : MonoBehaviour
     {
         public bool IsGrounded;
-        [SerializeField] private float _groundCheckLength = 1f;
-        [SerializeField] private float _groundCheckRadius = 1f;
+        [SerializeField] private float _groundCheckLength = 0.53f;
+        [SerializeField] private float _groundCheckRadius = 0.53f;
+        
+        public bool IsRoofed;
+        [SerializeField] private float _roofCheckLength = 0.53f;
+        [SerializeField] private float _roofCheckRadius = 0.53f;
         [SerializeField] private LayerMask _groundLayers;
+        private Vector3 pos;
+        private Vector2 ray;
 
         private void Update()
         {
+            pos = transform.position;
+            ray = new Vector2(pos.x, pos.y);
             CheckIfGrounded();
+            CheckIfRoofed();
         }
+        
+        private void CheckIfRoofed()
+        {
+            pos = transform.position;
+            ray = new Vector2(pos.x, pos.y);
+
+            // check above for collisions
+            IsRoofed = Physics2D.CircleCast(ray, _roofCheckRadius, Vector2.up, _roofCheckLength, _groundLayers);
+            Debug.DrawRay(pos, Vector3.up * _roofCheckLength, Color.red);
+        }
+        
 
         
         private void CheckIfGrounded()
         {
-            var pos = transform.position;
-            var ray = new Vector2(pos.x, pos.y);
+            pos = transform.position;
+            ray = new Vector2(pos.x, pos.y);
 
+            // check below for collisions
             IsGrounded = Physics2D.CircleCast(ray, _groundCheckRadius, Vector2.down, _groundCheckLength, _groundLayers);
             Debug.DrawRay(pos, Vector3.down * _groundCheckLength, Color.magenta);
         }
@@ -27,7 +48,11 @@ namespace GamePlay.Entities.Movement
         
         private void OnDrawGizmos()
         {
+            Gizmos.color = Color.cyan; // colour of ground check gizmo
             Gizmos.DrawSphere(transform.position + Vector3.down * _groundCheckLength, _groundCheckRadius);
+            
+            Gizmos.color = Color.yellow; // colour of roof check gizmo
+            Gizmos.DrawSphere(transform.position + Vector3.up * _roofCheckLength, _roofCheckRadius);
         }
     }
 }

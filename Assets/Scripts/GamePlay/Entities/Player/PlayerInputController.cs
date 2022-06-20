@@ -1,19 +1,26 @@
+using System;
 using UnityEngine;
-
 namespace GamePlay.Entities.Player
 {
     public class PlayerInputController : MonoBehaviour
     {
         private CommandContainer _commandContainer;
-        
         public float WalkInput { get; private set; }
-        public bool WalkLeftInput { get; private set; }
-        public bool WalkRightInput { get; private set; }
 
-        public bool JumpInputDown { get; private set; }
-        public bool JumpInputUp { get; private set; }
-        public bool JumpInput { get; private set; }
-        private bool _noInput;
+        public bool WalkLeftDownInput;
+        public bool WalkLeftUpInput;
+        public bool WalkRightDownInput;
+        public bool WalkRightUpInput;
+        public bool NoWalkInput;
+
+        
+        
+        public bool JumpDownInput;
+        public bool JumpUpInput;
+        
+        public bool AttackDownInput;
+        public bool AttackUpInput;
+
 
         
         private void Awake()
@@ -22,57 +29,39 @@ namespace GamePlay.Entities.Player
         }
 
         
+        
         private void Update()
         {
-            HandleInput();
-            SetCommands();
+            HandleInput(); // collect player inputs
+            SetCommands(); // assign inputs to commands
+
+            if (WalkLeftDownInput && WalkRightDownInput)
+                NoWalkInput = false;
+
+            if (NoWalkInput) return;
+            if (!WalkLeftDownInput && !WalkRightDownInput)
+            {
+                NoWalkInput = true;
+                Debug.Log("Not walking");
+            }
         }
         
         
+
         private void HandleInput()
         {
-            WalkInput = Input.GetAxis("Horizontal");
-            
-            switch (WalkRightInput)
-            {
-                case true when WalkLeftInput: // pressing both keeps player still
-                    WalkInput = 0;
-                    _noInput = false;
-                    break;
-                
-                case true:
-                    WalkInput = 1;
-                    _noInput = false;
-                    break;
-                
-                default:
-                {
-                    if (WalkLeftInput)
-                    {
-                        WalkInput = -1;
-                        _noInput = false;
-                    }
-                    
-                    else
-                        _noInput = true;
-                    break;
-                }
-            }
-
-            JumpInputDown = Input.GetKeyDown(KeyCode.Space);
-            JumpInputUp = Input.GetKeyUp(KeyCode.Space);
-            JumpInput = Input.GetKey(KeyCode.Space);
+            WalkInput = Input.GetAxis("Horizontal"); // left and right
         }
 
+        
         
         private void SetCommands()
         {
             _commandContainer.WalkCommand = WalkInput;
-            _commandContainer.WalkLeftCommand = WalkLeftInput;
-            _commandContainer.WalkRightCommand = WalkRightInput;
-            _commandContainer.JumpCommandDown = JumpInputDown;
-            _commandContainer.JumpCommandUp = JumpInputUp;
-            _commandContainer.JumpCommand = JumpInput;
+            _commandContainer.JumpDownCommand = JumpDownInput;
+            _commandContainer.JumpUpCommand = JumpUpInput;
+            _commandContainer.AttackDownCommand = AttackDownInput;
+            _commandContainer.AttackUpCommand = AttackUpInput;
         }
     }
 }
