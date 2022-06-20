@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4334260088892593512}
   - component: {fileID: 4334260088892593513}
   - component: {fileID: 5723524109402921018}
+  - component: {fileID: 8304419048604587728}
   - component: {fileID: 4334260088892593517}
   - component: {fileID: 6406288623175395895}
   m_Layer: 8
@@ -108,6 +109,9 @@ MonoBehaviour:
   IsGrounded: 0
   _groundCheckLength: 0.6
   _groundCheckRadius: 0.6
+  IsRoofed: 0
+  _roofCheckLength: 0.53
+  _roofCheckRadius: 0.53
   _groundLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -123,10 +127,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ffd5d2cecce7e442b2e42b3e17eef16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseMovementSpeed: 6
-  AirborneMovementSpeed: 0
-  chargingJumpSpeed: 10
-  JumpForce: 0
+  Acceleration: 80
+  DeAcceleration: 55
+  WalkClamp: 12
+  BaseJumpSpeed: 0
+  Jumping: 0
 --- !u!114 &4334260088892593512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8de95438624ac24c920d263e2e88eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  JumpDownInput: 0
+  JumpUpInput: 0
 --- !u!114 &4334260088892593513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,12 +159,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WalkCommand: 0
-  WalkLeftCommand: 0
-  WalkRightCommand: 0
-  JumpCommandDown: 0
-  JumpCommandUp: 0
-  JumpCommand: 0
-  AttackCommand: 0
+  JumpUpCommand: 0
+  JumpDownCommand: 0
 --- !u!114 &5723524109402921018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +175,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cointText: {fileID: 0}
   cointValue: 0
+--- !u!114 &8304419048604587728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4334260088892593524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a62179065a33a8c43879a7035312207e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 3
+  _invulnerablilityTime: 0.5
 --- !u!50 &4334260088892593517
 Rigidbody2D:
   serializedVersion: 4

@@ -8,13 +8,13 @@ public class ItemCollector : MonoBehaviour{
 
     [SerializeField] TextMeshProUGUI cointText;
     [SerializeField] int cointValue;
-    int coins = 0;
+    int coinCounter = 0;
 
     void OnTriggerEnter2D(Collider2D col){
         if (col.gameObject.CompareTag("Coin")){
             Destroy(col.gameObject);
-            coins +=  cointValue;
-            cointText.text = "Coins: " + coins;
+            coinCounter +=  cointValue;
+            cointText.text = "Coins: " + coinCounter;
         }
     }
 }

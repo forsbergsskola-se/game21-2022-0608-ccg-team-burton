@@ -10,6 +10,9 @@ namespace GamePlay.Entities.Player
         public float WalkCommand;
         public bool JumpUpCommand;
         public bool JumpDownCommand;
-        //public bool AttackCommand;
+        public bool AttackUpCommand;
+        public bool AttackDownCommand;
+
     }
 }
+
