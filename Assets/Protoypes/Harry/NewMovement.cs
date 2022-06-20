@@ -7,14 +7,15 @@ namespace Protoypes.Harry
     public class NewMovement : MonoBehaviour
     {
         private SpriteRenderer _renderer;
-        private Vector2 _velocity;
         private CommandContainer _commandContainer;
         private GroundChecker _groundChecker;
-        private Vector2 _lastPosition;
+        
         private Vector2 RawMovement { get; set; }
+        private Vector2 _velocity;
+        private Vector2 _lastPosition;
         private Rigidbody2D _rb;
-        private CapsuleCollider2D _collider;
 
+        
         [Header("WALKING")] 
         public float _acceleration = 90;
         public float _moveClamp = 13; 
@@ -29,29 +30,48 @@ namespace Protoypes.Harry
         public float _maxFallSpeed = 120f;
         private float FallSpeed;
         
+        
         [Header("JUMPING")] 
         public float _jumpHeight = 30;
         public float _jumpApexThreshold = 10f;
         public float _jumpEndEarlyGravityModifier = 3;
+        
         private float _currentVerticalSpeed;
-
         private float _timeLeftGrounded;
         private bool _endedJumpEarly = true;
-        private float _apexPoint; 
-
+        private float _apexPoint;
         
+        
+        //Inputs
+        [SerializeField] private float WalkCommand;
+        [SerializeField] private bool JumpDownCommand;
+        [SerializeField] private bool JumpUpCommand;
+
 
         private void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
-            _collider = GetComponent<CapsuleCollider2D>();
             _commandContainer = GetComponent<CommandContainer>();
             _groundChecker = GetComponent<GroundChecker>();
             _renderer = GetComponent<SpriteRenderer>();
         }
 
         
-        private void Update() 
+        
+        private void Update() => CollectInput();
+        
+        
+        
+        private void CollectInput()
+        {
+            WalkCommand = _commandContainer.WalkCommand;
+            JumpDownCommand = _commandContainer.JumpDownCommand;
+            JumpUpCommand = _commandContainer.JumpUpCommand;
+        }
+
+
+        
+        private void FixedUpdate() 
         {
             _velocity = (_rb.position - _lastPosition) / Time.deltaTime;
             _lastPosition = _rb.position;
@@ -68,16 +88,16 @@ namespace Protoypes.Harry
 
         private void CalculateWalking() 
         {
-            if (_commandContainer.WalkCommand != 0) 
+            if (WalkCommand != 0) 
             {
                 // Set horizontal move speed
-                _currentHorizontalSpeed += _commandContainer.WalkCommand * _acceleration * Time.deltaTime;
+                _currentHorizontalSpeed += WalkCommand * _acceleration * Time.deltaTime;
 
                 // clamped by max frame movement
                 _currentHorizontalSpeed = Mathf.Clamp(_currentHorizontalSpeed, -_moveClamp, _moveClamp);
 
                 // Apply bonus at the apex of a jump
-                var apexBonus = Mathf.Sign(_commandContainer.WalkCommand) * _apexBonus * _apexPoint;
+                var apexBonus = Mathf.Sign(WalkCommand) * _apexBonus * _apexPoint;
                 _currentHorizontalSpeed += apexBonus * Time.deltaTime;
             }
             else 
@@ -86,6 +106,7 @@ namespace Protoypes.Harry
         }
 
 
+        
         private void CalculateGravity()
         {
             if (_groundChecker.IsGrounded)
@@ -127,7 +148,7 @@ namespace Protoypes.Harry
         
         
         private void CalculateJumping() {
-            if (_commandContainer.JumpDownCommand && _groundChecker.IsGrounded)
+            if (JumpDownCommand && _groundChecker.IsGrounded)
             {
                 {
                     _currentVerticalSpeed = _jumpHeight;
@@ -136,7 +157,7 @@ namespace Protoypes.Harry
                 }
                 
                 // End the jump early if button released
-                if (!_groundChecker.IsGrounded && _commandContainer.JumpUpCommand && !_endedJumpEarly && _velocity.y > 0)
+                if (!_groundChecker.IsGrounded && JumpUpCommand && !_endedJumpEarly && _velocity.y > 0)
                     _endedJumpEarly = true;
             }
             
