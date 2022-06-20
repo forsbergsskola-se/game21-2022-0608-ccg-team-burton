@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Entity.Items;
@@ -16,6 +17,6 @@ public class ItemPrefab : MonoBehaviour
         ItemSprite = item.ItemSprite;
         ItemDamage = item.TotalAttackDamage;
     }
-    
-    
+
+     
 }
