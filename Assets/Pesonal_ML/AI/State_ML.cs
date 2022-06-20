@@ -82,7 +82,7 @@ public class Idle : State_ML
         time += Time.deltaTime * Random.Range(0, 11);
         if (time > 10)
         {
-            if ((int) EnemyVarsMl.EnemyType < 2)
+            if ((int) EnemyVarsMl.GetEnemyType < 2)
             {
                 NextStateMl = new Patrol(EnemyVarsMl);
             }
@@ -142,7 +142,6 @@ public class Patrol : State_ML
 
         delay -= Time.deltaTime * 2f;
     }
-    
     
     private void SimpleMove()
     {
@@ -224,7 +223,7 @@ public class Attack : State_ML
         { 
             EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("MakeAttack"));
 
-            if (EnemyVarsMl.EnemyType == EnemyType.Ranged)
+            if (EnemyVarsMl.GetEnemyType == EnemyType.Ranged)
             {
                 EffectsPool.RequestEffectStatic(EffectType.FireBall, EnemyVarsMl.enemyRef.transform.position);
             }
@@ -286,9 +285,15 @@ public class Jump : State_ML
             BackToPatrol();
         }
         
+        else if (EnemyVarsMl.ArcCollider.TileHeightDifference > 4)
+        {
+            BackToPatrol();
+        }
+        
         else if(EnemyVarsMl.ArcCollider.TileSpotted && !EnemyVarsMl.ArcCollider.SameTileSpotted)
         {
             jumpDelay -= Time.deltaTime * 2f;
+            
             
             if (jumpDelay < 0)
             {

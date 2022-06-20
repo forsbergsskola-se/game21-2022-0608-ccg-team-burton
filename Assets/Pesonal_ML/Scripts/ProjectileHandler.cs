@@ -34,7 +34,7 @@ public class ProjectileHandler : MonoBehaviour, IEffects
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player hit");
-            other.gameObject.GetComponent<IDamageable>().ModifyHealth(-3);
+            other.gameObject.GetComponent<IDamageable>().ModifyHealth(-12);
         }
     }
 
