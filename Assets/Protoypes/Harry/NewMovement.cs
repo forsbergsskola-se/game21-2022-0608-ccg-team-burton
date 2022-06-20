@@ -9,6 +9,7 @@ namespace Protoypes.Harry
         private SpriteRenderer _renderer;
         private CommandContainer _commandContainer;
         private GroundChecker _groundChecker;
+        private TrailRenderer _trailRenderer;
         
         private Vector2 RawMovement { get; set; }
         private Vector2 _velocity;
@@ -54,6 +55,7 @@ namespace Protoypes.Harry
             _commandContainer = GetComponent<CommandContainer>();
             _groundChecker = GetComponent<GroundChecker>();
             _renderer = GetComponent<SpriteRenderer>();
+            _trailRenderer = GetComponent<TrailRenderer>();
         }
 
         
@@ -178,12 +180,20 @@ namespace Protoypes.Harry
         
         private void FlipCharacter()
         {
-            _renderer.flipX = _commandContainer.WalkCommand switch
+           _renderer.flipX = _commandContainer.WalkCommand switch
             {
                 > 0 => false, 
                 < 0 => true,
                 _ => _renderer.flipX
             };
+
+           /*var trailPos = _trailRenderer.transform.position;
+           trailPos.x = _commandContainer.WalkCommand switch
+           {
+               > 0 => + 10, 
+               < 0 => - 10,
+               _ => trailPos.x
+           };*/
         }
     }
 }
