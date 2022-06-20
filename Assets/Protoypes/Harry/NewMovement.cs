@@ -7,11 +7,11 @@ namespace Protoypes.Harry
     public class NewMovement : MonoBehaviour
     {
         private SpriteRenderer _renderer;
-        private Vector3 _velocity;
+        private Vector2 _velocity;
         private CommandContainer _commandContainer;
         private GroundChecker _groundChecker;
         private Vector2 _lastPosition;
-        private Vector3 RawMovement { get; set; }
+        private Vector2 RawMovement { get; set; }
         private Rigidbody2D _rb;
         private CapsuleCollider2D _collider;
 
@@ -27,7 +27,7 @@ namespace Protoypes.Harry
         public float _fallClamp = -40f;
         public float _minFallSpeed = 80f;
         public float _maxFallSpeed = 120f;
-        public float _fallSpeed;
+        private float FallSpeed;
         
         [Header("JUMPING")] 
         public float _jumpHeight = 30;
@@ -98,8 +98,8 @@ namespace Protoypes.Harry
             {
                 // Add downward force while ascending if we ended the jump early
                 var fallSpeed = _endedJumpEarly && _currentVerticalSpeed > 0
-                    ? _fallSpeed * _jumpEndEarlyGravityModifier
-                    : _fallSpeed;
+                    ? FallSpeed * _jumpEndEarlyGravityModifier
+                    : FallSpeed;
 
                 // Fall
                 _currentVerticalSpeed -= fallSpeed * Time.deltaTime;
@@ -118,7 +118,7 @@ namespace Protoypes.Harry
             {
                 // Gets stronger the closer to the top of the jump
                 _apexPoint = Mathf.InverseLerp(_jumpApexThreshold, 0, Mathf.Abs(_velocity.y));
-                _fallSpeed = Mathf.Lerp(_minFallSpeed, _maxFallSpeed, _apexPoint);
+                FallSpeed = Mathf.Lerp(_minFallSpeed, _maxFallSpeed, _apexPoint);
             }
             else
                 _apexPoint = 0;
@@ -149,9 +149,8 @@ namespace Protoypes.Harry
 
         private void MoveCharacter()
         {
-            RawMovement = new Vector3(_currentHorizontalSpeed, _currentVerticalSpeed); // Used externally
-            var move = RawMovement * Time.deltaTime;
-            transform.position = transform.position + Vector3.zero + move;
+            RawMovement = new Vector2(_currentHorizontalSpeed, _currentVerticalSpeed) * Time.deltaTime; // Used externally
+            _rb.MovePosition(_rb.position + Vector2.zero + RawMovement);
         }
 
         
