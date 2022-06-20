@@ -43,9 +43,9 @@ namespace Protoypes.Harry
         
         
         //Inputs
-        [SerializeField] private float WalkCommand;
-        [SerializeField] private bool JumpDownCommand;
-        [SerializeField] private bool JumpUpCommand;
+        private float WalkCommand;
+        private bool JumpDownCommand;
+        private bool JumpUpCommand;
 
 
         private void Awake()
