@@ -10,8 +10,6 @@ public class ItemPrefab : MonoBehaviour
     public Sprite ItemSprite;
     public float ItemDamage;
 
-    
-    
     public void SetItemData(ItemSO item)
     {
         ItemSprite = item.ItemSprite;
