@@ -26,9 +26,10 @@ public class MeleeAttackTestJJ : MonoBehaviour
  {
   _combat.MeleeAttack();
   slowMotionEffect.StartSlowMotion();
-  slowMotionEffect.StopSlowMotion();
+  
   _allowAttack = false;
   yield return new WaitForSeconds(_attackDelaySec);
   _allowAttack = true;
+  slowMotionEffect.StopSlowMotion();
  }
 }
