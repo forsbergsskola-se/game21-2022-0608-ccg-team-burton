@@ -17,11 +17,11 @@ namespace GamePlay.Entities.Movement
         [Header("HORIZONTAL SIDES")]
         private bool LeftWallHit;
         [SerializeField] private float _leftCheckLength = 0.53f;
-        [SerializeField] private float _leftCheckRadius = 0.53f;
+        [SerializeField] private float _leftCheckRadius = 1f;
         
         private bool RightWallHit;
         [SerializeField] private float _rightCheckLength = 0.53f;
-        [SerializeField] private float _rightCheckRadius = 0.53f;
+        [SerializeField] private float _rightCheckRadius = 1f;
         
         private Vector3 pos;
         private Vector2 ray;
