@@ -10,6 +10,8 @@ public class LootBoxController : MonoBehaviour
    public LootBoxSO LootBoxSO;
    private int _numberOfItemToSpawn = 1;
 
+   public ItemPrefab ItemPrefab;
+   
    public void OpenBox()
    {
       for (var i = 0; i < _numberOfItemToSpawn; i++)
@@ -25,25 +27,34 @@ public class LootBoxController : MonoBehaviour
          //TODO: Save items to player inventory 
          
          
-         var createdItem = ItemFactory.CreateItemFromInventory(itemSo);
+         //This represents equipping item
+         ItemPrefab.SetItemPrefab(itemSo);
+         
+         
+         
+         
+         
+         
+         
+         // var createdItem = ItemFactory.CreateItemFromInventory(itemSo);
+         //
+         // if (createdItem is Weapon weapon)
+         // {
+         //    Debug.Log(weapon.ItemName);
+         //    Debug.Log(weapon.Rarity);
+         //    Debug.Log(weapon.WeaponDamage);
+         //    return;
+         // }
+         //
+         // if (createdItem is Armor armor)
+         // {
+         //    Debug.Log(armor.ItemName);
+         //    Debug.Log(armor.Rarity);
+         //    Debug.Log(armor.EffectValue);
+         //    return;
+         // }
 
-         if (createdItem is Weapon weapon)
-         {
-            Debug.Log(weapon.ItemName);
-            Debug.Log(weapon.Rarity);
-            Debug.Log(weapon.WeaponDamage);
-            return;
-         }
-
-         if (createdItem is Armor armor)
-         {
-            Debug.Log(armor.ItemName);
-            Debug.Log(armor.Rarity);
-            Debug.Log(armor.EffectValue);
-            return;
-         }
-
-         Debug.Log($"Not weapon: {createdItem.ItemName}");
+         // Debug.Log($"Not weapon: {createdItem.ItemName}");
          // Debug.Log("--------------------------------------------");
          // Debug.Log(item.name);
          // Debug.Log($"Rarity: {item.Rarity}");

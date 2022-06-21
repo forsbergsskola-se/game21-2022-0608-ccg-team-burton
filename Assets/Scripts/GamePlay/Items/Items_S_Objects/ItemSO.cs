@@ -7,11 +7,8 @@ using UnityEngine;
 public class ItemSO : ScriptableObject
 {
     public string ItemName;
+    public Sprite ItemSprite;
+
     [HideInInspector]
     public Rarity Rarity;
-
-    // private void OnValidate()
-    // {
-    //     Rarity = Rarity.Common;
-    // }
 }
