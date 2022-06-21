@@ -38,7 +38,7 @@ namespace GamePlay.Entities.Movement
         {
             // check above for collisions
             IsRoofed = Physics2D.CircleCast(ray, _roofCheckRadius, Vector2.up, _roofCheckLength, _groundLayers);
-            Debug.DrawRay(pos, Vector3.up * _roofCheckLength, Color.red);
+            Debug.DrawRay(pos, Vector3.up * _roofCheckLength, Color.white );
         }
         
 
@@ -47,30 +47,41 @@ namespace GamePlay.Entities.Movement
         {
            // check below for collisions
             IsGrounded = Physics2D.CircleCast(ray, _groundCheckRadius, Vector2.down, _groundCheckLength, _groundLayers);
-            Debug.DrawRay(pos, Vector3.down * _groundCheckLength, Color.magenta);
+            Debug.DrawRay(pos, Vector3.down * _groundCheckLength, Color.black);
         }
         
         
         
         private void CheckLeftWall()
         {
-            
+            LeftWallHit = Physics2D.CircleCast(ray, _leftCheckRadius, Vector2.left, _leftCheckLength, _groundLayers);
+            Debug.DrawRay(pos, Vector3.down * _leftCheckLength, Color.cyan);
         }
+        
+        
         
         private void CheckRightWall()
         {
-            
+            RightWallHit = Physics2D.CircleCast(ray, _rightCheckRadius, Vector2.right, _rightCheckLength, _groundLayers);
+            Debug.DrawRay(pos, Vector3.down * _rightCheckLength, Color.red);
         }
 
 
 
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.cyan; // colour of ground check gizmo
+            Gizmos.color = Color.black; // colour of ground check gizmo
             Gizmos.DrawSphere(transform.position + Vector3.down * _groundCheckLength, _groundCheckRadius);
             
-            Gizmos.color = Color.yellow; // colour of roof check gizmo
+            Gizmos.color = Color.white; // colour of roof check gizmo
             Gizmos.DrawSphere(transform.position + Vector3.up * _roofCheckLength, _roofCheckRadius);
+            
+            
+            Gizmos.color = Color.red; // colour of left wall check gizmo
+            Gizmos.DrawSphere(transform.position + Vector3.left * _leftCheckLength, _leftCheckRadius);
+            
+            Gizmos.color = Color.cyan; // colour of right wall check gizmo
+            Gizmos.DrawSphere(transform.position + Vector3.right * _rightCheckLength, _rightCheckRadius);
         }
     }
 }
