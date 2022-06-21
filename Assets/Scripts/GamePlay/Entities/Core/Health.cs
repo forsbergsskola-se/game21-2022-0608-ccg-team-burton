@@ -10,6 +10,8 @@ namespace Entity
     public class Health : MonoBehaviour, IDamageable
     {
         public Action<int> OnHealthChanged;
+        Coins _coins;
+        ItemCollector _itemCollector;
         [SerializeField]
         private int _health;
         [SerializeField]
@@ -17,11 +19,18 @@ namespace Entity
         private float _invulnerablilityTime;
         private bool _invulnerable;
         private bool IsDead { get; set; }
+        
+        
 
         public int CurrentHealth
         {
             get => _health;
             set => _health = value;
+        }
+
+        void Awake(){
+            _coins = GetComponent<Coins>();
+            _itemCollector = FindObjectOfType<ItemCollector>();
         }
 
         private void Start()
@@ -49,8 +58,20 @@ namespace Entity
         
         private void OnDeath() //TODO: Move to own script?
         {
+
             IsDead = true;
             gameObject.SetActive(false); //Make death-script and make event or something
+            
+
+            if (gameObject.CompareTag("Enemy")){
+                _itemCollector._coinCounter += _coins._coinValue;
+                _itemCollector.UpdateCoinText(_itemCollector._coinCounter);
+            }
+
+            if (gameObject.CompareTag("Player")){
+                _itemCollector.UpdateCoinText(0);
+            }
+            
         }
 
         private IEnumerator InvulnFrameTimer(float invulnFrameTimer)
