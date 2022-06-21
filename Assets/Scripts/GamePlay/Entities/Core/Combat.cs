@@ -16,7 +16,6 @@ public class Combat : MonoBehaviour
      public GameObject DebugProjectile;
      public Transform FirePoint;
      
-     
     public void MeleeAttack()
     {
         //Play Melee Attack 
