@@ -245,7 +245,7 @@ public class Attack : State_ML
 
             if (EnemyVarsMl.GetEnemyType == EnemyType.Ranged)
             {
-                EffectsPool.RequestEffectStatic(EffectType.FireBall, EnemyVarsMl.firePoint.position, EnemyVarsMl.enemyRef.transform.right);
+                AssetPool.RequestEffectStatic(EffectType.FireBall, EnemyVarsMl.firePoint.position, EnemyVarsMl.enemyRef.transform.right);
             }
 
             attackDelay -= EnemyVarsMl.GetAttackInterval;
