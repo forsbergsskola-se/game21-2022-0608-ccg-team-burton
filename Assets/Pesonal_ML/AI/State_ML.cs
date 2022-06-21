@@ -330,12 +330,12 @@ public class Jump : State_ML
         var diff = EnemyVarsMl.ArcCollider.TileHeightDifference;
         if (diff < 0)
         {
-            diff = 4;
+            diff = 6;
         }
         
         else
         {
-            diff *= 7;
+            diff *= 100;
             diff = Mathf.Clamp(diff, 0, 7);
         }
         
