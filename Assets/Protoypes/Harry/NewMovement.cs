@@ -188,14 +188,6 @@ namespace Protoypes.Harry
                 < 0 => true,
                 _ => _renderer.flipX
             };
-
-           /*var trailPos = _trailRenderer.transform.position;
-           trailPos.x = _commandContainer.WalkCommand switch
-           {
-               > 0 => + 10, 
-               < 0 => - 10,
-               _ => trailPos.x
-           };*/
         }
     }
 }
