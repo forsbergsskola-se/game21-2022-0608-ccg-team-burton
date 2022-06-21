@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: 5396622188471341529}
   - component: {fileID: 2597696560619294812}
   - component: {fileID: 2960315192915402105}
+  - component: {fileID: 5093309766379230621}
   - component: {fileID: 5396622188471341518}
   - component: {fileID: 1608118586}
   m_Layer: 8
@@ -329,6 +330,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _combat: {fileID: 2597696560619294812}
+  _attackDelaySec: 2
+--- !u!114 &5093309766379230621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7599863999437365925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e689cf6ca2c8514f94fd234acf8af0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slowMotionTimeScale: 0.5
 --- !u!114 &5396622188471341518
 MonoBehaviour:
   m_ObjectHideFlags: 0
