@@ -98,6 +98,8 @@ namespace Protoypes.Harry
             CalculateJumpApex();
             CalculateGravity(); 
             CalculateJumping();
+            FallIfWallOrRoofHit();
+            
             MoveCharacter();
             FlipCharacter();
         }
@@ -178,7 +180,12 @@ namespace Protoypes.Harry
                 if (!_isGrounded && _jumpUpCommand && !_endedJumpEarly && _velocity.y > 0)
                     _endedJumpEarly = true;
             }
+        }
 
+        
+        
+        private void FallIfWallOrRoofHit()
+        {
             if (_currentVerticalSpeed > 0)
             {
                 if (!_isRoofed) // if hit roof fall
@@ -209,14 +216,6 @@ namespace Protoypes.Harry
                 < 0 => true,
                 _ => _renderer.flipX
             };
-
-           /*var trailPos = _trailRenderer.transform.position;
-           trailPos.x = _commandContainer.WalkCommand switch
-           {
-               > 0 => + 10, 
-               < 0 => - 10,
-               _ => trailPos.x
-           };*/
         }
     }
 }
