@@ -33,16 +33,13 @@ namespace GamePlay.Entities.Player
 
             if (NoWalkInput) return;
             if (!WalkLeftDownInput && !WalkRightDownInput)
-            {
                 NoWalkInput = true;
-                Debug.Log("Not walking");
-            }
         }
         
         
-
-        private void HandleInput() => WalkInput = Input.GetAxis("Horizontal"); 
+        
         // left and right
+        private void HandleInput() => WalkInput = Input.GetAxis("Horizontal"); 
 
 
 
