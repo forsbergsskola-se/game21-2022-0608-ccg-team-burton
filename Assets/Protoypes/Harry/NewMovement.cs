@@ -6,6 +6,7 @@ namespace Protoypes.Harry
 {
     public class NewMovement : MonoBehaviour
     {
+        public Animator animator;
         private SpriteRenderer _renderer;
         private Vector3 _velocity;
         private CommandContainer _commandContainer;
@@ -67,7 +68,7 @@ namespace Protoypes.Harry
             {
                 // Set horizontal move speed
                 _currentHorizontalSpeed += _commandContainer.WalkCommand * _acceleration * Time.deltaTime;
-
+                
                 // clamped by max frame movement
                 _currentHorizontalSpeed = Mathf.Clamp(_currentHorizontalSpeed, -_moveClamp, _moveClamp);
 
@@ -77,6 +78,7 @@ namespace Protoypes.Harry
             }
             else // deAccelerate
                 _currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, 0, _deAcceleration * Time.deltaTime);
+            animator.SetFloat("Speed", Mathf.Abs( _currentHorizontalSpeed));
         }
 
         
@@ -126,6 +128,7 @@ namespace Protoypes.Harry
             if (_groundChecker.IsRoofed)
                 if (_currentVerticalSpeed > 0)
                     _currentVerticalSpeed = 0;
+            //INSERT JUMP-ANIMATION CODE HERE:
         }
 
 
