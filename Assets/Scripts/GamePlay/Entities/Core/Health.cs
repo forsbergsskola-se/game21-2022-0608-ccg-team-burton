@@ -61,10 +61,15 @@ namespace Entity
 
             IsDead = true;
             gameObject.SetActive(false); //Make death-script and make event or something
+            
 
             if (gameObject.CompareTag("Enemy")){
                 _itemCollector._coinCounter += _coins._coinValue;
                 _itemCollector.UpdateCoinText(_itemCollector._coinCounter);
+            }
+
+            if (gameObject.CompareTag("Player")){
+                _itemCollector.UpdateCoinText(0);
             }
             
         }

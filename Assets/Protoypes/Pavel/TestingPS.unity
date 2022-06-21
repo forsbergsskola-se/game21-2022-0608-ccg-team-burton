@@ -389,6 +389,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 7606225107853341130, guid: 5d9206907174fda42b95c6cba367a9ea,
+        type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 1376355322}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d9206907174fda42b95c6cba367a9ea, type: 3}
@@ -836,6 +841,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coinValue: 10
+--- !u!114 &1179506945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179506925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a4ed6dbeee629418c8eeea371134ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  playerHealth: {fileID: 0}
+  hearts: []
 --- !u!1 &1233193183
 GameObject:
   m_ObjectHideFlags: 0
@@ -1006,6 +1026,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1376355322 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5396622188471341528, guid: 1e8f445a2c1a88c47ab1ccd57baca50a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1274308281}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a62179065a33a8c43879a7035312207e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1511382362
