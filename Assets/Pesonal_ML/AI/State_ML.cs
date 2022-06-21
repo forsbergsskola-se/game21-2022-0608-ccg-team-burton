@@ -182,7 +182,7 @@ public class Pursue : State_ML
     public override void Update()
     {
         var distance = Vector3.Distance(EnemyVarsMl._eyes.PlayerTrans.position, EnemyVarsMl.enemyRef.gameObject.transform.position);
-        if (distance < EnemyVarsMl.GetAttackDistance)
+        if (EnemyVarsMl.attackZone.playerInZone)
         {
             NextStateMl = new Attack(EnemyVarsMl);
             Stage = EVENT.Exit;
@@ -245,7 +245,7 @@ public class Attack : State_ML
 
             if (EnemyVarsMl.GetEnemyType == EnemyType.Ranged)
             {
-                EffectsPool.RequestEffectStatic(EffectType.FireBall, EnemyVarsMl.enemyRef.transform.position);
+                EffectsPool.RequestEffectStatic(EffectType.FireBall, EnemyVarsMl.firePoint.position, EnemyVarsMl.enemyRef.transform.right);
             }
 
             attackDelay -= EnemyVarsMl.GetAttackInterval;

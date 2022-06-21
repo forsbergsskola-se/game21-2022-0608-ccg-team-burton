@@ -167,6 +167,7 @@ namespace Protoypes.Harry
             if (_groundChecker.IsRoofed)
                 if (_currentVerticalSpeed > 0)
                     _currentVerticalSpeed = 0;
+            animator.SetFloat("Speed", Mathf.Abs(_currentVerticalSpeed));
         }
 
 

@@ -14,6 +14,8 @@ public class Enemy_AI : MonoBehaviour
     private void Start()
     {
         EnemyVars._eyes = GetComponentInChildren<Enemy_Eyes>();
+        EnemyVars.attackZone = GetComponentInChildren<AttackZone>();
+        EnemyVars.firePoint = GetComponentsInChildren<Transform>()[^1];
         EnemyVars.animator = GetComponent<Animator>();
         EnemyVars.enemyRef = gameObject;
         EnemyVars.ArcCollider = GetComponentInChildren<ArcCollider>();

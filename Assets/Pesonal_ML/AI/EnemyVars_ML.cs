@@ -23,6 +23,8 @@ public class EnemyVars_ML
     [HideInInspector] public ArcCollider ArcCollider;
     [HideInInspector] public Animator animator;
     [HideInInspector] public GameObject enemyRef;
+    [HideInInspector] public AttackZone attackZone;
+    [HideInInspector] public Transform firePoint;
 
     public float GetAttackDistance => AttackDistance;
     public float GetPursueDistance => PursueDistance;
