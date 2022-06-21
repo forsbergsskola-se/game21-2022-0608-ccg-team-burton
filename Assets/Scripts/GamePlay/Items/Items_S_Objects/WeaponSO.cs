@@ -8,5 +8,6 @@ public class WeaponSO : ItemSO
 {
     
     public float WeaponBaseDamage;
-    public int ItemLevel;
+    [Tooltip("Increase from common level, e.g. a Rare would be a modifier of 3*RarityLevelModificationStep")]
+    public float RarityLevelModificationStep;
 }

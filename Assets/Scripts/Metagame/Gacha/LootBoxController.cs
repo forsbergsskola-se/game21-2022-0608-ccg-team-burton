@@ -18,14 +18,14 @@ public class LootBoxController : MonoBehaviour
          //Play animation
          
          
-         var item = LootBoxSO.PickLootTable().PickItem();
+         var itemSo = LootBoxSO.PickLootTable().PickItem();
 
          
          
          //TODO: Save items to player inventory 
          
          
-         var createdItem = ItemFactory.CreateItemFromInventory(item);
+         var createdItem = ItemFactory.CreateItemFromInventory(itemSo);
 
          if (createdItem is Weapon weapon)
          {

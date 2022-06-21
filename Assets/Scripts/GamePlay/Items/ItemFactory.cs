@@ -19,12 +19,10 @@ public static class ItemFactory
             
             var DamageMod = new WeaponDamageStatModifier();
             var effectMod = new WeaponEffectMod();
-            Debug.Log("Before test" +weapon.WeaponDamage);
-            DamageMod.ApplyStatChange(weapon, itemSo); //<-- this does only change the instance in method right. Need to be returned?
-            effectMod.ApplyStatChange(weapon, itemSo);
-            Debug.Log("After test" +weapon.WeaponDamage);
 
-            Debug.Log(weapon.WeaponDamage);
+            DamageMod.ApplyStatChange(weapon, itemSo);  
+            effectMod.ApplyStatChange(weapon, itemSo);
+
 
             return weapon;
         }
@@ -49,23 +47,27 @@ public class Weapon : Item
 
 public class WeaponDamageStatModifier : IStatsModifier
 {
-    public void ApplyStatChange(Item item, ItemSO itemSo) // return typ T?
+    public void ApplyStatChange(Item item, ItemSO itemSo)
     {
         if (item is not Weapon weapon) return;
         if (itemSo is not WeaponSO weaponSo) return;
         //Is this really going here?
-        float damageMod = item.Rarity switch
-        {
-            Rarity.Common => 1,
-            Rarity.Uncommon => 2,
-            Rarity.Rare => 3,
-            Rarity.Epic => 4,
-            Rarity.Legendary =>5,
-            _ => throw new ArgumentOutOfRangeException()
-        };
-        
-        Debug.Log("Setting WeaponDamage");  
-        weapon.WeaponDamage = damageMod *weaponSo.WeaponBaseDamage;
+        Debug.Log(weaponSo.WeaponBaseDamage);
+
+        weapon.WeaponDamage = weaponSo.WeaponBaseDamage + (int) weaponSo.Rarity * weaponSo.WeaponBaseDamage; // scaling with int enum bad??
+        Debug.Log(weapon.WeaponDamage);
+
+        // float damageMod = item.Rarity switch
+        // {
+        //     Rarity.Common => 1,
+        //     Rarity.Uncommon => 2,
+        //     Rarity.Rare => 3,
+        //     Rarity.Epic => 4,
+        //     Rarity.Legendary =>5,
+        //     _ => throw new ArgumentOutOfRangeException()
+        // };
+        //
+        // weapon.WeaponDamage = damageMod *weaponSo.WeaponBaseDamage;
     }
 }
 
@@ -73,7 +75,7 @@ public class WeaponEffectMod : IStatsModifier
 {
     public void ApplyStatChange(Item item, ItemSO itemSo)
     {
-        throw new NotImplementedException();
+        Debug.Log("Effects gogogo");
     }
 }
 
