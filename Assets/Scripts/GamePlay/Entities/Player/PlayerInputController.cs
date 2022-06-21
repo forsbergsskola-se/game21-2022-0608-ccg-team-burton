@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 namespace GamePlay.Entities.Player
 {
@@ -6,27 +5,21 @@ namespace GamePlay.Entities.Player
     {
         private CommandContainer _commandContainer;
         public float WalkInput { get; private set; }
-
-        public bool WalkLeftDownInput;
-        public bool WalkLeftUpInput;
-        public bool WalkRightDownInput;
-        public bool WalkRightUpInput;
-        public bool NoWalkInput;
-
-        
+        [HideInInspector] public bool WalkLeftDownInput;
+        [HideInInspector] public bool WalkLeftUpInput;
+        [HideInInspector] public bool WalkRightDownInput;
+        [HideInInspector] public bool WalkRightUpInput;
+        [HideInInspector] public bool NoWalkInput;
         
         public bool JumpDownInput;
         public bool JumpUpInput;
         
         public bool AttackDownInput;
-        public bool AttackUpInput;
+        [HideInInspector] public bool AttackUpInput;
 
 
         
-        private void Awake()
-        {
-            _commandContainer = GetComponent<CommandContainer>();
-        }
+        private void Awake() => _commandContainer = GetComponent<CommandContainer>();
 
         
         
@@ -48,13 +41,11 @@ namespace GamePlay.Entities.Player
         
         
 
-        private void HandleInput()
-        {
-            WalkInput = Input.GetAxis("Horizontal"); // left and right
-        }
+        private void HandleInput() => WalkInput = Input.GetAxis("Horizontal"); 
+        // left and right
 
-        
-        
+
+
         private void SetCommands()
         {
             _commandContainer.WalkCommand = WalkInput;

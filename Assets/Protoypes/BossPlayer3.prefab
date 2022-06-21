@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 5396622188471341528}
   - component: {fileID: 5396622188471341529}
   - component: {fileID: 5396622188471341518}
-  - component: {fileID: 723682894}
+  - component: {fileID: 1608118586}
   m_Layer: 8
   m_Name: BossPlayer3
   m_TagString: Player
@@ -182,16 +182,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7efbeca9fb2caee408e33967aa452cfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _acceleration: 90
+  _acceleration: 120
   _moveClamp: 13
   _deAcceleration: 60
+  _apexBonus: 2
   _fallClamp: -40
   _minFallSpeed: 80
   _maxFallSpeed: 120
-  _fallSpeed: 0
   _jumpHeight: 33
-  _apexBonus: 2
   _jumpApexThreshold: 11
+  _jumpEndEarlyGravityModifier: 3
 --- !u!50 &5396622188471341521
 Rigidbody2D:
   serializedVersion: 4
@@ -273,7 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseKnockback: 1
   knockbackDuration: 0.5
---- !u!96 &723682894
+--- !u!96 &1608118586
 TrailRenderer:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -281,7 +281,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7599863999437365925}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
