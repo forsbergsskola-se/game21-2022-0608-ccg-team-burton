@@ -5,34 +5,26 @@ using UnityEngine;
 
 public class Enemy_AI : MonoBehaviour
 {
-    private Vector3 testVector;
-    private bool rotate = true;
-    private bool move = false;
     private State_ML _currentStateMl;
     private Animator enemy_Anim;
-   
-    [SerializeField] private float moveSpeed = 5.0f;
-    private Enemy_Eyes _detector;
+
+    [SerializeField] private EnemyVars_ML EnemyVars;
+    private ArcCollider _arcCollider;
 
     private void Start()
     {
-        _detector = GetComponentInChildren<Enemy_Eyes>();
-        _currentStateMl = new Patrol(gameObject,  _detector);
+        EnemyVars._eyes = GetComponentInChildren<Enemy_Eyes>();
+        EnemyVars.animator = GetComponent<Animator>();
+        EnemyVars.enemyRef = gameObject;
+        EnemyVars.ArcCollider = GetComponentInChildren<ArcCollider>();
+        enemy_Anim = GetComponent<Animator>();
+     
+        _currentStateMl = new Idle(EnemyVars);
     }
 
     private void Update()
     {
         _currentStateMl = _currentStateMl.Process();
-    }
-
-    public void GroundGone()
-    {
-        gameObject.transform.Rotate(new Vector3(0,0,1), 180);
-    }
-    
-    public void PlayerSpotted()
-    {
-        _currentStateMl = new Pursue(gameObject, _detector);
     }
     
     
