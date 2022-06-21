@@ -23,16 +23,23 @@ namespace GamePlay.Entities.Movement
         [SerializeField] private float _rightCheckLength = 0.53f;
         [SerializeField] private float _rightCheckRadius = 1f;
         
-        private Vector3 pos;
-        private Vector2 ray;
+        private Vector3 _pos;
+        private Vector2 _ray;
+        
+
 
         private void Update()
         {
-            pos = transform.position;
-            ray = new Vector2(pos.x, pos.y);
-            CheckIfGrounded();
-            CheckIfRoofed(pos, ray);
+            _pos = transform.position;
+            _ray = new Vector2(_pos.x, _pos.y);
+            
+            CheckIfGrounded(_pos, _ray); 
+            CheckIfRoofed(_pos, _ray);
+            CheckLeftWall(_pos, _ray);
+            CheckRightWall(_pos, _ray);
         }
+        
+        
         
         private void CheckIfRoofed(Vector3 pos, Vector2 ray)
         {
@@ -43,27 +50,29 @@ namespace GamePlay.Entities.Movement
         
 
         
-        private void CheckIfGrounded()
+        private void CheckIfGrounded(Vector3 pos, Vector2 ray)
         {
            // check below for collisions
-            IsGrounded = Physics2D.CircleCast(ray, _groundCheckRadius, Vector2.down, _groundCheckLength, _groundLayers);
-            Debug.DrawRay(pos, Vector3.down * _groundCheckLength, Color.black);
+            IsGrounded = Physics2D.CircleCast(_ray, _groundCheckRadius, Vector2.down, _groundCheckLength, _groundLayers);
+            Debug.DrawRay(_pos, Vector3.down * _groundCheckLength, Color.black);
         }
         
         
         
-        private void CheckLeftWall()
+        private void CheckLeftWall(Vector3 pos, Vector2 ray)
         {
-            LeftWallHit = Physics2D.CircleCast(ray, _leftCheckRadius, Vector2.left, _leftCheckLength, _groundLayers);
-            Debug.DrawRay(pos, Vector3.down * _leftCheckLength, Color.cyan);
+            // check for left side collision
+            LeftWallHit = Physics2D.CircleCast(_ray, _leftCheckRadius, Vector2.left, _leftCheckLength, _groundLayers);
+            Debug.DrawRay(_pos, Vector3.down * _leftCheckLength, Color.cyan);
         }
         
         
         
-        private void CheckRightWall()
+        private void CheckRightWall(Vector3 pos, Vector2 ray)
         {
-            RightWallHit = Physics2D.CircleCast(ray, _rightCheckRadius, Vector2.right, _rightCheckLength, _groundLayers);
-            Debug.DrawRay(pos, Vector3.down * _rightCheckLength, Color.red);
+            // check for right side collision
+            RightWallHit = Physics2D.CircleCast(_ray, _rightCheckRadius, Vector2.right, _rightCheckLength, _groundLayers);
+            Debug.DrawRay(_pos, Vector3.down * _rightCheckLength, Color.red);
         }
 
 
