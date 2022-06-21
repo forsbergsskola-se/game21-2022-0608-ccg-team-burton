@@ -15,11 +15,11 @@ namespace GamePlay.Entities.Movement
         [SerializeField] private LayerMask _groundLayers;
 
         [Header("HORIZONTAL SIDES")]
-        private bool LeftWallHit;
+        public bool LeftWallHit;
         [SerializeField] private float _leftCheckLength = 0.53f;
         [SerializeField] private float _leftCheckRadius = 1f;
         
-        private bool RightWallHit;
+        public bool RightWallHit;
         [SerializeField] private float _rightCheckLength = 0.53f;
         [SerializeField] private float _rightCheckRadius = 1f;
         
