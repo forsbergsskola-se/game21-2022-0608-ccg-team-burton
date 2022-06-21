@@ -105,7 +105,7 @@ namespace Protoypes.Harry
             }
             else 
                 _currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, 0, _deAcceleration * Time.deltaTime);
-            animator.SetFloat("Speed", Mathf.Abs(_currentHorizontalSpeed));
+            //animator.SetFloat("Speed", Mathf.Abs(_currentHorizontalSpeed));
         }
 
 

@@ -14,7 +14,6 @@ public class AttackButton : MonoBehaviour
         {
             _playerInputController.AttackUpInput = true;
             _playerInputController.AttackDownInput = false;
-            Debug.Log("Givin em the whickity whack");
         }
     
         public void OnPointerDownAttack()

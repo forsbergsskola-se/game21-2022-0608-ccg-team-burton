@@ -1,23 +1,25 @@
 using System;
 using System.Collections;
+using GamePlay.Entities.Player;
 using UnityEngine;
 
 public class MeleeAttackTestJJ : MonoBehaviour
 {
- [SerializeField]
- private Combat _combat;
- [SerializeField] private float _attackDelaySec = 2f;
+ [SerializeField] Combat _combat;
+ [SerializeField] float _attackDelaySec = 2f;
 
  SlowMotionEffect slowMotionEffect;
- private bool _allowAttack = true;
+ CommandContainer _commandContainer;
+ bool _allowAttack = true;
 
  void Awake(){
   slowMotionEffect = GetComponent<SlowMotionEffect>();
+  _commandContainer = FindObjectOfType<CommandContainer>();
  }
 
  private void Update()
  {
-  if (Input.GetKeyDown(KeyCode.E) && _allowAttack)
+  if (_commandContainer.AttackDownCommand && _allowAttack)
     StartCoroutine(CallAttack());
  }
 
