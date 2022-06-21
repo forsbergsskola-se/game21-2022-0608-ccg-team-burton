@@ -61,11 +61,10 @@ public class ItemTableSO : ScriptableObject
                 Debug.LogError("ERROR: No Object set in table slot");
             }
 
-            go.ItemSO.Rarity = tableRarity;
-            go.ItemSO.SetData();
-            
-            
-            return go.ItemSO;
+            go.itemSo.Rarity = tableRarity; // Assign item rarity
+            go.itemSo.SetItemStats(go.itemSo); //scale stats to set rarity
+           
+            return go.itemSo;
         }
         Debug.LogError("GO couldn't be picked... Be sure that all of your active GameObject Tables (GO-class)  have assigned at least one GO! Returning NULL");
         //reset picked number in last method dependent on it (in this case, pick GO)
@@ -84,7 +83,7 @@ public class ItemTableSO : ScriptableObject
         public float ProbabilityRangeFrom;
         [HideInInspector]
         public float ProbabilityRangeTo;
-        public ItemSO ItemSO;
+        public ItemSO itemSo;
     }  
    
 }

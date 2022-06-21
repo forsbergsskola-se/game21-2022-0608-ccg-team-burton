@@ -20,15 +20,15 @@ public class LootBoxController : MonoBehaviour
          
          var item = LootBoxSO.PickLootTable().PickItem();
 
-         //Save items to player inventory         
+         //TODO: Save items to player inventory         
          
-         Debug.Log("--------------------------------------------");
-         Debug.Log(item.name);
-         Debug.Log($"Rarity: {item.Rarity}");
-         Debug.Log($"Base Attack Damage: {item.BaseAttackDamage}");
-         Debug.Log($"AttackModifier: x{item.AttackDamageMultiplier}");
-         Debug.Log($"Total Damage: : {item.TotalAttackDamage}");
-         Debug.Log("--------------------------------------------");
+         // Debug.Log("--------------------------------------------");
+         // Debug.Log(item.name);
+         // Debug.Log($"Rarity: {item.Rarity}");
+         // Debug.Log($"Base Attack Damage: {item.BaseAttackDamage}");
+         // Debug.Log($"AttackModifier: x{item.AttackDamageMultiplier}");
+         // Debug.Log($"Total Damage: : {item.TotalAttackDamage}");
+         // Debug.Log("--------------------------------------------");
 
       }
 

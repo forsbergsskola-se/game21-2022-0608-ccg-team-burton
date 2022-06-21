@@ -1,9 +1,9 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
 using Entity.Items;
 using UnityEngine;
- 
-[CreateAssetMenu(fileName = "WeaponType", menuName = "Item System/WeaponType")]
-public class ItemTypeSO : ScriptableObject
+
+public class ItemEffectSO : ScriptableObject
 {
     [Header("Damage Scaling")]
     public float BaseDamageMultiplier;
@@ -13,22 +13,18 @@ public class ItemTypeSO : ScriptableObject
     [Header("Effect Duration Scaling")]
     public float EffectDurationStep;
     
-    
-    //TODO: Duplicate code --> cleanup!
-    public void ScaleStats(ItemSO itemSo)
+     
+    public void ScaleItemStats(ItemSO itemSo)
     {
-        itemSo.AttackDamageMultiplier = itemSo.Rarity switch
+
+        //FOR WEAPONS ONLY
+        if (itemSo.itemEffectSo.GetType() == typeof(WeaponSO))
         {
-            Rarity.Common => BaseDamageMultiplier,
-            Rarity.Uncommon => BaseDamageMultiplier+DamageMultiplierStep,
-            Rarity.Rare =>BaseDamageMultiplier+DamageMultiplierStep*2,
-            Rarity.Epic => BaseDamageMultiplier+DamageMultiplierStep*3,
-            Rarity.Legendary => BaseDamageMultiplier+DamageMultiplierStep*4,
-
-            _ => itemSo.AttackDamageMultiplier
-        };
-        itemSo.TotalAttackDamage = itemSo.BaseAttackDamage * itemSo.AttackDamageMultiplier;
-
+            //Add weapon part here
+            
+        }
+            
+        //For all items (ARMOR + WEAPON)
         itemSo.EffectValueModifier = itemSo.Rarity switch
         {
             Rarity.Common => 0,
@@ -57,8 +53,6 @@ public class ItemTypeSO : ScriptableObject
         else
             itemSo.TotalEffectDuration = 0;
     }
-    
-}
- 
 
  
+}
