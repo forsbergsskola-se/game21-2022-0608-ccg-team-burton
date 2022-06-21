@@ -179,9 +179,13 @@ namespace Protoypes.Harry
                     _endedJumpEarly = true;
             }
 
-            if (!_isRoofed) return;
-            if (_currentVerticalSpeed > 0)
-                _currentVerticalSpeed = 0;
+            if (_isRoofed)
+                if (_currentVerticalSpeed > 0)
+                    _currentVerticalSpeed = 0;
+
+            if (!_isGrounded && (_currentHorizontalSpeed > 0 && _leftWallHit // if left wall hit
+                                 || _currentVerticalSpeed > 0 && _rightWallHit)) // if right wall hit
+                _currentVerticalSpeed = 0; // drop down & don't stick in place
         }
 
 
