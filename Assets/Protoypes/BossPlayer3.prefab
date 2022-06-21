@@ -151,6 +151,12 @@ MonoBehaviour:
   _groundLayers:
     serializedVersion: 2
     m_Bits: 64
+  LeftWallHit: 0
+  _leftCheckLength: 0.1
+  _leftCheckRadius: 0.3
+  RightWallHit: 0
+  _rightCheckLength: 0.3
+  _rightCheckRadius: 0.3
 --- !u!114 &7599863999437365945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,8 +208,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.628631, y: -0.09813368}
-  m_Size: {x: 4.2154975, y: 9.935083}
+  m_Offset: {x: 0.03939569, y: -0.09813368}
+  m_Size: {x: 5.551552, y: 9.935083}
   m_Direction: 0
 --- !u!114 &6186267417783580407
 MonoBehaviour:
