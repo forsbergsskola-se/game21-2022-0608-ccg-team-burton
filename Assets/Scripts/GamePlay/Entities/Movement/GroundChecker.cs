@@ -20,14 +20,11 @@ namespace GamePlay.Entities.Movement
             pos = transform.position;
             ray = new Vector2(pos.x, pos.y);
             CheckIfGrounded();
-            CheckIfRoofed();
+            CheckIfRoofed(pos, ray);
         }
         
-        private void CheckIfRoofed()
+        private void CheckIfRoofed(Vector3 pos, Vector2 ray)
         {
-            pos = transform.position;
-            ray = new Vector2(pos.x, pos.y);
-
             // check above for collisions
             IsRoofed = Physics2D.CircleCast(ray, _roofCheckRadius, Vector2.up, _roofCheckLength, _groundLayers);
             Debug.DrawRay(pos, Vector3.up * _roofCheckLength, Color.red);
@@ -37,15 +34,13 @@ namespace GamePlay.Entities.Movement
         
         private void CheckIfGrounded()
         {
-            pos = transform.position;
-            ray = new Vector2(pos.x, pos.y);
-
-            // check below for collisions
+           // check below for collisions
             IsGrounded = Physics2D.CircleCast(ray, _groundCheckRadius, Vector2.down, _groundCheckLength, _groundLayers);
             Debug.DrawRay(pos, Vector3.down * _groundCheckLength, Color.magenta);
         }
-
         
+
+
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.cyan; // colour of ground check gizmo
