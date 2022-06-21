@@ -102,9 +102,9 @@ namespace Protoypes.Harry
             CalculateJumping();
             FallIfWallOrRoofHit();
             
-            MovePlayer();
-            AnimatePlayer();
             FlipPlayer();
+            AnimatePlayer();
+            MovePlayer();
         }
         
     
