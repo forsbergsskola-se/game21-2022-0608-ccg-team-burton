@@ -105,7 +105,7 @@ namespace Protoypes.Harry
             }
             else 
                 _currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, 0, _deAcceleration * Time.deltaTime);
-            //animator.SetFloat("Speed", Mathf.Abs(_currentHorizontalSpeed));
+            animator.SetFloat("Hspeed", Mathf.Abs(_currentHorizontalSpeed));
         }
 
 
@@ -167,7 +167,7 @@ namespace Protoypes.Harry
             if (_groundChecker.IsRoofed)
                 if (_currentVerticalSpeed > 0)
                     _currentVerticalSpeed = 0;
-            animator.SetFloat("Speed", Mathf.Abs(_currentVerticalSpeed));
+            animator.SetFloat("Vspeed", Mathf.Abs(_currentVerticalSpeed));
         }
 
 
