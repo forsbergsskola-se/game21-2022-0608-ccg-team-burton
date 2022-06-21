@@ -17,7 +17,7 @@ public class EffectsPool : MonoBehaviour
     [SerializeField] private int startPool = 20;
     [SerializeField] private int maxPool = 30;
     private List<GameObject> _effects = new List<GameObject>();
-    public static event Action<EffectType, Vector2> OnRequestEffect; 
+    public static event Action<EffectType, Vector2, Vector2> OnRequestEffect; 
 
     private void Start()
     {
@@ -25,7 +25,7 @@ public class EffectsPool : MonoBehaviour
         for (var i = 0; i < startPool; i++)
         {
            var effect = Instantiate(effectPrototype);
-           effect.AddComponent<ProjectileHandler>();
+        //   effect.AddComponent<ProjectileHandler>();
            effect.SetActive(false);
            _effects.Add(effect);
         }
@@ -36,13 +36,13 @@ public class EffectsPool : MonoBehaviour
         OnRequestEffect -= RequestEffect;
     }
 
-    public static void RequestEffectStatic(EffectType type, Vector2 location)
+    public static void RequestEffectStatic(EffectType type, Vector2 location, Vector2 travelVector)
     {
-        OnRequestEffect?.Invoke(type, location);
+        OnRequestEffect?.Invoke(type, location, travelVector);
     }
     
     
-    public void RequestEffect(EffectType type, Vector2 location)
+    public void RequestEffect(EffectType type, Vector2 location, Vector2 travelVector)
     {
         Debug.Log("effect requested");
         GameObject effect = null;
@@ -66,8 +66,9 @@ public class EffectsPool : MonoBehaviour
         if (effect == null) return;
         
         effect.SetActive(true);
-        effect.GetComponent<IEffects>().EngageEffect();
-        effect.transform.position = location - new Vector2(0, 0.3f);
+    //    effect.GetComponent<IEffects>().EngageEffect();
+        effect.transform.position = location;
+        effect.GetComponent<Bullet_ML>().travelVector = travelVector;
 
         //  temp.GetComponent<Animator>().SetTrigger(Animator.StringToHash(input));
     }
