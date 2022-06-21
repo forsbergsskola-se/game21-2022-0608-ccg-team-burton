@@ -20,11 +20,22 @@ public static class ItemFactory
             var DamageMod = new WeaponDamageStatModifier();
             var effectMod = new WeaponEffectMod();
 
-            DamageMod.ApplyStatChange(weapon, itemSo);  
-            effectMod.ApplyStatChange(weapon, itemSo);
+            DamageMod.ApplyStatChange(weapon, weaponSo);  
+            effectMod.ApplyStatChange(weapon, weaponSo);
 
 
             return weapon;
+        }
+
+        if (itemSo is ArmorSO armorSo)
+        {
+            var armor = new Armor();
+            armor.ItemName = armorSo.ItemName;
+            armor.Rarity = armorSo.Rarity;
+            var EffectMod = new ArmorEffectModification();
+            EffectMod.ApplyStatChange(armor,armorSo);
+
+            return armor;
         }
         
 
@@ -43,6 +54,11 @@ public class Weapon : Item
 {
     public float WeaponDamage;
     
+}
+
+public class Armor : Item
+{
+    public float EffectValue;
 }
 
 public class WeaponDamageStatModifier : IStatsModifier
@@ -68,6 +84,21 @@ public class WeaponDamageStatModifier : IStatsModifier
         // };
         //
         // weapon.WeaponDamage = damageMod *weaponSo.WeaponBaseDamage;
+    }
+}
+
+public class ArmorEffectModification : IStatsModifier
+{
+    public void ApplyStatChange(Item item, ItemSO itemSo)
+    {
+        if (item is Armor armor)
+        {
+            if (itemSo is ArmorSO armorSo)
+            {
+                armor.EffectValue = armorSo.BaseEffect +
+                                    armorSo.RarityLevelEffectIncrease * (int)armorSo.Rarity;
+            }
+        }
     }
 }
 

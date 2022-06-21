@@ -13,15 +13,20 @@ MonoBehaviour:
   m_Name: RareItemTable
   m_EditorClassIdentifier: 
   tableRarity: 2
-  TotalProbabilityWeight: 2
+  TotalProbabilityWeight: 3
   ItemsList:
   - ProbabilityWeight: 1
-    ProbabilityPercent: 50
+    ProbabilityPercent: 33.333332
     ProbabilityRangeFrom: 0
     ProbabilityRangeTo: 1
     itemSo: {fileID: 11400000, guid: af604a675b68b4745b1f033955f83114, type: 2}
   - ProbabilityWeight: 1
-    ProbabilityPercent: 50
+    ProbabilityPercent: 33.333332
     ProbabilityRangeFrom: 1
     ProbabilityRangeTo: 2
     itemSo: {fileID: 11400000, guid: bea5a4ef7339b2b46a736e20bfb6ab41, type: 2}
+  - ProbabilityWeight: 1
+    ProbabilityPercent: 33.333332
+    ProbabilityRangeFrom: 2
+    ProbabilityRangeTo: 3
+    itemSo: {fileID: 11400000, guid: 1852a7c4c412c3f4d8da56a305314a62, type: 2}

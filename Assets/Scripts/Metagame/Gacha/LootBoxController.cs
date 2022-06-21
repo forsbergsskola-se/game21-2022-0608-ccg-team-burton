@@ -35,6 +35,14 @@ public class LootBoxController : MonoBehaviour
             return;
          }
 
+         if (createdItem is Armor armor)
+         {
+            Debug.Log(armor.ItemName);
+            Debug.Log(armor.Rarity);
+            Debug.Log(armor.EffectValue);
+            return;
+         }
+
          Debug.Log($"Not weapon: {createdItem.ItemName}");
          // Debug.Log("--------------------------------------------");
          // Debug.Log(item.name);
