@@ -4,6 +4,7 @@ namespace GamePlay.Entities.Movement
 {
     public class GroundChecker : MonoBehaviour
     {
+        [Header("VERTICAL SIDES")]
         public bool IsGrounded;
         [SerializeField] private float _groundCheckLength = 0.53f;
         [SerializeField] private float _groundCheckRadius = 0.53f;
@@ -12,6 +13,16 @@ namespace GamePlay.Entities.Movement
         [SerializeField] private float _roofCheckLength = 0.53f;
         [SerializeField] private float _roofCheckRadius = 0.53f;
         [SerializeField] private LayerMask _groundLayers;
+
+        [Header("HORIZONTAL SIDES")]
+        private bool LeftWallHit;
+        [SerializeField] private float _leftCheckLength = 0.53f;
+        [SerializeField] private float _leftCheckRadius = 0.53f;
+        
+        private bool RightWallHit;
+        [SerializeField] private float _rightCheckLength = 0.53f;
+        [SerializeField] private float _rightCheckRadius = 0.53f;
+        
         private Vector3 pos;
         private Vector2 ray;
 
@@ -39,6 +50,18 @@ namespace GamePlay.Entities.Movement
             Debug.DrawRay(pos, Vector3.down * _groundCheckLength, Color.magenta);
         }
         
+        
+        
+        private void CheckLeftWall()
+        {
+            
+        }
+        
+        private void CheckRightWall()
+        {
+            
+        }
+
 
 
         private void OnDrawGizmos()
