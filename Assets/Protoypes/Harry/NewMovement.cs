@@ -6,6 +6,7 @@ namespace Protoypes.Harry
 {
     public class NewMovement : MonoBehaviour
     {
+       
         private SpriteRenderer _renderer;
         private CommandContainer _commandContainer;
         private GroundChecker _groundChecker;
@@ -23,7 +24,7 @@ namespace Protoypes.Harry
         public float _deAcceleration = 60f;
         public float _apexBonus = 2;
         private float _currentHorizontalSpeed;
-        
+        public Animator animator;
         
         [Header("GRAVITY")] 
         public float _fallClamp = -40f;
@@ -104,7 +105,7 @@ namespace Protoypes.Harry
             }
             else 
                 _currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, 0, _deAcceleration * Time.deltaTime);
-
+            animator.SetFloat("Speed", Mathf.Abs(_currentHorizontalSpeed));
         }
 
 
