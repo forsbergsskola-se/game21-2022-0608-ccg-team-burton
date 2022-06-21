@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 5093309766379230621}
   - component: {fileID: 5396622188471341518}
   - component: {fileID: 1608118586}
+  - component: {fileID: 883098421}
   m_Layer: 8
   m_Name: BossPlayer3
   m_TagString: Player
@@ -76,7 +77,7 @@ Transform:
   m_Children:
   - {fileID: 6104149049274938615}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7599863999437365946
 SpriteRenderer:
@@ -151,6 +152,12 @@ MonoBehaviour:
   _groundLayers:
     serializedVersion: 2
     m_Bits: 64
+  LeftWallHit: 0
+  _leftCheckLength: 0.1
+  _leftCheckRadius: 0.3
+  RightWallHit: 0
+  _rightCheckLength: 0.3
+  _rightCheckRadius: 0.3
 --- !u!114 &7599863999437365945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,8 +209,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.628631, y: -0.09813368}
-  m_Size: {x: 4.2154975, y: 9.935083}
+  m_Offset: {x: 0.03939569, y: -0.09813368}
+  m_Size: {x: 5.551552, y: 9.935083}
   m_Direction: 0
 --- !u!114 &6186267417783580407
 MonoBehaviour:
@@ -330,7 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _combat: {fileID: 2597696560619294812}
-  _attackDelaySec: 2
+  _attackDelaySec: 1
 --- !u!114 &5093309766379230621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,3 +476,23 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!95 &883098421
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7599863999437365925}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
