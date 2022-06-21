@@ -1,37 +1,32 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LevelLocked : MonoBehaviour
 {
-    [SerializeField] private bool _locked;
+    [SerializeField] public bool Unlocked;
     public Image LockImage;
-    public GameObject[] Stars;
+    public Image[] Stars;
 
-    private void Update()
-    {
-        UpdateLevelImage();
-    }
+    private void Update() => UpdateLevelImage();  //maybe move later
+  
 
 
     private void UpdateLevelImage()
     {
-        if (!_locked)
+        if (!Unlocked)
         {
-            LockImage.gameObject.SetActive(true);
+            LockImage.enabled = true;
             for (int i = 0; i < Stars.Length; i++)
             {
-                Stars[i].gameObject.SetActive(false);
+                Stars[i].enabled = false;
             }
         }
         else
         {
-            LockImage.gameObject.SetActive(false);
+            LockImage.enabled = false;
             for (int i = 0; i < Stars.Length; i++)
             {
-                Stars[i].gameObject.SetActive(true);
+                Stars[i].enabled = true;
             }
         }
     }
