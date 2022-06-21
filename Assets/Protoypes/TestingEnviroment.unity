@@ -1480,6 +1480,11 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3200031515876604134, guid: 82be7821e5f7d1f409760711644a1ecf,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -104.8999
+      objectReference: {fileID: 0}
     - target: {fileID: 4913927584772791376, guid: 82be7821e5f7d1f409760711644a1ecf,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1672,6 +1677,34 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1608118586, guid: 1e8f445a2c1a88c47ab1ccd57baca50a, type: 3}
+      propertyPath: m_Time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1608118586, guid: 1e8f445a2c1a88c47ab1ccd57baca50a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1608118586, guid: 1e8f445a2c1a88c47ab1ccd57baca50a, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1608118586, guid: 1e8f445a2c1a88c47ab1ccd57baca50a, type: 3}
+      propertyPath: m_MinVertexDistance
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1608118586, guid: 1e8f445a2c1a88c47ab1ccd57baca50a, type: 3}
+      propertyPath: m_Parameters.numCapVertices
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1608118586, guid: 1e8f445a2c1a88c47ab1ccd57baca50a, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1608118586, guid: 1e8f445a2c1a88c47ab1ccd57baca50a, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.08118595
+      objectReference: {fileID: 0}
     - target: {fileID: 5396622188471341529, guid: 1e8f445a2c1a88c47ab1ccd57baca50a,
         type: 3}
       propertyPath: cointText
