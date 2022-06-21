@@ -661,32 +661,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 959156978}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &883098404 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7599863999437365925, guid: 1e8f445a2c1a88c47ab1ccd57baca50a,
-    type: 3}
-  m_PrefabInstance: {fileID: 5396622188128438334}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &883098421
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 883098404}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &937476945
 GameObject:
   m_ObjectHideFlags: 0
@@ -1960,16 +1934,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2960315192915402105, guid: 1e8f445a2c1a88c47ab1ccd57baca50a,
-        type: 3}
-      propertyPath: _attackDelaySec
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5093309766379230621, guid: 1e8f445a2c1a88c47ab1ccd57baca50a,
-        type: 3}
-      propertyPath: _slowMotionTimeScale
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 5396622188471341529, guid: 1e8f445a2c1a88c47ab1ccd57baca50a,
         type: 3}
       propertyPath: cointText
