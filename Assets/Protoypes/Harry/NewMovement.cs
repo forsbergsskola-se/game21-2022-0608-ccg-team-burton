@@ -44,9 +44,15 @@ namespace Protoypes.Harry
         
         
         //Inputs
-        private float WalkCommand;
-        private bool JumpDownCommand;
-        private bool JumpUpCommand;
+        private float _walkCommand;
+        private bool _jumpDownCommand;
+        private bool _jumpUpCommand;
+        
+        //Collisions
+        private bool _isGrounded;
+        private bool _isRoofed;
+        private bool _leftWallHit;
+        private bool _rightWallHit;
 
 
         private void Awake()
@@ -58,17 +64,27 @@ namespace Protoypes.Harry
             _trailRenderer = GetComponent<TrailRenderer>();
         }
 
-        
-        
-        private void Update() => CollectInput();
-        
-        
-        
+
+
+        private void Update() { CollectInput(); CheckCollisions(); }
+
+
+
         private void CollectInput()
         {
-            WalkCommand = _commandContainer.WalkCommand;
-            JumpDownCommand = _commandContainer.JumpDownCommand;
-            JumpUpCommand = _commandContainer.JumpUpCommand;
+            _walkCommand = _commandContainer.WalkCommand;
+            _jumpDownCommand = _commandContainer.JumpDownCommand;
+            _jumpUpCommand = _commandContainer.JumpUpCommand;
+        }
+
+        
+
+        private void CheckCollisions()
+        {
+            _isGrounded = _groundChecker.IsGrounded;
+            _isRoofed = _groundChecker.IsRoofed;
+            _leftWallHit = _groundChecker.LeftWallHit;
+            _rightWallHit = _groundChecker.RightWallHit;
         }
 
 
@@ -90,28 +106,27 @@ namespace Protoypes.Harry
 
         private void CalculateWalking() 
         {
-            if (WalkCommand != 0) 
+            if (_walkCommand != 0) 
             {
                 // Set horizontal move speed
-                _currentHorizontalSpeed += WalkCommand * _acceleration * Time.deltaTime;
+                _currentHorizontalSpeed += _walkCommand * _acceleration * Time.deltaTime;
 
                 // clamped by max frame movement
                 _currentHorizontalSpeed = Mathf.Clamp(_currentHorizontalSpeed, -_moveClamp, _moveClamp);
 
                 // Apply bonus at the apex of a jump
-                var apexBonus = Mathf.Sign(WalkCommand) * _apexBonus * _apexPoint;
+                var apexBonus = Mathf.Sign(_walkCommand) * _apexBonus * _apexPoint;
                 _currentHorizontalSpeed += apexBonus * Time.deltaTime;
             }
             else 
                 _currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, 0, _deAcceleration * Time.deltaTime);
-
         }
 
 
         
         private void CalculateGravity()
         {
-            if (_groundChecker.IsGrounded)
+            if (_isGrounded)
             {
                 if (_currentVerticalSpeed < 0)
                     _currentVerticalSpeed = 0;
@@ -137,7 +152,7 @@ namespace Protoypes.Harry
         
         private void CalculateJumpApex() 
         {
-            if (_groundChecker.IsGrounded)
+            if (_isGrounded)
             {
                 // Gets stronger the closer to the top of the jump
                 _apexPoint = Mathf.InverseLerp(_jumpApexThreshold, 0, Mathf.Abs(_velocity.y));
@@ -149,8 +164,9 @@ namespace Protoypes.Harry
 
         
         
-        private void CalculateJumping() {
-            if (JumpDownCommand && _groundChecker.IsGrounded)
+        private void CalculateJumping() 
+        {
+            if (_jumpDownCommand && _isGrounded)
             {
                 {
                     _currentVerticalSpeed = _jumpHeight;
@@ -159,13 +175,13 @@ namespace Protoypes.Harry
                 }
                 
                 // End the jump early if button released
-                if (!_groundChecker.IsGrounded && JumpUpCommand && !_endedJumpEarly && _velocity.y > 0)
+                if (!_isGrounded && _jumpUpCommand && !_endedJumpEarly && _velocity.y > 0)
                     _endedJumpEarly = true;
             }
-            
-            if (_groundChecker.IsRoofed)
-                if (_currentVerticalSpeed > 0)
-                    _currentVerticalSpeed = 0;
+
+            if (!_isRoofed) return;
+            if (_currentVerticalSpeed > 0)
+                _currentVerticalSpeed = 0;
         }
 
 
