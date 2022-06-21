@@ -8,8 +8,6 @@ public class ItemSO : ScriptableObject
 {
     public string ItemName;
     public Rarity Rarity;
-    public ItemEffectSO itemEffectSo; // Gem data
- 
-        
-  
+    
+    
 }

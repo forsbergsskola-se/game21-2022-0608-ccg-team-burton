@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using Entity.Items;
 using UnityEngine;
 
-public class ItemEffectSO : ScriptableObject
+public class StatModifierSO : ScriptableObject
 {
   
-    //Gem data here
      
 }

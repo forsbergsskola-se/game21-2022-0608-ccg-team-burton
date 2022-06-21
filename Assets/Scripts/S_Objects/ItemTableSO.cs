@@ -62,7 +62,6 @@ public class ItemTableSO : ScriptableObject
             }
             
             go.itemSo.Rarity = tableRarity; // Assign item rarity
-            //Set save parameters here
            
             return go.itemSo;
         }

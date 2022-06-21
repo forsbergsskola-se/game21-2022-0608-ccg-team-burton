@@ -20,8 +20,22 @@ public class LootBoxController : MonoBehaviour
          
          var item = LootBoxSO.PickLootTable().PickItem();
 
-         //TODO: Save items to player inventory         
          
+         
+         //TODO: Save items to player inventory 
+         
+         
+         var createdItem = ItemFactory.CreateItemFromInventory(item);
+
+         if (createdItem is Weapon weapon)
+         {
+            Debug.Log(weapon.ItemName);
+            Debug.Log(weapon.Rarity);
+            Debug.Log(weapon.WeaponDamage);
+            return;
+         }
+
+         Debug.Log($"Not weapon: {createdItem.ItemName}");
          // Debug.Log("--------------------------------------------");
          // Debug.Log(item.name);
          // Debug.Log($"Rarity: {item.Rarity}");
