@@ -60,9 +60,9 @@ public class ItemTableSO : ScriptableObject
             {
                 Debug.LogError("ERROR: No Object set in table slot");
             }
-
+            
             go.itemSo.Rarity = tableRarity; // Assign item rarity
-            go.itemSo.SetItemStats(go.itemSo); //scale stats to set rarity
+            //Set save parameters here
            
             return go.itemSo;
         }
