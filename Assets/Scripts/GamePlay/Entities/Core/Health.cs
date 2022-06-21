@@ -69,7 +69,8 @@ namespace Entity
             }
 
             if (gameObject.CompareTag("Player")){
-                _itemCollector.UpdateCoinText(0);
+                _itemCollector._coinCounter -= _itemCollector._coinCounter;
+                _itemCollector.UpdateCoinText(_itemCollector._coinCounter);
             }
             
         }
