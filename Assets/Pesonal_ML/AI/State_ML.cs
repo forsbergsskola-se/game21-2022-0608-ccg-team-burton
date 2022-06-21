@@ -86,6 +86,10 @@ public class Idle : State_ML
             {
                 NextStateMl = new Patrol(EnemyVarsMl);
             }
+            else
+            {
+                NextStateMl = new Sentry(EnemyVarsMl);
+            }
 
             Stage = EVENT.Exit;
         }
@@ -96,6 +100,22 @@ public class Idle : State_ML
         base.Exit();
         EnemyVarsMl.animator.SetBool(Animator.StringToHash("ExitIdleState"), true);
 
+    }
+}
+
+
+public class Sentry : State_ML
+{
+    public Sentry(EnemyVars_ML enemyVarsMl)
+        : base(enemyVarsMl)
+    {
+        
+    }
+    
+   
+    public override void Update()
+    {
+       
     }
 }
 
@@ -114,7 +134,7 @@ public class Patrol : State_ML
     public override void Enter()
     {
         base.Enter();
-     //   EnemyVarsMl.animator.SetBool(Animator.StringToHash("ExitIdleState"), true);
+    
     }
 
     public override void Update()

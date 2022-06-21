@@ -30,3 +30,41 @@ public class EnemyVars_ML
     public float GetAttackInterval => AttackInterval;
     public EnemyType GetEnemyType => EnemyType;
 }
+
+[Serializable]
+public abstract class EnemyVarsBase
+{
+    [SerializeField] protected float AttackDistance;
+    [SerializeField] protected float MoveSpeed;
+    [SerializeField] protected float AttackInterval;
+    [SerializeField] protected EnemyType EnemyType;
+    
+}
+
+[Serializable]
+public class EnemyVarsTurret : EnemyVarsBase, IEnemyVars
+{
+    public float GetAttackDistance()
+        => AttackDistance;
+
+    public float GetMoveSpeed()
+        => MoveSpeed;
+
+    public float GetAttackInterval()
+        => AttackInterval;
+
+    public EnemyType GetEnemyType()
+        => EnemyType;
+}
+
+public interface IEnemyVars
+{
+    public float GetAttackDistance();
+    public float GetMoveSpeed();
+    public float GetAttackInterval();
+
+    public EnemyType GetEnemyType();
+    
+    
+
+}

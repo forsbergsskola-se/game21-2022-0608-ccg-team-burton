@@ -130,7 +130,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &2699720229185814219
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -174,8 +174,11 @@ MonoBehaviour:
     PursueDistance: 4
     MoveSpeed: 8
     AttackInterval: 2
+    EnemyType: 0
     _eyes: {fileID: 0}
     ArcCollider: {fileID: 0}
+    animator: {fileID: 0}
+    enemyRef: {fileID: 0}
 --- !u!1001 &3771349586278283955
 PrefabInstance:
   m_ObjectHideFlags: 0

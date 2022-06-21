@@ -11,10 +11,13 @@ public class TurretTest : MonoBehaviour
     private float delayMax = 0.5f;
     private bool playerSeen;
     private float rotMod = 2;
+    private bool canMove = true;
+    [SerializeField] private EnemyVarsTurret vars;
     void Start()
     {
         cannonTrans = GetComponent<Transform>();
         shootVec = GetComponentInChildren<Transform>();
+        
     }
 
     // Update is called once per frame
@@ -22,26 +25,29 @@ public class TurretTest : MonoBehaviour
     {
         int layermask = 1 << 8;
      
-        if (cannonTrans.rotation.z * 100 > 10)
+        if (cannonTrans.rotation.z * 100 > 45 && canMove)
         {
             rotMod = -1;
          
         }
-        else if(cannonTrans.rotation.z * 100 < -10)
+        else if(cannonTrans.rotation.z * 100 < -45 && canMove)
         {
             rotMod = 1;
         }
 
         cannonTrans.Rotate(new Vector3(0,0,1), Time.deltaTime * rotMod);
 
-        if (Physics2D.Raycast(shootVec.position, transform.right, 100, layermask))
+        if (Physics2D.Raycast(shootVec.position, transform.right, 30, layermask))
         {
             Debug.DrawRay(shootVec.position, transform.right *100, Color.black);
-            Debug.Log("Player hit");
+            rotMod = 0;
+            canMove = false;
         }
         else
         {
             Debug.DrawRay(shootVec.position, transform.right *100, Color.gray);
+            rotMod = 1;
+            canMove = true;
         }
         
         if (delay > delayMax)
