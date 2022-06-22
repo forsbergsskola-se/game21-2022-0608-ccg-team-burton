@@ -18,6 +18,7 @@ public class SoundMananger : MonoBehaviour
     public void DoThing()
     {
         Debug.Log("DoThing");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Pick up currency");
     }
 
 
