@@ -23,7 +23,7 @@ namespace Protoypes.Harry
         public float _moveClamp = 13; 
         public float _deAcceleration = 60f;
         public float _apexBonus = 2;
-        private float _currentHorizontalSpeed;
+        public float _currentHorizontalSpeed { get; private set; }
         
         
         [Header("GRAVITY")] 
@@ -37,8 +37,8 @@ namespace Protoypes.Harry
         public float _jumpHeight = 30;
         public float _jumpApexThreshold = 10f;
         public float _jumpEndEarlyGravityModifier = 3;
-        
-        private float _currentVerticalSpeed;
+
+        public float _currentVerticalSpeed { get; private set; }
         private float _timeLeftGrounded;
         private bool _endedJumpEarly = true;
         private float _apexPoint;
@@ -50,7 +50,7 @@ namespace Protoypes.Harry
         private bool _jumpUpCommand;
         
         //Collisions
-        private bool _isGrounded;
+        public bool _isGrounded{ get; private set; }
         private bool _isRoofed;
         private bool _leftWallHit;
         private bool _rightWallHit;
@@ -69,9 +69,29 @@ namespace Protoypes.Harry
 
 
         private void Update() { CollectInput(); CheckCollisions(); }
+        
+        
+        
+        private void FixedUpdate() 
+        {
+            _velocity = (_rb.position - _lastPosition) / Time.deltaTime;
+            _lastPosition = _rb.position;
+            
+            CalculateWalking(); 
+            CalculateJumpApex();
+            CalculateGravity(); 
+            CalculateJumping();
+            FallIfWallOrRoofHit();
+            
+            FlipPlayer();
+            if (_animator.runtimeAnimatorController != null)
+                AnimatePlayer();
+            
+            MovePlayer();
+        }
 
 
-
+        
         private void CollectInput()
         {
             _walkCommand = _commandContainer.WalkCommand;
@@ -88,26 +108,8 @@ namespace Protoypes.Harry
             _leftWallHit = _groundChecker.LeftWallHit;
             _rightWallHit = _groundChecker.RightWallHit;
         }
-
-
         
-        private void FixedUpdate() 
-        {
-            _velocity = (_rb.position - _lastPosition) / Time.deltaTime;
-            _lastPosition = _rb.position;
-            
-            CalculateWalking(); 
-            CalculateJumpApex();
-            CalculateGravity(); 
-            CalculateJumping();
-            FallIfWallOrRoofHit();
-            
-            FlipPlayer();
-            AnimatePlayer();
-            MovePlayer();
-        }
-        
-    
+
 
         private void CalculateWalking() 
         {
@@ -201,15 +203,17 @@ namespace Protoypes.Harry
             }
         }
 
+        
 
         private void AnimatePlayer()
         {
-            
-                _animator.SetFloat("Hspeed", Mathf.Abs(_currentHorizontalSpeed));
+            _animator.SetFloat("Hspeed", Mathf.Abs(_currentHorizontalSpeed));
             
             
                 _animator.SetFloat("Vspeed", Mathf.Abs(_currentVerticalSpeed));
             
+            _animator.SetFloat("Hspeed", Mathf.Abs(_currentHorizontalSpeed));
+            _animator.SetFloat("Vspeed", Mathf.Abs(_currentVerticalSpeed));
         }
 
         
