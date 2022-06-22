@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 1900992439680973049}
   - component: {fileID: 3205524570191263572}
   - component: {fileID: 7392914789854599103}
+  - component: {fileID: 127808114}
   m_Layer: 8
   m_Name: Updated Player
   m_TagString: Player
@@ -46,7 +47,7 @@ Transform:
   m_Children:
   - {fileID: 3616007790298403442}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1144139567602091071
 SpriteRenderer:
@@ -86,8 +87,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1606159529
+  m_SortingLayer: 9
   m_SortingOrder: 1
   m_Sprite: {fileID: -1205404705, guid: 923859fea6b2f5647a96336e9d3464af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -317,9 +318,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  stopTime: 0
-  slowTime: 0
-  shake: 0
+  stopTime: 0.2
+  slowTime: 0.2
+  shake: 0.1
 --- !u!70 &1900992439680973049
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -468,6 +469,22 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &127808114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144139567602091040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11cf19b67d4230d4d9242e773668e88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  stopTime: 0
+  slowTime: 0
+  shake: 0
 --- !u!1 &7745896864445978379
 GameObject:
   m_ObjectHideFlags: 0
