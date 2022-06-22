@@ -9,7 +9,6 @@ namespace Protoypes.Harry
         private SpriteRenderer _renderer;
         private CommandContainer _commandContainer;
         private GroundChecker _groundChecker;
-        private TrailRenderer _trailRenderer;
         private Animator _animator;
         
         private Vector2 RawMovement { get; set; }
@@ -36,18 +35,13 @@ namespace Protoypes.Harry
         [Header("JUMPING")] 
         public float _jumpHeight = 30;
         public float _jumpApexThreshold = 10f;
-        public float _jumpEndEarlyGravityModifier = 3;
-
-        public float _currentVerticalSpeed { get; private set; }
-        private float _timeLeftGrounded;
-        private bool _endedJumpEarly = true;
         private float _apexPoint;
+        public float _currentVerticalSpeed { get; private set; }
         
         
         //Inputs
         private float _walkCommand;
         private bool _jumpDownCommand;
-        private bool _jumpUpCommand;
         
         //Collisions
         public bool _isGrounded{ get; private set; }
@@ -63,7 +57,6 @@ namespace Protoypes.Harry
             _groundChecker = GetComponent<GroundChecker>();
             _renderer = GetComponent<SpriteRenderer>();
             _animator = GetComponent<Animator>();
-            _trailRenderer = GetComponent<TrailRenderer>();
         }
 
 
@@ -96,7 +89,6 @@ namespace Protoypes.Harry
         {
             _walkCommand = _commandContainer.WalkCommand;
             _jumpDownCommand = _commandContainer.JumpDownCommand;
-            _jumpUpCommand = _commandContainer.JumpUpCommand;
         }
 
         
@@ -141,13 +133,8 @@ namespace Protoypes.Harry
 
             else
             {
-                // Add downward force while ascending if we ended the jump early
-                var fallSpeed = _endedJumpEarly && _currentVerticalSpeed > 0
-                    ? FallSpeed * _jumpEndEarlyGravityModifier
-                    : FallSpeed;
-
                 // Fall
-                _currentVerticalSpeed -= fallSpeed * Time.deltaTime;
+                _currentVerticalSpeed -= FallSpeed * Time.deltaTime;
 
                 // Clamp
                 if (_currentVerticalSpeed < _fallClamp)
@@ -175,15 +162,8 @@ namespace Protoypes.Harry
         {
             if (_jumpDownCommand && _isGrounded)
             {
-                {
+                if (_currentVerticalSpeed == 0)
                     _currentVerticalSpeed = _jumpHeight;
-                    _endedJumpEarly = false;
-                    _timeLeftGrounded = float.MinValue;
-                }
-                
-                // End the jump early if button released
-                if (!_isGrounded && _jumpUpCommand && !_endedJumpEarly && _velocity.y > 0)
-                    _endedJumpEarly = true;
             }
         }
 
@@ -207,13 +187,8 @@ namespace Protoypes.Harry
 
         private void AnimatePlayer()
         {
-            _animator.SetFloat("Hspeed", Mathf.Abs(_currentHorizontalSpeed));
-            
-            
-                _animator.SetFloat("Vspeed", Mathf.Abs(_currentVerticalSpeed));
-            
-            _animator.SetFloat("Hspeed", Mathf.Abs(_currentHorizontalSpeed));
-            _animator.SetFloat("Vspeed", Mathf.Abs(_currentVerticalSpeed));
+           _animator.SetFloat("Hspeed", Mathf.Abs(_currentHorizontalSpeed));
+           _animator.SetFloat("Vspeed", Mathf.Abs(_currentVerticalSpeed));
         }
 
         
