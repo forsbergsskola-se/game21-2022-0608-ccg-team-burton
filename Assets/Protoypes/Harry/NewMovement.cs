@@ -23,7 +23,7 @@ namespace Protoypes.Harry
         public float _moveClamp = 13; 
         public float _deAcceleration = 60f;
         public float _apexBonus = 2;
-        private float _currentHorizontalSpeed;
+        public float _currentHorizontalSpeed { get; private set; }
         
         
         [Header("GRAVITY")] 
