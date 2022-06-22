@@ -151,6 +151,12 @@ MonoBehaviour:
   _groundLayers:
     serializedVersion: 2
     m_Bits: 64
+  LeftWallHit: 0
+  _leftCheckLength: 0.53
+  _leftCheckRadius: 1
+  RightWallHit: 0
+  _rightCheckLength: 0.53
+  _rightCheckRadius: 1
 --- !u!114 &7599863999437365945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,9 +225,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _acceleration: 90
   _moveClamp: 13
-  _deAcceleration: 120
+  _deAcceleration: 90
   _apexBonus: 2
-  animator: {fileID: 1296411797}
   _fallClamp: -40
   _minFallSpeed: 80
   _maxFallSpeed: 120
