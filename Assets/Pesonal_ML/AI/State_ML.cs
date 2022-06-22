@@ -112,7 +112,6 @@ public class Sentry : State_ML
         
     }
     
-   
     public override void Update()
     {
        
@@ -209,7 +208,7 @@ public class Pursue : State_ML
     public override void Update()
     {
         var distance = Vector3.Distance(EnemyVarsMl.tracerEyes.PlayerTrans.position, EnemyVarsMl.enemyRef.gameObject.transform.position);
-        if (EnemyVarsMl.attackZone.playerInZone)
+        if (EnemyVarsMl.tracerEyes.PlayerInAttackRange)
         {
             NextStateMl = new Attack(EnemyVarsMl);
             Stage = EVENT.Exit;
@@ -266,7 +265,7 @@ public class Attack : State_ML
             }
         }
         
-        if (attackDelay >= EnemyVarsMl.GetAttackInterval && EnemyVarsMl.tracerEyes.PlayerSeen)
+        if (attackDelay >= EnemyVarsMl.GetAttackInterval && EnemyVarsMl.tracerEyes.PlayerInAttackRange)
         { 
             EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("MakeAttack"));
 
@@ -278,7 +277,13 @@ public class Attack : State_ML
             attackDelay -= EnemyVarsMl.GetAttackInterval;
         }
         
-        attackDelay += 1f * Time.deltaTime;
+        if (!EnemyVarsMl.tracerEyes.PlayerInAttackRange)
+        {
+            Stage = EVENT.Exit;
+            NextStateMl = new Pursue(EnemyVarsMl);
+        }
+        
+        attackDelay +=  Time.deltaTime;
     }
 
     private void TurnAround()

@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class TracerEyes : MonoBehaviour
 {
+    [SerializeField] private Transform attackRange;
     private int multiMask;
     private float TraceLength = 2f;
     public GameObject StandingOn { get; private set; }
@@ -17,6 +18,8 @@ public class TracerEyes : MonoBehaviour
     public bool WallSeen { get; private set;}
     public bool GroundSeen { get; private set;}
     public bool PlayerSeen { get; private set;}
+    
+    public bool PlayerInAttackRange { get; private set;}
     
     public Transform PlayerTrans;
     
@@ -53,19 +56,19 @@ public class TracerEyes : MonoBehaviour
         var point3 = origin + size;
         var point4 = origin + new Vector2(size.x, -size.y);
         
-        Debug.DrawLine(point1, point4, Color.red, 30);
+        Debug.DrawLine(point1, point4, Color.red, traceInterval);
         
-        Debug.DrawLine(point2, point3 , Color.red, 30);
+        Debug.DrawLine(point2, point3 , Color.red, traceInterval);
         
-        Debug.DrawLine(point4,point3, Color.red, 30);
+        Debug.DrawLine(point4,point3, Color.red, traceInterval);
         
-        Debug.DrawLine(point1,  point2, Color.red, 30);
+        Debug.DrawLine(point1,  point2, Color.red, traceInterval);
     }
     
     private void OnDrawGizmosSelected()
     {
-        var trans = gameObject.transform;
-        Gizmos.DrawWireCube(trans.position + new Vector3(3.5f ,0) * trans.forward.x, new Vector3(7,3));   
+      //  var trans = gameObject.transform;
+      //  Gizmos.DrawWireCube(trans.position + new Vector3(3.5f ,0) * trans.forward.x, new Vector3(7,3));   
     }
 
     private RaycastHit2D DoARayTrace(Vector2 dir, bool drawTrace )
@@ -78,7 +81,7 @@ public class TracerEyes : MonoBehaviour
     private void CheckForWalls(Vector2 dir)
     {
         var trans = transform;
-        var hit = Physics2D.Raycast(trans.position, dir, TraceLength, multiMask);
+        var hit = Physics2D.Raycast(trans.position, dir, 0.9f, multiMask);
         
         if (!hit)
         {
@@ -88,7 +91,7 @@ public class TracerEyes : MonoBehaviour
         
         if (hit.collider.gameObject.layer == 6)
         {
-            Debug.DrawRay(transform.position, dir *TraceLength, Color.blue, traceInterval);
+            Debug.DrawRay(transform.position, dir *0.9f, Color.blue, traceInterval);
             WallSeen = true;
         }
     }
@@ -104,7 +107,18 @@ public class TracerEyes : MonoBehaviour
             if (r.collider.gameObject.layer == 8)
             {
                 PlayerSeen = true;
-                PlayerTrans = r.collider.transform;
+                if(PlayerTrans == default)
+                    PlayerTrans = r.collider.transform;
+
+                if (Vector2.Distance(r.collider.gameObject.transform.position, attackRange.position) < 1f)
+                {
+                    PlayerInAttackRange = true;
+                }
+                else
+                {
+                    PlayerInAttackRange = false;
+                }
+                
                 Debug.Log("Player spotted");
             }
         }
