@@ -8,9 +8,7 @@ public class LevelLocked : MonoBehaviour
     public Image[] Stars;
 
     private void Update() => UpdateLevelImage();  //maybe move later
-  
-
-
+    
     private void UpdateLevelImage()
     {
         if (!Unlocked)
