@@ -6,8 +6,8 @@ public class LevelLocked : MonoBehaviour
     [SerializeField] public bool Unlocked;
     public Image LockImage;
     public Image[] Stars;
-    
-    
+
+    public Sprite fullStar;
 
     private void Update()
     {
@@ -17,8 +17,8 @@ public class LevelLocked : MonoBehaviour
 
     private void UpdateLevelStatus()
     {
-        int previousLevelNum = int.Parse(gameObject.name) - 1;
-        if (PlayerPrefs.GetInt("Lv" + previousLevelNum.ToString()) > 0)
+        int previousLevelIndex = int.Parse(gameObject.name) - 1;
+        if (PlayerPrefs.GetInt("Lv" + previousLevelIndex) > 0)
         {
             Unlocked = true;
             Debug.Log("Popped off");
@@ -41,6 +41,11 @@ public class LevelLocked : MonoBehaviour
             for (int i = 0; i < Stars.Length; i++)
             {
                 Stars[i].enabled = true;
+            }
+
+            for (int i = 0; i < PlayerPrefs.GetInt("Lv" + gameObject.name); i++)
+            {
+                Stars[i].gameObject.GetComponent<Image>().sprite = fullStar;
             }
         }
     }
