@@ -10,8 +10,14 @@ public class LootBoxController : MonoBehaviour
    public LootBoxSO LootBoxSO;
    private int _numberOfItemToSpawn = 1;
    
-   public ItemPrefab ItemPrefab;
-   
+   public GameObject ItemPrefabGameObject;
+   private ItemPrefab itemPrefab;
+
+   private void Start()
+   {
+      itemPrefab = ItemPrefabGameObject.GetComponent<ItemPrefab>();
+   }
+
    public void OpenBox()
    {
       for (var i = 0; i < _numberOfItemToSpawn; i++)
@@ -21,17 +27,23 @@ public class LootBoxController : MonoBehaviour
          
          
          var itemSo = LootBoxSO.PickLootTable().PickItem();
-         Debug.Log(itemSo.ID);
+         
+         
+        
+         //TODO: Save items to player inventory: Save(itemSo.id, itemRaritySo.Id, GemSo.id) //All strings (designer friendly)
+         // Debug.Log($"Saving: {itemSo.ID},{itemSo.RaritySo.RarityID},{itemSo.GemSo.ID}");
          
          
          
-         //TODO: Save items to player inventory - What to save? ItemSo only as long as it contains gems, names, etc? ID?
-         //TODO: Have SO with SO+ID --> search for SO with help of ID
-         //Save(itemSo.id, itemSo.itemRaritySo.Id, GemId....) //All strings (designer friendly)
          
-         //This represents equipping item (temporary placed here for testing)
-         // ItemPrefab.SetUpItemPrefab(itemSo); 
-       
+         //Not supposed to be here, but example on item factory building an item
+
+         itemPrefab.ItemSo = itemSo;
+         itemPrefab.RaritySo = itemSo.RaritySo;
+         itemPrefab.GemSo = itemSo.GemSo;
+         Instantiate(ItemPrefabGameObject, Vector3.zero, Quaternion.identity);
+
+
       }
 
    }

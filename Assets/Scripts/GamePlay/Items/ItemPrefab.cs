@@ -6,7 +6,29 @@ using UnityEngine;
 
 public class ItemPrefab : MonoBehaviour
 {
-    public void SetUpItemPrefab(ItemSO itemSO)
+    //Values are loaded
+    // public string itemID;
+    // public string RarityID;
+    // public string GemID;
+    
+    //these values hould be gotten from library via loaded string ID
+    public ItemSO ItemSo;
+    public ItemRaritySO RaritySo;
+    public GemSO GemSo;
+    //constructing an item
+    private void Start()
+    {
+        // var itemSo = GetFromLibrary.GetItemFromLibrary(itemID);
+        // var raritySo = GetFromLibrary.GetRarityFromLibrary(RarityID);
+        // var gemSo = GetFromLibrary.GetGemFromLibrary(GemID);
+        
+        SetUpItemPrefab(ItemSo, RaritySo, GemSo);
+        
+        
+        
+    }
+
+    public void SetUpItemPrefab(ItemSO itemSO, ItemRaritySO raritySo, GemSO gemSo)
     {
         //ItemPrefabSetup
         
@@ -18,7 +40,7 @@ public class ItemPrefab : MonoBehaviour
         {
             case WeaponSO weaponSo:
             {
-                var weapon = ItemFactory.CreateItemFromInventory(weaponSo) as Weapon;
+                var weapon = ItemFactory.CreateItemFromInventory(weaponSo, raritySo,gemSo) as Weapon;
 
                 Debug.Log("Weapon Name: " + weapon.ItemName);
                 Debug.Log("Weapon Rarity " + weapon.RaritySo.name);
@@ -26,7 +48,7 @@ public class ItemPrefab : MonoBehaviour
                 GetComponent<SpriteRenderer>().sprite = weaponSo.ItemSprite;
 
                 //ugly
-                if (weaponSo.Gem != null)
+                if (weaponSo.GemSo != null)
                 {
                     switch (weapon.Gem.GemType)
                     {
@@ -46,10 +68,11 @@ public class ItemPrefab : MonoBehaviour
             }
             case ArmorSO armorSo:
             {
-                var armor = ItemFactory.CreateItemFromInventory(armorSo) as Armor;
+                var armor = ItemFactory.CreateItemFromInventory(armorSo,raritySo,gemSo) as Armor;
                 Debug.Log("Armor name: " +armor.ItemName);
                 Debug.Log("Armor Rarity: " +armor.RaritySo.name);
                 Debug.Log("Armor Effect Value (e.g. hp bonus): " +armor.EffectValue);
+                Debug.Log("Armor Gem: "+armor.Gem.name);
                 GetComponent<SpriteRenderer>().sprite = armorSo.ItemSprite;
                 break;
             }

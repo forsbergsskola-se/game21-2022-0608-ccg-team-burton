@@ -1,7 +1,8 @@
-﻿public enum GemType
+﻿//Yes this is ugly. We are in a rush
+public enum GemType
 {
     Knockback,
     Slow,
-    Stun
-    
+    Stun,
+    Empty
 }

@@ -7,5 +7,4 @@ public class ArmorSO : ItemSO
 {
     public float BaseEffect;
     // public float RarityStepValue;
-    public GemSO Gem;
 }

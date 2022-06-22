@@ -12,4 +12,3 @@ public class GemSO : ScriptableObject
     public GemType GemType;
 }
 
-//Yes this is ugly. We are in a rush
