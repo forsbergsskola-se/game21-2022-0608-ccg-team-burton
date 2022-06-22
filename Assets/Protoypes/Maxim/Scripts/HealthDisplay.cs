@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Entity;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,19 +8,10 @@ public class HealthDisplay : MonoBehaviour
     public int health;
     
     public Health playerHealth;
-
     public Image[] hearts;
 
-    void OnEnable()
-    {
-        playerHealth.OnHealthChanged += UpdateHealthUI;
-    }
-
-    private void OnDisable()
-    {
-        playerHealth.OnHealthChanged -= UpdateHealthUI;
-    }
-
+    void OnEnable() => playerHealth.OnHealthChanged += UpdateHealthUI;
+    private void OnDisable() => playerHealth.OnHealthChanged -= UpdateHealthUI;
 
     private void UpdateHealthUI(int health)
     {
