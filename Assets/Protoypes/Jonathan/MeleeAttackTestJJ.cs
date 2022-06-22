@@ -24,6 +24,7 @@ public class MeleeAttackTestJJ : MonoBehaviour
  IEnumerator CallAttack()
  {
   _combat.MeleeAttack();
+  
   _allowAttack = false;
   yield return new WaitForSeconds(_attackDelaySec);
   _allowAttack = true;

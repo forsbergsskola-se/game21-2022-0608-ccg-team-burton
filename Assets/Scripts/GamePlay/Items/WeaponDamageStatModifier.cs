@@ -6,9 +6,8 @@
         if (itemSo is not WeaponSO weaponSo) return;
 
 
-        //TODO: Rarity is an SO with multipliers
-        
-        weapon.WeaponDamage +=  (int) weaponSo.Rarity * weaponSo.WeaponBaseDamage; // scaling with int enum bad??
+        //math here for items stat change (weapons)
+        weapon.WeaponDamage +=  weaponSo.RaritySo.DamageMultiplier * weaponSo.WeaponBaseDamage;
 
     }
 }

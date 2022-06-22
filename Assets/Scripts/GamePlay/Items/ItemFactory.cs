@@ -8,7 +8,7 @@ public static class ItemFactory
         {
             var weapon = new Weapon();
             weapon.ItemName = weaponSo.ItemName;
-            weapon.Rarity = weaponSo.Rarity;
+            weapon.RaritySo = weaponSo.RaritySo;
             weapon.WeaponDamage = weaponSo.WeaponBaseDamage;
             
             var DamageMod = new WeaponDamageStatModifier();
@@ -22,7 +22,7 @@ public static class ItemFactory
         {
             var armor = new Armor();
             armor.ItemName = armorSo.ItemName;
-            armor.Rarity = armorSo.Rarity;
+            armor.RaritySo = armorSo.RaritySo;
             armor.EffectValue = armorSo.BaseEffect;
             var EffectMod = new ArmorEffectModification();
             EffectMod.ApplyStatChange(armor,armorSo);
