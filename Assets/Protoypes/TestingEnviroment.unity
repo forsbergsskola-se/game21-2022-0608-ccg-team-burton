@@ -135,6 +135,28 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4345143183420323102}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &127808113 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1144139567602091040, guid: 123d0462d05bbb541858e1b9aeb1a388,
+    type: 3}
+  m_PrefabInstance: {fileID: 3205524569464581819}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &127808114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127808113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11cf19b67d4230d4d9242e773668e88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  stopTime: 0
+  slowTime: 0
+  shake: 0
 --- !u!1 &169866696
 GameObject:
   m_ObjectHideFlags: 0
@@ -2442,6 +2464,26 @@ PrefabInstance:
       propertyPath: hearts.Array.data[2]
       value: 
       objectReference: {fileID: 7872426394030782515}
+    - target: {fileID: 7747099678071028065, guid: 123d0462d05bbb541858e1b9aeb1a388,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 8307004188780847137}
+    - target: {fileID: 7747099678071028065, guid: 123d0462d05bbb541858e1b9aeb1a388,
+        type: 3}
+      propertyPath: shake
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747099678071028065, guid: 123d0462d05bbb541858e1b9aeb1a388,
+        type: 3}
+      propertyPath: slowTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747099678071028065, guid: 123d0462d05bbb541858e1b9aeb1a388,
+        type: 3}
+      propertyPath: stopTime
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 123d0462d05bbb541858e1b9aeb1a388, type: 3}
