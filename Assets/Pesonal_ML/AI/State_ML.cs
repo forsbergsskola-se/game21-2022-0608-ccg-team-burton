@@ -112,7 +112,6 @@ public class Sentry : State_ML
         
     }
     
-   
     public override void Update()
     {
        
@@ -124,6 +123,10 @@ public class Patrol : State_ML
     private int currentIndex = 0;
     private bool incDec = true;
     private float delay = 1;
+    private bool _wallSpotted;
+    private Bounds _bounds;
+    
+    
     public Patrol(EnemyVars_ML enemyVarsMl)
         : base(enemyVarsMl)
     {
@@ -134,20 +137,23 @@ public class Patrol : State_ML
     public override void Enter()
     {
         base.Enter();
-    
+       _bounds = EnemyVarsMl.enemyRef.gameObject.GetComponent<BoxCollider2D>().bounds;
+     //  Debug.Log($"Center of bounds is: {_bounds.center}");
+     //  Debug.Log($"Max of bounds is: {_bounds.max}");
+
     }
 
     public override void Update()
     {
         
-        if (EnemyVarsMl._eyes.PlayerSeen)
+        if (EnemyVarsMl.tracerEyes.PlayerSeen)
         {
             Stage = EVENT.Exit;
            
             NextStateMl = new Pursue(EnemyVarsMl);
         }
 
-        else if (!EnemyVarsMl._eyes.GroundSeen)
+        else if (!EnemyVarsMl.tracerEyes.GroundSeen)
         {
             Stage = EVENT.Exit;
             Debug.Log("Ground not seen");
@@ -155,15 +161,18 @@ public class Patrol : State_ML
             NextStateMl = new Jump(EnemyVarsMl);
         }
         
-        else if (EnemyVarsMl.WallChecker.WallSeen)
+        
+        else if (EnemyVarsMl.tracerEyes.WallSeen)
         {
+            _wallSpotted = true;
             TurnAround();
+        }
+
+        if (_wallSpotted)
+        {
+            
         }
         
-        else if (EnemyVarsMl._eyes.turnBack)
-        {
-            TurnAround();
-        }
         
         if (delay < 0)
         {
@@ -175,7 +184,6 @@ public class Patrol : State_ML
     
     private void TurnAround()
     {
-        EnemyVarsMl._eyes.turnBack = false;
         Stage = EVENT.Exit;
         NextStateMl = new Idle(EnemyVarsMl);
         EnemyVarsMl.enemyRef.transform.Rotate(Vector3.up, 180);
@@ -199,8 +207,8 @@ public class Pursue : State_ML
 
     public override void Update()
     {
-        var distance = Vector3.Distance(EnemyVarsMl._eyes.PlayerTrans.position, EnemyVarsMl.enemyRef.gameObject.transform.position);
-        if (EnemyVarsMl.attackZone.playerInZone)
+        var distance = Vector3.Distance(EnemyVarsMl.tracerEyes.PlayerTrans.position, EnemyVarsMl.enemyRef.gameObject.transform.position);
+        if (EnemyVarsMl.tracerEyes.PlayerInAttackRange)
         {
             NextStateMl = new Attack(EnemyVarsMl);
             Stage = EVENT.Exit;
@@ -242,9 +250,9 @@ public class Attack : State_ML
 
     public override void Update()
     {
-        if (!EnemyVarsMl._eyes.PlayerSeen)
+        if (!EnemyVarsMl.tracerEyes.PlayerSeen)
         {
-            var dotProd = Vector3.Dot(EnemyVarsMl.enemyRef.transform.right, EnemyVarsMl._eyes.PlayerTrans.position);
+            var dotProd = Vector3.Dot(EnemyVarsMl.enemyRef.transform.right, EnemyVarsMl.tracerEyes.PlayerTrans.position);
             
             if (dotProd < 1)
             {
@@ -257,7 +265,7 @@ public class Attack : State_ML
             }
         }
         
-        if (attackDelay >= EnemyVarsMl.GetAttackInterval && EnemyVarsMl._eyes.PlayerSeen)
+        if (attackDelay >= EnemyVarsMl.GetAttackInterval && EnemyVarsMl.tracerEyes.PlayerInAttackRange)
         { 
             EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("MakeAttack"));
 
@@ -269,7 +277,13 @@ public class Attack : State_ML
             attackDelay -= EnemyVarsMl.GetAttackInterval;
         }
         
-        attackDelay += 1f * Time.deltaTime;
+        if (!EnemyVarsMl.tracerEyes.PlayerInAttackRange)
+        {
+            Stage = EVENT.Exit;
+            NextStateMl = new Pursue(EnemyVarsMl);
+        }
+        
+        attackDelay +=  Time.deltaTime;
     }
 
     private void TurnAround()
@@ -292,6 +306,7 @@ public class Jump : State_ML
     private bool start;
     private float jumpDelay = 2;
     private Rigidbody2D body;
+    private bool tileSpotted;
 
     public Jump(EnemyVars_ML enemyVarsMl) 
         : base(enemyVarsMl)
@@ -309,39 +324,44 @@ public class Jump : State_ML
     
     public override void Update()
     {
-        if (!EnemyVarsMl.ArcCollider.TileSpotted && !start)
+        if (!tileSpotted)
         {
             EnemyVarsMl.ArcCollider.CalculatePoints();
+            tileSpotted = EnemyVarsMl.ArcCollider.TileSpotted;
         }
-        
-        else if (EnemyVarsMl.ArcCollider.GetAngle > maxAngle && !start)
+
+        if (tileSpotted)
         {
-            BackToPatrol();
-        }
-        else if (EnemyVarsMl.ArcCollider.SameTileSpotted)
-        {
-            BackToPatrol();
-        }
-        
-        else if (EnemyVarsMl.ArcCollider.TileHeightDifference > 4)
-        {
-            BackToPatrol();
-        }
-        
-        else if(EnemyVarsMl.ArcCollider.TileSpotted && !EnemyVarsMl.ArcCollider.SameTileSpotted)
-        {
-            jumpDelay -= Time.deltaTime * 2f;
-            
-            
-            if (jumpDelay < 0)
+            Debug.Log("tile spotted");
+            if (EnemyVarsMl.ArcCollider.NextTile == EnemyVarsMl.tracerEyes.StandingOn)
             {
-                MakeJump();
+                Debug.Log("same tile");
+                BackToPatrol();
             }
+            
+            else if (EnemyVarsMl.ArcCollider.TileHeightDifference > 4)
+            {
+                Debug.Log("too high");
+                BackToPatrol();
+            }
+            
+            else
+            {
+                jumpDelay -= Time.deltaTime * 2f;
+                MakeJump();    
+            }
+        }
+        
+        else if (EnemyVarsMl.ArcCollider.GetAngle > maxAngle)
+        {
+            Debug.Log("angle too high");
+            BackToPatrol();
         }
     }
 
     public void MakeJump()
     {
+        Debug.Log("Making jump");
         EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("Jump"));
         var forward = EnemyVarsMl.enemyRef.gameObject.transform.right;
         var impulse2 = EnemyVarsMl.ArcCollider.GetImpulse();
@@ -368,6 +388,7 @@ public class Jump : State_ML
     
     private void BackToPatrol()
     {
+        Debug.Log("Can't jump, back to patrol");
         EnemyVarsMl.enemyRef.transform.Rotate(Vector3.up, 180);
         EnemyVarsMl.ArcCollider.ResetCollider();
         NextStateMl = new Idle(EnemyVarsMl);

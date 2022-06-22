@@ -11,6 +11,7 @@ public class ArcCollider : MonoBehaviour
     [SerializeField] private float gravity = 9.8f;
     [SerializeField] private float velocity = 9.8f;
     [SerializeField] private float angle = 60f;
+    private float resetAngle;
     public bool TileSpotted { get; private set; }
     public bool SameTileSpotted { get; private set; }
     public bool announceTileSpotted;
@@ -26,14 +27,16 @@ public class ArcCollider : MonoBehaviour
 
     void Start()
     {
+        resetAngle = angle;
         currentDeg = angle;
         collider = GetComponent<EdgeCollider2D>();
     }
     
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Grounded"))
+        if (col.gameObject.layer == 6)
         {
+            Debug.Log("new tile spotted");
             TileSpotted = true;
 
             if (col.gameObject != NextTile)
@@ -51,6 +54,7 @@ public class ArcCollider : MonoBehaviour
             }
             else
             {
+                Debug.Log("Same tile spotted");
                 SameTileSpotted = true;
             }
             
@@ -104,7 +108,7 @@ public class ArcCollider : MonoBehaviour
 
     public void ResetCollider()
     {
-        angle = 60;
+        angle = resetAngle;
         collider.Reset();
         collider.isTrigger = true;
         collider.gameObject.transform.localScale = new Vector3(1, 1, 1);
