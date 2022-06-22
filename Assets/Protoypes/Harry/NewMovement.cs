@@ -204,11 +204,12 @@ namespace Protoypes.Harry
 
         private void AnimatePlayer()
         {
-            if (_currentHorizontalSpeed > 0)
+            
                 _animator.SetFloat("Hspeed", Mathf.Abs(_currentHorizontalSpeed));
             
-            if (_currentVerticalSpeed > 0)
+            
                 _animator.SetFloat("Vspeed", Mathf.Abs(_currentVerticalSpeed));
+            
         }
 
         
