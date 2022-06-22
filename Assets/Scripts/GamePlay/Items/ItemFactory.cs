@@ -11,8 +11,19 @@ public static class ItemFactory
             weapon.RaritySo = weaponSo.RaritySo;
             weapon.WeaponDamage = weaponSo.WeaponBaseDamage;
             
+            
+            //Ugly
+            //GEM addition:
+            if (weaponSo.Gem != null)
+            {
+             
+                weapon.Gem = weaponSo.Gem;
+                weapon.GemActive = weaponSo.Gem.GemActive;
+   
+            }
             var DamageMod = new WeaponDamageStatModifier();
-            DamageMod.ApplyStatChange(weapon, weaponSo);  
+            DamageMod.ApplyStatChange(weapon, weaponSo);
+
             
             
             return weapon;
@@ -24,6 +35,7 @@ public static class ItemFactory
             armor.ItemName = armorSo.ItemName;
             armor.RaritySo = armorSo.RaritySo;
             armor.EffectValue = armorSo.BaseEffect;
+            
             var EffectMod = new ArmorEffectModification();
             EffectMod.ApplyStatChange(armor,armorSo);
 

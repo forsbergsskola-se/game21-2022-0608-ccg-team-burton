@@ -23,10 +23,9 @@ public class LootBoxController : MonoBehaviour
          var itemSo = LootBoxSO.PickLootTable().PickItem();
 
          
-         
          //TODO: Save items to player inventory - What to save? ItemSo only as long as it contains gems, names, etc? ID?
          //TODO: Have SO with SO+ID --> search for SO with help of ID
-         //Save(itemSo.id, itemSo.itemRaritySo.Id, GemId....) //All strings or ints?
+         //Save(itemSo.id, itemSo.itemRaritySo.Id, GemId....) //All strings or ints? (om inte loot med gem --> gem = null)
          
          //This represents equipping item (temporary placed here for testing)
          ItemPrefab.SetUpItemPrefab(itemSo);
