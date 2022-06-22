@@ -9,7 +9,7 @@ public class LootBoxController : MonoBehaviour
 {
    public LootBoxSO LootBoxSO;
    private int _numberOfItemToSpawn = 1;
-
+   
    public ItemPrefab ItemPrefab;
    
    public void OpenBox()
@@ -21,14 +21,14 @@ public class LootBoxController : MonoBehaviour
          
          
          var itemSo = LootBoxSO.PickLootTable().PickItem();
-
+         Debug.Log(itemSo.ID);
          
          //TODO: Save items to player inventory - What to save? ItemSo only as long as it contains gems, names, etc? ID?
          //TODO: Have SO with SO+ID --> search for SO with help of ID
-         //Save(itemSo.id, itemSo.itemRaritySo.Id, GemId....) //All strings or ints? (om inte loot med gem --> gem = null)
+         //Save(itemSo.id, itemSo.itemRaritySo.Id, GemId....) //All strings (designer friendly)
          
          //This represents equipping item (temporary placed here for testing)
-         ItemPrefab.SetUpItemPrefab(itemSo);
+         // ItemPrefab.SetUpItemPrefab(itemSo); 
        
       }
 

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Slowing : MonoBehaviour
+public class SlowingGem : MonoBehaviour
 {
     private void Start()
     {
