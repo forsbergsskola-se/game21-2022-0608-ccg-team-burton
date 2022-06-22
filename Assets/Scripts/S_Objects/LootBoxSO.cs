@@ -51,6 +51,7 @@ public class LootBoxSO : ScriptableObject
         }
     }
 
+    
     public ItemTableSO PickLootTable()
     {
         _pickedNumber = Random.Range(0, TotalProbabilityWeight);

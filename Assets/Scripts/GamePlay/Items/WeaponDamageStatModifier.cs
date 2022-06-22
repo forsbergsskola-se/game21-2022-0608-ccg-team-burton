@@ -8,7 +8,7 @@
 
         //TODO: Rarity is an SO with multipliers
         
-        weapon.WeaponDamage +=  (int) weaponSo.Rarity * weaponSo.WeaponBaseDamage; // scaling with int enum bad??
+        weapon.WeaponDamage +=  weaponSo.RaritySo.DamageMultiplier * weaponSo.WeaponBaseDamage; // scaling with int enum bad??
 
     }
 }

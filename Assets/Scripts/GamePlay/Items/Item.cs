@@ -3,6 +3,6 @@
 public class Item
 {
     public string ItemName;
-    public Rarity Rarity;
+    public ItemRaritySO RaritySo;
 
 }

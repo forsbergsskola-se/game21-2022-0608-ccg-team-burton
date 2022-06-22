@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 [CreateAssetMenu(fileName = "ItemTable", menuName = "Item System/ItemTable")]
 public class ItemTableSO : ScriptableObject
 {
-    public Rarity tableRarity;
+    public ItemRaritySO tableRarity;
   public float TotalProbabilityWeight;
     [Space]
     public List<ItemData> ItemsList;
@@ -54,16 +54,16 @@ public class ItemTableSO : ScriptableObject
     public ItemSO PickItem()
     {
         _pickedNumber = Random.Range(0, TotalProbabilityWeight);
-        foreach (var go in ItemsList.Where(go => _pickedNumber > go.ProbabilityRangeFrom && _pickedNumber < go.ProbabilityRangeTo))
+        foreach (var itemData in ItemsList.Where(go => _pickedNumber > go.ProbabilityRangeFrom && _pickedNumber < go.ProbabilityRangeTo))
         {
-            if (go == null)
+            if (itemData == null)
             {
                 Debug.LogError("ERROR: No Object set in table slot");
             }
             
-            go.itemSo.Rarity = tableRarity; // Assign item rarity
+            itemData.itemSo.RaritySo = tableRarity; // Assign item rarity
            
-            return go.itemSo;
+            return itemData.itemSo;
         }
         Debug.LogError("GO couldn't be picked... Be sure that all of your active GameObject Tables (GO-class)  have assigned at least one GO! Returning NULL");
         //reset picked number in last method dependent on it (in this case, pick GO)

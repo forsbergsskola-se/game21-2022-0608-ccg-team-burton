@@ -17,8 +17,8 @@ public class ItemPrefab : MonoBehaviour
             var weapon = ItemFactory.CreateItemFromInventory(weaponSo) as Weapon;
             
             Debug.Log("Weapon Name: "+weapon.ItemName);
-            Debug.Log("Wewapon Rarity" +weapon.Rarity);
-            Debug.Log("Weapon damage" +weapon.WeaponDamage);
+            Debug.Log("Wewpon Rarity " +weapon.RaritySo.name);
+            Debug.Log("Weapon damage " +weapon.WeaponDamage);
             GetComponent<SpriteRenderer>().sprite = weaponSo.ItemSprite;
             //addcomponenet<GEM>??? --> issue if not monobehaviour I guess?
             
@@ -28,8 +28,8 @@ public class ItemPrefab : MonoBehaviour
         {
             var armor = ItemFactory.CreateItemFromInventory(armorSo) as Armor;
             Debug.Log("Armor name: "+armor.ItemName);
-            Debug.Log("Armor Rarity: " +armor.Rarity);
-            Debug.Log("Armor Effect VAlue (e.g. hp bonus): " +armor.EffectValue);
+            Debug.Log("Armor Rarity: " +armor.RaritySo.name);
+            Debug.Log("Armor Effect Value (e.g. hp bonus): " +armor.EffectValue);
             GetComponent<SpriteRenderer>().sprite = armorSo.ItemSprite;
         }
     }
