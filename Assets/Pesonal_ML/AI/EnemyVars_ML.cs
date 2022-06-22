@@ -19,13 +19,14 @@ public class EnemyVars_ML
     [SerializeField] private float AttackInterval;
     [SerializeField] EnemyType EnemyType;
     
-    [HideInInspector] public WallChecker WallChecker;
-    [HideInInspector] public Enemy_Eyes _eyes;
+  //  [HideInInspector] public WallChecker WallChecker;
+   
     [HideInInspector] public ArcCollider ArcCollider;
     [HideInInspector] public Animator animator;
     [HideInInspector] public GameObject enemyRef;
     [HideInInspector] public AttackZone attackZone;
     [HideInInspector] public Transform firePoint;
+    [HideInInspector] public TracerEyes tracerEyes;
 
     public float GetAttackDistance => AttackDistance;
     public float GetPursueDistance => PursueDistance;
