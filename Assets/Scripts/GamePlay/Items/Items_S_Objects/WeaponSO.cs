@@ -7,7 +7,7 @@ using UnityEngine;
 public class WeaponSO : ItemSO
 {
     public float WeaponBaseDamage;
-    [Tooltip("Increase from common level, e.g. a Rare would be a modifier of 3*RarityLevelModificationStep")]
-    public float RarityLevelModificationStep;
+    // [Tooltip("Increase from common level, e.g. a Rare would be a modifier of 3*RarityLevelModificationStep")]
+    // public float RarityStepValue;
     
 }

@@ -6,7 +6,8 @@
         {
             if (itemSo is ArmorSO armorSo)
             {
-                armor.EffectValue += armorSo.RarityLevelEffectIncrease * armorSo.RaritySo.EffectMultiplier;
+                //math here for items stat change (armor)
+                armor.EffectValue += armorSo.BaseEffect * armorSo.RaritySo.EffectMultiplier;
             }
         }
     }
