@@ -9,6 +9,7 @@ public class ItemSO : ScriptableObject
     public string ItemName;
     public Sprite ItemSprite;
 
-    [HideInInspector]
+    
+    // [HideInInspector] //TODO: Outside of this SO. Would be a field for the item which is set somewhere
     public Rarity Rarity;
 }

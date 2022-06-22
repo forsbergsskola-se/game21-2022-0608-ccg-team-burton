@@ -10,5 +10,4 @@ public class WeaponSO : ItemSO
     [Tooltip("Increase from common level, e.g. a Rare would be a modifier of 3*RarityLevelModificationStep")]
     public float RarityLevelModificationStep;
     
-    //GEMSLOT FOR A WEAPONEFFECT LIKE KNOCKBACK.
 }
