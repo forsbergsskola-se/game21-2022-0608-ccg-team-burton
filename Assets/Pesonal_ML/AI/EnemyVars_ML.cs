@@ -19,6 +19,7 @@ public class EnemyVars_ML
     [SerializeField] private float AttackInterval;
     [SerializeField] EnemyType EnemyType;
     
+    [HideInInspector] public WallChecker WallChecker;
     [HideInInspector] public Enemy_Eyes _eyes;
     [HideInInspector] public ArcCollider ArcCollider;
     [HideInInspector] public Animator animator;

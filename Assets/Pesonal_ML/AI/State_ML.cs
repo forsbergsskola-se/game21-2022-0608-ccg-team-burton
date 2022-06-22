@@ -154,13 +154,31 @@ public class Patrol : State_ML
            
             NextStateMl = new Jump(EnemyVarsMl);
         }
-
+        
+        else if (EnemyVarsMl.WallChecker.WallSeen)
+        {
+            TurnAround();
+        }
+        
+        else if (EnemyVarsMl._eyes.turnBack)
+        {
+            TurnAround();
+        }
+        
         if (delay < 0)
         {
             SimpleMove();
         }
 
         delay -= Time.deltaTime * 2f;
+    }
+    
+    private void TurnAround()
+    {
+        EnemyVarsMl._eyes.turnBack = false;
+        Stage = EVENT.Exit;
+        NextStateMl = new Idle(EnemyVarsMl);
+        EnemyVarsMl.enemyRef.transform.Rotate(Vector3.up, 180);
     }
     
     private void SimpleMove()
@@ -245,7 +263,7 @@ public class Attack : State_ML
 
             if (EnemyVarsMl.GetEnemyType == EnemyType.Ranged)
             {
-                EffectsPool.RequestEffectStatic(EffectType.FireBall, EnemyVarsMl.firePoint.position, EnemyVarsMl.enemyRef.transform.right);
+                AssetPool.RequestEffectStatic(EffectType.FireBall, EnemyVarsMl.firePoint.position, EnemyVarsMl.enemyRef.transform.right);
             }
 
             attackDelay -= EnemyVarsMl.GetAttackInterval;

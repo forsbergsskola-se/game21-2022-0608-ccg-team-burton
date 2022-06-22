@@ -37,6 +37,7 @@ public class Combat : MonoBehaviour
         enemy.GetComponent<IDamageable>().ModifyHealth(-_meleeDamage); // TODO: Implement damage of weapon here
         Debug.Log($"{enemy.name} Got Hit!");
         enemy.GetComponent<Knockback>()?.DoKnockBack(enemy.GetComponent<Rigidbody2D>(), attackPoint.position, _knockbackMultiplier); // TODO: Implement KnockbackMult of weapon here
+        GetComponent<HitEffect>().TimeStop();
     }
 
     private void OnDrawGizmosSelected()

@@ -11,11 +11,14 @@ public class Enemy_AI : MonoBehaviour
     [SerializeField] private EnemyVars_ML EnemyVars;
     private ArcCollider _arcCollider;
 
+    public bool turnBack;
+
     private void Start()
     {
         EnemyVars._eyes = GetComponentInChildren<Enemy_Eyes>();
         EnemyVars.attackZone = GetComponentInChildren<AttackZone>();
         EnemyVars.firePoint = GetComponentsInChildren<Transform>()[^1];
+        EnemyVars.WallChecker = GetComponentInChildren<WallChecker>();
         EnemyVars.animator = GetComponent<Animator>();
         EnemyVars.enemyRef = gameObject;
         EnemyVars.ArcCollider = GetComponentInChildren<ArcCollider>();
