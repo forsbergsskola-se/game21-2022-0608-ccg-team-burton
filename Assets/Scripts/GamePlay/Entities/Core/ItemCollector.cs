@@ -13,6 +13,7 @@ public class ItemCollector : MonoBehaviour{
     void OnTriggerEnter2D(Collider2D col){
         if (col.gameObject.CompareTag("Coin")){
             Destroy(col.gameObject);
+            //TODO: Implement coin sound here
             _coinCounter +=  cointValue;
             UpdateCoinText(_coinCounter);
         }
