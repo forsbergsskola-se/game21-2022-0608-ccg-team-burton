@@ -6,8 +6,24 @@ public class LevelLocked : MonoBehaviour
     [SerializeField] public bool Unlocked;
     public Image LockImage;
     public Image[] Stars;
+    
+    
 
-    private void Update() => UpdateLevelImage();  //maybe move later
+    private void Update()
+    {
+        UpdateLevelImage(); 
+        UpdateLevelStatus();
+    } 
+
+    private void UpdateLevelStatus()
+    {
+        int previousLevelNum = int.Parse(gameObject.name) - 1;
+        if (PlayerPrefs.GetInt("Lv" + previousLevelNum.ToString()) > 0)
+        {
+            Unlocked = true;
+            Debug.Log("Popped off");
+        }
+    }
     
     private void UpdateLevelImage()
     {
