@@ -48,7 +48,7 @@ public class TracerEyes : MonoBehaviour
         }
     }
 
-    private void DrawCubeRuntime(Vector2 size, Vector2 origin)
+    private void DrawBoxRuntime(Vector2 size, Vector2 origin)
     {
         size /= 2;
         var point1 = origin - size;
@@ -100,7 +100,7 @@ public class TracerEyes : MonoBehaviour
     {
         var trans = transform;  
         var result =  Physics2D.BoxCastAll(trans.position + new Vector3(3.5f * trans.forward.x, 0), new Vector2(7, 2), 0, trans.forward);
-        DrawCubeRuntime(new Vector2(7, 2), trans.position + new Vector3(7 * trans.forward.x, 0));
+        DrawBoxRuntime(new Vector2(7, 2), trans.position + new Vector3(7 * trans.forward.x, 0));
         
         foreach (var r in result)
         {
