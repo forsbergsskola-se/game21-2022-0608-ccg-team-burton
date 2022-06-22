@@ -12,7 +12,6 @@ namespace Entity
         public Action<int> OnHealthChanged;
         Coins _coins;
         ItemCollector _itemCollector;
-        SlowMotionEffect _slowMotionEffect;
         [SerializeField]
         private int _health;
         [SerializeField]
@@ -32,7 +31,6 @@ namespace Entity
         void Awake(){
             _coins = GetComponent<Coins>();
             _itemCollector = FindObjectOfType<ItemCollector>();
-            _slowMotionEffect = GetComponent<SlowMotionEffect>();
         }
 
         private void Start()
