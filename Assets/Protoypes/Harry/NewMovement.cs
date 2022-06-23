@@ -160,6 +160,8 @@ namespace Protoypes.Harry
         
         private void CalculateJumping() 
         {
+            if (!_isGrounded) return;
+            
             if (_jumpDownCommand && _isGrounded)
                 _currentVerticalSpeed = _jumpHeight;
         }
@@ -173,7 +175,7 @@ namespace Protoypes.Harry
                 if (!_isRoofed) // if hit roof fall
                     return;
 
-                if (_isGrounded && (_leftWallHit || _rightWallHit))
+                if (!_isGrounded && (_leftWallHit || _rightWallHit))
                     return; // if hit left or right wall fall
  
                 _currentVerticalSpeed = 0; // shared fall logic
