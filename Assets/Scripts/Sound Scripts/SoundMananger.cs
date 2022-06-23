@@ -82,12 +82,6 @@ public class SoundMananger : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Info-messages/Win");
     }
 
-    public void OpenCrate()
-    {
-        Debug.Log("OpenCrate");
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Meta Game/Lootbox/Open Gacha crate Type 1");
-    }
-
     public void SelectButton()
     {
         Debug.Log("SelectButton");
@@ -140,6 +134,18 @@ public class SoundMananger : MonoBehaviour
     {
         Debug.Log("Attack3");
         FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/Attack type 3");
+    }
+
+    public void OpenCrate()
+    {
+        Debug.Log("OpenCrate");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Meta Game/Lootbox/Open Gacha crate Type 1");
+    }
+
+    public void OpenCrate2()
+    {
+        Debug.Log("OpenCrate2");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Meta Game/Lootbox/Open Gacha crate Type 2");
     }
 }  
 
