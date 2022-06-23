@@ -67,7 +67,7 @@ namespace Protoypes.Harry
         
         private void FixedUpdate() 
         {
-            _velocity = (_rb.position - _lastPosition) / Time.deltaTime;
+            _velocity = (_rb.position - _lastPosition) / Time.fixedDeltaTime;
             _lastPosition = _rb.position;
             
             CalculateWalking(); 
@@ -108,17 +108,17 @@ namespace Protoypes.Harry
             if (_walkCommand != 0) 
             {
                 // Set horizontal move speed
-                _currentHorizontalSpeed += _walkCommand * _acceleration * Time.deltaTime;
+                _currentHorizontalSpeed += _walkCommand * _acceleration * Time.fixedDeltaTime;
 
                 // clamped by max frame movement
                 _currentHorizontalSpeed = Mathf.Clamp(_currentHorizontalSpeed, -_moveClamp, _moveClamp);
 
                 // Apply bonus at the apex of a jump
                 var apexBonus = Mathf.Sign(_walkCommand) * _apexBonus * _apexPoint;
-                _currentHorizontalSpeed += apexBonus * Time.deltaTime;
+                _currentHorizontalSpeed += apexBonus * Time.fixedDeltaTime;
             }
             else 
-                _currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, 0, _deAcceleration * Time.deltaTime);
+                _currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, 0, _deAcceleration * Time.fixedDeltaTime);
         }
 
 
@@ -134,7 +134,7 @@ namespace Protoypes.Harry
             else
             {
                 // Fall
-                _currentVerticalSpeed -= FallSpeed * Time.deltaTime;
+                _currentVerticalSpeed -= FallSpeed * Time.fixedDeltaTime;
 
                 // Clamp
                 if (_currentVerticalSpeed < _fallClamp)
@@ -194,7 +194,7 @@ namespace Protoypes.Harry
 
         private void MovePlayer()
         {
-           RawMovement = new Vector2(_currentHorizontalSpeed, _currentVerticalSpeed) * Time.deltaTime; // Used externally
+           RawMovement = new Vector2(_currentHorizontalSpeed, _currentVerticalSpeed) * Time.fixedDeltaTime; // Used externally
            _rb.MovePosition(_rb.position + RawMovement);
         }
 
