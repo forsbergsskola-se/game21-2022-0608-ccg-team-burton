@@ -31,6 +31,7 @@ public static class ItemFactory
         if (itemSo is ArmorSO armorSo)
         {
             var armor = new Armor();
+            armor.ItemSprite = armorSo.ItemSprite;
             armor.ItemName = armorSo.ItemName;
             armor.RaritySo = itemRaritySo;
             armor.EffectValue = armorSo.BaseEffect;
