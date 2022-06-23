@@ -6,7 +6,7 @@ using UnityEngine;
 public class ItemRaritySO : ScriptableObject
 {
     [Tooltip("Example: rarity.common")]
-    public string RarityID;
+    public string ID;
 
     public float DamageMultiplier;
     public float EffectMultiplier;
