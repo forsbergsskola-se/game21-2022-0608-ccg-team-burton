@@ -149,7 +149,7 @@ public class Patrol : State_ML
         if (EnemyVarsMl.tracerEyes.PlayerSeen)
         {
             Stage = EVENT.Exit;
-           
+            Debug.Log("Player is seen");
             NextStateMl = new Pursue(EnemyVarsMl);
         }
 
@@ -210,12 +210,21 @@ public class Pursue : State_ML
         var distance = Vector3.Distance(EnemyVarsMl.tracerEyes.PlayerTrans.position, EnemyVarsMl.enemyRef.gameObject.transform.position);
         if (EnemyVarsMl.tracerEyes.PlayerInAttackRange)
         {
+            Debug.Log("Player in attack range");
             NextStateMl = new Attack(EnemyVarsMl);
             Stage = EVENT.Exit;
         }
         
-        else if (distance > EnemyVarsMl.GetAttackDistance + 6)
+        else if (distance > EnemyVarsMl.GetAttackDistance + 20)
         {
+            Debug.Log("Player out of attack range");
+            NextStateMl = new Patrol(EnemyVarsMl);
+            Stage = EVENT.Exit;
+        }
+
+        else if(EnemyVarsMl.tracerEyes.GetPlayerHealth() <= 0)
+        {
+            Debug.Log("Player is dead");
             NextStateMl = new Patrol(EnemyVarsMl);
             Stage = EVENT.Exit;
         }
@@ -228,7 +237,9 @@ public class Pursue : State_ML
     
     private void SimpleMove()
     {
-        EnemyVarsMl.enemyRef.transform.position += EnemyVarsMl.enemyRef.transform.right * (Time.deltaTime * EnemyVarsMl.GetMoveSpeed);
+        EnemyVarsMl.enemyRef.transform.position 
+            += EnemyVarsMl.enemyRef.transform.right 
+               * (Time.deltaTime * (EnemyVarsMl.GetMoveSpeed * 1.5f));
     }
 }
 
