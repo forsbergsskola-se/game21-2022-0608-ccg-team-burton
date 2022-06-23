@@ -133,15 +133,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7efbeca9fb2caee408e33967aa452cfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _acceleration: 60
-  _moveClamp: 9
-  _deAcceleration: 60
-  _apexBonus: 2
-  _fallClamp: -40
-  _minFallSpeed: 80
-  _maxFallSpeed: 120
-  _jumpHeight: 30
-  _jumpApexThreshold: 10
+  _acceleration: 80
+  _moveClamp: 6.75
+  _deAcceleration: 400
+  _fallClamp: -50
+  _minFallSpeed: 65
+  _maxFallSpeed: 112.5
+  _jumpHeight: 23.5
 --- !u!114 &1144139567602091066
 MonoBehaviour:
   m_ObjectHideFlags: 0
