@@ -73,9 +73,9 @@ namespace Protoypes.Harry
             CalculateWalking(); 
             CalculateJumpApex();
             CalculateGravity(); 
-            CalculateJumping();
             FallIfWallOrRoofHit();
-            
+            CalculateJumping();
+
             FlipPlayer();
             if (_animator.runtimeAnimatorController != null)
                 AnimatePlayer();
@@ -161,10 +161,7 @@ namespace Protoypes.Harry
         private void CalculateJumping() 
         {
             if (_jumpDownCommand && _isGrounded)
-            {
-                if (_currentVerticalSpeed == 0)
-                    _currentVerticalSpeed = _jumpHeight;
-            }
+                _currentVerticalSpeed = _jumpHeight;
         }
 
         
@@ -195,8 +192,8 @@ namespace Protoypes.Harry
 
         private void MovePlayer()
         {
-            RawMovement = new Vector2(_currentHorizontalSpeed, _currentVerticalSpeed) * Time.deltaTime; // Used externally
-            _rb.MovePosition(_rb.position + Vector2.zero + RawMovement);
+           RawMovement = new Vector2(_currentHorizontalSpeed, _currentVerticalSpeed) * Time.deltaTime; // Used externally
+           _rb.MovePosition(_rb.position + RawMovement);
         }
 
 
