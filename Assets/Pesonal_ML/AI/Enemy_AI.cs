@@ -19,14 +19,15 @@ public class Enemy_AI : MonoBehaviour
         {
             EnemyVars.firePoint = GetComponentsInChildren<Transform>()[^1];
         }
-      
         EnemyVars.tracerEyes = GetComponentInChildren<TracerEyes>();
         EnemyVars.animator = GetComponent<Animator>();
-        EnemyVars.enemyRef = gameObject;
         EnemyVars.ArcCollider = GetComponentInChildren<ArcCollider>();
         enemy_Anim = GetComponent<Animator>();
-     
+
         _currentStateMl = new Idle(EnemyVars);
+
+        EnemyVars.enemyRef = gameObject;
+        EnemyVars.tracerEyes.pursueDistance = EnemyVars.GetPursueDistance;
     }
 
     private void Update()
