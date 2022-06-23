@@ -33,7 +33,7 @@ public class EquipmentLibrary : MonoBehaviour
     public ItemRaritySO GetRarityFromLibrary(string rarityID)
     {
         //TODO: If dictionary would be nice
-        foreach (var itemRaritySo in RarityLibrary.ItemRarityLibrary.Where(itemRaritySo => itemRaritySo.RarityID == rarityID))
+        foreach (var itemRaritySo in RarityLibrary.ItemRarityLibrary.Where(itemRaritySo => itemRaritySo.ID == rarityID))
         {
             return itemRaritySo;
         }

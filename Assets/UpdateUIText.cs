@@ -23,7 +23,7 @@ public class UpdateUIText : MonoBehaviour
         {
             itemSprite.sprite = armor.ItemSprite;
             ItemName.SetText(armor.ItemName);
-            Rarity.SetText( armor.RaritySo.RarityID);
+            Rarity.SetText( armor.RaritySo.ID);
             
         }
 

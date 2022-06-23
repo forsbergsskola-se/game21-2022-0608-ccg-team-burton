@@ -33,15 +33,15 @@ public class LootBoxController : MonoBehaviour
    {
          var itemSo = LootBoxSO.PickLootTable().PickItem();
         
-         //TODO: Save items to player inventory: Save(itemSo.id, itemRaritySo.Id, GemSo.id) //All strings (designer friendly)
-         Debug.Log($"Saving: {itemSo.ID},{itemSo.RaritySo.RarityID},{itemSo.GemSo.ID}");
+         Debug.Log($"Saving: {itemSo.ID},{itemSo.RaritySo.ID},{itemSo.GemSo.ID}");
          
          ////TEMP SAVE SYSTEM//////
          //TODO: Hook in save in save system
          InventoryItemSerialization saveItem = new InventoryItemSerialization();
          saveItem.itemID = itemSo.ID;
-         saveItem.rarityID = itemSo.RaritySo.RarityID;
+         saveItem.rarityID = itemSo.RaritySo.ID;
          saveItem.gemId = itemSo.GemSo.ID;
+         
          //Inventoryslot1 is gained when pressing an item slot in inventory
          PlayerPrefs.SetString("Inventoryslot1", JsonConvert.SerializeObject(saveItem));
          
