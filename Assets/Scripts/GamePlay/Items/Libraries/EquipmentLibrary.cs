@@ -8,30 +8,18 @@ using UnityEngine;
 
 
 //Dont want library in scene
-public class GetFromLibrary : MonoBehaviour
+public class EquipmentLibrary : MonoBehaviour
 {
 
-    public static ItemLibrarySO ItemLibrary;
-    public static ItemRarityLibrarySO RarityLibrary;
-    public static GemLibrarySO GemLibrary;
+    public  ItemLibrarySO ItemLibrary;
+    public  ItemRarityLibrarySO RarityLibrary;
+    public  GemLibrarySO GemLibrary;
 
-    //
-    // //Loaded from save/load system
-    // public string ItemSoID;
-    //
-    // public ItemSO FetchedItemSo;
-    //
-    //
-    // //TODO: DEBUG for checking if item is in library
-    // private void Start()
-    // {
-    //     FetchedItemSo = LoadItemFromLibrary(ItemSoID);
-    // }
+   
 
 
-    public static ItemSO GetItemFromLibrary(string itemSoID)
+    public ItemSO GetItemFromLibrary(string itemSoID)
     {
-        Debug.Log($"LOADING ITEM {itemSoID}");
         //TODO: If dictionary would be nice
         foreach (var itemSo in ItemLibrary.ItemsLibrary.Where(itemSo => itemSo.ID == itemSoID))
         {
@@ -42,9 +30,8 @@ public class GetFromLibrary : MonoBehaviour
         return null;
     }
 
-    public static ItemRaritySO GetRarityFromLibrary(string rarityID)
+    public ItemRaritySO GetRarityFromLibrary(string rarityID)
     {
-        Debug.Log($"LOADING ITEM {rarityID}");
         //TODO: If dictionary would be nice
         foreach (var itemRaritySo in RarityLibrary.ItemRarityLibrary.Where(itemRaritySo => itemRaritySo.RarityID == rarityID))
         {
@@ -55,9 +42,8 @@ public class GetFromLibrary : MonoBehaviour
         return null; 
     }
 
-    public static GemSO GetGemFromLibrary(string gemID)
+    public GemSO GetGemFromLibrary(string gemID)
     {
-        Debug.Log($"LOADING ITEM {gemID}");
         //TODO: If dictionary would be nice
         foreach (var gemSo in GemLibrary.GemLibrary.Where(gemSo => gemSo.ID == gemID))
         {
