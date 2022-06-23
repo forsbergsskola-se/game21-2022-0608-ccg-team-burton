@@ -28,7 +28,7 @@ public class SoundMananger : MonoBehaviour
         {
             Debug.Log("Hello testing");
             //SetMusicParam(0.3f);
-            //switchPitch();
+            switchPitch();
         }
     }
     public void DoThing()
