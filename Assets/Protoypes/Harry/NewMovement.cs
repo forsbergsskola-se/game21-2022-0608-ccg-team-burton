@@ -21,7 +21,6 @@ namespace Protoypes.Harry
         public float _acceleration = 90;
         public float _moveClamp = 13; 
         public float _deAcceleration = 60f;
-        public float _apexBonus = 2;
         public float _currentHorizontalSpeed { get; private set; }
         
         
@@ -34,7 +33,6 @@ namespace Protoypes.Harry
         
         [Header("JUMPING")] 
         public float _jumpHeight = 30;
-        public float _jumpApexThreshold = 10f;
         private float _apexPoint;
         public float _currentVerticalSpeed { get; private set; }
         
@@ -67,10 +65,7 @@ namespace Protoypes.Harry
         
         private void FixedUpdate() 
         {
-            _velocity = (_rb.position - _lastPosition) / Time.fixedDeltaTime;
-            _lastPosition = _rb.position;
-            
-            CalculateWalking(); 
+          CalculateWalking(); 
             CalculateJumpApex();
             CalculateGravity(); 
             FallIfWallOrRoofHit();
@@ -112,10 +107,6 @@ namespace Protoypes.Harry
 
                 // clamped by max frame movement
                 _currentHorizontalSpeed = Mathf.Clamp(_currentHorizontalSpeed, -_moveClamp, _moveClamp);
-
-                // Apply bonus at the apex of a jump
-                var apexBonus = Mathf.Sign(_walkCommand) * _apexBonus * _apexPoint;
-                _currentHorizontalSpeed += apexBonus * Time.fixedDeltaTime;
             }
             else 
                 _currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, 0, _deAcceleration * Time.fixedDeltaTime);
@@ -148,8 +139,6 @@ namespace Protoypes.Harry
         {
             if (_isGrounded)
             {
-                // Gets stronger the closer to the top of the jump
-                _apexPoint = Mathf.InverseLerp(_jumpApexThreshold, 0, Mathf.Abs(_velocity.y));
                 FallSpeed = Mathf.Lerp(_minFallSpeed, _maxFallSpeed, _apexPoint);
             }
             else
@@ -194,7 +183,7 @@ namespace Protoypes.Harry
 
         private void MovePlayer()
         {
-           RawMovement = new Vector2(_currentHorizontalSpeed, _currentVerticalSpeed) * Time.fixedDeltaTime; // Used externally
+            RawMovement = new Vector2(_currentHorizontalSpeed, _currentVerticalSpeed) * Time.fixedDeltaTime;
            _rb.MovePosition(_rb.position + RawMovement);
         }
 
