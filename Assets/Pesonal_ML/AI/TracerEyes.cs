@@ -16,6 +16,14 @@ public enum TraceType
     None
 }
 
+public enum Actions
+{
+    None,
+    TurnAround,
+    Jump,
+    PlatformJump
+}
+
 public enum SubType
 {
     Wall,
@@ -52,10 +60,14 @@ public class TracerEyes : MonoBehaviour
     
     public Transform PlatformRef { get; private set; }
     
+    public Transform WallRef { get; private set; }
+    
     public bool PlatformSeen { get; private set; }
     
     public bool PlayerBehind { get; private set; }
     public bool PlayerForgotten { get; private set; }
+    
+    public Actions actions { get; private set; }
 
     private Health _playerHealth;
     
@@ -72,92 +84,22 @@ public class TracerEyes : MonoBehaviour
 
     void Update()
     {
-        
         timeSinceTrace += Time.deltaTime;
 
         if (timeSinceTrace >= traceInterval)
         {
             timeSinceTrace -= traceInterval;
-            var right = transform.right;
-            
-           CheckForGround(new Vector2(right.x, -0.8f));
-           // CheckForWalls(right);
-          // DoSingleTrace(right, transform.position, TraceType.Player, pursueDistance, out var hit);
-           
-           // CheckForPlayer(new Vector2(right.x, 0.15f));
-           // CheckForPlayer(new Vector2(0, 1));
+
             DoMultiTrace();
         }
     }
 
-    private void DrawBoxRuntime(Vector2 size, Vector2 origin)
-    {
-        size /= 2;
-        var point1 = origin - size;
-        var point2 = origin + new Vector2(-size.x,  size.y);
-        var point3 = origin + size;
-        var point4 = origin + new Vector2(size.x, -size.y);
-        
-        Debug.DrawLine(point1, point4, Color.red, traceInterval);
-        
-        Debug.DrawLine(point2, point3 , Color.red, traceInterval);
-        
-        Debug.DrawLine(point4,point3, Color.red, traceInterval);
-        
-        Debug.DrawLine(point1,  point2, Color.red, traceInterval);
-    }
-    
-    private void OnDrawGizmosSelected()
-    {
-      //  var trans = gameObject.transform;
-      //  Gizmos.DrawWireCube(trans.position + new Vector3(3.5f ,0) * trans.forward.x, new Vector3(7,3));   
-    }
-
-    private RaycastHit2D DoARayTrace(Vector2 dir, bool drawTrace )
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, TraceLength, multiMask);
-
-        return hit;
-    }
-    
-
-    private void GeneralCheck(Vector2 dir)
-    {
-        var trans = transform;
-        var hit = Physics2D.Raycast(trans.position, dir, pursueDistance, multiMask);
-        
-        if (!hit)
-        {
-            PlayerSeen = false;
-            WallSeen = false;
-            return;
-        }
-
-        if (hit.collider.gameObject.layer == 8)
-        {
-
-        }
-        
-        else if (hit.collider.gameObject.layer == 6)
-        {
-
-        }
-    }
-
-    private void SetData(RaycastHit2D hit, TraceType type)
-    {
-        if (type == TraceType.Player)
-        {
-            PlayerTrans = hit.collider.transform;
-            _playerHealth = hit.collider.gameObject.GetComponent<Health>();
-        }
-    }
-    
     private void DoMultiTrace()
     {
         var right = transform.right;
        // var pos = transform.position;
        var increment = -0.5f;
+       actions = Actions.None;
 
        var inc = 0.5f;
        List<HitResults> resultList = new List<HitResults>();
@@ -185,12 +127,9 @@ public class TracerEyes : MonoBehaviour
            increment += inc;
        }
 
-       if (PlatformSeen)
+       if (PlatformSeen && !PlayerSeen)
        {
-           if (PlatformRef == default)
-           {
-               PlatformRef = resultList[2].theHit.collider.gameObject.transform;
-           }
+           PlatformRef = resultList[2].theHit.collider.gameObject.transform;
            
            if (Vector2.Distance(PlatformRef.transform.position, attackRange.position) < 7f)
            {
@@ -199,6 +138,28 @@ public class TracerEyes : MonoBehaviour
            else
            {
                PlatformInJumpDistance = false;
+           }
+       }
+
+       if (WallSeen)
+       {
+           if (WallRef != resultList[1].theHit.collider.gameObject.transform)
+           {
+               WallRef = resultList[1].theHit.collider.gameObject.transform;
+           }
+
+           if (resultList[1].theHit.distance < 1 && GroundSeen)
+           {
+               actions = Actions.TurnAround;
+           }
+           
+       }
+       
+       if (GroundSeen)
+       {
+           if (StandingOn != resultList[0].theHit.collider.gameObject)
+           {
+               StandingOn = resultList[0].theHit.collider.gameObject;
            }
        }
        
@@ -219,9 +180,6 @@ public class TracerEyes : MonoBehaviour
                _playerHealth = resultList[1].theHit.collider.gameObject.GetComponent<Health>();
            }
        }
-       
-       var dir2 = new Vector2(-right.x, 0);
-       DoSingleTrace(dir2, transform.position, pursueDistance, out var slhit2);
     }
 
     private void AnalyzeResults(int traceCount, TraceType type)
@@ -287,7 +245,7 @@ public class TracerEyes : MonoBehaviour
     {
         
     }
-    
+
     private TraceType DoSingleTrace(Vector2 dir, Vector2 pos, float traceDistance, out RaycastHit2D outHit)
     {
         var hit = Physics2D.Raycast(pos, dir, traceDistance, multiMask);
@@ -316,7 +274,7 @@ public class TracerEyes : MonoBehaviour
 
         return TraceType.None;
     }
-    
+
     private void CheckForPlayer(Vector2 dir)
     {
         var trans = transform;
@@ -355,7 +313,7 @@ public class TracerEyes : MonoBehaviour
 
         PlayerSeen = false;
     }
-    
+
     private void CheckForWalls(Vector2 dir)
     {
         var trans = transform;
@@ -376,7 +334,7 @@ public class TracerEyes : MonoBehaviour
 
     public int GetPlayerHealth()
     => _playerHealth.CurrentHealth;
-    
+
 
     private void TraceBox()
     {
@@ -411,7 +369,7 @@ public class TracerEyes : MonoBehaviour
 
         PlayerSeen = false;
     }
-    
+
     private void CheckForGround(Vector2 dir)
     {
         var trans = transform;
@@ -433,5 +391,21 @@ public class TracerEyes : MonoBehaviour
             StandingOn = hit.collider.gameObject;
         }
     }
-    
+
+    private void DrawBoxRuntime(Vector2 size, Vector2 origin)
+    {
+        size /= 2;
+        var point1 = origin - size;
+        var point2 = origin + new Vector2(-size.x,  size.y);
+        var point3 = origin + size;
+        var point4 = origin + new Vector2(size.x, -size.y);
+        
+        Debug.DrawLine(point1, point4, Color.red, traceInterval);
+        
+        Debug.DrawLine(point2, point3 , Color.red, traceInterval);
+        
+        Debug.DrawLine(point4,point3, Color.red, traceInterval);
+        
+        Debug.DrawLine(point1,  point2, Color.red, traceInterval);
+    }
 }

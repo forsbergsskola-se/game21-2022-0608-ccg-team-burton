@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using TreeEditor;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
@@ -124,6 +125,7 @@ public class Patrol : State_ML
     private float delay = 1;
     private bool _wallSpotted;
     private Bounds _bounds;
+    private bool stopMove;
     
     
     public Patrol(EnemyVars_ML enemyVarsMl)
@@ -159,21 +161,28 @@ public class Patrol : State_ML
         else if (EnemyVarsMl.tracerEyes.WallSeen)
         {
             _wallSpotted = true;
-            TurnAround();
         }
-
-
-        if (!EnemyVarsMl.tracerEyes.PlatformInJumpDistance)
+        
+        else if (!EnemyVarsMl.tracerEyes.WallSeen)
         {
-            SimpleMove();
+            _wallSpotted = false;
         }
 
-        if (EnemyVarsMl.tracerEyes.PlatformInJumpDistance && !EnemyVarsMl.tracerEyes.PlayerSeen)
+        if (EnemyVarsMl.tracerEyes.actions == Actions.TurnAround)
+        {
+            TurnAround();    
+        }
+        
+        if (EnemyVarsMl.tracerEyes.actions == Actions.PlatformJump)
         {
             Stage = EVENT.Exit;
             NextStateMl = new PlatformJump(EnemyVarsMl);
         }
-        
+
+        if (!stopMove)
+        {
+            SimpleMove();
+        }
     }
     
     private void TurnAround()
@@ -275,8 +284,7 @@ public class Attack : State_ML
         }
 
         if (attackDelay >= EnemyVarsMl.GetAttackInterval)
-        { 
-            Debug.Log($"Attack time {attackDelay}");
+        {
             EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("MakeAttack"));
 
             if (EnemyVarsMl.GetEnemyType == EnemyType.Ranged)
@@ -286,8 +294,8 @@ public class Attack : State_ML
 
             if (EnemyVarsMl.GetEnemyType == EnemyType.Melee && EnemyVarsMl.tracerEyes.PlayerSeen)
             {
-                Stage = EVENT.Exit;
-                NextStateMl = new BackOff(EnemyVarsMl);
+               // Stage = EVENT.Exit;
+               // NextStateMl = new BackOff(EnemyVarsMl);
             }
             attackDelay -= EnemyVarsMl.GetAttackInterval;
         }
@@ -370,22 +378,50 @@ public class PlatformJump : State_ML
     private Rigidbody2D body;
     private float estimateForce;
     private bool rightY;
-    private bool rightX;
+    private bool rightX = true;
     
     public PlatformJump(EnemyVars_ML enemyVarsMl) 
         : base(enemyVarsMl)
     {
         Debug.Log("Platform Jump state");
         body = EnemyVarsMl.enemyRef.GetComponent<Rigidbody2D>();
-        estimateForce = (EnemyVarsMl.tracerEyes.PlatformRef.position.y - EnemyVarsMl.enemyRef.transform.position.y) * 6;
+        estimateForce = (EnemyVarsMl.tracerEyes.PlatformRef.position.y - EnemyVarsMl.enemyRef.transform.position.y) * 4.5f;
     }
 
     public override void Update()
     {
+       
         if (!rightY)
         {
             body.AddForce(new Vector2(0, estimateForce), ForceMode2D.Impulse);
             rightY = true;
+            rightX = false;
+        }
+
+        if (!rightX)
+        {
+            var platX = EnemyVarsMl.tracerEyes.PlatformRef.transform.position.x;
+            var enemyX = EnemyVarsMl.enemyRef.transform.position.x;
+            var xDist = Mathf.Abs(enemyX) - Mathf.Abs(platX);
+            
+            Debug.Log(Mathf.Abs(xDist));
+            
+            var forceDir = EnemyVarsMl.enemyRef.transform.right;
+            body.AddForce(new Vector2(forceDir.x * 0.5f, 0), ForceMode2D.Force);
+            
+            if (Mathf.Abs(xDist) < 3)
+            {
+                rightX = true;
+            }
+        }
+
+        if (EnemyVarsMl.tracerEyes.GroundSeen)
+        {
+            if (EnemyVarsMl.tracerEyes.StandingOn.transform == EnemyVarsMl.tracerEyes.PlatformRef)
+            {
+                Stage = EVENT.Exit;
+                NextStateMl = new Idle(EnemyVarsMl);
+            }
         }
 
     }
@@ -438,7 +474,6 @@ public class Jump : State_ML
             
             else
             {
-                jumpDelay -= Time.deltaTime * 2f;
                 MakeJump();    
             }
         }
