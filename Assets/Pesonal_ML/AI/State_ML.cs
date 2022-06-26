@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using TreeEditor;
 using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -65,7 +66,6 @@ public abstract class State_ML
     }
 }
 
-
 public class Idle : State_ML
 {
     private float time;
@@ -102,7 +102,6 @@ public class Idle : State_ML
 
     }
 }
-
 
 public class Sentry : State_ML
 {
@@ -157,25 +156,24 @@ public class Patrol : State_ML
             NextStateMl = new Jump(EnemyVarsMl);
         }
         
-        
         else if (EnemyVarsMl.tracerEyes.WallSeen)
         {
             _wallSpotted = true;
             TurnAround();
         }
 
-        if (_wallSpotted)
-        {
-            
-        }
-        
-        
-        if (delay < 0)
+
+        if (!EnemyVarsMl.tracerEyes.PlatformInJumpDistance)
         {
             SimpleMove();
         }
 
-        delay -= Time.deltaTime * 2f;
+        if (EnemyVarsMl.tracerEyes.PlatformInJumpDistance && !EnemyVarsMl.tracerEyes.PlayerSeen)
+        {
+            Stage = EVENT.Exit;
+            NextStateMl = new PlatformJump(EnemyVarsMl);
+        }
+        
     }
     
     private void TurnAround()
@@ -242,6 +240,10 @@ public class Pursue : State_ML
 public class Attack : State_ML
 {
     private float attackDelay;
+    private bool backOff;
+    private float backOffTime;
+    private bool pursuePlayer;
+    
     public Attack(EnemyVars_ML enemyVarsMl)
         : base(enemyVarsMl)
     {
@@ -271,9 +273,10 @@ public class Attack : State_ML
                 NextStateMl = new Idle(EnemyVarsMl);
             }
         }
-        
-        if (attackDelay >= EnemyVarsMl.GetAttackInterval && EnemyVarsMl.tracerEyes.PlayerInAttackRange)
+
+        if (attackDelay >= EnemyVarsMl.GetAttackInterval)
         { 
+            Debug.Log($"Attack time {attackDelay}");
             EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("MakeAttack"));
 
             if (EnemyVarsMl.GetEnemyType == EnemyType.Ranged)
@@ -281,18 +284,24 @@ public class Attack : State_ML
                 AssetPool.RequestEffectStatic(EffectType.FireBall, EnemyVarsMl.firePoint.position, EnemyVarsMl.enemyRef.transform.right);
             }
 
+            if (EnemyVarsMl.GetEnemyType == EnemyType.Melee && EnemyVarsMl.tracerEyes.PlayerSeen)
+            {
+                Stage = EVENT.Exit;
+                NextStateMl = new BackOff(EnemyVarsMl);
+            }
             attackDelay -= EnemyVarsMl.GetAttackInterval;
         }
         
-        if (!EnemyVarsMl.tracerEyes.PlayerInAttackRange)
+        if (!EnemyVarsMl.tracerEyes.PlayerInAttackRange && EnemyVarsMl.tracerEyes.PlayerSeen)
         {
             Stage = EVENT.Exit;
             NextStateMl = new Pursue(EnemyVarsMl);
         }
-        
+
         attackDelay +=  Time.deltaTime;
     }
-
+    
+    
     private void TurnAround()
     {
         EnemyVarsMl.enemyRef.transform.Rotate(Vector3.up, 180);
@@ -307,6 +316,81 @@ public class Attack : State_ML
         
     }
 }
+
+public class BackOff : State_ML
+{
+    private float backOffTime;
+    private bool backOff = true;
+    private float timeToBack = 1;
+    private float amountBack;
+    public BackOff(EnemyVars_ML enemyVarsMl) 
+        : base(enemyVarsMl)
+    {
+        Debug.Log("Jump state");
+        Name = STATE.Jump;
+    }
+    
+    public override void Update()
+    {
+        base.Update();
+
+        if (backOff)
+        {
+            BackOffFunc();
+        }
+        else
+        {
+            Stage = EVENT.Exit;
+            NextStateMl = new Pursue(EnemyVarsMl);
+        }
+    }
+    
+    private void BackOffFunc()
+    {
+        var trans = EnemyVarsMl.enemyRef.transform;
+        amountBack -= -trans.right.x * (Time.deltaTime * 1);
+        backOffTime = Time.deltaTime;
+
+        if (amountBack >= -1)
+        {
+            trans.position += -trans.right * (Time.deltaTime * 2);
+        //    trans.position = new Vector3( trans.position.x + amountBack, 0);
+        }
+         
+        if (backOffTime >= EnemyVarsMl.GetAttackInterval)
+        {
+            backOff = false;
+            backOffTime -= timeToBack;
+        }
+    }
+}
+
+public class PlatformJump : State_ML
+{
+    private Rigidbody2D body;
+    private float estimateForce;
+    private bool rightY;
+    private bool rightX;
+    
+    public PlatformJump(EnemyVars_ML enemyVarsMl) 
+        : base(enemyVarsMl)
+    {
+        Debug.Log("Platform Jump state");
+        body = EnemyVarsMl.enemyRef.GetComponent<Rigidbody2D>();
+        estimateForce = (EnemyVarsMl.tracerEyes.PlatformRef.position.y - EnemyVarsMl.enemyRef.transform.position.y) * 6;
+    }
+
+    public override void Update()
+    {
+        if (!rightY)
+        {
+            body.AddForce(new Vector2(0, estimateForce), ForceMode2D.Impulse);
+            rightY = true;
+        }
+
+    }
+}
+
 public class Jump : State_ML
 {
     private float maxAngle = 90;
@@ -371,7 +455,7 @@ public class Jump : State_ML
         Debug.Log("Making jump");
         EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("Jump"));
         var forward = EnemyVarsMl.enemyRef.gameObject.transform.right;
-        var impulse2 = EnemyVarsMl.ArcCollider.GetImpulse();
+      
         var diff = EnemyVarsMl.ArcCollider.TileHeightDifference;
         if (diff < 0)
         {

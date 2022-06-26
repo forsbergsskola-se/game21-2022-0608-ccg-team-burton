@@ -46,6 +46,12 @@ public class TracerEyes : MonoBehaviour
     public bool GroundSeen { get; private set;}
     public bool PlayerSeen { get; private set;}
     
+    public bool PlayerNear { get; private set;}
+    
+    public bool PlatformInJumpDistance { get; private set; }
+    
+    public Transform PlatformRef { get; private set; }
+    
     public bool PlatformSeen { get; private set; }
     
     public bool PlayerBehind { get; private set; }
@@ -168,7 +174,6 @@ public class TracerEyes : MonoBehaviour
 
            AnalyzeResults(i, traceHit);
 
-
            HitResults results = new HitResults()
            {
                 traceCount = i,
@@ -179,40 +184,44 @@ public class TracerEyes : MonoBehaviour
 
            increment += inc;
        }
-        
-       
-       
-       foreach (var r in resultList)
+
+       if (PlatformSeen)
        {
-           Debug.Log(r.theHitType);
+           if (PlatformRef == default)
+           {
+               PlatformRef = resultList[2].theHit.collider.gameObject.transform;
+           }
+           
+           if (Vector2.Distance(PlatformRef.transform.position, attackRange.position) < 7f)
+           {
+               PlatformInJumpDistance = true;
+           }
+           else
+           {
+               PlatformInJumpDistance = false;
+           }
+       }
+       
+       if (PlayerSeen)
+       {
+           if (Vector2.Distance(resultList[1].theHit.collider.gameObject.transform.position, attackRange.position) < 1f)
+           {
+               PlayerInAttackRange = true;
+           }
+           else
+           {
+               PlayerInAttackRange = false;
+           }
+           
+           if (PlayerTrans == default)
+           {
+               PlayerTrans = resultList[1].theHit.collider.gameObject.transform; 
+               _playerHealth = resultList[1].theHit.collider.gameObject.GetComponent<Health>();
+           }
        }
        
        var dir2 = new Vector2(-right.x, 0);
        DoSingleTrace(dir2, transform.position, pursueDistance, out var slhit2);
-       
-      // var traceHit = DoSingleTrace(right, transform.position, TraceType.Wall, pursueDistance, out var hit);
-      // 
-      // if(traceHit == TraceType.Wall)
-      // {
-      //     WallSeen = true;
-      //     PlayerSeen = false;
-      // }
-      // else if(traceHit == TraceType.Player)
-      // {
-      //     PlayerSeen = true;
-      //     WallSeen = false;
-      //
-      //     if (PlayerTrans == default)
-      //     {
-      //         PlayerTrans = hit.collider.gameObject.transform;
-      //         _playerHealth = hit.collider.gameObject.GetComponent<Health>();
-      //     }
-      // }
-      // else
-      // {
-      //     PlayerSeen = false;
-      //     WallSeen = false;
-      // }
     }
 
     private void AnalyzeResults(int traceCount, TraceType type)
@@ -273,7 +282,11 @@ public class TracerEyes : MonoBehaviour
             
         }
     }
-    
+
+    private void CheckPlayer()
+    {
+        
+    }
     
     private TraceType DoSingleTrace(Vector2 dir, Vector2 pos, float traceDistance, out RaycastHit2D outHit)
     {
