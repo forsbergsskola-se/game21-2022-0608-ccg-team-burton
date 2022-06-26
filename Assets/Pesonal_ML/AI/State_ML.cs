@@ -158,16 +158,7 @@ public class Patrol : State_ML
             NextStateMl = new Jump(EnemyVarsMl);
         }
         
-        else if (EnemyVarsMl.tracerEyes.WallSeen)
-        {
-            _wallSpotted = true;
-        }
         
-        else if (!EnemyVarsMl.tracerEyes.WallSeen)
-        {
-            _wallSpotted = false;
-        }
-
         if (EnemyVarsMl.tracerEyes.actions == Actions.TurnAround)
         {
             TurnAround();    
@@ -487,6 +478,8 @@ public class Jump : State_ML
 
     public void MakeJump()
     {
+        EnemyVarsMl.ArcCollider.TileSpotted = false;
+        
         Debug.Log("Making jump");
         EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("Jump"));
         var forward = EnemyVarsMl.enemyRef.gameObject.transform.right;

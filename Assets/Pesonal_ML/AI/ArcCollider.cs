@@ -11,8 +11,8 @@ public class ArcCollider : MonoBehaviour
     [SerializeField] private float gravity = 9.8f;
     [SerializeField] private float velocity = 9.8f;
     [SerializeField] private float angle = 60f;
-    private float resetAngle;
-    public bool TileSpotted { get; private set; }
+    private float resetAngle = 30f;
+    public bool TileSpotted { get; set; }
     public bool SameTileSpotted { get; private set; }
     public bool announceTileSpotted;
     private float currentDeg;
@@ -96,15 +96,6 @@ public class ArcCollider : MonoBehaviour
             ? collider.points[pointIndex] : Vector2.zero;
     }
     
-    public List<Vector2> GetArc()
-    {
-        return collider.points.ToList();
-    }
-
-    public int GetNumberArcPoints()
-    {
-        return collider.points.Length;
-    }
 
     public void ResetCollider()
     {
@@ -116,7 +107,7 @@ public class ArcCollider : MonoBehaviour
     
     public void CalculatePoints()
     {
-        var something = 2 * velocity * Mathf.Sin(Mathf.Deg2Rad * angle) / gravity;
+        var something = (2 * velocity * Mathf.Sin(Mathf.Deg2Rad * angle) / gravity) * 1f;
         var points = FRange(0, something, 0.1f);
         var vecs = new List<Vector2>();
         

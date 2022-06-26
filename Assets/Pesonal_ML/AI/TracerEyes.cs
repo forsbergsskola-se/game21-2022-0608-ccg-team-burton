@@ -20,8 +20,10 @@ public enum Actions
 {
     None,
     TurnAround,
+    TestForJump,
     Jump,
-    PlatformJump
+    PlatformJump,
+    Pursue
 }
 
 public enum SubType
@@ -34,7 +36,6 @@ public class HitResults
 {
     public RaycastHit2D theHit;
     public TraceType theHitType;
-    public int traceCount;
 }
 
 public class TracerEyes : MonoBehaviour
@@ -107,19 +108,30 @@ public class TracerEyes : MonoBehaviour
        for (int i = 0; i < 4; i++)
        {
            var dir = new Vector2(right.x, increment);
+           var traceDistance = pursueDistance;
+           
+           if (i == 0)
+           {
+               traceDistance = 2.5f;
+               dir = new Vector2(right.x, -0.7f);
+           }
+           else
+           {
+               traceDistance = pursueDistance;
+           }
+           
            if (i > 2)
            {
                dir = new Vector2(-right.x, 0);
            }
 
-           var traceHit = DoSingleTrace(dir, transform.position, pursueDistance, out var hit);
+           var traceHit = DoSingleTrace(dir, transform.position, traceDistance, out var hit);
 
            AnalyzeResults(i, traceHit);
 
            HitResults results = new HitResults()
            {
-                traceCount = i,
-                theHitType = traceHit,
+               theHitType = traceHit,
                 theHit = hit
            };
            resultList.Add(results);
@@ -161,6 +173,11 @@ public class TracerEyes : MonoBehaviour
            {
                StandingOn = resultList[0].theHit.collider.gameObject;
            }
+       }
+
+       if (!GroundSeen)
+       {
+           
        }
        
        if (PlayerSeen)
@@ -364,6 +381,11 @@ public class TracerEyes : MonoBehaviour
                 
                 Debug.Log("Player spotted");
                 return;
+            }
+            
+            else if (r.collider.gameObject.layer == 6)
+            {
+                
             }
         }
 
