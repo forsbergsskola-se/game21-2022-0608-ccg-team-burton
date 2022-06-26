@@ -137,10 +137,6 @@ public class Patrol : State_ML
     public override void Enter()
     {
         base.Enter();
-       _bounds = EnemyVarsMl.enemyRef.gameObject.GetComponent<BoxCollider2D>().bounds;
-     //  Debug.Log($"Center of bounds is: {_bounds.center}");
-     //  Debug.Log($"Max of bounds is: {_bounds.max}");
-
     }
 
     public override void Update()
