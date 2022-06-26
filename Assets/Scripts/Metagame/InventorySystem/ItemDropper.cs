@@ -5,7 +5,7 @@ using UnityEngine;
 /// To be placed on anything that wishes to drop pickups into the world.
 /// Tracks the drops for saving and restoring.
 /// </summary>
-public class ItemDropper : MonoBehaviour, ISaveable
+public class ItemDropper : MonoBehaviour, I_Saveable
 {
 
     private List<Pickup> droppedItems = new List<Pickup>();
@@ -44,7 +44,7 @@ public class ItemDropper : MonoBehaviour, ISaveable
         public int number;
     }
 
-    object ISaveable.CaptureState()
+    object I_Saveable.CaptureState()
     {
         RemoveDestroyedDrops();
         var droppedItemsList = new DropRecord[droppedItems.Count];
@@ -57,7 +57,7 @@ public class ItemDropper : MonoBehaviour, ISaveable
         return droppedItemsList;
     }
 
-    void ISaveable.RestoreState(object state)
+    void I_Saveable.RestoreState(object state)
     {
         var droppedItemsList = (DropRecord[])state;
         foreach (var item in droppedItemsList)

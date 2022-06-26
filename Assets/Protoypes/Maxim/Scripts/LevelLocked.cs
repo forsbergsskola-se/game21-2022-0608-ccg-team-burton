@@ -8,7 +8,12 @@ public class LevelLocked : MonoBehaviour
     public Image[] Stars;
 
     public Sprite fullStar;
+    SavingWrapper wrapper;
 
+    private void Start()
+    {
+        wrapper = FindObjectOfType<SavingWrapper>();
+    }
     private void Update()
     {
         UpdateLevelImage(); 
@@ -22,7 +27,9 @@ public class LevelLocked : MonoBehaviour
         {
             Unlocked = true;
             Debug.Log("Popped off");
+            
         }
+        wrapper.Save();
     }
     
     private void UpdateLevelImage()
@@ -34,6 +41,8 @@ public class LevelLocked : MonoBehaviour
             {
                 Stars[i].enabled = false;
             }
+            //save stats
+           
         }
         else
         {
@@ -48,5 +57,6 @@ public class LevelLocked : MonoBehaviour
                 Stars[i].gameObject.GetComponent<Image>().sprite = fullStar;
             }
         }
+        wrapper.Save();
     }
 }

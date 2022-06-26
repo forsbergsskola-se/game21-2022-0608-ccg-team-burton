@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// This component should be placed on the GameObject tagged "Player".
 /// </summary>
-public class Inventory : MonoBehaviour, ISaveable
+public class Inventory : MonoBehaviour, I_Saveable
 {
 
     [Tooltip("Allowed size")]
@@ -210,7 +210,7 @@ public class Inventory : MonoBehaviour, ISaveable
         public int number;
     }
 
-    object ISaveable.CaptureState()
+    object I_Saveable.CaptureState()
     {
         var slotRecords = new InventorySlotRecord[inventorySize];
         for (int i = 0; i < inventorySize; i++)
@@ -224,7 +224,7 @@ public class Inventory : MonoBehaviour, ISaveable
         return slotRecords;
     }
 
-    void ISaveable.RestoreState(object state)
+    void I_Saveable.RestoreState(object state)
     {
         var slotRecords = (InventorySlotRecord[])state;
         for (int i = 0; i < inventorySize; i++)

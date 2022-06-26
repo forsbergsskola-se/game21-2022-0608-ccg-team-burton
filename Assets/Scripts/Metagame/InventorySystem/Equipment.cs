@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Equipment : MonoBehaviour, ISaveable
+public class Equipment : MonoBehaviour, I_Saveable
 {
     Dictionary<EquipedLocation, EquipedItem> equippedItems = new Dictionary<EquipedLocation, EquipedItem>();
     public event Action equipmentUpdated;

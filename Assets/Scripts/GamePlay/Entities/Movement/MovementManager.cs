@@ -1,9 +1,10 @@
 using GamePlay.Entities.Player;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace GamePlay.Entities.Movement
 {
-    public class MovementManager : MonoBehaviour
+    public class MovementManager : MonoBehaviour, I_Saveable
     {
         private Animator _animator;
         private SpriteRenderer _renderer;
@@ -105,7 +106,21 @@ namespace GamePlay.Entities.Movement
 
         }
 
-        
+        public object CaptureState()
+        {
+            Dictionary<string, object> data = new Dictionary<string, object>();
+            data["position"] = new SerializableVector(transform.position);
+            data["rotation"] = new SerializableVector(transform.eulerAngles);
+            return data;
+        }
+
+        public void RestoreState(object state)
+        {
+            Dictionary<string , object> data = new Dictionary<string , object>();
+            
+            transform.position = ((SerializableVector)data["position"]).ToVector();
+            transform.eulerAngles = ((SerializableVector)data["rotation"]).ToVector();
+        }
     }
 }
 

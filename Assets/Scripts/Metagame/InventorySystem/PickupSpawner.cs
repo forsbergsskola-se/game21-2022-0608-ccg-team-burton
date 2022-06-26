@@ -5,7 +5,7 @@
 /// Spawns pickups that should exist on first load in a level. This
 /// automatically spawns the correct prefab for a given inventory item.
 /// </summary>
-public class PickupSpawner : MonoBehaviour, ISaveable
+public class PickupSpawner : MonoBehaviour, I_Saveable
 {
 
     [SerializeField] InventoryItem item = null;
@@ -51,12 +51,12 @@ public class PickupSpawner : MonoBehaviour, ISaveable
         }
     }
 
-    object ISaveable.CaptureState()
+    object I_Saveable.CaptureState()
     {
         return isCollected();
     }
 
-    void ISaveable.RestoreState(object state)
+    void I_Saveable.RestoreState(object state)
     {
         bool shouldBeCollected = (bool)state;
 
