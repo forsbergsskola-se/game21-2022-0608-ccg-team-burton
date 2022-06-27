@@ -9,7 +9,7 @@ namespace Protoypes.Harry
         private SpriteRenderer _renderer;
         private CommandContainer _commandContainer;
         private GroundChecker _groundChecker;
-        private TrailRenderer _trailRenderer;
+        private Animator _animator;
         
         private Vector2 RawMovement { get; set; }
         private Vector2 _velocity;
@@ -21,8 +21,8 @@ namespace Protoypes.Harry
         public float _acceleration = 90;
         public float _moveClamp = 13; 
         public float _deAcceleration = 60f;
-        public float _apexBonus = 2;
-        private float _currentHorizontalSpeed;
+        public float _currentHorizontalSpeed { get; private set; }
+        public bool FacingRight;
         
         
         [Header("GRAVITY")] 
@@ -34,19 +34,19 @@ namespace Protoypes.Harry
         
         [Header("JUMPING")] 
         public float _jumpHeight = 30;
-        public float _jumpApexThreshold = 10f;
-        public float _jumpEndEarlyGravityModifier = 3;
-        
-        private float _currentVerticalSpeed;
-        private float _timeLeftGrounded;
-        private bool _endedJumpEarly = true;
         private float _apexPoint;
+        public float _currentVerticalSpeed { get; private set; }
         
         
         //Inputs
-        private float WalkCommand;
-        private bool JumpDownCommand;
-        private bool JumpUpCommand;
+        private float _walkCommand;
+        private bool _jumpDownCommand;
+        
+        //Collisions
+        public bool _isGrounded{ get; private set; }
+        private bool _isRoofed;
+        private bool _leftWallHit;
+        private bool _rightWallHit;
 
 
         private void Awake()
@@ -55,63 +55,69 @@ namespace Protoypes.Harry
             _commandContainer = GetComponent<CommandContainer>();
             _groundChecker = GetComponent<GroundChecker>();
             _renderer = GetComponent<SpriteRenderer>();
-            _trailRenderer = GetComponent<TrailRenderer>();
-        }
-
-        
-        
-        private void Update() => CollectInput();
-        
-        
-        
-        private void CollectInput()
-        {
-            WalkCommand = _commandContainer.WalkCommand;
-            JumpDownCommand = _commandContainer.JumpDownCommand;
-            JumpUpCommand = _commandContainer.JumpUpCommand;
+            _animator = GetComponent<Animator>();
         }
 
 
+
+        private void Update() { CollectInput(); CheckCollisions(); }
+        
+        
         
         private void FixedUpdate() 
         {
-            _velocity = (_rb.position - _lastPosition) / Time.deltaTime;
-            _lastPosition = _rb.position;
-            
-            CalculateWalking(); 
+          CalculateWalking(); 
             CalculateJumpApex();
             CalculateGravity(); 
+            FallIfWallOrRoofHit();
             CalculateJumping();
-            MoveCharacter();
-            FlipCharacter();
+
+            FlipPlayer();
+            if (_animator.runtimeAnimatorController != null)
+                AnimatePlayer();
+            
+            MovePlayer();
+        }
+
+
+        
+        private void CollectInput()
+        {
+            _walkCommand = _commandContainer.WalkCommand;
+            _jumpDownCommand = _commandContainer.JumpDownCommand;
+        }
+
+        
+
+        private void CheckCollisions()
+        {
+            _isGrounded = _groundChecker.IsGrounded;
+            _isRoofed = _groundChecker.IsRoofed;
+            _leftWallHit = _groundChecker.LeftWallHit;
+            _rightWallHit = _groundChecker.RightWallHit;
         }
         
-    
+
 
         private void CalculateWalking() 
         {
-            if (WalkCommand != 0) 
+            if (_walkCommand != 0) 
             {
                 // Set horizontal move speed
-                _currentHorizontalSpeed += WalkCommand * _acceleration * Time.deltaTime;
+                _currentHorizontalSpeed += _walkCommand * _acceleration * Time.fixedDeltaTime;
 
                 // clamped by max frame movement
                 _currentHorizontalSpeed = Mathf.Clamp(_currentHorizontalSpeed, -_moveClamp, _moveClamp);
-
-                // Apply bonus at the apex of a jump
-                var apexBonus = Mathf.Sign(WalkCommand) * _apexBonus * _apexPoint;
-                _currentHorizontalSpeed += apexBonus * Time.deltaTime;
             }
             else 
-                _currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, 0, _deAcceleration * Time.deltaTime);
-
+                _currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, 0, _deAcceleration * Time.fixedDeltaTime);
         }
 
 
         
         private void CalculateGravity()
         {
-            if (_groundChecker.IsGrounded)
+            if (_isGrounded)
             {
                 if (_currentVerticalSpeed < 0)
                     _currentVerticalSpeed = 0;
@@ -119,13 +125,8 @@ namespace Protoypes.Harry
 
             else
             {
-                // Add downward force while ascending if we ended the jump early
-                var fallSpeed = _endedJumpEarly && _currentVerticalSpeed > 0
-                    ? FallSpeed * _jumpEndEarlyGravityModifier
-                    : FallSpeed;
-
                 // Fall
-                _currentVerticalSpeed -= fallSpeed * Time.deltaTime;
+                _currentVerticalSpeed -= FallSpeed * Time.fixedDeltaTime;
 
                 // Clamp
                 if (_currentVerticalSpeed < _fallClamp)
@@ -137,10 +138,8 @@ namespace Protoypes.Harry
         
         private void CalculateJumpApex() 
         {
-            if (_groundChecker.IsGrounded)
+            if (_isGrounded)
             {
-                // Gets stronger the closer to the top of the jump
-                _apexPoint = Mathf.InverseLerp(_jumpApexThreshold, 0, Mathf.Abs(_velocity.y));
                 FallSpeed = Mathf.Lerp(_minFallSpeed, _maxFallSpeed, _apexPoint);
             }
             else
@@ -149,51 +148,59 @@ namespace Protoypes.Harry
 
         
         
-        private void CalculateJumping() {
-            if (JumpDownCommand && _groundChecker.IsGrounded)
-            {
-                {
-                    _currentVerticalSpeed = _jumpHeight;
-                    _endedJumpEarly = false;
-                    _timeLeftGrounded = float.MinValue;
-                }
-                
-                // End the jump early if button released
-                if (!_groundChecker.IsGrounded && JumpUpCommand && !_endedJumpEarly && _velocity.y > 0)
-                    _endedJumpEarly = true;
-            }
+        private void CalculateJumping() 
+        {
+            if (!_isGrounded) return;
             
-            if (_groundChecker.IsRoofed)
-                if (_currentVerticalSpeed > 0)
-                    _currentVerticalSpeed = 0;
-        }
-
-
-
-        private void MoveCharacter()
-        {
-            RawMovement = new Vector2(_currentHorizontalSpeed, _currentVerticalSpeed) * Time.deltaTime; // Used externally
-            _rb.MovePosition(_rb.position + Vector2.zero + RawMovement);
+            if (_jumpDownCommand && _isGrounded)
+                _currentVerticalSpeed = _jumpHeight;
         }
 
         
         
-        private void FlipCharacter()
+        private void FallIfWallOrRoofHit()
         {
-           _renderer.flipX = _commandContainer.WalkCommand switch
+            if (_currentVerticalSpeed > 0)
             {
-                > 0 => false, 
-                < 0 => true,
-                _ => _renderer.flipX
-            };
+                if (!_isRoofed) // if hit roof fall
+                    return;
 
-           /*var trailPos = _trailRenderer.transform.position;
-           trailPos.x = _commandContainer.WalkCommand switch
-           {
-               > 0 => + 10, 
-               < 0 => - 10,
-               _ => trailPos.x
-           };*/
+                if (!_isGrounded && (_leftWallHit || _rightWallHit))
+                    return; // if hit left or right wall fall
+ 
+                _currentVerticalSpeed = 0; // shared fall logic
+            }
+        }
+
+        
+
+        private void AnimatePlayer()
+        {
+           _animator.SetFloat("Hspeed", Mathf.Abs(_currentHorizontalSpeed));
+           _animator.SetFloat("Vspeed", Mathf.Abs(_currentVerticalSpeed));
+        }
+
+        
+
+        private void MovePlayer()
+        {
+            RawMovement = new Vector2(_currentHorizontalSpeed, _currentVerticalSpeed) * Time.fixedDeltaTime;
+           _rb.MovePosition(_rb.position + RawMovement);
+        }
+
+
+
+        private void FlipPlayer()
+        {
+            switch (_commandContainer.WalkCommand)
+            {
+                case > 0 when !FacingRight:
+                case < 0 when FacingRight:
+                    
+                    FacingRight = !FacingRight;
+                    transform.Rotate(new Vector2(transform.rotation.x, 180));
+                    break;
+            }
         }
     }
 }

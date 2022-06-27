@@ -6,15 +6,20 @@ using UnityEngine;
 
 public class ItemCollector : MonoBehaviour{
 
-    [SerializeField] TextMeshProUGUI cointText;
+    [SerializeField]public TextMeshProUGUI cointText;
     [SerializeField] int cointValue;
-    int coinCounter = 0;
+    [HideInInspector]public int _coinCounter = 0;
 
     void OnTriggerEnter2D(Collider2D col){
         if (col.gameObject.CompareTag("Coin")){
             Destroy(col.gameObject);
-            coinCounter +=  cointValue;
-            cointText.text = "Coins: " + coinCounter;
+            //TODO: Implement coin sound here
+            _coinCounter +=  cointValue;
+            UpdateCoinText(_coinCounter);
         }
+    }
+
+    public void UpdateCoinText(int value){
+        cointText.text = "Coins: " + value ;
     }
 }

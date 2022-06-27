@@ -11,15 +11,23 @@ public class Enemy_AI : MonoBehaviour
     [SerializeField] private EnemyVars_ML EnemyVars;
     private ArcCollider _arcCollider;
 
+    public bool turnBack;
+
     private void Start()
     {
-        EnemyVars._eyes = GetComponentInChildren<Enemy_Eyes>();
+        if (EnemyVars.EnemyType == EnemyType.Ranged)
+        {
+            EnemyVars.firePoint = GetComponentsInChildren<Transform>()[^1];
+        }
+        EnemyVars.tracerEyes = GetComponentInChildren<TracerEyes>();
         EnemyVars.animator = GetComponent<Animator>();
-        EnemyVars.enemyRef = gameObject;
         EnemyVars.ArcCollider = GetComponentInChildren<ArcCollider>();
         enemy_Anim = GetComponent<Animator>();
-     
+
         _currentStateMl = new Idle(EnemyVars);
+
+        EnemyVars.enemyRef = gameObject;
+        EnemyVars.tracerEyes.pursueDistance = EnemyVars.GetPursueDistance;
     }
 
     private void Update()

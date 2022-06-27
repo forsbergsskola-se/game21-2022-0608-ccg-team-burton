@@ -4,8 +4,10 @@ using UnityEngine;
 public class Enemy_Eyes : MonoBehaviour
 {
     public bool PlayerSeen { get; private set; }
-    public bool GroundSeen { get; private set; }
+    public bool GroundSeen { get; set; }
     public float Height { get; private set; }
+
+    public bool turnBack;
     
     public Transform PlayerTrans { get; private set; }
     
@@ -20,6 +22,7 @@ public class Enemy_Eyes : MonoBehaviour
         if (other.gameObject.CompareTag("Grounded"))
         {
             Height = other.gameObject.transform.position.y;
+            Debug.Log("Ground seen again");
             GroundSeen = true;
         }
     }

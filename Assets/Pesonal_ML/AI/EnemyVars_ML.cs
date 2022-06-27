@@ -17,12 +17,13 @@ public class EnemyVars_ML
     [SerializeField] private float PursueDistance;
     [SerializeField] private float MoveSpeed;
     [SerializeField] private float AttackInterval;
-    [SerializeField] EnemyType EnemyType;
+    public EnemyType EnemyType;
     
-    [HideInInspector] public Enemy_Eyes _eyes;
     [HideInInspector] public ArcCollider ArcCollider;
     [HideInInspector] public Animator animator;
     [HideInInspector] public GameObject enemyRef;
+    [HideInInspector] public Transform firePoint;
+    [HideInInspector] public TracerEyes tracerEyes;
 
     public float GetAttackDistance => AttackDistance;
     public float GetPursueDistance => PursueDistance;

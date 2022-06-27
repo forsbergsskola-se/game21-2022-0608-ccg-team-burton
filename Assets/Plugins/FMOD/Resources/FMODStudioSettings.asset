@@ -217,7 +217,7 @@ MonoBehaviour:
   HasSourceProject: 0
   HasPlatforms: 0
   sourceProjectPath: ..///MobileGPSummer22.fspro
-  sourceBankPath: Assets/StreamingAssets
+  sourceBankPath: Assets/StreamingAssets/Desktop
   SourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
@@ -240,11 +240,8 @@ MonoBehaviour:
   RealChannelSettings: []
   Plugins: []
   MasterBanks:
-  - Desktop/Master
-  - Mobile/Master
-  Banks:
-  - Desktop/Music Bank
-  - Mobile/Music Bank
+  - Master
+  Banks: []
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0

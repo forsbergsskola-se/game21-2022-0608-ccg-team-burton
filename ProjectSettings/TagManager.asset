@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Grounded
   - ATile
+  - Coin
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -61,8 +63,14 @@ TagManager:
   - name: Fog_front
     uniqueID: 1062485661
     locked: 0
+  - name: Grass_back
+    uniqueID: 2523576217
+    locked: 0
   - name: Walkable_platforms
     uniqueID: 2113556601
+    locked: 0
+  - name: Enemies
+    uniqueID: 1264358077
     locked: 0
   - name: Player
     uniqueID: 2688807767
