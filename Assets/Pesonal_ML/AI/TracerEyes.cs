@@ -102,7 +102,21 @@ public class TracerEyes : MonoBehaviour
        // DrawBoxRuntime(new Vector2(8, 8), transform.position);
         TraceBox(transform);
     }
-    
+
+    private void CheckPlayerPos()
+    {
+      // var aDot = Vector2.Dot(PlayerTrans.position.normalized, transform.InverseTransformPoint(transform.right).normalized);
+       var aDot2 = Vector2.Dot(PlayerTrans.position.normalized, transform.InverseTransformDirection(transform.right));
+     //  Debug.Log(aDot);
+       Debug.Log(aDot2);
+       //Debug.Log(transform.right);
+       //Debug.Log(PlayerTrans.right);
+
+       if (aDot2 < 0.8f)
+       {
+           actions = Actions.TurnAround;
+       }
+    }
     
     private void DoMultiTrace()
     {
@@ -148,13 +162,19 @@ public class TracerEyes : MonoBehaviour
            increment += inc;
        }
 
-       if (PlatformSeen && !PlayerSeen)
+       if (PlayerTrans != default)
+       {
+           
+       }
+       
+       if (PlatformSeen && !PlayerSeen && !WallSeen)
        {
            PlatformRef = resultList[2].theHit.collider.gameObject.transform;
            
            if (Vector2.Distance(PlatformRef.transform.position, attackRange.position) < 7f)
            {
                PlatformInJumpDistance = true;
+               actions = Actions.PlatformJump;
            }
            else
            {
@@ -204,6 +224,14 @@ public class TracerEyes : MonoBehaviour
            {
                PlayerTrans = resultList[1].theHit.collider.gameObject.transform; 
                _playerHealth = resultList[1].theHit.collider.gameObject.GetComponent<Health>();
+           }
+       }
+
+       if (!PlayerSeen && PlayerTrans != default)
+       {
+           if (PlayerBehind)
+           {
+               actions = Actions.TurnAround;
            }
        }
     }
