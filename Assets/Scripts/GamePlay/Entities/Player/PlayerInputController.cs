@@ -4,40 +4,44 @@ namespace GamePlay.Entities.Player
     public class PlayerInputController : MonoBehaviour
     {
         private CommandContainer _commandContainer;
+        
         public float WalkInput;
         public bool WalkLeftDownInput;
         public bool WalkRightDownInput;
         public bool NoWalkInput;
         
         public bool JumpDownInput;
-        public bool JumpUpInput;
-
-        //public AnimationCurve WalkingCurve;
         public float CurrentWalkSpeed;
         public float InputAcceleration;
-        //public float InputDeceleration;
-        
-        
         public bool AttackDownInput;
-        [HideInInspector] public bool AttackUpInput;
 
-        
-        
+
         private void Awake() => _commandContainer = GetComponent<CommandContainer>();
 
         
-        
+
         private void Update()
         {
             GatherHorizontalMovement(); // collect player inputs
-            SetHorizontalMovment(); // assign value between -1 & 1
+            SetHorizontalMovement(); // assign value between -1 & 1
+            GatherKeyboardInputs();
             SetCommands(); // assign inputs to commands
+
 
             if (WalkLeftDownInput || WalkRightDownInput)
                 NoWalkInput = false;
 
             else if (!WalkLeftDownInput && !WalkRightDownInput)
                 NoWalkInput = true;
+        }
+
+
+        
+        private void GatherKeyboardInputs()
+        {
+            _commandContainer.SpaceDownCommand = Input.GetButton("Jump");
+            _commandContainer.ArrowCommand = Input.GetAxis("Horizontal");
+            _commandContainer.AttackMouseCommand = Input.GetButton("Fire2");
         }
         
         
@@ -58,7 +62,7 @@ namespace GamePlay.Entities.Player
         
         
         
-        private void SetHorizontalMovment()
+        private void SetHorizontalMovement()
         {
             CurrentWalkSpeed = Mathf.Clamp(CurrentWalkSpeed, -1, 1);
             WalkInput = CurrentWalkSpeed;
@@ -69,14 +73,8 @@ namespace GamePlay.Entities.Player
         private void SetCommands()
         {
             _commandContainer.WalkCommand = WalkInput;
-            _commandContainer.WalkLeftCommand = WalkLeftDownInput;
-            _commandContainer.WalkRightCommand = WalkRightDownInput;
-            
             _commandContainer.JumpDownCommand = JumpDownInput;
-            _commandContainer.JumpUpCommand = JumpUpInput;
-            
             _commandContainer.AttackDownCommand = AttackDownInput;
-            _commandContainer.AttackUpCommand = AttackUpInput;
         }
     }
 }

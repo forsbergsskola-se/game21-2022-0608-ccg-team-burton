@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using GamePlay.Entities.Player;
 using UnityEngine;
@@ -16,7 +15,9 @@ public class MeleeAttackTestJJ : MonoBehaviour
 
  private void Update()
  {
-  if (_commandContainer.AttackDownCommand && _allowAttack)
+  if (!_allowAttack) return;
+  
+  if (_commandContainer.AttackDownCommand || _commandContainer.AttackMouseCommand)
     StartCoroutine(CallAttack());
  }
 

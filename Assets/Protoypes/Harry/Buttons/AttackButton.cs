@@ -10,15 +10,13 @@ public class AttackButton : MonoBehaviour
             _playerInputController = FindObjectOfType<PlayerInputController>();
         }
     
-        public void OnPointerUpAttack()
-        {
-            _playerInputController.AttackUpInput = true;
-            _playerInputController.AttackDownInput = false;
-        }
-    
         public void OnPointerDownAttack()
         {
             _playerInputController.AttackDownInput = true;
-            _playerInputController.AttackUpInput = false;
+        }
+    
+        public void OnPointerUpAttack()
+        {
+            _playerInputController.AttackDownInput = false;
         }
 }

@@ -10,15 +10,13 @@ public class JumpButton : MonoBehaviour
         _playerInputController = FindObjectOfType<PlayerInputController>();
     }
 
-    public void OnPointerUpJump()
-    {
-        _playerInputController.JumpUpInput = true;
-        _playerInputController.JumpDownInput = false;
-    }
-
     public void OnPointerDownJump()
     {
         _playerInputController.JumpDownInput = true;
-        _playerInputController.JumpUpInput = false;
+    }
+    
+    public void OnPointerUpJump()
+    {
+        _playerInputController.JumpDownInput = false;
     }
 }
