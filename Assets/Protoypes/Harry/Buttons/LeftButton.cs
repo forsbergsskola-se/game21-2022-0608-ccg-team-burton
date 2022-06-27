@@ -2,7 +2,7 @@ using GamePlay.Entities.Player;
 using UnityEngine;
 
 public class LeftButton : MonoBehaviour
-{
+{ 
     private PlayerInputController _playerInputController;
 
     private void Awake()
@@ -10,19 +10,15 @@ public class LeftButton : MonoBehaviour
         _playerInputController = FindObjectOfType<PlayerInputController>();
     }
 
-
+    public void OnPointerDownLeft()
+    {
+        _playerInputController.WalkLeftDownInput = true;
+        _playerInputController.WalkLeftUpInput = false;
+    }
 
     public void OnPointerUpLeft()
     {
-        _playerInputController.WalkLeftDownInput = true;
-        Debug.Log("Walking left");
-    }
-    
-    
-    
-    public void OnPointerDownLeft()
-    {
+        _playerInputController.WalkLeftUpInput = true;
         _playerInputController.WalkLeftDownInput = false;
-        Debug.Log("Stopped walking left");
     }
 }

@@ -22,6 +22,7 @@ namespace Protoypes.Harry
         public float _moveClamp = 13; 
         public float _deAcceleration = 60f;
         public float _currentHorizontalSpeed { get; private set; }
+        public bool FacingRight;
         
         
         [Header("GRAVITY")] 
@@ -192,12 +193,15 @@ namespace Protoypes.Harry
 
         private void FlipPlayer()
         {
-           _renderer.flipX = _commandContainer.WalkCommand switch
+            switch (_commandContainer.WalkCommand)
             {
-                > 0 => false, 
-                < 0 => true,
-                _ => _renderer.flipX
-            };
+                case > 0 when !FacingRight:
+                case < 0 when FacingRight:
+                    
+                    FacingRight = !FacingRight;
+                    transform.Rotate(new Vector2(transform.rotation.x, 180));
+                    break;
+            }
         }
     }
 }
