@@ -13,12 +13,10 @@ public class LeftButton : MonoBehaviour
     public void OnPointerDownLeft()
     {
         _playerInputController.WalkLeftDownInput = true;
-        _playerInputController.WalkLeftUpInput = false;
     }
 
     public void OnPointerUpLeft()
     {
-        _playerInputController.WalkLeftUpInput = true;
         _playerInputController.WalkLeftDownInput = false;
     }
 }
