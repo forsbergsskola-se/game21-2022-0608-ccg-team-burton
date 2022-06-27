@@ -2,36 +2,61 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Meta.Gacha;
-using Unity.VisualScripting;
+using Newtonsoft.Json;
 using UnityEngine;
 
 public class LootBoxController : MonoBehaviour
 {
    public LootBoxSO LootBoxSO;
    private int _numberOfItemToSpawn = 1;
+   [SerializeField] private Animator _animator;
 
-   public ItemPrefab ItemPrefab;
+   [SerializeField] private GameObject _itemInfoUI;
+
+   public Action<Item> OnUpdateItemUI;
+   private Item item;
+   private void Start()
+   {
+      _itemInfoUI.SetActive(false);
+   }
+
+   private void OnMouseDown()
+   {
+      Debug.Log("Opening loot box");
+      OpenBox();
+      _animator.SetBool("OpenLootBox", true);
+      
+   }
+
    
    public void OpenBox()
    {
-      for (var i = 0; i < _numberOfItemToSpawn; i++)
-      {
-         
-         //Play animation
-         
-         
          var itemSo = LootBoxSO.PickLootTable().PickItem();
+        
+         Debug.Log($"Saving: {itemSo.ID},{itemSo.RaritySo.ID},{itemSo.GemSo.ID}");
+         
+         ////TEMP SAVE SYSTEM//////
+         //TODO: Hook in save in save system
+         InventoryItemSerialization saveItem = new InventoryItemSerialization();
+         saveItem.itemID = itemSo.ID;
+         saveItem.rarityID = itemSo.RaritySo.ID;
+         saveItem.gemId = itemSo.GemSo.ID;
+         
+         //Inventoryslot1 is gained when pressing an item slot in inventory
+         PlayerPrefs.SetString("Inventoryslot1", JsonConvert.SerializeObject(saveItem));
+         
+         
+         //Hook in item generation to receive stats 
+         //TODO: Get item with scaled stats here - these will be presented on the lootboxUI when opening item.
+         item = ItemFactory.CreateItemFromInventory(itemSo, itemSo.RaritySo, itemSo.GemSo);
+ 
+      
 
-         
-         
-         //TODO: Save items to player inventory - What to save? ItemSo only as long as it contains gems, names, etc? ID?
-         //TODO: Have SO with SO+ID --> search for SO with help of ID
-         //Save(itemSo.id, itemSo.itemRaritySo.Id, GemId....) //All strings or ints?
-         
-         //This represents equipping item (temporary placed here for testing)
-         ItemPrefab.SetUpItemPrefab(itemSo);
-       
-      }
+   }
 
+   private void DisplayItem() // called by anim
+   {
+      _itemInfoUI.SetActive(true);
+      OnUpdateItemUI?.Invoke(item);
    }
 }

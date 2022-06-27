@@ -11,7 +11,8 @@ public class ArcCollider : MonoBehaviour
     [SerializeField] private float gravity = 9.8f;
     [SerializeField] private float velocity = 9.8f;
     [SerializeField] private float angle = 60f;
-    public bool TileSpotted { get; private set; }
+    private float resetAngle = 30f;
+    public bool TileSpotted { get; set; }
     public bool SameTileSpotted { get; private set; }
     public bool announceTileSpotted;
     private float currentDeg;
@@ -26,14 +27,16 @@ public class ArcCollider : MonoBehaviour
 
     void Start()
     {
+        resetAngle = angle;
         currentDeg = angle;
         collider = GetComponent<EdgeCollider2D>();
     }
     
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Grounded"))
+        if (col.gameObject.layer == 6)
         {
+            Debug.Log("new tile spotted");
             TileSpotted = true;
 
             if (col.gameObject != NextTile)
@@ -51,6 +54,7 @@ public class ArcCollider : MonoBehaviour
             }
             else
             {
+                Debug.Log("Same tile spotted");
                 SameTileSpotted = true;
             }
             
@@ -92,19 +96,10 @@ public class ArcCollider : MonoBehaviour
             ? collider.points[pointIndex] : Vector2.zero;
     }
     
-    public List<Vector2> GetArc()
-    {
-        return collider.points.ToList();
-    }
-
-    public int GetNumberArcPoints()
-    {
-        return collider.points.Length;
-    }
 
     public void ResetCollider()
     {
-        angle = 60;
+        angle = resetAngle;
         collider.Reset();
         collider.isTrigger = true;
         collider.gameObject.transform.localScale = new Vector3(1, 1, 1);
@@ -112,7 +107,7 @@ public class ArcCollider : MonoBehaviour
     
     public void CalculatePoints()
     {
-        var something = 2 * velocity * Mathf.Sin(Mathf.Deg2Rad * angle) / gravity;
+        var something = (2 * velocity * Mathf.Sin(Mathf.Deg2Rad * angle) / gravity) * 1f;
         var points = FRange(0, something, 0.1f);
         var vecs = new List<Vector2>();
         

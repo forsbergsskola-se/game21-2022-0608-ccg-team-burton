@@ -9,7 +9,6 @@ namespace Protoypes.Harry
         private SpriteRenderer _renderer;
         private CommandContainer _commandContainer;
         private GroundChecker _groundChecker;
-        private TrailRenderer _trailRenderer;
         private Animator _animator;
         
         private Vector2 RawMovement { get; set; }
@@ -22,7 +21,6 @@ namespace Protoypes.Harry
         public float _acceleration = 90;
         public float _moveClamp = 13; 
         public float _deAcceleration = 60f;
-        public float _apexBonus = 2;
         public float _currentHorizontalSpeed { get; private set; }
         
         
@@ -35,19 +33,13 @@ namespace Protoypes.Harry
         
         [Header("JUMPING")] 
         public float _jumpHeight = 30;
-        public float _jumpApexThreshold = 10f;
-        public float _jumpEndEarlyGravityModifier = 3;
-
-        public float _currentVerticalSpeed { get; private set; }
-        private float _timeLeftGrounded;
-        private bool _endedJumpEarly = true;
         private float _apexPoint;
+        public float _currentVerticalSpeed { get; private set; }
         
         
         //Inputs
         private float _walkCommand;
         private bool _jumpDownCommand;
-        private bool _jumpUpCommand;
         
         //Collisions
         public bool _isGrounded{ get; private set; }
@@ -63,7 +55,6 @@ namespace Protoypes.Harry
             _groundChecker = GetComponent<GroundChecker>();
             _renderer = GetComponent<SpriteRenderer>();
             _animator = GetComponent<Animator>();
-            _trailRenderer = GetComponent<TrailRenderer>();
         }
 
 
@@ -74,15 +65,12 @@ namespace Protoypes.Harry
         
         private void FixedUpdate() 
         {
-            _velocity = (_rb.position - _lastPosition) / Time.deltaTime;
-            _lastPosition = _rb.position;
-            
-            CalculateWalking(); 
+          CalculateWalking(); 
             CalculateJumpApex();
             CalculateGravity(); 
-            CalculateJumping();
             FallIfWallOrRoofHit();
-            
+            CalculateJumping();
+
             FlipPlayer();
             if (_animator.runtimeAnimatorController != null)
                 AnimatePlayer();
@@ -96,7 +84,6 @@ namespace Protoypes.Harry
         {
             _walkCommand = _commandContainer.WalkCommand;
             _jumpDownCommand = _commandContainer.JumpDownCommand;
-            _jumpUpCommand = _commandContainer.JumpUpCommand;
         }
 
         
@@ -116,17 +103,13 @@ namespace Protoypes.Harry
             if (_walkCommand != 0) 
             {
                 // Set horizontal move speed
-                _currentHorizontalSpeed += _walkCommand * _acceleration * Time.deltaTime;
+                _currentHorizontalSpeed += _walkCommand * _acceleration * Time.fixedDeltaTime;
 
                 // clamped by max frame movement
                 _currentHorizontalSpeed = Mathf.Clamp(_currentHorizontalSpeed, -_moveClamp, _moveClamp);
-
-                // Apply bonus at the apex of a jump
-                var apexBonus = Mathf.Sign(_walkCommand) * _apexBonus * _apexPoint;
-                _currentHorizontalSpeed += apexBonus * Time.deltaTime;
             }
             else 
-                _currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, 0, _deAcceleration * Time.deltaTime);
+                _currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, 0, _deAcceleration * Time.fixedDeltaTime);
         }
 
 
@@ -141,13 +124,8 @@ namespace Protoypes.Harry
 
             else
             {
-                // Add downward force while ascending if we ended the jump early
-                var fallSpeed = _endedJumpEarly && _currentVerticalSpeed > 0
-                    ? FallSpeed * _jumpEndEarlyGravityModifier
-                    : FallSpeed;
-
                 // Fall
-                _currentVerticalSpeed -= fallSpeed * Time.deltaTime;
+                _currentVerticalSpeed -= FallSpeed * Time.fixedDeltaTime;
 
                 // Clamp
                 if (_currentVerticalSpeed < _fallClamp)
@@ -161,8 +139,6 @@ namespace Protoypes.Harry
         {
             if (_isGrounded)
             {
-                // Gets stronger the closer to the top of the jump
-                _apexPoint = Mathf.InverseLerp(_jumpApexThreshold, 0, Mathf.Abs(_velocity.y));
                 FallSpeed = Mathf.Lerp(_minFallSpeed, _maxFallSpeed, _apexPoint);
             }
             else
@@ -173,18 +149,10 @@ namespace Protoypes.Harry
         
         private void CalculateJumping() 
         {
+            if (!_isGrounded) return;
+            
             if (_jumpDownCommand && _isGrounded)
-            {
-                {
-                    _currentVerticalSpeed = _jumpHeight;
-                    _endedJumpEarly = false;
-                    _timeLeftGrounded = float.MinValue;
-                }
-                
-                // End the jump early if button released
-                if (!_isGrounded && _jumpUpCommand && !_endedJumpEarly && _velocity.y > 0)
-                    _endedJumpEarly = true;
-            }
+                _currentVerticalSpeed = _jumpHeight;
         }
 
         
@@ -196,7 +164,7 @@ namespace Protoypes.Harry
                 if (!_isRoofed) // if hit roof fall
                     return;
 
-                if (_isGrounded && (_leftWallHit || _rightWallHit))
+                if (!_isGrounded && (_leftWallHit || _rightWallHit))
                     return; // if hit left or right wall fall
  
                 _currentVerticalSpeed = 0; // shared fall logic
@@ -207,21 +175,16 @@ namespace Protoypes.Harry
 
         private void AnimatePlayer()
         {
-            _animator.SetFloat("Hspeed", Mathf.Abs(_currentHorizontalSpeed));
-            
-            
-                _animator.SetFloat("Vspeed", Mathf.Abs(_currentVerticalSpeed));
-            
-            _animator.SetFloat("Hspeed", Mathf.Abs(_currentHorizontalSpeed));
-            _animator.SetFloat("Vspeed", Mathf.Abs(_currentVerticalSpeed));
+           _animator.SetFloat("Hspeed", Mathf.Abs(_currentHorizontalSpeed));
+           _animator.SetFloat("Vspeed", Mathf.Abs(_currentVerticalSpeed));
         }
 
         
 
         private void MovePlayer()
         {
-            RawMovement = new Vector2(_currentHorizontalSpeed, _currentVerticalSpeed) * Time.deltaTime; // Used externally
-            _rb.MovePosition(_rb.position + Vector2.zero + RawMovement);
+            RawMovement = new Vector2(_currentHorizontalSpeed, _currentVerticalSpeed) * Time.fixedDeltaTime;
+           _rb.MovePosition(_rb.position + RawMovement);
         }
 
 
