@@ -569,6 +569,12 @@ Transform:
   m_Father: {fileID: 1353441219}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &154681024 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3205524569664107112, guid: 123d0462d05bbb541858e1b9aeb1a388,
+    type: 3}
+  m_PrefabInstance: {fileID: 3205524569464581819}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &169866696
 GameObject:
   m_ObjectHideFlags: 0
@@ -15385,7 +15391,7 @@ PrefabInstance:
     - target: {fileID: 6999187586587883943, guid: 31dd108689ddc67479e4bc97ec9aa85e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -15904,6 +15910,11 @@ PrefabInstance:
       propertyPath: hearts.Array.data[2]
       value: 
       objectReference: {fileID: 7872426394030782515}
+    - target: {fileID: 4797520626450282201, guid: 123d0462d05bbb541858e1b9aeb1a388,
+        type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 154681024}
     - target: {fileID: 7747099678071028065, guid: 123d0462d05bbb541858e1b9aeb1a388,
         type: 3}
       propertyPath: cam

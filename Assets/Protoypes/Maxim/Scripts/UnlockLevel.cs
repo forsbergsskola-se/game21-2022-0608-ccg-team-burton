@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelLocked : MonoBehaviour
+public class UnlockLevel : MonoBehaviour, ISaveable 
 {
     [SerializeField] public bool Unlocked;
     public Image LockImage;
@@ -22,12 +22,13 @@ public class LevelLocked : MonoBehaviour
         {
             Unlocked = true;
             Debug.Log("Popped off");
+            
         }
     }
     
     private void UpdateLevelImage()
     {
-        if (!Unlocked)
+        if (!Unlocked)// if unlock is false, the level is locked
         {
             LockImage.enabled = true;
             for (int i = 0; i < Stars.Length; i++)
@@ -48,5 +49,16 @@ public class LevelLocked : MonoBehaviour
                 Stars[i].gameObject.GetComponent<Image>().sprite = fullStar;
             }
         }
+    }
+
+
+    public object CaptureState()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void RestoreState(object state)
+    {
+        throw new System.NotImplementedException();
     }
 }
