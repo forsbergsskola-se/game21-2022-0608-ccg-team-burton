@@ -14,6 +14,7 @@ namespace GamePlay.Entities.Player
         public bool JumpDownInput;
         public bool JumpUpInput;
         
+        
         public bool AttackDownInput;
         [HideInInspector] public bool AttackUpInput;
 
@@ -46,8 +47,12 @@ namespace GamePlay.Entities.Player
         private void SetCommands()
         {
             _commandContainer.WalkCommand = WalkInput;
+            _commandContainer.WalkLeftCommand = WalkLeftDownInput;
+            _commandContainer.WalkRightCommand = WalkRightDownInput;
+            
             _commandContainer.JumpDownCommand = JumpDownInput;
             _commandContainer.JumpUpCommand = JumpUpInput;
+            
             _commandContainer.AttackDownCommand = AttackDownInput;
             _commandContainer.AttackUpCommand = AttackUpInput;
         }
