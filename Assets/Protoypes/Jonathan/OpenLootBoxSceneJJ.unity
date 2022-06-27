@@ -123,6 +123,25 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &829679760 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9078144887388125230, guid: 5adc0df192404f94f8ee4898b5569bba,
+    type: 3}
+  m_PrefabInstance: {fileID: 9036578494889710586}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &829679766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829679760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 789de8b76f8535e44b53212b96d899b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneName: UI_Shop_Prototype
 --- !u!1 &1525907000
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,8 +397,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 957450406379543187, guid: 5adc0df192404f94f8ee4898b5569bba,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 957450406379543187, guid: 5adc0df192404f94f8ee4898b5569bba,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadOtherScene
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 957450406379543187, guid: 5adc0df192404f94f8ee4898b5569bba,
         type: 3}
@@ -390,6 +414,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 9036578494790298981, guid: 5adc0df192404f94f8ee4898b5569bba,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9036578494904530850, guid: 5adc0df192404f94f8ee4898b5569bba,
         type: 3}
@@ -451,6 +480,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: LootBox
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 284968712337978885, guid: 5adc0df192404f94f8ee4898b5569bba, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 5adc0df192404f94f8ee4898b5569bba, type: 3}
