@@ -40,11 +40,13 @@ namespace Protoypes.Harry
         
         //Inputs
         private float _walkCommand;
+        private float _horizontal;
         private bool _jumpDownCommand;
-        
+        private bool _jumpSpace;
+
         //Collisions
         public bool _isGrounded { get; private set; }
-        public bool _isBouncing { get; private set; }
+        private bool _isBouncing;
         private bool _isRoofed;
         private bool _leftWallHit;
         private bool _rightWallHit;
@@ -66,13 +68,13 @@ namespace Protoypes.Harry
         
         private void FixedUpdate() 
         {
-          CalculateWalking(); 
+            CalculateWalking(); 
             CalculateJumpApex();
             CalculateGravity(); 
             FallIfWallOrRoofHit();
             CalculateJumping();
+            FlipPlayer(_horizontal != 0 ? _horizontal : _walkCommand);
 
-            FlipPlayer();
             if (_animator.runtimeAnimatorController != null)
                 AnimatePlayer();
             
@@ -85,6 +87,8 @@ namespace Protoypes.Harry
         {
             _walkCommand = _commandContainer.WalkCommand;
             _jumpDownCommand = _commandContainer.JumpDownCommand;
+            _horizontal = _commandContainer.ArrowCommand;
+            _jumpSpace = _commandContainer.SpaceDownCommand;
         }
 
         
@@ -100,12 +104,16 @@ namespace Protoypes.Harry
         
 
 
-        private void CalculateWalking() 
+        private void CalculateWalking()
         {
-            if (_walkCommand != 0) 
+            
+            if (_walkCommand != 0 || _horizontal != 0) 
             {
+                if (_horizontal is > 0 or < 0)
+                    _currentHorizontalSpeed += _horizontal * Acceleration * Time.fixedDeltaTime;
                 // Set horizontal move speed
-                _currentHorizontalSpeed += _walkCommand * Acceleration * Time.fixedDeltaTime;
+                else
+                    _currentHorizontalSpeed += _walkCommand * Acceleration * Time.fixedDeltaTime;
 
                 // clamped by max frame movement
                 _currentHorizontalSpeed = Mathf.Clamp(_currentHorizontalSpeed, -MoveClamp, MoveClamp);
@@ -156,7 +164,7 @@ namespace Protoypes.Harry
             
             if (!_isGrounded) return;
             
-            if (_jumpDownCommand && _isGrounded)
+            if (_jumpDownCommand && _isGrounded || _jumpSpace && _isGrounded)
                 _currentVerticalSpeed = JumpHeight;
         }
 
@@ -195,9 +203,9 @@ namespace Protoypes.Harry
 
 
 
-        private void FlipPlayer()
+        private void FlipPlayer(float input)
         {
-            switch (_commandContainer.WalkCommand)
+            switch (input)
             {
                 case > 0 when !FacingRight:
                 case < 0 when FacingRight:
