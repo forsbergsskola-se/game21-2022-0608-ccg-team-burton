@@ -13,8 +13,8 @@ public class PressStars : MonoBehaviour
         {
             PlayerPrefs.SetInt("Lv" + levelIndex, _starsNum );
         }
-        // SceneManager.LoadScene("UI_WorldMap_Prototype");
+        SceneManager.LoadScene("UI_WorldMap_Prototype");
         
-        Debug.Log(PlayerPrefs.GetInt("Lv" + levelIndex, _starsNum ));
+        // Debug.Log(PlayerPrefs.GetInt("Lv" + levelIndex, _starsNum ));
     }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelLocked : MonoBehaviour
+public class UnlockLevel : MonoBehaviour
 {
     [SerializeField] public bool Unlocked;
     public Image LockImage;
