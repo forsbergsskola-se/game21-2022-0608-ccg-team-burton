@@ -134,12 +134,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Acceleration: 90
-  MoveClamp: 13
-  Deceleration: 60
+  MoveClamp: 7.25
+  Deceleration: 400
   FacingRight: 1
-  FallClamp: -40
-  MinFallSpeed: 80
-  MaxFallSpeed: 120
+  FallClamp: -52
+  MinFallSpeed: 65
+  MaxFallSpeed: 112.5
   JumpHeight: 30
   BounceHeight: 40
 --- !u!114 &1144139567602091066
@@ -286,11 +286,9 @@ MonoBehaviour:
   WalkRightDownInput: 0
   NoWalkInput: 0
   JumpDownInput: 0
-  JumpUpInput: 0
   CurrentWalkSpeed: 0
   InputAcceleration: 3.3333333
   AttackDownInput: 0
-  AttackUpInput: 0
 --- !u!114 &1144139567602091069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,11 +302,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WalkCommand: 0
-  WalkLeftCommand: 0
-  WalkRightCommand: 0
-  JumpUpCommand: 0
+  ArrowCommand: 0
   JumpDownCommand: 0
-  AttackUpCommand: 0
+  SpaceDownCommand: 0
   AttackDownCommand: 0
 --- !u!114 &7747099678071028065
 MonoBehaviour:
