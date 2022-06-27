@@ -133,8 +133,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7efbeca9fb2caee408e33967aa452cfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _acceleration: 80
-  _moveClamp: 6.75
+  _acceleration: 90
+  _moveClamp: 7.25
   _deAcceleration: 400
   FacingRight: 1
   _fallClamp: -50
@@ -198,7 +198,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45da3103cf2a5f441a32f6c98306be6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
   attackRange: 2
   attackPoint: {fileID: 3616007790298403442}
   enemyLayers:
@@ -277,13 +276,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8de95438624ac24c920d263e2e88eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WalkInput: 0
   WalkLeftDownInput: 0
-  WalkLeftUpInput: 0
   WalkRightDownInput: 0
-  WalkRightUpInput: 0
   NoWalkInput: 0
   JumpDownInput: 0
   JumpUpInput: 0
+  CurrentWalkSpeed: 0
+  InputAcceleration: 3.3333333
   AttackDownInput: 0
   AttackUpInput: 0
 --- !u!114 &1144139567602091069
