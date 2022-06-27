@@ -1,9 +1,10 @@
+using System;
 using Entity;
 using UnityEngine;
 
 public class Combat : MonoBehaviour
 {
-    public Animator anim;
+    private Animator anim;
     public float attackRange;
     public Transform attackPoint;
     public LayerMask enemyLayers;
@@ -15,15 +16,20 @@ public class Combat : MonoBehaviour
      private int _knockbackMultiplier = 1;
      public GameObject DebugProjectile;
      public Transform FirePoint;
-     
-    public void MeleeAttack()
+
+     void Awake(){
+         anim = GetComponent<Animator>();
+     }
+
+     public void MeleeAttack()
     {
-        //Play Melee Attack 
-        //anim.SetTrigger();
+        //Play Melee Attack
+        anim.SetBool("Attacking", true);
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
             DealDamage(enemy);
+        
         
     }
     public void RangedAttack()

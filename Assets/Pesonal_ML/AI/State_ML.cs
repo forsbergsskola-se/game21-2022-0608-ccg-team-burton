@@ -6,6 +6,7 @@ using TreeEditor;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 using Vector2 = UnityEngine.Vector2;
@@ -208,7 +209,12 @@ public class Pursue : State_ML
             NextStateMl = new Attack(EnemyVarsMl);
             Stage = EVENT.Exit;
         }
-        
+
+        if (EnemyVarsMl.tracerEyes.actions == Actions.TurnAround)
+        {
+            TurnAround();
+        }
+
         else if (distance > EnemyVarsMl.GetAttackDistance + 20)
         {
             Debug.Log("Player out of attack range");
@@ -227,6 +233,11 @@ public class Pursue : State_ML
         {
             SimpleMove();
         }
+    }
+    
+    private void TurnAround()
+    {
+        EnemyVarsMl.enemyRef.transform.Rotate(Vector3.up, 180);
     }
     
     private void SimpleMove()
@@ -398,7 +409,7 @@ public class PlatformJump : State_ML
             Debug.Log(Mathf.Abs(xDist));
             
             var forceDir = EnemyVarsMl.enemyRef.transform.right;
-            body.AddForce(new Vector2(forceDir.x * 0.5f, 0), ForceMode2D.Force);
+            body.AddForce(new Vector2(forceDir.x * 0.3f, 0), ForceMode2D.Force);
             
             if (Mathf.Abs(xDist) < 3)
             {
@@ -485,7 +496,10 @@ public class Jump : State_ML
         var forward = EnemyVarsMl.enemyRef.gameObject.transform.right;
       
         var diff = EnemyVarsMl.ArcCollider.TileHeightDifference;
-        if (diff < 0)
+        
+        Debug.Log(diff);
+        
+        if (diff <= 0)
         {
             diff = 6;
         }
@@ -495,8 +509,9 @@ public class Jump : State_ML
             diff *= 100;
             diff = Mathf.Clamp(diff, 0, 7);
         }
-        
+
         var impulse = new Vector2(forward.x  * (EnemyVarsMl.ArcCollider.GetLengthDifference() * 0.75f), diff);
+        Debug.Log(impulse);
 
         body.AddForce(impulse , ForceMode2D.Impulse); 
     

@@ -92,9 +92,32 @@ public class TracerEyes : MonoBehaviour
             timeSinceTrace -= traceInterval;
 
             DoMultiTrace();
+           // CheckForGround(new Vector2(transform.right.x, -0.5f));
+           // DoSquareTrace();
         }
     }
 
+    private void DoSquareTrace()
+    {
+       // DrawBoxRuntime(new Vector2(8, 8), transform.position);
+        TraceBox(transform);
+    }
+
+    private void CheckPlayerPos()
+    {
+      // var aDot = Vector2.Dot(PlayerTrans.position.normalized, transform.InverseTransformPoint(transform.right).normalized);
+       var aDot2 = Vector2.Dot(PlayerTrans.position.normalized, transform.InverseTransformDirection(transform.right));
+     //  Debug.Log(aDot);
+       Debug.Log(aDot2);
+       //Debug.Log(transform.right);
+       //Debug.Log(PlayerTrans.right);
+
+       if (aDot2 < 0.8f)
+       {
+           actions = Actions.TurnAround;
+       }
+    }
+    
     private void DoMultiTrace()
     {
         var right = transform.right;
@@ -139,13 +162,19 @@ public class TracerEyes : MonoBehaviour
            increment += inc;
        }
 
-       if (PlatformSeen && !PlayerSeen)
+       if (PlayerTrans != default)
+       {
+           
+       }
+       
+       if (PlatformSeen && !PlayerSeen && !WallSeen)
        {
            PlatformRef = resultList[2].theHit.collider.gameObject.transform;
            
            if (Vector2.Distance(PlatformRef.transform.position, attackRange.position) < 7f)
            {
                PlatformInJumpDistance = true;
+               actions = Actions.PlatformJump;
            }
            else
            {
@@ -197,6 +226,14 @@ public class TracerEyes : MonoBehaviour
                _playerHealth = resultList[1].theHit.collider.gameObject.GetComponent<Health>();
            }
        }
+
+       if (!PlayerSeen && PlayerTrans != default)
+       {
+           if (PlayerBehind)
+           {
+               actions = Actions.TurnAround;
+           }
+       }
     }
 
     private void AnalyzeResults(int traceCount, TraceType type)
@@ -216,6 +253,10 @@ public class TracerEyes : MonoBehaviour
                     
                     case 2:
                         PlatformSeen = false;
+                        break;
+                    
+                    case 3:
+                        PlayerBehind = false;
                         break;
                     
                 }
@@ -353,11 +394,14 @@ public class TracerEyes : MonoBehaviour
     => _playerHealth.CurrentHealth;
 
 
-    private void TraceBox()
+    private void TraceBox(Transform trans)
     {
-        var trans = transform;  
-        var result =  Physics2D.BoxCastAll(trans.position + new Vector3((pursueDistance/2) * trans.forward.x, 0), new Vector2(pursueDistance, 2), 0, trans.forward);
-        DrawBoxRuntime(new Vector2(pursueDistance, 2), trans.position + new Vector3(pursueDistance * trans.forward.x, 0));
+        var sizeY = 7f;
+        var sizeX = pursueDistance;
+        var boxPlacement = trans.position + new Vector3(0, sizeY / 2 - 1);
+        var result = Physics2D.BoxCastAll(boxPlacement , new Vector2(pursueDistance * 2, sizeY), 0, trans.forward, 8);
+      //  var result = Physics2D.BoxCastAll(trans.position + new Vector3((pursueDistance/2) * trans.forward.x, 0), new Vector2(pursueDistance, 6), 0, trans.forward, 8);
+        DrawBoxRuntime(new Vector2(pursueDistance, sizeY), boxPlacement);
         
         foreach (var r in result)
         {
@@ -384,6 +428,14 @@ public class TracerEyes : MonoBehaviour
             }
             
             else if (r.collider.gameObject.layer == 6)
+            {
+                if (r.collider.gameObject != StandingOn)
+                {
+                    Debug.Log("Platform or wall spotted");
+                }
+            }
+            
+            else if (r.collider.gameObject.layer == 7)
             {
                 
             }
