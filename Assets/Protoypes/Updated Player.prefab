@@ -133,14 +133,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7efbeca9fb2caee408e33967aa452cfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _acceleration: 90
-  _moveClamp: 7.25
-  _deAcceleration: 400
+  Acceleration: 90
+  MoveClamp: 13
+  Deceleration: 60
   FacingRight: 1
-  _fallClamp: -50
-  _minFallSpeed: 65
-  _maxFallSpeed: 112.5
-  _jumpHeight: 23.5
+  FallClamp: -40
+  MinFallSpeed: 80
+  MaxFallSpeed: 120
+  JumpHeight: 30
+  BounceHeight: 40
 --- !u!114 &1144139567602091066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,12 +157,16 @@ MonoBehaviour:
   IsGrounded: 0
   _groundCheckLength: 0.75
   _groundCheckRadius: 0.53
+  IsBouncing: 0
   IsRoofed: 0
   _roofCheckLength: 0.6
   _roofCheckRadius: 0.53
   _groundLayers:
     serializedVersion: 2
     m_Bits: 64
+  _bounceLayers:
+    serializedVersion: 2
+    m_Bits: 1024
   LeftWallHit: 0
   _leftCheckLength: 0.5
   _leftCheckRadius: 0.3
