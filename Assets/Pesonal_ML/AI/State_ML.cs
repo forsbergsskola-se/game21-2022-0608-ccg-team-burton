@@ -208,6 +208,14 @@ public class Pursue : State_ML
             NextStateMl = new Attack(EnemyVarsMl);
             Stage = EVENT.Exit;
         }
+
+        if (!EnemyVarsMl.tracerEyes.PlayerSeen)
+        {
+            if (EnemyVarsMl.tracerEyes.PlayerBehind)
+            {
+                TurnAround();
+            }
+        }
         
         else if (distance > EnemyVarsMl.GetAttackDistance + 20)
         {
@@ -227,6 +235,11 @@ public class Pursue : State_ML
         {
             SimpleMove();
         }
+    }
+    
+    private void TurnAround()
+    {
+        EnemyVarsMl.enemyRef.transform.Rotate(Vector3.up, 180);
     }
     
     private void SimpleMove()
