@@ -118,7 +118,7 @@ public class ArcCollider : MonoBehaviour
             vecs.Add(new Vector2(posX, posY));
         }
         
-        vecs.Add(new Vector2(vecs[^1].x, vecs[^1].y - 5));
+        vecs.Add(new Vector2(vecs[^1].x, vecs[^1].y - 8));
         
         
         collider.points = vecs.ToArray();
