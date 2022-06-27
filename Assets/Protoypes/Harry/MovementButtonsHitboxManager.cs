@@ -3,10 +3,10 @@ using UnityEngine.UI;
 
 public class MovementButtonsHitboxManager : MonoBehaviour
 {
-    public GameObject LeftHitbox;
-    public GameObject RightHitbox;
-    public GameObject AttackHitbox;
-    public GameObject JumpHitbox;
+    private GameObject LeftHitbox;
+    private GameObject RightHitbox;
+    private GameObject AttackHitbox;
+    private GameObject JumpHitbox;
 
     
     [Range(0.0f, 1.0f)]
@@ -22,12 +22,19 @@ public class MovementButtonsHitboxManager : MonoBehaviour
 
     private void Awake()
     {
+        LeftHitbox = gameObject.transform.Find("Left Button/Left Hitbox").gameObject;
+        RightHitbox = transform.Find("Right Button/Right Hitbox").gameObject;
+        AttackHitbox = transform.Find("Attack Button/Attack Hitbox").gameObject;
+        JumpHitbox = transform.Find("Jump Button/Jump Hitbox").gameObject;
+        
         _leftImage = LeftHitbox.GetComponent<Image>();
         _rightImage = RightHitbox.GetComponent<Image>();
         _attackImage = AttackHitbox.GetComponent<Image>();
         _jumpImage = JumpHitbox.GetComponent<Image>();
     }
 
+    
+    
     private void Update()
     {
         SetAlpha();
@@ -36,6 +43,7 @@ public class MovementButtonsHitboxManager : MonoBehaviour
     }
 
 
+    
     private void SetAlpha()
     {
         _newHitboxAlpha = _leftImage.color;
@@ -43,6 +51,7 @@ public class MovementButtonsHitboxManager : MonoBehaviour
     }
 
 
+    
     private void ChangeAlphaValues()
     {
         _leftImage.color = _newHitboxAlpha;
@@ -52,6 +61,7 @@ public class MovementButtonsHitboxManager : MonoBehaviour
     }
 
 
+    
     private void ChangeHitboxSizes()
     {
         var newSize = new Vector3(FixedSize, FixedSize, 0);
