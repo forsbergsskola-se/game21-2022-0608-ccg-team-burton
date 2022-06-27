@@ -3,9 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class LevelSelection : MonoBehaviour
 {
-   private LevelLocked _levelLocked;
+   private UnlockLevel _levelLocked;
 
-   private void Awake() => _levelLocked = GetComponent<LevelLocked>();
+   private void Awake() => _levelLocked = GetComponent<UnlockLevel>();
 
    public void LoadLevel()
    {
