@@ -11,7 +11,7 @@ public class PurchaseItem : MonoBehaviour
     public int _price;
 
     public Action<int> OnCurrencyChange;
-    
+
     public void Start()
     {
         _currentCoins = 1900;
@@ -26,6 +26,7 @@ public class PurchaseItem : MonoBehaviour
         {
             Debug.Log("Point Counter" + _currentCoins);
             _currentCoins -= _price;
+            // Save current coins to inentory
             OnCurrencyChange?.Invoke(_currentCoins);
             sceneLoader.LoadScene();
         }
