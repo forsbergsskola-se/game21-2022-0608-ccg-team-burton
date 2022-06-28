@@ -69,6 +69,15 @@ public class SoundMananger : MonoBehaviour
         }
     }
     
+
+
+    public void EquipItem()
+    {
+        Debug.Log("Walking");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Player/Walking");
+    }
+
+
     public void EquipItem()
     {
         Debug.Log("EquipItem");
