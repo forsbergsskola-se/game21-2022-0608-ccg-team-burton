@@ -7,9 +7,9 @@ using UnityEngine;
 public class SoundMananger : MonoBehaviour
 {
     [Header("Music and Ambience")]
-    public FMODUnity.EventReference MusicTrack1_EventRef;
+    public FMODUnity.EventReference MusicTrack;
 
-    private FMOD.Studio.EventInstance MusicTrack1_EventInst;
+    private FMOD.Studio.EventInstance MusicTrack_EventInst;
 
     bool isPitched = false;
 
@@ -20,7 +20,7 @@ public class SoundMananger : MonoBehaviour
         //MusicTrack1_EventInst = FMODUnity.RuntimeManager.CreateInstance(MusicTrack1_EventRef);
         //MusicTrack1_EventInst.start();
         
-        StartSound(MusicTrack1_EventRef);
+        StartMusic(MusicTrack);
 
         //DoThing();
         
@@ -40,20 +40,24 @@ public class SoundMananger : MonoBehaviour
     
     public void SetMusicParam(float val)
     {
-        MusicTrack1_EventInst.setParameterByName("test", val);
+        MusicTrack_EventInst.setParameterByName("test", val);
     }
 
     public void switchPitch()
     {
-        if (isPitched) MusicTrack1_EventInst.setParameterByName("test", 0f);
-        else MusicTrack1_EventInst.setParameterByName("test", 1f);
+        if (isPitched) MusicTrack_EventInst.setParameterByName("test", 0f);
+        else MusicTrack_EventInst.setParameterByName("test", 1f);
         isPitched = !isPitched;
     }
 
-    public void StartSound(FMODUnity.EventReference MusicTrack2_EventRef){
-        MusicTrack1_EventInst.stop(STOP_MODE.ALLOWFADEOUT);
-        MusicTrack1_EventInst = FMODUnity.RuntimeManager.CreateInstance(MusicTrack2_EventRef);
-        MusicTrack1_EventInst.start();
+    public void StartMusic(FMODUnity.EventReference MusicTrack){
+        StopMusic();
+        MusicTrack_EventInst = FMODUnity.RuntimeManager.CreateInstance(MusicTrack);
+        MusicTrack_EventInst.start();
+    }
+
+    public void StopMusic(){
+        MusicTrack_EventInst.stop(STOP_MODE.ALLOWFADEOUT);
     }
     
     public void EquipItem()
