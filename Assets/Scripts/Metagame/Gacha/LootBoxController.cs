@@ -70,10 +70,6 @@ public class LootBoxController : MonoBehaviour, ISaveable
          gainedItems.Add(item);
          
       }
-       
- 
-      
-
    }
 
    

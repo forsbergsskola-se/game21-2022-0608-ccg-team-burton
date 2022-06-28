@@ -123,27 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &235457769 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2820970757886194127, guid: 2b24a900e88c8a249914c1c1fe8e4510,
-    type: 3}
-  m_PrefabInstance: {fileID: 2500345111848040667}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &235457771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 235457769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b71b3f720c56c24a81f944722580667, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lootBoxController: {fileID: 960981154}
-  ItemName: {fileID: 0}
-  Rarity: {fileID: 0}
 --- !u!1 &344926699 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2500345111504294192, guid: 2b24a900e88c8a249914c1c1fe8e4510,
@@ -490,27 +469,27 @@ PrefabInstance:
     - target: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
         type: 3}
       propertyPath: MusicTrack.Path
-      value: event:/Music/MusicTrack1
+      value: event:/Music/MusicTrack2
       objectReference: {fileID: 0}
     - target: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
         type: 3}
       propertyPath: MusicTrack.Guid.Data1
-      value: -606211590
+      value: -168852341
       objectReference: {fileID: 0}
     - target: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
         type: 3}
       propertyPath: MusicTrack.Guid.Data2
-      value: 1274837012
+      value: 1262825356
       objectReference: {fileID: 0}
     - target: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
         type: 3}
       propertyPath: MusicTrack.Guid.Data3
-      value: -64651085
+      value: 2049451650
       objectReference: {fileID: 0}
     - target: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
         type: 3}
       propertyPath: MusicTrack.Guid.Data4
-      value: -664038866
+      value: 350843332
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -521,18 +500,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2500345111848040667}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1972830280 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2500345112022825107, guid: 2b24a900e88c8a249914c1c1fe8e4510,
-    type: 3}
-  m_PrefabInstance: {fileID: 2500345111848040667}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 789de8b76f8535e44b53212b96d899b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2500345111848040667
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -541,76 +508,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2500345111201984643, guid: 2b24a900e88c8a249914c1c1fe8e4510,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 218
-      objectReference: {fileID: 0}
-    - target: {fileID: 2500345111201984643, guid: 2b24a900e88c8a249914c1c1fe8e4510,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 168
-      objectReference: {fileID: 0}
-    - target: {fileID: 2500345111504294199, guid: 2b24a900e88c8a249914c1c1fe8e4510,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 21
-      objectReference: {fileID: 0}
-    - target: {fileID: 2500345111504294199, guid: 2b24a900e88c8a249914c1c1fe8e4510,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2500345112022825107, guid: 2b24a900e88c8a249914c1c1fe8e4510,
-        type: 3}
-      propertyPath: _sceneName
-      value: UI_Shop_Prototype
-      objectReference: {fileID: 0}
-    - target: {fileID: 2500345112022825118, guid: 2b24a900e88c8a249914c1c1fe8e4510,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2500345112022825118, guid: 2b24a900e88c8a249914c1c1fe8e4510,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2500345112022825118, guid: 2b24a900e88c8a249914c1c1fe8e4510,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+    - target: {fileID: 235457771, guid: 2b24a900e88c8a249914c1c1fe8e4510, type: 3}
+      propertyPath: lootBoxController
       value: 
-      objectReference: {fileID: 1972830280}
-    - target: {fileID: 2500345112022825118, guid: 2b24a900e88c8a249914c1c1fe8e4510,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2500345112022825118, guid: 2b24a900e88c8a249914c1c1fe8e4510,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 2500345112022825118, guid: 2b24a900e88c8a249914c1c1fe8e4510,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SceneLoader, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2500345112022825118, guid: 2b24a900e88c8a249914c1c1fe8e4510,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 2500345112421056410, guid: 2b24a900e88c8a249914c1c1fe8e4510,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 269
-      objectReference: {fileID: 0}
-    - target: {fileID: 2500345112421056410, guid: 2b24a900e88c8a249914c1c1fe8e4510,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -103
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 960981154}
     - target: {fileID: 3432007612819368856, guid: 2b24a900e88c8a249914c1c1fe8e4510,
         type: 3}
       propertyPath: m_Pivot.x
@@ -716,16 +617,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6907223180125374735, guid: 2b24a900e88c8a249914c1c1fe8e4510,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -98
-      objectReference: {fileID: 0}
-    - target: {fileID: 6907223180125374735, guid: 2b24a900e88c8a249914c1c1fe8e4510,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 187
-      objectReference: {fileID: 0}
     - target: {fileID: 8731747406335818595, guid: 2b24a900e88c8a249914c1c1fe8e4510,
         type: 3}
       propertyPath: m_Name
@@ -804,11 +695,6 @@ PrefabInstance:
       objectReference: {fileID: 6601824748177687480}
     - target: {fileID: 2543266220312297757, guid: 1ed1e2cdea434404884b3b7f5e190d19,
         type: 3}
-      propertyPath: OpenLootBoxSoundFile.Path
-      value: event:/Meta Game/Lootbox/OpenLootCrate1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2543266220312297757, guid: 1ed1e2cdea434404884b3b7f5e190d19,
-        type: 3}
       propertyPath: ItemElements.Array.data[0]
       value: 
       objectReference: {fileID: 9036578494743687639}
@@ -832,26 +718,6 @@ PrefabInstance:
       propertyPath: ItemElements.Array.data[4]
       value: 
       objectReference: {fileID: 1579910974}
-    - target: {fileID: 2543266220312297757, guid: 1ed1e2cdea434404884b3b7f5e190d19,
-        type: 3}
-      propertyPath: OpenLootBoxSoundFile.Guid.Data1
-      value: 1605765374
-      objectReference: {fileID: 0}
-    - target: {fileID: 2543266220312297757, guid: 1ed1e2cdea434404884b3b7f5e190d19,
-        type: 3}
-      propertyPath: OpenLootBoxSoundFile.Guid.Data2
-      value: 1257533211
-      objectReference: {fileID: 0}
-    - target: {fileID: 2543266220312297757, guid: 1ed1e2cdea434404884b3b7f5e190d19,
-        type: 3}
-      propertyPath: OpenLootBoxSoundFile.Guid.Data3
-      value: -1854008182
-      objectReference: {fileID: 0}
-    - target: {fileID: 2543266220312297757, guid: 1ed1e2cdea434404884b3b7f5e190d19,
-        type: 3}
-      propertyPath: OpenLootBoxSoundFile.Guid.Data4
-      value: 498159419
-      objectReference: {fileID: 0}
     - target: {fileID: 2543266220312297758, guid: 1ed1e2cdea434404884b3b7f5e190d19,
         type: 3}
       propertyPath: m_Name
@@ -866,23 +732,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2500345111848040667}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6601824748177687482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6601824748177687480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &9036578494743687639 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6907223180125374732, guid: 2b24a900e88c8a249914c1c1fe8e4510,
