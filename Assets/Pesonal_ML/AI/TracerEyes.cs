@@ -405,7 +405,8 @@ public class TracerEyes : MonoBehaviour
         
         foreach (var r in result)
         {
-            if (r.collider.gameObject.layer == 8)
+            var hitObject = r.collider.gameObject;
+            if (hitObject.layer == 8)
             {
                 PlayerSeen = true;
                 if (PlayerTrans == default)
@@ -414,7 +415,7 @@ public class TracerEyes : MonoBehaviour
                     _playerHealth = r.collider.gameObject.GetComponent<Health>();
                 }
 
-                if (Vector2.Distance(r.collider.gameObject.transform.position, attackRange.position) < 1f)
+                if (Vector2.Distance(r.collider.gameObject.transform.position, attackRange.position) < 0.5f)
                 {
                     PlayerInAttackRange = true;
                 }
@@ -427,23 +428,43 @@ public class TracerEyes : MonoBehaviour
                 return;
             }
             
-            else if (r.collider.gameObject.layer == 6)
+            else if (hitObject.layer == 6)
             {
-                if (r.collider.gameObject != StandingOn)
+                if (hitObject != StandingOn)
                 {
-                    Debug.Log("Platform or wall spotted");
+                    if (hitObject.transform.localScale.y > 2)
+                    {
+                        Debug.Log("Wall seen");
+                    }
+                    else
+                    {
+                        Debug.Log("Platform seen");
+                    }
                 }
             }
             
-            else if (r.collider.gameObject.layer == 7)
+            else if (hitObject.layer == 7)
             {
-                
+                Debug.Log("other enemy spotted");
             }
         }
 
         PlayerSeen = false;
     }
 
+
+    private void GetDistance(Vector2 position, float correctDist, TraceType type)
+    {
+        var dist = Vector2.Distance(position, transform.position);
+
+        if (dist >= correctDist) return;
+
+        if (type == TraceType.Platform)
+        {
+            
+        }
+    }
+    
     private void CheckForGround(Vector2 dir)
     {
         var trans = transform;

@@ -4,57 +4,77 @@ namespace GamePlay.Entities.Player
     public class PlayerInputController : MonoBehaviour
     {
         private CommandContainer _commandContainer;
-        public float WalkInput { get; private set; }
-        [HideInInspector] public bool WalkLeftDownInput;
-        [HideInInspector] public bool WalkLeftUpInput;
-        [HideInInspector] public bool WalkRightDownInput;
-        [HideInInspector] public bool WalkRightUpInput;
-        [HideInInspector] public bool NoWalkInput;
+        
+        public float WalkInput;
+        public bool WalkLeftDownInput;
+        public bool WalkRightDownInput;
+        public bool NoWalkInput;
         
         public bool JumpDownInput;
-        public bool JumpUpInput;
-        
-        
+        public float CurrentWalkSpeed;
+        public float InputAcceleration;
         public bool AttackDownInput;
-        [HideInInspector] public bool AttackUpInput;
 
 
-        
         private void Awake() => _commandContainer = GetComponent<CommandContainer>();
 
         
-        
+
         private void Update()
         {
-            HandleInput(); // collect player inputs
+            GatherHorizontalMovement(); // collect player inputs
+            SetHorizontalMovement(); // assign value between -1 & 1
+            GatherKeyboardInputs();
             SetCommands(); // assign inputs to commands
 
-            if (WalkLeftDownInput && WalkRightDownInput)
+
+            if (WalkLeftDownInput || WalkRightDownInput)
                 NoWalkInput = false;
 
-            if (NoWalkInput) return;
-            if (!WalkLeftDownInput && !WalkRightDownInput)
+            else if (!WalkLeftDownInput && !WalkRightDownInput)
                 NoWalkInput = true;
+        }
+
+
+        
+        private void GatherKeyboardInputs()
+        {
+            _commandContainer.SpaceDownCommand = Input.GetButton("Jump");
+            _commandContainer.ArrowCommand = Input.GetAxis("Horizontal");
+            _commandContainer.AttackMouseCommand = Input.GetButton("Fire2");
         }
         
         
         
-        // left and right
-        private void HandleInput() => WalkInput = Input.GetAxis("Horizontal"); 
+        private void GatherHorizontalMovement()
+        {
+            if (NoWalkInput || WalkLeftDownInput && WalkRightDownInput)
+                CurrentWalkSpeed = 0;
+                //Mathf.MoveTowards(CurrentWalkSpeed, 0, InputDeceleration * Time.deltaTime);
+            
+            if (WalkRightDownInput)
+                CurrentWalkSpeed += Time.deltaTime * InputAcceleration;
+
+            if (WalkLeftDownInput)
+                CurrentWalkSpeed -= Time.deltaTime * InputAcceleration;
+        }
+
+        
+        
+        
+        private void SetHorizontalMovement()
+        {
+            CurrentWalkSpeed = Mathf.Clamp(CurrentWalkSpeed, -1, 1);
+            WalkInput = CurrentWalkSpeed;
+        }
 
 
-
+        
         private void SetCommands()
         {
             _commandContainer.WalkCommand = WalkInput;
-            _commandContainer.WalkLeftCommand = WalkLeftDownInput;
-            _commandContainer.WalkRightCommand = WalkRightDownInput;
-            
             _commandContainer.JumpDownCommand = JumpDownInput;
-            _commandContainer.JumpUpCommand = JumpUpInput;
-            
             _commandContainer.AttackDownCommand = AttackDownInput;
-            _commandContainer.AttackUpCommand = AttackUpInput;
         }
     }
 }

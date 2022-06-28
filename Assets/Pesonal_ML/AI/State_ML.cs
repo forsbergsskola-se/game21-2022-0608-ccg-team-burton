@@ -409,7 +409,7 @@ public class PlatformJump : State_ML
             Debug.Log(Mathf.Abs(xDist));
             
             var forceDir = EnemyVarsMl.enemyRef.transform.right;
-            body.AddForce(new Vector2(forceDir.x * 0.3f, 0), ForceMode2D.Force);
+            body.AddForce(new Vector2(forceDir.x * 4f, 0), ForceMode2D.Force);
             
             if (Mathf.Abs(xDist) < 3)
             {
