@@ -15,6 +15,8 @@ public class LootBoxSO : ScriptableObject
     [Space]
     public List<LootBoxData> LootTables;
     private float _pickedNumber;
+    [Range(1,5)]
+    public int NumberOfItemsToSpawn;
 
     private void OnValidate()
     {
