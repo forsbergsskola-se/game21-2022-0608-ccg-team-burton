@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6326572614992549088}
   - component: {fileID: 6326572614992549089}
   m_Layer: 5
-  m_Name: LootBoxUIExample
+  m_Name: LootBoxUIExample_old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -250,7 +250,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LootBoxSO: {fileID: 11400000, guid: 92b81e392647eeb4396a4dc25eb68d0a, type: 2}
-  ItemPrefabGameObject: {fileID: 0}
+  _animator: {fileID: 0}
+  _itemInfoUI: {fileID: 0}
+  ItemElements: []
 --- !u!1 &6326572616823730848
 GameObject:
   m_ObjectHideFlags: 0
