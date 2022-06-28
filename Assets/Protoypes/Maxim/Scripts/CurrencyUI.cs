@@ -3,25 +3,38 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CurrencyUI : MonoBehaviour
 {
-    [SerializeField]private PurchaseItem purchaseItem;
+    [SerializeField]private PurchaseItemCoins purchaseCommonBox;
+    [SerializeField]private PurchaseItemButtons purchaseRareBox;
+    [SerializeField]private PurchaseItemButtons purchaseEpicBox;
     
-    [SerializeField] public TextMeshProUGUI coinTxt;
+    [SerializeField] public TextMeshProUGUI coinsTxt;
+    [SerializeField] public TextMeshProUGUI buttonsTxt;
 
     private void OnEnable()
     {
-        purchaseItem.OnCurrencyChange += UpdateCoinText;
+        purchaseCommonBox.OnCurrencyChange += UpdateCoinText;
+        purchaseRareBox.OnCurrencyChange += UpdateButtonsText;
+        purchaseEpicBox.OnCurrencyChange += UpdateButtonsText;
     }
 
     private void OnDisable()
     {
-        purchaseItem.OnCurrencyChange -= UpdateCoinText;
+        purchaseCommonBox.OnCurrencyChange -= UpdateCoinText;
+        purchaseRareBox.OnCurrencyChange += UpdateButtonsText;
+        purchaseEpicBox.OnCurrencyChange += UpdateButtonsText;
     }
 
     public void UpdateCoinText(int value)
     {
-        coinTxt.text = "Coins: " + value ;
+        coinsTxt.text = "Coins: " + value ;
+    }
+
+    public void UpdateButtonsText(int value)
+    {
+        buttonsTxt.text = "Buttons: " + value;
     }
 }
