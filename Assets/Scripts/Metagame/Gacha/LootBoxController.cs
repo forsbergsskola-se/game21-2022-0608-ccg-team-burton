@@ -10,21 +10,24 @@ using UnityEngine.SceneManagement;
 
 public class LootBoxController : MonoBehaviour, ISaveable
 {
+   
+   
    public LootBoxSO LootBoxSO;
 
-   private int _numberOfItemToSpawn;
    [SerializeField] private Animator _animator;
    [SerializeField] private GameObject _itemInfoUI;
 
-   public Action<int,Item> OnUpdateItemUI;
+   public Action<GameObject,Item> OnUpdateItemUI;
  
    private Item item;
    public GameObject[] ItemElements;
    SoundMananger _sound;
 
    // Since we are looping, we can use a list
-   private List<Item> gainedItems = new List<Item>();
+   private List<Item> gainedItems = new();
    
+   public FMODUnity.EventReference OpenLootBoxSoundFile;
+   private FMOD.Studio.EventInstance _openLootboxSound;
    
    void Awake(){
       _sound = FindObjectOfType<SoundMananger>();
@@ -32,14 +35,13 @@ public class LootBoxController : MonoBehaviour, ISaveable
 
    private void Start()
    {
+      _openLootboxSound = FMODUnity.RuntimeManager.CreateInstance(OpenLootBoxSoundFile);
+
       foreach (var itemElement in ItemElements)
       {
          itemElement.SetActive(false);
       }
       _itemInfoUI.SetActive(false);
-
-
-      // Debug.Log(_numberOfItemToSpawn);
    }
 
    
@@ -49,6 +51,7 @@ public class LootBoxController : MonoBehaviour, ISaveable
       Debug.Log("Opening loot box");
       OpenBox();
       _animator.SetBool("OpenLootBox", true);
+      _sound.PlaySound(_openLootboxSound);
       
    }
 
@@ -82,7 +85,7 @@ public class LootBoxController : MonoBehaviour, ISaveable
       foreach (var item in gainedItems)
       {
          ItemElements[i].SetActive(true);
-         OnUpdateItemUI?.Invoke(i,item);
+         OnUpdateItemUI?.Invoke(ItemElements[i],item);
 
          i++;
       }

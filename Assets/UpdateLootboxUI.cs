@@ -12,16 +12,16 @@ public class UpdateLootboxUI : MonoBehaviour
 
     private void OnDisable()=> lootBoxController.OnUpdateItemUI -= SetUI;
 
-    public Image[] itemSprite;
+    // public Image[] itemSprite;
     public TMP_Text ItemName;
     public TMP_Text Rarity;
     
 
-    private void SetUI( int i, Item item)
+    private void SetUI( GameObject itemObject, Item item)
     {
         if (item is Armor armor)
         {
-           itemSprite[i].sprite = armor.ItemSprite;
+           itemObject.GetComponent<Image>().sprite = armor.ItemSprite;
  
             
         }
