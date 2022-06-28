@@ -59,7 +59,14 @@ public class SoundMananger : MonoBehaviour
     public void StopMusic(){
         MusicTrack_EventInst.stop(STOP_MODE.ALLOWFADEOUT);
     }
-    
+
+
+    public void EquipItem()
+    {
+        Debug.Log("Walking");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Player/Walking");
+    }
+
     public void EquipItem()
     {
         Debug.Log("EquipItem");
