@@ -67,6 +67,8 @@ public class TracerEyes : MonoBehaviour
     
     public bool PlayerBehind { get; private set; }
     public bool PlayerForgotten { get; private set; }
+
+    private bool PlatformInRange;
     
     public Actions actions { get; private set; }
 
@@ -105,16 +107,16 @@ public class TracerEyes : MonoBehaviour
 
     private void CheckPlayerPos()
     {
-      // var aDot = Vector2.Dot(PlayerTrans.position.normalized, transform.InverseTransformPoint(transform.right).normalized);
-       var aDot2 = Vector2.Dot(PlayerTrans.position.normalized, transform.InverseTransformDirection(transform.right));
-     //  Debug.Log(aDot);
-       Debug.Log(aDot2);
-       //Debug.Log(transform.right);
-       //Debug.Log(PlayerTrans.right);
+        Vector3 right = transform.TransformDirection(Vector3.right);
+        Vector3 toOther = PlayerTrans.position - transform.position;
+        var aDot2 = Vector2.Dot(right, toOther);
 
-       if (aDot2 < 0.8f)
+       Debug.Log(aDot2);
+   
+
+       if (aDot2 < 0)
        {
-           actions = Actions.TurnAround;
+         //  actions = Actions.TurnAround;
        }
     }
     
@@ -164,7 +166,7 @@ public class TracerEyes : MonoBehaviour
 
        if (PlayerTrans != default)
        {
-           
+           CheckPlayerPos();
        }
        
        if (PlatformSeen && !PlayerSeen && !WallSeen)
@@ -403,6 +405,7 @@ public class TracerEyes : MonoBehaviour
       //  var result = Physics2D.BoxCastAll(trans.position + new Vector3((pursueDistance/2) * trans.forward.x, 0), new Vector2(pursueDistance, 6), 0, trans.forward, 8);
         DrawBoxRuntime(new Vector2(pursueDistance, sizeY), boxPlacement);
         
+        
         foreach (var r in result)
         {
             var hitObject = r.collider.gameObject;
@@ -415,14 +418,7 @@ public class TracerEyes : MonoBehaviour
                     _playerHealth = r.collider.gameObject.GetComponent<Health>();
                 }
 
-                if (Vector2.Distance(r.collider.gameObject.transform.position, attackRange.position) < 0.5f)
-                {
-                    PlayerInAttackRange = true;
-                }
-                else
-                {
-                    PlayerInAttackRange = false;
-                }
+                SetRangeValues(PlayerTrans.position, 1, TraceType.Player);
                 
                 Debug.Log("Player spotted");
                 return;
@@ -438,6 +434,13 @@ public class TracerEyes : MonoBehaviour
                     }
                     else
                     {
+                        SetRangeValues(hitObject.transform.position, 7, TraceType.Platform);
+
+                        if (PlatformInRange && !PlayerSeen)
+                        {
+                            
+                        }
+                        
                         Debug.Log("Platform seen");
                     }
                 }
@@ -453,17 +456,24 @@ public class TracerEyes : MonoBehaviour
     }
 
 
-    private void GetDistance(Vector2 position, float correctDist, TraceType type)
+    private void SetRangeValues(Vector2 position, float marginDist, TraceType type)
     {
         var dist = Vector2.Distance(position, transform.position);
+        
+        var closeEn = !(dist >= marginDist);
 
-        if (dist >= correctDist) return;
-
-        if (type == TraceType.Platform)
+        switch (type)
         {
-            
+            case TraceType.Platform:
+                PlatformInRange = closeEn;
+                break;
+            case TraceType.Player:
+                PlayerInAttackRange = closeEn;
+                break;
         }
+        
     }
+    
     
     private void CheckForGround(Vector2 dir)
     {
