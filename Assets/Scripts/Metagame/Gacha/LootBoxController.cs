@@ -16,7 +16,7 @@ public class LootBoxController : MonoBehaviour, ISaveable
    [SerializeField] private Animator _animator;
    [SerializeField] private GameObject _itemInfoUI;
 
-   public Action<Item> OnUpdateItemUI;
+   public Action<int,Item> OnUpdateItemUI;
  
    private Item item;
    public GameObject[] ItemElements;
@@ -32,9 +32,9 @@ public class LootBoxController : MonoBehaviour, ISaveable
 
    private void Start()
    {
-      foreach (var o in ItemElements)
+      foreach (var itemElement in ItemElements)
       {
-         o.SetActive(false);
+         itemElement.SetActive(false);
       }
       _itemInfoUI.SetActive(false);
 
@@ -82,9 +82,10 @@ public class LootBoxController : MonoBehaviour, ISaveable
       foreach (var item in gainedItems)
       {
          ItemElements[i].SetActive(true);
+         OnUpdateItemUI?.Invoke(i,item);
+
          i++;
       }
-      // OnUpdateItemUI?.Invoke(item);
    }
 
 
