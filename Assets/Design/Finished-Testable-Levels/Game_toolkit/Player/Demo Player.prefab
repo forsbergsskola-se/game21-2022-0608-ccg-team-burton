@@ -43,11 +43,11 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.1, y: 1.76, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3616007790298403442}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1144139567602091071
 SpriteRenderer:
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1606159529
-  m_SortingLayer: 10
+  m_SortingLayer: 14
   m_SortingOrder: 1
   m_Sprite: {fileID: -1205404705, guid: 923859fea6b2f5647a96336e9d3464af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -133,15 +133,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7efbeca9fb2caee408e33967aa452cfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IdleSoundFile:
+    Guid:
+      Data1: -1673904321
+      Data2: 1111623251
+      Data3: -147658871
+      Data4: -357734575
+    Path: event:/Game play/Player/PlayerIdle
   Acceleration: 90
   MoveClamp: 7.25
   Deceleration: 400
   FacingRight: 1
+  WalkingSoundFile:
+    Guid:
+      Data1: -1013597291
+      Data2: 1340873512
+      Data3: 1827987876
+      Data4: 2049349630
+    Path: event:/Game play/Player/Walking
   FallClamp: -52
   MinFallSpeed: 65
   MaxFallSpeed: 112.5
   JumpHeight: 30
   BounceHeight: 40
+  JumpSoundFile:
+    Guid:
+      Data1: -330003421
+      Data2: 1319600127
+      Data3: -1306740596
+      Data4: -1476415498
+    Path: event:/Game play/Player/Jump
 --- !u!114 &1144139567602091066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,6 +247,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 3
   _invulnerablilityTime: 0.75
+  TakeDamageSoundFile:
+    Guid:
+      Data1: 149457308
+      Data2: 1257443992
+      Data3: 1244329916
+      Data4: 2005952421
+    Path: event:/Game play/Combat/TakingDamage
+  DeathSoundFile:
+    Guid:
+      Data1: 620538182
+      Data2: 1119898424
+      Data3: 791635848
+      Data4: 1808263322
+    Path: event:/Game play/Combat/DiesFromDamage
+  _soundMananger: {fileID: 0}
 --- !u!114 &3205524570191263580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,6 +291,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _combat: {fileID: 4797520626450282201}
   _attackDelaySec: 2
+  _soundMananger: {fileID: 0}
+  AttackSoundFile:
+    Guid:
+      Data1: -627551298
+      Data2: 1136385199
+      Data3: -1090946890
+      Data4: 232387405
+    Path: event:/Game play/Combat/SissorAttack
 --- !u!114 &3205524570191263563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,6 +350,7 @@ MonoBehaviour:
   JumpDownCommand: 0
   SpaceDownCommand: 0
   AttackDownCommand: 0
+  AttackMouseCommand: 0
 --- !u!114 &7747099678071028065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,7 +444,7 @@ TrailRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1606159529
-  m_SortingLayer: 10
+  m_SortingLayer: 14
   m_SortingOrder: 0
   m_Time: 1
   m_Parameters:
