@@ -36,6 +36,14 @@ namespace Protoypes.Harry
         public float BounceHeight = 60;
         private float _apexPoint;
         public float _currentVerticalSpeed { get; private set; }
+
+
+        public float DoubleJumpHeight = 15;
+        public bool DoubleJumpAbilityActive;
+        public bool CanDoubleJump;
+        public float DoubleJumpBuffer;
+        private float _doubleJumpCounter;
+        public int DoubleJumpInt;
         
         
         //Inputs
@@ -157,15 +165,39 @@ namespace Protoypes.Harry
 
         
         
-        private void CalculateJumping() 
+        private void CalculateJumping()
         {
             if (_isBouncing)
+            {
                 _currentVerticalSpeed = BounceHeight;
+                _doubleJumpCounter += Time.fixedTime;
+            }
             
-            if (!_isGrounded) return;
             
             if (_jumpDownCommand && _isGrounded || _jumpSpace && _isGrounded)
                 _currentVerticalSpeed = JumpHeight;
+
+
+            if (!DoubleJumpAbilityActive) return;
+
+            if (_isGrounded)
+                DoubleJumpInt = 1;
+
+            if (!_isGrounded && _doubleJumpCounter > DoubleJumpBuffer)
+            {
+                if (CanDoubleJump && DoubleJumpInt == 1)
+                    CanDoubleJump = true;
+
+                else CanDoubleJump = false;
+
+                if (_jumpSpace || _jumpDownCommand)
+                    DoubleJumpInt++;
+
+                if (CanDoubleJump)
+                    _currentVerticalSpeed += JumpHeight;
+            }
+            
+            
         }
 
         
