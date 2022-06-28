@@ -1,5 +1,3 @@
-using System;
-using FMOD.Studio;
 using GamePlay.Entities.Movement;
 using GamePlay.Entities.Player;
 using UnityEngine;
@@ -42,7 +40,8 @@ namespace Protoypes.Harry
         
         [Header("JUMPING")] 
         public float JumpHeight = 30;
-        public float BounceHeight = 60;
+        public float BounceHeight = 25;
+        public float SuperBounceHeight = 40;
         private float _apexPoint;
         public float _currentVerticalSpeed { get; private set; }
         public FMODUnity.EventReference JumpSoundFile;
@@ -57,6 +56,7 @@ namespace Protoypes.Harry
         //Collisions
         public bool _isGrounded { get; private set; }
         private bool _isBouncing;
+        private bool _isSuperBouncing;
         private bool _isRoofed;
         private bool _leftWallHit;
         private bool _rightWallHit;
@@ -69,12 +69,9 @@ namespace Protoypes.Harry
             _groundChecker = GetComponent<GroundChecker>();
             _animator = GetComponent<Animator>();
             _soundMananger = FindObjectOfType<SoundMananger>();
-            
         }
 
 
-        
-        
         
         private void Start()
         {
@@ -83,6 +80,8 @@ namespace Protoypes.Harry
             _jumpSound = FMODUnity.RuntimeManager.CreateInstance(JumpSoundFile);
         }
 
+        
+        
         private void Update() { CollectInput(); CheckCollisions(); }
 
         
@@ -134,6 +133,7 @@ namespace Protoypes.Harry
         {
             _isGrounded = _groundChecker.IsGrounded;
             _isBouncing = _groundChecker.IsBouncing;
+            _isSuperBouncing = _groundChecker.IsSuperBouncing;
             _isRoofed = _groundChecker.IsRoofed;
             _leftWallHit = _groundChecker.LeftWallHit;
             _rightWallHit = _groundChecker.RightWallHit;
@@ -198,6 +198,9 @@ namespace Protoypes.Harry
         {
             if (_isBouncing)
                 _currentVerticalSpeed = BounceHeight;
+
+            if (_isSuperBouncing)
+                _currentVerticalSpeed = SuperBounceHeight;
             
             if (!_isGrounded) return;
 
