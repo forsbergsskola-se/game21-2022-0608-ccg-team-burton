@@ -155,7 +155,8 @@ MonoBehaviour:
   MinFallSpeed: 65
   MaxFallSpeed: 112.5
   JumpHeight: 30
-  BounceHeight: 40
+  BounceHeight: 20
+  SuperBounceHeight: 40
   JumpSoundFile:
     Guid:
       Data1: -330003421
@@ -179,6 +180,7 @@ MonoBehaviour:
   _groundCheckLength: 0.75
   _groundCheckRadius: 0.53
   IsBouncing: 0
+  IsSuperBouncing: 0
   IsRoofed: 0
   _roofCheckLength: 0.6
   _roofCheckRadius: 0.53
@@ -188,6 +190,9 @@ MonoBehaviour:
   _bounceLayers:
     serializedVersion: 2
     m_Bits: 1024
+  _superBounceLayers:
+    serializedVersion: 2
+    m_Bits: 2048
   LeftWallHit: 0
   _leftCheckLength: 0.5
   _leftCheckRadius: 0.3
@@ -277,6 +282,14 @@ MonoBehaviour:
   cointText: {fileID: 0}
   cointValue: 5
   _coinCounter: 0
+  _soundMananger: {fileID: 0}
+  CollectCoinSoundFile:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &5732464600212847612
 MonoBehaviour:
   m_ObjectHideFlags: 0
