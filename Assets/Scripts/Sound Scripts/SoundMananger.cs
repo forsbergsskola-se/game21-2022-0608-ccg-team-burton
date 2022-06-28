@@ -73,8 +73,20 @@ public class SoundMananger : MonoBehaviour
             sound.stop(STOP_MODE.IMMEDIATE);
         }
     }
-    
 
+
+    public void SpoongJump()
+    {
+        Debug.Log("SpoongJump");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Objects/SpoongJump");
+    }
+
+
+    public void CanonEnemy()
+    {
+        Debug.Log("CanonEnemy");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/Enemy/CanonEnemy");
+    }
 
     public void Walking()
     {
