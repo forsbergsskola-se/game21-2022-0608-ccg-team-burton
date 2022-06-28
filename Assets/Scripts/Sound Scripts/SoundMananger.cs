@@ -61,7 +61,7 @@ public class SoundMananger : MonoBehaviour
     
     public void PlayStackingSound(FMOD.Studio.EventInstance sound)
     {
-            sound.start();
+        sound.start();
     }
 
     public void StopSound(FMOD.Studio.EventInstance sound)

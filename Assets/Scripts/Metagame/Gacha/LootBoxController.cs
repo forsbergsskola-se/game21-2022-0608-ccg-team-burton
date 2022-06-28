@@ -35,7 +35,7 @@ public class LootBoxController : MonoBehaviour, ISaveable
       OpenBox();
       _animator.SetBool("OpenLootBox", true);
       // _sound.StartMusic(musicTrack2);
-      _sound.OpenCrate();
+      // _sound.OpenCrate();
    }
 
    
