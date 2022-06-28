@@ -1,3 +1,5 @@
+using System;
+using FMOD.Studio;
 using GamePlay.Entities.Movement;
 using GamePlay.Entities.Player;
 using UnityEngine;
@@ -9,11 +11,16 @@ namespace Protoypes.Harry
         private CommandContainer _commandContainer;
         private GroundChecker _groundChecker;
         private Animator _animator;
+        private SoundMananger _soundMananger;
         
         private Vector2 _rawMovement { get; set; }
         private Vector2 _velocity;
         private Vector2 _lastPosition;
         private Rigidbody2D _rb;
+
+        [Header("IDLE")] 
+        public FMODUnity.EventReference IdleSoundFile;
+        private FMOD.Studio.EventInstance _idleSound;
 
         
         [Header("WALKING")] 
@@ -22,6 +29,8 @@ namespace Protoypes.Harry
         public float Deceleration = 60f;
         public float _currentHorizontalSpeed { get; private set; }
         public bool FacingRight;
+        public FMODUnity.EventReference WalkingSoundFile;
+        private FMOD.Studio.EventInstance _walkingSound;
         
         
         [Header("GRAVITY")] 
@@ -36,7 +45,8 @@ namespace Protoypes.Harry
         public float BounceHeight = 60;
         private float _apexPoint;
         public float _currentVerticalSpeed { get; private set; }
-        
+        public FMODUnity.EventReference JumpSoundFile;
+        private FMOD.Studio.EventInstance _jumpSound;
         
         //Inputs
         private float _walkCommand;
@@ -58,16 +68,28 @@ namespace Protoypes.Harry
             _commandContainer = GetComponent<CommandContainer>();
             _groundChecker = GetComponent<GroundChecker>();
             _animator = GetComponent<Animator>();
+            _soundMananger = FindObjectOfType<SoundMananger>();
+            
         }
 
 
+        
+        
+        
+        private void Start()
+        {
+            _idleSound = FMODUnity.RuntimeManager.CreateInstance(IdleSoundFile);
+            _walkingSound = FMODUnity.RuntimeManager.CreateInstance(WalkingSoundFile);
+            _jumpSound = FMODUnity.RuntimeManager.CreateInstance(JumpSoundFile);
+        }
 
         private void Update() { CollectInput(); CheckCollisions(); }
-        
-        
+
         
         private void FixedUpdate() 
         {
+            MovementSound();
+            
             CalculateWalking(); 
             CalculateJumpApex();
             CalculateGravity(); 
@@ -80,9 +102,24 @@ namespace Protoypes.Harry
             
             MovePlayer();
         }
-
-
         
+        
+        private void MovementSound()
+        {
+            if (_currentHorizontalSpeed == 0 && _currentVerticalSpeed == 0)
+            {
+                _soundMananger.PlaySound(_idleSound);
+                    _soundMananger.StopSound(_walkingSound);
+
+            }
+            else
+            {
+                _soundMananger.StopSound(_idleSound);
+                if(_groundChecker.IsGrounded)
+                    _soundMananger.PlaySound(_walkingSound);
+            }
+        }
+       
         private void CollectInput()
         {
             _walkCommand = _commandContainer.WalkCommand;
@@ -163,9 +200,13 @@ namespace Protoypes.Harry
                 _currentVerticalSpeed = BounceHeight;
             
             if (!_isGrounded) return;
-            
+
             if (_jumpDownCommand && _isGrounded || _jumpSpace && _isGrounded)
+            {
                 _currentVerticalSpeed = JumpHeight;
+                _soundMananger.PlaySound(_jumpSound);
+            }
+            
         }
 
         

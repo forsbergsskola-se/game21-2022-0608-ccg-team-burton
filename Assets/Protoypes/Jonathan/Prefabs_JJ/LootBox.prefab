@@ -444,7 +444,7 @@ Transform:
   m_Children:
   - {fileID: 9036578494790298970}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9036578494904530861
 SpriteRenderer:
@@ -514,6 +514,13 @@ MonoBehaviour:
   LootBoxSO: {fileID: 11400000, guid: 92b81e392647eeb4396a4dc25eb68d0a, type: 2}
   _animator: {fileID: 9036578494904530848}
   _itemInfoUI: {fileID: 9036578494790298981}
+  musicTrack2:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!61 &9036578494904530851
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -709,7 +716,6 @@ GameObject:
   - component: {fileID: 9144802227902482327}
   - component: {fileID: 4033769747709437501}
   - component: {fileID: 957450406379543187}
-  - component: {fileID: 284968712337978885}
   m_Layer: 0
   m_Name: ExitButton
   m_TagString: Untagged
@@ -819,7 +825,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 284968712337978885}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
         m_MethodName: 
         m_Mode: 1
@@ -831,15 +837,3 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &284968712337978885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9078144887388125230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d149687b6a8b6541864a87bbb96302f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

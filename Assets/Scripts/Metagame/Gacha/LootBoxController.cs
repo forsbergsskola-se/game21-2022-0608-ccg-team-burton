@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Meta.Gacha;
+using Mono.Cecil;
 using Newtonsoft.Json;
 using UnityEngine;
 
-public class LootBoxController : MonoBehaviour
+public class LootBoxController : MonoBehaviour, ISaveable
 {
    public LootBoxSO LootBoxSO;
    private int _numberOfItemToSpawn = 1;
@@ -14,7 +15,15 @@ public class LootBoxController : MonoBehaviour
    [SerializeField] private GameObject _itemInfoUI;
 
    public Action<Item> OnUpdateItemUI;
+   public FMODUnity.EventReference musicTrack2;
+   
    private Item item;
+   SoundMananger _sound;
+
+   void Awake(){
+      _sound = FindObjectOfType<SoundMananger>();
+   }
+
    private void Start()
    {
       _itemInfoUI.SetActive(false);
@@ -25,7 +34,8 @@ public class LootBoxController : MonoBehaviour
       Debug.Log("Opening loot box");
       OpenBox();
       _animator.SetBool("OpenLootBox", true);
-      
+      // _sound.StartMusic(musicTrack2);
+      _sound.OpenCrate();
    }
 
    
@@ -35,16 +45,8 @@ public class LootBoxController : MonoBehaviour
         
          Debug.Log($"Saving: {itemSo.ID},{itemSo.RaritySo.ID},{itemSo.GemSo.ID}");
          
-         ////TEMP SAVE SYSTEM//////
-         //TODO: Hook in save in save system
-         InventoryItemSerialization saveItem = new InventoryItemSerialization();
-         saveItem.itemID = itemSo.ID;
-         saveItem.rarityID = itemSo.RaritySo.ID;
-         saveItem.gemId = itemSo.GemSo.ID;
-         
-         //Inventoryslot1 is gained when pressing an item slot in inventory
-         PlayerPrefs.SetString("Inventoryslot1", JsonConvert.SerializeObject(saveItem));
-         
+            
+            
          
          //Hook in item generation to receive stats 
          //TODO: Get item with scaled stats here - these will be presented on the lootboxUI when opening item.
@@ -58,5 +60,16 @@ public class LootBoxController : MonoBehaviour
    {
       _itemInfoUI.SetActive(true);
       OnUpdateItemUI?.Invoke(item);
+   }
+
+
+   public object CaptureState()
+   {
+      throw new NotImplementedException();
+   }
+
+   public void RestoreState(object state)
+   {
+      throw new NotImplementedException();
    }
 }
