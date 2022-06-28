@@ -26,6 +26,13 @@ public enum Actions
     Pursue
 }
 
+[Serializable]
+public class HitResultValues
+{
+    public int numberSeen;
+    public Vector2 position;
+}
+
 public enum SubType
 {
     Wall,
@@ -50,6 +57,8 @@ public class TracerEyes : MonoBehaviour
     private float timeSinceTrace;
     
     public bool WallSeen { get; private set;}
+
+    public bool WallInRange;
     
     public bool WallTurn { get; private set;}
     public bool GroundSeen { get; private set;}
@@ -66,9 +75,13 @@ public class TracerEyes : MonoBehaviour
     public bool PlatformSeen { get; private set; }
     
     public bool PlayerBehind { get; private set; }
+
+    private bool PlayerHit;
     public bool PlayerForgotten { get; private set; }
 
     private bool PlatformInRange;
+
+    private bool PlayerKnown;
     
     public Actions actions { get; private set; }
 
@@ -95,7 +108,7 @@ public class TracerEyes : MonoBehaviour
 
             DoMultiTrace();
            // CheckForGround(new Vector2(transform.right.x, -0.5f));
-           // DoSquareTrace();
+            DoSquareTrace();
         }
     }
 
@@ -105,19 +118,10 @@ public class TracerEyes : MonoBehaviour
         TraceBox(transform);
     }
 
-    private void CheckPlayerPos()
+    private bool IsPlayerBehind()
     {
-        Vector3 right = transform.TransformDirection(Vector3.right);
-        Vector3 toOther = PlayerTrans.position - transform.position;
-        var aDot2 = Vector2.Dot(right, toOther);
-
-       Debug.Log(aDot2);
-   
-
-       if (aDot2 < 0)
-       {
-         //  actions = Actions.TurnAround;
-       }
+        return Vector2.Dot(transform.TransformDirection(Vector3.right),
+            PlayerTrans.position - transform.position) < 0;
     }
     
     private void DoMultiTrace()
@@ -166,7 +170,7 @@ public class TracerEyes : MonoBehaviour
 
        if (PlayerTrans != default)
        {
-           CheckPlayerPos();
+          PlayerBehind = IsPlayerBehind();
        }
        
        if (PlatformSeen && !PlayerSeen && !WallSeen)
@@ -182,6 +186,21 @@ public class TracerEyes : MonoBehaviour
            {
                PlatformInJumpDistance = false;
            }
+       }
+
+       if (PlatformSeen && !GroundSeen)
+       {
+           PlatformRef = resultList[2].theHit.collider.gameObject.transform;
+           
+           if (Vector2.Distance(PlatformRef.transform.position, attackRange.position) < 7f)
+           {
+               PlatformInJumpDistance = true;
+               actions = Actions.PlatformJump;
+           }
+           else
+           {
+               PlatformInJumpDistance = false;
+           }   
        }
 
        if (WallSeen)
@@ -401,17 +420,19 @@ public class TracerEyes : MonoBehaviour
         var sizeY = 7f;
         var sizeX = pursueDistance;
         var boxPlacement = trans.position + new Vector3(0, sizeY / 2 - 1);
-        var result = Physics2D.BoxCastAll(boxPlacement , new Vector2(pursueDistance * 2, sizeY), 0, trans.forward, 8);
-      //  var result = Physics2D.BoxCastAll(trans.position + new Vector3((pursueDistance/2) * trans.forward.x, 0), new Vector2(pursueDistance, 6), 0, trans.forward, 8);
+        var result = Physics2D.BoxCastAll(boxPlacement , new Vector2(pursueDistance * 2, sizeY), 0, trans.forward, 8, multiMask);
         DrawBoxRuntime(new Vector2(pursueDistance, sizeY), boxPlacement);
-        
+        var playerSeen = false;
+        var playerIsHit = false;
         
         foreach (var r in result)
         {
             var hitObject = r.collider.gameObject;
+
             if (hitObject.layer == 8)
             {
-                PlayerSeen = true;
+                playerIsHit = true;
+                playerSeen = true;
                 if (PlayerTrans == default)
                 {
                     PlayerTrans = r.collider.transform;
@@ -421,7 +442,6 @@ public class TracerEyes : MonoBehaviour
                 SetRangeValues(PlayerTrans.position, 1, TraceType.Player);
                 
                 Debug.Log("Player spotted");
-                return;
             }
             
             else if (hitObject.layer == 6)
@@ -431,16 +451,19 @@ public class TracerEyes : MonoBehaviour
                     if (hitObject.transform.localScale.y > 2)
                     {
                         Debug.Log("Wall seen");
+                        SetRangeValues(hitObject.transform.position, 0.8f, TraceType.Wall);
+                    }
+
+                    if (hitObject.transform.localScale.x > 7)
+                    {
+                        Debug.Log("Floor seen");
                     }
                     else
                     {
+                        PlatformSeen = true;
+                        
                         SetRangeValues(hitObject.transform.position, 7, TraceType.Platform);
 
-                        if (PlatformInRange && !PlayerSeen)
-                        {
-                            
-                        }
-                        
                         Debug.Log("Platform seen");
                     }
                 }
@@ -452,10 +475,22 @@ public class TracerEyes : MonoBehaviour
             }
         }
 
-        PlayerSeen = false;
+        if (playerIsHit)
+        {
+           playerSeen = !IsPlayerBehind();
+        }
+        
+        PlayerSeen = playerSeen;
+        
+        
     }
 
-
+    private void ActOnResults()
+    {
+        
+    }
+    
+    
     private void SetRangeValues(Vector2 position, float marginDist, TraceType type)
     {
         var dist = Vector2.Distance(position, transform.position);
@@ -466,6 +501,9 @@ public class TracerEyes : MonoBehaviour
         {
             case TraceType.Platform:
                 PlatformInRange = closeEn;
+                break;
+            case TraceType.Wall:
+                WallInRange = closeEn;
                 break;
             case TraceType.Player:
                 PlayerInAttackRange = closeEn;
