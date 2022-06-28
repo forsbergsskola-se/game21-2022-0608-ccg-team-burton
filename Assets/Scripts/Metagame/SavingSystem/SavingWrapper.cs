@@ -30,4 +30,9 @@ public class SavingWrapper : MonoBehaviour
     {
         GetComponent<SavingSystem>().Save(defaultSaveFile);
     }
+
+    public void Delete()
+    {
+        GetComponent<SavingSystem>().Delete(defaultSaveFile);
+    }
 }

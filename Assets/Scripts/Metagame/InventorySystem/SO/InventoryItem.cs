@@ -11,7 +11,7 @@ using UnityEngine;
 /// In practice, you are likely to use a subclass such as `ActionItem` or
 /// `EquipableItem`.
 /// </remarks>
-[CreateAssetMenu(menuName = ("Team5/Inventory/Item"))]
+[CreateAssetMenu(menuName = ("Inventory/Item"))]
 public class InventoryItem : ScriptableObject, ISerializationCallbackReceiver
 {
     // CONFIG DATA

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(menuName = ("Team5/Inventory/Action Item"))]
+[CreateAssetMenu(menuName = ("Inventory/Action Item"))]
 
 
 public class ActionItem : InventoryItem
