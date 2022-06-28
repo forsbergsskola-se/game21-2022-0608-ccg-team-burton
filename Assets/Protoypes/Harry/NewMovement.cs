@@ -18,7 +18,10 @@ namespace Protoypes.Harry
         private Vector2 _lastPosition;
         private Rigidbody2D _rb;
 
-        [Header("IDLE")] public FMODUnity.EventReference IdleSoundFile;
+        [Header("IDLE")] 
+        public FMODUnity.EventReference IdleSoundFile;
+        private FMOD.Studio.EventInstance _idle;
+
         
         [Header("WALKING")] 
         public float Acceleration = 90;
@@ -26,6 +29,8 @@ namespace Protoypes.Harry
         public float Deceleration = 60f;
         public float _currentHorizontalSpeed { get; private set; }
         public bool FacingRight;
+        public FMODUnity.EventReference WalkingSoundFile;
+        private FMOD.Studio.EventInstance _walking;
         
         
         [Header("GRAVITY")] 
@@ -67,12 +72,13 @@ namespace Protoypes.Harry
         }
 
 
-        private FMOD.Studio.EventInstance _idle;
+        
         
         
         private void Start()
         {
-            _idle = FMODUnity.RuntimeManager.CreateInstance("event:/Game play/Player/PlayerIdle");
+            _idle = FMODUnity.RuntimeManager.CreateInstance(IdleSoundFile);
+            _walking = FMODUnity.RuntimeManager.CreateInstance(WalkingSoundFile);
         }
 
         private void Update() { CollectInput(); CheckCollisions(); }
@@ -96,41 +102,22 @@ namespace Protoypes.Harry
         }
         
         
-        
-
-        
- 
         private void IdleSound()
         {
             if (_currentHorizontalSpeed == 0 && _currentVerticalSpeed == 0)
             {
                 _soundMananger.PlaySound(_idle);
+                    _soundMananger.StopSound(_walking);
+
             }
             else
             {
                 _soundMananger.StopSound(_idle);
+                if(_groundChecker.IsGrounded)
+                    _soundMananger.PlaySound(_walking);
             }
         }
-
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+       
         private void CollectInput()
         {
             _walkCommand = _commandContainer.WalkCommand;
@@ -247,7 +234,6 @@ namespace Protoypes.Harry
         {
             _rawMovement = new Vector2(_currentHorizontalSpeed, _currentVerticalSpeed) * Time.fixedDeltaTime;
            _rb.MovePosition(_rb.position + _rawMovement);
-           //soundManager.WalkingSound();
         }
 
 

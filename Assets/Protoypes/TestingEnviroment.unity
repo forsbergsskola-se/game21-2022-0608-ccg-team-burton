@@ -7797,27 +7797,27 @@ PrefabInstance:
     - target: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
         type: 3}
       propertyPath: MusicTrack.Path
-      value: event:/Music/MusicTrack1
+      value: event:/Music/MusicTrack2
       objectReference: {fileID: 0}
     - target: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
         type: 3}
       propertyPath: MusicTrack.Guid.Data1
-      value: -606211590
+      value: -168852341
       objectReference: {fileID: 0}
     - target: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
         type: 3}
       propertyPath: MusicTrack.Guid.Data2
-      value: 1274837012
+      value: 1262825356
       objectReference: {fileID: 0}
     - target: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
         type: 3}
       propertyPath: MusicTrack.Guid.Data3
-      value: -64651085
+      value: 2049451650
       objectReference: {fileID: 0}
     - target: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
         type: 3}
       propertyPath: MusicTrack.Guid.Data4
-      value: -664038866
+      value: 350843332
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -15321,8 +15321,33 @@ PrefabInstance:
       objectReference: {fileID: 7872426394030782515}
     - target: {fileID: 3693762747164135538, guid: 123d0462d05bbb541858e1b9aeb1a388,
         type: 3}
+      propertyPath: IDLE.Path
+      value: event:/Game play/Player/PlayerIdle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3693762747164135538, guid: 123d0462d05bbb541858e1b9aeb1a388,
+        type: 3}
       propertyPath: IdleSound.Path
       value: event:/Game play/Player/PlayerIdle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3693762747164135538, guid: 123d0462d05bbb541858e1b9aeb1a388,
+        type: 3}
+      propertyPath: IDLE.Guid.Data1
+      value: -1673904321
+      objectReference: {fileID: 0}
+    - target: {fileID: 3693762747164135538, guid: 123d0462d05bbb541858e1b9aeb1a388,
+        type: 3}
+      propertyPath: IDLE.Guid.Data2
+      value: 1111623251
+      objectReference: {fileID: 0}
+    - target: {fileID: 3693762747164135538, guid: 123d0462d05bbb541858e1b9aeb1a388,
+        type: 3}
+      propertyPath: IDLE.Guid.Data3
+      value: -147658871
+      objectReference: {fileID: 0}
+    - target: {fileID: 3693762747164135538, guid: 123d0462d05bbb541858e1b9aeb1a388,
+        type: 3}
+      propertyPath: IDLE.Guid.Data4
+      value: -357734575
       objectReference: {fileID: 0}
     - target: {fileID: 3693762747164135538, guid: 123d0462d05bbb541858e1b9aeb1a388,
         type: 3}
@@ -15351,6 +15376,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3693762747164135538, guid: 123d0462d05bbb541858e1b9aeb1a388,
         type: 3}
+      propertyPath: WalkingSoundFile.Path
+      value: event:/Game play/Player/Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: 3693762747164135538, guid: 123d0462d05bbb541858e1b9aeb1a388,
+        type: 3}
       propertyPath: IdleSoundFile.Guid.Data1
       value: -1673904321
       objectReference: {fileID: 0}
@@ -15368,6 +15398,26 @@ PrefabInstance:
         type: 3}
       propertyPath: IdleSoundFile.Guid.Data4
       value: -357734575
+      objectReference: {fileID: 0}
+    - target: {fileID: 3693762747164135538, guid: 123d0462d05bbb541858e1b9aeb1a388,
+        type: 3}
+      propertyPath: WalkingSoundFile.Guid.Data1
+      value: -1013597291
+      objectReference: {fileID: 0}
+    - target: {fileID: 3693762747164135538, guid: 123d0462d05bbb541858e1b9aeb1a388,
+        type: 3}
+      propertyPath: WalkingSoundFile.Guid.Data2
+      value: 1340873512
+      objectReference: {fileID: 0}
+    - target: {fileID: 3693762747164135538, guid: 123d0462d05bbb541858e1b9aeb1a388,
+        type: 3}
+      propertyPath: WalkingSoundFile.Guid.Data3
+      value: 1827987876
+      objectReference: {fileID: 0}
+    - target: {fileID: 3693762747164135538, guid: 123d0462d05bbb541858e1b9aeb1a388,
+        type: 3}
+      propertyPath: WalkingSoundFile.Guid.Data4
+      value: 2049349630
       objectReference: {fileID: 0}
     - target: {fileID: 7747099678071028065, guid: 123d0462d05bbb541858e1b9aeb1a388,
         type: 3}

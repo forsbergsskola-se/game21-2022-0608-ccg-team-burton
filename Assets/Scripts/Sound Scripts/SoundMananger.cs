@@ -71,7 +71,7 @@ public class SoundMananger : MonoBehaviour
     
 
 
-    public void EquipItem()
+    public void Walking()
     {
         Debug.Log("Walking");
         FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Player/Walking");
