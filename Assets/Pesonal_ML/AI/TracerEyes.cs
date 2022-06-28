@@ -13,6 +13,7 @@ public enum TraceType
     Wall,
     Player,
     Platform,
+    Enemy,
     None
 }
 
@@ -29,8 +30,9 @@ public enum Actions
 [Serializable]
 public class HitResultValues
 {
-    public int numberSeen;
+    public TraceType type;
     public Vector2 position;
+    public bool objectWithinRange;
 }
 
 public enum SubType
@@ -59,6 +61,8 @@ public class TracerEyes : MonoBehaviour
     public bool WallSeen { get; private set;}
 
     public bool WallInRange;
+
+    private List<HitResultValues> hitValuesList = new();
     
     public bool WallTurn { get; private set;}
     public bool GroundSeen { get; private set;}
@@ -118,10 +122,10 @@ public class TracerEyes : MonoBehaviour
         TraceBox(transform);
     }
 
-    private bool IsPlayerBehind()
+    private bool IsObjectBehind(Vector2 objectPos)
     {
         return Vector2.Dot(transform.TransformDirection(Vector3.right),
-            PlayerTrans.position - transform.position) < 0;
+            (Vector3)objectPos - transform.position) < 0;
     }
     
     private void DoMultiTrace()
@@ -170,7 +174,7 @@ public class TracerEyes : MonoBehaviour
 
        if (PlayerTrans != default)
        {
-          PlayerBehind = IsPlayerBehind();
+          PlayerBehind = IsObjectBehind(PlayerTrans.position);
        }
        
        if (PlatformSeen && !PlayerSeen && !WallSeen)
@@ -425,14 +429,19 @@ public class TracerEyes : MonoBehaviour
         var playerSeen = false;
         var playerIsHit = false;
         
+        hitValuesList.Clear();
+        
         foreach (var r in result)
         {
+            hitValuesList.Add(new HitResultValues());
             var hitObject = r.collider.gameObject;
+            hitValuesList[^1].position = hitObject.transform.position;
 
             if (hitObject.layer == 8)
             {
+                hitValuesList[^1].type = TraceType.Player;
+
                 playerIsHit = true;
-                playerSeen = true;
                 if (PlayerTrans == default)
                 {
                     PlayerTrans = r.collider.transform;
@@ -446,48 +455,56 @@ public class TracerEyes : MonoBehaviour
             
             else if (hitObject.layer == 6)
             {
-                if (hitObject != StandingOn)
-                {
-                    if (hitObject.transform.localScale.y > 2)
-                    {
-                        Debug.Log("Wall seen");
-                        SetRangeValues(hitObject.transform.position, 0.8f, TraceType.Wall);
-                    }
 
-                    if (hitObject.transform.localScale.x > 7)
-                    {
-                        Debug.Log("Floor seen");
-                    }
-                    else
-                    {
-                        PlatformSeen = true;
-                        
+                if (hitObject.transform.localScale.y > 2)
+                {
+                    hitValuesList[^1].type = TraceType.Wall;
+                    Debug.Log("Wall seen");
+                    SetRangeValues(hitObject.transform.position, 0.8f, TraceType.Wall);
+                }
+                    
+                else if (hitObject.transform.localScale.x > 7)
+                {
+                    hitValuesList[^1].type = TraceType.Ground;
+                    Debug.Log("Floor seen");
+                }
+                
+                else
+                {
+                    PlatformSeen = true;
+                    hitValuesList[^1].type = TraceType.Platform;
+                    
+                    if(StandingOn != hitObject)
                         SetRangeValues(hitObject.transform.position, 7, TraceType.Platform);
 
-                        Debug.Log("Platform seen");
-                    }
+                    Debug.Log("Platform seen");
                 }
             }
             
             else if (hitObject.layer == 7)
             {
+                hitValuesList[^1].type = TraceType.Enemy;
                 Debug.Log("other enemy spotted");
             }
         }
 
         if (playerIsHit)
         {
-           playerSeen = !IsPlayerBehind();
+           playerSeen = !IsObjectBehind(PlayerTrans.position);
         }
         
         PlayerSeen = playerSeen;
         
+        ActOnResults();
         
     }
 
     private void ActOnResults()
     {
-        
+        if (PlayerSeen)
+        {
+            SetRangeValues(PlayerTrans.position, 1, TraceType.Player);
+        }
     }
     
     
