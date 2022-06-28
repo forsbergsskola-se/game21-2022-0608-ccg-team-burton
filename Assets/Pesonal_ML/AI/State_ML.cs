@@ -395,7 +395,7 @@ public class PlatformJump : State_ML
        
         if (!rightY)
         {
-            body.AddForce(new Vector2(0, estimateForce), ForceMode2D.Impulse);
+            body.AddForce(new Vector2(EnemyVarsMl.enemyRef.transform.right.x * 3.5f, estimateForce), ForceMode2D.Impulse);
             rightY = true;
             rightX = false;
         }
@@ -409,7 +409,7 @@ public class PlatformJump : State_ML
             Debug.Log(Mathf.Abs(xDist));
             
             var forceDir = EnemyVarsMl.enemyRef.transform.right;
-            body.AddForce(new Vector2(forceDir.x * 4f, 0), ForceMode2D.Force);
+         //   body.AddForce(new Vector2(forceDir.x * 0.5f, 0), ForceMode2D.Force);
             
             if (Mathf.Abs(xDist) < 3)
             {
