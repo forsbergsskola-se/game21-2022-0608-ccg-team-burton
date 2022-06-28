@@ -1,15 +1,16 @@
 using Protoypes.Harry;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class OneWayWall : MonoBehaviour
 {
-    private BoxCollider2D _collider;
+    private TilemapCollider2D _collider;
     private NewMovement _player;
-    public float UnlockTime;
+    private float UnlockTime;
     private float _unlockBuffer = float.MinValue;
     
     
-    private void Awake() => _collider = GetComponentInParent<BoxCollider2D>();
+    private void Awake() => _collider = GetComponentInParent<TilemapCollider2D>();
 
    
    
