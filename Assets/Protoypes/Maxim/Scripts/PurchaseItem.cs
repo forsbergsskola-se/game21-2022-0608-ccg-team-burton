@@ -2,10 +2,11 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PurchaseItem : MonoBehaviour
 {
-    
+    public SceneLoader sceneLoader;
     private int _currentCoins;
     public int _price;
 
@@ -26,6 +27,7 @@ public class PurchaseItem : MonoBehaviour
             Debug.Log("Point Counter" + _currentCoins);
             _currentCoins -= _price;
             OnCurrencyChange?.Invoke(_currentCoins);
+            sceneLoader.LoadScene();
         }
     }
     

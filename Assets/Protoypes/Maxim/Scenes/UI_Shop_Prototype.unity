@@ -140,7 +140,6 @@ GameObject:
   - component: {fileID: 161151978}
   - component: {fileID: 161151977}
   - component: {fileID: 161151976}
-  - component: {fileID: 161151979}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -214,19 +213,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &161151979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 161151975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 789de8b76f8535e44b53212b96d899b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sceneName: 
 --- !u!1 &203866537
 GameObject:
   m_ObjectHideFlags: 0
@@ -1304,4 +1290,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4449f2a88bd9099438bc646180ad120f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneLoader: {fileID: 3501134911170938277}
   _price: 1000
+--- !u!114 &3501134911170938277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36042249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 789de8b76f8535e44b53212b96d899b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneName: OpenLootBoxSceneJJ
