@@ -4115,10 +4115,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2001452584, guid: f1f0a7101684343beb8111591c2d3990, type: 3}
+      propertyPath: attenuationObject
+      value: 
+      objectReference: {fileID: 1324795166}
     - target: {fileID: 3713123893993751251, guid: f1f0a7101684343beb8111591c2d3990,
         type: 3}
       propertyPath: m_Name
-      value: Main Camera (1)
+      value: Main Camera
       objectReference: {fileID: 0}
     - target: {fileID: 3713123893993751263, guid: f1f0a7101684343beb8111591c2d3990,
         type: 3}
@@ -5115,6 +5119,12 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1324795166 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1144139567602091040, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
+    type: 3}
+  m_PrefabInstance: {fileID: 2094998861}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1484376762
 PrefabInstance:
   m_ObjectHideFlags: 0
