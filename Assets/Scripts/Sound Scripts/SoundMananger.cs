@@ -19,6 +19,8 @@ public class SoundMananger : MonoBehaviour
         MusicTrack1_EventInst.start();
 
         //DoThing();
+        
+        DontDestroyOnLoad(this);
     }
 
     // Update is called once per frame
@@ -55,7 +57,7 @@ public class SoundMananger : MonoBehaviour
     public void PickUpCurrency()
     {
         Debug.Log("PickUpCurrency");
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Pick up currency");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Objects/Pick up currency");
     }
 
     public void Jump()

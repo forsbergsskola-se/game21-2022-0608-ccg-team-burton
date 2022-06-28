@@ -25,6 +25,8 @@ public class LootBoxController : MonoBehaviour, ISaveable
       Debug.Log("Opening loot box");
       OpenBox();
       _animator.SetBool("OpenLootBox", true);
+      //FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Objects/Pick up currency");
+      //FMODUnity.RuntimeManager.PlayOneShot("event:/Meta Game/Lootbox/Open Gacha crate Type 1");
       
    }
 
