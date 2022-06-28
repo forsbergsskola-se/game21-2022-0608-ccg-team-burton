@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Meta.Gacha;
+using Mono.Cecil;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -14,7 +15,15 @@ public class LootBoxController : MonoBehaviour, ISaveable
    [SerializeField] private GameObject _itemInfoUI;
 
    public Action<Item> OnUpdateItemUI;
+   public FMODUnity.EventReference musicTrack2;
+   
    private Item item;
+   SoundMananger _sound;
+
+   void Awake(){
+      _sound = FindObjectOfType<SoundMananger>();
+   }
+
    private void Start()
    {
       _itemInfoUI.SetActive(false);
@@ -25,9 +34,7 @@ public class LootBoxController : MonoBehaviour, ISaveable
       Debug.Log("Opening loot box");
       OpenBox();
       _animator.SetBool("OpenLootBox", true);
-      //FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Objects/Pick up currency");
-      //FMODUnity.RuntimeManager.PlayOneShot("event:/Meta Game/Lootbox/Open Gacha crate Type 1");
-      
+      _sound.StartSound(musicTrack2);
    }
 
    

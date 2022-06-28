@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
+using Mono.Cecil;
 using UnityEngine;
 
 public class SoundMananger : MonoBehaviour
@@ -15,8 +17,10 @@ public class SoundMananger : MonoBehaviour
     void Start()
     {
         //music
-        MusicTrack1_EventInst = FMODUnity.RuntimeManager.CreateInstance(MusicTrack1_EventRef);
-        MusicTrack1_EventInst.start();
+        //MusicTrack1_EventInst = FMODUnity.RuntimeManager.CreateInstance(MusicTrack1_EventRef);
+        //MusicTrack1_EventInst.start();
+        
+        StartSound(MusicTrack1_EventRef);
 
         //DoThing();
         
@@ -46,8 +50,12 @@ public class SoundMananger : MonoBehaviour
         isPitched = !isPitched;
     }
 
-
-
+    public void StartSound(FMODUnity.EventReference MusicTrack2_EventRef){
+        MusicTrack1_EventInst.stop(STOP_MODE.ALLOWFADEOUT);
+        MusicTrack1_EventInst = FMODUnity.RuntimeManager.CreateInstance(MusicTrack2_EventRef);
+        MusicTrack1_EventInst.start();
+    }
+    
     public void EquipItem()
     {
         Debug.Log("Equip item");
