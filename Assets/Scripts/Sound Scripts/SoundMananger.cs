@@ -27,17 +27,6 @@ public class SoundMananger : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("Hello testing");
-            //SetMusicParam(0.3f);
-            switchPitch();
-        }
-    }
-    
     public void SetMusicParam(float val)
     {
         MusicTrack_EventInst.setParameterByName("test", val);
@@ -58,6 +47,26 @@ public class SoundMananger : MonoBehaviour
 
     public void StopMusic(){
         MusicTrack_EventInst.stop(STOP_MODE.ALLOWFADEOUT);
+    }
+
+    public void PlaySound(FMOD.Studio.EventInstance sound)
+    {
+        FMOD.Studio.PLAYBACK_STATE PbState;
+        sound.getPlaybackState(out PbState);
+        if (PbState != PLAYBACK_STATE.PLAYING)
+        {
+            sound.start();
+        }
+    }
+
+    public void StopSound(FMOD.Studio.EventInstance sound)
+    {
+        FMOD.Studio.PLAYBACK_STATE PbState;
+        sound.getPlaybackState(out PbState);
+        if (PbState == PLAYBACK_STATE.PLAYING)
+        {
+            sound.stop(STOP_MODE.IMMEDIATE);
+        }
     }
     
     public void EquipItem()

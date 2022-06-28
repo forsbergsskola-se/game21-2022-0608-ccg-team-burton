@@ -1,3 +1,5 @@
+using System;
+using FMOD.Studio;
 using GamePlay.Entities.Movement;
 using GamePlay.Entities.Player;
 using UnityEngine;
@@ -9,12 +11,14 @@ namespace Protoypes.Harry
         private CommandContainer _commandContainer;
         private GroundChecker _groundChecker;
         private Animator _animator;
+        private SoundMananger _soundMananger;
         
         private Vector2 _rawMovement { get; set; }
         private Vector2 _velocity;
         private Vector2 _lastPosition;
         private Rigidbody2D _rb;
 
+        [Header("IDLE")] public FMODUnity.EventReference IdleSoundFile;
         
         [Header("WALKING")] 
         public float Acceleration = 90;
@@ -58,16 +62,26 @@ namespace Protoypes.Harry
             _commandContainer = GetComponent<CommandContainer>();
             _groundChecker = GetComponent<GroundChecker>();
             _animator = GetComponent<Animator>();
+            _soundMananger = FindObjectOfType<SoundMananger>();
+            
         }
 
 
+        private FMOD.Studio.EventInstance _idle;
+        
+        
+        private void Start()
+        {
+            _idle = FMODUnity.RuntimeManager.CreateInstance("event:/Game play/Player/PlayerIdle");
+        }
 
         private void Update() { CollectInput(); CheckCollisions(); }
-        
-        
+
         
         private void FixedUpdate() 
         {
+            IdleSound();
+            
             CalculateWalking(); 
             CalculateJumpApex();
             CalculateGravity(); 
@@ -80,8 +94,42 @@ namespace Protoypes.Harry
             
             MovePlayer();
         }
+        
+        
+        
+
+        
+ 
+        private void IdleSound()
+        {
+            if (_currentHorizontalSpeed == 0 && _currentVerticalSpeed == 0)
+            {
+                _soundMananger.PlaySound(_idle);
+            }
+            else
+            {
+                _soundMananger.StopSound(_idle);
+            }
+        }
 
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         private void CollectInput()
         {
@@ -199,6 +247,7 @@ namespace Protoypes.Harry
         {
             _rawMovement = new Vector2(_currentHorizontalSpeed, _currentVerticalSpeed) * Time.fixedDeltaTime;
            _rb.MovePosition(_rb.position + _rawMovement);
+           //soundManager.WalkingSound();
         }
 
 
