@@ -9,7 +9,7 @@ namespace Protoypes.Harry
         private CommandContainer _commandContainer;
         private GroundChecker _groundChecker;
         private Animator _animator;
-        private SoundMananger _soundMananger;
+        private SoundMananger _soundManager;
         
         private Vector2 _rawMovement { get; set; }
         private Vector2 _velocity;
@@ -19,6 +19,8 @@ namespace Protoypes.Harry
         [Header("IDLE")] 
         public FMODUnity.EventReference IdleSoundFile;
         private FMOD.Studio.EventInstance _idleSound;
+        public bool FacingRight;
+
 
         
         [Header("WALKING")] 
@@ -26,7 +28,6 @@ namespace Protoypes.Harry
         public float MoveClamp = 13; 
         public float Deceleration = 60f;
         public float _currentHorizontalSpeed { get; private set; }
-        public bool FacingRight;
         public FMODUnity.EventReference WalkingSoundFile;
         private FMOD.Studio.EventInstance _walkingSound;
         
@@ -40,15 +41,17 @@ namespace Protoypes.Harry
         
         [Header("JUMPING")] 
         public float JumpHeight = 30;
-        public float BounceHeight = 25;
-        public float SuperBounceHeight = 40;
         private float _apexPoint;
         public float _currentVerticalSpeed { get; private set; }
-        
         public FMODUnity.EventReference JumpSoundFile;
         private FMOD.Studio.EventInstance _jumpSound;
-        public FMODUnity.EventReference ShroomBounceSoundFile;
-        private FMOD.Studio.EventInstance _shroomBounce;
+        
+        
+        [Header("BOUNCING")]
+        public float BounceHeight = 25;
+        public float SuperBounceHeight = 40;
+        public FMODUnity.EventReference BounceSoundFile;
+        private FMOD.Studio.EventInstance _bounceSound;
         
         //Inputs
         private float _walkCommand;
@@ -71,7 +74,7 @@ namespace Protoypes.Harry
             _commandContainer = GetComponent<CommandContainer>();
             _groundChecker = GetComponent<GroundChecker>();
             _animator = GetComponent<Animator>();
-            _soundMananger = FindObjectOfType<SoundMananger>();
+            _soundManager = FindObjectOfType<SoundMananger>();
         }
 
 
@@ -81,7 +84,7 @@ namespace Protoypes.Harry
             _idleSound = FMODUnity.RuntimeManager.CreateInstance(IdleSoundFile);
             _walkingSound = FMODUnity.RuntimeManager.CreateInstance(WalkingSoundFile);
             _jumpSound = FMODUnity.RuntimeManager.CreateInstance(JumpSoundFile);
-            _shroomBounce = FMODUnity.RuntimeManager.CreateInstance(ShroomBounceSoundFile);
+            _bounceSound = FMODUnity.RuntimeManager.CreateInstance(BounceSoundFile);
         }
 
         
@@ -91,38 +94,44 @@ namespace Protoypes.Harry
         
         private void FixedUpdate() 
         {
-            MovementSound();
-            
+            // Physics
             CalculateWalking(); 
-            CalculateJumpApex();
-            CalculateGravity(); 
-            FallIfWallOrRoofHit();
+            CalculateGravity();
+            CheckForBouncing();
             CalculateJumping();
-            FlipPlayer(_horizontal != 0 ? _horizontal : _walkCommand);
-
+            CalculateJumpApex();
+            FallIfWallOrRoofHit();
+            
+            // Animation & Sound
             if (_animator.runtimeAnimatorController != null)
                 AnimatePlayer();
+            FlipPlayer(_horizontal != 0 ? _horizontal : _walkCommand);
+            PlayMovementSound();
             
+            // Execution
             MovePlayer();
         }
         
         
-        private void MovementSound()
+        private void PlayMovementSound()
         {
             if (_currentHorizontalSpeed == 0 && _currentVerticalSpeed == 0)
             {
-                _soundMananger.PlaySound(_idleSound);
-                    _soundMananger.StopSound(_walkingSound);
-
+                _soundManager.PlaySound(_idleSound);
+                _soundManager.StopSound(_walkingSound);
             }
+            
             else
             {
-                _soundMananger.StopSound(_idleSound);
-                if(_groundChecker.IsGrounded)
-                    _soundMananger.PlaySound(_walkingSound);
+                _soundManager.StopSound(_idleSound);
+                
+                if (_groundChecker.IsGrounded)
+                    _soundManager.PlaySound(_walkingSound);
             }
         }
-       
+        
+
+
         private void CollectInput()
         {
             _walkCommand = _commandContainer.WalkCommand;
@@ -175,11 +184,9 @@ namespace Protoypes.Harry
 
             else
             {
-                // Fall
-                _currentVerticalSpeed -= FallSpeed * Time.fixedDeltaTime;
-
-                // Clamp
-                if (_currentVerticalSpeed < FallClamp)
+                _currentVerticalSpeed -= FallSpeed * Time.fixedDeltaTime; // Fall
+                
+                if (_currentVerticalSpeed < FallClamp) // Clamp
                     _currentVerticalSpeed = FallClamp;
             }
         }
@@ -189,63 +196,57 @@ namespace Protoypes.Harry
         private void CalculateJumpApex() 
         {
             if (_isGrounded)
-            {
                 FallSpeed = Mathf.Lerp(MinFallSpeed, MaxFallSpeed, _apexPoint);
-            }
+            
             else
                 _apexPoint = 0;
+        }
+
+
+
+        private void CheckForBouncing()
+        {
+            if (_isBouncing)
+            {
+                _currentVerticalSpeed = BounceHeight;
+                _soundManager.PlaySound(_bounceSound);
+            }
+
+            if (!_isSuperBouncing) return;
+            
+            _currentVerticalSpeed = SuperBounceHeight;
+            _soundManager.PlaySound(_bounceSound);
         }
 
         
         
         private void CalculateJumping() 
         {
-            if (_isBouncing)
-            {
-                _currentVerticalSpeed = BounceHeight;
-                _soundMananger.PlaySound(_shroomBounce);
-
-            }
-
-            if (_isSuperBouncing)
-            {
-                _currentVerticalSpeed = SuperBounceHeight;
-                _soundMananger.PlaySound(_shroomBounce);
-            }
-            
             if (!_isGrounded) return;
-
-            if (_jumpDownCommand && _isGrounded || _jumpSpace && _isGrounded)
-            {
-                _currentVerticalSpeed = JumpHeight;
-                _soundMananger.PlaySound(_jumpSound);
-            }
+            if ((!_jumpDownCommand || !_isGrounded) && (!_jumpSpace || !_isGrounded)) return;
             
+            _currentVerticalSpeed = JumpHeight;
+            _soundManager.PlaySound(_jumpSound);
         }
 
         
         
         private void FallIfWallOrRoofHit()
         {
-            if (_currentVerticalSpeed > 0)
-            {
-                if (!_isRoofed) // if hit roof fall
-                    return;
-
-                if (!_isGrounded && (_leftWallHit || _rightWallHit))
-                    return; // if hit left or right wall fall
- 
-                _currentVerticalSpeed = 0; // shared fall logic
-            }
+            if (!(_currentVerticalSpeed > 0)) return;
+            if (!_isRoofed) return; // if hit roof fall
+            if (!_isGrounded && (_leftWallHit || _rightWallHit)) return; // if hit left or right wall fall
+            
+            _currentVerticalSpeed = 0; // shared fall logic
         }
 
         
 
         private void AnimatePlayer()
         {
-           _animator.SetFloat("Hspeed", Mathf.Abs(_currentHorizontalSpeed));
-           _animator.SetFloat("Vspeed", Mathf.Abs(_currentVerticalSpeed));
-           _animator.SetBool("Attacking",false);
+            _animator.SetFloat("Hspeed", Mathf.Abs(_currentHorizontalSpeed)); 
+            _animator.SetFloat("Vspeed", Mathf.Abs(_currentVerticalSpeed));
+            _animator.SetBool("Attacking",false);
         }
 
         
@@ -253,7 +254,7 @@ namespace Protoypes.Harry
         private void MovePlayer()
         {
             _rawMovement = new Vector2(_currentHorizontalSpeed, _currentVerticalSpeed) * Time.fixedDeltaTime;
-           _rb.MovePosition(_rb.position + _rawMovement);
+            _rb.MovePosition(_rb.position + _rawMovement);
         }
 
 
