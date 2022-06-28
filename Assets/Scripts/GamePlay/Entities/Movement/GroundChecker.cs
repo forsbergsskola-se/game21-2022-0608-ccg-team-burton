@@ -9,12 +9,16 @@ namespace GamePlay.Entities.Movement
         [SerializeField] private float _groundCheckLength = 0.53f;
         [SerializeField] private float _groundCheckRadius = 0.53f;
         public bool IsBouncing;
+        public bool IsSuperBouncing;
         
         public bool IsRoofed;
         [SerializeField] private float _roofCheckLength = 0.53f;
         [SerializeField] private float _roofCheckRadius = 0.53f;
         [SerializeField] private LayerMask _groundLayers;
         [SerializeField] private LayerMask _bounceLayers;
+        [SerializeField] private LayerMask _superBounceLayers;
+
+        
 
 
         [Header("HORIZONTAL SIDES")]
@@ -38,6 +42,7 @@ namespace GamePlay.Entities.Movement
             
             CheckIfGrounded(_pos, _ray); 
             CheckIfBouncing(_pos, _ray);
+            CheckIfSuperBouncing(_pos, _ray);
             CheckIfRoofed(_pos, _ray);
             CheckLeftWall(_pos, _ray);
             CheckRightWall(_pos, _ray);
@@ -66,6 +71,14 @@ namespace GamePlay.Entities.Movement
         private void CheckIfBouncing(Vector3 pos, Vector2 ray)
         {
             IsBouncing = Physics2D.CircleCast(_ray, _groundCheckRadius, Vector2.down, _groundCheckLength, _bounceLayers);
+            Debug.DrawRay(_pos, Vector3.down * _groundCheckLength, Color.black);
+        }
+        
+        
+        
+        private void CheckIfSuperBouncing(Vector3 pos, Vector2 ray)
+        {
+            IsSuperBouncing = Physics2D.CircleCast(_ray, _groundCheckRadius, Vector2.down, _groundCheckLength, _superBounceLayers);
             Debug.DrawRay(_pos, Vector3.down * _groundCheckLength, Color.black);
         }
         
