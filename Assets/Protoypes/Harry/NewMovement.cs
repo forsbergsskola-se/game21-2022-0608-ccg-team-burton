@@ -44,8 +44,11 @@ namespace Protoypes.Harry
         public float SuperBounceHeight = 40;
         private float _apexPoint;
         public float _currentVerticalSpeed { get; private set; }
+        
         public FMODUnity.EventReference JumpSoundFile;
         private FMOD.Studio.EventInstance _jumpSound;
+        public FMODUnity.EventReference ShroomBounceSoundFile;
+        private FMOD.Studio.EventInstance _shroomBounce;
         
         //Inputs
         private float _walkCommand;
@@ -78,6 +81,7 @@ namespace Protoypes.Harry
             _idleSound = FMODUnity.RuntimeManager.CreateInstance(IdleSoundFile);
             _walkingSound = FMODUnity.RuntimeManager.CreateInstance(WalkingSoundFile);
             _jumpSound = FMODUnity.RuntimeManager.CreateInstance(JumpSoundFile);
+            _shroomBounce = FMODUnity.RuntimeManager.CreateInstance(ShroomBounceSoundFile);
         }
 
         
@@ -197,10 +201,17 @@ namespace Protoypes.Harry
         private void CalculateJumping() 
         {
             if (_isBouncing)
+            {
                 _currentVerticalSpeed = BounceHeight;
+                _soundMananger.PlaySound(_shroomBounce);
+
+            }
 
             if (_isSuperBouncing)
+            {
                 _currentVerticalSpeed = SuperBounceHeight;
+                _soundMananger.PlaySound(_shroomBounce);
+            }
             
             if (!_isGrounded) return;
 
