@@ -140,10 +140,10 @@ MonoBehaviour:
       Data3: -147658871
       Data4: -357734575
     Path: event:/Game play/Player/PlayerIdle
+  FacingRight: 1
   Acceleration: 90
   MoveClamp: 7.25
   Deceleration: 400
-  FacingRight: 1
   WalkingSoundFile:
     Guid:
       Data1: -1013597291
@@ -155,8 +155,6 @@ MonoBehaviour:
   MinFallSpeed: 65
   MaxFallSpeed: 112.5
   JumpHeight: 30
-  BounceHeight: 20
-  SuperBounceHeight: 40
   JumpSoundFile:
     Guid:
       Data1: -330003421
@@ -164,7 +162,9 @@ MonoBehaviour:
       Data3: -1306740596
       Data4: -1476415498
     Path: event:/Game play/Player/Jump
-  ShroomBounceSoundFile:
+  BounceHeight: 20
+  SuperBounceHeight: 40
+  BounceSoundFile:
     Guid:
       Data1: -1728539902
       Data2: 1169222615
@@ -292,11 +292,11 @@ MonoBehaviour:
   _soundMananger: {fileID: 0}
   CollectCoinSoundFile:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 1503992618
+      Data2: 1197633378
+      Data3: 2020082080
+      Data4: 1417607242
+    Path: event:/Game play/Objects/PickUpCurrency
 --- !u!114 &5732464600212847612
 MonoBehaviour:
   m_ObjectHideFlags: 0
