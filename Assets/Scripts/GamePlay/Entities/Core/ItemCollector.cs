@@ -10,10 +10,20 @@ public class ItemCollector : MonoBehaviour{
     [SerializeField] int cointValue;
     [HideInInspector]public int _coinCounter = 0;
 
+    [SerializeField] SoundMananger _soundMananger;
+    public FMODUnity.EventReference CollectCoinSoundFile;
+    FMOD.Studio.EventInstance _collectCoinSound;
+
+    private void Start()
+    {
+        _collectCoinSound = FMODUnity.RuntimeManager.CreateInstance(CollectCoinSoundFile);
+    }
+
+
     void OnTriggerEnter2D(Collider2D col){
         if (col.gameObject.CompareTag("Coin")){
             Destroy(col.gameObject);
-            //TODO: Implement coin sound here
+            _soundMananger.PlayStackingSound(_collectCoinSound);
             _coinCounter +=  cointValue;
             UpdateCoinText(_coinCounter);
         }

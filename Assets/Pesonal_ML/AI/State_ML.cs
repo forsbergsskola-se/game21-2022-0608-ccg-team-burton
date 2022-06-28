@@ -187,6 +187,7 @@ public class Patrol : State_ML
     private void SimpleMove()
     {
         EnemyVarsMl.enemyRef.transform.position += EnemyVarsMl.enemyRef.transform.right * (Time.deltaTime * EnemyVarsMl.GetMoveSpeed);
+        //Sound here for rat movement (talk to JJ or Pavel)
         
     }
 }
