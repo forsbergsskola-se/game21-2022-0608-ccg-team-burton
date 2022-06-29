@@ -47,7 +47,7 @@ Transform:
   m_Children:
   - {fileID: 3616007790298403442}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1144139567602091071
 SpriteRenderer:
@@ -218,9 +218,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a4ed6dbeee629418c8eeea371134ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  health: 6
   playerHealth: {fileID: 3205524570191263581}
   hearts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -241,6 +244,13 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
+  AttackHitSoundFile:
+    Guid:
+      Data1: -627551298
+      Data2: 1136385199
+      Data3: -1090946890
+      Data4: 232387405
+    Path: event:/Game play/Combat/SissorAttack
   _meleeDamage: 1
   _knockbackMultiplier: 1
   DebugProjectile: {fileID: 0}
@@ -257,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62179065a33a8c43879a7035312207e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 3
+  _health: 6
   _invulnerablilityTime: 0.75
   TakeDamageSoundFile:
     Guid:
@@ -273,7 +283,6 @@ MonoBehaviour:
       Data3: 791635848
       Data4: 1808263322
     Path: event:/Game play/Combat/DiesFromDamage
-  _soundMananger: {fileID: 0}
 --- !u!114 &3205524570191263580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,7 +319,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _combat: {fileID: 4797520626450282201}
   _attackDelaySec: 2
-  _soundMananger: {fileID: 0}
   AttackSoundFile:
     Guid:
       Data1: -627551298
