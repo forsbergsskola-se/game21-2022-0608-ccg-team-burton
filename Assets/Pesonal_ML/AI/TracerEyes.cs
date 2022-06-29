@@ -5,6 +5,7 @@ using System.Linq;
 using Entity;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [Flags]
 public enum TraceType
@@ -85,6 +86,8 @@ public class TracerEyes : MonoBehaviour
 
     private bool PlatformInRange;
 
+    private bool JumpableWallSeen;
+
     private bool PlayerKnown;
     
     public Actions actions { get; private set; }
@@ -94,6 +97,8 @@ public class TracerEyes : MonoBehaviour
     public bool PlayerInAttackRange { get; private set;}
     
     public Transform PlayerTrans;
+
+    private List<HitResults> hitResultList = new();
     
     private void Awake()
     {
@@ -112,7 +117,7 @@ public class TracerEyes : MonoBehaviour
 
             DoMultiTrace();
            // CheckForGround(new Vector2(transform.right.x, -0.5f));
-            DoSquareTrace();
+        //    DoSquareTrace();
         }
     }
 
@@ -135,10 +140,10 @@ public class TracerEyes : MonoBehaviour
        var increment = -0.5f;
        actions = Actions.None;
 
+       hitResultList.Clear();
        var inc = 0.5f;
-       List<HitResults> resultList = new List<HitResults>();
 
-       for (int i = 0; i < 4; i++)
+       for (int i = 0; i < 5; i++)
        {
            var dir = new Vector2(right.x, increment);
            var traceDistance = pursueDistance;
@@ -153,7 +158,7 @@ public class TracerEyes : MonoBehaviour
                traceDistance = pursueDistance;
            }
            
-           if (i > 2)
+           if (i > 3)
            {
                dir = new Vector2(-right.x, 0);
            }
@@ -167,100 +172,111 @@ public class TracerEyes : MonoBehaviour
                theHitType = traceHit,
                 theHit = hit
            };
-           resultList.Add(results);
+           hitResultList.Add(results);
 
            increment += inc;
        }
-
-       if (PlayerTrans != default)
-       {
-          PlayerBehind = IsObjectBehind(PlayerTrans.position);
-       }
        
-       if (PlatformSeen && !PlayerSeen && !WallSeen)
-       {
-           PlatformRef = resultList[2].theHit.collider.gameObject.transform;
-           
-           if (Vector2.Distance(PlatformRef.transform.position, attackRange.position) < 7f)
-           {
-               PlatformInJumpDistance = true;
-               actions = Actions.PlatformJump;
-           }
-           else
-           {
-               PlatformInJumpDistance = false;
-           }
-       }
-
-       if (PlatformSeen && !GroundSeen)
-       {
-           PlatformRef = resultList[2].theHit.collider.gameObject.transform;
-           
-           if (Vector2.Distance(PlatformRef.transform.position, attackRange.position) < 7f)
-           {
-               PlatformInJumpDistance = true;
-               actions = Actions.PlatformJump;
-           }
-           else
-           {
-               PlatformInJumpDistance = false;
-           }   
-       }
-
-       if (WallSeen)
-       {
-           if (WallRef != resultList[1].theHit.collider.gameObject.transform)
-           {
-               WallRef = resultList[1].theHit.collider.gameObject.transform;
-           }
-
-           if (resultList[1].theHit.distance < 1 && GroundSeen)
-           {
-               actions = Actions.TurnAround;
-           }
-           
-       }
+       SetResults();
        
-       if (GroundSeen)
-       {
-           if (StandingOn != resultList[0].theHit.collider.gameObject)
-           {
-               StandingOn = resultList[0].theHit.collider.gameObject;
-           }
-       }
-
-       if (!GroundSeen)
-       {
-           
-       }
-       
-       if (PlayerSeen)
-       {
-           if (Vector2.Distance(resultList[1].theHit.collider.gameObject.transform.position, attackRange.position) < 1f)
-           {
-               PlayerInAttackRange = true;
-           }
-           else
-           {
-               PlayerInAttackRange = false;
-           }
-           
-           if (PlayerTrans == default)
-           {
-               PlayerTrans = resultList[1].theHit.collider.gameObject.transform; 
-               _playerHealth = resultList[1].theHit.collider.gameObject.GetComponent<Health>();
-           }
-       }
-
-       if (!PlayerSeen && PlayerTrans != default)
-       {
-           if (PlayerBehind)
-           {
-               actions = Actions.TurnAround;
-           }
-       }
     }
 
+    private void SetResults()
+    {
+        if (PlayerSeen)
+        {
+            SetRangeValues(hitResultList[1].theHit.collider.gameObject.transform.position, 0.4f, TraceType.Player);
+            
+            if (PlayerTrans == default)
+            {
+                PlayerTrans = hitResultList[1].theHit.collider.gameObject.transform; 
+                _playerHealth = hitResultList[1].theHit.collider.gameObject.GetComponent<Health>();
+            }
+        }
+
+        if (!PlayerSeen)
+        {
+            if (PlayerTrans != default)
+            {
+                if (IsObjectBehind(PlayerTrans.position))
+                {
+                    actions = Actions.TurnAround;
+                }
+            }
+        }
+
+        if (GroundSeen)
+        {
+            if (StandingOn != hitResultList[0].theHit.collider.gameObject)
+            {
+                StandingOn = hitResultList[0].theHit.collider.gameObject;
+            }
+        }
+        
+        
+        if (PlatformSeen && !GroundSeen)
+        {
+            PlatformRef = hitResultList[2].theHit.collider.gameObject.transform;
+           
+            if (Vector2.Distance(PlatformRef.transform.position, attackRange.position) < 7f)
+            {
+                PlatformInJumpDistance = true;
+                actions = Actions.PlatformJump;
+            }
+            else
+            {
+                PlatformInJumpDistance = false;
+            }   
+        }
+        
+        if (PlatformSeen && !PlayerSeen && !WallSeen)
+        {
+            PlatformRef = hitResultList[2].theHit.collider.gameObject.transform;
+           
+            if (Vector2.Distance(PlatformRef.transform.position, attackRange.position) < 7f)
+            {
+                PlatformInJumpDistance = true;
+                actions = Actions.PlatformJump;
+            }
+            else
+            {
+                PlatformInJumpDistance = false;
+            }
+        }
+
+        if (PlatformSeen && !GroundSeen)
+        {
+            PlatformRef = hitResultList[2].theHit.collider.gameObject.transform;
+           
+            if (Vector2.Distance(PlatformRef.transform.position, attackRange.position) < 7f)
+            {
+                PlatformInJumpDistance = true;
+                actions = Actions.PlatformJump;
+            }
+            else
+            {
+                PlatformInJumpDistance = false;
+            }   
+        }
+
+        
+        if (WallSeen)
+        {
+            var wallDist = hitResultList[1].theHit.distance;
+            
+            if (wallDist< 1 && GroundSeen)
+            {
+                actions = Actions.TurnAround;
+            }
+           
+        }
+
+        if (WallSeen && !PlatformSeen)
+        {
+            JumpableWallSeen = true;
+        }
+    }
+    
     private void AnalyzeResults(int traceCount, TraceType type)
     {
         switch (type)
@@ -280,7 +296,7 @@ public class TracerEyes : MonoBehaviour
                         PlatformSeen = false;
                         break;
                     
-                    case 3:
+                    case 4:
                         PlayerBehind = false;
                         break;
                     
@@ -314,7 +330,7 @@ public class TracerEyes : MonoBehaviour
                         PlayerSeen = true;
                         break;
                     
-                    case 3:
+                    case 4:
                         PlayerBehind = true;
                         break;
                 }
@@ -333,13 +349,15 @@ public class TracerEyes : MonoBehaviour
     {
         var hit = Physics2D.Raycast(pos, dir, traceDistance, multiMask);
         outHit = hit;
-
+        
         if (!hit)
         {
             Debug.DrawRay(transform.position, dir *traceDistance, Color.red, traceInterval);
             return TraceType.None;
         }
 
+        Debug.Log(hit.point);
+        
         var layer = hit.collider.gameObject.layer;
         
         if (layer == 6)
@@ -436,7 +454,10 @@ public class TracerEyes : MonoBehaviour
             hitValuesList.Add(new HitResultValues());
             var hitObject = r.collider.gameObject;
             hitValuesList[^1].position = hitObject.transform.position;
-
+     
+            TilemapCollider2D coll;
+            
+            
             if (hitObject.layer == 8)
             {
                 hitValuesList[^1].type = TraceType.Player;
@@ -496,7 +517,6 @@ public class TracerEyes : MonoBehaviour
         PlayerSeen = playerSeen;
         
         ActOnResults();
-        
     }
 
     private void ActOnResults()
