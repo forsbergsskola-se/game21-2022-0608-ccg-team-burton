@@ -1,25 +1,32 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class ItemCollector : MonoBehaviour{
 
-    [SerializeField]public TextMeshProUGUI cointText;
-    [SerializeField] int cointValue;
-    [HideInInspector]public int _coinCounter = 0;
+    [SerializeField] public TextMeshProUGUI coinText;
+    [SerializeField] public int coinValue;
+    [HideInInspector] public int _coinCounter = 0;
 
-    void OnTriggerEnter2D(Collider2D col){
-        if (col.gameObject.CompareTag("Coin")){
-            Destroy(col.gameObject);
-            //TODO: Implement coin sound here
-            _coinCounter +=  cointValue;
-            UpdateCoinText(_coinCounter);
-        }
+    private SoundMananger _soundManager;
+    public FMODUnity.EventReference CollectCoinSoundFile;
+    private FMOD.Studio.EventInstance _collectCoinSound;
+
+    private void Awake()
+    {
+        _soundManager = FindObjectOfType<SoundMananger>();
+        _collectCoinSound = FMODUnity.RuntimeManager.CreateInstance(CollectCoinSoundFile);
     }
 
-    public void UpdateCoinText(int value){
-        cointText.text = "Coins: " + value ;
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (!col.gameObject.CompareTag("Coin")) return;
+        
+        Destroy(col.gameObject);
+        _soundManager.PlayStackingSound(_collectCoinSound);
+        _coinCounter +=  coinValue;
+        UpdateCoinText(_coinCounter);
     }
+
+    public void UpdateCoinText(int value) => coinText.text = "Coins: " + value ;
 }

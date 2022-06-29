@@ -31,6 +31,7 @@ public class Combat : MonoBehaviour
             DealDamage(enemy);
         
         
+        
     }
     public void RangedAttack()
     {

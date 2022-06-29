@@ -5,6 +5,7 @@ using System.Linq;
 using Entity;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [Flags]
 public enum TraceType
@@ -13,6 +14,7 @@ public enum TraceType
     Wall,
     Player,
     Platform,
+    Enemy,
     None
 }
 
@@ -24,6 +26,14 @@ public enum Actions
     Jump,
     PlatformJump,
     Pursue
+}
+
+[Serializable]
+public class HitResultValues
+{
+    public TraceType type;
+    public Vector2 position;
+    public bool objectWithinRange;
 }
 
 public enum SubType
@@ -50,6 +60,10 @@ public class TracerEyes : MonoBehaviour
     private float timeSinceTrace;
     
     public bool WallSeen { get; private set;}
+
+    public bool WallInRange;
+
+    private List<HitResultValues> hitValuesList = new();
     
     public bool WallTurn { get; private set;}
     public bool GroundSeen { get; private set;}
@@ -66,7 +80,15 @@ public class TracerEyes : MonoBehaviour
     public bool PlatformSeen { get; private set; }
     
     public bool PlayerBehind { get; private set; }
+
+    private bool PlayerHit;
     public bool PlayerForgotten { get; private set; }
+
+    private bool PlatformInRange;
+
+    private bool JumpableWallSeen;
+
+    private bool PlayerKnown;
     
     public Actions actions { get; private set; }
 
@@ -75,6 +97,8 @@ public class TracerEyes : MonoBehaviour
     public bool PlayerInAttackRange { get; private set;}
     
     public Transform PlayerTrans;
+
+    private List<HitResults> hitResultList = new();
     
     private void Awake()
     {
@@ -93,7 +117,7 @@ public class TracerEyes : MonoBehaviour
 
             DoMultiTrace();
            // CheckForGround(new Vector2(transform.right.x, -0.5f));
-           // DoSquareTrace();
+        //    DoSquareTrace();
         }
     }
 
@@ -103,19 +127,10 @@ public class TracerEyes : MonoBehaviour
         TraceBox(transform);
     }
 
-    private void CheckPlayerPos()
+    private bool IsObjectBehind(Vector2 objectPos)
     {
-      // var aDot = Vector2.Dot(PlayerTrans.position.normalized, transform.InverseTransformPoint(transform.right).normalized);
-       var aDot2 = Vector2.Dot(PlayerTrans.position.normalized, transform.InverseTransformDirection(transform.right));
-     //  Debug.Log(aDot);
-       Debug.Log(aDot2);
-       //Debug.Log(transform.right);
-       //Debug.Log(PlayerTrans.right);
-
-       if (aDot2 < 0.8f)
-       {
-           actions = Actions.TurnAround;
-       }
+        return Vector2.Dot(transform.TransformDirection(Vector3.right),
+            (Vector3)objectPos - transform.position) < 0;
     }
     
     private void DoMultiTrace()
@@ -125,10 +140,10 @@ public class TracerEyes : MonoBehaviour
        var increment = -0.5f;
        actions = Actions.None;
 
+       hitResultList.Clear();
        var inc = 0.5f;
-       List<HitResults> resultList = new List<HitResults>();
 
-       for (int i = 0; i < 4; i++)
+       for (int i = 0; i < 5; i++)
        {
            var dir = new Vector2(right.x, increment);
            var traceDistance = pursueDistance;
@@ -143,7 +158,7 @@ public class TracerEyes : MonoBehaviour
                traceDistance = pursueDistance;
            }
            
-           if (i > 2)
+           if (i > 3)
            {
                dir = new Vector2(-right.x, 0);
            }
@@ -157,85 +172,111 @@ public class TracerEyes : MonoBehaviour
                theHitType = traceHit,
                 theHit = hit
            };
-           resultList.Add(results);
+           hitResultList.Add(results);
 
            increment += inc;
        }
-
-       if (PlayerTrans != default)
-       {
-           
-       }
        
-       if (PlatformSeen && !PlayerSeen && !WallSeen)
-       {
-           PlatformRef = resultList[2].theHit.collider.gameObject.transform;
-           
-           if (Vector2.Distance(PlatformRef.transform.position, attackRange.position) < 7f)
-           {
-               PlatformInJumpDistance = true;
-               actions = Actions.PlatformJump;
-           }
-           else
-           {
-               PlatformInJumpDistance = false;
-           }
-       }
-
-       if (WallSeen)
-       {
-           if (WallRef != resultList[1].theHit.collider.gameObject.transform)
-           {
-               WallRef = resultList[1].theHit.collider.gameObject.transform;
-           }
-
-           if (resultList[1].theHit.distance < 1 && GroundSeen)
-           {
-               actions = Actions.TurnAround;
-           }
-           
-       }
+       SetResults();
        
-       if (GroundSeen)
-       {
-           if (StandingOn != resultList[0].theHit.collider.gameObject)
-           {
-               StandingOn = resultList[0].theHit.collider.gameObject;
-           }
-       }
-
-       if (!GroundSeen)
-       {
-           
-       }
-       
-       if (PlayerSeen)
-       {
-           if (Vector2.Distance(resultList[1].theHit.collider.gameObject.transform.position, attackRange.position) < 1f)
-           {
-               PlayerInAttackRange = true;
-           }
-           else
-           {
-               PlayerInAttackRange = false;
-           }
-           
-           if (PlayerTrans == default)
-           {
-               PlayerTrans = resultList[1].theHit.collider.gameObject.transform; 
-               _playerHealth = resultList[1].theHit.collider.gameObject.GetComponent<Health>();
-           }
-       }
-
-       if (!PlayerSeen && PlayerTrans != default)
-       {
-           if (PlayerBehind)
-           {
-               actions = Actions.TurnAround;
-           }
-       }
     }
 
+    private void SetResults()
+    {
+        if (PlayerSeen)
+        {
+            SetRangeValues(hitResultList[1].theHit.collider.gameObject.transform.position, 0.4f, TraceType.Player);
+            
+            if (PlayerTrans == default)
+            {
+                PlayerTrans = hitResultList[1].theHit.collider.gameObject.transform; 
+                _playerHealth = hitResultList[1].theHit.collider.gameObject.GetComponent<Health>();
+            }
+        }
+
+        if (!PlayerSeen)
+        {
+            if (PlayerTrans != default)
+            {
+                if (IsObjectBehind(PlayerTrans.position))
+                {
+                    actions = Actions.TurnAround;
+                }
+            }
+        }
+
+        if (GroundSeen)
+        {
+            if (StandingOn != hitResultList[0].theHit.collider.gameObject)
+            {
+                StandingOn = hitResultList[0].theHit.collider.gameObject;
+            }
+        }
+        
+        
+        if (PlatformSeen && !GroundSeen)
+        {
+            PlatformRef = hitResultList[2].theHit.collider.gameObject.transform;
+           
+            if (Vector2.Distance(PlatformRef.transform.position, attackRange.position) < 7f)
+            {
+                PlatformInJumpDistance = true;
+                actions = Actions.PlatformJump;
+            }
+            else
+            {
+                PlatformInJumpDistance = false;
+            }   
+        }
+        
+        if (PlatformSeen && !PlayerSeen && !WallSeen)
+        {
+            PlatformRef = hitResultList[2].theHit.collider.gameObject.transform;
+           
+            if (Vector2.Distance(PlatformRef.transform.position, attackRange.position) < 7f)
+            {
+                PlatformInJumpDistance = true;
+                actions = Actions.PlatformJump;
+            }
+            else
+            {
+                PlatformInJumpDistance = false;
+            }
+        }
+
+        if (PlatformSeen && !GroundSeen)
+        {
+            PlatformRef = hitResultList[2].theHit.collider.gameObject.transform;
+           
+            if (Vector2.Distance(PlatformRef.transform.position, attackRange.position) < 7f)
+            {
+                PlatformInJumpDistance = true;
+                actions = Actions.PlatformJump;
+            }
+            else
+            {
+                PlatformInJumpDistance = false;
+            }   
+        }
+
+        
+        if (WallSeen)
+        {
+            var wallDist = hitResultList[1].theHit.distance;
+            
+            if (wallDist< 1 && GroundSeen)
+            {
+                actions = Actions.TurnAround;
+            }
+           
+        }
+
+        if (WallSeen && !PlatformSeen)
+        {
+            JumpableWallSeen = true;
+        }
+    }
+    
     private void AnalyzeResults(int traceCount, TraceType type)
     {
         switch (type)
@@ -255,7 +296,7 @@ public class TracerEyes : MonoBehaviour
                         PlatformSeen = false;
                         break;
                     
-                    case 3:
+                    case 4:
                         PlayerBehind = false;
                         break;
                     
@@ -289,7 +330,7 @@ public class TracerEyes : MonoBehaviour
                         PlayerSeen = true;
                         break;
                     
-                    case 3:
+                    case 4:
                         PlayerBehind = true;
                         break;
                 }
@@ -308,13 +349,15 @@ public class TracerEyes : MonoBehaviour
     {
         var hit = Physics2D.Raycast(pos, dir, traceDistance, multiMask);
         outHit = hit;
-
+        
         if (!hit)
         {
             Debug.DrawRay(transform.position, dir *traceDistance, Color.red, traceInterval);
             return TraceType.None;
         }
 
+        Debug.Log(hit.point);
+        
         var layer = hit.collider.gameObject.layer;
         
         if (layer == 6)
@@ -399,71 +442,113 @@ public class TracerEyes : MonoBehaviour
         var sizeY = 7f;
         var sizeX = pursueDistance;
         var boxPlacement = trans.position + new Vector3(0, sizeY / 2 - 1);
-        var result = Physics2D.BoxCastAll(boxPlacement , new Vector2(pursueDistance * 2, sizeY), 0, trans.forward, 8);
-      //  var result = Physics2D.BoxCastAll(trans.position + new Vector3((pursueDistance/2) * trans.forward.x, 0), new Vector2(pursueDistance, 6), 0, trans.forward, 8);
+        var result = Physics2D.BoxCastAll(boxPlacement , new Vector2(pursueDistance * 2, sizeY), 0, trans.forward, 8, multiMask);
         DrawBoxRuntime(new Vector2(pursueDistance, sizeY), boxPlacement);
+        var playerSeen = false;
+        var playerIsHit = false;
+        
+        hitValuesList.Clear();
         
         foreach (var r in result)
         {
+            hitValuesList.Add(new HitResultValues());
             var hitObject = r.collider.gameObject;
+            hitValuesList[^1].position = hitObject.transform.position;
+     
+            TilemapCollider2D coll;
+            
+            
             if (hitObject.layer == 8)
             {
-                PlayerSeen = true;
+                hitValuesList[^1].type = TraceType.Player;
+
+                playerIsHit = true;
                 if (PlayerTrans == default)
                 {
                     PlayerTrans = r.collider.transform;
                     _playerHealth = r.collider.gameObject.GetComponent<Health>();
                 }
 
-                if (Vector2.Distance(r.collider.gameObject.transform.position, attackRange.position) < 0.5f)
-                {
-                    PlayerInAttackRange = true;
-                }
-                else
-                {
-                    PlayerInAttackRange = false;
-                }
+                SetRangeValues(PlayerTrans.position, 1, TraceType.Player);
                 
                 Debug.Log("Player spotted");
-                return;
             }
             
             else if (hitObject.layer == 6)
             {
-                if (hitObject != StandingOn)
+
+                if (hitObject.transform.localScale.y > 2)
                 {
-                    if (hitObject.transform.localScale.y > 2)
-                    {
-                        Debug.Log("Wall seen");
-                    }
-                    else
-                    {
-                        Debug.Log("Platform seen");
-                    }
+                    hitValuesList[^1].type = TraceType.Wall;
+                    Debug.Log("Wall seen");
+                    SetRangeValues(hitObject.transform.position, 0.8f, TraceType.Wall);
+                }
+                    
+                else if (hitObject.transform.localScale.x > 7)
+                {
+                    hitValuesList[^1].type = TraceType.Ground;
+                    Debug.Log("Floor seen");
+                }
+                
+                else
+                {
+                    PlatformSeen = true;
+                    hitValuesList[^1].type = TraceType.Platform;
+                    
+                    if(StandingOn != hitObject)
+                        SetRangeValues(hitObject.transform.position, 7, TraceType.Platform);
+
+                    Debug.Log("Platform seen");
                 }
             }
             
             else if (hitObject.layer == 7)
             {
+                hitValuesList[^1].type = TraceType.Enemy;
                 Debug.Log("other enemy spotted");
             }
         }
 
-        PlayerSeen = false;
+        if (playerIsHit)
+        {
+           playerSeen = !IsObjectBehind(PlayerTrans.position);
+        }
+        
+        PlayerSeen = playerSeen;
+        
+        ActOnResults();
     }
 
-
-    private void GetDistance(Vector2 position, float correctDist, TraceType type)
+    private void ActOnResults()
     {
-        var dist = Vector2.Distance(position, transform.position);
-
-        if (dist >= correctDist) return;
-
-        if (type == TraceType.Platform)
+        if (PlayerSeen)
         {
-            
+            SetRangeValues(PlayerTrans.position, 1, TraceType.Player);
         }
     }
+    
+    
+    private void SetRangeValues(Vector2 position, float marginDist, TraceType type)
+    {
+        var dist = Vector2.Distance(position, transform.position);
+        
+        var closeEn = !(dist >= marginDist);
+
+        switch (type)
+        {
+            case TraceType.Platform:
+                PlatformInRange = closeEn;
+                break;
+            case TraceType.Wall:
+                WallInRange = closeEn;
+                break;
+            case TraceType.Player:
+                PlayerInAttackRange = closeEn;
+                break;
+        }
+        
+    }
+    
     
     private void CheckForGround(Vector2 dir)
     {

@@ -9,19 +9,31 @@ namespace Entity
     /// </summary>
     public class Health : MonoBehaviour, IDamageable
     {
+        
+                
         public Action<int> OnHealthChanged;
-        Coins _coins;
-        ItemCollector _itemCollector;
         [SerializeField]
         private int _health;
+        
         [SerializeField]
         [Tooltip("The amount of time the entity is invulnerable after being hit")]
         private float _invulnerablilityTime;
         private bool _invulnerable;
+        public FMODUnity.EventReference TakeDamageSoundFile;
+        private FMOD.Studio.EventInstance _takeDamageSound;
+        public FMODUnity.EventReference DeathSoundFile;
+        private FMOD.Studio.EventInstance _deathSound;
+        
         private bool IsDead { get; set; }
         
+        Coins _coins;
+        ItemCollector _itemCollector;
         
-
+        [SerializeField]
+        private SoundMananger _soundMananger;
+        
+        
+        
         public int CurrentHealth
         {
             get => _health;
@@ -36,6 +48,9 @@ namespace Entity
         private void Start()
         {
             CurrentHealth = _health;
+            _takeDamageSound = FMODUnity.RuntimeManager.CreateInstance(TakeDamageSoundFile);
+            _deathSound = FMODUnity.RuntimeManager.CreateInstance(DeathSoundFile);
+
         }
 
         public void ModifyHealth(int healthValueChange)
@@ -45,10 +60,14 @@ namespace Entity
                 
             CurrentHealth += healthValueChange;
             OnHealthChanged?.Invoke(CurrentHealth);
-            
-            
-            if(!_invulnerable && healthValueChange <=0)
+
+
+            if (!_invulnerable && healthValueChange <= 0)
+            {
                 StartCoroutine(InvulnFrameTimer(_invulnerablilityTime));
+                _soundMananger.PlaySound(_takeDamageSound);
+                
+            }
         
             Debug.Log($"New health for {name}: {CurrentHealth}");
             
@@ -58,7 +77,7 @@ namespace Entity
         
         private void OnDeath() //TODO: Move to own script?
         {
-
+            _soundMananger.PlaySound(_deathSound);
             IsDead = true;
             gameObject.SetActive(false); //Make death-script and make event or something
             

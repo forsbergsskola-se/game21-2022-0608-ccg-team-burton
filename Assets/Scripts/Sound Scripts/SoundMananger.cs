@@ -1,61 +1,105 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
+using Mono.Cecil;
 using UnityEngine;
 
 public class SoundMananger : MonoBehaviour
 {
     [Header("Music and Ambience")]
-    public FMODUnity.EventReference MusicTrack1_EventRef;
+    public FMODUnity.EventReference MusicTrack;
 
-    private FMOD.Studio.EventInstance MusicTrack1_EventInst;
+    private FMOD.Studio.EventInstance MusicTrack_EventInst;
 
     bool isPitched = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        //music
-        MusicTrack1_EventInst = FMODUnity.RuntimeManager.CreateInstance(MusicTrack1_EventRef);
-        MusicTrack1_EventInst.start();
-
-        //DoThing();
+     
+        StartMusic(MusicTrack);
+        
+        DontDestroyOnLoad(this);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("Hello testing");
-            //SetMusicParam(0.3f);
-            switchPitch();
-        }
-    }
-    
     public void SetMusicParam(float val)
     {
-        MusicTrack1_EventInst.setParameterByName("test", val);
+        MusicTrack_EventInst.setParameterByName("test", val);
     }
 
     public void switchPitch()
     {
-        if (isPitched) MusicTrack1_EventInst.setParameterByName("test", 0f);
-        else MusicTrack1_EventInst.setParameterByName("test", 1f);
+        if (isPitched) MusicTrack_EventInst.setParameterByName("test", 0f);
+        else MusicTrack_EventInst.setParameterByName("test", 1f);
         isPitched = !isPitched;
     }
 
+    public void StartMusic(FMODUnity.EventReference MusicTrack){
+        StopMusic();
+        MusicTrack_EventInst = FMODUnity.RuntimeManager.CreateInstance(MusicTrack);
+        MusicTrack_EventInst.start();
+    }
+
+    public void StopMusic(){
+        MusicTrack_EventInst.stop(STOP_MODE.ALLOWFADEOUT);
+    }
+
+    public void PlaySound(FMOD.Studio.EventInstance sound)
+    {
+        FMOD.Studio.PLAYBACK_STATE PbState;
+        sound.getPlaybackState(out PbState);
+        if (PbState != PLAYBACK_STATE.PLAYING)
+        {
+            sound.start();
+        }
+    }
+    
+    public void PlayStackingSound(FMOD.Studio.EventInstance sound)
+    {
+        sound.start();
+    }
+
+    public void StopSound(FMOD.Studio.EventInstance sound)
+    {
+        FMOD.Studio.PLAYBACK_STATE PbState;
+        sound.getPlaybackState(out PbState);
+        if (PbState == PLAYBACK_STATE.PLAYING)
+        {
+            sound.stop(STOP_MODE.IMMEDIATE);
+        }
+    }
+
+
+    public void SpoongJump()
+    {
+        Debug.Log("SpoongJump");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Objects/SpoongJump");
+    }
+
+
+    public void CanonEnemy()
+    {
+        Debug.Log("CanonEnemy");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/Enemy/CanonEnemy");
+    }
+
+    public void Walking()
+    {
+        Debug.Log("Walking");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Player/Walking");
+    }
 
 
     public void EquipItem()
     {
-        Debug.Log("Equip item");
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Objects/Equip item");
+        Debug.Log("EquipItem");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Objects/EquipItem");
     }
 
     public void PickUpCurrency()
     {
         Debug.Log("PickUpCurrency");
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Pick up currency");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Objects/PickUpCurrency");
     }
 
     public void Jump()
@@ -78,74 +122,74 @@ public class SoundMananger : MonoBehaviour
 
     public void Win()
     {
-        Debug.Log("Win");
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Info-messages/Win");
+        Debug.Log("WinLevel");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Info-messages/WinLevel");
     }
 
     public void SelectButton()
     {
         Debug.Log("SelectButton");
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Ui/Select button");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Ui/SelectButton");
     }
 
     public void PlayerIdle()
     {
         Debug.Log("PlayerIdle");
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Player/Player idle");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Player/PlayerIdle");
     }
 
     public void LootCrateDestroy()
     {
-        Debug.Log("LootCrateDestroy");
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Objects/Loot crate get's destroyed");
+        Debug.Log("LootCrateDestroyd");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Objects/LootCrateGetDestroyed");
     }
 
     public void AttackLootCrate()
     {
-        Debug.Log("AttackLootCrate");
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Objects/Attacking loot crate");
+        Debug.Log("AttackingLootCrate");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Objects/AttackingLootCrate");
     }
 
     public void TakeDmg()
     {
-        Debug.Log("TakeDmg");
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/Taking damage");
+        Debug.Log("TakingDamage");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/TakingDamage");
     }
 
     public void Dies()
     {
-        Debug.Log("Dies");
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/Dies");
+        Debug.Log("DiesFromDamage");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/DiesFromDamage");
     }
 
     public void Attack1()
     {
-        Debug.Log("Attack1");
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/Attack type 1");
+        Debug.Log("AcidAttack");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/AcidAttack");
     }
 
     public void Attack2()
     {
-        Debug.Log("Attack2");
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/Attack type 2");
+        Debug.Log("SissorAcidAttack");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/SissorAcidAttack");
     }
 
     public void Attack3()
     {
-        Debug.Log("Attack3");
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/Attack type 3");
+        Debug.Log("SissorAttack");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/SissorAttack");
     }
 
     public void OpenCrate()
     {
-        Debug.Log("OpenCrate");
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Meta Game/Lootbox/Open Gacha crate Type 1");
+        Debug.Log("OpenLootCrate1");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Meta Game/Lootbox/OpenLootCrate1");
     }
 
     public void OpenCrate2()
     {
-        Debug.Log("OpenCrate2");
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Meta Game/Lootbox/Open Gacha crate Type 2");
+        Debug.Log("OpenLootCrate2");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Meta Game/Lootbox/OpenLootCrate2");
     }
 }  
 
