@@ -210,35 +210,46 @@ public class TracerEyes : MonoBehaviour
            theHit = hit2
        };
        hitResultList.Add(results2);
-       
+
        SetResults();
        
     }
 
+    private float CheckGroundDistance()
+    {
+        var right = transform.right;
+        var pos = transform.position + new Vector3(0, 4);
+       // var traceHit= DoSingleTrace(right, pos, 8, out var hit);
+        var traceHit2= DoSingleTrace(new Vector2(0, -1), pos, 8, out var hit2);
+        var traceHit3= DoSingleTrace(new Vector2(0, -1), pos + new Vector3(right.x * 5, 0), 8, out var hit3);
+
+        return hit2.distance - hit3.distance;
+    }
+  
     private void SetResults()
     {
-       // if (PlayerSeen)
-       // {
-       //     SetRangeValues(hitResultList[1].theHit.collider.gameObject.transform.position, 0.4f, TraceType.Player);
-       //     
-       //     if (PlayerTrans == default)
-       //     {
-       //         PlayerTrans = hitResultList[1].theHit.collider.gameObject.transform; 
-       //         _playerHealth = hitResultList[1].theHit.collider.gameObject.GetComponent<Health>();
-       //     }
-       // }
-       //
-       // if (!PlayerSeen)
-       // {
-       //     if (PlayerTrans != default)
-       //     {
-       //         if (PlayerBehind)
-       //         {
-       //             actions = Actions.TurnAround;
-       //         }
-       //     }
-       // }
-       //
+        if (PlayerSeen)
+        {
+            SetRangeValues(hitResultList[1].theHit.collider.gameObject.transform.position, 0.4f, TraceType.Player);
+            
+            if (PlayerTrans == default)
+            {
+                PlayerTrans = hitResultList[1].theHit.collider.gameObject.transform; 
+                _playerHealth = hitResultList[1].theHit.collider.gameObject.GetComponent<Health>();
+            }
+        }
+       
+        if (!PlayerSeen)
+        {
+            if (PlayerTrans != default)
+            {
+                if (PlayerBehind)
+                {
+                    actions = Actions.TurnAround;
+                }
+            }
+        }
+       
         if (GroundSeen)
         {
             if (StandingOn != hitResultList[0].theHit.collider.gameObject)
@@ -248,72 +259,55 @@ public class TracerEyes : MonoBehaviour
         }
         
         
-        if (PlatformSeen && !GroundSeen)
+        if (PlatformSeen)
         {
-            PlatformRef = hitResultList[2].theHit.collider.gameObject.transform;
-            var xDiff = CompareVectorComponents(transform.position, PlatformRef.position, true);
-            Debug.Log($"X distance to platform {xDiff}");
-            
-            if (hitResultList[2].theHit.distance < 7f)
+            if (!GroundSeen)
             {
-                PlatformInJumpDistance = true;
-                actions = Actions.PlatformJump;
+                if (hitResultList[2].theHit.distance < 7f)
+                {
+                    PlatformInJumpDistance = true;
+                    actions = Actions.PlatformJump;
+                }
+                else
+                {
+                    PlatformInJumpDistance = false;
+                }
             }
-            else
-            {
-                PlatformInJumpDistance = false;
-            }   
-        }
-        
-        if (PlatformSeen && !PlayerSeen && !WallSeen && !PlayerBehind)
-        {
-            if (hitResultList[2].theHit.distance < 7f)
-            {
-                PlatformInJumpDistance = true;
-                actions = Actions.PlatformJump;
-            }
-            else
-            {
-                PlatformInJumpDistance = false;
-            }
-        }
 
-        if (PlatformSeen && !GroundSeen)
-        {
-            if ( hitResultList[2].theHit.distance < 7f)
+            if (!PlayerSeen && !WallSeen && !PlayerBehind)
             {
-                PlatformInJumpDistance = true;
-                actions = Actions.PlatformJump;
+                if (hitResultList[2].theHit.distance < 7f)
+                {
+                    PlatformInJumpDistance = true;
+                    actions = Actions.PlatformJump;
+                }
+                else
+                {
+                    PlatformInJumpDistance = false;
+                }
             }
-            else
-            {
-                PlatformInJumpDistance = false;
-            }   
         }
-
         
         if (WallSeen)
         {
-            if (hitResultList[1].theHit.distance< 1 && GroundSeen)
+            if (hitResultList[1].theHit.distance < 1 && GroundSeen)
             {
                 actions = Actions.TurnAround;
             }
-        }
-
-        if (WallSeen && !WallOnTopSeen)
-        {
-            if (hitResultList[1].theHit.distance < 4f)
+            
+            if (!WallOnTopSeen)
             {
-                Debug.Log("wall, none on top");
-                PlatformInJumpDistance = true;
-                actions = Actions.PlatformJump;
+                if (hitResultList[1].theHit.distance < 2f)
+                {
+                    var dist = CheckGroundDistance();
+                    EstimatedJumpForce = new Vector2(3, dist);
+
+                    PlatformInJumpDistance = true;
+                    actions = Actions.PlatformJump;
+                }
             }
         }
         
-        if (WallSeen && !PlatformSeen)
-        {
-            JumpableWallSeen = true;
-        }
     }
     
     private void AnalyzeResults(int traceCount, TraceType type)
