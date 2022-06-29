@@ -97,7 +97,7 @@ namespace Protoypes.Harry
             if (_animator.runtimeAnimatorController != null)
                 AnimatePlayer();
             FlipPlayer(_horizontal != 0 ? _horizontal : _walkCommand);
-            PlayMovementSound();
+            // PlayMovementSound();
         }
 
         
@@ -123,13 +123,21 @@ namespace Protoypes.Harry
             {
                 _soundManager.PlaySound(_idleSound);
                 _soundManager.StopSound(_walkingSound);
+                
+                // _idleSound = FMODUnity.RuntimeManager.CreateInstance("event:/Game play/Player/PlayerIdle");
+                
+                // _soundManager.PlayerIdle();
             }
             else
             {
-                _soundManager.StopSound(_idleSound);
+                // _soundManager.StopSound(_idleSound);
                 
                 if (_groundChecker.IsGrounded)
                     _soundManager.PlaySound(_walkingSound);
+
+                    // _soundManager.Walking();
+                    // _idleSound = FMODUnity.RuntimeManager.CreateInstance( "event:/Game play/Player/Walking" );
+                         
             }
         }
         

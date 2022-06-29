@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using FMOD.Studio;
 using Mono.Cecil;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SoundMananger : MonoBehaviour
@@ -51,12 +52,14 @@ public class SoundMananger : MonoBehaviour
         if (PbState != PLAYBACK_STATE.PLAYING)
         {
             sound.start();
+ 
         }
     }
     
     public void PlayStackingSound(FMOD.Studio.EventInstance sound)
     {
         sound.start();
+ 
     }
 
     public void StopSound(FMOD.Studio.EventInstance sound)
@@ -66,6 +69,7 @@ public class SoundMananger : MonoBehaviour
         if (PbState == PLAYBACK_STATE.PLAYING)
         {
             sound.stop(STOP_MODE.IMMEDIATE);
+            // sound.release();
         }
     }
 
