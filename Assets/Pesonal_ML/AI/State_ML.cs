@@ -401,7 +401,7 @@ public class PlatformJump : State_ML
     {
         if (!jumped)
         {
-            body.AddForce(EnemyVarsMl.tracerEyes.EstimatedJumpForce * new Vector2(1.5f, 4), ForceMode2D.Impulse);
+            body.AddForce(EnemyVarsMl.tracerEyes.EstimatedJumpForce * new Vector2(1f, 5.5f), ForceMode2D.Impulse);
             jumped = true;
         }
         
