@@ -297,7 +297,7 @@ public class TracerEyes : MonoBehaviour
             
             if (!WallOnTopSeen)
             {
-                if (hitResultList[1].theHit.distance < 2f)
+                if (hitResultList[1].theHit.distance < 3f)
                 {
                     var dist = CheckGroundDistance();
                     EstimatedJumpForce = new Vector2(3, dist);

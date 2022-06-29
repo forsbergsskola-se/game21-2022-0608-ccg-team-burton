@@ -399,23 +399,16 @@ public class PlatformJump : State_ML
 
     public override void Update()
     {
-        Debug.Log("Something happens");
-        Debug.Log(EnemyVarsMl.tracerEyes.EstimatedJumpForce);
-        
         if (!jumped)
         {
-            Debug.Log(EnemyVarsMl.tracerEyes.EstimatedJumpForce);
-            body.AddForce(EnemyVarsMl.tracerEyes.EstimatedJumpForce * new Vector2(4, 6), ForceMode2D.Impulse);
+            body.AddForce(EnemyVarsMl.tracerEyes.EstimatedJumpForce * new Vector2(1.5f, 4), ForceMode2D.Impulse);
             jumped = true;
         }
         
-        if (EnemyVarsMl.tracerEyes.GroundSeen)
+        if (EnemyVarsMl.tracerEyes.GroundSeen && jumped)
         {
-            if (EnemyVarsMl.tracerEyes.StandingOn.transform == EnemyVarsMl.tracerEyes.PlatformRef)
-            {
-                Stage = EVENT.Exit;
-                NextStateMl = new Idle(EnemyVarsMl);
-            }
+            Stage = EVENT.Exit;
+            NextStateMl = new Idle(EnemyVarsMl);
         }
 
     }
