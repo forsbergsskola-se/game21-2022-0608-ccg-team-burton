@@ -16,13 +16,8 @@ public class SoundMananger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //music
-        //MusicTrack1_EventInst = FMODUnity.RuntimeManager.CreateInstance(MusicTrack1_EventRef);
-        //MusicTrack1_EventInst.start();
-        
+     
         StartMusic(MusicTrack);
-
-        //DoThing();
         
         DontDestroyOnLoad(this);
     }
