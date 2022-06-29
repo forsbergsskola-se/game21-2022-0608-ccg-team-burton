@@ -24,8 +24,8 @@ public class Combat : MonoBehaviour
      public void MeleeAttack()
     {
         //Play Melee Attack
-        anim.SetBool("Attacking", true);
-
+        anim.SetTrigger("Attack");
+        
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
             DealDamage(enemy);
