@@ -215,15 +215,15 @@ public class TracerEyes : MonoBehaviour
        
     }
 
-    private float CheckGroundDistance()
+    private Vector2 CheckGroundDistance()
     {
         var right = transform.right;
         var pos = transform.position + new Vector3(0, 4);
        // var traceHit= DoSingleTrace(right, pos, 8, out var hit);
-        var traceHit2= DoSingleTrace(new Vector2(0, -1), pos, 8, out var hit2);
-        var traceHit3= DoSingleTrace(new Vector2(0, -1), pos + new Vector3(right.x * 5, 0), 8, out var hit3);
+        var traceHit2= DoSingleTrace(new Vector2(0, -1), pos, 16, out var hit2);
+        var traceHit3= DoSingleTrace(new Vector2(0, -1), pos + new Vector3(right.x * 5, 0), 16, out var hit3);
 
-        return hit2.distance - hit3.distance;
+        return hit3.point - (Vector2)transform.position;
     }
   
     private void SetResults()
@@ -255,6 +255,31 @@ public class TracerEyes : MonoBehaviour
             if (StandingOn != hitResultList[0].theHit.collider.gameObject)
             {
                 StandingOn = hitResultList[0].theHit.collider.gameObject;
+            }
+        }
+
+        if (!GroundSeen)
+        {
+            if (!WallSeen && !PlatformSeen)
+            {
+                var dist = CheckGroundDistance();
+
+                if (Mathf.Abs(dist.y) <= 5)
+                {
+                    EstimatedJumpForce =  new Vector2((transform.right.x * Mathf.Abs(dist.x)) * 0.75f, Mathf.Abs(dist.y) / 2);
+                    actions = Actions.PlatformJump;
+                }
+                
+                Debug.Log(Mathf.Abs( dist.y));
+            }
+            
+            if (WallSeen)
+            {
+                var dist = CheckGroundDistance();
+                EstimatedJumpForce =  new Vector2(transform.right.x * Mathf.Abs(dist.x), Mathf.Abs(dist.y));
+
+                PlatformInJumpDistance = true;
+                actions = Actions.PlatformJump;
             }
         }
         
@@ -297,10 +322,10 @@ public class TracerEyes : MonoBehaviour
             
             if (!WallOnTopSeen)
             {
-                if (hitResultList[1].theHit.distance < 3f)
+                if (hitResultList[1].theHit.distance < 2.5f)
                 {
                     var dist = CheckGroundDistance();
-                    EstimatedJumpForce = new Vector2(3, dist);
+                    EstimatedJumpForce =  CheckGroundDistance();
 
                     PlatformInJumpDistance = true;
                     actions = Actions.PlatformJump;
