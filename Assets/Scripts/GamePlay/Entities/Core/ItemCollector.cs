@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -14,7 +15,12 @@ public class ItemCollector : MonoBehaviour{
     private void Awake()
     {
         _soundManager = FindObjectOfType<SoundMananger>();
+    }
+
+    private void Start()
+    {
         _collectCoinSound = FMODUnity.RuntimeManager.CreateInstance(CollectCoinSoundFile);
+
     }
 
 
