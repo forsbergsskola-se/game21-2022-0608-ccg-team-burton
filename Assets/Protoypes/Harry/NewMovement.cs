@@ -89,7 +89,16 @@ namespace Protoypes.Harry
 
         
         
-        private void Update() { CollectInput(); CheckCollisions(); }
+        private void Update() 
+        {
+            CollectInput(); 
+            CheckCollisions();
+            // Animation & Sound
+            if (_animator.runtimeAnimatorController != null)
+                AnimatePlayer();
+            FlipPlayer(_horizontal != 0 ? _horizontal : _walkCommand);
+            PlayMovementSound();
+        }
 
         
         private void FixedUpdate() 
@@ -102,11 +111,6 @@ namespace Protoypes.Harry
             CalculateJumpApex();
             FallIfWallOrRoofHit();
             
-            // Animation & Sound
-            if (_animator.runtimeAnimatorController != null)
-                AnimatePlayer();
-            FlipPlayer(_horizontal != 0 ? _horizontal : _walkCommand);
-            PlayMovementSound();
             
             // Execution
             MovePlayer();
@@ -120,7 +124,6 @@ namespace Protoypes.Harry
                 _soundManager.PlaySound(_idleSound);
                 _soundManager.StopSound(_walkingSound);
             }
-            
             else
             {
                 _soundManager.StopSound(_idleSound);
