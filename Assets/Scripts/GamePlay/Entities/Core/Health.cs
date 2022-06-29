@@ -23,6 +23,7 @@ namespace Entity
         private FMOD.Studio.EventInstance _takeDamageSound;
         public FMODUnity.EventReference DeathSoundFile;
         private FMOD.Studio.EventInstance _deathSound;
+        Animator _animator;
         
         private bool IsDead { get; set; }
         
@@ -42,7 +43,11 @@ namespace Entity
         void Awake(){
             _coins = GetComponent<Coins>();
             _itemCollector = FindObjectOfType<ItemCollector>();
+
             _soundMananger = FindObjectOfType<SoundMananger>();
+
+            _animator = GetComponent<Animator>();
+
         }
 
         private void Start()
@@ -77,9 +82,10 @@ namespace Entity
         
         private void OnDeath() //TODO: Move to own script?
         {
+            _animator.SetTrigger("Dead");
             _soundMananger.PlaySound(_deathSound);
             IsDead = true;
-            gameObject.SetActive(false); //Make death-script and make event or something
+            //Make death-script and make event or something
             
 
             if (gameObject.CompareTag("Enemy")){
