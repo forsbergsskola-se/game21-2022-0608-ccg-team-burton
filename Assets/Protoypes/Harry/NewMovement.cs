@@ -17,8 +17,8 @@ namespace Protoypes.Harry
         private Rigidbody2D _rb;
 
         [Header("IDLE")] 
-        public FMODUnity.EventReference IdleSoundFile;
-        private FMOD.Studio.EventInstance _idleSound;
+        // public FMODUnity.EventReference IdleSoundFile;
+        // private FMOD.Studio.EventInstance _idleSound;
         public bool FacingRight;
 
 
@@ -28,8 +28,8 @@ namespace Protoypes.Harry
         public float MoveClamp = 13; 
         public float Deceleration = 60f;
         public float _currentHorizontalSpeed { get; private set; }
-        public FMODUnity.EventReference WalkingSoundFile;
-        private FMOD.Studio.EventInstance _walkingSound;
+        // public FMODUnity.EventReference WalkingSoundFile;
+        // private FMOD.Studio.EventInstance _walkingSound;
         
         
         [Header("GRAVITY")] 
@@ -81,8 +81,8 @@ namespace Protoypes.Harry
         
         private void Start()
         {
-            _idleSound = FMODUnity.RuntimeManager.CreateInstance(IdleSoundFile);
-            _walkingSound = FMODUnity.RuntimeManager.CreateInstance(WalkingSoundFile);
+            // _idleSound = FMODUnity.RuntimeManager.CreateInstance(IdleSoundFile);
+            // _walkingSound = FMODUnity.RuntimeManager.CreateInstance(WalkingSoundFile);
             _jumpSound = FMODUnity.RuntimeManager.CreateInstance(JumpSoundFile);
             _bounceSound = FMODUnity.RuntimeManager.CreateInstance(BounceSoundFile);
         }
@@ -121,8 +121,8 @@ namespace Protoypes.Harry
         {
             if (_currentHorizontalSpeed == 0 && _currentVerticalSpeed == 0)
             {
-                _soundManager.PlaySound(_idleSound);
-                _soundManager.StopSound(_walkingSound);
+                // _soundManager.PlaySound(_idleSound);
+                // _soundManager.StopSound(_walkingSound);
                 
                 // _idleSound = FMODUnity.RuntimeManager.CreateInstance("event:/Game play/Player/PlayerIdle");
                 
@@ -131,9 +131,9 @@ namespace Protoypes.Harry
             else
             {
                 // _soundManager.StopSound(_idleSound);
-                
-                if (_groundChecker.IsGrounded)
-                    _soundManager.PlaySound(_walkingSound);
+                //
+                // if (_groundChecker.IsGrounded)
+                //     _soundManager.PlaySound(_walkingSound);
 
                     // _soundManager.Walking();
                     // _idleSound = FMODUnity.RuntimeManager.CreateInstance( "event:/Game play/Player/Walking" );

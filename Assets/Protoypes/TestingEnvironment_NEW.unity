@@ -10372,7 +10372,7 @@ PrefabInstance:
     - target: {fileID: 3693762747164135538, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
         type: 3}
       propertyPath: IdleSoundFile.Path
-      value: 
+      value: event:/Game play/Player/PlayerIdle
       objectReference: {fileID: 0}
     - target: {fileID: 3693762747164135538, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
         type: 3}
@@ -10382,22 +10382,22 @@ PrefabInstance:
     - target: {fileID: 3693762747164135538, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
         type: 3}
       propertyPath: IdleSoundFile.Guid.Data1
-      value: 0
+      value: -1673904321
       objectReference: {fileID: 0}
     - target: {fileID: 3693762747164135538, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
         type: 3}
       propertyPath: IdleSoundFile.Guid.Data2
-      value: 0
+      value: 1111623251
       objectReference: {fileID: 0}
     - target: {fileID: 3693762747164135538, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
         type: 3}
       propertyPath: IdleSoundFile.Guid.Data3
-      value: 0
+      value: -147658871
       objectReference: {fileID: 0}
     - target: {fileID: 3693762747164135538, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
         type: 3}
       propertyPath: IdleSoundFile.Guid.Data4
-      value: 0
+      value: -357734575
       objectReference: {fileID: 0}
     - target: {fileID: 3693762747164135538, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
         type: 3}
@@ -10457,6 +10457,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1522215631210464179, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2578437769821243731, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
         type: 3}
