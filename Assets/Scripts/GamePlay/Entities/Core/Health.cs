@@ -30,7 +30,6 @@ namespace Entity
         Coins _coins;
         ItemCollector _itemCollector;
         
-        [SerializeField]
         private SoundMananger _soundMananger;
         
         
@@ -44,7 +43,11 @@ namespace Entity
         void Awake(){
             _coins = GetComponent<Coins>();
             _itemCollector = FindObjectOfType<ItemCollector>();
+
+            _soundMananger = FindObjectOfType<SoundMananger>();
+
             _animator = GetComponent<Animator>();
+
         }
 
         private void Start()
