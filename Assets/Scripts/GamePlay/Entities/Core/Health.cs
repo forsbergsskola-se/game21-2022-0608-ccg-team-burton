@@ -70,6 +70,10 @@ namespace Entity
             if (!_invulnerable && healthValueChange <= 0)
             {
                 StartCoroutine(InvulnFrameTimer(_invulnerablilityTime));
+
+                if (CurrentHealth > 0){
+                    _animator.SetTrigger("TakeDmg");
+                }
                 _soundMananger.PlaySound(_takeDamageSound);
                 
             }
