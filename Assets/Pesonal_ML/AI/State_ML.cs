@@ -380,7 +380,7 @@ public class PlatformJump : State_ML
 {
     private Rigidbody2D body;
     private float estimateForce;
-    private bool rightY;
+    private bool jumped;
     private bool rightX = true;
     
     public PlatformJump(EnemyVars_ML enemyVarsMl) 
@@ -388,36 +388,27 @@ public class PlatformJump : State_ML
     {
         Debug.Log("Platform Jump state");
         body = EnemyVarsMl.enemyRef.GetComponent<Rigidbody2D>();
-        estimateForce = (EnemyVarsMl.tracerEyes.PlatformRef.position.y - EnemyVarsMl.enemyRef.transform.position.y) * 4.5f;
+        Stage = EVENT.Enter;
+    }
+
+    public override void Enter()
+    {
+        base.Enter();
+        
     }
 
     public override void Update()
     {
-       
-        if (!rightY)
+        Debug.Log("Something happens");
+        Debug.Log(EnemyVarsMl.tracerEyes.EstimatedJumpForce);
+        
+        if (!jumped)
         {
-            body.AddForce(new Vector2(EnemyVarsMl.enemyRef.transform.right.x * 3.5f, estimateForce), ForceMode2D.Impulse);
-            rightY = true;
-            rightX = false;
+            Debug.Log(EnemyVarsMl.tracerEyes.EstimatedJumpForce);
+            body.AddForce(EnemyVarsMl.tracerEyes.EstimatedJumpForce * new Vector2(4, 6), ForceMode2D.Impulse);
+            jumped = true;
         }
-
-        if (!rightX)
-        {
-            var platX = EnemyVarsMl.tracerEyes.PlatformRef.transform.position.x;
-            var enemyX = EnemyVarsMl.enemyRef.transform.position.x;
-            var xDist = Mathf.Abs(enemyX) - Mathf.Abs(platX);
-            
-            Debug.Log(Mathf.Abs(xDist));
-            
-            var forceDir = EnemyVarsMl.enemyRef.transform.right;
-         //   body.AddForce(new Vector2(forceDir.x * 0.5f, 0), ForceMode2D.Force);
-            
-            if (Mathf.Abs(xDist) < 3)
-            {
-                rightX = true;
-            }
-        }
-
+        
         if (EnemyVarsMl.tracerEyes.GroundSeen)
         {
             if (EnemyVarsMl.tracerEyes.StandingOn.transform == EnemyVarsMl.tracerEyes.PlatformRef)
