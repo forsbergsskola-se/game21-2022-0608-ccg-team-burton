@@ -45,6 +45,15 @@ namespace Protoypes.Harry
         public float _currentVerticalSpeed { get; private set; }
         public FMODUnity.EventReference JumpSoundFile;
         private FMOD.Studio.EventInstance _jumpSound;
+        
+        
+        [Header("DOUBLE JUMP")]
+        public float DoubleJumpHeight = 15;
+        public bool DoubleJumpAbilityActive;
+        public bool CanDoubleJump;
+        public float DoubleJumpBuffer;
+        private float _doubleJumpCounter;
+        public int DoubleJumpInt;
 
 
         [Header("BOUNCING")]
