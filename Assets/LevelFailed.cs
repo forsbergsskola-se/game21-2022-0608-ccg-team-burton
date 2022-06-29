@@ -1,17 +1,15 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-public class LevelCompleted : MonoBehaviour
+
+public class LevelFailed : MonoBehaviour
 {
-    public GameObject WinScreen;
+    public GameObject DeathScreen;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            WinScreen.SetActive(true);
+            DeathScreen.SetActive(true);
             Time.timeScale = 0; 
         }
     }
