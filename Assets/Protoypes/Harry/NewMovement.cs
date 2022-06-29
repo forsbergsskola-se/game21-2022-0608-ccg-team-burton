@@ -117,6 +117,7 @@ namespace Protoypes.Harry
             CalculateGravity();
             CheckForBouncing();
             CalculateJumping();
+            CalculateDoubleJump();
             CalculateJumpApex();
             FallIfWallOrRoofHit();
             
@@ -239,6 +240,30 @@ namespace Protoypes.Harry
             
             _currentVerticalSpeed = JumpHeight;
             _soundManager.PlaySound(_jumpSound);
+        }
+
+
+
+        private void CalculateDoubleJump()
+        {
+            if (!DoubleJumpAbilityActive) return;
+
+            if (_isGrounded)
+                DoubleJumpInt = 1;
+
+            if (!_isGrounded && _doubleJumpCounter > DoubleJumpBuffer)
+            {
+                if (CanDoubleJump && DoubleJumpInt == 1)
+                    CanDoubleJump = true;
+
+                else CanDoubleJump = false;
+
+                if (_jumpSpace || _jumpDownCommand)
+                    DoubleJumpInt++;
+
+                if (CanDoubleJump)
+                    _currentVerticalSpeed += JumpHeight;
+            }
         }
 
         
