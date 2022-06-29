@@ -187,13 +187,12 @@ public class Patrol : State_ML
     private void SimpleMove()
     {
         EnemyVarsMl.enemyRef.transform.position += EnemyVarsMl.enemyRef.transform.right * (Time.deltaTime * EnemyVarsMl.GetMoveSpeed);
-        //Sound here for rat movement (talk to JJ or Pavel)
+        //Sound here for rat movement (talk to JJ or Pavel) 
         
     }
 }
 
-public class Pursue : State_ML
-{
+public class Pursue : State_ML{
     public Pursue(EnemyVars_ML enemyVarsMl)
         : base(enemyVarsMl)
     {
@@ -288,7 +287,7 @@ public class Attack : State_ML
 
         if (attackDelay >= EnemyVarsMl.GetAttackInterval)
         {
-            EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("MakeAttack"));
+            EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("MakeAttack")); //Should I put attack animation here?
 
             if (EnemyVarsMl.GetEnemyType == EnemyType.Ranged)
             {
