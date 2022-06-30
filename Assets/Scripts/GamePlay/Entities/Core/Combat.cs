@@ -1,9 +1,9 @@
+using Design.Jocke.Jocke_testSceneScripts;
 using Entity;
 using UnityEngine;
 
 public class Combat : MonoBehaviour
 {
-    public GameObject Cinemachine;
     private CameraShake _cameraShake;
     public float CamIntensity = 5f;
     public float CamTime = 0f;
@@ -11,7 +11,6 @@ public class Combat : MonoBehaviour
     public float attackRange;
     public Transform attackPoint;
     public LayerMask enemyLayers;
-    private SoundMananger _soundMananger;
 
     
     [Header("DEBUGSTATS")] 
@@ -22,11 +21,15 @@ public class Combat : MonoBehaviour
      public GameObject DebugProjectile;
      public Transform FirePoint;
 
-     void Awake(){
+     
+     
+     void Awake()
+     {
          anim = GetComponent<Animator>();
-         _soundMananger = FindObjectOfType<SoundMananger>();
-         _cameraShake = Cinemachine.GetComponent<CameraShake>();
+         _cameraShake = FindObjectOfType<CameraShake>().GetComponent<CameraShake>();
      }
+     
+
 
      public void MeleeAttack()
     {
@@ -41,16 +44,16 @@ public class Combat : MonoBehaviour
             _cameraShake.ShakeCamera(CamIntensity,CamTime);
             Debug.Log("Camera shakiee");
         }
-            
-        
-        
-        
-        
     }
+    
+    
+    
     public void RangedAttack()
     {
         var projectile = Instantiate(DebugProjectile, FirePoint.position, Quaternion.identity);
     }
+    
+    
     
     private void DealDamage(Collider2D enemy)
     {
@@ -62,11 +65,11 @@ public class Combat : MonoBehaviour
         
     }
 
+    
+    
     private void OnDrawGizmosSelected()
     {
         if (attackPoint == null) return;
             Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
-
-    
 }
