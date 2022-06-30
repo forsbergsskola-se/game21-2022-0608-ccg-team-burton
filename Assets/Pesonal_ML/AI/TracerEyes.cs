@@ -82,6 +82,8 @@ public class TracerEyes : MonoBehaviour
     public bool PlayerSeen { get; private set;}
     
     public bool PlayerNear { get; private set;}
+
+    private bool UnderAttack;
     
     public bool PlatformInJumpDistance { get; private set; }
     
@@ -139,7 +141,7 @@ public class TracerEyes : MonoBehaviour
     {
         if (!PlayerSeen)
         {
-            PlayerBehind = true;
+            UnderAttack = true;
         }
     }
     
@@ -266,6 +268,13 @@ public class TracerEyes : MonoBehaviour
   
     private void SetResults()
     {
+        if (UnderAttack)
+        {
+            actions = Actions.TurnAround;
+            
+            UnderAttack = false;
+        }
+        
         if (PlayerSeen)
         {
             PlayerInAttackRange = hitResultList[1].theHit.distance < 1;
@@ -361,7 +370,8 @@ public class TracerEyes : MonoBehaviour
                // }
             }
         }
-        
+
+        UnderAttack = false;
     }
 
     private Vector2 CheckForJumps(int numberTraces)
