@@ -1,7 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class UnlockLevel : MonoBehaviour, I_Saveable 
+
 {
     [SerializeField] public bool Unlocked;
     public Image LockImage;
@@ -59,15 +61,5 @@ public class UnlockLevel : MonoBehaviour, I_Saveable
         }
         wrapper.Save();
     }
-
-
-    public object CaptureState()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void RestoreState(object state)
-    {
-        throw new System.NotImplementedException();
-    }
+    
 }

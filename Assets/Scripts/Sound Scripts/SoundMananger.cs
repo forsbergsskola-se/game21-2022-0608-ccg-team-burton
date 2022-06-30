@@ -49,7 +49,6 @@ public class SoundMananger : MonoBehaviour
     {
         FMOD.Studio.PLAYBACK_STATE PbState;
         sound.getPlaybackState(out PbState);
-        Debug.Log(PbState);
         if (PbState != PLAYBACK_STATE.PLAYING)
         {
             
