@@ -30,9 +30,16 @@ public class EnemyDamageTaker : MonoBehaviour
         }
         else
         {
-            _animator.SetTrigger(Animator.StringToHash("Enemy_Dead"));
+            StartCoroutine(DoDeath());
         }
         
+    }
+
+    IEnumerator DoDeath()
+    {
+        _animator.SetTrigger(Animator.StringToHash("Rat_Dead"));
+        yield return new WaitForSeconds(2f);
+        gameObject.SetActive(false);
     }
 
 }
