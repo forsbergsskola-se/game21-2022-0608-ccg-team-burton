@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LootBoxController : MonoBehaviour, ISaveable
+public class LootBoxController : MonoBehaviour
 {
    
    
@@ -88,13 +88,4 @@ public class LootBoxController : MonoBehaviour, ISaveable
    }
 
 
-   public object CaptureState()
-   {
-      throw new NotImplementedException();
-   }
-
-   public void RestoreState(object state)
-   {
-      throw new NotImplementedException();
-   }
 }
