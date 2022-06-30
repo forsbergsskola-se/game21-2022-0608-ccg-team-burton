@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5184618353410980184}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.7, y: 0, z: 0}
+  m_LocalPosition: {x: 2.441, y: -0.163, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46,12 +46,12 @@ GameObject:
   - component: {fileID: 97031474771827129}
   - component: {fileID: 5184618353456863432}
   - component: {fileID: 5184618353456863427}
-  - component: {fileID: 5184618352731276700}
   - component: {fileID: 5184618352731276701}
   - component: {fileID: 1296682025009656458}
   - component: {fileID: 4874833652481478937}
   - component: {fileID: 1335438296354588738}
   - component: {fileID: -5978559120333302869}
+  - component: {fileID: 540880516}
   m_Layer: 7
   m_Name: RatEnemyWithAI
   m_TagString: Untagged
@@ -74,7 +74,7 @@ Transform:
   - {fileID: 5184618353410980185}
   - {fileID: 3013155505611826172}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6670360478246836091
 SpriteRenderer:
@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2c96f8e501e4146bbe5fc365c74eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 1
+  _damage: 0
   _knockbackMultiplier: 1
 --- !u!114 &97031474771827129
 MonoBehaviour:
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62179065a33a8c43879a7035312207e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 2
+  _health: 503
   _invulnerablilityTime: 1
 --- !u!114 &5184618353456863432
 MonoBehaviour:
@@ -189,7 +189,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45da3103cf2a5f441a32f6c98306be6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 1.5
+  CamIntensity: 5
+  CamTime: 0
+  attackRange: 0.8
   attackPoint: {fileID: 5184618353410980185}
   enemyLayers:
     serializedVersion: 2
@@ -212,32 +214,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseKnockback: 1
   knockbackDuration: 1
---- !u!61 &5184618352731276700
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6999187586587883943}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.7571459, y: -0.048003376}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 5.12}
-    newSize: {x: 0.2, y: 0.2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 3.7106762, y: 1.6387719}
-  m_EdgeRadius: 0
 --- !u!114 &5184618352731276701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,7 +234,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6999187586587883943}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d278368937f35c4bb571041fe3dfa24, type: 3}
   m_Name: 
@@ -322,6 +298,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585f36b94970eec48818ebdb09a919c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!70 &540880516
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6999187586587883943}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.1249598, y: -0.01571812}
+  m_Size: {x: 2.8200004, y: 1.3594152}
+  m_Direction: 1
 --- !u!1001 &5338558807074250868
 PrefabInstance:
   m_ObjectHideFlags: 0
