@@ -14,7 +14,7 @@ AnimatorState:
   - {fileID: 4085214932669656805}
   - {fileID: -2365698952389350941}
   m_StateMachineBehaviours:
-  - {fileID: -2944376023320132525}
+  - {fileID: 4222790399587703810}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -138,27 +138,6 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 1200351345191556138}
---- !u!114 &-2944376023320132525
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd8bc4743e9ec5948b78e28a1272ae1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _soundMananger: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
-    type: 3}
-  WalkingSoundFile:
-    Guid:
-      Data1: -1013597291
-      Data2: 1340873512
-      Data3: 1827987876
-      Data4: 2049349630
-    Path: event:/Game play/Player/Walking
 --- !u!1101 &-2365698952389350941
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -198,7 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _soundMananger: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
     type: 3}
-  IdleSoundFile:
+  SoundFile:
     Guid:
       Data1: -1673904321
       Data2: 1111623251
@@ -416,6 +395,27 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &4222790399587703810
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40719b8d930e9c942b998e8a77984cb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundMananger: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
+    type: 3}
+  SoundFile:
+    Guid:
+      Data1: -1013597291
+      Data2: 1340873512
+      Data3: 1827987876
+      Data4: 2049349630
+    Path: event:/Game play/Player/Walking
 --- !u!1102 &4311477988326433215
 AnimatorState:
   serializedVersion: 6

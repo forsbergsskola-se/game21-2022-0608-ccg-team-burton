@@ -43,15 +43,15 @@ namespace Protoypes.Harry
         public float JumpHeight = 30;
         private float _apexPoint;
         public float _currentVerticalSpeed { get; private set; }
-        public FMODUnity.EventReference JumpSoundFile;
-        private FMOD.Studio.EventInstance _jumpSound;
+        // public FMODUnity.EventReference JumpSoundFile;
+        // private FMOD.Studio.EventInstance _jumpSound;
         
         
         [Header("BOUNCING")]
         public float BounceHeight = 25;
         public float SuperBounceHeight = 40;
-        public FMODUnity.EventReference BounceSoundFile;
-        private FMOD.Studio.EventInstance _bounceSound;
+        // public FMODUnity.EventReference BounceSoundFile;
+        // private FMOD.Studio.EventInstance _bounceSound;
         
         //Inputs
         private float _walkCommand;
@@ -83,8 +83,8 @@ namespace Protoypes.Harry
         {
             // _idleSound = FMODUnity.RuntimeManager.CreateInstance(IdleSoundFile);
             // _walkingSound = FMODUnity.RuntimeManager.CreateInstance(WalkingSoundFile);
-            _jumpSound = FMODUnity.RuntimeManager.CreateInstance(JumpSoundFile);
-            _bounceSound = FMODUnity.RuntimeManager.CreateInstance(BounceSoundFile);
+            // _jumpSound = FMODUnity.RuntimeManager.CreateInstance(JumpSoundFile);
+            // _bounceSound = FMODUnity.RuntimeManager.CreateInstance(BounceSoundFile);
         }
 
         
@@ -220,13 +220,13 @@ namespace Protoypes.Harry
             if (_isBouncing)
             {
                 _currentVerticalSpeed = BounceHeight;
-                _soundManager.PlaySound(_bounceSound);
+                // _soundManager.PlaySound(_bounceSound);
             }
 
             if (!_isSuperBouncing) return;
             
             _currentVerticalSpeed = SuperBounceHeight;
-            _soundManager.PlaySound(_bounceSound);
+            // _soundManager.PlaySound(_bounceSound);
         }
 
         
@@ -237,7 +237,7 @@ namespace Protoypes.Harry
             if ((!_jumpDownCommand || !_isGrounded) && (!_jumpSpace || !_isGrounded)) return;
             
             _currentVerticalSpeed = JumpHeight;
-            _soundManager.PlaySound(_jumpSound);
+            // _soundManager.PlaySound(_jumpSound);
         }
 
         

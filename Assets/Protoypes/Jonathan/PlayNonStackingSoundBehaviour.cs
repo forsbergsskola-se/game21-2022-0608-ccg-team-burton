@@ -2,18 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleSoundBehaviour : StateMachineBehaviour
+public class PlayNonStackingSoundBehaviour : StateMachineBehaviour
 {
     [SerializeField] private SoundMananger _soundMananger;
-    public FMODUnity.EventReference IdleSoundFile;
-    private FMOD.Studio.EventInstance _idleSound;
+    public FMODUnity.EventReference SoundFile;
+    private FMOD.Studio.EventInstance _sound;
+
+    private bool initiated;
     
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _idleSound = FMODUnity.RuntimeManager.CreateInstance(IdleSoundFile);
+        if (!initiated)
+        {
+            _sound = FMODUnity.RuntimeManager.CreateInstance(SoundFile);
+            initiated = true;
+        }
 
-        _soundMananger.PlaySound(_idleSound);
+        _soundMananger.PlaySound(_sound);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -25,7 +31,7 @@ public class IdleSoundBehaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _soundMananger.StopSound(_idleSound);
+        _soundMananger.StopSound(_sound);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
