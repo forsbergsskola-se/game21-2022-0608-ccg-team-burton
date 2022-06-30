@@ -1,13 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Entity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+
 public class LevelCompleted : MonoBehaviour
 {
+    public TextMeshProUGUI totalCoinText;
     public TextMeshProUGUI coinText;
     public GameObject winScreen;
     public Image[] stars;
@@ -25,7 +23,7 @@ public class LevelCompleted : MonoBehaviour
             Time.timeScale = 0; 
             StarsAchieved();
             UpdateCoinText(currentCoins);
-            
+            UpdateTotalCoinText(currentCoins);
         }
     }
 
@@ -55,4 +53,9 @@ public class LevelCompleted : MonoBehaviour
     }
     
     public void UpdateCoinText(int value) => coinText.text = $"{value}";
+
+    public void UpdateTotalCoinText(int value) => totalCoinText.text = $"Total Coins: {value}";
+
+
+
 }
