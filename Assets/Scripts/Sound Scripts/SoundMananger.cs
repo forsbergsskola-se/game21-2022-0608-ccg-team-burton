@@ -75,6 +75,13 @@ public class SoundMananger : MonoBehaviour
         }
     }
 
+    public void RatAttack()
+    {
+        Debug.Log("RatAttack");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/Enemy/RatAttack");
+    }
+
+
     public void EnemyIdle()
     {
         Debug.Log("EnemyIdle");
