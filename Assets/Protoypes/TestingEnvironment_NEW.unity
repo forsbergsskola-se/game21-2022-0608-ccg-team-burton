@@ -6912,7 +6912,7 @@ PrefabInstance:
     - target: {fileID: 3079274145042139584, guid: 3006d7835dd244efca07aaa71cf23bef,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 19.706543
+      value: 14.25
       objectReference: {fileID: 0}
     - target: {fileID: 3079274145042139584, guid: 3006d7835dd244efca07aaa71cf23bef,
         type: 3}
@@ -6959,11 +6959,6 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 2094998862}
-    - target: {fileID: 3079274145042139585, guid: 3006d7835dd244efca07aaa71cf23bef,
-        type: 3}
-      propertyPath: m_Lens.m_SensorSize.x
-      value: 1.15
-      objectReference: {fileID: 0}
     - target: {fileID: 3079274145042139586, guid: 3006d7835dd244efca07aaa71cf23bef,
         type: 3}
       propertyPath: m_Name
@@ -7488,7 +7483,7 @@ PrefabInstance:
     - target: {fileID: 3713123893993751263, guid: f1f0a7101684343beb8111591c2d3990,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 19.706543
+      value: 14.25
       objectReference: {fileID: 0}
     - target: {fileID: 3713123893993751263, guid: f1f0a7101684343beb8111591c2d3990,
         type: 3}
@@ -11960,6 +11955,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3205524570191263563, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
+        type: 3}
+      propertyPath: baseKnockback
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205524570191263563, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
+        type: 3}
+      propertyPath: knockbackDuration
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3205524570191263580, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
         type: 3}
       propertyPath: coinText
@@ -11995,6 +12000,56 @@ PrefabInstance:
       propertyPath: hearts.Array.data[5]
       value: 
       objectReference: {fileID: 211736769}
+    - target: {fileID: 4797520626450282201, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
+        type: 3}
+      propertyPath: AttackHitSoundFile.Path
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797520626450282201, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
+        type: 3}
+      propertyPath: AttackHitSoundFile.Guid.Data1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797520626450282201, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
+        type: 3}
+      propertyPath: AttackHitSoundFile.Guid.Data2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797520626450282201, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
+        type: 3}
+      propertyPath: AttackHitSoundFile.Guid.Data3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797520626450282201, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
+        type: 3}
+      propertyPath: AttackHitSoundFile.Guid.Data4
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732464600212847612, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
+        type: 3}
+      propertyPath: AttackSoundFile.Path
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732464600212847612, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
+        type: 3}
+      propertyPath: AttackSoundFile.Guid.Data1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732464600212847612, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
+        type: 3}
+      propertyPath: AttackSoundFile.Guid.Data2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732464600212847612, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
+        type: 3}
+      propertyPath: AttackSoundFile.Guid.Data3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732464600212847612, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
+        type: 3}
+      propertyPath: AttackSoundFile.Guid.Data4
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7747099678071028065, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
         type: 3}
       propertyPath: cam
@@ -12151,31 +12206,6 @@ PrefabInstance:
     - target: {fileID: 2578437769821243731, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
-        type: 3}
-      propertyPath: MusicTrack.Path
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
-        type: 3}
-      propertyPath: MusicTrack.Guid.Data1
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
-        type: 3}
-      propertyPath: MusicTrack.Guid.Data2
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
-        type: 3}
-      propertyPath: MusicTrack.Guid.Data3
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
-        type: 3}
-      propertyPath: MusicTrack.Guid.Data4
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

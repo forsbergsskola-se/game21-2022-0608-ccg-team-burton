@@ -190,7 +190,8 @@ public class Patrol : State_ML
     }
 }
 
-public class Pursue : State_ML{
+public class Pursue : State_ML
+{
     public Pursue(EnemyVars_ML enemyVarsMl)
         : base(enemyVarsMl)
     {
