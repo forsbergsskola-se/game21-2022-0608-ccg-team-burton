@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UnlockLevel : MonoBehaviour, ISaveable 
+public class UnlockLevel : MonoBehaviour
 {
     [SerializeField] public bool Unlocked;
     public Image LockImage;
@@ -49,16 +49,5 @@ public class UnlockLevel : MonoBehaviour, ISaveable
                 Stars[i].gameObject.GetComponent<Image>().sprite = fullStar;
             }
         }
-    }
-
-
-    public object CaptureState()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void RestoreState(object state)
-    {
-        throw new System.NotImplementedException();
     }
 }

@@ -1,12 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using TreeEditor;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 using Vector2 = UnityEngine.Vector2;
@@ -152,22 +144,15 @@ public class Patrol : State_ML
             NextStateMl = new Pursue(EnemyVarsMl);
         }
 
-        else if (!EnemyVarsMl.tracerEyes.GroundSeen)
+        if (EnemyVarsMl.tracerEyes.Actions == Actions.TurnAround)
         {
-            Stage = EVENT.Exit;
-            Debug.Log("Ground not seen");
-           
-            NextStateMl = new Jump(EnemyVarsMl);
-        }
-        
-        
-        if (EnemyVarsMl.tracerEyes.actions == Actions.TurnAround)
-        {
+            Debug.Log("Time to turn around");
             TurnAround();    
         }
         
-        if (EnemyVarsMl.tracerEyes.actions == Actions.PlatformJump)
+        if (EnemyVarsMl.tracerEyes.Actions == Actions.PlatformJump)
         {
+            Debug.Log("Platform jump action");
             Stage = EVENT.Exit;
             NextStateMl = new PlatformJump(EnemyVarsMl);
         }
@@ -193,7 +178,8 @@ public class Patrol : State_ML
     }
 }
 
-public class Pursue : State_ML{
+public class Pursue : State_ML
+{
     public Pursue(EnemyVars_ML enemyVarsMl)
         : base(enemyVarsMl)
     {
@@ -212,7 +198,7 @@ public class Pursue : State_ML{
             Stage = EVENT.Exit;
         }
 
-        if (EnemyVarsMl.tracerEyes.actions == Actions.TurnAround)
+        if (EnemyVarsMl.tracerEyes.Actions == Actions.TurnAround)
         {
             TurnAround();
         }
@@ -289,7 +275,7 @@ public class Attack : State_ML
 
         if (attackDelay >= EnemyVarsMl.GetAttackInterval)
         {
-            EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("Enemy_Attack")); //Should I put attack animation here?
+            EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("Enemy_Attack"));
 
             if (EnemyVarsMl.GetEnemyType == EnemyType.Ranged)
             {
@@ -391,18 +377,12 @@ public class PlatformJump : State_ML
         body = EnemyVarsMl.enemyRef.GetComponent<Rigidbody2D>();
         Stage = EVENT.Enter;
     }
-
-    public override void Enter()
-    {
-        base.Enter();
-        
-    }
-
+    
     public override void Update()
     {
         if (!jumped)
         {
-            body.AddForce(EnemyVarsMl.tracerEyes.EstimatedJumpForce * new Vector2(1f, 5.5f), ForceMode2D.Impulse);
+            body.AddForce(EnemyVarsMl.tracerEyes.EstimatedJumpForce, ForceMode2D.Impulse);
             jumped = true;
         }
         
@@ -412,106 +392,5 @@ public class PlatformJump : State_ML
             NextStateMl = new Idle(EnemyVarsMl);
         }
 
-    }
-}
-
-public class Jump : State_ML
-{
-    private float maxAngle = 90;
-    private bool start;
-    private float jumpDelay = 2;
-    private Rigidbody2D body;
-    private bool tileSpotted;
-
-    public Jump(EnemyVars_ML enemyVarsMl) 
-        : base(enemyVarsMl)
-    {
-        Debug.Log("Jump state");
-        Name = STATE.Jump;
-        body = EnemyVarsMl.enemyRef.GetComponent<Rigidbody2D>();
-    }
-  
-    public override void Enter()
-    {
-        base.Enter();
-        EnemyVarsMl.animator.SetBool(Animator.StringToHash("ExitIdleState"), false);
-    }
-    
-    public override void Update()
-    {
-        if (!tileSpotted)
-        {
-            EnemyVarsMl.ArcCollider.CalculatePoints();
-            tileSpotted = EnemyVarsMl.ArcCollider.TileSpotted;
-        }
-
-        if (tileSpotted)
-        {
-            Debug.Log("tile spotted");
-            if (EnemyVarsMl.ArcCollider.NextTile == EnemyVarsMl.tracerEyes.StandingOn)
-            {
-                Debug.Log("same tile");
-                BackToPatrol();
-            }
-            
-            else if (EnemyVarsMl.ArcCollider.TileHeightDifference > 4)
-            {
-                Debug.Log("too high");
-                BackToPatrol();
-            }
-            
-            else
-            {
-                MakeJump();    
-            }
-        }
-        
-        else if (EnemyVarsMl.ArcCollider.GetAngle > maxAngle)
-        {
-            Debug.Log("angle too high");
-            BackToPatrol();
-        }
-    }
-
-    public void MakeJump()
-    {
-        EnemyVarsMl.ArcCollider.TileSpotted = false;
-        
-        Debug.Log("Making jump");
-        EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("Jump"));
-        var forward = EnemyVarsMl.enemyRef.gameObject.transform.right;
-      
-        var diff = EnemyVarsMl.ArcCollider.TileHeightDifference;
-        
-        Debug.Log(diff);
-        
-        if (diff <= 0)
-        {
-            diff = 6;
-        }
-        
-        else
-        {
-            diff *= 100;
-            diff = Mathf.Clamp(diff, 0, 7);
-        }
-
-        var impulse = new Vector2(forward.x  * (EnemyVarsMl.ArcCollider.GetLengthDifference() * 0.75f), diff);
-        Debug.Log(impulse);
-
-        body.AddForce(impulse , ForceMode2D.Impulse); 
-    
-        EnemyVarsMl.ArcCollider.ResetCollider();
-        NextStateMl = new Idle(EnemyVarsMl);
-        Stage = EVENT.Exit;
-    }
-    
-    private void BackToPatrol()
-    {
-        Debug.Log("Can't jump, back to patrol");
-        EnemyVarsMl.enemyRef.transform.Rotate(Vector3.up, 180);
-        EnemyVarsMl.ArcCollider.ResetCollider();
-        NextStateMl = new Idle(EnemyVarsMl);
-        Stage = EVENT.Exit;
     }
 }

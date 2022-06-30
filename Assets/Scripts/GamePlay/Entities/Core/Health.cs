@@ -66,14 +66,18 @@ namespace Entity
             }
         
             Debug.Log($"New health for {name}: {CurrentHealth}");
-            
+
             if (CurrentHealth <= 0)
-                OnDeath();
+            {
+                Debug.Log("Animtrigger");
+                _animator.SetTrigger("Dead");
+
+            }
         }
         
         private void OnDeath() //TODO: Move to own script?
         {
-            _animator.SetTrigger("Dead");
+ 
             IsDead = true;
             //Make death-script and make event or something
             
@@ -87,7 +91,7 @@ namespace Entity
                 _itemCollector._coinCounter -= _itemCollector._coinCounter;
                 _itemCollector.UpdateCoinText(_itemCollector._coinCounter);
             }
-            
+            Destroy(gameObject);
         }
 
         private IEnumerator InvulnFrameTimer(float invulnFrameTimer)
