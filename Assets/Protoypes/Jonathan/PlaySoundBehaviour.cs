@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayNonStackingSoundBehaviour : StateMachineBehaviour
+public class PlaySoundBehaviour : StateMachineBehaviour
 {
     [SerializeField] private SoundMananger _soundMananger;
     public FMODUnity.EventReference SoundFile;

@@ -89,6 +89,27 @@ MonoBehaviour:
       Data3: 1918458257
       Data4: 300325405
     Path: event:/Game play/Combat/Enemy/EnemyTakeDamage
+--- !u!114 &-5618520690771531436
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40719b8d930e9c942b998e8a77984cb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundMananger: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
+    type: 3}
+  SoundFile:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1102 &-5058829068146335307
 AnimatorState:
   serializedVersion: 6
@@ -358,6 +379,7 @@ AnimatorState:
   m_Transitions: []
   m_StateMachineBehaviours:
   - {fileID: 4542617305253936923}
+  - {fileID: -5618520690771531436}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
