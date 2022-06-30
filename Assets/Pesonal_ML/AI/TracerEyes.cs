@@ -293,6 +293,7 @@ public class TracerEyes : MonoBehaviour
                 if (PlayerBehind)
                 {
                     actions = Actions.TurnAround;
+                    PlayerBehind = false;
                 }
             }
         }
@@ -336,39 +337,21 @@ public class TracerEyes : MonoBehaviour
 
     private Vector2 CheckForJumps(int numberTraces)
     {
-        var inc = 0f;
         var pos = transform.position;
         var dir = transform.right;
         var traceDistance = 7;
-        var wallInTheWay = true;
-        var numberBlockedHoriz = 0;
-        
 
         FillHitResults(numberTraces, dir, pos, traceDistance, new Vector2(), new Vector2(0, 1));
-    
+        var filter2 = hitResultList.Where(x => x.theHit).ToList();
         
-        foreach (var h in hitResultList)
+        if (filter2.Count == numberTraces - 1)
         {
-            if (h.theHit.distance > 0)
-            {
-                
-            }
-            else
-            {
-                numberBlockedHoriz++;
-            }
-        }
-
-        if (numberBlockedHoriz == numberTraces - 1)
-        {
-            wallInTheWay = true;
+            return Vector2.zero;
         }
         
         FillHitResults(numberTraces, new Vector2(0, -1), pos  + new Vector3(dir.x * 2, 5), traceDistance, new Vector2(), dir);
         
         var filter = hitResultList.Where(x => x.theHit).ToList();
-        
-        Debug.Log(filter.Count);
 
         var xDist = new Vector2();
         
@@ -378,9 +361,7 @@ public class TracerEyes : MonoBehaviour
             return new Vector2(Mathf.Abs(xDist.x) * dir.x, 6);
         }
         
-
-        return new Vector2(0,0);
-
+        return Vector2.zero;
     }
 
     private void FillHitResults(int numberTraces, Vector2 dir, Vector2 pos, float traceDistance, Vector2 dirMod = new Vector2(), Vector2 posMod = new Vector2())
