@@ -198,6 +198,7 @@ public class Pursue : State_ML{
         : base(enemyVarsMl)
     {
         Debug.Log("Pursue state");
+        EnemyVarsMl.animator.SetBool(Animator.StringToHash("Enemy_Walk"), true);
         Name = STATE.Pursue;
     }
 
@@ -266,7 +267,7 @@ public class Attack : State_ML
     {
         Debug.Log("Attack state");
         base.Enter();
-        EnemyVarsMl.animator.SetBool(Animator.StringToHash("EnterCombat"), true);
+        EnemyVarsMl.animator.SetBool(Animator.StringToHash("Enemy_Walk"), false);
     }
 
     public override void Update()
@@ -288,7 +289,7 @@ public class Attack : State_ML
 
         if (attackDelay >= EnemyVarsMl.GetAttackInterval)
         {
-            EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("MakeAttack")); //Should I put attack animation here?
+            EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("Enemy_Attack")); //Should I put attack animation here?
 
             if (EnemyVarsMl.GetEnemyType == EnemyType.Ranged)
             {
@@ -323,7 +324,7 @@ public class Attack : State_ML
     public override void Exit()
     {
         base.Exit();
-        EnemyVarsMl.animator.SetBool(Animator.StringToHash("EnterCombat"), false);
+     //  EnemyVarsMl.animator.SetBool(Animator.StringToHash("EnterCombat"), false);
         
     }
 }
