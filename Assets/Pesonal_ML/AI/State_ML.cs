@@ -166,6 +166,7 @@ public class Patrol : State_ML
         
         if (EnemyVarsMl.tracerEyes.actions == Actions.PlatformJump)
         {
+            Debug.Log("Platform jump action");
             Stage = EVENT.Exit;
             NextStateMl = new PlatformJump(EnemyVarsMl);
         }

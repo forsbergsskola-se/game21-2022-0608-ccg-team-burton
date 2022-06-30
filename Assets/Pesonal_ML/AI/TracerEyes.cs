@@ -304,13 +304,11 @@ public class TracerEyes : MonoBehaviour
 
         if (!GroundSeen)
         {
-           // TraceSpread(transform.right + new Vector3(0, -1), true, 12);
-            var jumpForce = CheckForJumps(7);
+            var jumpForce = CheckForJumps(8);
 
             if (jumpForce.x != 0)
             {
                 EstimatedJumpForce =  jumpForce;
-                PlatformInJumpDistance = true;
                 actions = Actions.PlatformJump;
             }
             
@@ -320,54 +318,16 @@ public class TracerEyes : MonoBehaviour
             }
         }
         
-        
         if (PlatformSeen)
         {
-            if (!GroundSeen)
-            {
-                if (hitResultList[2].theHit.distance < 7f)
-                {
-                    PlatformInJumpDistance = true;
-                    actions = Actions.PlatformJump;
-                }
-                else
-                {
-                    PlatformInJumpDistance = false;
-                }
-            }
-
-            if (!PlayerSeen && !WallSeen && !PlayerBehind)
-            {
-                if (hitResultList[2].theHit.distance < 7f)
-                {
-                    PlatformInJumpDistance = true;
-                    actions = Actions.PlatformJump;
-                }
-                else
-                {
-                    PlatformInJumpDistance = false;
-                }
-            }
+            
         }
         
         if (WallSeen)
         {
-            Debug.Log($"distance to wall {hitResultList[1].theHit.distance}");
             if (hitResultList[1].theHit.distance < 1.5f && GroundSeen)
             {
                 actions = Actions.TurnAround;
-            }
-            
-            if (!WallOnTopSeen)
-            {
-               // if (hitResultList[1].theHit.distance < 2.5f)
-               // {
-               //     var dist = CheckGroundDistance();
-               //     EstimatedJumpForce =  CheckGroundDistance();
-               //
-               //     PlatformInJumpDistance = true;
-               //     actions = Actions.PlatformJump;
-               // }
             }
         }
 
@@ -385,7 +345,8 @@ public class TracerEyes : MonoBehaviour
         
 
         FillHitResults(numberTraces, dir, pos, traceDistance, new Vector2(), new Vector2(0, 1));
-
+    
+        
         foreach (var h in hitResultList)
         {
             if (h.theHit.distance > 0)
@@ -403,16 +364,22 @@ public class TracerEyes : MonoBehaviour
             wallInTheWay = true;
         }
         
-        FillHitResults(numberTraces, new Vector2(0, -1), pos  + new Vector3(0, 5), traceDistance, new Vector2(), dir);
+        FillHitResults(numberTraces, new Vector2(0, -1), pos  + new Vector3(dir.x * 2, 5), traceDistance, new Vector2(), dir);
+        
+        var filter = hitResultList.Where(x => x.theHit).ToList();
+        
+        Debug.Log(filter.Count);
 
-        var xDist = hitResultList[^1].theHit.point -= (Vector2) pos;
-
-        foreach (var h in hitResultList)
+        var xDist = new Vector2();
+        
+        if (filter.Count > 3)
         {
-            
+            xDist = filter[1].theHit.point -= (Vector2) pos;
+            return new Vector2(Mathf.Abs(xDist.x) * dir.x, 6);
         }
+        
 
-        return new Vector2(Mathf.Abs(xDist.x) * dir.x, 6);
+        return new Vector2(0,0);
 
     }
 
@@ -537,7 +504,7 @@ public class TracerEyes : MonoBehaviour
         
         var layer = hit.collider.gameObject.layer;
         
-        if (layer == 6)
+        if (layer is 6)
         {
             Debug.DrawRay(pos, dir *hit.distance, Color.green, traceInterval);
             
