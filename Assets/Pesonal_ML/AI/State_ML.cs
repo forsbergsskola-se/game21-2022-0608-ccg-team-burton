@@ -154,10 +154,7 @@ public class Patrol : State_ML
 
         else if (!EnemyVarsMl.tracerEyes.GroundSeen)
         {
-            Stage = EVENT.Exit;
-            Debug.Log("Ground not seen");
            
-            NextStateMl = new Jump(EnemyVarsMl);
         }
         
         
@@ -412,106 +409,5 @@ public class PlatformJump : State_ML
             NextStateMl = new Idle(EnemyVarsMl);
         }
 
-    }
-}
-
-public class Jump : State_ML
-{
-    private float maxAngle = 90;
-    private bool start;
-    private float jumpDelay = 2;
-    private Rigidbody2D body;
-    private bool tileSpotted;
-
-    public Jump(EnemyVars_ML enemyVarsMl) 
-        : base(enemyVarsMl)
-    {
-        Debug.Log("Jump state");
-        Name = STATE.Jump;
-        body = EnemyVarsMl.enemyRef.GetComponent<Rigidbody2D>();
-    }
-  
-    public override void Enter()
-    {
-        base.Enter();
-        EnemyVarsMl.animator.SetBool(Animator.StringToHash("ExitIdleState"), false);
-    }
-    
-    public override void Update()
-    {
-        if (!tileSpotted)
-        {
-            EnemyVarsMl.ArcCollider.CalculatePoints();
-            tileSpotted = EnemyVarsMl.ArcCollider.TileSpotted;
-        }
-
-        if (tileSpotted)
-        {
-            Debug.Log("tile spotted");
-            if (EnemyVarsMl.ArcCollider.NextTile == EnemyVarsMl.tracerEyes.StandingOn)
-            {
-                Debug.Log("same tile");
-                BackToPatrol();
-            }
-            
-            else if (EnemyVarsMl.ArcCollider.TileHeightDifference > 4)
-            {
-                Debug.Log("too high");
-                BackToPatrol();
-            }
-            
-            else
-            {
-                MakeJump();    
-            }
-        }
-        
-        else if (EnemyVarsMl.ArcCollider.GetAngle > maxAngle)
-        {
-            Debug.Log("angle too high");
-            BackToPatrol();
-        }
-    }
-
-    public void MakeJump()
-    {
-        EnemyVarsMl.ArcCollider.TileSpotted = false;
-        
-        Debug.Log("Making jump");
-        EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("Jump"));
-        var forward = EnemyVarsMl.enemyRef.gameObject.transform.right;
-      
-        var diff = EnemyVarsMl.ArcCollider.TileHeightDifference;
-        
-        Debug.Log(diff);
-        
-        if (diff <= 0)
-        {
-            diff = 6;
-        }
-        
-        else
-        {
-            diff *= 100;
-            diff = Mathf.Clamp(diff, 0, 7);
-        }
-
-        var impulse = new Vector2(forward.x  * (EnemyVarsMl.ArcCollider.GetLengthDifference() * 0.75f), diff);
-        Debug.Log(impulse);
-
-        body.AddForce(impulse , ForceMode2D.Impulse); 
-    
-        EnemyVarsMl.ArcCollider.ResetCollider();
-        NextStateMl = new Idle(EnemyVarsMl);
-        Stage = EVENT.Exit;
-    }
-    
-    private void BackToPatrol()
-    {
-        Debug.Log("Can't jump, back to patrol");
-        EnemyVarsMl.enemyRef.transform.Rotate(Vector3.up, 180);
-        EnemyVarsMl.ArcCollider.ResetCollider();
-        NextStateMl = new Idle(EnemyVarsMl);
-        Stage = EVENT.Exit;
     }
 }

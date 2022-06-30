@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Entity;
 using UnityEngine;
 
 public enum EnemyType
@@ -19,11 +20,11 @@ public class EnemyVars_ML
     [SerializeField] private float AttackInterval;
     public EnemyType EnemyType;
     
-    [HideInInspector] public ArcCollider ArcCollider;
     [HideInInspector] public Animator animator;
     [HideInInspector] public GameObject enemyRef;
     [HideInInspector] public Transform firePoint;
     [HideInInspector] public TracerEyes tracerEyes;
+    public IDamageable enemyHealth;
 
     public float GetAttackDistance => AttackDistance;
     public float GetPursueDistance => PursueDistance;

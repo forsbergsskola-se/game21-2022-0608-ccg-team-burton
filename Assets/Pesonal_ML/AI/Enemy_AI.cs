@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-
+using Entity;
 using UnityEngine;
 
 public class Enemy_AI : MonoBehaviour
@@ -19,9 +19,10 @@ public class Enemy_AI : MonoBehaviour
         {
             EnemyVars.firePoint = GetComponentsInChildren<Transform>()[^1];
         }
+
+        EnemyVars.enemyHealth = GetComponent<IDamageable>();
         EnemyVars.tracerEyes = GetComponentInChildren<TracerEyes>();
         EnemyVars.animator = GetComponent<Animator>();
-        EnemyVars.ArcCollider = GetComponentInChildren<ArcCollider>();
         enemy_Anim = GetComponent<Animator>();
 
         _currentStateMl = new Idle(EnemyVars);
