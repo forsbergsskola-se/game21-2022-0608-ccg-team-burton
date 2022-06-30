@@ -6,13 +6,10 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
+    
+    
     private CinemachineVirtualCamera cinemachineVirtualCamera;
     private float shakeTimer;
-    private void Awake()
-    {
-        GetComponent<CinemachineVirtualCamera>();
-    }
-
     public void ShakeCamera(float intensity, float time)
     {
         CinemachineBasicMultiChannelPerlin cinemachingeBasicMultiChannelPerlin =

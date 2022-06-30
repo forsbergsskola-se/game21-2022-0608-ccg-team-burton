@@ -1,10 +1,12 @@
-using System;
 using Entity;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Combat : MonoBehaviour
 {
+    public GameObject Cinemachine;
+    private CameraShake _cameraShake;
+    public float CamIntensity = 5f;
+    public float CamTime = 0f;
     private Animator anim;
     public float attackRange;
     public Transform attackPoint;
@@ -23,6 +25,7 @@ public class Combat : MonoBehaviour
      void Awake(){
          anim = GetComponent<Animator>();
          _soundMananger = FindObjectOfType<SoundMananger>();
+         _cameraShake = Cinemachine.GetComponent<CameraShake>();
      }
 
      public void MeleeAttack()
@@ -32,8 +35,11 @@ public class Combat : MonoBehaviour
         
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
+            
         {
             DealDamage(enemy);
+            _cameraShake.ShakeCamera(CamIntensity,CamTime);
+            Debug.Log("Camera shakiee");
         }
             
         
@@ -53,6 +59,7 @@ public class Combat : MonoBehaviour
         Debug.Log($"{enemy.name} Got Hit!");
         enemy.GetComponent<Knockback>()?.DoKnockBack(enemy.GetComponent<Rigidbody2D>(), attackPoint.position, _knockbackMultiplier); // TODO: Implement KnockbackMult of weapon here
         GetComponent<HitEffect>().TimeStop();
+        
     }
 
     private void OnDrawGizmosSelected()
