@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b5ede54e64d046042a68828cb4cab59c
+guid: 5c5f0b2a783755a4cb0b3d11b8d894c9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -71,7 +71,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -106,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: NewerDoll_WalkAttack_0
+      name: NewerDoll_Hit_0
       rect:
         serializedVersion: 2
-        x: 23
-        y: 811
-        width: 218
-        height: 164
+        x: 29
+        y: 1035
+        width: 141
+        height: 236
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -120,272 +120,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9abee242f20d19147b50af21b6fac01a
-      internalID: -788614806
+      spriteID: 867f9a0bfe6cca64d89433009442a5ce
+      internalID: -781821001
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewerDoll_WalkAttack_1
-      rect:
-        serializedVersion: 2
-        x: 278
-        y: 811
-        width: 223
-        height: 165
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4d232c88a4b2478479c41d0d9c788e4f
-      internalID: -1145641628
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: NewerDoll_WalkAttack_2
-      rect:
-        serializedVersion: 2
-        x: 534
-        y: 811
-        width: 224
-        height: 168
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ecb2f3f5f4048b44d80617948b855ec0
-      internalID: -1341258384
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: NewerDoll_WalkAttack_3
-      rect:
-        serializedVersion: 2
-        x: 791
-        y: 810
-        width: 224
-        height: 172
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5c9c4df63a89b6f4bbe02fffc46f2273
-      internalID: -1787595839
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: NewerDoll_WalkAttack_4
-      rect:
-        serializedVersion: 2
-        x: 26
-        y: 555
-        width: 221
-        height: 176
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fbf91fabba4e1554db55c049b0786d13
-      internalID: -967020086
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: NewerDoll_WalkAttack_5
-      rect:
-        serializedVersion: 2
-        x: 283
-        y: 555
-        width: 220
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8f7911435b0484f4ba088bf36ca51962
-      internalID: -645635780
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: NewerDoll_WalkAttack_6
-      rect:
-        serializedVersion: 2
-        x: 537
-        y: 558
-        width: 222
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 15838c67076f30e43a4714104910ad53
-      internalID: 1857002166
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: NewerDoll_WalkAttack_7
-      rect:
-        serializedVersion: 2
-        x: 793
-        y: 561
-        width: 221
-        height: 179
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 45b36577f54d84c46853597115081633
-      internalID: 711560532
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: NewerDoll_WalkAttack_8
-      rect:
-        serializedVersion: 2
-        x: 25
-        y: 307
-        width: 221
-        height: 178
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dc0158dfa9d850843bf6e73239b5d93a
-      internalID: -1258962681
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: NewerDoll_WalkAttack_9
-      rect:
-        serializedVersion: 2
-        x: 281
-        y: 305
-        width: 221
-        height: 179
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: da73f45719085b84593e8edabadc1550
-      internalID: 169342626
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: NewerDoll_WalkAttack_10
-      rect:
-        serializedVersion: 2
-        x: 538
-        y: 302
-        width: 219
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5ca503dcba0663541a812364dc6c4832
-      internalID: 1506172394
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: NewerDoll_WalkAttack_11
-      rect:
-        serializedVersion: 2
-        x: 797
-        y: 299
-        width: 216
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3f4f24ebbe30b4c42b486d197e5a9e68
-      internalID: -1010831551
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: NewerDoll_WalkAttack_12
-      rect:
-        serializedVersion: 2
-        x: 27
-        y: 43
-        width: 216
-        height: 176
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cb3c4eb91dc2beb4c8305b19a05957b1
-      internalID: -1369381701
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: NewerDoll_WalkAttack_13
+      name: NewerDoll_Hit_1
       rect:
         serializedVersion: 2
         x: 282
-        y: 43
-        width: 216
-        height: 171
+        y: 1036
+        width: 145
+        height: 236
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -393,20 +141,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb4a6592b98762f4babc4f584771128b
-      internalID: 800226375
+      spriteID: d28f9bd4eea049d44be6e2806bb210f4
+      internalID: -1894916683
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewerDoll_WalkAttack_14
+      name: NewerDoll_Hit_2
       rect:
         serializedVersion: 2
-        x: 536
-        y: 43
-        width: 217
-        height: 168
+        x: 532
+        y: 1038
+        width: 158
+        height: 236
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -414,20 +162,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8fd622de7a989de41ad3ce1de22f6c4d
-      internalID: -457624124
+      spriteID: 2f6167a036d6bb848a4e989a558fafc9
+      internalID: -1693151796
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NewerDoll_WalkAttack_15
+      name: NewerDoll_Hit_3
       rect:
         serializedVersion: 2
-        x: 791
-        y: 43
-        width: 218
-        height: 165
+        x: 783
+        y: 1039
+        width: 168
+        height: 234
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -435,8 +183,365 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5cc8f3125f6f36d449da5639f5c92890
-      internalID: 1793809647
+      spriteID: a717fb2760092524ca753de0ea419e96
+      internalID: -610846266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewerDoll_Hit_4
+      rect:
+        serializedVersion: 2
+        x: 1036
+        y: 1040
+        width: 174
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63a3ff0c5bcf60b499fa7b986ddb6a45
+      internalID: -1027977144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewerDoll_Hit_5
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 784
+        width: 172
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a844afb1b0b097440824d338e0b49dce
+      internalID: 1511859839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewerDoll_Hit_6
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 783
+        width: 170
+        height: 234
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b7345820e61105488bad73eb222fba5
+      internalID: 352256954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewerDoll_Hit_7
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 783
+        width: 166
+        height: 235
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe5475f993c2f5e4ba8383062597c4bb
+      internalID: 469506551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewerDoll_Hit_8
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 782
+        width: 160
+        height: 237
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f1bf3d8c776e4448bea633983e42b1a
+      internalID: 1238563372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewerDoll_Hit_9
+      rect:
+        serializedVersion: 2
+        x: 1046
+        y: 781
+        width: 154
+        height: 237
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df2ca8a8dc7482946875e9176812c93b
+      internalID: 294273436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewerDoll_Hit_10
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 525
+        width: 148
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a50dc96774559e4dafa21734a300047
+      internalID: 1724510434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewerDoll_Hit_11
+      rect:
+        serializedVersion: 2
+        x: 283
+        y: 524
+        width: 144
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72e5b04289fbaa949a2dc395ceb7dd02
+      internalID: 421676858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewerDoll_Hit_12
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 523
+        width: 141
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e51dea4da08c5b4aa937ec5286ebbc4
+      internalID: 437673101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewerDoll_Hit_13
+      rect:
+        serializedVersion: 2
+        x: 797
+        y: 523
+        width: 141
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cac34e2612babf45978f2835665e0d2
+      internalID: -871685902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewerDoll_Hit_14
+      rect:
+        serializedVersion: 2
+        x: 1053
+        y: 523
+        width: 141
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 628d13994fc17154d81d9ea07b8ab8d1
+      internalID: 894964836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewerDoll_Hit_15
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 267
+        width: 141
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f7917198607eff488192d6e50a44109
+      internalID: 1111302913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewerDoll_Hit_16
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 267
+        width: 141
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bf624c3ff45be74d84779d0f29a5e33
+      internalID: 1520166074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewerDoll_Hit_17
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 267
+        width: 141
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3b93ce21c0add342b8e5662560e313b
+      internalID: -523858079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewerDoll_Hit_18
+      rect:
+        serializedVersion: 2
+        x: 797
+        y: 267
+        width: 141
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a59a4ec53d306f4e8217c2ff6d4b6cc
+      internalID: -1960863822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewerDoll_Hit_19
+      rect:
+        serializedVersion: 2
+        x: 1053
+        y: 267
+        width: 141
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc82e4e58036ad84ab2aed422c5cac0f
+      internalID: 1693016047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewerDoll_Hit_20
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 11
+        width: 141
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d10d8a227a5652e41ad756bfcab267db
+      internalID: 234202391
       vertices: []
       indices: 
       edges: []
@@ -444,7 +549,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: cbd4eb84e35f718448fabf6f1e7b116f
+    spriteID: 726420166843b2241a5db626ce95a1ee
     internalID: 0
     vertices: []
     indices: 
@@ -452,22 +557,27 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      NewerDoll_WalkAttack_12: -1369381701
-      NewerDoll_WalkAttack_10: 1506172394
-      NewerDoll_WalkAttack_2: -1341258384
-      NewerDoll_WalkAttack_1: -1145641628
-      NewerDoll_WalkAttack_0: -788614806
-      NewerDoll_WalkAttack_13: 800226375
-      NewerDoll_WalkAttack_7: 711560532
-      NewerDoll_WalkAttack_14: -457624124
-      NewerDoll_WalkAttack_4: -967020086
-      NewerDoll_WalkAttack_8: -1258962681
-      NewerDoll_WalkAttack_11: -1010831551
-      NewerDoll_WalkAttack_3: -1787595839
-      NewerDoll_WalkAttack_6: 1857002166
-      NewerDoll_WalkAttack_5: -645635780
-      NewerDoll_WalkAttack_9: 169342626
-      NewerDoll_WalkAttack_15: 1793809647
+      NewerDoll_Hit_11: 421676858
+      NewerDoll_Hit_18: -1960863822
+      NewerDoll_Hit_19: 1693016047
+      NewerDoll_Hit_15: 1111302913
+      NewerDoll_Hit_14: 894964836
+      NewerDoll_Hit_20: 234202391
+      NewerDoll_Hit_10: 1724510434
+      NewerDoll_Hit_6: 352256954
+      NewerDoll_Hit_17: -523858079
+      NewerDoll_Hit_4: -1027977144
+      NewerDoll_Hit_7: 469506551
+      NewerDoll_Hit_2: -1693151796
+      NewerDoll_Hit_12: 437673101
+      NewerDoll_Hit_1: -1894916683
+      NewerDoll_Hit_9: 294273436
+      NewerDoll_Hit_8: 1238563372
+      NewerDoll_Hit_16: 1520166074
+      NewerDoll_Hit_0: -781821001
+      NewerDoll_Hit_5: 1511859839
+      NewerDoll_Hit_13: -871685902
+      NewerDoll_Hit_3: -610846266
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 
