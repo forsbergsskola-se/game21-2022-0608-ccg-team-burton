@@ -1636,6 +1636,7 @@ GameObject:
   - component: {fileID: 370853322}
   - component: {fileID: 370853321}
   - component: {fileID: 370853320}
+  - component: {fileID: 370853325}
   m_Layer: 10
   m_Name: Tilemap_Bouncy
   m_TagString: Untagged
@@ -6202,6 +6203,36 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &370853325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370853318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1728539902
+      Data2: 1169222615
+      Data3: 591892380
+      Data4: -306102303
+    Path: event:/Game play/Objects/SpoongJump
+  Event: 
+  PlayEvent: 9
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!4 &388566016 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3887871905063471677, guid: 06932baa51403d543857f2b7958cdf27,
@@ -7882,6 +7913,7 @@ GameObject:
   - component: {fileID: 1186816574}
   - component: {fileID: 1186816573}
   - component: {fileID: 1186816572}
+  - component: {fileID: 1186816577}
   m_Layer: 11
   m_Name: Tilemap_SuperBouncy
   m_TagString: Untagged
@@ -8614,6 +8646,36 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1186816577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186816570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1728539902
+      Data2: 1169222615
+      Data3: 591892380
+      Data4: -306102303
+    Path: event:/Game play/Objects/SpoongJump
+  Event: 
+  PlayEvent: 9
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1193493342 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
