@@ -133,6 +133,7 @@ public class Patrol : State_ML
         : base(enemyVarsMl)
     {
         Debug.Log("Patrol state");
+        EnemyVarsMl.animator.SetBool(Animator.StringToHash("Enemy_Walk"), true);
         Name = STATE.Patrol;
     }
 
@@ -187,17 +188,17 @@ public class Patrol : State_ML
     private void SimpleMove()
     {
         EnemyVarsMl.enemyRef.transform.position += EnemyVarsMl.enemyRef.transform.right * (Time.deltaTime * EnemyVarsMl.GetMoveSpeed);
-        //Sound here for rat movement (talk to JJ or Pavel)
+        //Sound here for rat movement (talk to JJ or Pavel) 
         
     }
 }
 
-public class Pursue : State_ML
-{
+public class Pursue : State_ML{
     public Pursue(EnemyVars_ML enemyVarsMl)
         : base(enemyVarsMl)
     {
         Debug.Log("Pursue state");
+        EnemyVarsMl.animator.SetBool(Animator.StringToHash("Enemy_Walk"), true);
         Name = STATE.Pursue;
     }
 
@@ -266,7 +267,7 @@ public class Attack : State_ML
     {
         Debug.Log("Attack state");
         base.Enter();
-        EnemyVarsMl.animator.SetBool(Animator.StringToHash("EnterCombat"), true);
+        EnemyVarsMl.animator.SetBool(Animator.StringToHash("Enemy_Walk"), false);
     }
 
     public override void Update()
@@ -288,7 +289,7 @@ public class Attack : State_ML
 
         if (attackDelay >= EnemyVarsMl.GetAttackInterval)
         {
-            EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("MakeAttack"));
+            EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("Enemy_Attack")); //Should I put attack animation here?
 
             if (EnemyVarsMl.GetEnemyType == EnemyType.Ranged)
             {
@@ -323,7 +324,7 @@ public class Attack : State_ML
     public override void Exit()
     {
         base.Exit();
-        EnemyVarsMl.animator.SetBool(Animator.StringToHash("EnterCombat"), false);
+     //  EnemyVarsMl.animator.SetBool(Animator.StringToHash("EnterCombat"), false);
         
     }
 }
@@ -380,7 +381,7 @@ public class PlatformJump : State_ML
 {
     private Rigidbody2D body;
     private float estimateForce;
-    private bool rightY;
+    private bool jumped;
     private bool rightX = true;
     
     public PlatformJump(EnemyVars_ML enemyVarsMl) 
@@ -388,43 +389,27 @@ public class PlatformJump : State_ML
     {
         Debug.Log("Platform Jump state");
         body = EnemyVarsMl.enemyRef.GetComponent<Rigidbody2D>();
-        estimateForce = (EnemyVarsMl.tracerEyes.PlatformRef.position.y - EnemyVarsMl.enemyRef.transform.position.y) * 4.5f;
+        Stage = EVENT.Enter;
+    }
+
+    public override void Enter()
+    {
+        base.Enter();
+        
     }
 
     public override void Update()
     {
-       
-        if (!rightY)
+        if (!jumped)
         {
-            body.AddForce(new Vector2(EnemyVarsMl.enemyRef.transform.right.x * 3.5f, estimateForce), ForceMode2D.Impulse);
-            rightY = true;
-            rightX = false;
+            body.AddForce(EnemyVarsMl.tracerEyes.EstimatedJumpForce * new Vector2(1f, 5.5f), ForceMode2D.Impulse);
+            jumped = true;
         }
-
-        if (!rightX)
+        
+        if (EnemyVarsMl.tracerEyes.GroundSeen && jumped)
         {
-            var platX = EnemyVarsMl.tracerEyes.PlatformRef.transform.position.x;
-            var enemyX = EnemyVarsMl.enemyRef.transform.position.x;
-            var xDist = Mathf.Abs(enemyX) - Mathf.Abs(platX);
-            
-            Debug.Log(Mathf.Abs(xDist));
-            
-            var forceDir = EnemyVarsMl.enemyRef.transform.right;
-         //   body.AddForce(new Vector2(forceDir.x * 0.5f, 0), ForceMode2D.Force);
-            
-            if (Mathf.Abs(xDist) < 3)
-            {
-                rightX = true;
-            }
-        }
-
-        if (EnemyVarsMl.tracerEyes.GroundSeen)
-        {
-            if (EnemyVarsMl.tracerEyes.StandingOn.transform == EnemyVarsMl.tracerEyes.PlatformRef)
-            {
-                Stage = EVENT.Exit;
-                NextStateMl = new Idle(EnemyVarsMl);
-            }
+            Stage = EVENT.Exit;
+            NextStateMl = new Idle(EnemyVarsMl);
         }
 
     }

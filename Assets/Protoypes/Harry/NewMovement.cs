@@ -9,16 +9,13 @@ namespace Protoypes.Harry
         private CommandContainer _commandContainer;
         private GroundChecker _groundChecker;
         private Animator _animator;
-        private SoundMananger _soundManager;
         
         private Vector2 _rawMovement { get; set; }
         private Vector2 _velocity;
         private Vector2 _lastPosition;
         private Rigidbody2D _rb;
 
-        [Header("IDLE")] 
-        public FMODUnity.EventReference IdleSoundFile;
-        private FMOD.Studio.EventInstance _idleSound;
+        [Header("IDLE")]
         public bool FacingRight;
 
 
@@ -28,10 +25,8 @@ namespace Protoypes.Harry
         public float MoveClamp = 13; 
         public float Deceleration = 60f;
         public float _currentHorizontalSpeed { get; private set; }
-        public FMODUnity.EventReference WalkingSoundFile;
-        private FMOD.Studio.EventInstance _walkingSound;
-        
-        
+
+
         [Header("GRAVITY")] 
         public float FallClamp = -40f;
         public float MinFallSpeed = 80f;
@@ -43,8 +38,6 @@ namespace Protoypes.Harry
         public float JumpHeight = 30;
         private float _apexPoint;
         public float _currentVerticalSpeed { get; private set; }
-        public FMODUnity.EventReference JumpSoundFile;
-        private FMOD.Studio.EventInstance _jumpSound;
         
         
         [Header("DOUBLE JUMP")]
@@ -56,12 +49,11 @@ namespace Protoypes.Harry
         public int DoubleJumpInt;
 
 
+
         [Header("BOUNCING")]
         public float BounceHeight = 25;
         public float SuperBounceHeight = 40;
-        public FMODUnity.EventReference BounceSoundFile;
-        private FMOD.Studio.EventInstance _bounceSound;
-        
+
         //Inputs
         private float _walkCommand;
         private float _horizontal;
@@ -83,19 +75,7 @@ namespace Protoypes.Harry
             _commandContainer = GetComponent<CommandContainer>();
             _groundChecker = GetComponent<GroundChecker>();
             _animator = GetComponent<Animator>();
-            _soundManager = FindObjectOfType<SoundMananger>();
         }
-
-
-        
-        private void Start()
-        {
-            _idleSound = FMODUnity.RuntimeManager.CreateInstance(IdleSoundFile);
-            _walkingSound = FMODUnity.RuntimeManager.CreateInstance(WalkingSoundFile);
-            _jumpSound = FMODUnity.RuntimeManager.CreateInstance(JumpSoundFile);
-            _bounceSound = FMODUnity.RuntimeManager.CreateInstance(BounceSoundFile);
-        }
-
         
         
         private void Update() 
@@ -106,7 +86,6 @@ namespace Protoypes.Harry
             if (_animator.runtimeAnimatorController != null)
                 AnimatePlayer();
             FlipPlayer(_horizontal != 0 ? _horizontal : _walkCommand);
-            PlayMovementSound();
         }
 
         
@@ -126,25 +105,6 @@ namespace Protoypes.Harry
             MovePlayer();
         }
         
-        
-        private void PlayMovementSound()
-        {
-            if (_currentHorizontalSpeed == 0 && _currentVerticalSpeed == 0)
-            {
-                _soundManager.PlaySound(_idleSound);
-                _soundManager.StopSound(_walkingSound);
-            }
-            else
-            {
-                _soundManager.StopSound(_idleSound);
-                
-                if (_groundChecker.IsGrounded)
-                    _soundManager.PlaySound(_walkingSound);
-            }
-        }
-        
-
-
         private void CollectInput()
         {
             _walkCommand = _commandContainer.WalkCommand;
@@ -222,13 +182,11 @@ namespace Protoypes.Harry
             if (_isBouncing)
             {
                 _currentVerticalSpeed = BounceHeight;
-                _soundManager.PlaySound(_bounceSound);
             }
 
             if (!_isSuperBouncing) return;
             
             _currentVerticalSpeed = SuperBounceHeight;
-            _soundManager.PlaySound(_bounceSound);
         }
 
         
@@ -239,7 +197,6 @@ namespace Protoypes.Harry
             if ((!_jumpDownCommand || !_isGrounded) && (!_jumpSpace || !_isGrounded)) return;
             
             _currentVerticalSpeed = JumpHeight;
-            _soundManager.PlaySound(_jumpSound);
         }
 
 
@@ -283,7 +240,6 @@ namespace Protoypes.Harry
         {
             _animator.SetFloat("Hspeed", Mathf.Abs(_currentHorizontalSpeed)); 
             _animator.SetFloat("Vspeed", Mathf.Abs(_currentVerticalSpeed));
-            _animator.SetBool("Attacking",false);
         }
 
         

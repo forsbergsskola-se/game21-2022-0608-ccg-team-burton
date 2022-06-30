@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using FMOD.Studio;
 using Mono.Cecil;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SoundMananger : MonoBehaviour
@@ -48,15 +49,19 @@ public class SoundMananger : MonoBehaviour
     {
         FMOD.Studio.PLAYBACK_STATE PbState;
         sound.getPlaybackState(out PbState);
+        Debug.Log(PbState);
         if (PbState != PLAYBACK_STATE.PLAYING)
         {
+            
             sound.start();
+ 
         }
     }
     
     public void PlayStackingSound(FMOD.Studio.EventInstance sound)
     {
         sound.start();
+ 
     }
 
     public void StopSound(FMOD.Studio.EventInstance sound)
@@ -66,7 +71,21 @@ public class SoundMananger : MonoBehaviour
         if (PbState == PLAYBACK_STATE.PLAYING)
         {
             sound.stop(STOP_MODE.IMMEDIATE);
+            // sound.release();
         }
+    }
+
+    public void EnemyIdle()
+    {
+        Debug.Log("EnemyIdle");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/EnemyIidle");
+    }
+
+
+    public void EnemyTakeDamage()
+    {
+        Debug.Log("EnemyTakeDamage");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/Enemy/EnemyTakeDamage");
     }
 
 

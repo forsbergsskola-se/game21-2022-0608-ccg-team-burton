@@ -19,19 +19,12 @@ namespace Entity
         [Tooltip("The amount of time the entity is invulnerable after being hit")]
         private float _invulnerablilityTime;
         private bool _invulnerable;
-        public FMODUnity.EventReference TakeDamageSoundFile;
-        private FMOD.Studio.EventInstance _takeDamageSound;
-        public FMODUnity.EventReference DeathSoundFile;
-        private FMOD.Studio.EventInstance _deathSound;
+        Animator _animator;
         
         private bool IsDead { get; set; }
         
         Coins _coins;
         ItemCollector _itemCollector;
-        
-        [SerializeField]
-        private SoundMananger _soundMananger;
-        
         
         
         public int CurrentHealth
@@ -43,14 +36,14 @@ namespace Entity
         void Awake(){
             _coins = GetComponent<Coins>();
             _itemCollector = FindObjectOfType<ItemCollector>();
+
+            _animator = GetComponent<Animator>();
+
         }
 
         private void Start()
         {
             CurrentHealth = _health;
-            _takeDamageSound = FMODUnity.RuntimeManager.CreateInstance(TakeDamageSoundFile);
-            _deathSound = FMODUnity.RuntimeManager.CreateInstance(DeathSoundFile);
-
         }
 
         public void ModifyHealth(int healthValueChange)
@@ -65,7 +58,10 @@ namespace Entity
             if (!_invulnerable && healthValueChange <= 0)
             {
                 StartCoroutine(InvulnFrameTimer(_invulnerablilityTime));
-                _soundMananger.PlaySound(_takeDamageSound);
+
+                if (CurrentHealth > 0){
+                    _animator.SetTrigger("TakeDmg");
+                }
                 
             }
         
@@ -77,9 +73,9 @@ namespace Entity
         
         private void OnDeath() //TODO: Move to own script?
         {
-            _soundMananger.PlaySound(_deathSound);
+            _animator.SetTrigger("Dead");
             IsDead = true;
-            gameObject.SetActive(false); //Make death-script and make event or something
+            //Make death-script and make event or something
             
 
             if (gameObject.CompareTag("Enemy")){

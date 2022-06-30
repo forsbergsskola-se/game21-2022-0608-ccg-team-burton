@@ -21,7 +21,7 @@ public class LootBoxController : MonoBehaviour, ISaveable
  
    private Item item;
    public GameObject[] ItemElements;
-   SoundMananger _sound;
+   private SoundMananger _sound;
 
    // Since we are looping, we can use a list
    private List<Item> gainedItems = new();

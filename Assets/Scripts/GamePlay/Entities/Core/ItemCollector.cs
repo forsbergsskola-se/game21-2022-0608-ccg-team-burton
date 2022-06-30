@@ -7,26 +7,32 @@ public class ItemCollector : MonoBehaviour{
     [SerializeField] public int coinValue;
     [HideInInspector] public int _coinCounter = 0;
 
+
     private SoundMananger _soundManager;
-    public FMODUnity.EventReference CollectCoinSoundFile;
-    private FMOD.Studio.EventInstance _collectCoinSound;
+    // public FMODUnity.EventReference CollectCoinSoundFile;
+    // private FMOD.Studio.EventInstance _collectCoinSound;
 
-    private void Awake()
+    private void Awake() => _soundManager = FindObjectOfType<SoundMananger>();
+
+    private void Start()
     {
-        _soundManager = FindObjectOfType<SoundMananger>();
-        _collectCoinSound = FMODUnity.RuntimeManager.CreateInstance(CollectCoinSoundFile);
-    }
+        // _collectCoinSound = FMODUnity.RuntimeManager.CreateInstance(CollectCoinSoundFile);
+        UpdateCoinText(0);
+    } 
 
 
+    
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (!col.gameObject.CompareTag("Coin")) return;
         
         Destroy(col.gameObject);
-        _soundManager.PlayStackingSound(_collectCoinSound);
+        // _soundManager.PlayStackingSound(_collectCoinSound);
         _coinCounter +=  coinValue;
         UpdateCoinText(_coinCounter);
     }
 
-    public void UpdateCoinText(int value) => coinText.text = "Coins: " + value ;
+    
+    
+    public void UpdateCoinText(int value) => coinText.text = $"{value}";
 }

@@ -1,5 +1,6 @@
 using System;
 using Entity;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Combat : MonoBehaviour
@@ -8,7 +9,10 @@ public class Combat : MonoBehaviour
     public float attackRange;
     public Transform attackPoint;
     public LayerMask enemyLayers;
-
+    private SoundMananger _soundMananger;
+    public FMODUnity.EventReference AttackHitSoundFile;
+    private FMOD.Studio.EventInstance _attackHitSound;
+    
     [Header("DEBUGSTATS")] 
     [SerializeField]
     private int _meleeDamage =1;
@@ -19,16 +23,27 @@ public class Combat : MonoBehaviour
 
      void Awake(){
          anim = GetComponent<Animator>();
+         _soundMananger = FindObjectOfType<SoundMananger>();
+     }
+
+     private void Start()
+     {
+         _attackHitSound = FMODUnity.RuntimeManager.CreateInstance(AttackHitSoundFile);
      }
 
      public void MeleeAttack()
     {
         //Play Melee Attack
-        anim.SetBool("Attacking", true);
-
+        anim.SetTrigger("Attack");
+        
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
+        {
             DealDamage(enemy);
+            _soundMananger.PlaySound(_attackHitSound);
+        }
+            
+        
         
         
         
