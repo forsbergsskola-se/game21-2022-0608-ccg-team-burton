@@ -50,7 +50,6 @@ GameObject:
   - component: {fileID: 1296682025009656458}
   - component: {fileID: 4874833652481478937}
   - component: {fileID: 1335438296354588738}
-  - component: {fileID: -5978559120333302869}
   - component: {fileID: 540880516}
   m_Layer: 7
   m_Name: RatEnemyWithAI
@@ -74,7 +73,7 @@ Transform:
   - {fileID: 5184618353410980185}
   - {fileID: 3013155505611826172}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6670360478246836091
 SpriteRenderer:
@@ -286,18 +285,6 @@ MonoBehaviour:
   stopTime: 0
   slowTime: 0
   shake: 0
---- !u!114 &-5978559120333302869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6999187586587883943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 585f36b94970eec48818ebdb09a919c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!70 &540880516
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
