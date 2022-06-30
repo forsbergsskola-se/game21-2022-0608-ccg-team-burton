@@ -26,8 +26,8 @@ public class LootBoxController : MonoBehaviour
    // Since we are looping, we can use a list
    private List<Item> gainedItems = new();
    
-   public FMODUnity.EventReference OpenLootBoxSoundFile;
-   private FMOD.Studio.EventInstance _openLootboxSound;
+   // public FMODUnity.EventReference OpenLootBoxSoundFile;
+   // private FMOD.Studio.EventInstance _openLootboxSound;
    
    void Awake(){
       _sound = FindObjectOfType<SoundMananger>();
@@ -35,7 +35,7 @@ public class LootBoxController : MonoBehaviour
 
    private void Start()
    {
-      _openLootboxSound = FMODUnity.RuntimeManager.CreateInstance(OpenLootBoxSoundFile);
+      // _openLootboxSound = FMODUnity.RuntimeManager.CreateInstance(OpenLootBoxSoundFile);
 
       foreach (var itemElement in ItemElements)
       {
@@ -51,7 +51,7 @@ public class LootBoxController : MonoBehaviour
       Debug.Log("Opening loot box");
       OpenBox();
       _animator.SetBool("OpenLootBox", true);
-      _sound.PlaySound(_openLootboxSound);
+      // _sound.PlaySound(_openLootboxSound);
       
    }
 

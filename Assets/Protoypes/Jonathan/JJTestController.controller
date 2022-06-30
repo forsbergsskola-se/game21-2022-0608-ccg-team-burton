@@ -11,7 +11,8 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -6692316000291592641}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -51,6 +52,27 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -6256777093310392293}
+--- !u!114 &-6692316000291592641
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40719b8d930e9c942b998e8a77984cb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundMananger: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
+    type: 3}
+  SoundFile:
+    Guid:
+      Data1: 1605765374
+      Data2: 1257533211
+      Data3: -1854008182
+      Data4: 498159419
+    Path: event:/Meta Game/Lootbox/OpenLootCrate1
 --- !u!1102 &-6256777093310392293
 AnimatorState:
   serializedVersion: 6
@@ -117,7 +139,7 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
