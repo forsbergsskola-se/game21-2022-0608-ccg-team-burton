@@ -215,6 +215,34 @@ public class TracerEyes : MonoBehaviour
        
     }
 
+    private void TraceSpread(Vector2 startDir, bool plusMinus, int numberTraces)
+    {
+        var inc = 0f;
+        var pos = transform.position;
+        var traceDistance = 16;
+        var dir = startDir;
+        
+        hitResultList.Clear();
+        
+        if (plusMinus) inc = 0.3f;
+        else inc = -0.3f;
+        
+        for (int i = 0; i < numberTraces; i++)
+        {
+            var traceHit = DoSingleTrace(dir, pos, traceDistance, out var hit);
+           
+            AnalyzeResults(i, traceHit);
+            HitResults results = new HitResults()
+            {
+                theHitType = traceHit,
+                theHit = hit
+            };
+            hitResultList.Add(results);
+            
+            dir += new Vector2(0, inc);
+        }    
+    }
+
     private Vector2 CheckGroundDistance()
     {
         var right = transform.right;
@@ -223,6 +251,11 @@ public class TracerEyes : MonoBehaviour
         var traceHit2= DoSingleTrace(new Vector2(0, -1), pos, 16, out var hit2);
         var traceHit3= DoSingleTrace(new Vector2(0, -1), pos + new Vector3(right.x * 5, 0), 16, out var hit3);
 
+        if (hit2.point.y == hit3.point.y)
+        {
+            Debug.Log("even");
+        }
+        
         return hit3.point - (Vector2)transform.position;
     }
   
@@ -264,13 +297,11 @@ public class TracerEyes : MonoBehaviour
             {
                 var dist = CheckGroundDistance();
 
-                if (Mathf.Abs(dist.y) <= 5)
+                if (dist.y <= 0)
                 {
-                    EstimatedJumpForce =  new Vector2((transform.right.x * Mathf.Abs(dist.x)) * 0.75f, Mathf.Abs(dist.y) / 2);
+                    EstimatedJumpForce =  new Vector2((transform.right.x * Mathf.Abs(dist.x)) * 0.75f, Mathf.Abs(dist.y) * 0.45f);
                     actions = Actions.PlatformJump;
                 }
-                
-                Debug.Log(Mathf.Abs( dist.y));
             }
             
             if (WallSeen)

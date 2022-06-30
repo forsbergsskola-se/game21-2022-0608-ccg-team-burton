@@ -133,6 +133,7 @@ public class Patrol : State_ML
         : base(enemyVarsMl)
     {
         Debug.Log("Patrol state");
+        EnemyVarsMl.animator.SetBool(Animator.StringToHash("Enemy_Walk"), true);
         Name = STATE.Patrol;
     }
 
