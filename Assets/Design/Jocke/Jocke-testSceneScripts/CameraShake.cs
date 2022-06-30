@@ -1,38 +1,34 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
-public class CameraShake : MonoBehaviour
+namespace Design.Jocke.Jocke_testSceneScripts
 {
-    
-    
-    private CinemachineVirtualCamera cinemachineVirtualCamera;
-    private float shakeTimer;
-    public void ShakeCamera(float intensity, float time)
+    public class CameraShake : MonoBehaviour
     {
-        CinemachineBasicMultiChannelPerlin cinemachingeBasicMultiChannelPerlin =
-            cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        cinemachingeBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
+        private CinemachineVirtualCamera _cineMachine;
+        private CinemachineBasicMultiChannelPerlin _noise;
 
-        shakeTimer = time;
-    }
+        private float shakeTimer;
 
-    private void Update()
-    {
-        if (shakeTimer >0f)
+        private void Awake()
         {
-            shakeTimer -= Time.deltaTime;
+            _cineMachine = gameObject.GetComponent<CinemachineVirtualCamera>();
+            _noise = _cineMachine.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         }
-        shakeTimer -= Time.deltaTime;
-        if (shakeTimer <= 0f)
-        {
-            // time Over!
-            CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin =
-                cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 
-            cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0f;
+        public void ShakeCamera(float intensity, float time)
+        {
+            _noise.m_AmplitudeGain = intensity;
+            shakeTimer = time;
+        }
+
+        private void Update()
+        {
+            if (shakeTimer > 0f)
+                shakeTimer -= Time.deltaTime;
+        
+            if (shakeTimer <= 0f)
+                _noise.m_AmplitudeGain = 0f; // time Over!
         }
     }
 }
