@@ -160,6 +160,7 @@ public class Patrol : State_ML
         
         if (EnemyVarsMl.tracerEyes.actions == Actions.TurnAround)
         {
+            Debug.Log("Time to turn around");
             TurnAround();    
         }
         
@@ -400,7 +401,7 @@ public class PlatformJump : State_ML
     {
         if (!jumped)
         {
-            body.AddForce(EnemyVarsMl.tracerEyes.EstimatedJumpForce * new Vector2(1f, 5.5f), ForceMode2D.Impulse);
+            body.AddForce(EnemyVarsMl.tracerEyes.EstimatedJumpForce, ForceMode2D.Impulse);
             jumped = true;
         }
         
