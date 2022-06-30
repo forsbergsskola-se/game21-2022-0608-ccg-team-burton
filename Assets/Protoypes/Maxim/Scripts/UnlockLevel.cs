@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UnlockLevel : MonoBehaviour, ISaveable 
+public class UnlockLevel : MonoBehaviour, I_Saveable 
 {
     [SerializeField] public bool Unlocked;
     public Image LockImage;

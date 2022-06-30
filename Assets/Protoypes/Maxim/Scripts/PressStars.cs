@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PressStars : MonoBehaviour, ISaveable
+public class PressStars : MonoBehaviour, I_Saveable
 {
     private int _currentStarsNum = 0;
     public int levelIndex;

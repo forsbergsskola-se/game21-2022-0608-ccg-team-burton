@@ -4,12 +4,12 @@ using UnityEngine.SceneManagement;
 public class LevelSelection : MonoBehaviour
 {
 
-   private LevelLocked _levelLocked;
+   private UnlockLevel _levelLocked;
     SavingWrapper _savingWrapper;
 
    private void Awake()
     {
-        _levelLocked = GetComponent<LevelLocked>();
+        _levelLocked = GetComponent<UnlockLevel>();
         _savingWrapper = GetComponent<SavingWrapper>();
     }
 

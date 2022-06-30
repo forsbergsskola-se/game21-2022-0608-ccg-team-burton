@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LootBoxController : MonoBehaviour, ISaveable
+public class LootBoxController : MonoBehaviour, I_Saveable
 {
    
    
@@ -62,12 +62,12 @@ public class LootBoxController : MonoBehaviour, ISaveable
       {
          var itemSo = LootBoxSO.PickLootTable().PickItem();
         
-         Debug.Log($"Saving: {itemSo.ID},{itemSo.RaritySo.ID},{itemSo.GemSo.ID}");
+         Debug.Log($"Saving: {itemSo.GetDisplayName()}");
           
          //Hook in item generation to receive stats 
          //TODO: Get item with scaled stats here - these will be presented on the lootboxUI when opening item.
-         item = ItemFactory.CreateItemFromInventory(itemSo, itemSo.RaritySo, itemSo.GemSo);
-         gainedItems.Add(item);
+         // item = ItemFactory.CreateItemFromInventory(itemSo, itemSo.RaritySo, itemSo.GemSo);
+         // gainedItems.Add(item);
          
       }
    }
