@@ -69,6 +69,19 @@ public class SoundMananger : MonoBehaviour
         sound.stop(STOP_MODE.IMMEDIATE);
     }
 
+    public void EnemyWalk()
+    {
+        Debug.Log("EnemyWalk");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/Enemy/EnemyWalk");
+    }
+
+    
+    public void RatWalk()
+    {
+        Debug.Log("RatWalk");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/Enemy/RatWalk");
+    }
+
     public void RatAttack()
     {
         Debug.Log("RatAttack");
