@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class PressStars : MonoBehaviour, I_Saveable
+public class PressStars : MonoBehaviour
 
 {
     private int _currentStarsNum = 0;

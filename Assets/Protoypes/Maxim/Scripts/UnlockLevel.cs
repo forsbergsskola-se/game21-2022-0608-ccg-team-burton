@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class UnlockLevel : MonoBehaviour, I_Saveable 
+public class UnlockLevel : MonoBehaviour
 
 {
     [SerializeField] public bool Unlocked;

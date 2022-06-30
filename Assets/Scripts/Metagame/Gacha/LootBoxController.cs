@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LootBoxController : MonoBehaviour, I_Saveable
+public class LootBoxController : MonoBehaviour
 {
    
    
@@ -62,12 +62,12 @@ public class LootBoxController : MonoBehaviour, I_Saveable
       {
          var itemSo = LootBoxSO.PickLootTable().PickItem();
         
-         Debug.Log($"Saving: {itemSo.GetDisplayName()}");
+         Debug.Log($"Saving: {itemSo.name}");
           
-         //Hook in item generation to receive stats 
-         //TODO: Get item with scaled stats here - these will be presented on the lootboxUI when opening item.
-         // item = ItemFactory.CreateItemFromInventory(itemSo, itemSo.RaritySo, itemSo.GemSo);
-         // gainedItems.Add(item);
+         // Hook in item generation to receive stats 
+         // TODO: Get item with scaled stats here - these will be presented on the lootboxUI when opening item.
+          item = ItemFactory.CreateItemFromInventory(itemSo);
+          gainedItems.Add(item);
          
       }
    }
@@ -86,15 +86,5 @@ public class LootBoxController : MonoBehaviour, I_Saveable
          i++;
       }
    }
-
-
-   public object CaptureState()
-   {
-      throw new NotImplementedException();
-   }
-
-   public void RestoreState(object state)
-   {
-      throw new NotImplementedException();
-   }
+ 
 }

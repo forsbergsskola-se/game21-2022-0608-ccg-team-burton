@@ -11,6 +11,6 @@ public class ItemSO : ScriptableObject
     public Sprite ItemSprite;
 
     
-    public ItemRaritySO RaritySo;
-    public GemSO GemSo;
+    // public ItemRaritySO RaritySo;
+    // public GemSO GemSo;
 }
