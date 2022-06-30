@@ -20,7 +20,6 @@ public class PlaySoundBehaviour : StateMachineBehaviour
             initiated = true;
         }
 
-        Debug.Log($"Playing sound: {_sound}");
         _soundMananger.PlaySound(_sound);
     }
 
@@ -33,7 +32,6 @@ public class PlaySoundBehaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log($"Stopping playing: {_sound}");
         _soundMananger.StopSound(_sound);
     }
 

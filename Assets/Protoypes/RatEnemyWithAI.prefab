@@ -51,9 +51,11 @@ GameObject:
   - component: {fileID: 4874833652481478937}
   - component: {fileID: 1335438296354588738}
   - component: {fileID: 540880516}
+  - component: {fileID: 639262615}
+  - component: {fileID: 2043513948}
   m_Layer: 7
   m_Name: RatEnemyWithAI
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +75,7 @@ Transform:
   - {fileID: 5184618353410980185}
   - {fileID: 3013155505611826172}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6670360478246836091
 SpriteRenderer:
@@ -160,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2c96f8e501e4146bbe5fc365c74eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 0
+  _damage: 1
   _knockbackMultiplier: 1
 --- !u!114 &97031474771827129
 MonoBehaviour:
@@ -174,7 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62179065a33a8c43879a7035312207e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 503
+  _health: 2
   _invulnerablilityTime: 1
 --- !u!114 &5184618353456863432
 MonoBehaviour:
@@ -233,7 +235,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6999187586587883943}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d278368937f35c4bb571041fe3dfa24, type: 3}
   m_Name: 
@@ -301,6 +303,32 @@ CapsuleCollider2D:
   m_Offset: {x: 1.1249598, y: -0.01571812}
   m_Size: {x: 2.8200004, y: 1.3594152}
   m_Direction: 1
+--- !u!114 &639262615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6999187586587883943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d647cd166645fb4790db0e667c3cb9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _coinValue: 10
+--- !u!114 &2043513948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6999187586587883943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d647cd166645fb4790db0e667c3cb9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _coinValue: 10
 --- !u!1001 &5338558807074250868
 PrefabInstance:
   m_ObjectHideFlags: 0
