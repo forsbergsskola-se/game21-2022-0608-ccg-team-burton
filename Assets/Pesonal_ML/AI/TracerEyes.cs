@@ -263,7 +263,7 @@ public class TracerEyes : MonoBehaviour
     {
         if (PlayerSeen)
         {
-            SetRangeValues(hitResultList[1].theHit.collider.gameObject.transform.position, 0.4f, TraceType.Player);
+            PlayerInAttackRange = hitResultList[1].theHit.distance < 1;
             
             if (PlayerTrans == default)
             {

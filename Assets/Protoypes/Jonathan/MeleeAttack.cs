@@ -9,19 +9,12 @@ public class MeleeAttack : MonoBehaviour
  [SerializeField] float _attackDelaySec = 2f;
  CommandContainer _commandContainer;
  private SoundMananger _soundMananger;
- public FMODUnity.EventReference AttackSoundFile;
- private FMOD.Studio.EventInstance _attackSound;
- 
+
  bool _allowAttack = true;
 
  void Awake(){
   _commandContainer = FindObjectOfType<CommandContainer>();
-  _soundMananger = FindObjectOfType<SoundMananger>();
- }
 
- private void Start()
- {
-  _attackSound = FMODUnity.RuntimeManager.CreateInstance(AttackSoundFile);
  }
 
  private void Update()
@@ -36,8 +29,7 @@ public class MeleeAttack : MonoBehaviour
  IEnumerator CallAttack()
  {
   _combat.MeleeAttack();
-  _soundMananger.PlaySound(_attackSound);
-  
+
   _allowAttack = false;
   yield return new WaitForSeconds(_attackDelaySec);
   _allowAttack = true;

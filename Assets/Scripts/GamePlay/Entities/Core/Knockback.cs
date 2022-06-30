@@ -6,6 +6,7 @@ namespace Entity
  /// <summary>
  /// Knockback script. The knockback has a base knockback.
  /// The knockback is also affected by a multiplier that can come from thing calling the knockback (e.g. Werapon knockback multiplier)
+ /// knockback
  /// </summary>
     [RequireComponent(typeof(Rigidbody2D))]
     public class Knockback : MonoBehaviour
@@ -16,7 +17,7 @@ namespace Entity
         [SerializeField]
         private float knockbackDuration=0.5f;
  
-        public void DoKnockBack(Rigidbody2D hitTargetRb2d, Vector3 hitPosition, float knockbackMultiplier)
+        public void DoKnockBack(Rigidbody2D hitTargetRb2d, Vector3 hitPosition, float knockbackMultiplier = 1)
         {
             var knockBackDir = (transform.position - hitPosition).normalized;
             var originalVelocity = hitTargetRb2d.velocity;
@@ -26,7 +27,6 @@ namespace Entity
 
         private IEnumerator HaltKnockBack(Rigidbody2D hitTargetRb2d, float knockbackDuration, Vector2 originalVelocity)
         {
-            Debug.Log(knockbackDuration);
             yield return new WaitForSeconds(knockbackDuration);
             hitTargetRb2d.velocity = originalVelocity;
         }

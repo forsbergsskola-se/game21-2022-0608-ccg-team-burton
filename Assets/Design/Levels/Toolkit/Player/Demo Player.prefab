@@ -47,7 +47,7 @@ Transform:
   m_Children:
   - {fileID: 3616007790298403442}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1144139567602091071
 SpriteRenderer:
@@ -133,44 +133,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7efbeca9fb2caee408e33967aa452cfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IdleSoundFile:
-    Guid:
-      Data1: -1673904321
-      Data2: 1111623251
-      Data3: -147658871
-      Data4: -357734575
-    Path: event:/Game play/Player/PlayerIdle
   FacingRight: 1
   Acceleration: 90
   MoveClamp: 7.25
   Deceleration: 400
-  WalkingSoundFile:
-    Guid:
-      Data1: -1013597291
-      Data2: 1340873512
-      Data3: 1827987876
-      Data4: 2049349630
-    Path: event:/Game play/Player/Walking
   FallClamp: -52
   MinFallSpeed: 65
   MaxFallSpeed: 112.5
   JumpHeight: 30
-  JumpSoundFile:
-    Guid:
-      Data1: -330003421
-      Data2: 1319600127
-      Data3: -1306740596
-      Data4: -1476415498
-    Path: event:/Game play/Player/Jump
   BounceHeight: 20
   SuperBounceHeight: 40
-  BounceSoundFile:
-    Guid:
-      Data1: -1728539902
-      Data2: 1169222615
-      Data3: 591892380
-      Data4: -306102303
-    Path: event:/Game play/Objects/SpoongJump
 --- !u!114 &1144139567602091066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,18 +211,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45da3103cf2a5f441a32f6c98306be6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cinemachine: {fileID: 0}
+  CamIntensity: 5
+  CamTime: 0
   attackRange: 2
   attackPoint: {fileID: 3616007790298403442}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
-  AttackHitSoundFile:
-    Guid:
-      Data1: -627551298
-      Data2: 1136385199
-      Data3: -1090946890
-      Data4: 232387405
-    Path: event:/Game play/Combat/SissorAttack
   _meleeDamage: 1
   _knockbackMultiplier: 1
   DebugProjectile: {fileID: 0}
@@ -269,20 +237,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 6
   _invulnerablilityTime: 0.75
-  TakeDamageSoundFile:
-    Guid:
-      Data1: 149457308
-      Data2: 1257443992
-      Data3: 1244329916
-      Data4: 2005952421
-    Path: event:/Game play/Combat/TakingDamage
-  DeathSoundFile:
-    Guid:
-      Data1: 620538182
-      Data2: 1119898424
-      Data3: 791635848
-      Data4: 1808263322
-    Path: event:/Game play/Combat/DiesFromDamage
 --- !u!114 &3205524570191263580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,13 +252,6 @@ MonoBehaviour:
   coinText: {fileID: 0}
   coinValue: 5
   _coinCounter: 0
-  CollectCoinSoundFile:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
 --- !u!114 &5732464600212847612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,13 +266,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _combat: {fileID: 4797520626450282201}
   _attackDelaySec: 2
-  AttackSoundFile:
-    Guid:
-      Data1: -627551298
-      Data2: 1136385199
-      Data3: -1090946890
-      Data4: 232387405
-    Path: event:/Game play/Combat/SissorAttack
 --- !u!114 &3205524570191263563
 MonoBehaviour:
   m_ObjectHideFlags: 0
