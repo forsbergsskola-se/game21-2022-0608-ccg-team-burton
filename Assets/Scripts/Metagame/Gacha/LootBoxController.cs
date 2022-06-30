@@ -63,7 +63,10 @@ public class LootBoxController : MonoBehaviour
          var itemSo = LootBoxSO.PickLootTable().PickItem();
         
          Debug.Log($"Saving: {itemSo.name}");
-          
+         PlayerPrefs.SetString("InventorySlot", itemSo.ID);
+
+         var t = PlayerPrefs.GetString("InventorySlot");
+         
          // Hook in item generation to receive stats 
          // TODO: Get item with scaled stats here - these will be presented on the lootboxUI when opening item.
           item = ItemFactory.CreateItemFromInventory(itemSo);

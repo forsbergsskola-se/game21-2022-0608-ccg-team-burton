@@ -16,12 +16,13 @@ public class ItemPrefab : MonoBehaviour
     
     private void Start()
     {
-        var jsonString = PlayerPrefs.GetString("Inventoryslot1");
-        var InventoryItem= JsonConvert.DeserializeObject<InventoryItemSerialization>(jsonString);
+        // var jsonString = PlayerPrefs.GetString("Inventoryslot");
+        // var InventoryItem= JsonConvert.DeserializeObject<InventoryItemSerialization>(jsonString);
 
         // Debug.Log($"Deserialized values: {InventoryItem.itemID}, {InventoryItem.rarityID}, {InventoryItem.gemId}");
-        
-        var itemSo = EquipmentLibrary.GetItemFromLibrary(InventoryItem.itemID);
+        var loadItem = PlayerPrefs.GetString("InventorySlot"); 
+
+        var itemSo = EquipmentLibrary.GetItemFromLibrary(loadItem);
         // var raritySo = EquipmentLibrary.GetRarityFromLibrary(InventoryItem.rarityID);
         // var gemSo = EquipmentLibrary.GetGemFromLibrary(InventoryItem.gemId);
         

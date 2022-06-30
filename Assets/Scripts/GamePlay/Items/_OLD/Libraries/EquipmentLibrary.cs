@@ -12,8 +12,8 @@ public class EquipmentLibrary : MonoBehaviour
 {
 
     public  ItemLibrarySO ItemLibrary;
-    public  ItemRarityLibrarySO RarityLibrary;
-    public  GemLibrarySO GemLibrary;
+    // public  ItemRarityLibrarySO RarityLibrary;
+    // public  GemLibrarySO GemLibrary;
 
    
 
@@ -30,29 +30,29 @@ public class EquipmentLibrary : MonoBehaviour
         return null;
     }
 
-    public ItemRaritySO GetRarityFromLibrary(string rarityID)
-    {
-        //TODO: If dictionary would be nice
-        foreach (var itemRaritySo in RarityLibrary.ItemRarityLibrary.Where(itemRaritySo => itemRaritySo.ID == rarityID))
-        {
-            return itemRaritySo;
-        }
+    // public ItemRaritySO GetRarityFromLibrary(string rarityID)
+    // {
+    //     //TODO: If dictionary would be nice
+    //     foreach (var itemRaritySo in RarityLibrary.ItemRarityLibrary.Where(itemRaritySo => itemRaritySo.ID == rarityID))
+    //     {
+    //         return itemRaritySo;
+    //     }
+    //
+    //     Debug.Log("Warning: No Rarity was found with that ID in library. Returning Null");
+    //     return null; 
+    // }
 
-        Debug.Log("Warning: No Rarity was found with that ID in library. Returning Null");
-        return null; 
-    }
-
-    public GemSO GetGemFromLibrary(string gemID)
-    {
-        //TODO: If dictionary would be nice
-        foreach (var gemSo in GemLibrary.GemLibrary.Where(gemSo => gemSo.ID == gemID))
-        {
-            return gemSo;
-        }
-
-        Debug.Log("Warning: No gem was found with that ID in library. Returning Null");
-        return null; 
-    }
+    // public GemSO GetGemFromLibrary(string gemID)
+    // {
+    //     //TODO: If dictionary would be nice
+    //     foreach (var gemSo in GemLibrary.GemLibrary.Where(gemSo => gemSo.ID == gemID))
+    //     {
+    //         return gemSo;
+    //     }
+    //
+    //     Debug.Log("Warning: No gem was found with that ID in library. Returning Null");
+    //     return null; 
+    // }
     
     
     
