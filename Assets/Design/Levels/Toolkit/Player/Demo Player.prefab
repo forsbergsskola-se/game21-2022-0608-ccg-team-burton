@@ -47,7 +47,7 @@ Transform:
   m_Children:
   - {fileID: 3616007790298403442}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1144139567602091071
 SpriteRenderer:
@@ -211,10 +211,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45da3103cf2a5f441a32f6c98306be6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cinemachine: {fileID: 0}
-  CamIntensity: 5
-  CamTime: 0
-  attackRange: 2
+  CamIntensity: 0.05
+  CamTime: 0.05
+  attackRange: 1.5
   attackPoint: {fileID: 3616007790298403442}
   enemyLayers:
     serializedVersion: 2
@@ -331,8 +330,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  stopTime: 0.2
-  slowTime: 0.2
+  stopTime: 0.05
+  slowTime: 0.05
   shake: 0.1
 --- !u!70 &1900992439680973049
 CapsuleCollider2D:
@@ -522,7 +521,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7745896864445978379}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.75, y: 0, z: 0}
+  m_LocalPosition: {x: 2.37, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
