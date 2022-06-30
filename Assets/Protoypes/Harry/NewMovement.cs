@@ -9,7 +9,6 @@ namespace Protoypes.Harry
         private CommandContainer _commandContainer;
         private GroundChecker _groundChecker;
         private Animator _animator;
-        private SoundMananger _soundManager;
         
         private Vector2 _rawMovement { get; set; }
         private Vector2 _velocity;
@@ -66,7 +65,6 @@ namespace Protoypes.Harry
             _commandContainer = GetComponent<CommandContainer>();
             _groundChecker = GetComponent<GroundChecker>();
             _animator = GetComponent<Animator>();
-            _soundManager = FindObjectOfType<SoundMananger>();
         }
         
         
