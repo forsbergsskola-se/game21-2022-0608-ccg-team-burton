@@ -13,12 +13,14 @@ public class PlayNonStackingSoundBehaviour : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+      
         if (!initiated)
         {
             _sound = FMODUnity.RuntimeManager.CreateInstance(SoundFile);
             initiated = true;
         }
 
+        Debug.Log($"Playing sound: {_sound}");
         _soundMananger.PlaySound(_sound);
     }
 
@@ -31,6 +33,7 @@ public class PlayNonStackingSoundBehaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        Debug.Log($"Stopping playing: {_sound}");
         _soundMananger.StopSound(_sound);
     }
 

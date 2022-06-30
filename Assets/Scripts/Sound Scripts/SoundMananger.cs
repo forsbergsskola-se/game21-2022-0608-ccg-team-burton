@@ -66,13 +66,7 @@ public class SoundMananger : MonoBehaviour
 
     public void StopSound(FMOD.Studio.EventInstance sound)
     {
-        FMOD.Studio.PLAYBACK_STATE PbState;
-        sound.getPlaybackState(out PbState);
-        if (PbState == PLAYBACK_STATE.PLAYING)
-        {
-            sound.stop(STOP_MODE.IMMEDIATE);
-            // sound.release();
-        }
+        sound.stop(STOP_MODE.IMMEDIATE);
     }
 
     public void EnemyIdle()
