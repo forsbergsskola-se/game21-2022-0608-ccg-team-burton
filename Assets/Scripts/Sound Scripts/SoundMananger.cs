@@ -75,6 +75,19 @@ public class SoundMananger : MonoBehaviour
         }
     }
 
+    public void EnemyIdle()
+    {
+        Debug.Log("EnemyIdle");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/EnemyIidle");
+    }
+
+
+    public void EnemyTakeDamage()
+    {
+        Debug.Log("EnemyTakeDamage");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/Enemy/EnemyTakeDamage");
+    }
+
 
     public void SpoongJump()
     {
