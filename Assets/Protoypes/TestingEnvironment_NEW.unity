@@ -637,24 +637,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1481378356}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &122544363 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 1218731881}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &134471368 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 1759735576}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &140429771 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 1039156942}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &188820987 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1223383330, guid: 0710a1003cb211c46a7334b5adc96c33,
@@ -746,6 +728,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1223383330, guid: 0710a1003cb211c46a7334b5adc96c33, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4913927584772791376, guid: 0710a1003cb211c46a7334b5adc96c33,
         type: 3}
       propertyPath: m_Pivot.x
@@ -857,7 +843,11 @@ PrefabInstance:
       value: UI Hud
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1721037924, guid: 0710a1003cb211c46a7334b5adc96c33,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1741147476}
   m_SourcePrefab: {fileID: 100100000, guid: 0710a1003cb211c46a7334b5adc96c33, type: 3}
 --- !u!114 &211736769 stripped
 MonoBehaviour:
@@ -1002,42 +992,6 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 06932baa51403d543857f2b7958cdf27, type: 3}
---- !u!1 &227378691 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 1653012496}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &227378694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227378691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1001 &241804277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1120,18 +1074,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 241804277}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &253313789 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 749524849}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &256359097 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 1881446913}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &287955094
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1203,25 +1145,6 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 06932baa51403d543857f2b7958cdf27, type: 3}
---- !u!1 &309477309 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1522215631210464179, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
-    type: 3}
-  m_PrefabInstance: {fileID: 2307485411553829753}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &309477312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 309477309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attenuationObject: {fileID: 1324795166}
 --- !u!1001 &319744072
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1441,42 +1364,6 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 06932baa51403d543857f2b7958cdf27, type: 3}
---- !u!1 &353358008 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 529355637}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &353358011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 353358008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1001 &355605831
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1620,7 +1507,7 @@ Transform:
   - {fileID: 112839043}
   - {fileID: 1817196397}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &370853318
 GameObject:
@@ -6285,12 +6172,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 789971451}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &410973877 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 1571209481}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &435717890 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9171843561555806483, guid: 1e98edb67205b9f44a3ec59ef42d6bd6,
@@ -6451,42 +6332,93 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1881446913}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &465687222
-MonoBehaviour:
+--- !u!1001 &472470261
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 256359097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
---- !u!1 &471584944 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 626788519}
-  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3214087284289029016, guid: 5d9206907174fda42b95c6cba367a9ea,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214087284289029016, guid: 5d9206907174fda42b95c6cba367a9ea,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.5673647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214087284289029016, guid: 5d9206907174fda42b95c6cba367a9ea,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214087284289029016, guid: 5d9206907174fda42b95c6cba367a9ea,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214087284289029016, guid: 5d9206907174fda42b95c6cba367a9ea,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214087284289029016, guid: 5d9206907174fda42b95c6cba367a9ea,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214087284289029016, guid: 5d9206907174fda42b95c6cba367a9ea,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214087284289029016, guid: 5d9206907174fda42b95c6cba367a9ea,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214087284289029016, guid: 5d9206907174fda42b95c6cba367a9ea,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214087284289029016, guid: 5d9206907174fda42b95c6cba367a9ea,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214087284289029016, guid: 5d9206907174fda42b95c6cba367a9ea,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6670360478246836091, guid: 5d9206907174fda42b95c6cba367a9ea,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6670360478246836091, guid: 5d9206907174fda42b95c6cba367a9ea,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1264358077
+      objectReference: {fileID: 0}
+    - target: {fileID: 6999187586587883943, guid: 5d9206907174fda42b95c6cba367a9ea,
+        type: 3}
+      propertyPath: m_Name
+      value: RatEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6999187586587883943, guid: 5d9206907174fda42b95c6cba367a9ea,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7606225107853341130, guid: 5d9206907174fda42b95c6cba367a9ea, type: 3}
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5d9206907174fda42b95c6cba367a9ea, type: 3}
 --- !u!1001 &473536363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6647,23 +6579,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &562766890 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 1740402264}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &571032639 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2942451223724579570, guid: 2d3e9299409d10544acfc3ad301cd434,
     type: 3}
   m_PrefabInstance: {fileID: 766110174}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &582776760 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 319744072}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &583144286
 PrefabInstance:
@@ -6736,29 +6656,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 06932baa51403d543857f2b7958cdf27, type: 3}
---- !u!1 &596812274 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 217062911}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &614949264 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9171843561555806483, guid: 1e98edb67205b9f44a3ec59ef42d6bd6,
     type: 3}
   m_PrefabInstance: {fileID: 57112912}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &615688904 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 106698197}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &619492810 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 1331633440}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &626788519
 PrefabInstance:
@@ -6837,42 +6739,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1396180169}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &636261641 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 819792244}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &636261644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 636261641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!4 &644801216 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9171843561555806483, guid: 1e98edb67205b9f44a3ec59ef42d6bd6,
@@ -7038,66 +6904,12 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 06932baa51403d543857f2b7958cdf27, type: 3}
---- !u!1 &669362375 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 355605831}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &734919632 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 1480955304}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &741234934 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3887871905063471677, guid: 06932baa51403d543857f2b7958cdf27,
     type: 3}
   m_PrefabInstance: {fileID: 1675148112}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &746773766 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 349459992}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &749457715 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 2013820996}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &749457718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 749457715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1001 &749524849
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7387,48 +7199,145 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 06932baa51403d543857f2b7958cdf27, type: 3}
---- !u!1 &839291102 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 473536363}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &868014916 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 1675148112}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &868014919
-MonoBehaviour:
+--- !u!1001 &858984545
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 1741147476}
+    m_Modifications:
+    - target: {fileID: 6863749409938557570, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_Name
+      value: Star 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2013.6462
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 141.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -88.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 58f4b4d21f9f1974f8e4a8426c4f1077, type: 3}
+--- !u!224 &858984546 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+    type: 3}
+  m_PrefabInstance: {fileID: 858984545}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 868014916}
+--- !u!114 &858984547 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6863749409938557580, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+    type: 3}
+  m_PrefabInstance: {fileID: 858984545}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!4 &921607320 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3887871905063471677, guid: 06932baa51403d543857f2b7958cdf27,
@@ -7440,6 +7349,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3887871905063471677, guid: 06932baa51403d543857f2b7958cdf27,
     type: 3}
   m_PrefabInstance: {fileID: 343794052}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &946558999 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1721037924, guid: 0710a1003cb211c46a7334b5adc96c33,
+    type: 3}
+  m_PrefabInstance: {fileID: 211736768}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &947981151
 PrefabInstance:
@@ -7539,12 +7454,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3887871905063471677, guid: 06932baa51403d543857f2b7958cdf27,
     type: 3}
   m_PrefabInstance: {fileID: 583144286}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &993716361 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 1016813212}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1010821626 stripped
 Transform:
@@ -7694,78 +7603,12 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 06932baa51403d543857f2b7958cdf27, type: 3}
---- !u!1 &1058715876 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 1396180169}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1058715879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1058715876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!4 &1078669389 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3887871905063471677, guid: 06932baa51403d543857f2b7958cdf27,
     type: 3}
   m_PrefabInstance: {fileID: 1740402264}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1078669392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562766890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!4 &1111171464 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3887871905063471677, guid: 06932baa51403d543857f2b7958cdf27,
@@ -7784,84 +7627,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1759735576}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1117452612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 134471368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
---- !u!1 &1142603920 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 460333781}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1148907726 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 2039734767}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1168424589 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 287955094}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1168424592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1168424589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!4 &1181611712 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3887871905063471677, guid: 06932baa51403d543857f2b7958cdf27,
@@ -8614,12 +8379,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &1193493342 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 1563635117}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1218731881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9110,48 +8869,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 192295283}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1278825506 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
+--- !u!224 &1282664040 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
     type: 3}
-  m_PrefabInstance: {fileID: 390367830}
+  m_PrefabInstance: {fileID: 6863749408666463461}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1318787208 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 1985112}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1318787211
+--- !u!114 &1282664041 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 6863749409938557580, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+    type: 3}
+  m_PrefabInstance: {fileID: 6863749408666463461}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1318787208}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1 &1324795166 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1144139567602091040, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
@@ -9229,48 +8964,6 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 06932baa51403d543857f2b7958cdf27, type: 3}
---- !u!1 &1358251877 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 2004525909}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1379430175 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 192295283}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1379430178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1379430175}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!4 &1392486642 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3887871905063471677, guid: 06932baa51403d543857f2b7958cdf27,
@@ -9354,36 +9047,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 217062911}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1416908977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 596812274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1001 &1417014159
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9455,186 +9118,145 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 06932baa51403d543857f2b7958cdf27, type: 3}
---- !u!1 &1442519833 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 66594151}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1442519836
-MonoBehaviour:
+--- !u!1001 &1432781949
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 1741147476}
+    m_Modifications:
+    - target: {fileID: 6863749409938557570, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_Name
+      value: Star 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2013.6462
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 274.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -88.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 58f4b4d21f9f1974f8e4a8426c4f1077, type: 3}
+--- !u!224 &1432781950 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+    type: 3}
+  m_PrefabInstance: {fileID: 1432781949}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1442519833}
+--- !u!114 &1432781951 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6863749409938557580, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+    type: 3}
+  m_PrefabInstance: {fileID: 1432781949}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
---- !u!1 &1454683973 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 442348758}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1454683976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1454683973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
---- !u!1 &1461784933 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 343794052}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1461784936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1461784933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
---- !u!1 &1479366649 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 668509276}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1479366652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1479366649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
---- !u!1 &1480483799 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 1481378356}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1480483802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1480483799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1001 &1480955304
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9712,36 +9334,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1480955304}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1481346737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 734919632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1001 &1481378356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9890,72 +9482,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1331633440}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1497159794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 619492810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!4 &1533127961 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3887871905063471677, guid: 06932baa51403d543857f2b7958cdf27,
     type: 3}
   m_PrefabInstance: {fileID: 106698197}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1533127964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 615688904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1001 &1563635117
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10033,36 +9565,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1563635117}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1563635121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1193493342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1001 &1571209481
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10140,36 +9642,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1571209481}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1571209485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 410973877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1001 &1596185608
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10247,113 +9719,17 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2039734767}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1600180995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1148907726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!4 &1602742461 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3887871905063471677, guid: 06932baa51403d543857f2b7958cdf27,
     type: 3}
   m_PrefabInstance: {fileID: 1218731881}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1602742464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 122544363}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!4 &1623686327 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3887871905063471677, guid: 06932baa51403d543857f2b7958cdf27,
     type: 3}
   m_PrefabInstance: {fileID: 1016813212}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1623686330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 993716361}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
---- !u!1 &1632378052 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 1417014159}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1634035898 stripped
 Transform:
@@ -10361,36 +9737,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 460333781}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1634035901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1142603920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1001 &1653012496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10468,36 +9814,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 319744072}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1665690159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 582776760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1001 &1675148112
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10640,6 +9956,45 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 06932baa51403d543857f2b7958cdf27, type: 3}
+--- !u!1 &1741147475
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1741147476}
+  m_Layer: 5
+  m_Name: Stars
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1741147476
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741147475}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1282664040}
+  - {fileID: 858984546}
+  - {fileID: 1432781950}
+  m_Father: {fileID: 946558999}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -3, y: 97}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1742412169
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10853,150 +10208,18 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 06932baa51403d543857f2b7958cdf27, type: 3}
---- !u!1 &1804850259 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 789971451}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1804850262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1804850259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!4 &1817196397 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3887871905063471677, guid: 06932baa51403d543857f2b7958cdf27,
     type: 3}
   m_PrefabInstance: {fileID: 473536363}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1817196400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 839291102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
---- !u!1 &1826728021 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 1742412169}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1826728024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1826728021}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!4 &1833140733 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3887871905063471677, guid: 06932baa51403d543857f2b7958cdf27,
     type: 3}
   m_PrefabInstance: {fileID: 1039156942}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1833140736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 140429771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1 &1849734088
 GameObject:
   m_ObjectHideFlags: 0
@@ -11053,42 +10276,6 @@ PlayableDirector:
     - 48998d503b1424edc8ad4dd22f54a756: {fileID: 0}
     - f6a1beb67f9f34171a9eb4f07f6a9644: {fileID: 0}
     - 265d5739f20554c1db8eaeb4b3e0d17a: {fileID: 657202394}
---- !u!1 &1863374604 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 583144286}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1863374607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1863374604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1001 &1881446913
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11166,150 +10353,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 626788519}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1896685516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 471584944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!4 &1925183776 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3887871905063471677, guid: 06932baa51403d543857f2b7958cdf27,
     type: 3}
   m_PrefabInstance: {fileID: 355605831}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1925183779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 669362375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!4 &1949380466 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3887871905063471677, guid: 06932baa51403d543857f2b7958cdf27,
     type: 3}
   m_PrefabInstance: {fileID: 749524849}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1949380469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 253313789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1 &1957198756 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5712137843230292561, guid: 0710a1003cb211c46a7334b5adc96c33,
     type: 3}
   m_PrefabInstance: {fileID: 211736768}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1992977485 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 1772697156}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1992977488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1992977485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!4 &2001452581 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3713123893993751263, guid: f1f0a7101684343beb8111591c2d3990,
@@ -11387,42 +10448,6 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 06932baa51403d543857f2b7958cdf27, type: 3}
---- !u!1 &2007197341 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 49876563}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2007197344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2007197341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1001 &2013820996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11500,72 +10525,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 349459992}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2016809664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 746773766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!4 &2022432466 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3887871905063471677, guid: 06932baa51403d543857f2b7958cdf27,
     type: 3}
   m_PrefabInstance: {fileID: 2004525909}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2022432469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1358251877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1 &2035831268
 GameObject:
   m_ObjectHideFlags: 0
@@ -11737,42 +10702,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1417014159}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2057727892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1632378052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
---- !u!1 &2094888170 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3887871905063471676, guid: 06932baa51403d543857f2b7958cdf27,
-    type: 3}
-  m_PrefabInstance: {fileID: 47714381}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2094998861
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11876,56 +10805,6 @@ PrefabInstance:
       propertyPath: hearts.Array.data[5]
       value: 
       objectReference: {fileID: 211736769}
-    - target: {fileID: 3693762747164135538, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
-        type: 3}
-      propertyPath: IdleSoundFile.Path
-      value: event:/Game play/Player/PlayerIdle
-      objectReference: {fileID: 0}
-    - target: {fileID: 3693762747164135538, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
-        type: 3}
-      propertyPath: JumpSoundFile.Path
-      value: event:/Game play/Player/Jump
-      objectReference: {fileID: 0}
-    - target: {fileID: 3693762747164135538, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
-        type: 3}
-      propertyPath: IdleSoundFile.Guid.Data1
-      value: -1673904321
-      objectReference: {fileID: 0}
-    - target: {fileID: 3693762747164135538, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
-        type: 3}
-      propertyPath: IdleSoundFile.Guid.Data2
-      value: 1111623251
-      objectReference: {fileID: 0}
-    - target: {fileID: 3693762747164135538, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
-        type: 3}
-      propertyPath: IdleSoundFile.Guid.Data3
-      value: -147658871
-      objectReference: {fileID: 0}
-    - target: {fileID: 3693762747164135538, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
-        type: 3}
-      propertyPath: IdleSoundFile.Guid.Data4
-      value: -357734575
-      objectReference: {fileID: 0}
-    - target: {fileID: 3693762747164135538, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
-        type: 3}
-      propertyPath: JumpSoundFile.Guid.Data1
-      value: -330003421
-      objectReference: {fileID: 0}
-    - target: {fileID: 3693762747164135538, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
-        type: 3}
-      propertyPath: JumpSoundFile.Guid.Data2
-      value: 1319600127
-      objectReference: {fileID: 0}
-    - target: {fileID: 3693762747164135538, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
-        type: 3}
-      propertyPath: JumpSoundFile.Guid.Data3
-      value: -1306740596
-      objectReference: {fileID: 0}
-    - target: {fileID: 3693762747164135538, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
-        type: 3}
-      propertyPath: JumpSoundFile.Guid.Data4
-      value: -1476415498
-      objectReference: {fileID: 0}
     - target: {fileID: 7747099678071028065, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
         type: 3}
       propertyPath: cam
@@ -11940,78 +10819,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2094998861}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2094998873 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3205524570191263581, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
+    type: 3}
+  m_PrefabInstance: {fileID: 2094998861}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324795166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a62179065a33a8c43879a7035312207e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2129398190 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3887871905063471677, guid: 06932baa51403d543857f2b7958cdf27,
     type: 3}
   m_PrefabInstance: {fileID: 47714381}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2129398193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2094888170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!4 &2130237680 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3887871905063471677, guid: 06932baa51403d543857f2b7958cdf27,
     type: 3}
   m_PrefabInstance: {fileID: 390367830}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2130237683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1278825506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: Player
-  EventReference:
-    Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game play/Objects/PickUpCurrency
-  Event: 
-  PlayEvent: 5
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1001 &2307485411553829753
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12024,11 +10855,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SoundManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 1522215631210464179, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2578437769821243731, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
         type: 3}
@@ -12099,7 +10925,7 @@ PrefabInstance:
     - target: {fileID: 2604721245304753350, guid: 14170cf24b36f304ea2933ce087d2670,
         type: 3}
       propertyPath: m_Name
-      value: Goal
+      value: GoalBox
       objectReference: {fileID: 0}
     - target: {fileID: 2604721245304753352, guid: 14170cf24b36f304ea2933ce087d2670,
         type: 3}
@@ -12184,12 +11010,12 @@ PrefabInstance:
     - target: {fileID: 2604721245304753352, guid: 14170cf24b36f304ea2933ce087d2670,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 71.25
+      value: 70.64
       objectReference: {fileID: 0}
     - target: {fileID: 2604721245304753352, guid: 14170cf24b36f304ea2933ce087d2670,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 25.5
+      value: 23.58
       objectReference: {fileID: 0}
     - target: {fileID: 2604721245304753352, guid: 14170cf24b36f304ea2933ce087d2670,
         type: 3}
@@ -12208,9 +11034,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2604721245304753354, guid: 14170cf24b36f304ea2933ce087d2670,
         type: 3}
+      propertyPath: Health
+      value: 
+      objectReference: {fileID: 2094998873}
+    - target: {fileID: 2604721245304753354, guid: 14170cf24b36f304ea2933ce087d2670,
+        type: 3}
       propertyPath: WinScreen
       value: 
       objectReference: {fileID: 188820987}
+    - target: {fileID: 2604721245304753354, guid: 14170cf24b36f304ea2933ce087d2670,
+        type: 3}
+      propertyPath: PlayerHealth
+      value: 
+      objectReference: {fileID: 2094998873}
+    - target: {fileID: 2604721245304753354, guid: 14170cf24b36f304ea2933ce087d2670,
+        type: 3}
+      propertyPath: Stars.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2604721245304753354, guid: 14170cf24b36f304ea2933ce087d2670,
+        type: 3}
+      propertyPath: Stars.Array.data[0]
+      value: 
+      objectReference: {fileID: 1282664041}
+    - target: {fileID: 2604721245304753354, guid: 14170cf24b36f304ea2933ce087d2670,
+        type: 3}
+      propertyPath: Stars.Array.data[1]
+      value: 
+      objectReference: {fileID: 858984547}
+    - target: {fileID: 2604721245304753354, guid: 14170cf24b36f304ea2933ce087d2670,
+        type: 3}
+      propertyPath: Stars.Array.data[2]
+      value: 
+      objectReference: {fileID: 1432781951}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 14170cf24b36f304ea2933ce087d2670, type: 3}
@@ -37361,6 +36217,127 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &6863749408666463461
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 1741147476}
+    m_Modifications:
+    - target: {fileID: 6863749409938557570, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_Name
+      value: Star 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2013.6462
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -88
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863749409938557581, guid: 58f4b4d21f9f1974f8e4a8426c4f1077,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 58f4b4d21f9f1974f8e4a8426c4f1077, type: 3}
 --- !u!1001 &8636538415300508724
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37428,6 +36405,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953517108463356800, guid: f45bb3ffeb3c2d84e9b35b8c67680cfb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953517108463356800, guid: f45bb3ffeb3c2d84e9b35b8c67680cfb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.16
       objectReference: {fileID: 0}
     - target: {fileID: 7878519793387414472, guid: f45bb3ffeb3c2d84e9b35b8c67680cfb,
         type: 3}
