@@ -353,12 +353,14 @@ public class TracerEyes : MonoBehaviour
         
         var filter = hitResultList.Where(x => x.theHit).ToList();
 
-        var xDist = new Vector2();
+        var theDistance = new Vector2();
         
         if (filter.Count > 3)
         {
-            xDist = filter[1].theHit.point -= (Vector2) pos;
-            return new Vector2(Mathf.Abs(xDist.x) * dir.x, 6);
+            var yForce = Mathf.Clamp(theDistance.y, 1, 12);
+          
+            theDistance = filter[1].theHit.point -= (Vector2) pos;
+            return new Vector2(Mathf.Abs(theDistance.x) * dir.x, yForce * 6);
         }
         
         return Vector2.zero;
