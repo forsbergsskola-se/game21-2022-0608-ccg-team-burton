@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class CurrencyUI : MonoBehaviour
+public class CurrencyShopUI : MonoBehaviour
 {
     [SerializeField]private PurchaseItemCoins purchaseCommonBox;
     [SerializeField]private PurchaseItemButtons purchaseRareBox;
