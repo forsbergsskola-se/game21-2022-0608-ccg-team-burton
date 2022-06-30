@@ -19,16 +19,6 @@ public enum TraceType
     None
 }
 
-public enum TraceStates
-{
-    GroundSeen,
-    WallSeen,
-    WallNear,
-    PlatformSeen,
-    PlatformNear,
-    
-}
-
 public enum Actions
 {
     None,
@@ -38,19 +28,6 @@ public enum Actions
     PlatformJump,
     Pursue,
     Stop
-}
-
-[Serializable]
-public class HitResultValues
-{
-    public TraceType type;
-    public Vector2 position;
-    public bool objectWithinRange;
-}
-
-public enum SubType
-{
-    Wall,
 }
 
 [Serializable]
@@ -69,9 +46,6 @@ public class TracerEyes : MonoBehaviour
     private float traceInterval = 0.4f;
     private float timeSinceTrace;
 
-
-    private List<HitResultValues> hitValuesList = new();
-    
     public bool WallSeen { get; private set;}
     public bool GroundSeen { get; private set;}
     public bool PlayerSeen { get; private set;}
@@ -79,15 +53,11 @@ public class TracerEyes : MonoBehaviour
     public bool PlayerBehind { get; private set; }
     
     private bool UnderAttack;
-    
-    private bool PlayerHit;
     public bool PlayerForgotten { get; private set; }
 
     private bool WallOnTopSeen;
 
-    private bool PlayerKnown;
-    
-    public Actions actions { get; private set; }
+    public Actions Actions { get; private set; }
 
     private Health _playerHealth;
     
@@ -149,7 +119,7 @@ public class TracerEyes : MonoBehaviour
         var right = transform.right;
         var pos = transform.position;
        var increment = -0.5f;
-       actions = Actions.None;
+       Actions = Actions.None;
 
        hitResultList.Clear();
        var inc = 0.4f;
@@ -199,7 +169,7 @@ public class TracerEyes : MonoBehaviour
     {
         if (UnderAttack)
         {
-            actions = Actions.TurnAround;
+            Actions = Actions.TurnAround;
             
             UnderAttack = false;
         }
@@ -221,15 +191,10 @@ public class TracerEyes : MonoBehaviour
             {
                 if (PlayerBehind)
                 {
-                    actions = Actions.TurnAround;
+                    Actions = Actions.TurnAround;
                     PlayerBehind = false;
                 }
             }
-        }
-       
-        if (GroundSeen)
-        {
-            
         }
 
         if (!GroundSeen)
@@ -239,12 +204,12 @@ public class TracerEyes : MonoBehaviour
             if (jumpForce.x != 0)
             {
                 EstimatedJumpForce =  jumpForce;
-                actions = Actions.PlatformJump;
+                Actions = Actions.PlatformJump;
             }
             
             else
             {
-                actions = Actions.TurnAround;
+                Actions = Actions.TurnAround;
             }
         }
         
@@ -257,7 +222,7 @@ public class TracerEyes : MonoBehaviour
         {
             if (hitResultList[1].theHit.distance < 1.5f && GroundSeen)
             {
-                actions = Actions.TurnAround;
+                Actions = Actions.TurnAround;
             }
         }
 
@@ -279,7 +244,6 @@ public class TracerEyes : MonoBehaviour
         }
         
         FillHitResults(numberTraces, new Vector2(0, -1), pos  + new Vector3(dir.x * 2, 5), traceDistance, new Vector2(), dir);
-        
         var filter = hitResultList.Where(x => x.theHit).ToList();
 
         var theDistance = new Vector2();
@@ -298,16 +262,10 @@ public class TracerEyes : MonoBehaviour
     private void FillHitResults(int numberTraces, Vector2 dir, Vector2 pos, float traceDistance, Vector2 dirMod = new Vector2(), Vector2 posMod = new Vector2())
     {
         hitResultList.Clear();
-        var noHits = true;
-        
+
         for (int i = 0; i < numberTraces; i++)
         {
             var traceHit = DoSingleTrace(dir, pos, traceDistance, out var hit);
-
-            if (hit)
-            {
-                noHits = false;
-            }
             
             HitResults results = new HitResults()
             {
@@ -411,7 +369,7 @@ public class TracerEyes : MonoBehaviour
             
             return TraceType.Ground | TraceType.Wall;
         }
-        else if(layer == 8)
+        else if(layer is 8)
         {
             Debug.DrawRay(pos, dir *hit.distance, Color.blue, traceInterval);
             
@@ -430,70 +388,6 @@ public class TracerEyes : MonoBehaviour
         DrawBoxRuntime(new Vector2(pursueDistance, sizeY), boxPlacement);
         var playerSeen = false;
         var playerIsHit = false;
-        
-        hitValuesList.Clear();
-        
-        foreach (var r in result)
-        {
-            hitValuesList.Add(new HitResultValues());
-            var hitObject = r.collider.gameObject;
-            hitValuesList[^1].position = hitObject.transform.position;
-     
-            TilemapCollider2D coll;
-            
-            
-            if (hitObject.layer == 8)
-            {
-                hitValuesList[^1].type = TraceType.Player;
-
-                playerIsHit = true;
-                if (PlayerTrans == default)
-                {
-                    PlayerTrans = r.collider.transform;
-                    _playerHealth = r.collider.gameObject.GetComponent<Health>();
-                }
-
-                Debug.Log("Player spotted");
-            }
-            
-            else if (hitObject.layer == 6)
-            {
-
-                if (hitObject.transform.localScale.y > 2)
-                {
-                    hitValuesList[^1].type = TraceType.Wall;
-                    Debug.Log("Wall seen");
-                }
-                    
-                else if (hitObject.transform.localScale.x > 7)
-                {
-                    hitValuesList[^1].type = TraceType.Ground;
-                    Debug.Log("Floor seen");
-                }
-                
-                else
-                {
-                    PlatformSeen = true;
-                    hitValuesList[^1].type = TraceType.Platform;
-
-                    Debug.Log("Platform seen");
-                }
-            }
-            
-            else if (hitObject.layer == 7)
-            {
-                hitValuesList[^1].type = TraceType.Enemy;
-                Debug.Log("other enemy spotted");
-            }
-        }
-
-        if (playerIsHit)
-        {
-           playerSeen = !IsObjectBehind(PlayerTrans.position);
-        }
-        
-        PlayerSeen = playerSeen;
-        
     }
 
     private void DrawBoxRuntime(Vector2 size, Vector2 origin)

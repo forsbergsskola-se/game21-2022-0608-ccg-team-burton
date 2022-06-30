@@ -144,13 +144,13 @@ public class Patrol : State_ML
             NextStateMl = new Pursue(EnemyVarsMl);
         }
 
-        if (EnemyVarsMl.tracerEyes.actions == Actions.TurnAround)
+        if (EnemyVarsMl.tracerEyes.Actions == Actions.TurnAround)
         {
             Debug.Log("Time to turn around");
             TurnAround();    
         }
         
-        if (EnemyVarsMl.tracerEyes.actions == Actions.PlatformJump)
+        if (EnemyVarsMl.tracerEyes.Actions == Actions.PlatformJump)
         {
             Debug.Log("Platform jump action");
             Stage = EVENT.Exit;
@@ -198,7 +198,7 @@ public class Pursue : State_ML
             Stage = EVENT.Exit;
         }
 
-        if (EnemyVarsMl.tracerEyes.actions == Actions.TurnAround)
+        if (EnemyVarsMl.tracerEyes.Actions == Actions.TurnAround)
         {
             TurnAround();
         }
