@@ -10,8 +10,7 @@ public class Combat : MonoBehaviour
     public Transform attackPoint;
     public LayerMask enemyLayers;
     private SoundMananger _soundMananger;
-    public FMODUnity.EventReference AttackHitSoundFile;
-    private FMOD.Studio.EventInstance _attackHitSound;
+
     
     [Header("DEBUGSTATS")] 
     [SerializeField]
@@ -26,11 +25,6 @@ public class Combat : MonoBehaviour
          _soundMananger = FindObjectOfType<SoundMananger>();
      }
 
-     private void Start()
-     {
-         _attackHitSound = FMODUnity.RuntimeManager.CreateInstance(AttackHitSoundFile);
-     }
-
      public void MeleeAttack()
     {
         //Play Melee Attack
@@ -40,7 +34,6 @@ public class Combat : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             DealDamage(enemy);
-            _soundMananger.PlaySound(_attackHitSound);
         }
             
         
