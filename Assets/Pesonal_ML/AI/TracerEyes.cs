@@ -83,8 +83,6 @@ public class TracerEyes : MonoBehaviour
     private bool PlayerHit;
     public bool PlayerForgotten { get; private set; }
 
-    private bool JumpableWallSeen;
-    
     private bool WallOnTopSeen;
 
     private bool PlayerKnown;

@@ -1,12 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using TreeEditor;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 using Vector2 = UnityEngine.Vector2;
@@ -152,12 +144,6 @@ public class Patrol : State_ML
             NextStateMl = new Pursue(EnemyVarsMl);
         }
 
-        else if (!EnemyVarsMl.tracerEyes.GroundSeen)
-        {
-           
-        }
-        
-        
         if (EnemyVarsMl.tracerEyes.actions == Actions.TurnAround)
         {
             Debug.Log("Time to turn around");
@@ -289,7 +275,7 @@ public class Attack : State_ML
 
         if (attackDelay >= EnemyVarsMl.GetAttackInterval)
         {
-            EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("Enemy_Attack")); //Should I put attack animation here?
+            EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("Enemy_Attack"));
 
             if (EnemyVarsMl.GetEnemyType == EnemyType.Ranged)
             {
@@ -391,13 +377,7 @@ public class PlatformJump : State_ML
         body = EnemyVarsMl.enemyRef.GetComponent<Rigidbody2D>();
         Stage = EVENT.Enter;
     }
-
-    public override void Enter()
-    {
-        base.Enter();
-        
-    }
-
+    
     public override void Update()
     {
         if (!jumped)
