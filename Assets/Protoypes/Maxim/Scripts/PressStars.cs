@@ -21,5 +21,4 @@ public class PressStars : MonoBehaviour
         
         // Debug.Log(PlayerPrefs.GetInt("Lv" + levelIndex, _starsNum ));
     }
-     
 }

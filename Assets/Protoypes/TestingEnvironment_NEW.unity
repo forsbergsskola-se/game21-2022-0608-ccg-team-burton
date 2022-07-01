@@ -7336,6 +7336,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: OneWayWallEffector
       objectReference: {fileID: 0}
+    - target: {fileID: 2942451223724579573, guid: 2d3e9299409d10544acfc3ad301cd434,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d3e9299409d10544acfc3ad301cd434, type: 3}
@@ -8826,7 +8831,7 @@ GameObject:
   - component: {fileID: 1261850270}
   - component: {fileID: 1261850269}
   - component: {fileID: 1261850268}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Tilemap_OneWay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
