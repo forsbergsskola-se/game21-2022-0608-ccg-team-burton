@@ -60,7 +60,7 @@ namespace Entity
                 StartCoroutine(InvulnFrameTimer(_invulnerablilityTime));
 
                 if (CurrentHealth > 0){
-                    _animator.SetTrigger("TakeDmg");
+                    _animator.SetTrigger(Animator.StringToHash("TakeDmg"));
                 }
                 
             }
@@ -70,9 +70,15 @@ namespace Entity
             if (CurrentHealth <= 0)
             {
                 Debug.Log("Animtrigger");
-                _animator.SetTrigger("Dead");
-
+                _animator.SetTrigger(Animator.StringToHash("Dead"));
+                StartCoroutine(StartDeath());
             }
+        }
+
+        private IEnumerator StartDeath()
+        {
+            yield return new WaitForSeconds(1.5f);
+            OnDeath();
         }
         
         private void OnDeath() //TODO: Move to own script?
@@ -91,7 +97,7 @@ namespace Entity
                 _itemCollector._coinCounter -= _itemCollector._coinCounter;
                 _itemCollector.UpdateCoinText(_itemCollector._coinCounter);
             }
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
         private IEnumerator InvulnFrameTimer(float invulnFrameTimer)
@@ -99,7 +105,7 @@ namespace Entity
             //TODO: Temp visualization for IFrame (Color stuff)
             _invulnerable = true;
             var originalColor = GetComponent<SpriteRenderer>().color;             //Temp visualization for IFrame (Color stuff)
-            GetComponent<SpriteRenderer>().color = Color.magenta;             //Temp visualization for IFrame (Color stuff)
+            GetComponent<SpriteRenderer>().color = Color.red;             //Temp visualization for IFrame (Color stuff)
             yield return new WaitForSeconds(invulnFrameTimer);
             GetComponent<SpriteRenderer>().color = originalColor;             //Temp visualization for IFrame (Color stuff)
             _invulnerable = false;
