@@ -6,7 +6,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Upgrade material", menuName = "Item System/New upgrade material")]
 
-public class UpgradeMaterialSO : ItemSO
+public class UpgradeMaterialSO : InventoryItem
 {
     
     

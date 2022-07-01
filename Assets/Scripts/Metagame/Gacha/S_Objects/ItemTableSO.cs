@@ -50,7 +50,7 @@ public class ItemTableSO : ScriptableObject
         }
     }
 
-    public ItemSO PickItem()
+    public InventoryItem PickItem()
     {
         _pickedNumber = Random.Range(0, TotalProbabilityWeight);
         foreach (var itemData in ItemsList.Where(go => _pickedNumber > go.ProbabilityRangeFrom && _pickedNumber < go.ProbabilityRangeTo))
@@ -62,7 +62,7 @@ public class ItemTableSO : ScriptableObject
             
             // itemData.InventoryItem.RaritySo = tableRarity; // Assign item rarity
            
-            return itemData.ItemSo;
+            return itemData.inventoryItem;
         }
         Debug.LogError("GO couldn't be picked... Be sure that all of your active GameObject Tables (GO-class)  have assigned at least one GO! Returning NULL");
         //reset picked number in last method dependent on it (in this case, pick GO)
@@ -81,7 +81,7 @@ public class ItemTableSO : ScriptableObject
         public float ProbabilityRangeFrom;
         [HideInInspector]
         public float ProbabilityRangeTo;
-        public ItemSO ItemSo;
+        public InventoryItem inventoryItem;
     }  
    
 }

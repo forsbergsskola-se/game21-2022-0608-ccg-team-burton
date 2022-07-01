@@ -17,15 +17,9 @@ public class UpdateLootboxUI : MonoBehaviour
     // public TMP_Text Rarity;
     
 
-    private void SetUIElement( GameObject itemObject, Item item)
+    private void SetUIElement( GameObject itemObject, InventoryItem item)
     {
-        if (item is UpgradeMaterial upgradeMaterial)
-        {
-           itemObject.GetComponent<Image>().sprite = upgradeMaterial.ItemSprite;
- 
-            
-        }
-
+           itemObject.GetComponent<Image>().sprite = item.GetIcon();
     }
 
     
