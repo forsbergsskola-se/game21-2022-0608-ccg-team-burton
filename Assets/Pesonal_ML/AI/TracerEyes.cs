@@ -39,8 +39,7 @@ public class HitResults
 
 public class TracerEyes : MonoBehaviour
 {
-    [SerializeField] private Transform attackRange;
-    public float pursueDistance;
+    [SerializeField] public float pursueDistance;
     private int multiMask;
 
     private float traceInterval = 0.4f;
@@ -51,30 +50,22 @@ public class TracerEyes : MonoBehaviour
     public bool PlayerSeen { get; private set;}
     public bool PlatformSeen { get; private set; }
     public bool PlayerBehind { get; private set; }
-    
-    private bool UnderAttack;
     public bool PlayerForgotten { get; private set; }
-
-    private bool WallOnTopSeen;
-
     public Actions Actions { get; private set; }
-
-    private Health _playerHealth;
-    
     public Vector2 EstimatedJumpForce { get; private set; }
-    
     public bool PlayerInAttackRange { get; private set;}
     
+    private bool UnderAttack;
     public Transform PlayerTrans;
-
     private List<HitResults> hitResultList = new();
     
-    private Health _health;
+    private Health _playerHealth;
+    private Health _enemyHealth;
 
     private void Awake()
     {
-        _health = GetComponentInParent<Health>();
-        _health.OnHealthChanged += RegisterAttack;
+        _enemyHealth = GetComponentInParent<Health>();
+        _enemyHealth.OnHealthChanged += RegisterAttack;
 
         PlayerForgotten = true;
         multiMask = 1 << 6 | 1 << 8;
@@ -82,7 +73,7 @@ public class TracerEyes : MonoBehaviour
 
     private void OnDisable()
     {
-        _health.OnHealthChanged -= RegisterAttack;
+        _enemyHealth.OnHealthChanged -= RegisterAttack;
     }
 
     private void RegisterAttack(int currentHealth)
@@ -122,6 +113,7 @@ public class TracerEyes : MonoBehaviour
        Actions = Actions.None;
 
        hitResultList.Clear();
+       
        var inc = 0.4f;
 
        for (int i = 0; i < 5; i++)
@@ -289,6 +281,7 @@ public class TracerEyes : MonoBehaviour
                     case 0:
                         GroundSeen = false;
                         break;
+                    
                     case 1:
                         WallSeen = false;
                         PlayerSeen = false;
@@ -301,11 +294,6 @@ public class TracerEyes : MonoBehaviour
                     case 4:
                         PlayerBehind = false;
                         break;
-                    
-                    case 5:
-                        WallOnTopSeen = false;
-                        break;
-                    
                 }
                 break;
             
@@ -323,10 +311,6 @@ public class TracerEyes : MonoBehaviour
                     
                     case 2:
                         PlatformSeen = true;
-                        break;
-                    
-                    case 5:
-                        WallOnTopSeen = true;
                         break;
                 }
                 break;
