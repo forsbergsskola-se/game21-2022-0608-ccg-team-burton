@@ -60,7 +60,7 @@ namespace Entity
                 StartCoroutine(InvulnFrameTimer(_invulnerablilityTime));
 
                 if (CurrentHealth > 0){
-                    _animator.SetTrigger("TakeDmg");
+                    _animator.SetTrigger(Animator.StringToHash("TakeDmg"));
                 }
                 
             }
@@ -70,8 +70,8 @@ namespace Entity
             if (CurrentHealth <= 0)
             {
                 Debug.Log("Animtrigger");
-                _animator.SetTrigger("Dead");
-
+                _animator.SetTrigger(Animator.StringToHash("Dead"));
+                OnDeath();
             }
         }
         
