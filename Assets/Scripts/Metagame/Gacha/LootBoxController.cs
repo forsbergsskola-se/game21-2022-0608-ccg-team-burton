@@ -61,11 +61,11 @@ public class LootBoxController : MonoBehaviour
          var LootedItemSO = LootBoxSO.PickLootTable().PickItem(); //Scriptable object
          gainedItems.Add(LootedItemSO);
          
-          //TODO: SAVE LOOTEDITEMSO TO INVENTORY
+          //TODO: SAVE LOOTEDITEMSO TO INVENTORY HERE <3
       }
    }
 
-   public void CollectItems() // Call on button
+   public void CollectItems() // Call on collect button if we dont save above in open box
    {
 
    
@@ -73,7 +73,7 @@ public class LootBoxController : MonoBehaviour
       
    }
    
-   private void DisplayItem() // called by anim
+   private void DisplayItem() // called by anim event
    {
       int i = 0;
       _itemInfoUI.SetActive(true);
