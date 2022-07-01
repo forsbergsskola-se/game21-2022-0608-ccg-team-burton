@@ -22,7 +22,6 @@ public class LootBoxController : MonoBehaviour
  
    private Item item;
    public GameObject[] ItemUIGameobjects;
-   private SoundMananger _sound;
 
    // Since we are looping, we can use a list
    private List<InventoryItem> gainedItems = new();
@@ -30,9 +29,6 @@ public class LootBoxController : MonoBehaviour
    [SerializeField] private PickupSpawner[] _pickup;
    
    
-   void Awake(){
-      _sound = FindObjectOfType<SoundMananger>();
-   }
 
    private void Start()
    {
