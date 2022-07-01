@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 128
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -102,9 +102,462 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Rat_Idle_768_0
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 3374
+        width: 672
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c3c51049da4f8942bbf6d2db2b9975c
+      internalID: 1937089966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Idle_768_1
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 3374
+        width: 672
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efc2d644c662b5c4c86eb549bc3b870a
+      internalID: -1987647235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Idle_768_2
+      rect:
+        serializedVersion: 2
+        x: 1587
+        y: 3374
+        width: 672
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbb9683cd1ef2b745bb33c4595bbc81e
+      internalID: 2037256026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Idle_768_3
+      rect:
+        serializedVersion: 2
+        x: 2355
+        y: 3374
+        width: 672
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa0355a27c42e364a9d9ef20dcc7eec2
+      internalID: 1898884530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Idle_768_4
+      rect:
+        serializedVersion: 2
+        x: 3132
+        y: 3374
+        width: 672
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7dde914c56d91e94eb94208de85d5158
+      internalID: -1323171610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Idle_768_5
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 2606
+        width: 672
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b7616754b8d335468e57a28dd8f1132
+      internalID: 615376279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Idle_768_6
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 2606
+        width: 672
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30ce6b2d992c3a54589cb77d423016cd
+      internalID: 1240060131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Idle_768_7
+      rect:
+        serializedVersion: 2
+        x: 1588
+        y: 2606
+        width: 672
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a76bb14da3339f4a96fa3f78015a2e5
+      internalID: 486066684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Idle_768_8
+      rect:
+        serializedVersion: 2
+        x: 2356
+        y: 2606
+        width: 672
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f560355393d8ec94daa4a37e0db076f1
+      internalID: -807491373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Idle_768_9
+      rect:
+        serializedVersion: 2
+        x: 3123
+        y: 2606
+        width: 672
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c206d5fac92a4ac4cad11da8956d71ea
+      internalID: 625782341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Idle_768_10
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 1834
+        width: 672
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7183d77b2ea9a0541ace7f46406dd3b5
+      internalID: -1703691904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Idle_768_11
+      rect:
+        serializedVersion: 2
+        x: 822
+        y: 1834
+        width: 672
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1cd7a21e7b04f345bf41a9f3ce0a4a7
+      internalID: 558891733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Idle_768_12
+      rect:
+        serializedVersion: 2
+        x: 1586
+        y: 1834
+        width: 672
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8cebf67e1eb1c24dbaf23e08781036d
+      internalID: -1376185448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Idle_768_13
+      rect:
+        serializedVersion: 2
+        x: 2351
+        y: 1834
+        width: 672
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d93ce7fb349f234fbdcae673004f029
+      internalID: -1246287789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Idle_768_14
+      rect:
+        serializedVersion: 2
+        x: 3126
+        y: 1834
+        width: 672
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbec90b8d296b734db1966f3d29ef365
+      internalID: -331085230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Idle_768_15
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 1068
+        width: 672
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8e8946c6d686594ba55c12ed73dce4f
+      internalID: 861585039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Idle_768_16
+      rect:
+        serializedVersion: 2
+        x: 818
+        y: 1073
+        width: 672
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9e96f58d7072c143bd2ce9a70b4f161
+      internalID: 963033499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Idle_768_17
+      rect:
+        serializedVersion: 2
+        x: 1590
+        y: 1071
+        width: 672
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd9c315ce372e954f94a0ed49055872f
+      internalID: 828022904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Idle_768_18
+      rect:
+        serializedVersion: 2
+        x: 2358
+        y: 1071
+        width: 672
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0a85e89c6d84ea4581b252ee9b31b77
+      internalID: 770292527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Idle_768_19
+      rect:
+        serializedVersion: 2
+        x: 3126
+        y: 1078
+        width: 672
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c6abce0f83e02341acee80f70ed5e97
+      internalID: -964288026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Idle_768_20
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 307
+        width: 672
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdb031d0b2fe08a4abd3fbee2c2c08fa
+      internalID: -2130960264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -115,7 +568,28 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Rat_Idle_768_14: -331085230
+      Rat_Idle_768_9: 625782341
+      Rat_Idle_768_4: -1323171610
+      Rat_Idle_768_15: 861585039
+      Rat_Idle_768_20: -2130960264
+      Rat_Idle_768_2: 2037256026
+      Rat_Idle_768_11: 558891733
+      Rat_Idle_768_10: -1703691904
+      Rat_Idle_768_12: -1376185448
+      Rat_Idle_768_3: 1898884530
+      Rat_Idle_768_5: 615376279
+      Rat_Idle_768_8: -807491373
+      Rat_Idle_768_17: 828022904
+      Rat_Idle_768_18: 770292527
+      Rat_Idle_768_16: 963033499
+      Rat_Idle_768_1: -1987647235
+      Rat_Idle_768_19: -964288026
+      Rat_Idle_768_13: -1246287789
+      Rat_Idle_768_6: 1240060131
+      Rat_Idle_768_0: 1937089966
+      Rat_Idle_768_7: 486066684
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 
