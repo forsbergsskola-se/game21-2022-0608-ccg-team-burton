@@ -1,4 +1,4 @@
-namespace InventoryExample.Core
+namespace TeamBurtonCore.Core
 {
     public interface IAction {
         void Cancel();

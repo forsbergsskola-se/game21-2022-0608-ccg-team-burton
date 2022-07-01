@@ -1,11 +1,11 @@
-using InventoryExample.Movement;
+using TeamBurtonCore.Movement;
 using UnityEngine;
 using System;
 using UnityEngine.EventSystems;
 using UnityEngine.AI;
 using TeamBurton.Inventories;
 
-namespace InventoryExample.Control
+namespace TeamBurtonCore.Control
 {
     public class PlayerController : MonoBehaviour
     {

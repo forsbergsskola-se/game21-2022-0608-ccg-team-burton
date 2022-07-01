@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace InventoryExample.UI
+namespace TeamBurtonCore.UI
 {
     public class ShowHideUI : MonoBehaviour
     {
@@ -12,7 +12,7 @@ namespace InventoryExample.UI
         // Start is called before the first frame update
         void Start()
         {
-            uiContainer.SetActive(false);
+            uiContainer.SetActive(true);
         }
 
         // Update is called once per frame

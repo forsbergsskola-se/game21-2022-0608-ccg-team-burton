@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace InventoryExample.Core
+namespace TeamBurtonCore.Core
 {
     public class ActionScheduler : MonoBehaviour
     {

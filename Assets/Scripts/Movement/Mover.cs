@@ -1,9 +1,9 @@
-﻿using InventoryExample.Core;
+﻿using TeamBurtonCore.Core;
 using TeamBurton.Saving;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace InventoryExample.Movement
+namespace TeamBurtonCore.Movement
 {
     public class Mover : MonoBehaviour, IAction, ISaveable
     {

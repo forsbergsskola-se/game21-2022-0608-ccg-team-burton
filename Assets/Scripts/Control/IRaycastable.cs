@@ -1,4 +1,4 @@
-﻿namespace InventoryExample.Control
+﻿namespace TeamBurtonCore.Control
 {
     public interface IRaycastable
     {

@@ -1,8 +1,8 @@
 using UnityEngine;
 using TeamBurton.Inventories;
-using InventoryExample.Control;
+using TeamBurtonCore.Control;
 
-namespace InventoryExample.Control
+namespace TeamBurtonCore.Control
 {
     [RequireComponent(typeof(Pickup))]
     public class ClickablePickup : MonoBehaviour, IRaycastable

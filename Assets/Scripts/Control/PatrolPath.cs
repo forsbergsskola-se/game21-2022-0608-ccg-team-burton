@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace InventoryExample.Control
+namespace TeamBurtonCore.Control
 {
     public class PatrolPath : MonoBehaviour
     {

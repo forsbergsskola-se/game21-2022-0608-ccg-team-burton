@@ -2,7 +2,7 @@ using System.Collections;
 using TeamBurton.Saving;
 using UnityEngine;
 
-namespace InventoryExample.SceneManagement
+namespace TeamBurtonCore.SceneManagement
 {
     public class SavingWrapper : MonoBehaviour
     {
@@ -21,18 +21,7 @@ namespace InventoryExample.SceneManagement
         }
 
         private void Update() {
-            if (Input.GetKeyDown(saveKey))
-            {
-                Save();
-            }
-            if (Input.GetKeyDown(loadKey))
-            {
-                Load();
-            }
-            if (Input.GetKeyDown(deleteKey))
-            {
-                Delete();
-            }
+
         }
 
         public void Load()
