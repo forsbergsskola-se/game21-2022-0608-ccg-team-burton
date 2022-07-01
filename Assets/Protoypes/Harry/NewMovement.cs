@@ -18,7 +18,6 @@ namespace Protoypes.Harry
         [Header("IDLE")]
         public bool FacingRight;
 
-
         
         [Header("WALKING")] 
         public float Acceleration = 90;
@@ -40,17 +39,21 @@ namespace Protoypes.Harry
         public float _currentVerticalSpeed { get; private set; }
         
         
-        [Header("DOUBLE JUMP")]
-        public float DoubleJumpHeight = 15;
+        [Header("JUMP BUFFER")]
+        
+        
+        [Header("DOUBLE JUMPING")]
         public bool DoubleJumpAbilityActive;
         public bool CanDoubleJump;
+        public float DoubleJumpHeight;
+        
+        [Header("DOUBLE JUMP BUFFER")]
+        private int JumpCounter;
+        public float AirborneTime;
         public float DoubleJumpBuffer;
-        private float _doubleJumpCounter;
-        public int DoubleJumpInt;
 
 
-
-        [Header("BOUNCING")]
+            [Header("BOUNCING")]
         public float BounceHeight = 25;
         public float SuperBounceHeight = 40;
 
@@ -96,7 +99,7 @@ namespace Protoypes.Harry
             CalculateGravity();
             CheckForBouncing();
             CalculateJumping();
-            CalculateDoubleJump();
+            //CalculateDoubleJump();
             CalculateJumpApex();
             FallIfWallOrRoofHit();
             
@@ -151,12 +154,17 @@ namespace Protoypes.Harry
         {
             if (_isGrounded)
             {
+                CanDoubleJump = true;
+                JumpCounter = 0;
+                AirborneTime = 0f;
+
                 if (_currentVerticalSpeed < 0)
                     _currentVerticalSpeed = 0;
             }
 
             else
             {
+                AirborneTime += Time.deltaTime;
                 _currentVerticalSpeed -= FallSpeed * Time.fixedDeltaTime; // Fall
                 
                 if (_currentVerticalSpeed < FallClamp) // Clamp
@@ -180,50 +188,46 @@ namespace Protoypes.Harry
         private void CheckForBouncing()
         {
             if (_isBouncing)
-            {
                 _currentVerticalSpeed = BounceHeight;
-            }
 
             if (!_isSuperBouncing) return;
-            
             _currentVerticalSpeed = SuperBounceHeight;
         }
 
         
         
-        private void CalculateJumping() 
+        private void CalculateJumping()
         {
-            if (!_isGrounded) return;
-            if ((!_jumpDownCommand || !_isGrounded) && (!_jumpSpace || !_isGrounded)) return;
-            
-            _currentVerticalSpeed = JumpHeight;
+            if (_jumpDownCommand && _isGrounded || _jumpSpace && _isGrounded)
+            {
+                // calculate jump
+                _currentVerticalSpeed = JumpHeight;
+                JumpCounter++;
+            }
+            else
+                CalculateDoubleJump();
         }
 
 
 
         private void CalculateDoubleJump()
         {
+            // Check if double jump allowed
             if (!DoubleJumpAbilityActive) return;
+            if (JumpCounter > 2)
+                CanDoubleJump = false;
 
-            if (_isGrounded)
-                DoubleJumpInt = 1;
 
-            if (!_isGrounded && _doubleJumpCounter > DoubleJumpBuffer)
-            {
-                if (CanDoubleJump && DoubleJumpInt == 1)
-                    CanDoubleJump = true;
-
-                else CanDoubleJump = false;
-
-                if (_jumpSpace || _jumpDownCommand)
-                    DoubleJumpInt++;
-
-                if (CanDoubleJump)
-                    _currentVerticalSpeed += JumpHeight;
-            }
+            // Buffer time wait before can double jump
+            if (!(AirborneTime > DoubleJumpBuffer)) return;
+            if ((!CanDoubleJump || !_jumpDownCommand) && (!CanDoubleJump || !_jumpSpace)) return;
+                
+            // calculate double jump
+            _currentVerticalSpeed = DoubleJumpHeight;
+            JumpCounter++;
         }
-
         
+
         
         private void FallIfWallOrRoofHit()
         {
