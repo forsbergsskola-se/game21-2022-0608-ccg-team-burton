@@ -71,8 +71,14 @@ namespace Entity
             {
                 Debug.Log("Animtrigger");
                 _animator.SetTrigger(Animator.StringToHash("Dead"));
-                OnDeath();
+                StartCoroutine(StartDeath());
             }
+        }
+
+        private IEnumerator StartDeath()
+        {
+            yield return new WaitForSeconds(1.5f);
+            OnDeath();
         }
         
         private void OnDeath() //TODO: Move to own script?
@@ -91,7 +97,7 @@ namespace Entity
                 _itemCollector._coinCounter -= _itemCollector._coinCounter;
                 _itemCollector.UpdateCoinText(_itemCollector._coinCounter);
             }
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
         private IEnumerator InvulnFrameTimer(float invulnFrameTimer)
