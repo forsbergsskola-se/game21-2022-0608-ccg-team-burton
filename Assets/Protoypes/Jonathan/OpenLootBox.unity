@@ -297,7 +297,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1675575238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 1, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -414,7 +414,7 @@ PrefabInstance:
     - target: {fileID: 2578437769821243731, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2578437769821243731, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
         type: 3}
@@ -525,7 +525,7 @@ PrefabInstance:
     - target: {fileID: 3432007612819368856, guid: 2b24a900e88c8a249914c1c1fe8e4510,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3432007612819368856, guid: 2b24a900e88c8a249914c1c1fe8e4510,
         type: 3}
@@ -632,6 +632,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LootBoxUI
       objectReference: {fileID: 0}
+    - target: {fileID: 8731747406335818595, guid: 2b24a900e88c8a249914c1c1fe8e4510,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b24a900e88c8a249914c1c1fe8e4510, type: 3}
@@ -643,10 +648,30 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2543266220312297746, guid: 1ed1e2cdea434404884b3b7f5e190d19,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 20.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 2543266220312297746, guid: 1ed1e2cdea434404884b3b7f5e190d19,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 20.489998
+      objectReference: {fileID: 0}
+    - target: {fileID: 2543266220312297746, guid: 1ed1e2cdea434404884b3b7f5e190d19,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 20.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 2543266220312297746, guid: 1ed1e2cdea434404884b3b7f5e190d19,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 20.489998
+      objectReference: {fileID: 0}
     - target: {fileID: 2543266220312297747, guid: 1ed1e2cdea434404884b3b7f5e190d19,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2543266220312297747, guid: 1ed1e2cdea434404884b3b7f5e190d19,
         type: 3}
@@ -671,17 +696,17 @@ PrefabInstance:
     - target: {fileID: 2543266220312297747, guid: 1ed1e2cdea434404884b3b7f5e190d19,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2543266220312297747, guid: 1ed1e2cdea434404884b3b7f5e190d19,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2543266220312297747, guid: 1ed1e2cdea434404884b3b7f5e190d19,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2543266220312297747, guid: 1ed1e2cdea434404884b3b7f5e190d19,
         type: 3}
@@ -696,6 +721,22 @@ PrefabInstance:
     - target: {fileID: 2543266220312297747, guid: 1ed1e2cdea434404884b3b7f5e190d19,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2543266220312297756, guid: 1ed1e2cdea434404884b3b7f5e190d19,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 23587389, guid: 287196bdc8d880a4b8051d58a3662b4a,
+        type: 3}
+    - target: {fileID: 2543266220312297756, guid: 1ed1e2cdea434404884b3b7f5e190d19,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2543266220312297756, guid: 1ed1e2cdea434404884b3b7f5e190d19,
+        type: 3}
+      propertyPath: m_SortingLayerID
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2543266220312297757, guid: 1ed1e2cdea434404884b3b7f5e190d19,
