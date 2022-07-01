@@ -45,6 +45,7 @@ public class TracerEyes : MonoBehaviour
     private float traceInterval = 0.4f;
     private float timeSinceTrace;
 
+    
     public bool WallSeen { get; private set;}
     public bool GroundSeen { get; private set;}
     public bool PlayerSeen { get; private set;}
@@ -62,8 +63,11 @@ public class TracerEyes : MonoBehaviour
     private Health _playerHealth;
     private Health _enemyHealth;
 
+    private bool JumpReady;
+
     private void Awake()
     {
+        JumpReady = true;
         _enemyHealth = GetComponentInParent<Health>();
         _enemyHealth.OnHealthChanged += RegisterAttack;
 
@@ -168,7 +172,7 @@ public class TracerEyes : MonoBehaviour
         
         if (PlayerSeen)
         {
-            PlayerInAttackRange = hitResultList[1].theHit.distance < 1;
+            PlayerInAttackRange = hitResultList[1].theHit.distance < 0.6f;
             
             if (PlayerTrans == default)
             {
@@ -389,5 +393,12 @@ public class TracerEyes : MonoBehaviour
         Debug.DrawLine(point4,point3, Color.red, traceInterval);
         
         Debug.DrawLine(point1,  point2, Color.red, traceInterval);
+    }
+
+    private IEnumerator JumpInProgress()
+    {
+        JumpReady = false;
+        yield return new WaitForSeconds(2f);
+        JumpReady = true;
     }
 }
