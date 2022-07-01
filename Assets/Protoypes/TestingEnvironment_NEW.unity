@@ -12281,6 +12281,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Demo Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1144139567602091040, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1144139567602091070, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
         type: 3}
       propertyPath: m_RootOrder
@@ -12336,6 +12341,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2235276909187434609, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3205524570191263580, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
         type: 3}
       propertyPath: coinText
@@ -12375,6 +12385,11 @@ PrefabInstance:
         type: 3}
       propertyPath: DoubleJumpAbilityActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7745896864445978379, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7747099678071028065, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
         type: 3}
@@ -12557,6 +12572,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
+        type: 3}
+      propertyPath: MusicTrack.Path
+      value: event:/Music/MusicTrack2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
+        type: 3}
+      propertyPath: MusicTrack.Guid.Data1
+      value: -168852341
+      objectReference: {fileID: 0}
+    - target: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
+        type: 3}
+      propertyPath: MusicTrack.Guid.Data2
+      value: 1262825356
+      objectReference: {fileID: 0}
+    - target: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
+        type: 3}
+      propertyPath: MusicTrack.Guid.Data3
+      value: 2049451650
+      objectReference: {fileID: 0}
+    - target: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
+        type: 3}
+      propertyPath: MusicTrack.Guid.Data4
+      value: 350843332
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -30968,9 +31008,9 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 4
-      m_TileSpriteIndex: 3
+      m_TileSpriteIndex: 4
       m_TileMatrixIndex: 0
-      m_TileColorIndex: 1
+      m_TileColorIndex: 2
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741827
@@ -31373,10 +31413,10 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 1014614681}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 1014614681}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 038881c7b04d04fc4abedd999fd1ea81, type: 3}
   - m_RefCount: 2
@@ -31409,10 +31449,10 @@ Tilemap:
   m_TileColorArray:
   - m_RefCount: 682
     m_Data: {r: 1, g: 1, b: 1, a: 1}
+  - m_RefCount: 0
+    m_Data: {r: 1.33821e-40, g: 1.33821e-40, b: 1.33821e-40, a: 1.33821e-40}
   - m_RefCount: 1
     m_Data: {r: 0.76388407, g: 0.38093138, b: 0.46655738, a: 1}
-  - m_RefCount: 0
-    m_Data: {r: 3.9228e-41, g: 3.9228e-41, b: 3.9228e-41, a: 3.9228e-41}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
