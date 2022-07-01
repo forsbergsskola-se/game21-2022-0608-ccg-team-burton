@@ -1,4 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+using TreeEditor;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 using Vector2 = UnityEngine.Vector2;
@@ -144,15 +152,19 @@ public class Patrol : State_ML
             NextStateMl = new Pursue(EnemyVarsMl);
         }
 
+        else if (!EnemyVarsMl.tracerEyes.GroundSeen)
+        {
+           
+        }
+        
+        
         if (EnemyVarsMl.tracerEyes.Actions == Actions.TurnAround)
         {
-            Debug.Log("Time to turn around");
             TurnAround();    
         }
         
         if (EnemyVarsMl.tracerEyes.Actions == Actions.PlatformJump)
         {
-            Debug.Log("Platform jump action");
             Stage = EVENT.Exit;
             NextStateMl = new PlatformJump(EnemyVarsMl);
         }
@@ -275,7 +287,7 @@ public class Attack : State_ML
 
         if (attackDelay >= EnemyVarsMl.GetAttackInterval)
         {
-            EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("Enemy_Attack"));
+            EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("Enemy_Attack")); //Should I put attack animation here?
 
             if (EnemyVarsMl.GetEnemyType == EnemyType.Ranged)
             {
@@ -377,12 +389,18 @@ public class PlatformJump : State_ML
         body = EnemyVarsMl.enemyRef.GetComponent<Rigidbody2D>();
         Stage = EVENT.Enter;
     }
-    
+
+    public override void Enter()
+    {
+        base.Enter();
+        
+    }
+
     public override void Update()
     {
         if (!jumped)
         {
-            body.AddForce(EnemyVarsMl.tracerEyes.EstimatedJumpForce, ForceMode2D.Impulse);
+            body.AddForce(EnemyVarsMl.tracerEyes.EstimatedJumpForce * new Vector2(1f, 5.5f), ForceMode2D.Impulse);
             jumped = true;
         }
         

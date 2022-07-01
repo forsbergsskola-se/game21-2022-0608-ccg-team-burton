@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class PressStars : MonoBehaviour
+
 {
     private int _currentStarsNum = 0;
     public int levelIndex;
@@ -19,4 +21,5 @@ public class PressStars : MonoBehaviour
         
         // Debug.Log(PlayerPrefs.GetInt("Lv" + levelIndex, _starsNum ));
     }
+     
 }

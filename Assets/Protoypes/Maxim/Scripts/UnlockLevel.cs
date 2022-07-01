@@ -1,14 +1,21 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class UnlockLevel : MonoBehaviour
+
 {
     [SerializeField] public bool Unlocked;
     public Image LockImage;
     public Image[] Stars;
 
     public Sprite fullStar;
+    SavingWrapper wrapper;
 
+    private void Start()
+    {
+        wrapper = FindObjectOfType<SavingWrapper>();
+    }
     private void Update()
     {
         UpdateLevelImage(); 
@@ -24,6 +31,7 @@ public class UnlockLevel : MonoBehaviour
             Debug.Log("Popped off");
             
         }
+        wrapper.Save();
     }
     
     private void UpdateLevelImage()
@@ -35,6 +43,8 @@ public class UnlockLevel : MonoBehaviour
             {
                 Stars[i].enabled = false;
             }
+            //save stats
+           
         }
         else
         {
@@ -49,5 +59,7 @@ public class UnlockLevel : MonoBehaviour
                 Stars[i].gameObject.GetComponent<Image>().sprite = fullStar;
             }
         }
+        wrapper.Save();
     }
+    
 }

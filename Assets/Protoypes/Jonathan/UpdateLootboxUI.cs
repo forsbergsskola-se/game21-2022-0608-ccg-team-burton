@@ -8,24 +8,18 @@ using UnityEngine.UI;
 public class UpdateLootboxUI : MonoBehaviour
 {
     [SerializeField] private LootBoxController lootBoxController;
-    private void OnEnable() => lootBoxController.OnUpdateItemUI += SetUI;
+    private void OnEnable() => lootBoxController.OnUpdateItemUI += SetUIElement;
 
-    private void OnDisable()=> lootBoxController.OnUpdateItemUI -= SetUI;
+    private void OnDisable()=> lootBoxController.OnUpdateItemUI -= SetUIElement;
 
     // public Image[] itemSprite;
-    public TMP_Text ItemName;
-    public TMP_Text Rarity;
+    // public TMP_Text ItemName;
+    // public TMP_Text Rarity;
     
 
-    private void SetUI( GameObject itemObject, Item item)
+    private void SetUIElement( GameObject itemObject, InventoryItem item)
     {
-        if (item is Armor armor)
-        {
-           itemObject.GetComponent<Image>().sprite = armor.ItemSprite;
- 
-            
-        }
-
+           itemObject.GetComponent<Image>().sprite = item.GetIcon();
     }
 
     

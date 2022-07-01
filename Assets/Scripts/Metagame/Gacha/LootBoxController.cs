@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class LootBoxController : MonoBehaviour
 {
@@ -17,17 +18,17 @@ public class LootBoxController : MonoBehaviour
    [SerializeField] private Animator _animator;
    [SerializeField] private GameObject _itemInfoUI;
 
-   public Action<GameObject,Item> OnUpdateItemUI;
+   public Action<GameObject,InventoryItem> OnUpdateItemUI;
  
    private Item item;
-   public GameObject[] ItemElements;
+   public GameObject[] ItemUIGameobjects;
    private SoundMananger _sound;
 
    // Since we are looping, we can use a list
-   private List<Item> gainedItems = new();
+   private List<InventoryItem> gainedItems = new();
+
+   [SerializeField] private PickupSpawner[] _pickup;
    
-   public FMODUnity.EventReference OpenLootBoxSoundFile;
-   private FMOD.Studio.EventInstance _openLootboxSound;
    
    void Awake(){
       _sound = FindObjectOfType<SoundMananger>();
@@ -35,9 +36,7 @@ public class LootBoxController : MonoBehaviour
 
    private void Start()
    {
-      _openLootboxSound = FMODUnity.RuntimeManager.CreateInstance(OpenLootBoxSoundFile);
-
-      foreach (var itemElement in ItemElements)
+      foreach (var itemElement in ItemUIGameobjects)
       {
          itemElement.SetActive(false);
       }
@@ -46,12 +45,11 @@ public class LootBoxController : MonoBehaviour
 
    
 
-   private void OnMouseDown()
+   private void OnMouseUp()
    {
       Debug.Log("Opening loot box");
       OpenBox();
       _animator.SetBool("OpenLootBox", true);
-      _sound.PlaySound(_openLootboxSound);
       
    }
 
@@ -60,32 +58,33 @@ public class LootBoxController : MonoBehaviour
    {
       for (int i = 0; i < LootBoxSO.NumberOfItemsToSpawn; i++)
       {
-         var itemSo = LootBoxSO.PickLootTable().PickItem();
-        
-         Debug.Log($"Saving: {itemSo.ID},{itemSo.RaritySo.ID},{itemSo.GemSo.ID}");
-          
-         //Hook in item generation to receive stats 
-         //TODO: Get item with scaled stats here - these will be presented on the lootboxUI when opening item.
-         item = ItemFactory.CreateItemFromInventory(itemSo, itemSo.RaritySo, itemSo.GemSo);
-         gainedItems.Add(item);
+         var LootedItemSO = LootBoxSO.PickLootTable().PickItem(); //Scriptable object
+         gainedItems.Add(LootedItemSO);
          
+          //TODO: SAVE LOOTEDITEMSO TO INVENTORY
       }
    }
 
+   public void CollectItems() // Call on button
+   {
+
+   
+      
+      
+   }
    
    private void DisplayItem() // called by anim
    {
       int i = 0;
       _itemInfoUI.SetActive(true);
-
+   
       foreach (var item in gainedItems)
       {
-         ItemElements[i].SetActive(true);
-         OnUpdateItemUI?.Invoke(ItemElements[i],item);
-
+         ItemUIGameobjects[i].SetActive(true);
+         OnUpdateItemUI?.Invoke(ItemUIGameobjects[i],item);
+   
          i++;
       }
    }
-
-
+ 
 }
