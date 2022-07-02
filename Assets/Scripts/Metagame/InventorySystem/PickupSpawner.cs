@@ -8,7 +8,7 @@
 public class PickupSpawner : MonoBehaviour, I_Saveable
 {
 
-    [SerializeField] InventoryItem item = null;
+    public InventoryItem item = null; //TODO: CHANGED HERE!
     [SerializeField] int number = 1;
     private void Awake()
     {

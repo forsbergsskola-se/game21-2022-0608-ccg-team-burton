@@ -26,9 +26,9 @@ public class LootBoxController : MonoBehaviour
    // Since we are looping, we can use a list
    private List<InventoryItem> gainedItems = new();
 
-   [SerializeField] private PickupSpawner[] _pickup;
-   
-   
+   // [SerializeField] private PickupSpawner[] _pickup;
+
+   public GameObject DroppedItem;   
 
    private void Start()
    {
@@ -56,17 +56,20 @@ public class LootBoxController : MonoBehaviour
       {
          var LootedItemSO = LootBoxSO.PickLootTable().PickItem(); //Scriptable object
          gainedItems.Add(LootedItemSO);
+         SetUpItem(LootedItemSO);
          
           //TODO: SAVE LOOTEDITEMSO TO INVENTORY HERE <3
+          Instantiate(DroppedItem, Vector2.zero, Quaternion.identity); // When instantiated, it Autocollects to inventory
       }
    }
 
-   public void CollectItems() // Call on collect button if we dont save above in open box
+   public void SetUpItem(InventoryItem item) // Call on collect button if we dont save above in open box
    {
 
+      DroppedItem.GetComponent<PickupSpawner>().item = item;
+      Debug.Log(item.name);
    
-      
-      
+
    }
    
    private void DisplayItem() // called by anim event
