@@ -68,6 +68,12 @@ public class SoundMananger : MonoBehaviour
         sound.stop(STOP_MODE.IMMEDIATE);
     }
 
+    public void SoldierWalk()
+    {
+        Debug.Log("SoldierWalk");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/Enemy/SoldierWalk");
+    }
+
 
     public void BossWhipAttack()
     {
