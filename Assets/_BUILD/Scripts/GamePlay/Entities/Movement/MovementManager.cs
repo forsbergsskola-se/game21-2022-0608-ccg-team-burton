@@ -109,8 +109,8 @@ namespace GamePlay.Entities.Movement
         public object CaptureState()
         {
             Dictionary<string, object> data = new Dictionary<string, object>();
-            data["position"] = new SerializableVector(transform.position);
-            data["rotation"] = new SerializableVector(transform.eulerAngles);
+            data["position"] = new SerializableVector3(transform.position);
+            data["rotation"] = new SerializableVector3(transform.eulerAngles);
             return data;
         }
 
@@ -118,8 +118,8 @@ namespace GamePlay.Entities.Movement
         {
             Dictionary<string , object> data = new Dictionary<string , object>();
             
-            transform.position = ((SerializableVector)data["position"]).ToVector();
-            transform.eulerAngles = ((SerializableVector)data["rotation"]).ToVector();
+            transform.position = ((SerializableVector3)data["position"]).ToVector();
+            transform.eulerAngles = ((SerializableVector3)data["rotation"]).ToVector();
         }
     }
 }

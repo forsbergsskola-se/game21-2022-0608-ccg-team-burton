@@ -7,7 +7,7 @@ namespace Entity
     /// <summary>
     /// Health class, which enables things to be damaged or healed.
     /// </summary>
-    public class Health : MonoBehaviour, IDamageable, I_Saveable
+    public class Health : MonoBehaviour, IDamageable
     {
         
                 
