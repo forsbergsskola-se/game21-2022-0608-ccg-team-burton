@@ -28,9 +28,10 @@ public class LootBoxController : MonoBehaviour
 
    // [SerializeField] private PickupSpawner[] _pickup;
 
-   private bool _boxOpenedCurrentSession = false;
+   private bool _boxOpenedCurrentSession;
    
-   public GameObject DroppedItem;   
+   public GameObject DroppedItem;
+
 
    private void Start()
    {
@@ -64,11 +65,12 @@ public class LootBoxController : MonoBehaviour
       {
          var LootedItemSO = LootBoxSO.PickLootTable().PickItem(); //Scriptable object
          gainedItems.Add(LootedItemSO);
+         
          SetUpItemSO(LootedItemSO);
          
           //TODO: SAVE LOOTEDITEMSO TO INVENTORY HERE <3
           var item = Instantiate(DroppedItem, Vector2.zero, Quaternion.identity); // When instantiated, it Autocollects to inventory
-          // item.GetComponentInChildren<Pickup>().GetComponentInChildren<SpriteRenderer>().sprite = LootedItemSO.GetIcon();
+    
 
       }
    }
@@ -85,7 +87,7 @@ public class LootBoxController : MonoBehaviour
    {
       int i = 0;
       _itemInfoUI.SetActive(true);
-   
+
       foreach (var item in gainedItems)
       {
          ItemUIGameobjects[i].SetActive(true);
