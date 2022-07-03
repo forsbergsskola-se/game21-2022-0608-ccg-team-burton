@@ -87,6 +87,6 @@ public class SavingSystem : MonoBehaviour
 
     private string GetPathFromSaveFile(string saveFile)
     {
-        return Path.Combine(Application.persistentDataPath, saveFile + ".sav");
+        return Path.Combine(Application.streamingAssetsPath, saveFile + ".sav");
     }
 }
