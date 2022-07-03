@@ -78,7 +78,7 @@ public class LootBoxController : MonoBehaviour
    public void SetUpItemSO(InventoryItem item) // Call on collect button if we dont save above in open box
    {
 
-      DroppedItem.GetComponent<PickupSpawner>().item = item;
+      DroppedItem.GetComponent<PickupSpawner>().Item = item;
       Debug.Log(item.name);
 
    }
