@@ -423,6 +423,7 @@ GameObject:
   - component: {fileID: 296882642}
   - component: {fileID: 296882641}
   - component: {fileID: 296882644}
+  - component: {fileID: 296882645}
   m_Layer: 5
   m_Name: Back Btn
   m_TagString: Untagged
@@ -558,6 +559,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneName: UI_WorldMap_Prototype
+  _sceneManager: {fileID: 296882645}
+--- !u!114 &296882645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296882639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c51a09cce3be109498741ef6b2ab50fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _index: 2
 --- !u!1 &719064781
 GameObject:
   m_ObjectHideFlags: 0
@@ -1996,6 +2011,11 @@ PrefabInstance:
       propertyPath: _sceneName
       value: OpenLootBox
       objectReference: {fileID: 0}
+    - target: {fileID: 3501134911170938277, guid: 85f9ccfb876f7854ba7ad0ea99ccd525,
+        type: 3}
+      propertyPath: _sceneManager
+      value: 
+      objectReference: {fileID: 3501134911170938278}
     - target: {fileID: 4059960931959746117, guid: 85f9ccfb876f7854ba7ad0ea99ccd525,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -2294,9 +2314,28 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 3501134911170938274}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 3501134911170938277}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4449f2a88bd9099438bc646180ad120f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3501134911170938277 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4694688804580005517, guid: 85f9ccfb876f7854ba7ad0ea99ccd525,
+    type: 3}
+  m_PrefabInstance: {fileID: 3501134911170938274}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3501134911170938278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3501134911170938277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c51a09cce3be109498741ef6b2ab50fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _index: 4
