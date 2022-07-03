@@ -12,21 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c1b0f2ee071c2b49a35b61c3c81f8ef, type: 3}
   m_Name: CommonLootBox
   m_EditorClassIdentifier: 
-  TotalProbabilityWeight: 100
+  TotalProbabilityWeight: 75
   LootTables:
   - ProbabilityWeight: 75
-    ProbabilityPercent: 75
+    ProbabilityPercent: 100
     ProbabilityRangeFrom: 0
     ProbabilityRangeTo: 75
     itemTableSo: {fileID: 11400000, guid: 1fc4c9b2f497d01428418a66df31e1c1, type: 2}
-  - ProbabilityWeight: 20
-    ProbabilityPercent: 20
-    ProbabilityRangeFrom: 75
-    ProbabilityRangeTo: 95
-    itemTableSo: {fileID: 11400000, guid: d2a216eabc177f141a4062f9e6cc4395, type: 2}
-  - ProbabilityWeight: 5
-    ProbabilityPercent: 5
-    ProbabilityRangeFrom: 95
-    ProbabilityRangeTo: 100
-    itemTableSo: {fileID: 11400000, guid: 954518d81aad9414ea0d9c708923f0f8, type: 2}
   NumberOfItemsToSpawn: 5
