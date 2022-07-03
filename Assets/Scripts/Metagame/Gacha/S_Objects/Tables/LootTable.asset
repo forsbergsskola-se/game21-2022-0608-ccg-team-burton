@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b64321b44f705a740bd1c48dd404912b, type: 3}
+  m_Name: LootTable
+  m_EditorClassIdentifier: 
+  TotalProbabilityWeight: 100
+  ItemsList:
+  - ProbabilityWeight: 25
+    ProbabilityPercent: 25
+    ProbabilityRangeFrom: 0
+    ProbabilityRangeTo: 25
+    inventoryItem: {fileID: 11400000, guid: 5dfaa23d70f48654799eeba550922c7b, type: 2}
+  - ProbabilityWeight: 25
+    ProbabilityPercent: 25
+    ProbabilityRangeFrom: 25
+    ProbabilityRangeTo: 50
+    inventoryItem: {fileID: 11400000, guid: 231f90cca38b9be46bbe26de72414ced, type: 2}
+  - ProbabilityWeight: 25
+    ProbabilityPercent: 25
+    ProbabilityRangeFrom: 50
+    ProbabilityRangeTo: 75
+    inventoryItem: {fileID: 11400000, guid: 78a2edaef72d4df4d9107ae51269052e, type: 2}
+  - ProbabilityWeight: 12.5
+    ProbabilityPercent: 12.5
+    ProbabilityRangeFrom: 75
+    ProbabilityRangeTo: 87.5
+    inventoryItem: {fileID: 11400000, guid: a0574b7ec21ca2240b1496afef1274e6, type: 2}
+  - ProbabilityWeight: 12.5
+    ProbabilityPercent: 12.5
+    ProbabilityRangeFrom: 87.5
+    ProbabilityRangeTo: 100
+    inventoryItem: {fileID: 11400000, guid: 3fc6d7a599ab4694b97da5829283f8e4, type: 2}
