@@ -9,7 +9,7 @@ public class SavingWrapper : MonoBehaviour
 
     private void Awake()
     {
-        StartCoroutine(LoadLastScene());    
+        //StartCoroutine(LoadLastScene());    
     }
     IEnumerator LoadLastScene()
     {
@@ -19,7 +19,14 @@ public class SavingWrapper : MonoBehaviour
 
     void Update()
     {
-        //Call Load or Save when needed
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Save();
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Load();
+        }
     }
 
     public void Load()
