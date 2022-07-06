@@ -236,6 +236,12 @@ public class SoundMananger : MonoBehaviour
         Debug.Log("OpenLootCrate2");
         FMODUnity.RuntimeManager.PlayOneShot("event:/Meta Game/Lootbox/OpenLootCrate2");
     }
+
+    public void OpenCrate3()
+    {
+        Debug.Log("OpenLootCrate3");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Meta Game/Lootbox/OpenLootCrate3");
+    }
 }  
 
 
