@@ -4,7 +4,7 @@ using Meta.Gacha;
 using UnityEngine;
 
 
-public class LootBoxController : MonoBehaviour, IDataPersistance
+public class LootBoxController : MonoBehaviour
 {
    
    
@@ -65,13 +65,18 @@ public class LootBoxController : MonoBehaviour, IDataPersistance
 
          itemID = LootedItemSO.GetItemID();
          Debug.Log($"Saving item ID: {itemID}, with name: {LootedItemSO.GetDisplayName()}");
-         
+
+   
+         //Saving item
+            PlayerPrefs.SetInt(itemID, PlayerPrefs.GetInt(itemID)+1);
+
+            Debug.Log($"item: {itemID}, {LootedItemSO.name}"+PlayerPrefs.GetInt(itemID));
          
           /////////////////////////////////
-         SetUpItemSO(LootedItemSO);
+         // SetUpItemSO(LootedItemSO);
          
-          //TODO: SAVE LOOTEDITEMSO TO INVENTORY HERE <3
-          var item = Instantiate(DroppedItem, Vector2.zero, Quaternion.identity); // When instantiated, it Autocollects to inventory
+          //TODO: SAVE LOOTEDITEMSO TO INVENTORY HERE
+          // var item = Instantiate(DroppedItem, Vector2.zero, Quaternion.identity); // When instantiated, it Autocollects to inventory
     ////////////////////////////////////////
 
       }
@@ -99,13 +104,5 @@ public class LootBoxController : MonoBehaviour, IDataPersistance
       }
    }
 
-   public void LoadData(GameData data)
-   {
-      throw new NotImplementedException();
-   }
-
-   public void SaveData(GameData data)
-   {
-      data.SavedItem.itemID = this.itemID;
-   }
+   
 }

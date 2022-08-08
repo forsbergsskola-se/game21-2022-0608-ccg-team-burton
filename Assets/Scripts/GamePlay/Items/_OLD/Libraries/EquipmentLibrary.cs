@@ -11,24 +11,24 @@ using UnityEngine;
 public class EquipmentLibrary : MonoBehaviour
 {
 
-    public  ItemLibrarySO ItemLibrary;
+    // public  ItemLibrarySO ItemLibrary;
     // public  ItemRarityLibrarySO RarityLibrary;
-    // public  GemLibrarySO GemLibrary;
+    public  GemLibrarySO GemLibrary;
 
    
 
 
-    public ItemSO GetItemFromLibrary(string itemSoID)
-    {
-        //TODO: If dictionary would be nice
-        foreach (var itemSo in ItemLibrary.ItemsLibrary.Where(itemSo => itemSo.ID == itemSoID))
-        {
-            return itemSo;
-        }
-
-        Debug.Log("Warning: No item was found with that ID in library. Returning Null");
-        return null;
-    }
+    // public ItemSO GetItemFromLibrary(string itemSoID)
+    // {
+    //     //TODO: If dictionary would be nice
+    //     foreach (var itemSo in ItemLibrary.ItemsLibrary.Where(itemSo => itemSo.ID == itemSoID))
+    //     {
+    //         return itemSo;
+    //     }
+    //
+    //     Debug.Log("Warning: No item was found with that ID in library. Returning Null");
+    //     return null;
+    // }
 
     // public ItemRaritySO GetRarityFromLibrary(string rarityID)
     // {
@@ -42,17 +42,17 @@ public class EquipmentLibrary : MonoBehaviour
     //     return null; 
     // }
 
-    // public GemSO GetGemFromLibrary(string gemID)
-    // {
-    //     //TODO: If dictionary would be nice
-    //     foreach (var gemSo in GemLibrary.GemLibrary.Where(gemSo => gemSo.ID == gemID))
-    //     {
-    //         return gemSo;
-    //     }
-    //
-    //     Debug.Log("Warning: No gem was found with that ID in library. Returning Null");
-    //     return null; 
-    // }
+    public ActionItem GetGemFromLibrary(string gemID)
+    {
+        //TODO: If dictionary would be nice
+        foreach (var gemSo in GemLibrary.GemLibrary.Where(gemSo => gemSo.GetItemID() == gemID))
+        {
+            return gemSo;
+        }
+    
+        Debug.Log("Warning: No gem was found with that ID in library. Returning Null");
+        return null; 
+    }
     
     
     

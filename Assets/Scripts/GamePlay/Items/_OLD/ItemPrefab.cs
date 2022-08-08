@@ -4,7 +4,7 @@
 //
 // public class ItemPrefab : MonoBehaviour
 // {
-//     public EquipmentLibrary EquipmentLibrary;
+//     // public EquipmentLibrary EquipmentLibrary;
 //     //Values are set from whatever you equip
 //     string itemID;
 //     // string RarityID;

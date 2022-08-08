@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Gem Library", menuName = "Libraries/Gem Library")]
 public class GemLibrarySO : ScriptableObject
 {
-    public List<GemSO> GemLibrary;
+    public List<ActionItem> GemLibrary;
 }
