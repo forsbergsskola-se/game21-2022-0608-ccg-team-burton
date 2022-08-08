@@ -10,6 +10,9 @@ namespace Metagame
         [SerializeField] private bool _testMode = true;
         [SerializeField] private string _adTargetSystemId;
         //public string myPlacementId = "rewardedVideo";
+        [SerializeField] private string _androidReward = "Rewarded_Android";
+        [SerializeField] private string _androidInterstitial = "Interstitial_Android";
+        
 
 
         private void Awake()
@@ -26,13 +29,13 @@ namespace Metagame
         public void PlayAd()
         {
             Debug.Log("Play interstitial Ad");
-            Advertisement.Show("Interstitial_Android");
+            Advertisement.Show(_androidInterstitial);
         }
 
         public void PlayRewardedAd()
         {
             Debug.Log("Play rewarded Ad");
-            Advertisement.Show("Rewarded_Android");
+            Advertisement.Show(_androidReward);
         }
 
         
@@ -106,7 +109,10 @@ namespace Metagame
 
         public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
         {
-            throw new System.NotImplementedException();
+            if (placementId == _androidReward && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
+            {
+                Debug.Log("Reward Player for watching full reward video");
+            }
         }
     }
 }
