@@ -8,7 +8,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 
-public class BUSetSlot : MonoBehaviour
+public class BUSetSlot : MonoBehaviour, IPointerClickHandler
 {
 
     private Image spriteRenderer;
@@ -24,6 +24,7 @@ public class BUSetSlot : MonoBehaviour
     public void SetSlot(ActionItem item)
     {
         spriteRenderer.sprite = item.GetIcon();
+        name = item.GetDisplayName();
         amount.SetText(PlayerPrefs.GetInt(item.GetItemID()).ToString());
     }
 
@@ -33,6 +34,12 @@ public class BUSetSlot : MonoBehaviour
     private void OnMouseDown()
     {
         Debug.Log("MOUSE DOWN TRIGGERED!");
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Debug.Log($"Pointer on: {name}!");
+
     }
 }
 
