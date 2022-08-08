@@ -26,13 +26,13 @@ namespace Metagame
         public void PlayAd()
         {
             Debug.Log("Play interstitial Ad");
-            Advertisement.Show("Interstitial Android");
+            Advertisement.Show("Interstitial_Android");
         }
 
         public void PlayRewardedAd()
         {
             Debug.Log("Play rewarded Ad");
-            Advertisement.Show("Rewarded Android");
+            Advertisement.Show("Rewarded_Android");
         }
 
         
