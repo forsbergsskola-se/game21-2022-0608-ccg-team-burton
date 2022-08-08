@@ -3,7 +3,7 @@ using UnityEngine.Advertisements;
 
 namespace Metagame
 {
-    public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
+    public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
     {
         private const string _androidID = "4876959";
         private const string _iOSId = "4876958";
@@ -37,6 +37,10 @@ namespace Metagame
 
         
         
+        /// <summary>
+        /// Initialization Logic
+        /// </summary>
+        
         public void OnInitializationComplete()
         { 
             Debug.Log("Unity Ads initialization complete.");
@@ -47,6 +51,62 @@ namespace Metagame
         public void OnInitializationFailed(UnityAdsInitializationError error, string message)
         {
             Debug.Log($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
+        }
+
+        
+        
+        
+        /// <summary>
+        /// Ads OnLoad Logic
+        /// </summary>
+        
+        public void OnUnityAdsAdLoaded(string placementId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        
+        
+        public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        
+        
+        
+        
+        /// <summary>
+        /// Ads OnShow Logic
+        /// </summary>
+        
+        public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        
+        
+        
+        public void OnUnityAdsShowStart(string placementId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        
+        
+        
+        public void OnUnityAdsShowClick(string placementId)
+        {
+            throw new System.NotImplementedException();
+        }
+        
+        
+        
+
+        public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
