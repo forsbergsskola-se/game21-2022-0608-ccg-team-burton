@@ -14,15 +14,16 @@ namespace Metagame
 
         [Header("AD IDs")]
         public bool ShowBanner;
+
+        private const string _iOS = "iOS";
+        private const string _android = "Android"; 
+        
         [SerializeField] private bool _testMode = true;
         [SerializeField] private string _placementID;
-        //public string myPlacementId = "rewardedVideo";
-        [SerializeField] private string _androidReward = "Rewarded_Android";
-        [SerializeField] private string _androidInterstitial = "Interstitial_Android";
-        [SerializeField] private string _androidBanner = "Banner_Android";
-        /*private string _iOSReward = "Rewarded_iOS";
-        private string _iOSInterstitial = "Interstitial_iOS";
-        private string _iOSBanner = "Banner_iOS";*/
+        
+        [SerializeField] private string _rewardID = "Rewarded_";
+        [SerializeField] private string _interstitialID = "Interstitial_";
+        [SerializeField] private string _bannerID = "Banner_";
         #endregion
 
         #region Buttons;
@@ -42,11 +43,26 @@ namespace Metagame
                 ? _iOSId
                 : _androidID;
 
-            Advertisement.Initialize(_androidID, _testMode, this);
+            if (_placementID == _iOSId)
+                AssignAdIds(_iOS);
+            else
+                AssignAdIds(_android);
+            
+            Advertisement.Initialize(_placementID, _testMode, this);
+            
             if (ShowBanner)
                 ShowBannerAd();
             
             AssignButtons();
+        }
+
+        
+
+        private void AssignAdIds(string platform)
+        {
+            _rewardID += platform;
+            _interstitialID += platform;
+            _bannerID += platform;
         }
 
         
@@ -71,20 +87,20 @@ namespace Metagame
         private void PlayAd()
         {
             Debug.Log("Play interstitial Ad");
-            Advertisement.Show(_androidInterstitial);
+            Advertisement.Show(_interstitialID);
         }
 
         private void PlayRewardedAd()
         {
             Debug.Log("Play rewarded Ad");
-            Advertisement.Show(_androidReward);
+            Advertisement.Show(_rewardID);
         }
 
 
         private void ShowBannerAd()
         {
             Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
-            Advertisement.Banner.Show(_androidBanner);
+            Advertisement.Banner.Show(_bannerID);
         }
 
 
@@ -169,10 +185,10 @@ namespace Metagame
 
         public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
         {
-            if (placementId == _androidReward && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
+            if (placementId == _rewardID && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
                 Debug.Log("Reward Player for watching full reward video");
 
-            else if (placementId == _androidReward && showCompletionState == UnityAdsShowCompletionState.SKIPPED)
+            else if (placementId == _rewardID && showCompletionState == UnityAdsShowCompletionState.SKIPPED)
                 Debug.Log("Reward Player for skipping reward video");
         }
     }
