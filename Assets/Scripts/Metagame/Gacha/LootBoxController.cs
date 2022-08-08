@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class LootBoxController : MonoBehaviour
+public class LootBoxController : MonoBehaviour, IDataPersistance
 {
    
    
@@ -66,6 +66,14 @@ public class LootBoxController : MonoBehaviour
          var LootedItemSO = LootBoxSO.PickLootTable().PickItem(); //Scriptable object
          gainedItems.Add(LootedItemSO);
          
+         
+         
+         
+         
+         
+         
+         
+         
          SetUpItemSO(LootedItemSO);
          
           //TODO: SAVE LOOTEDITEMSO TO INVENTORY HERE <3
@@ -96,5 +104,14 @@ public class LootBoxController : MonoBehaviour
          i++;
       }
    }
- 
+
+   public void LoadData(GameData data)
+   {
+      throw new NotImplementedException();
+   }
+
+   public void SaveData(GameData data)
+   {
+      throw new NotImplementedException();
+   }
 }
