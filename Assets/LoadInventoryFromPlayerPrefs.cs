@@ -4,16 +4,16 @@ using UnityEngine;
 public class LoadInventoryFromPlayerPrefs : MonoBehaviour
 {
     [SerializeField]
-    private ItemLibrary ItemLibrary;
+    private ItemLibrary itemLibrary;
 
     [SerializeField]
-    private GameObject InventorySlot;
+    private GameObject inventorySlot;
 
     [SerializeField]
     private GameObject[] inventorySlots;
 
     [SerializeField]
-    private GameObject UI;
+    private GameObject ui;
 
     public List<GameObject> currentItems;
     private void Start()
@@ -21,28 +21,24 @@ public class LoadInventoryFromPlayerPrefs : MonoBehaviour
       UpdateInventory();
     }
 
-    private void DestroyCurrentItemsInInventory()
-    {
-        foreach (var currentItem in currentItems)
-        {
-            Destroy(currentItem);
-        }
-    }
-    
     //Yes this is inefficient. But it is million times better than no system at all...
     public void UpdateInventory()
     {
-        DestroyCurrentItemsInInventory();
+        if (currentItems.Count > 0)
+        {
+            DestroyCurrentItemsInInventory();
+            
+        }
         var index = 0;
         
-        foreach (var item in ItemLibrary.ItemLibrarySos.Library)
+        foreach (var item in itemLibrary.ItemLibrarySos.Library)
         {
             // Debug.Log($"{item.GetDisplayName()} in inventory with count: {PlayerPrefs.GetInt(item.GetItemID())}");
 
             if (PlayerPrefs.GetInt(item.GetItemID()) <= 0) continue;
-            var itemInSlot = Instantiate(InventorySlot, inventorySlots[index].transform.position , Quaternion.identity);
+            var itemInSlot = Instantiate(inventorySlot, inventorySlots[index].transform.position , Quaternion.identity);
             currentItems.Add(itemInSlot);
-            itemInSlot.transform.parent = UI.transform;
+            itemInSlot.transform.parent = ui.transform;
             itemInSlot.GetComponent<BUSetSlot>().SetSlot(item);
                 
             index++;
@@ -50,4 +46,13 @@ public class LoadInventoryFromPlayerPrefs : MonoBehaviour
 
         }
     }
+    private void DestroyCurrentItemsInInventory()
+    {
+        foreach (var currentItem in currentItems)
+        {
+            Destroy(currentItem);
+        }
+    }
+
+    
 }
