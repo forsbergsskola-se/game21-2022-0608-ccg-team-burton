@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Advertisements;
 
+
 namespace Metagame
 {
     public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
@@ -8,7 +9,7 @@ namespace Metagame
         private const string _androidID = "4876959";
         private const string _iOSId = "4876958";
         [SerializeField] private bool _testMode = true;
-        [SerializeField] private string _adTargetSystemId;
+        [SerializeField] private string _placementID;
         //public string myPlacementId = "rewardedVideo";
         [SerializeField] private string _androidReward = "Rewarded_Android";
         [SerializeField] private string _androidInterstitial = "Interstitial_Android";
@@ -18,18 +19,21 @@ namespace Metagame
         private void Awake()
         {
             // Get the Ad Unit ID for the current platform:
-            _adTargetSystemId = (Application.platform == RuntimePlatform.IPhonePlayer)
+            _placementID = (Application.platform == RuntimePlatform.IPhonePlayer)
                 ? _iOSId
                 : _androidID;
 
             Advertisement.Initialize(_androidID, _testMode, this);
+            Advertisement.debugMode = true;
         }
+        
 
 
         public void PlayAd()
         {
             Debug.Log("Play interstitial Ad");
             Advertisement.Show(_androidInterstitial);
+            Advertisement.
         }
 
         public void PlayRewardedAd()
@@ -65,14 +69,14 @@ namespace Metagame
         
         public void OnUnityAdsAdLoaded(string placementId)
         {
-            throw new System.NotImplementedException();
+            Debug.Log("Ads are ready");
         }
 
         
         
         public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
         {
-            throw new System.NotImplementedException();
+            Debug.Log("ERROR: " + message);
         }
 
         
@@ -85,7 +89,7 @@ namespace Metagame
         
         public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
         {
-            throw new System.NotImplementedException();
+            Debug.Log("ERROR: " + message);
         }
 
         
@@ -93,7 +97,7 @@ namespace Metagame
         
         public void OnUnityAdsShowStart(string placementId)
         {
-            throw new System.NotImplementedException();
+            Debug.Log("Video Started");
         }
 
         
@@ -110,9 +114,10 @@ namespace Metagame
         public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
         {
             if (placementId == _androidReward && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
-            {
                 Debug.Log("Reward Player for watching full reward video");
-            }
+
+            else if (placementId == _androidReward && showCompletionState == UnityAdsShowCompletionState.SKIPPED)
+                Debug.Log("Reward Player for skipping reward video");
         }
     }
 }
