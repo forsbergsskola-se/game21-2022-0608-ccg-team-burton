@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Advertisements;
-
+using UnityEngine.UI;
 
 namespace Metagame
 {
@@ -9,16 +9,29 @@ namespace Metagame
     {
         private const string _androidID = "4876959";
         private const string _iOSId = "4876958";
-        public bool ShowBannerAd;
+
+        #region AdIDs;
+
+        [Header("AD IDs")]
+        public bool ShowBanner;
         [SerializeField] private bool _testMode = true;
         [SerializeField] private string _placementID;
         //public string myPlacementId = "rewardedVideo";
         [SerializeField] private string _androidReward = "Rewarded_Android";
         [SerializeField] private string _androidInterstitial = "Interstitial_Android";
         [SerializeField] private string _androidBanner = "Banner_Android";
+        #endregion
+
+        #region Buttons;
         
+        [Header("Ad Buttons")]
+        public Button ShowInterstitialAdButton;
+        public Button ShowRewardAdButton;
+        public Button ShowBannerAdButton;
+        public Button HideBannerAdButton;
+        #endregion
 
-
+        
         private void Awake()
         {
             // Get the Ad Unit ID for the current platform:
@@ -27,41 +40,59 @@ namespace Metagame
                 : _androidID;
 
             Advertisement.Initialize(_androidID, _testMode, this);
-            Advertisement.debugMode = true;
-            if (ShowBannerAd)
-                ShowBanner();
+            if (ShowBanner)
+                ShowBannerAd();
+            
+            AssignButtons();
         }
 
         
 
-        public void PlayAd()
+        private void AssignButtons()
+        {
+            ShowInterstitialAdButton.onClick.AddListener(PlayAd);
+            ShowInterstitialAdButton.interactable = true;
+            
+            ShowRewardAdButton.onClick.AddListener(PlayRewardedAd);
+            ShowRewardAdButton.interactable = true;
+            
+            ShowBannerAdButton.onClick.AddListener(ShowBannerAd);
+            ShowBannerAdButton.interactable = true;
+            
+            HideBannerAdButton.onClick.AddListener(HideBannerAd);
+            HideBannerAdButton.interactable = true;
+        }
+
+        
+
+        private void PlayAd()
         {
             Debug.Log("Play interstitial Ad");
             Advertisement.Show(_androidInterstitial);
         }
 
-        public void PlayRewardedAd()
+        private void PlayRewardedAd()
         {
             Debug.Log("Play rewarded Ad");
             Advertisement.Show(_androidReward);
         }
 
 
-        public void ShowBanner()
+        private void ShowBannerAd()
         {
             Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
             Advertisement.Banner.Show(_androidBanner);
         }
 
 
-        public void HideBanner() => Advertisement.Banner.Hide();
+        private void HideBannerAd() => Advertisement.Banner.Hide();
 
         
         
-        IEnumerator RepeatShowBanner()
+        private IEnumerator RepeatShowBanner()
         {
             yield return new WaitForSeconds(1);
-            ShowBanner();
+            ShowBannerAd();
         }
         
         
