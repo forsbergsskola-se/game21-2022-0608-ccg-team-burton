@@ -9,6 +9,8 @@ namespace Metagame
         private const string _iOSId = "4876958";
         [SerializeField] private bool _testMode = true;
         [SerializeField] private string _adTargetSystemId;
+        public string myPlacementId = "rewardedVideo";
+
 
         private void Awake()
         {
@@ -17,7 +19,13 @@ namespace Metagame
                 ? _iOSId
                 : _androidID;
 
-            Advertisement.Initialize(_adTargetSystemId, _testMode, this);
+            Advertisement.Initialize(_androidID, _testMode, this);
+        }
+
+
+        public void PlayAd()
+        {
+            Advertisement.Show("video");
         }
 
         
