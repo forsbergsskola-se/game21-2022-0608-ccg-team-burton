@@ -13,6 +13,7 @@ public class GameData
    //Default values, e.g if save not found --> start new game.
    public GameData()
    {
+      Debug.Log($"Creating new item with id: {SavedItem.itemID}");
       this.SavedItem = new SavedItem();
       
    }
@@ -22,5 +23,5 @@ public class GameData
 public class SavedItem
 {
    //TODO: This will be used to search sprite library in inventory scene or smth
-   public int SpriteID;
+   public string itemID ="";
 }

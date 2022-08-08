@@ -1,13 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Meta.Gacha;
-using Mono.Cecil;
-using Newtonsoft.Json;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
+
 
 public class LootBoxController : MonoBehaviour, IDataPersistance
 {
@@ -32,6 +27,7 @@ public class LootBoxController : MonoBehaviour, IDataPersistance
    
    public GameObject DroppedItem;
 
+   private string itemID;
 
    private void Start()
    {
@@ -57,7 +53,7 @@ public class LootBoxController : MonoBehaviour, IDataPersistance
       
       
    }
-
+   
    
    public void OpenBox()
    {
@@ -65,20 +61,18 @@ public class LootBoxController : MonoBehaviour, IDataPersistance
       {
          var LootedItemSO = LootBoxSO.PickLootTable().PickItem(); //Scriptable object
          gainedItems.Add(LootedItemSO);
+
+
+         itemID = LootedItemSO.GetItemID();
+         Debug.Log($"Saving item ID: {itemID}, with name: {LootedItemSO.GetDisplayName()}");
          
          
-         
-         
-         
-         
-         
-         
-         
+          /////////////////////////////////
          SetUpItemSO(LootedItemSO);
          
           //TODO: SAVE LOOTEDITEMSO TO INVENTORY HERE <3
           var item = Instantiate(DroppedItem, Vector2.zero, Quaternion.identity); // When instantiated, it Autocollects to inventory
-    
+    ////////////////////////////////////////
 
       }
    }
@@ -112,6 +106,6 @@ public class LootBoxController : MonoBehaviour, IDataPersistance
 
    public void SaveData(GameData data)
    {
-      throw new NotImplementedException();
+      data.SavedItem.itemID = this.itemID;
    }
 }

@@ -68,7 +68,7 @@ public class Inventory : MonoBehaviour, I_Saveable
 
         slots[i].item = item;
         slots[i].number += number;
-        print(slots[i].number);
+        // print(slots[i].number);
         if (inventoryUpdated != null)
         {
             inventoryUpdated();
