@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [Flags]
@@ -45,7 +46,7 @@ public class LevelGrid : MonoBehaviour
     private Vector2 _max;
     private int _layerMask;
 
-    private float _traceTime = 1f;
+    private float _traceTime = 100f;
 
     private List<RaycastHit2D> _hitList = new();
 
@@ -68,11 +69,50 @@ public class LevelGrid : MonoBehaviour
         {
             for (var j = 0; j < numberCubes.x; j++)
             {
-                ScanABox(new Vector2(i,j), true);
-                ScanABox(new Vector2(i,j), false);
+                var cube = _gridList[i][j];
+                ScanABox(new Vector2(i,j), new Vector2(-1,-1), new Vector2(0,1));
+                CheckUnder(cube);
             }
         }
     }
+
+    private void CheckTop(CubeFacts cube)
+    {
+        
+    }
+    
+    private void CheckUnder(CubeFacts cube)
+    {
+        var hitCount = 0;
+        var missCount = 0;
+        
+
+        foreach (var h in _hitList)
+        {
+            if (h)
+            {
+                hitCount++;
+            }
+        }
+
+        if (hitCount == _hitList.Count)
+        {
+            cube.pointsList.Add(new PointsOfInterest()
+            {
+                location = cube.location,
+                pointType = LevelElements.TwoWayPass
+            });
+        }
+        else
+        {
+            cube.pointsList.Add(new PointsOfInterest()
+            {
+                location = cube.location,
+                pointType = LevelElements.Gap
+            });
+        }
+    }
+    
     private bool CheckIfLookingAtTarget(Transform enemyTrans, Vector3 destination)
     {
         var dirFromAtoB = (enemyTrans.position - destination).normalized;
@@ -103,43 +143,30 @@ public class LevelGrid : MonoBehaviour
     
     
     
-    private void ScanABox(Vector2 index, Vector2 startDir, Vector2 move)
+    private void ScanABox(Vector2 index, Vector2 startDir, Vector2 traceDir)
     {
         _hitList.Clear();
         var cube = _gridList[(int) index.x][(int) index.y];
-        var basePos = cube.location;
-        var traceDir = new Vector2();
+  
         var numberTraces = 15;
         var increment = cubeSize.x / numberTraces;
-        var start = startDir * new Vector2(cubeSize.x / 2, cubeSize.y / 2);
-
-        if (upOrDown)
-        {
-            traceDir += new Vector2(0, 1);
-            basePos += new Vector2(-cubeSize.x / 2, -cubeSize.y / 2);
-        }
-        else
-        {
-            traceDir -= new Vector2(0, 1);
-            basePos += new Vector2(-cubeSize.x / 2, cubeSize.y / 2);
-        }
-
+        var start = cube.location + startDir * new Vector2(cubeSize.x / 2, cubeSize.y / 2);
+        
         for (var i = 0; i < numberTraces; i++)
         {
-            var hit = Physics2D.Raycast(basePos, traceDir, cubeSize.y, _layerMask);
+            var hit = Physics2D.Raycast(start, traceDir, cubeSize.y, _layerMask);
             _hitList.Add(hit);
             if (hit)
             {
-                Debug.DrawLine(basePos, hit.point, Color.green, _traceTime);
+                Debug.DrawLine(start, hit.point, Color.green, _traceTime);
             }
             else
             {
-                Debug.DrawLine(basePos, basePos + traceDir *cubeSize.y, Color.red, _traceTime);
+                Debug.DrawLine(start, start + traceDir *cubeSize.y, Color.red, _traceTime);
             }
             
-            basePos += new Vector2(increment, 0);
+            start += new Vector2(increment, 0);
         }
-        
     }
 
     private void AnalyzeHits()
@@ -203,11 +230,6 @@ public class LevelGrid : MonoBehaviour
 
                 if (storePoint)
                 {
-                    cube.pointsList.Add(new PointsOfInterest()
-                    {
-                        location = hitLocation,
-                        pointType = pointType
-                    });
                 }
             }
           
@@ -281,6 +303,10 @@ public class LevelGrid : MonoBehaviour
                     else if (p.pointType.HasFlag(LevelElements.TwoWayPass))
                     {
                         Gizmos.color = Color.green;
+                    }
+                    else if (p.pointType.HasFlag(LevelElements.Gap))
+                    {
+                        Gizmos.color = Color.red;
                     }
 
                     else
