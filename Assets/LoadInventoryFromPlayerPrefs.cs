@@ -16,9 +16,10 @@ public class LoadInventoryFromPlayerPrefs : MonoBehaviour
                 Debug.Log($"{item.GetDisplayName()} in inventory with count: {PlayerPrefs.GetInt(item.GetItemID())}");
                 if (PlayerPrefs.GetInt(item.GetItemID()) > 0)
                 {
-                    var slot = Instantiate(InventorySlot, Vector3.zero + new Vector3(i * 5, j*-5, 0),
+                    var slot = Instantiate(InventorySlot, Vector3.zero + new Vector3(i * 50, j*-50, 0),
                         Quaternion.identity);
                     slot.transform.parent = transform;
+                    slot.GetComponent<BUSetSlot>().SetSlot(item);
                     i++;
                     if (i > 1)
                     {
