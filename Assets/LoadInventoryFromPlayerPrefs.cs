@@ -21,7 +21,7 @@ public class LoadInventoryFromPlayerPrefs : MonoBehaviour
         
         foreach (var item in ItemLibrary.ItemLibrarySos.Library)
         {
-                Debug.Log($"{item.GetDisplayName()} in inventory with count: {PlayerPrefs.GetInt(item.GetItemID())}");
+                // Debug.Log($"{item.GetDisplayName()} in inventory with count: {PlayerPrefs.GetInt(item.GetItemID())}");
 
                 if (PlayerPrefs.GetInt(item.GetItemID()) <= 0) continue;
                 var slot = Instantiate(InventorySlot, inventorySlots[index].transform.position , Quaternion.identity);

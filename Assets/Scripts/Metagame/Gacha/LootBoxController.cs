@@ -39,8 +39,6 @@ public class LootBoxController : MonoBehaviour
       _itemInfoUI.SetActive(false);
    }
 
-   
-
    private void OnMouseUp()
    {
       if (!_boxOpenedCurrentSession)

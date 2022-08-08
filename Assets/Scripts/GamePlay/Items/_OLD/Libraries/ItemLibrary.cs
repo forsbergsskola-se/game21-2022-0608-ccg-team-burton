@@ -6,15 +6,15 @@ public class ItemLibrary : MonoBehaviour
 {
     public  LibrarySO ItemLibrarySos;
     
-    public ActionItem GetGemFromLibrary(string gemID)
-    {
-        //TODO: If dictionary would be nice
-        foreach (var gemSo in ItemLibrarySos.Library.Where(gemSo => gemSo.GetItemID() == gemID))
-        {
-            return gemSo;
-        }
-    
-        Debug.Log("Warning: No gem was found with that ID in library. Returning Null");
-        return null; 
-    }
+    // public ActionItem GetGemFromLibrary(string gemID)
+    // {
+    //     //TODO: If dictionary would be nice
+    //     foreach (var gemSo in ItemLibrarySos.Library.Where(gemSo => gemSo.GetItemID() == gemID))
+    //     {
+    //         return gemSo;
+    //     }
+    //
+    //     Debug.Log("Warning: No gem was found with that ID in library. Returning Null");
+    //     return null; 
+    // }
 }
