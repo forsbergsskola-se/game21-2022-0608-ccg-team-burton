@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LoadInventoryFromPlayerPrefs : MonoBehaviour
@@ -13,27 +14,39 @@ public class LoadInventoryFromPlayerPrefs : MonoBehaviour
 
     [SerializeField]
     private GameObject UI;
+
+    public List<GameObject> currentItems;
     private void Start()
     {
-        int i = 0;
-        int j = 0;
-        int index = 0;
+      UpdateInventory();
+    }
+
+    private void DestroyCurrentItemsInInventory()
+    {
+        foreach (var currentItem in currentItems)
+        {
+            Destroy(currentItem);
+        }
+    }
+    
+    //Yes this is inefficient. But it is million times better than no system at all...
+    public void UpdateInventory()
+    {
+        DestroyCurrentItemsInInventory();
+        var index = 0;
         
         foreach (var item in ItemLibrary.ItemLibrarySos.Library)
         {
-                // Debug.Log($"{item.GetDisplayName()} in inventory with count: {PlayerPrefs.GetInt(item.GetItemID())}");
+            // Debug.Log($"{item.GetDisplayName()} in inventory with count: {PlayerPrefs.GetInt(item.GetItemID())}");
 
-                if (PlayerPrefs.GetInt(item.GetItemID()) <= 0) continue;
-                var slot = Instantiate(InventorySlot, inventorySlots[index].transform.position , Quaternion.identity);
-                    
-                slot.transform.parent = UI.transform;
-                slot.GetComponent<BUSetSlot>().SetSlot(item);
+            if (PlayerPrefs.GetInt(item.GetItemID()) <= 0) continue;
+            var itemInSlot = Instantiate(InventorySlot, inventorySlots[index].transform.position , Quaternion.identity);
+            currentItems.Add(itemInSlot);
+            itemInSlot.transform.parent = UI.transform;
+            itemInSlot.GetComponent<BUSetSlot>().SetSlot(item);
                 
-                index++;
-                i++;
-                if (i <= 1) continue;
-                i = 0;
-                j++;
+            index++;
+
 
         }
     }

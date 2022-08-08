@@ -413,12 +413,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1366435909 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3760054208502085794, guid: 17a79eb4b08abb44fb34d3fd24039688,
+    type: 3}
+  m_PrefabInstance: {fileID: 3760054209158841079}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1366435911 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3760054208502085792, guid: 17a79eb4b08abb44fb34d3fd24039688,
     type: 3}
   m_PrefabInstance: {fileID: 3760054209158841079}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1366435912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366435909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &1495322439
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,6 +886,11 @@ PrefabInstance:
       propertyPath: m_RenderMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3760054208502085793, guid: 17a79eb4b08abb44fb34d3fd24039688,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3760054208502085794, guid: 17a79eb4b08abb44fb34d3fd24039688,
         type: 3}
       propertyPath: m_Name
@@ -1017,6 +1045,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3676017915770118716, guid: 4c9909d36decd904ebebcc9a3ff2bf63,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3676017915770118717, guid: 4c9909d36decd904ebebcc9a3ff2bf63,
         type: 3}
