@@ -26,4 +26,9 @@ public class BUSetSlot : MonoBehaviour
         spriteRenderer.sprite = item.GetIcon();
         amount.SetText(PlayerPrefs.GetInt(item.GetItemID()).ToString()); 
     }
+
+    private void OnMouseDown()
+    {
+        Debug.Log($"Clicked on: {this.name}");
+    }
 }

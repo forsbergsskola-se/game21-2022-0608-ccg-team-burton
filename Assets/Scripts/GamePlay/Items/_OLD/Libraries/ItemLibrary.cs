@@ -9,7 +9,7 @@ public class ItemLibrary : MonoBehaviour
     public ActionItem GetGemFromLibrary(string gemID)
     {
         //TODO: If dictionary would be nice
-        foreach (var gemSo in ItemLibrarySos.GemLibrary.Where(gemSo => gemSo.GetItemID() == gemID))
+        foreach (var gemSo in ItemLibrarySos.Library.Where(gemSo => gemSo.GetItemID() == gemID))
         {
             return gemSo;
         }
