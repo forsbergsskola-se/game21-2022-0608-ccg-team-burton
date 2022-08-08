@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Gem Library", menuName = "Libraries/Gem Library")]
-public class GemLibrarySO : ScriptableObject
+public class LibrarySO : ScriptableObject
 {
     public List<ActionItem> GemLibrary;
 }

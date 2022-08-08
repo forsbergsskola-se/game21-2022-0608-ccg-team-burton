@@ -54,7 +54,6 @@ public class LootBoxController : MonoBehaviour
       
    }
    
-   
    public void OpenBox()
    {
       for (int i = 0; i < LootBoxSO.NumberOfItemsToSpawn; i++)
@@ -66,29 +65,12 @@ public class LootBoxController : MonoBehaviour
          itemID = LootedItemSO.GetItemID();
          Debug.Log($"Saving item ID: {itemID}, with name: {LootedItemSO.GetDisplayName()}");
 
-   
          //Saving item
-            PlayerPrefs.SetInt(itemID, PlayerPrefs.GetInt(itemID)+1);
-
-
-         
-          /////////////////////////////////
-         // SetUpItemSO(LootedItemSO);
-         
-          //TODO: SAVE LOOTEDITEMSO TO INVENTORY HERE
-          // var item = Instantiate(DroppedItem, Vector2.zero, Quaternion.identity); // When instantiated, it Autocollects to inventory
-    ////////////////////////////////////////
+         PlayerPrefs.SetInt(itemID, PlayerPrefs.GetInt(itemID)+1);
 
       }
    }
 
-   public void SetUpItemSO(InventoryItem item) // Call on collect button if we dont save above in open box
-   {
-
-      DroppedItem.GetComponent<PickupSpawner>().Item = item;
-      Debug.Log(item.name);
-
-   }
    
    private void DisplayItem() // called by anim event
    {
