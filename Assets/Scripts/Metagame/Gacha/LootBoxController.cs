@@ -70,7 +70,7 @@ public class LootBoxController : MonoBehaviour
          //Saving item
             PlayerPrefs.SetInt(itemID, PlayerPrefs.GetInt(itemID)+1);
 
-            Debug.Log($"item: {itemID}, {LootedItemSO.name}"+PlayerPrefs.GetInt(itemID));
+
          
           /////////////////////////////////
          // SetUpItemSO(LootedItemSO);

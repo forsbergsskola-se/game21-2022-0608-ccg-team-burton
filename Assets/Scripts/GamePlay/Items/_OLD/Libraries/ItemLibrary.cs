@@ -8,7 +8,7 @@ using UnityEngine;
 
 
 //Dont want library in scene
-public class EquipmentLibrary : MonoBehaviour
+public class ItemLibrary : MonoBehaviour
 {
 
     // public  ItemLibrarySO ItemLibrary;
