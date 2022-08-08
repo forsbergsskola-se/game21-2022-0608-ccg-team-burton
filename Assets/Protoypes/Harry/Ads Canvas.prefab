@@ -402,19 +402,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8416864656818238236}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8416864657275709949}
-        m_TargetAssemblyTypeName: Metagame.AdsInitializer, Assembly-CSharp
-        m_MethodName: PlayRewardedAd
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &8416864656847583427
 GameObject:
   m_ObjectHideFlags: 0
@@ -1085,8 +1073,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e65a98a34279445a9ea133ecbd8be8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowBanner: 0
   _testMode: 1
-  _adTargetSystemId: 
+  _placementID: 
+  _androidReward: Rewarded_Android
+  _androidInterstitial: Interstitial_Android
+  _androidBanner: Banner_Android
+  ShowInterstitialAdButton: {fileID: 8416864657661146898}
+  ShowRewardAdButton: {fileID: 8416864656818238227}
+  ShowBannerAdButton: {fileID: 8416864658500756958}
+  HideBannerAdButton: {fileID: 8416864656876150573}
 --- !u!1 &8416864657569878529
 GameObject:
   m_ObjectHideFlags: 0
@@ -1423,19 +1419,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8416864657661146899}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8416864657275709949}
-        m_TargetAssemblyTypeName: Metagame.AdsInitializer, Assembly-CSharp
-        m_MethodName: PlayAd
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &8416864657717590715
 GameObject:
   m_ObjectHideFlags: 0
