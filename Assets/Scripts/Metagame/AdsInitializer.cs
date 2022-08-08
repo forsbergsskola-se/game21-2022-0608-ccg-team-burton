@@ -8,11 +8,13 @@ namespace Metagame
     {
         private const string _androidID = "4876959";
         private const string _iOSId = "4876958";
+        public bool ShowBannerAd;
         [SerializeField] private bool _testMode = true;
         [SerializeField] private string _placementID;
         //public string myPlacementId = "rewardedVideo";
         [SerializeField] private string _androidReward = "Rewarded_Android";
         [SerializeField] private string _androidInterstitial = "Interstitial_Android";
+        [SerializeField] private string _androidBanner = "Banner_Android";
         
 
 
@@ -25,6 +27,8 @@ namespace Metagame
 
             Advertisement.Initialize(_androidID, _testMode, this);
             Advertisement.debugMode = true;
+            if (ShowBannerAd)
+                ShowBanner();
         }
         
 
@@ -33,13 +37,19 @@ namespace Metagame
         {
             Debug.Log("Play interstitial Ad");
             Advertisement.Show(_androidInterstitial);
-            Advertisement.
         }
 
         public void PlayRewardedAd()
         {
             Debug.Log("Play rewarded Ad");
             Advertisement.Show(_androidReward);
+        }
+
+
+        public void ShowBanner()
+        {
+            Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
+            Advertisement.Banner.Show(_androidBanner);
         }
 
         
