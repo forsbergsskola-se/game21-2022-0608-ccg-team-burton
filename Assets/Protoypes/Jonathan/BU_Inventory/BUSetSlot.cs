@@ -14,11 +14,13 @@ public class BUSetSlot : MonoBehaviour, IPointerClickHandler
     private Image spriteRenderer;
     [SerializeField] private TMP_Text amount;
     private ActionItem item;
+    private LoadInventoryFromPlayerPrefs inventoryHandler;
 
 
     private void Awake()
     {
         spriteRenderer = GetComponent<Image>();
+        inventoryHandler = FindObjectOfType<LoadInventoryFromPlayerPrefs>();
     }
 
     public void SetSlot(ActionItem item)
@@ -36,10 +38,7 @@ public class BUSetSlot : MonoBehaviour, IPointerClickHandler
         amount.SetText(PlayerPrefs.GetInt(item.GetItemID()).ToString()); //TODO: Move to update UI event if time
         if (PlayerPrefs.GetInt(item.GetItemID()) <= 0)
         {
-            
-            FindObjectOfType<LoadInventoryFromPlayerPrefs>().UpdateInventory();
-        
-
+            inventoryHandler.UpdateInventory();
         }
 
     }

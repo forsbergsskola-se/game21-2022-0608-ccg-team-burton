@@ -27,23 +27,17 @@ public class LoadInventoryFromPlayerPrefs : MonoBehaviour
         if (currentItems.Count > 0)
         {
             DestroyCurrentItemsInInventory();
-            
         }
         var index = 0;
         
         foreach (var item in itemLibrary.ItemLibrarySos.Library)
         {
-            // Debug.Log($"{item.GetDisplayName()} in inventory with count: {PlayerPrefs.GetInt(item.GetItemID())}");
-
             if (PlayerPrefs.GetInt(item.GetItemID()) <= 0) continue;
             var itemInSlot = Instantiate(inventorySlot, inventorySlots[index].transform.position , Quaternion.identity);
             currentItems.Add(itemInSlot);
             itemInSlot.transform.parent = ui.transform;
             itemInSlot.GetComponent<BUSetSlot>().SetSlot(item);
-                
             index++;
-
-
         }
     }
     private void DestroyCurrentItemsInInventory()
@@ -53,6 +47,4 @@ public class LoadInventoryFromPlayerPrefs : MonoBehaviour
             Destroy(currentItem);
         }
     }
-
-    
 }
