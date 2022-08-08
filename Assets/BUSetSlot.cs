@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class BUSetSlot : MonoBehaviour
 {
 
-    private SpriteRenderer spriteRenderer;
+    private Image spriteRenderer;
     [SerializeField]
     private TMP_Text amount;
 
@@ -15,7 +17,7 @@ public class BUSetSlot : MonoBehaviour
     
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<Image>();
         Debug.Log(spriteRenderer);
     }
 

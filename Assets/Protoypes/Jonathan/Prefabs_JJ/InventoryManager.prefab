@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3351317406823470594}
   - component: {fileID: 3351317406823470593}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: InventoryManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3351317406823470593
 MonoBehaviour:
@@ -45,3 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemLibrary: {fileID: 0}
+  InventorySlot: {fileID: 6548483289138556154, guid: 29e1c68855e78ad418e43a1028fca253,
+    type: 3}
