@@ -9,7 +9,10 @@ public enum LevelElements
     None = 0,
     Platform = 1,
     Ground = 2,
-    Edge = 4
+    Edge = 4,
+    Jump = 8,
+    TwoWayPass = 16,
+    Gap = 32
 }
 
 [Serializable]
@@ -38,9 +41,11 @@ public class LevelGrid : MonoBehaviour
     [SerializeField] private LevelMemory memory;
     
     private List<List<CubeFacts>> _gridList = new();
-    private Vector3 _min;
-    private Vector3 _max;
+    private Vector2 _min;
+    private Vector2 _max;
     private int _layerMask;
+
+    private float _traceTime = 1f;
 
     private List<RaycastHit2D> _hitList = new();
 
@@ -52,11 +57,53 @@ public class LevelGrid : MonoBehaviour
 
     void Start()
     {
-        ScanABox(new Vector2(0,0), true);
-        ScanABox(new Vector2(0,0), false);
+        ScanAll();
+    }
+
+    private void ScanAll()
+    {
+        if (memory.fullyScanned) return;
+        
+        for (var i = 0; i < numberCubes.y; i++)
+        {
+            for (var j = 0; j < numberCubes.x; j++)
+            {
+                ScanABox(new Vector2(i,j), true);
+                ScanABox(new Vector2(i,j), false);
+            }
+        }
+    }
+    private bool CheckIfLookingAtTarget(Transform enemyTrans, Vector3 destination)
+    {
+        var dirFromAtoB = (enemyTrans.position - destination).normalized;
+        var dotProd = Vector2.Dot(dirFromAtoB, enemyTrans.right);
+        return dotProd > 0.9f;
+    }
+
+    public void GetOptions(Vector2 point)
+    {
+        var current = GetSquareFromPoint(point);
+
+        foreach (var p in current.pointsList)
+        {
+            
+        }
     }
     
-    private void ScanABox(Vector2 index, bool upOrDown)
+    public CubeFacts GetSquareFromPoint(Vector2 thePoint)
+    {
+        var mag = thePoint - _min;
+        var indexX = (mag.x - (mag.x % cubeSize.x)) / cubeSize.x;
+        var indexY = (mag.y - (mag.y % cubeSize.y)) / cubeSize.y;
+
+        var square = _gridList[(int)indexY][(int)indexX];
+
+        return square;
+    }
+    
+    
+    
+    private void ScanABox(Vector2 index, Vector2 startDir, Vector2 move)
     {
         _hitList.Clear();
         var cube = _gridList[(int) index.x][(int) index.y];
@@ -64,6 +111,7 @@ public class LevelGrid : MonoBehaviour
         var traceDir = new Vector2();
         var numberTraces = 15;
         var increment = cubeSize.x / numberTraces;
+        var start = startDir * new Vector2(cubeSize.x / 2, cubeSize.y / 2);
 
         if (upOrDown)
         {
@@ -82,19 +130,21 @@ public class LevelGrid : MonoBehaviour
             _hitList.Add(hit);
             if (hit)
             {
-                Debug.DrawLine(basePos, hit.point, Color.green, 90);
+                Debug.DrawLine(basePos, hit.point, Color.green, _traceTime);
             }
             else
             {
-                Debug.DrawLine(basePos, basePos + traceDir *cubeSize.y, Color.red, 90);
+                Debug.DrawLine(basePos, basePos + traceDir *cubeSize.y, Color.red, _traceTime);
             }
             
             basePos += new Vector2(increment, 0);
         }
         
-        var previousHit = false;
-        
-        
+    }
+
+    private void AnalyzeHits()
+    {
+           var numberHits = 0;
         for (var i = 0; i < _hitList.Count; i++)
         {
             var hitLocation = _hitList[i].point;
@@ -107,12 +157,24 @@ public class LevelGrid : MonoBehaviour
                 var past = _hitList[i - 1];
                 var current = _hitList[i];
                 var future = _hitList[i + 1];
+
+                if (current) numberHits++;
                 
-                if (!past && current)
+                if (!past || !future)
                 {
-                    hitLocation = _hitList[i].point;
-                    pointType = LevelElements.Ground | LevelElements.Edge;
-                    storePoint = true;
+                    if (!past && current)
+                    {
+                        hitLocation = _hitList[i].point;
+                        pointType = LevelElements.Ground | LevelElements.Edge;
+                        storePoint = true;
+                    }
+                    
+                    if (!future && current)
+                    {
+                        hitLocation = _hitList[i].point;
+                        pointType = LevelElements.Ground | LevelElements.Edge;
+                        storePoint = true;
+                    }
                 }
 
                 else if (past && current)
@@ -120,6 +182,18 @@ public class LevelGrid : MonoBehaviour
                     if (past.point.y < current.point.y)
                     {
                         if (Vector2.Distance(past.point, current.point) > 1)
+                        {
+                            pointType = LevelElements.Platform | LevelElements.Edge;
+                            storePoint = true;
+                        }
+                    }
+                }
+                
+                else if (current && future)
+                {
+                    if (current.point.y > future.point.y)
+                    {
+                        if (Vector2.Distance(current.point, future.point) > 1)
                         {
                             pointType = LevelElements.Platform | LevelElements.Edge;
                             storePoint = true;
@@ -138,12 +212,10 @@ public class LevelGrid : MonoBehaviour
             }
           
         }
-    } 
+    }
     
     private void SetNewList()
     {
-        _gridList = new List<List<CubeFacts>>((int)numberCubes.y);
-
         for (var i = 0; i < numberCubes.y; i++)
         {
             var newList = new List<CubeFacts>((int)numberCubes.x);
@@ -205,6 +277,10 @@ public class LevelGrid : MonoBehaviour
                     else if(p.pointType.HasFlag(LevelElements.Platform))
                     {
                         Gizmos.color = Color.magenta;
+                    }
+                    else if (p.pointType.HasFlag(LevelElements.TwoWayPass))
+                    {
+                        Gizmos.color = Color.green;
                     }
 
                     else
