@@ -20,6 +20,9 @@ namespace Metagame
         [SerializeField] private string _androidReward = "Rewarded_Android";
         [SerializeField] private string _androidInterstitial = "Interstitial_Android";
         [SerializeField] private string _androidBanner = "Banner_Android";
+        /*private string _iOSReward = "Rewarded_iOS";
+        private string _iOSInterstitial = "Interstitial_iOS";
+        private string _iOSBanner = "Banner_iOS";*/
         #endregion
 
         #region Buttons;
