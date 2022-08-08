@@ -16,7 +16,7 @@ public class NodeView : Node
     public Port input;
     public Port output;
     
-    public NodeView(BaseNode node) : base("Assets/Pesonal_ML/Graph/NodeView.uxml")
+    public NodeView(BaseNode node) : base("Assets/Personal_ML/Graph/NodeView.uxml")
     {
         Node = node;
         title = node.name;
