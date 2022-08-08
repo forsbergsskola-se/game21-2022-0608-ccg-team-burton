@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
@@ -30,8 +31,8 @@ namespace Metagame
             if (ShowBannerAd)
                 ShowBanner();
         }
-        
 
+        
 
         public void PlayAd()
         {
@@ -52,6 +53,17 @@ namespace Metagame
             Advertisement.Banner.Show(_androidBanner);
         }
 
+
+        public void HideBanner() => Advertisement.Banner.Hide();
+
+        
+        
+        IEnumerator RepeatShowBanner()
+        {
+            yield return new WaitForSeconds(1);
+            ShowBanner();
+        }
+        
         
         
         /// <summary>
