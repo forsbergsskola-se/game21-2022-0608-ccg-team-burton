@@ -1075,6 +1075,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _testMode: 1
   _adTargetSystemId: 
+  myPlacementId: rewardedVideo
 --- !u!1 &8416864657569878529
 GameObject:
   m_ObjectHideFlags: 0
@@ -1411,7 +1412,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8416864657661146899}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8416864657275709949}
+        m_TargetAssemblyTypeName: Metagame.AdsInitializer, Assembly-CSharp
+        m_MethodName: PlayAd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8416864657717590715
 GameObject:
   m_ObjectHideFlags: 0
