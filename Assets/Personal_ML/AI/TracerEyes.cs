@@ -11,12 +11,12 @@ using UnityEngine.Tilemaps;
 [Flags]
 public enum TraceType
 {
-    Ground,
-    Wall,
-    Player,
-    Platform,
-    Enemy,
-    None
+    None = 0,
+    Ground = 1,
+    Wall = 2,
+    Player = 4,
+    Platform = 8,
+    Enemy = 16,
 }
 
 public enum Actions
@@ -39,7 +39,10 @@ public class HitResults
 
 public class TracerEyes : MonoBehaviour
 {
+    [Header("Eye values")]
     [SerializeField] public float pursueDistance;
+    [SerializeField] public Vector2 traceSize;
+    
     private int multiMask;
 
     private float traceInterval = 0.4f;
@@ -57,7 +60,7 @@ public class TracerEyes : MonoBehaviour
     public bool PlayerInAttackRange { get; private set;}
     
     private bool UnderAttack;
-    public Transform PlayerTrans;
+    [HideInInspector] public Transform PlayerTrans;
     private List<HitResults> hitResultList = new();
     
     private Health _playerHealth;
@@ -95,7 +98,6 @@ public class TracerEyes : MonoBehaviour
         if (timeSinceTrace >= traceInterval)
         {
             timeSinceTrace -= traceInterval;
-
             DoMultiTrace();
         }
     }
@@ -113,53 +115,53 @@ public class TracerEyes : MonoBehaviour
     {
         var right = transform.right;
         var pos = transform.position;
-       var increment = -0.5f;
-       Actions = Actions.None;
-
-       hitResultList.Clear();
-       
-       var inc = 0.4f;
-
-       for (int i = 0; i < 5; i++)
-       {
-           var dir = new Vector2(right.x, increment);
-           var traceDistance = pursueDistance;
-           
-           if (i == 0)
-           {
-               traceDistance = 2.5f;
-               dir = new Vector2(right.x, -0.7f);
-           }
-           else if (i == 1)
-           {
-               dir = new Vector2(right.x, 0);     
-           }
-           else
-           {
-               traceDistance = pursueDistance;
-           }
-           
-           if (i > 3)
-           {
-               dir = new Vector2(-right.x, 0);
-           }
-
-           var traceHit = DoSingleTrace(dir, pos, traceDistance, out var hit);
-           
-           AnalyzeResults(i, traceHit);
-
-           HitResults results = new HitResults()
-           {
-               theHitType = traceHit,
-               theHit = hit
-           };
-           hitResultList.Add(results);
-
-           increment += inc;
-       }
-       
-       SetResults();
-    }
+        var increment = -0.5f;
+        Actions = Actions.None;
+        
+        hitResultList.Clear();
+        
+        var inc = 0.4f;
+        
+        for (int i = 0; i < 5; i++)
+        {
+            var dir = new Vector2(right.x, increment);
+            var traceDistance = pursueDistance;
+            
+            if (i == 0)
+            {
+                traceDistance = 2.5f;
+                dir = new Vector2(right.x, -0.7f);
+            }
+            else if (i == 1)
+            {
+                dir = new Vector2(right.x, 0);     
+            }
+            else
+            {
+                traceDistance = pursueDistance;
+            }
+            
+            if (i > 3)
+            {
+                dir = new Vector2(-right.x, 0);
+            }
+        
+            var traceHit = DoSingleTrace(dir, pos, traceDistance, out var hit);
+            
+            AnalyzeResults(i, traceHit);
+        
+            HitResults results = new HitResults()
+            {
+                theHitType = traceHit,
+                theHit = hit
+            };
+            hitResultList.Add(results);
+        
+            increment += inc;
+        }
+        
+        SetResults();
+    }   
 
     private void SetResults()
     {
@@ -367,38 +369,36 @@ public class TracerEyes : MonoBehaviour
         return TraceType.None;
     }
 
-    private void TraceBox(Transform trans)
+    private void TraceBox()
     {
         var sizeY = 7f;
         var sizeX = pursueDistance;
-        var boxPlacement = trans.position + new Vector3(0, sizeY / 2 - 1);
-        var result = Physics2D.BoxCastAll(boxPlacement , new Vector2(pursueDistance * 2, sizeY), 0, trans.forward, 8, multiMask);
-        DrawBoxRuntime(new Vector2(pursueDistance, sizeY), boxPlacement);
+        var boxPlacement = transform.position + new Vector3(0, sizeY / 2 - 1);
+        var result = Physics2D.BoxCastAll(boxPlacement , 
+            new Vector2(pursueDistance * 2, sizeY), 0, transform.forward, 8, multiMask);
         var playerSeen = false;
         var playerIsHit = false;
+
+        foreach (var h in result)
+        {
+            Debug.Log(h.collider.transform.name);
+            Debug.Log(h.collider.transform.position);
+        }
     }
 
-    private void DrawBoxRuntime(Vector2 size, Vector2 origin)
-    {
-        size /= 2;
-        var point1 = origin - size;
-        var point2 = origin + new Vector2(-size.x,  size.y);
-        var point3 = origin + size;
-        var point4 = origin + new Vector2(size.x, -size.y);
-        
-        Debug.DrawLine(point1, point4, Color.red, traceInterval);
-        
-        Debug.DrawLine(point2, point3 , Color.red, traceInterval);
-        
-        Debug.DrawLine(point4,point3, Color.red, traceInterval);
-        
-        Debug.DrawLine(point1,  point2, Color.red, traceInterval);
-    }
-
+  
     private IEnumerator JumpInProgress()
     {
         JumpReady = false;
         yield return new WaitForSeconds(2f);
         JumpReady = true;
     }
+
+    #if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(transform.position, traceSize);
+    }
+    #endif
 }

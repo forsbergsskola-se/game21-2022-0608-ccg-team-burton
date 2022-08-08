@@ -36,21 +36,15 @@ public class AiAgent
     public CurrentCommand currentCommand;
 
     public Vector3 currentDestination;
-
     public Instruction currentInstruction;
-    public Transform currentCommander;
-
     public Queue<Vector3> TargetQueue = new();
 
     public Queue<CurrentCommand> commandQueue = new();
-    
 
+    public Animator anim;
     public bool pathBlocked;
 
     public bool commanderReached;
-
-    public GameObject heldItem;
-    
 
     public AiAgent()
     {
