@@ -159,7 +159,7 @@ namespace Metagame
         
         public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
         {
-            Debug.Log($"Unity Ads Load Failed: {error.ToString()}");
+            Debug.Log($"Error loading Ad Unit {placementId}: {error.ToString()} - {message}");
         }
 
 
@@ -172,7 +172,7 @@ namespace Metagame
 
         public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
         {
-            Debug.Log($"Unity Ads Initialization Failed: {error.ToString()}");
+            Debug.Log($"Error showing Ad Unit {placementId}: {error.ToString()} - {message}");
         }
 
 
@@ -180,7 +180,7 @@ namespace Metagame
 
         public void OnUnityAdsShowStart(string placementId)
         {
-            Debug.Log("Video Started");
+            Debug.Log($"Started Ad Unit {placementId}");
         }
 
         
@@ -188,7 +188,7 @@ namespace Metagame
         
         public void OnUnityAdsShowClick(string placementId)
         {
-            throw new System.NotImplementedException();
+            Debug.Log($"Clicked on {placementId}");
         }
         
         
@@ -197,10 +197,10 @@ namespace Metagame
         public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
         {
             if (placementId == _rewardID && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
-                Debug.Log("Reward Player for watching full reward video");
+                Debug.Log($"{placementId} status = {showCompletionState} - Reward Player for watching full reward video");
 
             else if (placementId == _rewardID && showCompletionState == UnityAdsShowCompletionState.SKIPPED)
-                Debug.Log("Reward Player for skipping reward video");
+                Debug.Log($"{placementId} status = {showCompletionState} - Reward Player for skipping reward video");
         }
     }
 }
