@@ -220,6 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe53203328e84d49a2316d8989202a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  equipment: {fileID: 0}
   UpgradeScreen: {fileID: 2135628255}
 --- !u!1 &651083061 stripped
 GameObject:
@@ -245,6 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe53203328e84d49a2316d8989202a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  equipment: {fileID: 0}
   UpgradeScreen: {fileID: 2135628255}
 --- !u!1 &1091833628
 GameObject:
@@ -348,6 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe53203328e84d49a2316d8989202a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  equipment: {fileID: 0}
   UpgradeScreen: {fileID: 2135628255}
 --- !u!1 &1495322439
 GameObject:
@@ -461,7 +464,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe53203328e84d49a2316d8989202a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  equipment: {fileID: 11400000, guid: 9dcf1d0796acb084eb7b5f2b496e92ac, type: 2}
   UpgradeScreen: {fileID: 2135628255}
+--- !u!1 &2024843948 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3834205139099808088, guid: 1072aef07a42fa147b4c4f452910dc20,
+    type: 3}
+  m_PrefabInstance: {fileID: 2135628254}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2135628254
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -594,6 +604,20 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2135628254}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2135628260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135628255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2f66166b0c469947a61516d28572bdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EquipmentData: {fileID: 0}
+  EquipmentIcon: {fileID: 2024843948}
 --- !u!1 &1802058786977440869 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3255072885043717778, guid: 17a79eb4b08abb44fb34d3fd24039688,

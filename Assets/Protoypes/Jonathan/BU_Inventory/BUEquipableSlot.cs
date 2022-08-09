@@ -7,9 +7,11 @@ using UnityEngine.EventSystems;
 public class BUEquipableSlot : MonoBehaviour, IPointerDownHandler
 {
 
-    public GameObject UpgradeScreen;
+    [SerializeField] private BUEquipment equipment;
+    [SerializeField] private GameObject UpgradeScreen;
     public void OnPointerDown(PointerEventData eventData)
     {
+        UpgradeScreen.GetComponent<BUFusionScreenUIHandler>().EquipmentData = equipment;
         UpgradeScreen.SetActive(true);
     }
 }
