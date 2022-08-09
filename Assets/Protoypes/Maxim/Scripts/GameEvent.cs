@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "GameEvent", fileName = "New Game Event")]
 public class GameEvent : ScriptableObject
 {
-    private HashSet<GameEventListener> _listeners = new HashSet<GameEventListener>();
+    private HashSet<PlayerDeathListener> _listeners = new HashSet<PlayerDeathListener>();
 
     public void Invoke()
     {
@@ -13,11 +13,13 @@ public class GameEvent : ScriptableObject
         {
             globalEventListener.RaiseEvent();
         }
+
+        Debug.Log("We do be Invokeing");
     }
 
-    public void Register(GameEventListener gameEventListener) => _listeners.Add(gameEventListener);
+    public void Register(PlayerDeathListener playerDeathListener) => _listeners.Add(playerDeathListener);
     
-    public void Deregister(GameEventListener gameEventListener) => _listeners.Remove(gameEventListener);
+    public void Deregister(PlayerDeathListener playerDeathListener) => _listeners.Remove(playerDeathListener);
     
 }
 

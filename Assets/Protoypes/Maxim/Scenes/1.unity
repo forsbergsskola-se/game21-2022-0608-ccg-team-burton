@@ -933,6 +933,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Hud
       objectReference: {fileID: 0}
+    - target: {fileID: 5712137843230292561, guid: 0710a1003cb211c46a7334b5adc96c33,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2986375844428923136, guid: 0710a1003cb211c46a7334b5adc96c33, type: 3}
     m_AddedGameObjects: []
@@ -12147,6 +12152,12 @@ PrefabInstance:
     - target: {fileID: 3205524570191263581, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
         type: 3}
       propertyPath: onDeath
+      value: 
+      objectReference: {fileID: 11400000, guid: f8811dc9379df0744a45a2e15bd6f078,
+        type: 2}
+    - target: {fileID: 3205524570191263581, guid: 7c9e5dd0ec057994db80d6fb85bbed35,
+        type: 3}
+      propertyPath: playerDies
       value: 
       objectReference: {fileID: 11400000, guid: f8811dc9379df0744a45a2e15bd6f078,
         type: 2}
