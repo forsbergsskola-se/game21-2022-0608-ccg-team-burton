@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
@@ -41,14 +42,26 @@ namespace Metagame
         public Button HideBannerAdButton;
         #endregion
 
-        #region Reward;
-        [Header("Rewards")]
+        #region Rewards
+        [Header("Reward Type")]
+        public bool Multiplier = true;
         public GameObject CoinTextAsset;
         private TMP_Text CoinText;
-        private int Coins = 0;
+        private int Coins;
+        #endregion
+
+        #region Reward Sums;
+        [Header("Reward Sums")]
         public int InterstitialAmount;
         public int RewardFullAmount;
         public int RewardSkippedAmount;
+        #endregion
+        
+        #region Reward Multipliers;
+        [Header("Reward Multipliers")]
+        public float InterstitialMultiplier;
+        public float RewardFullMultiplier;
+        public float RewardSkippedMultiplier;
         #endregion
         
         private void Awake()
@@ -241,22 +254,36 @@ namespace Metagame
         //TODO: Add the reward logic based on Completion State
         public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
         {
+            Coins = Convert.ToInt32(CoinText.text);
+
             if (placementId == _interstitialID && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
             {
                 Debug.Log($"Ad status = {showCompletionState} - Reward Player for watching full {placementId} video");
-                RewardPlayer(InterstitialAmount);
+                
+                if (Multiplier)
+                    RewardPlayerCalc(InterstitialMultiplier);
+                else
+                    RewardPlayerSum(InterstitialAmount);
             }
 
             else if (placementId == _rewardID && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
             {
                 Debug.Log($"Ad status = {showCompletionState} - Reward Player for watching {placementId} video");
-                RewardPlayer(RewardFullAmount);
+                
+                if (Multiplier)
+                    RewardPlayerCalc(RewardFullMultiplier);
+                else
+                    RewardPlayerSum(RewardFullAmount);
             }
 
             else if (placementId == _interstitialID && showCompletionState == UnityAdsShowCompletionState.SKIPPED)
             {
                 Debug.Log($"Ad status = {showCompletionState} - Reward Player for skipping {placementId} video");
-                RewardPlayer(RewardSkippedAmount);
+                
+                if (Multiplier)
+                    RewardPlayerCalc(RewardSkippedMultiplier);
+                else
+                    RewardPlayerSum(RewardSkippedAmount);
             }
             
             if (_shouldReactivateBanner)
@@ -269,9 +296,15 @@ namespace Metagame
         }
 
 
-        private void RewardPlayer(int rewardType)
+        private void RewardPlayerSum(int rewardType)
         {
             Coins += rewardType;
+            CoinText.text = $"{Coins}";
+        }
+        
+        private void RewardPlayerCalc(float rewardType)
+        {
+            Coins = Mathf.CeilToInt(Coins * rewardType);
             CoinText.text = $"{Coins}";
         }
     }
