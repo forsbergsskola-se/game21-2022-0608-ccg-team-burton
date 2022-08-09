@@ -237,11 +237,7 @@ namespace Metagame
         {
             Debug.Log($"Started Ad Unit {placementId}");
             
-            if (ShowBanner)
-                _shouldReactivateBanner = true;
-            
-            HideBannerAd();
-            Time.timeScale = 0;
+            ToggleBanner(true);
         }
 
 
@@ -286,12 +282,18 @@ namespace Metagame
                     RewardPlayerSum(RewardSkippedAmount);
             }
             
+            ToggleBanner(false);
+        }
+        
+        private void ToggleBanner(bool toggle)
+        {
             if (_shouldReactivateBanner)
             {
                 ShowBannerAd();
-                _shouldReactivateBanner = false;
+                _shouldReactivateBanner = toggle;
             }
             
+            if (toggle) HideBannerAd();
             Time.timeScale = 1;
         }
 
