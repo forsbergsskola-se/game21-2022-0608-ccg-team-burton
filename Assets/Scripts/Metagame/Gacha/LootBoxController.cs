@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class LootBoxController : MonoBehaviour
 {
-   
-   
    public LootBoxSO LootBoxSO;
 
    [SerializeField] private Animator _animator;
@@ -20,8 +18,6 @@ public class LootBoxController : MonoBehaviour
 
    // Since we need to update all elements, we can use a list
    private List<InventoryItem> gainedItems = new();
-
-   // [SerializeField] private PickupSpawner[] _pickup;
 
    private bool _boxOpenedCurrentSession;
    
@@ -48,8 +44,6 @@ public class LootBoxController : MonoBehaviour
          _boxOpenedCurrentSession = true;
          _animator.SetBool("OpenLootBox", true); 
       }
-      
-      
    }
    
    public void OpenBox()
@@ -83,6 +77,4 @@ public class LootBoxController : MonoBehaviour
          i++;
       }
    }
-
-   
 }
