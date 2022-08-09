@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Entity.Items;
@@ -21,6 +22,10 @@ public class BUEquipmentSO : ScriptableObject
     public Sprite UpgradeMaterialIcon;
     public int testInt;
 
+    private void OnValidate()
+    {
+        //Update values here?
+    }
 }
 
 

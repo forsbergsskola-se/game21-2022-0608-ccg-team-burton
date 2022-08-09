@@ -18,7 +18,7 @@ public class SetPlayerPrefsForEquipment : MonoBehaviour
         {
             if (PlayerPrefs.HasKey(equipment.ID))
             {
-                Debug.Log($"Found Entry for {equipment.Name}. Current rarity is {equipment.Rarity}. This affects {equipment.AttributeDescription} with a modifier of {equipment.AttributeValue}.");
+                Debug.Log($"Found Entry for {PlayerPrefs.GetString(equipment.ID)}. Current rarity is {PlayerPrefs.GetString(equipment.RarityID)}. This affects {equipment.AttributeDescription} with a modifier of {PlayerPrefs.GetFloat(equipment.AttributeValueID)}.");
             }
             else
             {

@@ -21,7 +21,8 @@ public class BUFusionScreenUIHandler : MonoBehaviour
         EquipmentIcon.GetComponent<Image>().sprite = equipmentSoData.Icon;
         Rarity.SetText("Rarity: "+equipmentSoData.Rarity.ToString());
         AttributeText.SetText(equipmentSoData.AttributeDescription+" " +equipmentSoData.AttributeValue.ToString() );
-
+        UpgradeMaterialsIcon.GetComponent<Image>().sprite = equipmentSoData.UpgradeMaterialIcon;
+        
     }
  
 }
