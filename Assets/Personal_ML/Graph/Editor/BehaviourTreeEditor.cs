@@ -136,7 +136,6 @@ public class BehaviourTreeEditor : EditorWindow
         {
             _treeObject = new SerializedObject(tree);
             _blackboardProperty = _treeObject.FindProperty("blackboard");
-            
             if(_blackboardProperty == null) Debug.Log("no blackboard found");
         }
     }

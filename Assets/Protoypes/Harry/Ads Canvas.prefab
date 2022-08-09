@@ -1073,7 +1073,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e65a98a34279445a9ea133ecbd8be8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowBanner: 0
+  ShowBannerOnStartup: 0
   _testMode: 1
   _placementID: 
   _rewardID: Rewarded_
@@ -1083,6 +1083,14 @@ MonoBehaviour:
   ShowRewardAdButton: {fileID: 8416864656818238227}
   ShowBannerAdButton: {fileID: 8416864658500756958}
   HideBannerAdButton: {fileID: 8416864656876150573}
+  Multiplier: 1
+  CoinTextAsset: {fileID: 0}
+  InterstitialAmount: 100
+  RewardCompleteAmount: 50
+  RewardSkippedAmount: 25
+  InterstitialMultiplier: 2
+  RewardCompleteMultiplier: 1.5
+  RewardSkippedMultiplier: 1.15
 --- !u!1 &8416864657569878529
 GameObject:
   m_ObjectHideFlags: 0

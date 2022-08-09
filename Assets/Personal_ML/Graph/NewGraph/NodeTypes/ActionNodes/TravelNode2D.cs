@@ -33,7 +33,7 @@ namespace NewGraph.NodeTypes.ActionNodes
 
         public override State OnUpdate()
         {
-            agent.enemyTransform.position += agent.enemyTransform.forward * (Time.deltaTime * 1);
+            agent.enemyTransform.position += agent.enemyTransform.right * (Time.deltaTime * 1);
             return ArrivedAtTarget() ? State.Success : State.Update;
         }
     }

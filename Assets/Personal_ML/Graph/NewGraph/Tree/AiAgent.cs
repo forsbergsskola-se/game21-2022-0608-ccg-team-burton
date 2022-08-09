@@ -12,6 +12,7 @@ public enum CurrentCommand
     None,
     FindCommander,
     MoveToPosition,
+    OutOfCommands,
     Interact,
     PickupItem,
     DropOfItem,

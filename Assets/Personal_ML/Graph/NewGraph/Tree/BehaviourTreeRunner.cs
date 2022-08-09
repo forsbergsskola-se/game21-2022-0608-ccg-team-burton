@@ -17,28 +17,17 @@ public class BehaviourTreeRunner : MonoBehaviour
 
     private void Setup()
     {
-        Queue<CurrentCommand> commands = new Queue<CurrentCommand>();
-        commands.Enqueue(CurrentCommand.MoveToPosition);
-        commands.Enqueue(CurrentCommand.GetInstructions);
-        Queue<Vector3> goals = new Queue<Vector3>();
-        goals.Enqueue(commanderTrans.position);
-        
+        var grid = GameObject.FindWithTag("LevelGrid").GetComponent<LevelGrid>();
         tree = tree.Clone();
         tree.Bind(new AiAgent()
         {
             enemyTransform = gameObject.transform,
-            currentDestination = GameObject.Find("EnemyCommander").transform.position,
-            commandQueue = commands,
-            TargetQueue = goals
+            grid = grid
         });
 
         readyToRun = true;
     }
     
-    private void OnDisable()
-    {
-    }
-
     private void OnObjectSeen(TraceType obj)
     {
         

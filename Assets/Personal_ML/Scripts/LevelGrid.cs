@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [Flags]
 public enum LevelElements
@@ -13,7 +14,20 @@ public enum LevelElements
     Edge = 4,
     Jump = 8,
     TwoWayPass = 16,
-    Gap = 32
+    Gap = 32,
+    TotalBlock = 64,
+}
+
+[Flags]
+public enum TileOptions
+{
+    None = 0,
+    OpenMinus = 1,
+    OpenPlus = 2,
+    JumpPlus = 4,
+    JumpMinus = 8,
+    WallPlus = 16,
+    WallMinus = 32
 }
 
 [Serializable]
@@ -31,6 +45,8 @@ public class CubeFacts
     public Vector2 min;
     public Vector2 max;
     public List<PointsOfInterest> pointsList = new();
+    public float lowestGroundY = 9999;
+    public TileOptions options;
 }
 
 public class LevelGrid : MonoBehaviour
@@ -40,15 +56,18 @@ public class LevelGrid : MonoBehaviour
     [SerializeField] private Vector2 numberCubes;
     [Range(0, 1),SerializeField] private float delayUpdate;
     [SerializeField] private LevelMemory memory;
+    [SerializeField] private Tilemap tilemap;
     
     private List<List<CubeFacts>> _gridList = new();
     private Vector2 _min;
     private Vector2 _max;
     private int _layerMask;
 
-    private float _traceTime = 100f;
+    private float _traceTime = 20f;
 
     private List<RaycastHit2D> _hitList = new();
+
+    private float _maxJumpDistance = 6f;
 
     private void Awake()
     {
@@ -63,20 +82,42 @@ public class LevelGrid : MonoBehaviour
 
     private void ScanAll()
     {
-        if (memory.fullyScanned) return;
-        
         for (var i = 0; i < numberCubes.y; i++)
         {
             for (var j = 0; j < numberCubes.x; j++)
             {
                 var cube = _gridList[i][j];
-                ScanABox(new Vector2(i,j), new Vector2(-1,-1), new Vector2(0,1));
+                var start = cube.location + new Vector2(-1,-1f) * new Vector2(cubeSize.x / 2, cubeSize.y / 2);
+                
+                ScanABox(new Vector2(i,j), start, new Vector2(0,1));
                 CheckUnder(cube);
+                SetOptions(cube);
+
+                if ((int) cube.lowestGroundY != 9999)
+                {
+                   // ScanABox(new Vector2(i,j), new Vector2(-1,-1), new Vector2(0,1));
+                }
             }
         }
     }
 
     private void CheckTop(CubeFacts cube)
+    {
+        if ((int) cube.lowestGroundY != 9999)
+        {
+            
+        }
+    }
+
+    private void SetOptions(CubeFacts cube)
+    {
+        if (cube.pointsList.SingleOrDefault(x => x.pointType == LevelElements.TwoWayPass) != default)
+        {
+            cube.options |= TileOptions.OpenMinus | TileOptions.OpenPlus;
+        }
+    }
+
+    private void CheckForGround(CubeFacts cube)
     {
         
     }
@@ -85,15 +126,44 @@ public class LevelGrid : MonoBehaviour
     {
         var hitCount = 0;
         var missCount = 0;
-        
 
-        foreach (var h in _hitList)
+        for (var i = 0; i < _hitList.Count; i++)
         {
-            if (h)
+            if (_hitList[i])
             {
                 hitCount++;
             }
+            
+            if (i <= 0 || i >= _hitList.Count - 1) continue;
+            
+            var past = _hitList[i - 1];
+            var present = _hitList[i];
+            var future = _hitList[i + 1];
+
+            if (!past && present)
+            {
+                cube.pointsList.Add(new PointsOfInterest()
+                {
+                    location = present.point + new Vector2(0, 2),
+                    pointType = LevelElements.Edge
+                });
+            }
+            if (!future && present)
+            {
+                cube.pointsList.Add(new PointsOfInterest()
+                {
+                    location = present.point+ new Vector2(0, 2),
+                    pointType = LevelElements.Edge
+                });
+            }
         }
+
+        if (cube.pointsList.Count > 0)
+        {
+            cube.lowestGroundY = cube.pointsList
+                .OrderBy(x => x.location.y).ToList()[0].location.y;
+        }
+        
 
         if (hitCount == _hitList.Count)
         {
@@ -103,7 +173,7 @@ public class LevelGrid : MonoBehaviour
                 pointType = LevelElements.TwoWayPass
             });
         }
-        else
+        else if(hitCount == 0)
         {
             cube.pointsList.Add(new PointsOfInterest()
             {
@@ -143,29 +213,29 @@ public class LevelGrid : MonoBehaviour
     
     
     
-    private void ScanABox(Vector2 index, Vector2 startDir, Vector2 traceDir)
+    private void ScanABox(Vector2 index, Vector2 startPos, Vector2 traceDir)
     {
         _hitList.Clear();
         var cube = _gridList[(int) index.x][(int) index.y];
   
         var numberTraces = 15;
         var increment = cubeSize.x / numberTraces;
-        var start = cube.location + startDir * new Vector2(cubeSize.x / 2, cubeSize.y / 2);
+        var start = cube.location + startPos * new Vector2(cubeSize.x / 2, cubeSize.y / 2);
         
         for (var i = 0; i < numberTraces; i++)
         {
-            var hit = Physics2D.Raycast(start, traceDir, cubeSize.y, _layerMask);
+            var hit = Physics2D.Raycast(startPos, traceDir, cubeSize.y, _layerMask);
             _hitList.Add(hit);
             if (hit)
             {
-                Debug.DrawLine(start, hit.point, Color.green, _traceTime);
+                Debug.DrawLine(startPos, hit.point, Color.green, _traceTime);
             }
             else
             {
-                Debug.DrawLine(start, start + traceDir *cubeSize.y, Color.red, _traceTime);
+                Debug.DrawLine(startPos, startPos + traceDir *cubeSize.y, Color.red, _traceTime);
             }
             
-            start += new Vector2(increment, 0);
+            startPos += new Vector2(increment, 0);
         }
     }
 
@@ -262,8 +332,9 @@ public class LevelGrid : MonoBehaviour
     
     private Tuple<Vector2, Vector2> GetMinMax(Vector2 location, Vector2 size)
     {
-        var min = location - new Vector2(size.x  / 2, 0);
-        var max = location + new Vector2(size.x  / 2, size.y);
+        var min = location - new Vector2(size.x  / 2, size.y / 2);
+        var max = location + new Vector2(size.x  / 2, size.y / 2);
+        Debug.Log($"min: {min} max {max}");
 
         return new Tuple<Vector2, Vector2>(min, max);
     }
@@ -291,7 +362,7 @@ public class LevelGrid : MonoBehaviour
 
                 foreach (var p in cube.pointsList)
                 {
-                    if (p.pointType.HasFlag(LevelElements.Ground))
+                    if (p.pointType.HasFlag(LevelElements.Edge))
                     {
                         Gizmos.color = Color.yellow;
                     }
