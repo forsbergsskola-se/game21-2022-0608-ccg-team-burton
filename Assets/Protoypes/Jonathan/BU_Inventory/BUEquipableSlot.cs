@@ -4,10 +4,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BUInventoryHeadSlot : MonoBehaviour, IPointerDownHandler
+public class BUEquipableSlot : MonoBehaviour, IPointerDownHandler
 {
+
+    public GameObject UpgradeScreen;
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("Click");
+        UpgradeScreen.SetActive(true);
     }
 }

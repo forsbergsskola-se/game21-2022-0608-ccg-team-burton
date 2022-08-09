@@ -202,12 +202,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &588048014 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1393154143, guid: 17a79eb4b08abb44fb34d3fd24039688,
+    type: 3}
+  m_PrefabInstance: {fileID: 3760054209158841079}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &588048018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588048014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe53203328e84d49a2316d8989202a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpgradeScreen: {fileID: 0}
 --- !u!1 &651083061 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3760054209598165844, guid: 17a79eb4b08abb44fb34d3fd24039688,
     type: 3}
   m_PrefabInstance: {fileID: 3760054209158841079}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &994450828 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2059573509, guid: 17a79eb4b08abb44fb34d3fd24039688,
+    type: 3}
+  m_PrefabInstance: {fileID: 3760054209158841079}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &994450832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994450828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe53203328e84d49a2316d8989202a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpgradeScreen: {fileID: 0}
 --- !u!1 &1091833628
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,51 +330,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1342679571 stripped
+--- !u!1 &1326070022 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 2112999879, guid: 17a79eb4b08abb44fb34d3fd24039688,
+  m_CorrespondingSourceObject: {fileID: 1421814584, guid: 17a79eb4b08abb44fb34d3fd24039688,
     type: 3}
   m_PrefabInstance: {fileID: 3760054209158841079}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1342679574
+--- !u!114 &1326070026
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1342679571}
+  m_GameObject: {fileID: 1326070022}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Script: {fileID: 11500000, guid: ebe53203328e84d49a2316d8989202a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!223 &1342679575
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1342679571}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
+  UpgradeScreen: {fileID: 0}
 --- !u!1 &1495322439
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,6 +443,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1878881306 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1613182652, guid: 17a79eb4b08abb44fb34d3fd24039688,
+    type: 3}
+  m_PrefabInstance: {fileID: 3760054209158841079}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1878881310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878881306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe53203328e84d49a2316d8989202a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpgradeScreen: {fileID: 0}
 --- !u!1 &1802058786977440869 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3255072885043717778, guid: 17a79eb4b08abb44fb34d3fd24039688,
