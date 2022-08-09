@@ -20,13 +20,12 @@ public class Bullet_ML : MonoBehaviour
 
         if (col.gameObject.CompareTag("Enemy"))
         {
-        //    gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
         
-    //    gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         gameObject.transform.position += (Vector3) travelVector * Time.deltaTime;

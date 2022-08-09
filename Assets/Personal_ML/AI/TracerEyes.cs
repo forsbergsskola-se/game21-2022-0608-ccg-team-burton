@@ -76,6 +76,7 @@ public class TracerEyes : MonoBehaviour
 
         PlayerForgotten = true;
         multiMask = 1 << 6 | 1 << 8;
+        GroundSeen = true;
     }
 
     private void OnDisable()
@@ -248,10 +249,10 @@ public class TracerEyes : MonoBehaviour
         
         if (filter.Count > 3)
         {
-            var yForce = Mathf.Clamp(theDistance.y, 1, 12);
+            var yForce = Mathf.Clamp(theDistance.y, 1, 3);
           
             theDistance = filter[1].theHit.point -= (Vector2) pos;
-            return new Vector2(Mathf.Abs(theDistance.x) * dir.x, yForce * 6);
+            return new Vector2(Mathf.Abs(theDistance.x) * dir.x, yForce * 3);
         }
         
         return Vector2.zero;
