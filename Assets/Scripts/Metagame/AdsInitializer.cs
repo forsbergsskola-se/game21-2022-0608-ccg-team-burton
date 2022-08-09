@@ -1,4 +1,6 @@
 using System.Collections;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.UI;
@@ -39,6 +41,15 @@ namespace Metagame
         public Button HideBannerAdButton;
         #endregion
 
+        #region Reward;
+        [Header("Rewards")]
+        public GameObject CoinTextAsset;
+        private TMP_Text CoinText;
+        private int Coins = 0;
+        public int InterstitialAmount;
+        public int RewardFullAmount;
+        public int RewardSkippedAmount;
+        #endregion
         
         private void Awake()
         {
@@ -52,6 +63,8 @@ namespace Metagame
                 LoadBannerAd();
                 ShowBannerAd();
             }
+
+            CoinText = CoinTextAsset.GameObject().GetComponent<TMP_Text>();
         }
 
 
@@ -229,13 +242,22 @@ namespace Metagame
         public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
         {
             if (placementId == _interstitialID && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
+            {
                 Debug.Log($"Ad status = {showCompletionState} - Reward Player for watching full {placementId} video");
+                RewardPlayer(InterstitialAmount);
+            }
 
             else if (placementId == _rewardID && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
+            {
                 Debug.Log($"Ad status = {showCompletionState} - Reward Player for watching {placementId} video");
+                RewardPlayer(RewardFullAmount);
+            }
 
             else if (placementId == _interstitialID && showCompletionState == UnityAdsShowCompletionState.SKIPPED)
+            {
                 Debug.Log($"Ad status = {showCompletionState} - Reward Player for skipping {placementId} video");
+                RewardPlayer(RewardSkippedAmount);
+            }
             
             if (_shouldReactivateBanner)
             {
@@ -244,6 +266,13 @@ namespace Metagame
             }
             
             Time.timeScale = 1;
+        }
+
+
+        private void RewardPlayer(int rewardType)
+        {
+            Coins += rewardType;
+            CoinText.text = $"{Coins}";
         }
     }
 }
