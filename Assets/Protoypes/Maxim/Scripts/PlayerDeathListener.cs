@@ -12,6 +12,7 @@ public class PlayerDeathListener : MonoBehaviour
     void Awake()
     {
         _gameEvent.Register(playerDeathListener:this);
+        Debug.Log("Registered");
         gameObject.SetActive(false);
     }
 
