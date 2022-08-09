@@ -53,14 +53,14 @@ namespace Metagame
         #region Reward Sums;
         [Header("Reward Sums")]
         public int InterstitialAmount;
-        public int RewardFullAmount;
+        public int RewardCompleteAmount;
         public int RewardSkippedAmount;
         #endregion
         
         #region Reward Multipliers;
         [Header("Reward Multipliers")]
         public float InterstitialMultiplier;
-        public float RewardFullMultiplier;
+        public float RewardCompleteMultiplier;
         public float RewardSkippedMultiplier;
         #endregion
         
@@ -247,43 +247,38 @@ namespace Metagame
         
         
         
-        //TODO: Add the reward logic based on Completion State
         public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
         {
+            //TODO: UPDATE COINS REFERENCE
             Coins = Convert.ToInt32(CoinText.text);
 
             if (placementId == _interstitialID && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
-            {
-                Debug.Log($"Ad status = {showCompletionState} - Reward Player for watching full {placementId} video");
-                
-                if (Multiplier)
-                    RewardPlayerCalc(InterstitialMultiplier);
-                else
-                    RewardPlayerSum(InterstitialAmount);
-            }
+                CalculateReward(placementId, showCompletionState, "watching", InterstitialMultiplier, InterstitialAmount);
+
 
             else if (placementId == _rewardID && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
-            {
-                Debug.Log($"Ad status = {showCompletionState} - Reward Player for watching {placementId} video");
-                
-                if (Multiplier)
-                    RewardPlayerCalc(RewardFullMultiplier);
-                else
-                    RewardPlayerSum(RewardFullAmount);
-            }
+                CalculateReward(placementId, showCompletionState, "completing", RewardCompleteMultiplier, RewardCompleteAmount);
+
 
             else if (placementId == _interstitialID && showCompletionState == UnityAdsShowCompletionState.SKIPPED)
-            {
-                Debug.Log($"Ad status = {showCompletionState} - Reward Player for skipping {placementId} video");
-                
-                if (Multiplier)
-                    RewardPlayerCalc(RewardSkippedMultiplier);
-                else
-                    RewardPlayerSum(RewardSkippedAmount);
-            }
-            
+                CalculateReward(placementId, showCompletionState, "skipping", RewardSkippedMultiplier, RewardSkippedAmount);
+
             ToggleBanner(false);
         }
+
+        
+
+        private void CalculateReward(string placementId, UnityAdsShowCompletionState showCompletionState, 
+            string message, float completionMultiplier, int completionAmount)
+        {
+            Debug.Log($"Ad status = {showCompletionState} - Reward Player for {message} {placementId} video");
+            if (Multiplier)
+                RewardPlayerCalc(completionMultiplier);
+            else
+                RewardPlayerSum(completionAmount);
+        }
+        
+        
         
         private void ToggleBanner(bool toggle)
         {
@@ -303,6 +298,8 @@ namespace Metagame
             Coins += rewardType;
             CoinText.text = $"{Coins}";
         }
+        
+        
         
         private void RewardPlayerCalc(float rewardType)
         {
