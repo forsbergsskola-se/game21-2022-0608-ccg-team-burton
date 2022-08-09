@@ -228,6 +228,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3760054209158841079}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &874296624 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7550958972340298797, guid: 1072aef07a42fa147b4c4f452910dc20,
+    type: 3}
+  m_PrefabInstance: {fileID: 2135628254}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &994450828 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2059573509, guid: 17a79eb4b08abb44fb34d3fd24039688,
@@ -480,6 +492,11 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3106505165143205155, guid: 1072aef07a42fa147b4c4f452910dc20,
+        type: 3}
+      propertyPath: m_text
+      value: 'Rarity:'
+      objectReference: {fileID: 0}
     - target: {fileID: 5752209485782625474, guid: 1072aef07a42fa147b4c4f452910dc20,
         type: 3}
       propertyPath: m_Name
@@ -618,6 +635,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EquipmentData: {fileID: 0}
   EquipmentIcon: {fileID: 2024843948}
+  RarityValue: {fileID: 874296624}
 --- !u!1 &1802058786977440869 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3255072885043717778, guid: 17a79eb4b08abb44fb34d3fd24039688,

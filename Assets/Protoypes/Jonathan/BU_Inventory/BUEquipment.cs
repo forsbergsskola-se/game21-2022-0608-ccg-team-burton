@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Entity.Items;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,8 +14,11 @@ public class BUEquipment : ScriptableObject
     
     public Sprite Icon;
 
-    public string Rarity ="Common";
-
+    public Rarity Rarity;
+    
     public int testInt;
 
 }
+
+
+ 
