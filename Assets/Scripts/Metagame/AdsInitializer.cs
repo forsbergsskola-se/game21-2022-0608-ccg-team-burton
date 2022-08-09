@@ -1,4 +1,7 @@
+using System;
 using System.Collections;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.UI;
@@ -39,6 +42,27 @@ namespace Metagame
         public Button HideBannerAdButton;
         #endregion
 
+        #region Rewards
+        [Header("Reward Type")]
+        public bool Multiplier = true;
+        public GameObject CoinTextAsset;
+        private TMP_Text CoinText;
+        private int Coins;
+        #endregion
+
+        #region Reward Sums;
+        [Header("Reward Sums")]
+        public int InterstitialAmount;
+        public int RewardCompleteAmount;
+        public int RewardSkippedAmount;
+        #endregion
+        
+        #region Reward Multipliers;
+        [Header("Reward Multipliers")]
+        public float InterstitialMultiplier;
+        public float RewardCompleteMultiplier;
+        public float RewardSkippedMultiplier;
+        #endregion
         
         private void Awake()
         {
@@ -52,6 +76,8 @@ namespace Metagame
                 LoadBannerAd();
                 ShowBannerAd();
             }
+
+            CoinText = CoinTextAsset.GameObject().GetComponent<TMP_Text>();
         }
 
 
@@ -211,11 +237,7 @@ namespace Metagame
         {
             Debug.Log($"Started Ad Unit {placementId}");
             
-            if (ShowBanner)
-                _shouldReactivateBanner = true;
-            
-            HideBannerAd();
-            Time.timeScale = 0;
+            ToggleBanner(true);
         }
 
 
@@ -225,25 +247,64 @@ namespace Metagame
         
         
         
-        //TODO: Add the reward logic based on Completion State
         public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
         {
+            //TODO: UPDATE COINS REFERENCE
+            Coins = Convert.ToInt32(CoinText.text);
+
             if (placementId == _interstitialID && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
-                Debug.Log($"Ad status = {showCompletionState} - Reward Player for watching full {placementId} video");
+                CalculateReward(placementId, showCompletionState, "watching", InterstitialMultiplier, InterstitialAmount);
+
 
             else if (placementId == _rewardID && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
-                Debug.Log($"Ad status = {showCompletionState} - Reward Player for watching {placementId} video");
+                CalculateReward(placementId, showCompletionState, "completing", RewardCompleteMultiplier, RewardCompleteAmount);
+
 
             else if (placementId == _interstitialID && showCompletionState == UnityAdsShowCompletionState.SKIPPED)
-                Debug.Log($"Ad status = {showCompletionState} - Reward Player for skipping {placementId} video");
-            
+                CalculateReward(placementId, showCompletionState, "skipping", RewardSkippedMultiplier, RewardSkippedAmount);
+
+            ToggleBanner(false);
+        }
+
+        
+
+        private void CalculateReward(string placementId, UnityAdsShowCompletionState showCompletionState, 
+            string message, float completionMultiplier, int completionAmount)
+        {
+            Debug.Log($"Ad status = {showCompletionState} - Reward Player for {message} {placementId} video");
+            if (Multiplier)
+                RewardPlayerCalc(completionMultiplier);
+            else
+                RewardPlayerSum(completionAmount);
+        }
+        
+        
+        
+        private void ToggleBanner(bool toggle)
+        {
             if (_shouldReactivateBanner)
             {
                 ShowBannerAd();
-                _shouldReactivateBanner = false;
+                _shouldReactivateBanner = toggle;
             }
             
+            if (toggle) HideBannerAd();
             Time.timeScale = 1;
+        }
+
+
+        private void RewardPlayerSum(int rewardType)
+        {
+            Coins += rewardType;
+            CoinText.text = $"{Coins}";
+        }
+        
+        
+        
+        private void RewardPlayerCalc(float rewardType)
+        {
+            Coins = Mathf.CeilToInt(Coins * rewardType);
+            CoinText.text = $"{Coins}";
         }
     }
 }
