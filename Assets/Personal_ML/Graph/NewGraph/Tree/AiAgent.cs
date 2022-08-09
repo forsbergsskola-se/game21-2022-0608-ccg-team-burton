@@ -29,7 +29,7 @@ public class AiAgent
     public CurrentCommand currentCommand;
 
     public Vector3 currentDestination;
-    public Queue<Vector3> TargetQueue = new();
+    public Queue<Vector2> TargetQueue = new();
 
     public Queue<CurrentCommand> commandQueue = new();
     public Animator anim;
