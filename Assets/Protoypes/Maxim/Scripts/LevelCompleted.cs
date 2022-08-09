@@ -12,7 +12,9 @@ public class LevelCompleted : MonoBehaviour
     public Health playerHealth;
     public ItemCollector itemCollector;
     public int coinBonus = 500;
+    [SerializeField] private CustomSceneManager sceneManager;
     
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         int currentCoins = itemCollector._coinCounter;
@@ -22,8 +24,10 @@ public class LevelCompleted : MonoBehaviour
             winScreen.SetActive(true);
             Time.timeScale = 0; 
             StarsAchieved();
+            //sceneManager.DoCoroutine();
             UpdateCoinText(currentCoins);
             UpdateTotalCoinText(currentCoins);
+
         }
     }
 
