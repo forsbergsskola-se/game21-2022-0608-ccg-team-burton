@@ -13,7 +13,11 @@ namespace Metagame
         #region AdIDs;
 
         [Header("AD IDs")]
-        public bool ShowBanner;
+        public bool ShowBannerOnStartup;
+
+        private bool ShowBanner;
+        private bool _shouldReactivateBanner;
+        private bool OnlyOnce = true;
 
         private const string _iOS = "iOS";
         private const string _android = "Android"; 
@@ -41,10 +45,13 @@ namespace Metagame
             if (!Advertisement.isInitialized)
                 InitializeAds();
 
-            if (ShowBanner)
-                ShowBannerAd();
-            
             AssignButtons();
+
+            if (ShowBannerOnStartup)
+            {
+                LoadBannerAd();
+                ShowBannerAd();
+            }
         }
 
 
@@ -104,11 +111,23 @@ namespace Metagame
 
 
         
-        private void ShowBannerAd()
+        private void LoadBannerAd()
         {
             Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
             Advertisement.Banner.Load(_bannerID, new BannerLoadOptions {loadCallback = OnBannerLoaded, errorCallback = OnBannerLoadError});
+        }
 
+
+        
+        private void ShowBannerAd()
+        {
+            if (ShowBannerOnStartup == false && OnlyOnce)
+            {
+                LoadBannerAd();
+                OnlyOnce = false;
+            }
+            
+            ShowBanner = true;
             if (Advertisement.Banner.isLoaded == false)
                 StartCoroutine(RepeatShowBanner());
             
@@ -116,8 +135,12 @@ namespace Metagame
         }
 
 
-        
-        private static void HideBannerAd() => Advertisement.Banner.Hide();
+
+        private void HideBannerAd()
+        {
+            ShowBanner = false;
+            Advertisement.Banner.Hide(false);
+        }
 
         
         
@@ -187,8 +210,12 @@ namespace Metagame
         public void OnUnityAdsShowStart(string placementId)
         {
             Debug.Log($"Started Ad Unit {placementId}");
+            
+            if (ShowBanner)
+                _shouldReactivateBanner = true;
+            
+            HideBannerAd();
             Time.timeScale = 0;
-
         }
 
 
@@ -209,7 +236,13 @@ namespace Metagame
 
             else if (placementId == _interstitialID && showCompletionState == UnityAdsShowCompletionState.SKIPPED)
                 Debug.Log($"Ad status = {showCompletionState} - Reward Player for skipping {placementId} video");
-
+            
+            if (_shouldReactivateBanner)
+            {
+                ShowBannerAd();
+                _shouldReactivateBanner = false;
+            }
+            
             Time.timeScale = 1;
         }
     }
