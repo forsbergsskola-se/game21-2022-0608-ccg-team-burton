@@ -38,7 +38,8 @@ namespace Metagame
         
         private void Awake()
         {
-            InitializeAds();
+            if (!Advertisement.isInitialized)
+                InitializeAds();
 
             if (ShowBanner)
                 ShowBannerAd();
@@ -170,8 +171,12 @@ namespace Metagame
 
 
 
-        public void OnUnityAdsShowStart(string placementId) 
-            => Debug.Log($"Started Ad Unit {placementId}");
+        public void OnUnityAdsShowStart(string placementId)
+        {
+            Debug.Log($"Started Ad Unit {placementId}");
+            Time.timeScale = 0;
+
+        }
 
 
 
@@ -191,6 +196,8 @@ namespace Metagame
 
             else if (placementId == _interstitialID && showCompletionState == UnityAdsShowCompletionState.SKIPPED)
                 Debug.Log($"Ad status = {showCompletionState} - Reward Player for skipping {placementId} video");
+
+            Time.timeScale = 1;
         }
     }
 }
