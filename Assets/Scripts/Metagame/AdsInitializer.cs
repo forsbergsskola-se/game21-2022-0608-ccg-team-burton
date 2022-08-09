@@ -13,7 +13,11 @@ namespace Metagame
         #region AdIDs;
 
         [Header("AD IDs")]
-        public bool ShowBanner;
+        public bool ShowBannerOnStartup;
+
+        private bool ShowBanner;
+        private bool _shouldReactivateBanner;
+        private bool OnlyOnce = true;
 
         private const string _iOS = "iOS";
         private const string _android = "Android"; 
@@ -38,22 +42,29 @@ namespace Metagame
         
         private void Awake()
         {
+            if (!Advertisement.isInitialized)
+                InitializeAds();
+
+            AssignButtons();
+
+            if (ShowBannerOnStartup)
+            {
+                LoadBannerAd();
+                ShowBannerAd();
+            }
+        }
+
+
+
+        private void InitializeAds()
+        {
             // Get the Ad Unit ID for the current platform:
             _placementID = (Application.platform == RuntimePlatform.IPhonePlayer)
                 ? _iOSId
                 : _androidID;
-
-            if (_placementID == _iOSId)
-                AssignAdIds(_iOS);
-            else
-                AssignAdIds(_android);
             
             Advertisement.Initialize(_placementID, _testMode, this);
-            
-            if (ShowBanner)
-                ShowBannerAd();
-            
-            AssignButtons();
+            AssignAdIds(_placementID == _iOSId ? _iOS : _android);
         }
 
         
@@ -69,10 +80,10 @@ namespace Metagame
 
         private void AssignButtons()
         {
-            ShowInterstitialAdButton.onClick.AddListener(PlayAd);
+            ShowInterstitialAdButton.onClick.AddListener(LoadInterstitialAd);
             ShowInterstitialAdButton.interactable = true;
             
-            ShowRewardAdButton.onClick.AddListener(PlayRewardedAd);
+            ShowRewardAdButton.onClick.AddListener(LoadRewardedAd);
             ShowRewardAdButton.interactable = true;
             
             ShowBannerAdButton.onClick.AddListener(ShowBannerAd);
@@ -84,27 +95,52 @@ namespace Metagame
 
         
 
-        private void PlayAd()
+        private void LoadInterstitialAd()
         {
             Debug.Log("Play interstitial Ad");
-            Advertisement.Show(_interstitialID);
+            Advertisement.Load(_interstitialID, this);
         }
 
-        private void PlayRewardedAd()
+        
+        
+        private void LoadRewardedAd()
         {
             Debug.Log("Play rewarded Ad");
-            Advertisement.Show(_rewardID);
+            Advertisement.Load(_rewardID, this);
         }
 
 
-        private void ShowBannerAd()
+        
+        private void LoadBannerAd()
         {
             Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
+            Advertisement.Banner.Load(_bannerID, new BannerLoadOptions {loadCallback = OnBannerLoaded, errorCallback = OnBannerLoadError});
+        }
+
+
+        
+        private void ShowBannerAd()
+        {
+            if (ShowBannerOnStartup == false && OnlyOnce)
+            {
+                LoadBannerAd();
+                OnlyOnce = false;
+            }
+            
+            ShowBanner = true;
+            if (Advertisement.Banner.isLoaded == false)
+                StartCoroutine(RepeatShowBanner());
+            
             Advertisement.Banner.Show(_bannerID);
         }
 
 
-        private void HideBannerAd() => Advertisement.Banner.Hide();
+
+        private void HideBannerAd()
+        {
+            ShowBanner = false;
+            Advertisement.Banner.Hide(false);
+        }
 
         
         
@@ -113,28 +149,38 @@ namespace Metagame
             yield return new WaitForSeconds(1);
             ShowBannerAd();
         }
+
+
+        private void OnBannerLoaded()
+            => Advertisement.Banner.Show(_bannerID, new BannerOptions{});
         
         
+        
+        
+        private static void OnBannerLoadError(string message)
+            => Debug.Log($"Error loading Banner Ad - {message}");
+
+        
+
         
         /// <summary>
         /// Initialization Logic
         /// </summary>
         
-        public void OnInitializationComplete()
-        { 
-            Debug.Log("Unity Ads initialization complete.");
-        }
+        public void OnInitializationComplete() 
+            => Debug.Log("Unity Ads initialization complete.");
+        
+        //TODO: Can add banner ad here
+        
+        
 
         
         
-        public void OnInitializationFailed(UnityAdsInitializationError error, string message)
-        {
-            Debug.Log($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
-        }
+        public void OnInitializationFailed(UnityAdsInitializationError error, string message) 
+            => Debug.Log($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
 
-        
-        
-        
+
+
         /// <summary>
         /// Ads OnLoad Logic
         /// </summary>
@@ -142,54 +188,62 @@ namespace Metagame
         public void OnUnityAdsAdLoaded(string placementId)
         {
             Debug.Log("Ads are ready");
+            Advertisement.Show(placementId, this);
         }
 
         
         
-        public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
-        {
-            Debug.Log("ERROR: " + message);
-        }
+        public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message) 
+            => Debug.Log($"Error loading Ad Unit {placementId}: {error.ToString()} - {message}");
 
-        
-        
-        
-        
+
+
         /// <summary>
         /// Ads OnShow Logic
         /// </summary>
-        
-        public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
-        {
-            Debug.Log("ERROR: " + message);
-        }
 
-        
-        
-        
+        public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message) 
+            => Debug.Log($"Error showing Ad Unit {placementId}: {error.ToString()} - {message}");
+
+
+
         public void OnUnityAdsShowStart(string placementId)
         {
-            Debug.Log("Video Started");
+            Debug.Log($"Started Ad Unit {placementId}");
+            
+            if (ShowBanner)
+                _shouldReactivateBanner = true;
+            
+            HideBannerAd();
+            Time.timeScale = 0;
         }
 
-        
-        
-        
-        public void OnUnityAdsShowClick(string placementId)
-        {
-            throw new System.NotImplementedException();
-        }
-        
-        
-        
 
+
+        public void OnUnityAdsShowClick(string placementId) 
+            => Debug.Log($"Clicked on {placementId}");
+        
+        
+        
+        //TODO: Add the reward logic based on Completion State
         public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
         {
-            if (placementId == _rewardID && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
-                Debug.Log("Reward Player for watching full reward video");
+            if (placementId == _interstitialID && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
+                Debug.Log($"Ad status = {showCompletionState} - Reward Player for watching full {placementId} video");
 
-            else if (placementId == _rewardID && showCompletionState == UnityAdsShowCompletionState.SKIPPED)
-                Debug.Log("Reward Player for skipping reward video");
+            else if (placementId == _rewardID && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
+                Debug.Log($"Ad status = {showCompletionState} - Reward Player for watching {placementId} video");
+
+            else if (placementId == _interstitialID && showCompletionState == UnityAdsShowCompletionState.SKIPPED)
+                Debug.Log($"Ad status = {showCompletionState} - Reward Player for skipping {placementId} video");
+            
+            if (_shouldReactivateBanner)
+            {
+                ShowBannerAd();
+                _shouldReactivateBanner = false;
+            }
+            
+            Time.timeScale = 1;
         }
     }
 }
