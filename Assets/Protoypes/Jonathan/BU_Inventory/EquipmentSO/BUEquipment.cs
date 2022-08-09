@@ -11,7 +11,8 @@ public class BUEquipment : ScriptableObject
     public string ID;
     
     public string Name;
-    
+    public string AttributeDescription;
+    public float AttributeValue;
     public Sprite Icon;
 
     public Rarity Rarity;

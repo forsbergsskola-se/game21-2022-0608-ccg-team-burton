@@ -10,14 +10,16 @@ public class BUFusionScreenUIHandler : MonoBehaviour
     
     //UPDATE FIELDS
     [SerializeField] private GameObject EquipmentIcon;
-    [SerializeField] private TMP_Text RarityValue;
+    [SerializeField] private TMP_Text Rarity;
+    [SerializeField] private TMP_Text AttributeText;
     
     
-    // Start is called before the first frame update
+
     void OnEnable()
     {
         EquipmentIcon.GetComponent<Image>().sprite = EquipmentData.Icon;
-        RarityValue.SetText(EquipmentData.Rarity.ToString());
+        Rarity.SetText("Rarity: "+EquipmentData.Rarity.ToString());
+        AttributeText.SetText(EquipmentData.AttributeDescription+" " +EquipmentData.AttributeValue.ToString() );
 
     }
  
