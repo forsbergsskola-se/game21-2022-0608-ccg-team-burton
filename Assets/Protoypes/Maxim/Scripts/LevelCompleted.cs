@@ -24,7 +24,7 @@ public class LevelCompleted : MonoBehaviour
             winScreen.SetActive(true);
             Time.timeScale = 0; 
             StarsAchieved();
-            //sceneManager.DoCoroutine();
+            sceneManager.DoCoroutine();
             UpdateCoinText(currentCoins);
             UpdateTotalCoinText(currentCoins);
 
