@@ -15,20 +15,13 @@ public class SelectNode : CompositeNode
 
     public override void OnStart()
     {
-        choiceMade = false;
         SetPossibleNodes();
+        if(agent.currentCommand == CurrentCommand.None)
+            agent.currentCommand = CurrentCommand.OutOfCommands;
+
         currentCommand = agent.commandQueue.Peek();
-        choiceMade = true;
-    }
-    
-    private void OutOfCommands()
-    {
-        var closestPos = GameObject.FindGameObjectsWithTag("EnemyCommander")
-            .OrderBy(x => Vector3.Distance(agent.enemyTransform.position, x.transform.position)).ToArray()[0].transform.position;
         
-        agent.TargetQueue.Enqueue(closestPos);
-        agent.commandQueue.Enqueue(CurrentCommand.MoveToPosition);
-        agent.commandQueue.Enqueue(CurrentCommand.GetInstructions);
+        choiceMade = true;
     }
     
     private void OnObjectSeen(TraceType obj)
@@ -38,18 +31,25 @@ public class SelectNode : CompositeNode
         }
     }
 
-    public void SetPossibleNodes()
+    private void SetPossibleNodes()
     {
         foreach (var n in children)
         {
-            var traveler = n as TravelNode;
+            var traveler = n as TravelNode2D;
 
             if (traveler)
             {
                 ownedNodes.Add(CurrentCommand.MoveToPosition, traveler);
                 continue;
             }
-            
+
+            var check = n as GridCheckerNode;
+
+            if (check)
+            {
+                ownedNodes.Add(CurrentCommand.OutOfCommands, check);
+            }
+
         }
 
     }
@@ -61,12 +61,9 @@ public class SelectNode : CompositeNode
     
     public override State OnUpdate()
     {
-        if(agent.commandQueue.Count < 1)
-            OutOfCommands();
+        if (agent.currentCommand == CurrentCommand.None) return State.Update;
         
-        if (!choiceMade) return State.Update;
-        
-        var child = ownedNodes[currentCommand];
+        var child = ownedNodes[agent.currentCommand];
 
         switch (child.Update())
         {
@@ -77,7 +74,8 @@ public class SelectNode : CompositeNode
                 return State.Update;
 
             case State.Success:
-                currentCommand = agent.commandQueue.Peek();
+                //currentCommand = agent.commandQueue.Peek();
+                Debug.Log(agent.currentCommand);
                 break;
         }
 
