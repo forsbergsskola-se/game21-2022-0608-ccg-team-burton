@@ -280,6 +280,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1472386832 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3476298978988839911, guid: a40241267d9f6cf44bf45eab6028acfe,
+    type: 3}
+  m_PrefabInstance: {fileID: 3476298979210932212}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbfbde2ba47772f4e8b0d2e6c59dcdb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1495322439
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,6 +615,11 @@ PrefabInstance:
       propertyPath: ui
       value: 
       objectReference: {fileID: 651083061}
+    - target: {fileID: 3688288116838923508, guid: 6b6eb237d78396e4e9db8caad75ca5d9,
+        type: 3}
+      propertyPath: libraries
+      value: 
+      objectReference: {fileID: 1472386832}
     - target: {fileID: 3688288116838923508, guid: 6b6eb237d78396e4e9db8caad75ca5d9,
         type: 3}
       propertyPath: inventorySlots.Array.data[0]
