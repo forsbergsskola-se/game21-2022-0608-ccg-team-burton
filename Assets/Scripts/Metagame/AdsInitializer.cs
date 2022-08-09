@@ -38,22 +38,29 @@ namespace Metagame
         
         private void Awake()
         {
-            // Get the Ad Unit ID for the current platform:
-            _placementID = (Application.platform == RuntimePlatform.IPhonePlayer)
-                ? _iOSId
-                : _androidID;
+            InitializeAds();
 
-            if (_placementID == _iOSId)
-                AssignAdIds(_iOS);
-            else
-                AssignAdIds(_android);
-            
-            Advertisement.Initialize(_placementID, _testMode, this);
-            
             if (ShowBanner)
                 ShowBannerAd();
             
             AssignButtons();
+        }
+
+
+
+        private void InitializeAds()
+        {
+            // Get the Ad Unit ID for the current platform:
+            _placementID = (Application.platform == RuntimePlatform.IPhonePlayer)
+                ? _iOSId
+                : _androidID;
+            
+            Advertisement.Initialize(_placementID, _testMode, this);
+            
+            if (_placementID == _iOSId)
+                AssignAdIds(_iOS);
+            else
+                AssignAdIds(_android);
         }
 
         
