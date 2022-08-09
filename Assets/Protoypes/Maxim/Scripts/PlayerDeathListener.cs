@@ -9,9 +9,10 @@ public class PlayerDeathListener : MonoBehaviour
     [SerializeField] GameEvent _gameEvent;
     [SerializeField] UnityEvent _unityEvent;
 
-    void Awake()
+    void Start()
     {
         _gameEvent.Register(playerDeathListener:this);
+        Debug.Log("Registered");
         gameObject.SetActive(false);
     }
 

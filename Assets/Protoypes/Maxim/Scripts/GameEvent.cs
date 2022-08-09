@@ -13,8 +13,6 @@ public class GameEvent : ScriptableObject
         {
             globalEventListener.RaiseEvent();
         }
-
-        Debug.Log("We do be Invokeing");
     }
 
     public void Register(PlayerDeathListener playerDeathListener) => _listeners.Add(playerDeathListener);

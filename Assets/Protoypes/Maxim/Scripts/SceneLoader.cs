@@ -9,4 +9,9 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(_sceneName);
         Time.timeScale = 1;
     }
+
+    public void RestartSceen()
+    {
+        
+    }
 }

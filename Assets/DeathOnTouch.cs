@@ -8,6 +8,7 @@ public class DeathOnTouch : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D col)
     {
+        Debug.Log("collided");
         if (col.gameObject.CompareTag("Player"))
         {
             var playerHealth =col.gameObject.GetComponent<IDamageable>(); 
