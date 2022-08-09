@@ -13,9 +13,10 @@ public class BUEquipmentSO : ScriptableObject
     public string Name;
     
     public string AttributeDescription;
+    public string AttributeValueID;
     public float AttributeValue;
     public Sprite Icon;
-
+    public string RarityID;
     public Rarity Rarity;
     
     public int testInt;
