@@ -409,6 +409,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpgradeScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 5752209485782625474, guid: 1072aef07a42fa147b4c4f452910dc20,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7428781205555222994, guid: 1072aef07a42fa147b4c4f452910dc20,
         type: 3}
       propertyPath: m_Pivot.x
@@ -735,6 +740,30 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1393154143, guid: 17a79eb4b08abb44fb34d3fd24039688, type: 3}
+      propertyPath: m_Name
+      value: Weapon Slot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1421814584, guid: 17a79eb4b08abb44fb34d3fd24039688, type: 3}
+      propertyPath: m_Name
+      value: Chest Slot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1613182652, guid: 17a79eb4b08abb44fb34d3fd24039688, type: 3}
+      propertyPath: m_Name
+      value: Head Slot
+      objectReference: {fileID: 0}
+    - target: {fileID: 2059573509, guid: 17a79eb4b08abb44fb34d3fd24039688, type: 3}
+      propertyPath: m_Name
+      value: Feet Slot
+      objectReference: {fileID: 0}
+    - target: {fileID: 2112999880, guid: 17a79eb4b08abb44fb34d3fd24039688, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2112999880, guid: 17a79eb4b08abb44fb34d3fd24039688, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 3760054208502085792, guid: 17a79eb4b08abb44fb34d3fd24039688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -748,7 +777,7 @@ PrefabInstance:
     - target: {fileID: 3760054208502085792, guid: 17a79eb4b08abb44fb34d3fd24039688,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3760054208502085792, guid: 17a79eb4b08abb44fb34d3fd24039688,
         type: 3}
@@ -840,11 +869,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3760054208502085793, guid: 17a79eb4b08abb44fb34d3fd24039688,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1091833630}
     - target: {fileID: 3760054208502085794, guid: 17a79eb4b08abb44fb34d3fd24039688,
         type: 3}
       propertyPath: m_Name
@@ -904,7 +928,7 @@ PrefabInstance:
     - target: {fileID: 3676017915770118689, guid: 4c9909d36decd904ebebcc9a3ff2bf63,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3676017915770118689, guid: 4c9909d36decd904ebebcc9a3ff2bf63,
         type: 3}
