@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 
 [CreateAssetMenu(fileName = "EquipmentData", menuName = "BUInventory/EquipmentData")]
-public class BUEquipment : ScriptableObject
+public class BUEquipmentSO : ScriptableObject
 {
     public string ID;
     

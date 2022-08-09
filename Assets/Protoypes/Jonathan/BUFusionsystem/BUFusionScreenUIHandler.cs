@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class BUFusionScreenUIHandler : MonoBehaviour
 {
-    public BUEquipment EquipmentData;
+    public BUEquipmentSO equipmentSoData;
     
     //UPDATE FIELDS
     [SerializeField] private GameObject EquipmentIcon;
@@ -17,9 +17,9 @@ public class BUFusionScreenUIHandler : MonoBehaviour
 
     void OnEnable()
     {
-        EquipmentIcon.GetComponent<Image>().sprite = EquipmentData.Icon;
-        Rarity.SetText("Rarity: "+EquipmentData.Rarity.ToString());
-        AttributeText.SetText(EquipmentData.AttributeDescription+" " +EquipmentData.AttributeValue.ToString() );
+        EquipmentIcon.GetComponent<Image>().sprite = equipmentSoData.Icon;
+        Rarity.SetText("Rarity: "+equipmentSoData.Rarity.ToString());
+        AttributeText.SetText(equipmentSoData.AttributeDescription+" " +equipmentSoData.AttributeValue.ToString() );
 
     }
  

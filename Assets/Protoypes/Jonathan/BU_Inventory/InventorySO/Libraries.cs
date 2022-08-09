@@ -2,10 +2,12 @@ using System.Linq;
 using UnityEngine;
 
 //Dont want library in scene
-public class ItemLibrary : MonoBehaviour
+public class Libraries : MonoBehaviour
 {
-    public  LibrarySO ItemLibrarySos;
-    
+    public  BUMatlerialsLibrarySO MatlerialsLibrarySo;
+    public BUEquippableLibrarySO EquipmentLibrarySo;
+
+
     // public ActionItem GetGemFromLibrary(string gemID)
     // {
     //     //TODO: If dictionary would be nice

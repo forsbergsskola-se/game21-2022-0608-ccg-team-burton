@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1393154144}
   - component: {fileID: 1393154146}
   - component: {fileID: 1393154145}
+  - component: {fileID: 588048018}
   m_Layer: 5
   m_Name: Weapon Slot
   m_TagString: Untagged
@@ -77,6 +78,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &588048018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393154143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe53203328e84d49a2316d8989202a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipmentSo: {fileID: 11400000, guid: 6b0feb39a0395f045b0526ecb3ddb6c4, type: 2}
+  UpgradeScreen: {fileID: 0}
 --- !u!1 &1421814584
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,6 +103,7 @@ GameObject:
   - component: {fileID: 1421814585}
   - component: {fileID: 1421814587}
   - component: {fileID: 1421814586}
+  - component: {fileID: 1326070026}
   m_Layer: 5
   m_Name: Chest Slot
   m_TagString: Untagged
@@ -154,6 +170,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1326070026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421814584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe53203328e84d49a2316d8989202a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipmentSo: {fileID: 11400000, guid: c441c99003248dd4d8d2a2e6e706e387, type: 2}
+  UpgradeScreen: {fileID: 0}
 --- !u!1 &1613182652
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,6 +195,7 @@ GameObject:
   - component: {fileID: 1613182653}
   - component: {fileID: 1613182655}
   - component: {fileID: 1613182654}
+  - component: {fileID: 1878881310}
   m_Layer: 5
   m_Name: Head Slot
   m_TagString: Untagged
@@ -231,6 +262,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1878881310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613182652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe53203328e84d49a2316d8989202a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipmentSo: {fileID: 11400000, guid: 9dcf1d0796acb084eb7b5f2b496e92ac, type: 2}
+  UpgradeScreen: {fileID: 0}
 --- !u!1 &2059573509
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,8 +287,9 @@ GameObject:
   - component: {fileID: 2059573510}
   - component: {fileID: 2059573512}
   - component: {fileID: 2059573511}
+  - component: {fileID: 994450832}
   m_Layer: 5
-  m_Name: Feet Slot
+  m_Name: Legs Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -308,6 +354,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &994450832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059573509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe53203328e84d49a2316d8989202a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipmentSo: {fileID: 11400000, guid: fd7d6491783f8d94782970baefae8c75, type: 2}
+  UpgradeScreen: {fileID: 0}
 --- !u!1 &2112999879
 GameObject:
   m_ObjectHideFlags: 0

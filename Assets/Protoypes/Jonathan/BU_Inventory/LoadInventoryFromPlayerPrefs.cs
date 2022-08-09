@@ -4,7 +4,7 @@ using UnityEngine;
 public class LoadInventoryFromPlayerPrefs : MonoBehaviour
 {
     [SerializeField]
-    private ItemLibrary itemLibrary;
+    private Libraries libraries;
 
     [SerializeField]
     private GameObject inventorySlot;
@@ -30,7 +30,7 @@ public class LoadInventoryFromPlayerPrefs : MonoBehaviour
         }
         var index = 0;
         
-        foreach (var item in itemLibrary.ItemLibrarySos.Library)
+        foreach (var item in libraries.MatlerialsLibrarySo.InventoryLibrary)
         {
             if (PlayerPrefs.GetInt(item.GetItemID()) <= 0) continue;
             var itemInSlot = Instantiate(inventorySlot, inventorySlots[index].transform.position , Quaternion.identity);

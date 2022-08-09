@@ -1056,13 +1056,14 @@ GameObject:
   - component: {fileID: 8616620451430531625}
   - component: {fileID: 8536243300012931608}
   - component: {fileID: 4161867315974066718}
+  - component: {fileID: 2135628260}
   m_Layer: 5
   m_Name: UpgradeScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7428781205555222994
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1087,7 +1088,7 @@ RectTransform:
   - {fileID: 1133037147}
   - {fileID: 8736275437415672244}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1156,6 +1157,22 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2135628260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5752209485782625474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2f66166b0c469947a61516d28572bdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipmentSoData: {fileID: 0}
+  EquipmentIcon: {fileID: 3834205139099808088}
+  Rarity: {fileID: 3106505165143205155}
+  AttributeText: {fileID: 2117543597}
 --- !u!1 &6777631334143194772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1627,7 +1644,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Current ATTR: '
+  m_text: 'Rarity:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3b7e287e73342ac46ba636a6b0138ead, type: 2}
   m_sharedMaterial: {fileID: -2717891193415401434, guid: 3b7e287e73342ac46ba636a6b0138ead,
