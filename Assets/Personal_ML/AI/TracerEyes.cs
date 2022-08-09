@@ -30,6 +30,15 @@ public enum Actions
     Stop
 }
 
+[Flags]
+public enum PlayerEncounter
+{
+    None = 0,
+    PlayerNoticed = 1,
+    PlayerBehind = 2,
+    PlayerInFront = 4
+}
+
 [Serializable]
 public class HitResults
 {
@@ -58,6 +67,8 @@ public class TracerEyes : MonoBehaviour
     public Actions Actions { get; private set; }
     public Vector2 EstimatedJumpForce { get; private set; }
     public bool PlayerInAttackRange { get; private set;}
+    
+    public bool QuitNode { get; private set; }
     
     private bool UnderAttack;
     [HideInInspector] public Transform PlayerTrans;
@@ -99,13 +110,36 @@ public class TracerEyes : MonoBehaviour
         if (timeSinceTrace >= traceInterval)
         {
             timeSinceTrace -= traceInterval;
-            DoMultiTrace();
+            //DoMultiTrace();
+            TraceForGround();
         }
     }
 
     public int GetPlayerHealth()
         => _playerHealth.CurrentHealth;
+    
+    
+    private void TraceForGround()
+    {
+        var pos = transform.position;
+        var dir = transform.right + new Vector3(0, -1);
+        var traceDist = 2;
+        var hit = Physics2D.Raycast(pos, dir, traceDist, multiMask);
 
+        if (hit)
+        {
+            Debug.DrawRay(pos, dir *hit.distance, Color.green, traceInterval);
+            QuitNode = true;
+        }
+        else
+        {
+            Debug.DrawRay(pos, dir *traceDist, Color.red, traceInterval);
+            QuitNode = false;
+        }
+
+        GroundSeen = hit;
+    }
+    
     private bool IsObjectBehind(Vector2 objectPos)
     {
         return Vector2.Dot(transform.TransformDirection(Vector3.right),

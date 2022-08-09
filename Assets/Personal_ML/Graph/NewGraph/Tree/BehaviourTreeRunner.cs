@@ -7,8 +7,7 @@ using UnityEngine;
 public class BehaviourTreeRunner : MonoBehaviour
 {
     public BehaviourTree tree;
-    public Transform commanderTrans;
-    public bool readyToRun;
+    [HideInInspector] public bool readyToRun;
     
     void Start()
     {
@@ -22,26 +21,13 @@ public class BehaviourTreeRunner : MonoBehaviour
         tree.Bind(new AiAgent()
         {
             enemyTransform = gameObject.transform,
-            grid = grid
+            grid = grid,
+            anim = GetComponent<Animator>(),
+            enemyEyes = GetComponentInChildren<TracerEyes>(),
+            body = GetComponent<Rigidbody2D>(),
+            keepWalking = true
         });
-
         readyToRun = true;
-    }
-    
-    private void OnObjectSeen(TraceType obj)
-    {
-        
-    }
-
-    public Transform GetTopParent(Transform pTrans)
-    {
-        if (pTrans.parent)
-        {
-            pTrans = pTrans.parent;
-            GetTopParent(pTrans);
-        }
-        
-        return pTrans;
     }
     
     void Update()
@@ -49,21 +35,6 @@ public class BehaviourTreeRunner : MonoBehaviour
         if (!readyToRun) return;
         
         tree.Update();
-    }
-
-    public void MoveToDestination(Vector3 destination)
-    {
-       
-    }
-
-    public void SetNextCommand(CurrentCommand command)
-    {
-       
-    }
-
-    public void GetNextDestination(Action<Instruction> callBack)
-    {
-        
     }
 }
 

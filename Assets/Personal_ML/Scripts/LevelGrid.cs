@@ -334,7 +334,6 @@ public class LevelGrid : MonoBehaviour
     {
         var min = location - new Vector2(size.x  / 2, size.y / 2);
         var max = location + new Vector2(size.x  / 2, size.y / 2);
-        Debug.Log($"min: {min} max {max}");
 
         return new Tuple<Vector2, Vector2>(min, max);
     }
