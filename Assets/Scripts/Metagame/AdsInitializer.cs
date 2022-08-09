@@ -56,11 +56,8 @@ namespace Metagame
                 : _androidID;
             
             Advertisement.Initialize(_placementID, _testMode, this);
-            
-            if (_placementID == _iOSId)
-                AssignAdIds(_iOS);
-            else
-                AssignAdIds(_android);
+
+            AssignAdIds(_placementID == _iOSId ? _iOS : _android);
         }
 
         
@@ -76,7 +73,7 @@ namespace Metagame
 
         private void AssignButtons()
         {
-            ShowInterstitialAdButton.onClick.AddListener(PlayAd);
+            ShowInterstitialAdButton.onClick.AddListener(PlayInterstitialAd);
             ShowInterstitialAdButton.interactable = true;
             
             ShowRewardAdButton.onClick.AddListener(PlayRewardedAd);
@@ -91,15 +88,17 @@ namespace Metagame
 
         
 
-        private void PlayAd()
+        private void PlayInterstitialAd()
         {
             Debug.Log("Play interstitial Ad");
+            Advertisement.Load(_interstitialID, this);
             Advertisement.Show(_interstitialID);
         }
 
         private void PlayRewardedAd()
         {
             Debug.Log("Play rewarded Ad");
+            Advertisement.Load(_rewardID, this);
             Advertisement.Show(_rewardID);
         }
 
@@ -107,6 +106,11 @@ namespace Metagame
         private void ShowBannerAd()
         {
             Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
+            Advertisement.Banner.Load(_bannerID);
+
+            if (Advertisement.Banner.isLoaded == false)
+                StartCoroutine(RepeatShowBanner());
+            
             Advertisement.Banner.Show(_bannerID);
         }
 
@@ -155,25 +159,25 @@ namespace Metagame
         
         public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
         {
-            Debug.Log("ERROR: " + message);
+            Debug.Log($"Unity Ads Load Failed: {error.ToString()}");
         }
 
-        
-        
-        
-        
+
+
+
+
         /// <summary>
         /// Ads OnShow Logic
         /// </summary>
-        
+
         public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
         {
-            Debug.Log("ERROR: " + message);
+            Debug.Log($"Unity Ads Initialization Failed: {error.ToString()}");
         }
 
-        
-        
-        
+
+
+
         public void OnUnityAdsShowStart(string placementId)
         {
             Debug.Log("Video Started");
