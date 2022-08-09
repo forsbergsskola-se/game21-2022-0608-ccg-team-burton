@@ -25,6 +25,8 @@ namespace Entity
         
         Coins _coins;
         ItemCollector _itemCollector;
+
+        [SerializeField] GameEvent playerDies;
         
         
         public int CurrentHealth
@@ -83,8 +85,6 @@ namespace Entity
         
         private void OnDeath() //TODO: Move to own script?
         {
- 
-            IsDead = true;
             //Make death-script and make event or something
             
 
@@ -97,7 +97,12 @@ namespace Entity
                 _itemCollector._coinCounter -= _itemCollector._coinCounter;
                 _itemCollector.UpdateCoinText(_itemCollector._coinCounter);
             }
+            playerDies.Invoke();
+            
             gameObject.SetActive(false);
+            
+            IsDead = true;
+
         }
 
         private IEnumerator InvulnFrameTimer(float invulnFrameTimer)
