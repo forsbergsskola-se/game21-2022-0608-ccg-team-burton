@@ -40,12 +40,9 @@ public class AiAgent
     public Queue<Vector3> TargetQueue = new();
 
     public Queue<CurrentCommand> commandQueue = new();
-
     public Animator anim;
-    public bool pathBlocked;
-
-    public bool commanderReached;
-
+    public LevelGrid grid;
+    
     public AiAgent()
     {
         currentDestination = new Vector3(0, 0, 0);
