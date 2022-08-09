@@ -10110,7 +10110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce0d3a9aed20514fa130191de54cc91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeathScreen: {fileID: 5712137843595097204}
+  playerDies: {fileID: 0}
 --- !u!224 &758766392
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12381,7 +12381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce0d3a9aed20514fa130191de54cc91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeathScreen: {fileID: 5712137843595097204}
+  playerDies: {fileID: 0}
 --- !u!1001 &1503746376
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12532,6 +12532,42 @@ PrefabInstance:
       propertyPath: coinText
       value: 
       objectReference: {fileID: 3200031517315348220}
+    - target: {fileID: 3205524570191263581, guid: c8e35a458123a9f4c913169b6c32a26c,
+        type: 3}
+      propertyPath: playerDies
+      value: 
+      objectReference: {fileID: 11400000, guid: f8811dc9379df0744a45a2e15bd6f078,
+        type: 2}
+    - target: {fileID: 3205524570191263582, guid: c8e35a458123a9f4c913169b6c32a26c,
+        type: 3}
+      propertyPath: hearts.Array.data[0]
+      value: 
+      objectReference: {fileID: 3810530921694747064}
+    - target: {fileID: 3205524570191263582, guid: c8e35a458123a9f4c913169b6c32a26c,
+        type: 3}
+      propertyPath: hearts.Array.data[1]
+      value: 
+      objectReference: {fileID: 4579817604315779209}
+    - target: {fileID: 3205524570191263582, guid: c8e35a458123a9f4c913169b6c32a26c,
+        type: 3}
+      propertyPath: hearts.Array.data[2]
+      value: 
+      objectReference: {fileID: 6175868630857233067}
+    - target: {fileID: 3205524570191263582, guid: c8e35a458123a9f4c913169b6c32a26c,
+        type: 3}
+      propertyPath: hearts.Array.data[3]
+      value: 
+      objectReference: {fileID: 6834891640556649370}
+    - target: {fileID: 3205524570191263582, guid: c8e35a458123a9f4c913169b6c32a26c,
+        type: 3}
+      propertyPath: hearts.Array.data[4]
+      value: 
+      objectReference: {fileID: 5565236465327332264}
+    - target: {fileID: 3205524570191263582, guid: c8e35a458123a9f4c913169b6c32a26c,
+        type: 3}
+      propertyPath: hearts.Array.data[5]
+      value: 
+      objectReference: {fileID: 5067903508145083033}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: c8e35a458123a9f4c913169b6c32a26c, type: 3}
@@ -12997,7 +13033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce0d3a9aed20514fa130191de54cc91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeathScreen: {fileID: 5712137843595097204}
+  playerDies: {fileID: 0}
 --- !u!4 &1792658730 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3887871905063471677, guid: 06932baa51403d543857f2b7958cdf27,
@@ -16036,12 +16072,19 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7878519793387414472, guid: 923f5c0b7bee39749b1130a0678f2574,
+        type: 3}
+      propertyPath: playerDies
+      value: 
+      objectReference: {fileID: 11400000, guid: f8811dc9379df0744a45a2e15bd6f078,
+        type: 2}
     - target: {fileID: 9022901378440353445, guid: 923f5c0b7bee39749b1130a0678f2574,
         type: 3}
       propertyPath: m_Name
       value: Parallax Manager
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5402823869654701481, guid: 923f5c0b7bee39749b1130a0678f2574, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 923f5c0b7bee39749b1130a0678f2574, type: 3}
 --- !u!1 &2381072988743090519
@@ -16147,6 +16190,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6851419594516715218, guid: 63c7bdcbf0d5b394796fa27c8c578c6d,
         type: 3}
+      propertyPath: playerDies
+      value: 
+      objectReference: {fileID: 11400000, guid: f8811dc9379df0744a45a2e15bd6f078,
+        type: 2}
+    - target: {fileID: 6851419594516715218, guid: 63c7bdcbf0d5b394796fa27c8c578c6d,
+        type: 3}
       propertyPath: DeathScreen
       value: 
       objectReference: {fileID: 5712137843595097204}
@@ -16225,7 +16274,8 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 1.1962285
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4865460206684134544, guid: 63c7bdcbf0d5b394796fa27c8c578c6d, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7347420564388313001, guid: 63c7bdcbf0d5b394796fa27c8c578c6d,
         type: 3}
