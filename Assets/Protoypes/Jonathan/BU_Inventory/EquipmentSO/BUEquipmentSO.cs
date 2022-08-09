@@ -18,7 +18,7 @@ public class BUEquipmentSO : ScriptableObject
     public Sprite Icon;
     public string RarityID;
     public Rarity Rarity;
-    
+    public Sprite UpgradeMaterialIcon;
     public int testInt;
 
 }

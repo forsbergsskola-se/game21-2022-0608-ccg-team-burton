@@ -23,6 +23,10 @@ public class SetPlayerPrefsForEquipment : MonoBehaviour
             else
             {
                 Debug.Log($"No entry for {equipment.Name}. Creating new entry with {equipment.Rarity}-rarity. This equipment affects {equipment.AttributeDescription} with a modifier of {equipment.AttributeValue}.");
+                PlayerPrefs.SetString(equipment.ID, equipment.Name);
+                PlayerPrefs.SetString(equipment.RarityID, equipment.Rarity.ToString());
+                PlayerPrefs.SetFloat(equipment.AttributeValueID, equipment.AttributeValue);
+                
             }
         }
     }

@@ -12,7 +12,8 @@ public class BUFusionScreenUIHandler : MonoBehaviour
     [SerializeField] private GameObject EquipmentIcon;
     [SerializeField] private TMP_Text Rarity;
     [SerializeField] private TMP_Text AttributeText;
-    
+    [SerializeField] private GameObject UpgradeMaterialsIcon;
+    [SerializeField] private TMP_Text NeededMaterialText;
     
 
     void OnEnable()
