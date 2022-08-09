@@ -107,7 +107,7 @@ namespace Metagame
         private void ShowBannerAd()
         {
             Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
-            Advertisement.Banner.Load(_bannerID);
+            Advertisement.Banner.Load(_bannerID, new BannerLoadOptions {loadCallback = OnBannerLoaded, errorCallback = OnBannerLoadError});
 
             if (Advertisement.Banner.isLoaded == false)
                 StartCoroutine(RepeatShowBanner());
@@ -117,7 +117,7 @@ namespace Metagame
 
 
         
-        private void HideBannerAd() => Advertisement.Banner.Hide();
+        private static void HideBannerAd() => Advertisement.Banner.Hide();
 
         
         
@@ -126,8 +126,19 @@ namespace Metagame
             yield return new WaitForSeconds(1);
             ShowBannerAd();
         }
+
+
+        private void OnBannerLoaded()
+            => Advertisement.Banner.Show(_bannerID, new BannerOptions{});
         
         
+        
+        
+        private static void OnBannerLoadError(string message)
+            => Debug.Log($"Error loading Banner Ad - {message}");
+
+        
+
         
         /// <summary>
         /// Initialization Logic
@@ -135,6 +146,8 @@ namespace Metagame
         
         public void OnInitializationComplete() 
             => Debug.Log("Unity Ads initialization complete.");
+        
+        //TODO: Can add banner ad here
         
         
 
