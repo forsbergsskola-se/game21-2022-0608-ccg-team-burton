@@ -11,6 +11,7 @@ public class BUEquipmentSO : ScriptableObject
     public string ID;
     
     public string Name;
+    
     public string AttributeDescription;
     public float AttributeValue;
     public Sprite Icon;

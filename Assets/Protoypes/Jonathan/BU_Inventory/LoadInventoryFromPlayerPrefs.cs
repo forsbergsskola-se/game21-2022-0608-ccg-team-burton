@@ -21,8 +21,11 @@ public class LoadInventoryFromPlayerPrefs : MonoBehaviour
       UpdateInventory();
     }
 
+    
+    
+    
     //Yes this is inefficient. But it is million times better than no system at all...
-    public void UpdateInventory()
+    private void UpdateInventory()
     {
         if (currentItems.Count > 0)
         {
