@@ -92,17 +92,18 @@ namespace Metagame
         {
             Debug.Log("Play interstitial Ad");
             Advertisement.Load(_interstitialID, this);
-            Advertisement.Show(_interstitialID);
         }
 
+        
+        
         private void PlayRewardedAd()
         {
             Debug.Log("Play rewarded Ad");
             Advertisement.Load(_rewardID, this);
-            Advertisement.Show(_rewardID);
         }
 
 
+        
         private void ShowBannerAd()
         {
             Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
@@ -115,6 +116,7 @@ namespace Metagame
         }
 
 
+        
         private void HideBannerAd() => Advertisement.Banner.Hide();
 
         
@@ -142,7 +144,6 @@ namespace Metagame
         {
             Debug.Log($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
         }
-
         
         
         
@@ -153,6 +154,7 @@ namespace Metagame
         public void OnUnityAdsAdLoaded(string placementId)
         {
             Debug.Log("Ads are ready");
+            Advertisement.Show(placementId);
         }
 
         
@@ -163,9 +165,7 @@ namespace Metagame
         }
 
 
-
-
-
+        
         /// <summary>
         /// Ads OnShow Logic
         /// </summary>
@@ -176,14 +176,12 @@ namespace Metagame
         }
 
 
-
-
+        
         public void OnUnityAdsShowStart(string placementId)
         {
             Debug.Log($"Started Ad Unit {placementId}");
         }
 
-        
         
         
         public void OnUnityAdsShowClick(string placementId)
@@ -193,7 +191,6 @@ namespace Metagame
         
         
         
-
         public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
         {
             if (placementId == _rewardID && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
