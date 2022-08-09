@@ -154,7 +154,7 @@ namespace Metagame
         public void OnUnityAdsAdLoaded(string placementId)
         {
             Debug.Log("Ads are ready");
-            Advertisement.Show(placementId);
+            Advertisement.Show(placementId, this);
         }
 
         
@@ -193,11 +193,14 @@ namespace Metagame
         
         public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
         {
-            if (placementId == _rewardID && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
-                Debug.Log($"{placementId} status = {showCompletionState} - Reward Player for watching full reward video");
+            if (placementId == _interstitialID && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
+                Debug.Log($"Ad status = {showCompletionState} - Reward Player for watching full {placementId} video");
 
-            else if (placementId == _rewardID && showCompletionState == UnityAdsShowCompletionState.SKIPPED)
-                Debug.Log($"{placementId} status = {showCompletionState} - Reward Player for skipping reward video");
+            else if (placementId == _rewardID && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
+                Debug.Log($"Ad status = {showCompletionState} - Reward Player for watching {placementId} video");
+
+            else if (placementId == _interstitialID && showCompletionState == UnityAdsShowCompletionState.SKIPPED)
+                Debug.Log($"Ad status = {showCompletionState} - Reward Player for skipping {placementId} video");
         }
     }
 }
