@@ -56,7 +56,6 @@ namespace Metagame
                 : _androidID;
             
             Advertisement.Initialize(_placementID, _testMode, this);
-
             AssignAdIds(_placementID == _iOSId ? _iOS : _android);
         }
 
@@ -73,10 +72,10 @@ namespace Metagame
 
         private void AssignButtons()
         {
-            ShowInterstitialAdButton.onClick.AddListener(PlayInterstitialAd);
+            ShowInterstitialAdButton.onClick.AddListener(LoadInterstitialAd);
             ShowInterstitialAdButton.interactable = true;
             
-            ShowRewardAdButton.onClick.AddListener(PlayRewardedAd);
+            ShowRewardAdButton.onClick.AddListener(LoadRewardedAd);
             ShowRewardAdButton.interactable = true;
             
             ShowBannerAdButton.onClick.AddListener(ShowBannerAd);
@@ -88,7 +87,7 @@ namespace Metagame
 
         
 
-        private void PlayInterstitialAd()
+        private void LoadInterstitialAd()
         {
             Debug.Log("Play interstitial Ad");
             Advertisement.Load(_interstitialID, this);
@@ -96,7 +95,7 @@ namespace Metagame
 
         
         
-        private void PlayRewardedAd()
+        private void LoadRewardedAd()
         {
             Debug.Log("Play rewarded Ad");
             Advertisement.Load(_rewardID, this);
@@ -133,20 +132,18 @@ namespace Metagame
         /// Initialization Logic
         /// </summary>
         
-        public void OnInitializationComplete()
-        { 
-            Debug.Log("Unity Ads initialization complete.");
-        }
+        public void OnInitializationComplete() 
+            => Debug.Log("Unity Ads initialization complete.");
+        
+        
 
         
         
-        public void OnInitializationFailed(UnityAdsInitializationError error, string message)
-        {
-            Debug.Log($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
-        }
-        
-        
-        
+        public void OnInitializationFailed(UnityAdsInitializationError error, string message) 
+            => Debug.Log($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
+
+
+
         /// <summary>
         /// Ads OnLoad Logic
         /// </summary>
@@ -159,38 +156,31 @@ namespace Metagame
 
         
         
-        public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
-        {
-            Debug.Log($"Error loading Ad Unit {placementId}: {error.ToString()} - {message}");
-        }
+        public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message) 
+            => Debug.Log($"Error loading Ad Unit {placementId}: {error.ToString()} - {message}");
 
 
-        
+
         /// <summary>
         /// Ads OnShow Logic
         /// </summary>
 
-        public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
-        {
-            Debug.Log($"Error showing Ad Unit {placementId}: {error.ToString()} - {message}");
-        }
+        public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message) 
+            => Debug.Log($"Error showing Ad Unit {placementId}: {error.ToString()} - {message}");
 
 
-        
-        public void OnUnityAdsShowStart(string placementId)
-        {
-            Debug.Log($"Started Ad Unit {placementId}");
-        }
 
+        public void OnUnityAdsShowStart(string placementId) 
+            => Debug.Log($"Started Ad Unit {placementId}");
+
+
+
+        public void OnUnityAdsShowClick(string placementId) 
+            => Debug.Log($"Clicked on {placementId}");
         
         
-        public void OnUnityAdsShowClick(string placementId)
-        {
-            Debug.Log($"Clicked on {placementId}");
-        }
         
-        
-        
+        //TODO: Add the reward logic based on Completion State
         public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
         {
             if (placementId == _interstitialID && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
