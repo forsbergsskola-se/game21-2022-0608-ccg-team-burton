@@ -7,14 +7,14 @@ public class Initialization : MonoBehaviour
     public Action OnInitComplete;
 
     [SerializeField] private Libraries equipmentLibrary;
-
+    [SerializeField] private UICurrencyUpdater uICurrencyUpdater;
 
     private void Start()
     {
         NewGamePlayerStats();
         
         //Update UI after init
-        OnInitComplete?.Invoke();
+        uICurrencyUpdater.OnCurrencyChanged?.Invoke();
     }
 //TODO: Should be called on like main map for first time setup. On second start (player prefs present) --> nothing will happen here
     private void NewGamePlayerStats()
