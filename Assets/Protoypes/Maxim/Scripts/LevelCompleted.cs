@@ -21,7 +21,7 @@ public class LevelCompleted : MonoBehaviour
         {
             currentCoins += coinBonus;
             //Save coins to inventory
-            PlayerPrefs.SetInt("CurrentCoins", PlayerPrefs.GetInt("CurrentCoins") + currentCoins);
+            PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) + currentCoins);
 
             winScreen.SetActive(true);
             Time.timeScale = 0; 
