@@ -12,15 +12,16 @@ public class SelectNode : CompositeNode
     [HideInInspector] public CurrentCommand currentCommand;
     [HideInInspector] public STATE nextState;
     private Dictionary<CurrentCommand, BaseNode> ownedNodes = new();
+    
+    private CubeFacts _current;
+    private bool _plusMinus;
+
+    private bool _choiceMade;
 
     public override void OnStart()
     {
         SetPossibleNodes();
-        if(agent.currentCommand == CurrentCommand.None)
-            agent.currentCommand = CurrentCommand.OutOfCommands;
-
-        currentCommand = agent.commandQueue.Peek();
-        
+        CheckOptions();
         choiceMade = true;
     }
     
@@ -29,6 +30,41 @@ public class SelectNode : CompositeNode
         if (currentCommand == CurrentCommand.None)
         {
         }
+    }
+    
+    private void CheckOptions()
+    {
+        _plusMinus = agent.enemyTransform.right.x > 0;
+        _current = agent.grid.GetSquareFromPoint(agent.enemyTransform.position);
+
+        if (!agent.enemyEyes.GroundSeen)
+        {
+            agent.commandQueue.Enqueue(CurrentCommand.Jump);
+            _choiceMade = true;
+            currentCommand = agent.commandQueue.Dequeue();
+            Debug.Log("jumping time");
+            return;
+        }
+        
+        if (_plusMinus)
+        {
+            if (_current.options.HasFlag(TileOptions.OpenPlus))
+            {
+                agent.commandQueue.Enqueue(CurrentCommand.MoveToPosition);
+                agent.currentDestination = new Vector3(_current.max.x, agent.enemyTransform.position.y);
+                currentCommand = agent.commandQueue.Dequeue();
+                _choiceMade = true;
+                return;
+            }
+        }
+        else
+        {
+            agent.commandQueue.Enqueue(CurrentCommand.None);
+        }
+        
+       // agent.commandQueue.Enqueue(CurrentCommand.None);
+      //  currentCommand = agent.commandQueue.Dequeue();
+      //  Debug.Log(currentCommand);
     }
 
     private void SetPossibleNodes()
@@ -50,8 +86,13 @@ public class SelectNode : CompositeNode
                 ownedNodes.Add(CurrentCommand.OutOfCommands, check);
             }
 
-        }
+            var jump = n as JumpNode;
 
+            if (jump)
+            {
+                ownedNodes.Add(CurrentCommand.Jump, jump);
+            }
+        }
     }
 
     public override void OnExit()
@@ -61,9 +102,9 @@ public class SelectNode : CompositeNode
     
     public override State OnUpdate()
     {
-        if (agent.currentCommand == CurrentCommand.None) return State.Update;
+        if (currentCommand == CurrentCommand.None || !choiceMade) return State.Update;
         
-        var child = ownedNodes[agent.currentCommand];
+        var child = ownedNodes[currentCommand];
 
         switch (child.Update())
         {
@@ -74,8 +115,7 @@ public class SelectNode : CompositeNode
                 return State.Update;
 
             case State.Success:
-                //currentCommand = agent.commandQueue.Peek();
-                Debug.Log(agent.currentCommand);
+                CheckOptions();
                 break;
         }
 
