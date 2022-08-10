@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3688288116838923508
 MonoBehaviour:
@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b823eb3fc2133444a944dbc67c9764e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  libraries: {fileID: 0}
+  libraries: {fileID: 3476298978988839911, guid: a40241267d9f6cf44bf45eab6028acfe,
+    type: 3}
   inventorySlot: {fileID: 6548483289138556154, guid: 29e1c68855e78ad418e43a1028fca253,
     type: 3}
   inventorySlots:
@@ -57,4 +58,4 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   ui: {fileID: 0}
-  currentItems: []
+  CurrentItems: []

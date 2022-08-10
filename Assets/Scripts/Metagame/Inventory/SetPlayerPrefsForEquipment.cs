@@ -22,6 +22,10 @@ public class SetPlayerPrefsForEquipment : MonoBehaviour
                 PlayerPrefs.SetFloat(equipment.AttributeValueID, equipment.AttributeValue);
 
             }
+            else
+            {
+                Debug.Log($"{equipment.Name} is present with id: {equipment.ID}");
+            }
         }
     }
 }
