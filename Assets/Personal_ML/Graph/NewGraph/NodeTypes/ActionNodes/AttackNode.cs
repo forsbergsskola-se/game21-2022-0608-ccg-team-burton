@@ -4,9 +4,11 @@ namespace NewGraph.NodeTypes.ActionNodes
 {
     public class AttackNode : ActionNode
     {
+        private float timeSinceAttack;
+        
         public override void OnStart()
         {
-            agent.anim.SetBool(Animator.StringToHash("Enemy_Walk2"), true);
+        
         }
 
         public override void OnExit()
@@ -16,6 +18,13 @@ namespace NewGraph.NodeTypes.ActionNodes
 
         public override State OnUpdate()
         {
+            if (timeSinceAttack >= agent.attackInterval)
+            {
+                agent.anim.SetTrigger(Animator.StringToHash("Enemy_Attack"));
+                timeSinceAttack -= agent.attackInterval;
+            }
+
+            timeSinceAttack += Time.deltaTime;
             return State.Update;
         }
     }

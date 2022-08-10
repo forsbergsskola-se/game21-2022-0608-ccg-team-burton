@@ -7,7 +7,7 @@ using UnityEngine;
 public class CurrencyUIUpdater : MonoBehaviour
 {
 
-    [SerializeField] private Initialization init;
+    [SerializeField] private UICurrencyUpdater currencyUpdater;
     
     [SerializeField] private TMP_Text coinAmountText;
     [SerializeField] private TMP_Text buttonAmountText;
@@ -15,12 +15,13 @@ public class CurrencyUIUpdater : MonoBehaviour
 
     private void OnEnable()
     {
-        init.OnInitComplete += UpdateCurrencyUI;
+        currencyUpdater.OnCurrencyChanged += UpdateCurrencyUI;
     }
 
     private void OnDisable()
     {
-        init.OnInitComplete -= UpdateCurrencyUI;
+        currencyUpdater.OnCurrencyChanged -= UpdateCurrencyUI;
+
     }
 
     private void UpdateCurrencyUI()

@@ -8,6 +8,11 @@ public class BehaviourTreeRunner : MonoBehaviour
 {
     public BehaviourTree tree;
     [HideInInspector] public bool readyToRun;
+
+    [Header("Enemy Attributes")] 
+    [SerializeField, Range(0.2f, 2)]private float attackInterval;
+    [SerializeField, Range(1f, 5)]private float baseMoveSpeed;
+    [SerializeField, Range(5, 10)]private float pursueMoveSpeed;
     
     void Start()
     {
@@ -25,7 +30,9 @@ public class BehaviourTreeRunner : MonoBehaviour
             anim = GetComponent<Animator>(),
             enemyEyes = GetComponentInChildren<TracerEyes>(),
             body = GetComponent<Rigidbody2D>(),
-            keepWalking = true
+            keepWalking = true,
+            attackInterval = attackInterval,
+            moveSpeed = baseMoveSpeed
         });
         readyToRun = true;
     }
