@@ -123,6 +123,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &925534688 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5609521060847783346, guid: c609f76e853bcc844853bebf2e80259c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1472958613}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8145f7b2272b74e44bf04ca8ad2dcef0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1136247761
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +240,7 @@ PrefabInstance:
     - target: {fileID: 2241896657917019300, guid: c609f76e853bcc844853bebf2e80259c,
         type: 3}
       propertyPath: m_Name
-      value: PlayerInitialization
+      value: Initialization
       objectReference: {fileID: 0}
     - target: {fileID: 9149717052070278926, guid: c609f76e853bcc844853bebf2e80259c,
         type: 3}
@@ -447,6 +459,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1097512147, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
+      propertyPath: init
+      value: 
+      objectReference: {fileID: 925534688}
     - target: {fileID: 8188770375977295125, guid: 1c9a3b07db90ccc4985c681aa62b3ec8,
         type: 3}
       propertyPath: m_Pivot.x
