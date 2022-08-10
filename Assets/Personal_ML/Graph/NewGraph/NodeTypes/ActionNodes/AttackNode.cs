@@ -29,6 +29,11 @@ namespace NewGraph.NodeTypes.ActionNodes
             {
                 return State.Success;
             }
+            
+            if (playerEncounter.HasFlag(PlayerEncounter.PlayerBehind))
+            {
+                return State.Success;
+            }
 
             timeSinceAttack += Time.deltaTime;
             return State.Update;
