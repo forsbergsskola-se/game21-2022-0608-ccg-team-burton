@@ -31,7 +31,6 @@ public class AiAgent
     public Vector3 currentDestination;
     public Queue<Vector2> TargetQueue = new();
 
-    public Queue<CurrentCommand> commandQueue = new();
     public Animator anim;
     public LevelGrid grid;
 
@@ -42,6 +41,10 @@ public class AiAgent
     public Rigidbody2D body;
 
     public bool keepWalking;
+
+    public float moveSpeed;
+
+    public float attackInterval = 0.3f;
     
     public AiAgent()
     {

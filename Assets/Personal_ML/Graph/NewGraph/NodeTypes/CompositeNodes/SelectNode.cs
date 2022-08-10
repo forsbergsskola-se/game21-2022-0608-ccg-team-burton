@@ -23,13 +23,7 @@ public class SelectNode : CompositeNode
         SetPossibleNodes();
         CheckOptions();
         choiceMade = true;
-    }
-    
-    private void OnObjectSeen(TraceType obj)
-    {
-        if (currentCommand == CurrentCommand.None)
-        {
-        }
+        currentCommand = CurrentCommand.MoveToPosition;
     }
     
     private void CheckOptions()
@@ -39,32 +33,12 @@ public class SelectNode : CompositeNode
 
         if (!agent.enemyEyes.GroundSeen)
         {
-            agent.commandQueue.Enqueue(CurrentCommand.Jump);
             _choiceMade = true;
-            currentCommand = agent.commandQueue.Dequeue();
-            Debug.Log("jumping time");
+            currentCommand = CurrentCommand.Jump;
             return;
         }
         
-        if (_plusMinus)
-        {
-            if (_current.options.HasFlag(TileOptions.OpenPlus))
-            {
-                agent.commandQueue.Enqueue(CurrentCommand.MoveToPosition);
-                agent.currentDestination = new Vector3(_current.max.x, agent.enemyTransform.position.y);
-                currentCommand = agent.commandQueue.Dequeue();
-                _choiceMade = true;
-                return;
-            }
-        }
-        else
-        {
-            agent.commandQueue.Enqueue(CurrentCommand.None);
-        }
-        
-       // agent.commandQueue.Enqueue(CurrentCommand.None);
-      //  currentCommand = agent.commandQueue.Dequeue();
-      //  Debug.Log(currentCommand);
+        currentCommand = CurrentCommand.MoveToPosition;
     }
 
     private void SetPossibleNodes()

@@ -1,17 +1,28 @@
+using System;
 using UnityEngine;
 
-public class PlayerInitialization : MonoBehaviour
+public class Initialization : MonoBehaviour
 {
 
     [SerializeField] private Libraries equipmentLibrary;
+    [SerializeField] private UICurrencyUpdater uICurrencyUpdater;
 
     private void Start()
     {
-        SetupOrUpdatePLayerStats();
+        NewGamePlayerStats();
+        
+        //Update UI after init
+        uICurrencyUpdater.OnCurrencyChanged?.Invoke();
     }
 //TODO: Should be called on like main map for first time setup. On second start (player prefs present) --> nothing will happen here
-    private void SetupOrUpdatePLayerStats()
+    private void NewGamePlayerStats()
     {
+        if(!PlayerPrefs.HasKey(PlayerPrefsKeys.CurrentCoins.ToString()))
+            PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), 0);
+        
+        if(!PlayerPrefs.HasKey(PlayerPrefsKeys.CurrentButtons.ToString()))
+            PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentButtons.ToString(), 0);
+        
         foreach (var equipment in equipmentLibrary.EquipmentLibrarySo.EquipablesLibrary)
         {
             if (!PlayerPrefs.HasKey(equipment.ID))
@@ -22,13 +33,6 @@ public class PlayerInitialization : MonoBehaviour
                 PlayerPrefs.SetFloat(equipment.AttributeValueID, equipment.AttributeValue);
 
             }
-            else
-            {
-                Debug.Log($"{equipment.Name} is present with id: {equipment.ID}");
-            }
         }
-        
-        PlayerPrefs.SetInt("CurrentCoins", 0);
-        PlayerPrefs.SetInt("CurrentButtons", 0);
     }
 }

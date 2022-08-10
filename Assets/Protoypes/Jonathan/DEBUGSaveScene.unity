@@ -301,25 +301,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1133557925 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2375309749274493535, guid: 440d18354c9726f419c470a62de00a4e,
-    type: 3}
-  m_PrefabInstance: {fileID: 2375309748227013370}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1133557930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1133557925}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79d18039efc01a444b162f3eef3e4963, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Library: {fileID: 3476298978988839911, guid: a40241267d9f6cf44bf45eab6028acfe, type: 3}
 --- !u!1 &1155721368
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,50 +486,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: DebugMenu
       objectReference: {fileID: 0}
-    - target: {fileID: 2375309749479234632, guid: 440d18354c9726f419c470a62de00a4e,
+    - target: {fileID: 3184176266375694864, guid: 440d18354c9726f419c470a62de00a4e,
         type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -35
+      propertyPath: m_text
+      value: Remove 25 Buttons
       objectReference: {fileID: 0}
-    - target: {fileID: 2375309749479234632, guid: 440d18354c9726f419c470a62de00a4e,
+    - target: {fileID: 7931023119352042063, guid: 440d18354c9726f419c470a62de00a4e,
         type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 374
-      objectReference: {fileID: 0}
-    - target: {fileID: 2375309749479234633, guid: 440d18354c9726f419c470a62de00a4e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2375309749479234633, guid: 440d18354c9726f419c470a62de00a4e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2375309749479234633, guid: 440d18354c9726f419c470a62de00a4e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1133557930}
-    - target: {fileID: 2375309749479234633, guid: 440d18354c9726f419c470a62de00a4e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2375309749479234633, guid: 440d18354c9726f419c470a62de00a4e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ClearInventoryFromItems
-      objectReference: {fileID: 0}
-    - target: {fileID: 2375309749479234633, guid: 440d18354c9726f419c470a62de00a4e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: DebugSaveClear, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2375309749479234633, guid: 440d18354c9726f419c470a62de00a4e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      propertyPath: m_text
+      value: Add 25 Buttons
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

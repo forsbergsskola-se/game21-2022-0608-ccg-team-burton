@@ -40,7 +40,7 @@ namespace GamePlay.Entities.Player
         private void GatherKeyboardInputs()
         {
             _commandContainer.SpaceDownCommand = Input.GetButton("Jump");
-            _commandContainer.ArrowCommand = Input.GetAxis("Horizontal");
+            _commandContainer.ArrowCommand = Input.GetAxisRaw("Horizontal");
             _commandContainer.AttackMouseCommand = Input.GetButton("Fire2");
         }
         

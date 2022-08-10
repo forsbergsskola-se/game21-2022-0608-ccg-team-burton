@@ -31,7 +31,6 @@ public class UnlockLevel : MonoBehaviour
             Debug.Log("Popped off");
             
         }
-        wrapper.Save();
     }
     
     private void UpdateLevelImage()
@@ -59,7 +58,6 @@ public class UnlockLevel : MonoBehaviour
                 Stars[i].gameObject.GetComponent<Image>().sprite = fullStar;
             }
         }
-        wrapper.Save();
     }
     
 }

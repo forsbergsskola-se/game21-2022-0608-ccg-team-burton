@@ -681,7 +681,7 @@ PrefabInstance:
     - target: {fileID: 3214087284289029016, guid: 31dd108689ddc67479e4bc97ec9aa85e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.04
+      value: -14.15
       objectReference: {fileID: 0}
     - target: {fileID: 3214087284289029016, guid: 31dd108689ddc67479e4bc97ec9aa85e,
         type: 3}
@@ -7667,6 +7667,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tree: {fileID: 11400000, guid: 0b881e22c19ad7a4998b93c6014da312, type: 2}
   readyToRun: 0
+  attackInterval: 0.307
+  baseMoveSpeed: 2.41
+  pursueMoveSpeed: 8.26
 --- !u!4 &921607320 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3887871905063471677, guid: 06932baa51403d543857f2b7958cdf27,
@@ -12544,6 +12547,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 309477312, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 309477312, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3, type: 3}
       propertyPath: attenuationObject
       value: 
       objectReference: {fileID: 1324795166}
@@ -12605,6 +12612,11 @@ PrefabInstance:
     - target: {fileID: 2578437769821243731, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,

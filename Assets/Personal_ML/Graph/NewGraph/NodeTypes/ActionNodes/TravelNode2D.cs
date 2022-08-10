@@ -35,7 +35,7 @@ namespace NewGraph.NodeTypes.ActionNodes
 
         public override State OnUpdate()
         {
-            agent.enemyTransform.position += agent.enemyTransform.right * (Time.deltaTime * 1);
+            agent.enemyTransform.position += agent.enemyTransform.right * (Time.deltaTime * agent.moveSpeed);
 
             if (!agent.keepWalking)
             {
