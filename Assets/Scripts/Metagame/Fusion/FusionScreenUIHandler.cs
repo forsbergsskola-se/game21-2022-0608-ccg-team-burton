@@ -7,7 +7,8 @@ public class FusionScreenUIHandler : MonoBehaviour
 {
     [HideInInspector] public EquipmentSO equipmentSoData;
     [HideInInspector] public ActionItem UpgradeMaterialSoData;
-    
+
+    [SerializeField] private FusionManager fusionManager;
     
     //UI FIELDS
     [SerializeField] private GameObject equipmentIconGameObject;
@@ -30,6 +31,12 @@ public class FusionScreenUIHandler : MonoBehaviour
         var neededMaterials = ((int)currentRarity + 1) +equipmentSoData.BaseUpgradeCost; //Current rarity +1 = addition cost.
         
         neededMaterialText.SetText($"Need: {neededMaterials}");
+    }
+
+    public void PressUpgradeButton()
+    {
+            fusionManager.Tester();
+        
     }
  
 }

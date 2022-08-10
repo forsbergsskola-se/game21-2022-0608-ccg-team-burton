@@ -1034,6 +1034,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipmentSoData: {fileID: 0}
   UpgradeMaterialSoData: {fileID: 0}
+  fusionManager: {fileID: 0}
   equipmentIconGameObject: {fileID: 3834205139099808088}
   rarityText: {fileID: 3106505165143205155}
   attributeText: {fileID: 2117543597}
@@ -1444,7 +1445,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7714310827367375063}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2135628260}
+        m_TargetAssemblyTypeName: FusionScreenUIHandler, Assembly-CSharp
+        m_MethodName: PressUpgradeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8267967061267906975
 GameObject:
   m_ObjectHideFlags: 0
