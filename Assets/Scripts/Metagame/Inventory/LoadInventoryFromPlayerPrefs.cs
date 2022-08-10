@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,9 +14,21 @@ public class LoadInventoryFromPlayerPrefs : MonoBehaviour
     private GameObject[] inventorySlots;
 
     [SerializeField]
-    private GameObject ui;
+    private GameObject inventorySlotUI;
 
     private List<GameObject> currentItems = new();
+
+    [SerializeField] private FusionScreenUIHandler fusionUI;
+    private void OnEnable()
+    {
+        fusionUI.OnInventoryChange += UpdateInventory;
+    }
+
+    private void OnDisable()
+    {
+        fusionUI.OnInventoryChange -= UpdateInventory;
+    }
+
     private void Start()
     {
       UpdateInventory();
@@ -35,7 +48,7 @@ public class LoadInventoryFromPlayerPrefs : MonoBehaviour
             if (PlayerPrefs.GetInt(item.GetItemID()) <= 0) continue;
             var itemInSlot = Instantiate(inventorySlot, inventorySlots[index].transform.position , Quaternion.identity);
             currentItems.Add(itemInSlot);
-            itemInSlot.transform.parent = ui.transform;
+            itemInSlot.transform.parent = inventorySlotUI.transform;
             itemInSlot.GetComponent<InventorySlot>().SetItemSlot(item);
             index++;
         }

@@ -290,7 +290,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1495322439
 GameObject:
@@ -517,6 +517,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2135628254}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2135628256 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2135628260, guid: 1072aef07a42fa147b4c4f452910dc20,
+    type: 3}
+  m_PrefabInstance: {fileID: 2135628254}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135628255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2f66166b0c469947a61516d28572bdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1802058786977440869 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3255072885043717778, guid: 17a79eb4b08abb44fb34d3fd24039688,
@@ -545,7 +557,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3688288116838923508, guid: 6b6eb237d78396e4e9db8caad75ca5d9,
         type: 3}
-      propertyPath: ui
+      propertyPath: fusionUI
+      value: 
+      objectReference: {fileID: 2135628256}
+    - target: {fileID: 3688288116838923508, guid: 6b6eb237d78396e4e9db8caad75ca5d9,
+        type: 3}
+      propertyPath: inventorySlotUI
       value: 
       objectReference: {fileID: 651083061}
     - target: {fileID: 3688288116838923508, guid: 6b6eb237d78396e4e9db8caad75ca5d9,
