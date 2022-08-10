@@ -16,9 +16,13 @@ public class LevelCompleted : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         int currentCoins = itemCollector._coinCounter;
+        
         if (collision.tag == "Player")
         {
             currentCoins += coinBonus;
+            //Save coins to inventory
+            PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) + currentCoins);
+
             winScreen.SetActive(true);
             Time.timeScale = 0; 
             StarsAchieved();

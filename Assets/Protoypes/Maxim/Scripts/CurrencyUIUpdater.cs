@@ -26,8 +26,8 @@ public class CurrencyUIUpdater : MonoBehaviour
     private void UpdateCurrencyUI()
     {
 
-        coinAmountText.SetText(PlayerPrefs.GetInt("CurrentCoins").ToString());
-        buttonAmountText.SetText(PlayerPrefs.GetInt("CurrentButtons").ToString());
+        coinAmountText.SetText(PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()).ToString());
+        buttonAmountText.SetText(PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentButtons.ToString()).ToString());
 
     }
     

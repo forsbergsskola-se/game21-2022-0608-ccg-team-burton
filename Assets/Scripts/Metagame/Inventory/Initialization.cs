@@ -19,11 +19,11 @@ public class Initialization : MonoBehaviour
 //TODO: Should be called on like main map for first time setup. On second start (player prefs present) --> nothing will happen here
     private void NewGamePlayerStats()
     {
-        if(!PlayerPrefs.HasKey("CurrentCoins"))
-            PlayerPrefs.SetInt("CurrentCoins", 0);
+        if(!PlayerPrefs.HasKey(PlayerPrefsKeys.CurrentCoins.ToString()))
+            PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), 0);
         
-        if(!PlayerPrefs.HasKey("CurrentButtons"))
-            PlayerPrefs.SetInt("CurrentButtons", 0);
+        if(!PlayerPrefs.HasKey(PlayerPrefsKeys.CurrentButtons.ToString()))
+            PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentButtons.ToString(), 0);
         
         foreach (var equipment in equipmentLibrary.EquipmentLibrarySo.EquipablesLibrary)
         {
