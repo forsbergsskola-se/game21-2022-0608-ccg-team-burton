@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class FusionScreenUIHandler : MonoBehaviour
 {
-
     public Action OnInventoryChange;
     [HideInInspector] public EquipmentSO EquipmentSoData;
     [HideInInspector] public ActionItem UpgradeMaterialSoData;
@@ -19,12 +18,9 @@ public class FusionScreenUIHandler : MonoBehaviour
     [SerializeField] private GameObject upgradeMaterialsIconGameObject;
     [SerializeField] private TMP_Text neededMaterialText;
     [SerializeField] private TMP_Text haveMaterialText;
-
-
     
     private void OnEnable()
     {
-
         UpdateUpgradeUI();
     }
 
@@ -34,20 +30,21 @@ public class FusionScreenUIHandler : MonoBehaviour
         UpdateUIElements();  
     }
 
-
-    public void CalculateNeededMaterials()
+    private void CalculateNeededMaterials()
     {
-        Enum.TryParse(EquipmentSoData.RarityID, out Rarity currentRarity);
-        EquipmentSoData.NeededUpgradeMaterial = ((int)currentRarity + 1) +EquipmentSoData.BaseUpgradeCost;
+        var currentRarity = PlayerPrefs.GetString(EquipmentSoData.RarityID);
+        Enum.TryParse(currentRarity, out Rarity rarity);
+        PlayerPrefs.SetInt(PlayerPrefsKeys.NeededUpgradeMaterial.ToString(), (int) (rarity+1+EquipmentSoData.BaseUpgradeCost));
+        
     }
     private void UpdateUIElements()
     {
         equipmentIconGameObject.GetComponent<Image>().sprite = EquipmentSoData.Icon;
-        rarityText.SetText("Rarity: "+EquipmentSoData.Rarity);
-        attributeText.SetText(EquipmentSoData.AttributeDescription+" " +EquipmentSoData.AttributeValue);
+        rarityText.SetText("Rarity: "+PlayerPrefs.GetString(EquipmentSoData.RarityID));
+        attributeText.SetText(EquipmentSoData.AttributeDescription+" " +PlayerPrefs.GetFloat(PlayerPrefsKeys.AttributeValue.ToString()));
         upgradeMaterialsIconGameObject.GetComponent<Image>().sprite = UpgradeMaterialSoData.GetIcon();
         haveMaterialText.SetText("Have: "+PlayerPrefs.GetInt(UpgradeMaterialSoData.GetItemID()));
-        neededMaterialText.SetText($"Need: {EquipmentSoData.NeededUpgradeMaterial}");
+        neededMaterialText.SetText($"Need: {PlayerPrefs.GetInt(PlayerPrefsKeys.NeededUpgradeMaterial.ToString())}");
     }
 
     public void PressUpgradeButton()

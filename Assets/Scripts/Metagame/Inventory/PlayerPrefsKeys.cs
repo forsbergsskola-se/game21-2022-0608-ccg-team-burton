@@ -1,5 +1,7 @@
 public enum PlayerPrefsKeys
 {
     CurrentCoins,
-    CurrentButtons
+    CurrentButtons,
+    NeededUpgradeMaterial,
+    AttributeValue
 }

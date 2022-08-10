@@ -5,21 +5,27 @@ using UnityEngine;
 
 public class FusionManager : MonoBehaviour
 {
-
-
-    public Action OnUiUpdate;
     public void InitiateUpgrade(EquipmentSO equipmentData, ActionItem upgradeMaterial)
     {
-        if (equipmentData.NeededUpgradeMaterial > PlayerPrefs.GetInt(upgradeMaterial.GetItemID()))
+        if (PlayerPrefs.GetInt(PlayerPrefsKeys.NeededUpgradeMaterial.ToString()) > PlayerPrefs.GetInt(upgradeMaterial.GetItemID()))
         {
             Debug.Log("Not enough materials!");
         }
         else
         {
             Debug.Log("Upgrading!");
-            var newBalance =PlayerPrefs.GetInt(upgradeMaterial.GetItemID()) - equipmentData.NeededUpgradeMaterial;
+            var newBalance =PlayerPrefs.GetInt(upgradeMaterial.GetItemID()) - PlayerPrefs.GetInt(PlayerPrefsKeys.NeededUpgradeMaterial.ToString());
             PlayerPrefs.SetInt(upgradeMaterial.GetItemID(), newBalance);
-            //EVEnt to update UI on fusionUI?
+            
+            var currentRarityString = PlayerPrefs.GetString(equipmentData.RarityID);
+            Enum.TryParse(currentRarityString, out Rarity currentRarity);
+            currentRarity += 1;
+            PlayerPrefs.SetString(equipmentData.RarityID, currentRarity.ToString());
+
+
+
+
+
         }
         
         
