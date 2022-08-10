@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SetPlayerPrefsForEquipment : MonoBehaviour
+public class PlayerInitialization : MonoBehaviour
 {
 
     [SerializeField] private Libraries equipmentLibrary;
@@ -27,5 +27,8 @@ public class SetPlayerPrefsForEquipment : MonoBehaviour
                 Debug.Log($"{equipment.Name} is present with id: {equipment.ID}");
             }
         }
+        
+        PlayerPrefs.SetInt("CurrentCoins", 0);
+        PlayerPrefs.SetInt("CurrentButtons", 0);
     }
 }
