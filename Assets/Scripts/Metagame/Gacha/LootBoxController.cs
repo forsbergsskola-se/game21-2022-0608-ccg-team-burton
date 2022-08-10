@@ -13,7 +13,6 @@ public class LootBoxController : MonoBehaviour
    
    public Action<GameObject,InventoryItem> OnUpdateItemUI;
  
-   private Item item;
    public GameObject[] ItemUIGameobjects;
 
    // Since we need to update all elements, we can use a list
