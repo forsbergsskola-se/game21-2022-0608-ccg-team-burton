@@ -14,4 +14,18 @@ public class DebugSaveClear : MonoBehaviour
          Debug.Log(item.GetItemID() +" was deleted!");
       }
    }
+
+
+   public void AddCoins()
+   {
+      PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString())+250);
+      Debug.Log($"Current Coins: {PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString())}");
+   }
+   
+   public void RemoveCoins()
+   {
+      PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString())-250);
+      Debug.Log($"Current Coins: {PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString())}");
+
+   }
 }
