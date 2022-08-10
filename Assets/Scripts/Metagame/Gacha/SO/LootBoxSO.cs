@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 namespace Meta.Gacha
 { 
     
-[CreateAssetMenu(fileName = "Loot Box", menuName = "Item System/Loot Box")]
+[CreateAssetMenu(fileName = "Loot Box", menuName = "LootboxSystem/Loot Box")]
 public class LootBoxSO : ScriptableObject
 {
     public float TotalProbabilityWeight;
@@ -54,7 +54,7 @@ public class LootBoxSO : ScriptableObject
     }
 
     
-    public ItemTableSO PickLootTable()
+    public ActionItemTableSO PickLootTable()
     {
         _pickedNumber = Random.Range(0, TotalProbabilityWeight);
         foreach (var go in LootTables.Where(go => _pickedNumber > go.ProbabilityRangeFrom && _pickedNumber < go.ProbabilityRangeTo))
@@ -63,7 +63,7 @@ public class LootBoxSO : ScriptableObject
             {
                 Debug.LogError("ERROR: No gameobject set in table slot");
             }
-            return go.itemTableSo;
+            return go.actionItemTableSo;
         }
         Debug.LogError("GO couldn't be picked... Be sure that all of your active GameObject Tables (GO-class)  have assigned at least one GO! Returning NULL");
         //reset picked number in last method dependent on it (in this case, pick GO)
@@ -80,7 +80,7 @@ public class LootBoxSO : ScriptableObject
         public float ProbabilityRangeFrom;
         [HideInInspector]
         public float ProbabilityRangeTo;
-        public ItemTableSO itemTableSo;
+        public ActionItemTableSO actionItemTableSo;
     }
 }
 

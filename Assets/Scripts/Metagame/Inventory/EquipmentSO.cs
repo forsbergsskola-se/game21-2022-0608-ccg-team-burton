@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Entity.Items;
 using UnityEngine;
-using UnityEngine.UI;
 
 
 [CreateAssetMenu(fileName = "EquipmentData", menuName = "BUInventory/EquipmentData")]
@@ -19,8 +14,7 @@ public class EquipmentSO : ScriptableObject
     public Sprite Icon;
     public string RarityID;
     public Rarity Rarity;
-    public Sprite UpgradeMaterialIcon;
-    public int testInt;
+    public int BaseUpgradeCost;
 
     private void OnValidate()
     {

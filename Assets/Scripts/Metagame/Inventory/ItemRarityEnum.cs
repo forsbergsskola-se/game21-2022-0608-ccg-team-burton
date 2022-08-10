@@ -1,5 +1,5 @@
-namespace Entity.Items
-{
+
+
     public enum Rarity
     {
         Common,
@@ -8,4 +8,3 @@ namespace Entity.Items
         Epic,
         Legendary,
     }   
-}

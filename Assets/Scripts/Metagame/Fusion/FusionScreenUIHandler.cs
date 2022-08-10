@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,28 +9,27 @@ public class FusionScreenUIHandler : MonoBehaviour
     [HideInInspector] public ActionItem UpgradeMaterialSoData;
     
     
-    //UPDATE FIELDS
-    [SerializeField] private GameObject EquipmentIcon;
-    [SerializeField] private TMP_Text Rarity;
-    [SerializeField] private TMP_Text AttributeText;
-    [SerializeField] public GameObject UpgradeMaterialsIcon;
-    [SerializeField] private TMP_Text NeededMaterialText;
-    [SerializeField] private TMP_Text HaveMaterialText;
-    
+    //UI FIELDS
+    [SerializeField] private GameObject equipmentIconGameObject;
+    [SerializeField] private TMP_Text rarityText;
+    [SerializeField] private TMP_Text attributeText;
+    [SerializeField] private GameObject upgradeMaterialsIconGameObject;
+    [SerializeField] private TMP_Text neededMaterialText;
+    [SerializeField] private TMP_Text haveMaterialText;
 
-    void OnEnable()
+
+    private void OnEnable()
     {
-        EquipmentIcon.GetComponent<Image>().sprite = equipmentSoData.Icon;
-        Rarity.SetText("Rarity: "+equipmentSoData.Rarity);
-        AttributeText.SetText(equipmentSoData.AttributeDescription+" " +equipmentSoData.AttributeValue);
-        UpgradeMaterialsIcon.GetComponent<Image>().sprite = UpgradeMaterialSoData.GetIcon();
-        HaveMaterialText.SetText("Have: "+PlayerPrefs.GetInt(UpgradeMaterialSoData.GetItemID()));
+        equipmentIconGameObject.GetComponent<Image>().sprite = equipmentSoData.Icon;
+        rarityText.SetText("Rarity: "+equipmentSoData.Rarity);
+        attributeText.SetText(equipmentSoData.AttributeDescription+" " +equipmentSoData.AttributeValue);
+        upgradeMaterialsIconGameObject.GetComponent<Image>().sprite = UpgradeMaterialSoData.GetIcon();
+        haveMaterialText.SetText("Have: "+PlayerPrefs.GetInt(UpgradeMaterialSoData.GetItemID()));
 
-        Enum.TryParse(equipmentSoData.RarityID, out Entity.Items.Rarity currentRarity);
-
-        var needed = ((int)currentRarity + 1) +1;
+        Enum.TryParse(equipmentSoData.RarityID, out Rarity currentRarity);
+        var neededMaterials = ((int)currentRarity + 1) +equipmentSoData.BaseUpgradeCost; //Current rarity +1 = addition cost.
         
-        NeededMaterialText.SetText($"Need: {needed}");
+        neededMaterialText.SetText($"Need: {neededMaterials}");
     }
  
 }

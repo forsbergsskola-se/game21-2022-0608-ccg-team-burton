@@ -1,14 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Entity.Items;
-using Meta.Gacha;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[CreateAssetMenu(fileName = "ItemTable", menuName = "Item System/ItemTable")]
-public class ItemTableSO : ScriptableObject
+[CreateAssetMenu(fileName = "ActionItemTable", menuName = "LootboxSystem/ActionItemTable")]
+public class ActionItemTableSO : ScriptableObject
 {
   public float TotalProbabilityWeight;
     [Space]

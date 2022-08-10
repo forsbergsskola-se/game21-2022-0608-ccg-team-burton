@@ -538,7 +538,7 @@ GameObject:
   - component: {fileID: 326720953}
   - component: {fileID: 326720952}
   m_Layer: 5
-  m_Name: Shop Btn (1)
+  m_Name: InventoryBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -671,7 +671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 789de8b76f8535e44b53212b96d899b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: BU_Inventory
+  _sceneName: PlayerInventory
 --- !u!1 &470842101
 GameObject:
   m_ObjectHideFlags: 0
@@ -2858,7 +2858,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1887904654
 RectTransform:
   m_ObjectHideFlags: 0

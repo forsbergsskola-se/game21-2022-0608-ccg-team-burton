@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,9 +9,9 @@ public class EquippableSlot : MonoBehaviour, IPointerDownHandler
     [SerializeField] private GameObject UpgradeScreen;
     public void OnPointerDown(PointerEventData eventData)
     {
-        //TODO: Cache
-        UpgradeScreen.GetComponent<FusionScreenUIHandler>().equipmentSoData = equipmentSo;
-        UpgradeScreen.GetComponent<FusionScreenUIHandler>().UpgradeMaterialSoData = upgradeMaterialSO;
+        var FusionScreenUI = UpgradeScreen.GetComponent<FusionScreenUIHandler>();
+        FusionScreenUI.equipmentSoData = equipmentSo;
+        FusionScreenUI.UpgradeMaterialSoData = upgradeMaterialSO;
         
         UpgradeScreen.SetActive(true);
     }

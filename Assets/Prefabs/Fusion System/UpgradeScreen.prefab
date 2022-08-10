@@ -951,7 +951,7 @@ RectTransform:
   - {fileID: 8736275437415672244}
   - {fileID: 873172635}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1034,12 +1034,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipmentSoData: {fileID: 0}
   UpgradeMaterialSoData: {fileID: 0}
-  EquipmentIcon: {fileID: 3834205139099808088}
-  Rarity: {fileID: 3106505165143205155}
-  AttributeText: {fileID: 2117543597}
-  UpgradeMaterialsIcon: {fileID: 1278736990}
-  NeededMaterialText: {fileID: 1225281333}
-  HaveMaterialText: {fileID: 1844787927}
+  equipmentIconGameObject: {fileID: 3834205139099808088}
+  rarityText: {fileID: 3106505165143205155}
+  attributeText: {fileID: 2117543597}
+  upgradeMaterialsIconGameObject: {fileID: 1278736990}
+  neededMaterialText: {fileID: 1225281333}
+  haveMaterialText: {fileID: 1844787927}
 --- !u!1 &6777631334143194772
 GameObject:
   m_ObjectHideFlags: 0

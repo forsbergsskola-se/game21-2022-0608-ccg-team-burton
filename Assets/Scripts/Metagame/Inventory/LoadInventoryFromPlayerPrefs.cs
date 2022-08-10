@@ -15,19 +15,16 @@ public class LoadInventoryFromPlayerPrefs : MonoBehaviour
     [SerializeField]
     private GameObject ui;
 
-    public List<GameObject> currentItems;
+    public List<GameObject> CurrentItems;
     private void Start()
     {
       UpdateInventory();
     }
-
-    
-    
     
     //Yes this is inefficient. But it is million times better than no system at all...
     private void UpdateInventory()
     {
-        if (currentItems.Count > 0)
+        if (CurrentItems.Count > 0)
         {
             DestroyCurrentItemsInInventory();
         }
@@ -37,7 +34,7 @@ public class LoadInventoryFromPlayerPrefs : MonoBehaviour
         {
             if (PlayerPrefs.GetInt(item.GetItemID()) <= 0) continue;
             var itemInSlot = Instantiate(inventorySlot, inventorySlots[index].transform.position , Quaternion.identity);
-            currentItems.Add(itemInSlot);
+            CurrentItems.Add(itemInSlot);
             itemInSlot.transform.parent = ui.transform;
             itemInSlot.GetComponent<InventorySlot>().SetItemSlot(item);
             index++;
@@ -45,7 +42,7 @@ public class LoadInventoryFromPlayerPrefs : MonoBehaviour
     }
     private void DestroyCurrentItemsInInventory()
     {
-        foreach (var currentItem in currentItems)
+        foreach (var currentItem in CurrentItems)
         {
             Destroy(currentItem);
         }
