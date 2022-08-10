@@ -68,6 +68,12 @@ public class SoundMananger : MonoBehaviour
         sound.stop(STOP_MODE.IMMEDIATE);
     }
 
+    public void LevelFailed()
+    {
+        Debug.Log("LevelFailed");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Info-messages/LevelFailed");
+    }
+
     public void SoldierWalk()
     {
         Debug.Log("SoldierWalk");
@@ -104,7 +110,7 @@ public class SoundMananger : MonoBehaviour
     public void EnemyIdle()
     {
         Debug.Log("EnemyIdle");
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/EnemyIidle");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/EnemyIdle");
     }
 
 
@@ -175,6 +181,18 @@ public class SoundMananger : MonoBehaviour
     {
         Debug.Log("SelectButton");
         FMODUnity.RuntimeManager.PlayOneShot("event:/Ui/SelectButton");
+    }
+
+    public void SelectButton2()
+    {
+        Debug.Log("SelectButton2");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Ui/SelectButton2");
+    }
+
+    public void SelectButton3()
+    {
+        Debug.Log("SelectButton3");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Ui/SelectButton3");
     }
 
     public void PlayerIdle()

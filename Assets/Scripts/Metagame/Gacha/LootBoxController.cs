@@ -1,18 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Meta.Gacha;
-using Mono.Cecil;
-using Newtonsoft.Json;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
+
 
 public class LootBoxController : MonoBehaviour
 {
-   
-   
    public LootBoxSO LootBoxSO;
 
    [SerializeField] private Animator _animator;
@@ -20,18 +13,16 @@ public class LootBoxController : MonoBehaviour
    
    public Action<GameObject,InventoryItem> OnUpdateItemUI;
  
-   private Item item;
    public GameObject[] ItemUIGameobjects;
 
    // Since we need to update all elements, we can use a list
    private List<InventoryItem> gainedItems = new();
 
-   // [SerializeField] private PickupSpawner[] _pickup;
-
    private bool _boxOpenedCurrentSession;
    
    public GameObject DroppedItem;
 
+   private string itemID;
 
    private void Start()
    {
@@ -43,8 +34,6 @@ public class LootBoxController : MonoBehaviour
       _itemInfoUI.SetActive(false);
    }
 
-   
-
    private void OnMouseUp()
    {
       if (!_boxOpenedCurrentSession)
@@ -54,10 +43,7 @@ public class LootBoxController : MonoBehaviour
          _boxOpenedCurrentSession = true;
          _animator.SetBool("OpenLootBox", true); 
       }
-      
-      
    }
-
    
    public void OpenBox()
    {
@@ -65,23 +51,17 @@ public class LootBoxController : MonoBehaviour
       {
          var LootedItemSO = LootBoxSO.PickLootTable().PickItem(); //Scriptable object
          gainedItems.Add(LootedItemSO);
-         
-         SetUpItemSO(LootedItemSO);
-         
-          //TODO: SAVE LOOTEDITEMSO TO INVENTORY HERE <3
-          var item = Instantiate(DroppedItem, Vector2.zero, Quaternion.identity); // When instantiated, it Autocollects to inventory
-    
+
+
+         itemID = LootedItemSO.GetItemID();
+         Debug.Log($"Saving item ID: {itemID}, with name: {LootedItemSO.GetDisplayName()}");
+
+         //Saving item
+         PlayerPrefs.SetInt(itemID, PlayerPrefs.GetInt(itemID)+1);
 
       }
    }
 
-   public void SetUpItemSO(InventoryItem item) // Call on collect button if we dont save above in open box
-   {
-
-      DroppedItem.GetComponent<PickupSpawner>().Item = item;
-      Debug.Log(item.name);
-
-   }
    
    private void DisplayItem() // called by anim event
    {
@@ -96,5 +76,4 @@ public class LootBoxController : MonoBehaviour
          i++;
       }
    }
- 
 }
