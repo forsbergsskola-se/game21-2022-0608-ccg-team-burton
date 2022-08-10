@@ -49,8 +49,11 @@ public class CubeFacts
     public TileOptions options;
 }
 
-public class HitInfo
+[Serializable]
+public class WalkableGround
 {
+    public Vector2 start;
+    public Vector2 end;
     
 }
 
@@ -72,6 +75,8 @@ public class LevelGrid : MonoBehaviour
 
     private List<RaycastHit2D> _hitList = new();
 
+    private List<WalkableGround> _walkableGround = new();
+
     private float _maxJumpDistance = 6f;
 
     private void Awake()
@@ -82,8 +87,7 @@ public class LevelGrid : MonoBehaviour
 
     void Start()
     {
-      //  ScanAll();
-      AdvancedTrace(new Vector2(0,0));
+        ScanAll();
     }
 
     private void ScanAll()
@@ -95,26 +99,22 @@ public class LevelGrid : MonoBehaviour
                 var cube = _gridList[i][j];
                 var start = cube.location + new Vector2(-1,-1f) * new Vector2(cubeSize.x / 2, cubeSize.y / 2);
                 AdvancedTrace(new Vector2(i,j));
-                //ScanABox(new Vector2(i,j), start, new Vector2(0,1));
-                //CheckUnder(cube);
-                //SetOptions(cube);
-
-                if ((int) cube.lowestGroundY != 9999)
-                {
-                   // ScanABox(new Vector2(i,j), new Vector2(-1,-1), new Vector2(0,1));
-                }
             }
         }
+        
+        SpawnPointsOfInterest();
     }
 
-    private void CheckTop(CubeFacts cube)
+
+    private void SpawnPointsOfInterest()
     {
-        if ((int) cube.lowestGroundY != 9999)
+        foreach (var p in _walkableGround)
         {
-            
+            Instantiate(spawnablePointOfInterest, p.end, Quaternion.identity, transform);
+            Instantiate(spawnablePointOfInterest, p.start, Quaternion.identity, transform);
         }
     }
-
+    
     private void SetOptions(CubeFacts cube)
     {
         if (cube.pointsList.SingleOrDefault(x => x.pointType == LevelElements.TwoWayPass) != default)
@@ -217,6 +217,39 @@ public class LevelGrid : MonoBehaviour
         return square;
     }
 
+    private Vector2 ScanUntilEdge(Vector2 startPoint)
+    {
+        var breakLoop = false;
+        
+        List<Vector2> newHits = new();
+
+        while (!breakLoop)
+        {
+            var aHit = SingleTrace(startPoint, new Vector2(0,-1), 0.4f);
+            if (!aHit) breakLoop = true;
+
+            startPoint += new Vector2(0.5f,0);
+            
+            newHits.Add(aHit.point);
+        }
+
+        return newHits[^2];
+    }
+
+    private bool HasHitBeenRegistered(Vector2 point)
+    {
+        foreach (var g in _walkableGround)
+        {
+            if (!(point.x > g.start.x) || !(point.x < g.end.x)) continue;
+            
+            if ((int) point.y == (int) g.start.y)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     private void AdvancedTrace(Vector2 startIndex)
     {
         _hitList.Clear();
@@ -228,17 +261,20 @@ public class LevelGrid : MonoBehaviour
         for (var i = 0; i < numberTraces; i++)
         {
             var aHit = SingleTrace(topCorner, new Vector2(0,-1), cubeSize.y * numberCubes.y);
-
+            
             if (aHit)
             {
-                if (_hitList.SingleOrDefault(x => (int) x.point.y == (int) aHit.point.y) == default)
+                if (!HasHitBeenRegistered(aHit.point))
                 {
-                    _hitList.Add(aHit);
-                    cube.pointsList.Add(new PointsOfInterest()
+                    if (_hitList.SingleOrDefault(x => (int) x.point.y == (int) aHit.point.y) == default)
                     {
-                        location = aHit.point,
-                        pointType = LevelElements.Edge
-                    });
+                        _hitList.Add(aHit);
+                        cube.pointsList.Add(new PointsOfInterest()
+                        {
+                            location = aHit.point,
+                            pointType = LevelElements.Edge
+                        });
+                    }
                 }
             }
             topCorner += new Vector2(increment, 0);
@@ -248,37 +284,22 @@ public class LevelGrid : MonoBehaviour
         
         foreach (var h in _hitList)
         {
-            var len = cube.max.x - h.point.x;
-            increment = len / numberTraces;
+            var hitPoint = ScanUntilEdge(h.point + new Vector2(0,0.2f));
             
-            newHits.Clear();
-            var start = h.point + new Vector2(0, 0.1f);
-       
-            for (int i = 0; i < numberTraces; i++)
+            _walkableGround.Add(new WalkableGround()
             {
-                var aHit = SingleTrace(start, new Vector2(0,-1), 0.3f);
-                if (!aHit)
-                {
-                    cube.pointsList.Add(new PointsOfInterest()
-                    {
-                        location = newHits[^1].point,
-                        pointType = LevelElements.Edge
-                    });
-                    break;
-                }
-                newHits.Add(aHit);
-                start += new Vector2(increment, 0);
-            }
-            
-            if (newHits.Count  == numberTraces)
+                start = h.point,
+                end = hitPoint
+            });
+
+            cube.pointsList.Add(new PointsOfInterest()
             {
-                cube.pointsList.Add(new PointsOfInterest()
-                {
-                    location = newHits[^1].point,
-                    pointType = LevelElements.TwoWayPass
-                });
-            }
+                location = hitPoint,
+                pointType = LevelElements.Edge
+            });
         }
+        
+    
     }
     
     private RaycastHit2D SingleTrace(Vector2 startPos, Vector2 traceDir, float traceLength)

@@ -11,8 +11,10 @@ public enum CurrentCommand
 {
     None,
     MoveToPosition,
+    MoveToAttack,
     OutOfCommands,
-    Jump
+    Jump,
+    Attack
 }
 
 [Serializable]
@@ -26,11 +28,10 @@ public class AiAgent
 {
     public Transform enemyTransform;
     public Transform destination;
-    public CurrentCommand currentCommand;
+  //  public CurrentCommand currentCommand;
 
     public Vector3 currentDestination;
-    public Queue<Vector2> TargetQueue = new();
-
+    
     public Animator anim;
     public LevelGrid grid;
 
@@ -43,7 +44,6 @@ public class AiAgent
     public bool keepWalking;
 
     public float moveSpeed;
-
     public float attackInterval = 0.3f;
     
     public AiAgent()

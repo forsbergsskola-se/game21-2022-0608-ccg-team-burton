@@ -144,30 +144,6 @@ public class Patrol : State_ML
 
     public override void Update()
     {
-        
-        if (EnemyVarsMl.tracerEyes.PlayerSeen)
-        {
-            Stage = EVENT.Exit;
-            Debug.Log("Player is seen");
-            NextStateMl = new Pursue(EnemyVarsMl);
-        }
-
-        else if (!EnemyVarsMl.tracerEyes.GroundSeen)
-        {
-           
-        }
-        
-        
-        if (EnemyVarsMl.tracerEyes.Actions == Actions.TurnAround)
-        {
-            TurnAround();    
-        }
-        
-        if (EnemyVarsMl.tracerEyes.Actions == Actions.PlatformJump)
-        {
-            Stage = EVENT.Exit;
-            NextStateMl = new PlatformJump(EnemyVarsMl);
-        }
 
         if (!stopMove)
         {
@@ -209,11 +185,7 @@ public class Pursue : State_ML
             NextStateMl = new Attack(EnemyVarsMl);
             Stage = EVENT.Exit;
         }
-
-        if (EnemyVarsMl.tracerEyes.Actions == Actions.TurnAround)
-        {
-            TurnAround();
-        }
+        
 
         else if (distance > EnemyVarsMl.GetAttackDistance + 20)
         {
@@ -270,20 +242,7 @@ public class Attack : State_ML
 
     public override void Update()
     {
-        if (!EnemyVarsMl.tracerEyes.PlayerSeen)
-        {
-            var dotProd = Vector3.Dot(EnemyVarsMl.enemyRef.transform.right, EnemyVarsMl.tracerEyes.PlayerTrans.position);
-            
-            if (dotProd < 1)
-            {
-                TurnAround();
-            }
-            else
-            {
-                Stage = EVENT.Exit;
-                NextStateMl = new Idle(EnemyVarsMl);
-            }
-        }
+        
 
         if (attackDelay >= EnemyVarsMl.GetAttackInterval)
         {
@@ -294,19 +253,11 @@ public class Attack : State_ML
                 AssetPool.RequestEffectStatic(EffectType.FireBall, EnemyVarsMl.firePoint.position, EnemyVarsMl.enemyRef.transform.right);
             }
 
-            if (EnemyVarsMl.GetEnemyType == EnemyType.Melee && EnemyVarsMl.tracerEyes.PlayerSeen)
-            {
-               // Stage = EVENT.Exit;
-               // NextStateMl = new BackOff(EnemyVarsMl);
-            }
+            
             attackDelay -= EnemyVarsMl.GetAttackInterval;
         }
         
-        if (!EnemyVarsMl.tracerEyes.PlayerInAttackRange && EnemyVarsMl.tracerEyes.PlayerSeen)
-        {
-            Stage = EVENT.Exit;
-            NextStateMl = new Pursue(EnemyVarsMl);
-        }
+       
 
         attackDelay +=  Time.deltaTime;
     }

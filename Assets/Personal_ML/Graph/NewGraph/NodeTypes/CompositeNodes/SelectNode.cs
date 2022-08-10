@@ -30,14 +30,43 @@ public class SelectNode : CompositeNode
     {
         _plusMinus = agent.enemyTransform.right.x > 0;
         _current = agent.grid.GetSquareFromPoint(agent.enemyTransform.position);
-
+        agent.keepWalking = true;
         if (!agent.enemyEyes.GroundSeen)
         {
             _choiceMade = true;
             currentCommand = CurrentCommand.Jump;
             return;
         }
-        
+
+        var playerEncounter = agent.enemyEyes.playerEncounter;
+
+        if (playerEncounter.HasFlag(PlayerEncounter.PlayerNoticed))
+        {
+            Debug.Log(playerEncounter);
+            
+            if (playerEncounter.HasFlag(PlayerEncounter.PlayerInFront))
+            {
+                if (playerEncounter.HasFlag(PlayerEncounter.PlayerInAttackRange))
+                {
+                    currentCommand = CurrentCommand.Attack;
+                    return;
+                } 
+                
+                currentCommand = CurrentCommand.MoveToPosition;
+                agent.keepWalking = false;
+                agent.currentDestination = agent.enemyEyes.PlayerPos;
+                return;
+            }
+            
+            if (playerEncounter.HasFlag(PlayerEncounter.PlayerBehind))
+            {
+                agent.keepWalking = false;
+                agent.currentDestination = agent.enemyEyes.PlayerPos;
+                currentCommand = CurrentCommand.MoveToPosition;
+                return;
+            }
+        }
+
         currentCommand = CurrentCommand.MoveToPosition;
     }
 
@@ -65,6 +94,13 @@ public class SelectNode : CompositeNode
             if (jump)
             {
                 ownedNodes.Add(CurrentCommand.Jump, jump);
+            }
+
+            var attack = n as AttackNode;
+
+            if (attack)
+            {
+                ownedNodes.Add(CurrentCommand.Attack, attack);
             }
         }
     }

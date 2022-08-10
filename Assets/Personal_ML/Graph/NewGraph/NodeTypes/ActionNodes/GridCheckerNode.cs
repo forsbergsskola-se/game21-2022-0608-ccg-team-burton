@@ -25,7 +25,7 @@ namespace NewGraph.NodeTypes.ActionNodes
 
         private void CheckOptions()
         {
-            agent.currentCommand = CurrentCommand.MoveToPosition;
+            
        //     var xPos = _current.pointsList.FindAll(x => x.pointType == LevelElements.Gap)[0].location.x;
        agent.currentDestination = new Vector3(_current.max.x ,agent.enemyTransform.position.y);
             _choiceMade = true;

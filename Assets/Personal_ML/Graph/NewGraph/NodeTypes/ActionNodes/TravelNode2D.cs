@@ -29,7 +29,7 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         private bool ArrivedAtTarget()
         {
-            return Vector3.Distance(agent.enemyTransform.position, agent.currentDestination) < 0.6f;
+            return Vector3.Distance(agent.enemyTransform.position, agent.currentDestination) < 3f;
         }
         
 
@@ -39,16 +39,23 @@ namespace NewGraph.NodeTypes.ActionNodes
 
             if (!agent.keepWalking)
             {
+                Debug.Log("moving to target");
                 if (ArrivedAtTarget() || agent.quitNode || agent.enemyEyes.QuitNode)
                 {
+                    Debug.Log("arrived at target");
                     return State.Success;
                 }
             }
             
             else
             {
-                if (agent.quitNode || !agent.enemyEyes.GroundSeen)
+                if (!agent.enemyEyes.GroundSeen || agent.enemyEyes.playerEncounter.HasFlag(PlayerEncounter.PlayerNoticed))
                 {
+                    return State.Success;
+                }
+                if (agent.enemyEyes.playerEncounter.HasFlag(PlayerEncounter.PlayerNoticed))
+                {
+                    
                     return State.Success;
                 }
             }
