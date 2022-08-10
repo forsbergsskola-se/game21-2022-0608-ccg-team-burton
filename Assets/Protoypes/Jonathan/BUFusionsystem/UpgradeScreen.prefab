@@ -519,8 +519,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -102.5, y: 67}
-  m_SizeDelta: {x: 330.1206, y: 99.2881}
+  m_AnchoredPosition: {x: 26.72699, y: 42.0614}
+  m_SizeDelta: {x: 588.5746, y: 149.1652}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2117543598
 CanvasRenderer:
@@ -578,10 +578,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
-  m_fontSizeBase: 36
+  m_fontSize: 100
+  m_fontSizeBase: 100
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -1033,11 +1033,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equipmentSoData: {fileID: 0}
+  UpgradeMaterialSoData: {fileID: 0}
   EquipmentIcon: {fileID: 3834205139099808088}
   Rarity: {fileID: 3106505165143205155}
   AttributeText: {fileID: 2117543597}
   UpgradeMaterialsIcon: {fileID: 1278736990}
   NeededMaterialText: {fileID: 1225281333}
+  HaveMaterialText: {fileID: 1844787927}
 --- !u!1 &6777631334143194772
 GameObject:
   m_ObjectHideFlags: 0

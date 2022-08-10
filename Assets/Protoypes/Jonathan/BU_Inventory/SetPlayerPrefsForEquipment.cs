@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Entity.Items;
 using UnityEngine;
 
 public class SetPlayerPrefsForEquipment : MonoBehaviour
@@ -19,6 +21,8 @@ public class SetPlayerPrefsForEquipment : MonoBehaviour
             if (PlayerPrefs.HasKey(equipment.ID))
             {
                 Debug.Log($"Found Entry for {PlayerPrefs.GetString(equipment.ID)}. Current rarity is {PlayerPrefs.GetString(equipment.RarityID)}. This affects {equipment.AttributeDescription} with a modifier of {PlayerPrefs.GetFloat(equipment.AttributeValueID)}.");
+                Enum.TryParse("Rare", out Rarity rarity);
+                PlayerPrefs.SetString(equipment.RarityID, rarity.ToString() );
             }
             else
             {

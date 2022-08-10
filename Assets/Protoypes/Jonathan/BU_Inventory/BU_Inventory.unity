@@ -394,6 +394,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2117543597, guid: 1072aef07a42fa147b4c4f452910dc20, type: 3}
+      propertyPath: m_fontSize
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2117543597, guid: 1072aef07a42fa147b4c4f452910dc20, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 5752209485782625474, guid: 1072aef07a42fa147b4c4f452910dc20,
         type: 3}
       propertyPath: m_Name
@@ -816,18 +824,38 @@ PrefabInstance:
       propertyPath: UpgradeScreen
       value: 
       objectReference: {fileID: 2135628255}
+    - target: {fileID: 588048018, guid: 17a79eb4b08abb44fb34d3fd24039688, type: 3}
+      propertyPath: upgradeMaterialSO
+      value: 
+      objectReference: {fileID: 11400000, guid: a0574b7ec21ca2240b1496afef1274e6,
+        type: 2}
     - target: {fileID: 994450832, guid: 17a79eb4b08abb44fb34d3fd24039688, type: 3}
       propertyPath: UpgradeScreen
       value: 
       objectReference: {fileID: 2135628255}
+    - target: {fileID: 994450832, guid: 17a79eb4b08abb44fb34d3fd24039688, type: 3}
+      propertyPath: upgradeMaterialSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 3fc6d7a599ab4694b97da5829283f8e4,
+        type: 2}
     - target: {fileID: 1326070026, guid: 17a79eb4b08abb44fb34d3fd24039688, type: 3}
       propertyPath: UpgradeScreen
       value: 
       objectReference: {fileID: 2135628255}
+    - target: {fileID: 1326070026, guid: 17a79eb4b08abb44fb34d3fd24039688, type: 3}
+      propertyPath: upgradeMaterialSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 3fc6d7a599ab4694b97da5829283f8e4,
+        type: 2}
     - target: {fileID: 1878881310, guid: 17a79eb4b08abb44fb34d3fd24039688, type: 3}
       propertyPath: UpgradeScreen
       value: 
       objectReference: {fileID: 2135628255}
+    - target: {fileID: 1878881310, guid: 17a79eb4b08abb44fb34d3fd24039688, type: 3}
+      propertyPath: upgradeMaterialSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 3fc6d7a599ab4694b97da5829283f8e4,
+        type: 2}
     - target: {fileID: 3760054208502085792, guid: 17a79eb4b08abb44fb34d3fd24039688,
         type: 3}
       propertyPath: m_Pivot.x
