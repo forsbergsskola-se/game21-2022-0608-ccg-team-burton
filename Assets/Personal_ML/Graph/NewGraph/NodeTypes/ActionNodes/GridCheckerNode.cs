@@ -27,20 +27,11 @@ namespace NewGraph.NodeTypes.ActionNodes
         {
             agent.currentCommand = CurrentCommand.MoveToPosition;
        //     var xPos = _current.pointsList.FindAll(x => x.pointType == LevelElements.Gap)[0].location.x;
-            Debug.Log(_current.max.x);
-            agent.currentDestination = new Vector3(_current.max.x ,agent.enemyTransform.position.y);
+       agent.currentDestination = new Vector3(_current.max.x ,agent.enemyTransform.position.y);
             _choiceMade = true;
             return;
             
-            if (_plusMinus)
-            {
-                if (_current.options.HasFlag(TileOptions.OpenPlus))
-                {
-                    agent.commandQueue.Enqueue(CurrentCommand.MoveToPosition);
-                    agent.currentDestination = agent.enemyTransform.position + agent.enemyTransform.right * 10;
-                    _choiceMade = true;
-                }
-            }
+       
         }
         
         private bool CheckIfLookingAtTarget()

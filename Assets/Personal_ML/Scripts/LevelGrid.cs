@@ -49,6 +49,11 @@ public class CubeFacts
     public TileOptions options;
 }
 
+public class HitInfo
+{
+    
+}
+
 public class LevelGrid : MonoBehaviour
 {
     [Header("Input values")]
@@ -56,7 +61,7 @@ public class LevelGrid : MonoBehaviour
     [SerializeField] private Vector2 numberCubes;
     [Range(0, 1),SerializeField] private float delayUpdate;
     [SerializeField] private LevelMemory memory;
-    [SerializeField] private Tilemap tilemap;
+    [SerializeField] private GameObject spawnablePointOfInterest;
     
     private List<List<CubeFacts>> _gridList = new();
     private Vector2 _min;
@@ -238,28 +243,41 @@ public class LevelGrid : MonoBehaviour
             }
             topCorner += new Vector2(increment, 0);
         }
-
-        var breakLoop = false;
+        
         List<RaycastHit2D> newHits = new();
-
+        
         foreach (var h in _hitList)
         {
+            var len = cube.max.x - h.point.x;
+            increment = len / numberTraces;
+            
             newHits.Clear();
             var start = h.point + new Vector2(0, 0.1f);
-            while (!breakLoop)
+       
+            for (int i = 0; i < numberTraces; i++)
             {
-                var aHit = SingleTrace(start, new Vector2(0,-1), 0.2f);
-                
-                if (!aHit) breakLoop = true;
+                var aHit = SingleTrace(start, new Vector2(0,-1), 0.3f);
+                if (!aHit)
+                {
+                    cube.pointsList.Add(new PointsOfInterest()
+                    {
+                        location = newHits[^1].point,
+                        pointType = LevelElements.Edge
+                    });
+                    break;
+                }
                 newHits.Add(aHit);
                 start += new Vector2(increment, 0);
             }
-
-            cube.pointsList.Add(new PointsOfInterest()
+            
+            if (newHits.Count  == numberTraces)
             {
-                
-                pointType = LevelElements.Gap
-            });
+                cube.pointsList.Add(new PointsOfInterest()
+                {
+                    location = newHits[^1].point,
+                    pointType = LevelElements.TwoWayPass
+                });
+            }
         }
     }
     
@@ -273,7 +291,7 @@ public class LevelGrid : MonoBehaviour
         }
         else
         {
-            Debug.DrawLine(startPos, startPos + traceDir *cubeSize.y, Color.red, _traceTime);
+            Debug.DrawLine(startPos, startPos + traceDir *traceLength, Color.red, _traceTime);
         }
         
         return hit;
