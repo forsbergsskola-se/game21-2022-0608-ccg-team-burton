@@ -110,7 +110,7 @@ public class SoundMananger : MonoBehaviour
     public void EnemyIdle()
     {
         Debug.Log("EnemyIdle");
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/EnemyIidle");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game play/Combat/EnemyIdle");
     }
 
 
