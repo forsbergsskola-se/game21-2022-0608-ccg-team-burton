@@ -16,25 +16,25 @@ public class CurrencyShopUI : MonoBehaviour
 
     private void OnEnable()
     {
-        purchaseCommonBox.OnCurrencyChange += UpdateCoinText;
-        purchaseRareBox.OnCurrencyChange += UpdateButtonsText;
-        purchaseEpicBox.OnCurrencyChange += UpdateButtonsText;
+        // purchaseCommonBox.OnCurrencyChange += UpdateCoinText;
+        // purchaseRareBox.OnCurrencyChange += UpdateButtonsText;
+        // purchaseEpicBox.OnCurrencyChange += UpdateButtonsText;
     }
 
     private void OnDisable()
     {
-        purchaseCommonBox.OnCurrencyChange -= UpdateCoinText;
-        purchaseRareBox.OnCurrencyChange += UpdateButtonsText;
-        purchaseEpicBox.OnCurrencyChange += UpdateButtonsText;
+        // purchaseCommonBox.OnCurrencyChange -= UpdateCoinText;
+        // purchaseRareBox.OnCurrencyChange += UpdateButtonsText;
+        // purchaseEpicBox.OnCurrencyChange += UpdateButtonsText;
     }
 
-    public void UpdateCoinText(int value)
-    {
-        coinsTxt.text = "Coins: " + value ;
-    }
-
-    public void UpdateButtonsText(int value)
-    {
-        buttonsTxt.text = "Buttons: " + value;
-    }
+    // public void UpdateCoinText(int value)
+    // {
+    //     coinsTxt.text = "Coins: " + value ;
+    // }
+    //
+    // public void UpdateButtonsText(int value)
+    // {
+    //     buttonsTxt.text = "Buttons: " + value;
+    // }
 }

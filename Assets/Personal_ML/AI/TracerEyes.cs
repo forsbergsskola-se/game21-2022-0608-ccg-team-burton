@@ -52,7 +52,8 @@ public class TracerEyes : MonoBehaviour
     [SerializeField] public float pursueDistance;
     [SerializeField] public Vector2 traceSize;
     
-    private int multiMask;
+    private int _groundMask;
+    private int _boxMask;
 
     private float traceInterval = 0.4f;
     private float timeSinceTrace;
@@ -79,6 +80,10 @@ public class TracerEyes : MonoBehaviour
 
     private bool JumpReady;
 
+    private bool _somethingHit;
+
+
+
     private void Awake()
     {
         JumpReady = true;
@@ -86,7 +91,8 @@ public class TracerEyes : MonoBehaviour
         _enemyHealth.OnHealthChanged += RegisterAttack;
 
         PlayerForgotten = true;
-        multiMask = 1 << 6 | 1 << 8;
+        _groundMask = 1 << 6;
+        _boxMask = 1 << 8 | 1 << 13;
         GroundSeen = true;
     }
 
@@ -111,20 +117,25 @@ public class TracerEyes : MonoBehaviour
         {
             timeSinceTrace -= traceInterval;
             //DoMultiTrace();
-            TraceForGround();
+            DoAllTraces();
         }
     }
 
     public int GetPlayerHealth()
         => _playerHealth.CurrentHealth;
-    
+
+    private void DoAllTraces()
+    {
+        TraceForGround();
+        TraceBox();
+    }
     
     private void TraceForGround()
     {
         var pos = transform.position;
         var dir = transform.right + new Vector3(0, -1);
         var traceDist = 2;
-        var hit = Physics2D.Raycast(pos, dir, traceDist, multiMask);
+        var hit = Physics2D.Raycast(pos, dir, traceDist, _groundMask);
 
         if (hit)
         {
@@ -377,7 +388,7 @@ public class TracerEyes : MonoBehaviour
 
     private TraceType DoSingleTrace(Vector2 dir, Vector2 pos, float traceDistance, out RaycastHit2D outHit)
     {
-        var hit = Physics2D.Raycast(pos, dir, traceDistance, multiMask);
+        var hit = Physics2D.Raycast(pos, dir, traceDistance, _groundMask);
         outHit = hit;
         
         if (!hit)
@@ -406,19 +417,19 @@ public class TracerEyes : MonoBehaviour
 
     private void TraceBox()
     {
-        var sizeY = 7f;
-        var sizeX = pursueDistance;
-        var boxPlacement = transform.position + new Vector3(0, sizeY / 2 - 1);
-        var result = Physics2D.BoxCastAll(boxPlacement , 
-            new Vector2(pursueDistance * 2, sizeY), 0, transform.forward, 8, multiMask);
-        var playerSeen = false;
-        var playerIsHit = false;
+        var result = Physics2D.BoxCastAll(transform.position, 
+            traceSize, 0, transform.up, 8, _boxMask);
 
+        var numHits = 0;
         foreach (var h in result)
         {
-            Debug.Log(h.collider.transform.name);
-            Debug.Log(h.collider.transform.position);
+            if (h)
+            {
+                numHits++;
+            }
         }
+
+        _somethingHit = numHits > 0;
     }
 
   
@@ -432,7 +443,8 @@ public class TracerEyes : MonoBehaviour
     #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
+        Gizmos.color = _somethingHit ? Color.green : Color.red;
+
         Gizmos.DrawWireCube(transform.position, traceSize);
     }
     #endif

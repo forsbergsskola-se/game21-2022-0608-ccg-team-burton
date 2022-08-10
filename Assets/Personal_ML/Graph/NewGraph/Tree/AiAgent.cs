@@ -42,6 +42,8 @@ public class AiAgent
     public Rigidbody2D body;
 
     public bool keepWalking;
+
+    public float moveSpeed;
     
     public AiAgent()
     {
