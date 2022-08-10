@@ -71,13 +71,14 @@ public class LevelGrid : MonoBehaviour
 
     private void Awake()
     {
-        _layerMask = 1 << 6;
+        _layerMask = 1 << 6 | 1 << 10 | 1 << 11;
         SetNewList();
     }
 
     void Start()
     {
-        ScanAll();
+      //  ScanAll();
+      AdvancedTrace(new Vector2(0,0));
     }
 
     private void ScanAll()
@@ -88,10 +89,10 @@ public class LevelGrid : MonoBehaviour
             {
                 var cube = _gridList[i][j];
                 var start = cube.location + new Vector2(-1,-1f) * new Vector2(cubeSize.x / 2, cubeSize.y / 2);
-                
-                ScanABox(new Vector2(i,j), start, new Vector2(0,1));
-                CheckUnder(cube);
-                SetOptions(cube);
+                AdvancedTrace(new Vector2(i,j));
+                //ScanABox(new Vector2(i,j), start, new Vector2(0,1));
+                //CheckUnder(cube);
+                //SetOptions(cube);
 
                 if ((int) cube.lowestGroundY != 9999)
                 {
@@ -210,8 +211,88 @@ public class LevelGrid : MonoBehaviour
 
         return square;
     }
+
+    private void AdvancedTrace(Vector2 startIndex)
+    {
+        _hitList.Clear();
+        var cube = _gridList[(int) startIndex.x][(int) startIndex.y];
+        var topCorner = cube.location + new Vector2(-cubeSize.x / 2, cubeSize.y / 2);
+        var numberTraces = 15 ;
+        var increment = cubeSize.x  / numberTraces;
+        
+        for (var i = 0; i < numberTraces; i++)
+        {
+            var aHit = SingleTrace(topCorner, new Vector2(0,-1), cubeSize.y * numberCubes.y);
+
+            if (aHit)
+            {
+                if (_hitList.SingleOrDefault(x => (int) x.point.y == (int) aHit.point.y) == default)
+                {
+                    _hitList.Add(aHit);
+                    cube.pointsList.Add(new PointsOfInterest()
+                    {
+                        location = aHit.point,
+                        pointType = LevelElements.Edge
+                    });
+                }
+            }
+            topCorner += new Vector2(increment, 0);
+        }
+
+        var breakLoop = false;
+        List<RaycastHit2D> newHits = new();
+
+        foreach (var h in _hitList)
+        {
+            newHits.Clear();
+            var start = h.point + new Vector2(0, 0.1f);
+            while (!breakLoop)
+            {
+                var aHit = SingleTrace(start, new Vector2(0,-1), 0.2f);
+                
+                if (!aHit) breakLoop = true;
+                newHits.Add(aHit);
+                start += new Vector2(increment, 0);
+            }
+
+            cube.pointsList.Add(new PointsOfInterest()
+            {
+                
+                pointType = LevelElements.Gap
+            });
+        }
+    }
     
-    
+    private RaycastHit2D SingleTrace(Vector2 startPos, Vector2 traceDir, float traceLength)
+    {
+        var hit = Physics2D.Raycast(startPos, traceDir, traceLength, _layerMask);
+        
+        if (hit)
+        {
+            Debug.DrawLine(startPos, hit.point, Color.green, _traceTime);
+        }
+        else
+        {
+            Debug.DrawLine(startPos, startPos + traceDir *cubeSize.y, Color.red, _traceTime);
+        }
+        
+        return hit;
+    }
+
+
+    private void ScanInDirection(Vector2 scanDir, Vector2 moveDir, Vector2 index, Vector2 startPos)
+    {
+        _hitList.Clear();
+        var cube = _gridList[(int) index.x][(int) index.y];
+        var numberTraces = 15;
+        var increment = cubeSize.x / numberTraces;
+        
+        for (var i = 0; i < numberTraces; i++)
+        {
+
+            startPos += new Vector2(increment, 0);
+        }
+    }
     
     private void ScanABox(Vector2 index, Vector2 startPos, Vector2 traceDir)
     {
