@@ -3,5 +3,6 @@ public enum PlayerPrefsKeys
     CurrentCoins,
     CurrentButtons,
     NeededUpgradeMaterial,
-    AttributeValue
+    AttributeValue,
+    PlayerDataCreated
 }

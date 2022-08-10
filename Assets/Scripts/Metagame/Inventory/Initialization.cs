@@ -9,7 +9,8 @@ public class Initialization : MonoBehaviour
 
     private void Start()
     {
-        NewGamePlayerStats();
+        if(!PlayerPrefs.HasKey(PlayerPrefsKeys.PlayerDataCreated.ToString()))
+            NewGamePlayerStats();
         
         //Update UI after init
         uICurrencyUpdater.OnCurrencyChanged?.Invoke();
@@ -17,6 +18,7 @@ public class Initialization : MonoBehaviour
 //TODO: Should be called on like main map for first time setup. On second start (player prefs present) --> nothing will happen here
     private void NewGamePlayerStats()
     {
+        Debug.Log("Creating new data...");
         if(!PlayerPrefs.HasKey(PlayerPrefsKeys.CurrentCoins.ToString()))
             PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), 0);
         
@@ -34,5 +36,7 @@ public class Initialization : MonoBehaviour
 
             }
         }
+        
+        PlayerPrefs.SetString(PlayerPrefsKeys.PlayerDataCreated.ToString(), "Data has been created");
     }
 }
