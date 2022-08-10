@@ -28,4 +28,17 @@ public class DebugSaveClear : MonoBehaviour
       Debug.Log($"Current Coins: {PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString())}");
 
    }
+   
+   public void AddButtons()
+   {
+      PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentButtons.ToString(), PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentButtons.ToString())+25);
+      Debug.Log($"Current Buttons: {PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentButtons.ToString())}");
+   }
+   
+   public void RemoveButtons()
+   {
+      PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentButtons.ToString(), PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentButtons.ToString())-25);
+      Debug.Log($"Current Buttons: {PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentButtons.ToString())}");
+
+   }
 }

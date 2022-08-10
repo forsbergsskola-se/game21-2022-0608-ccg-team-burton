@@ -4,8 +4,6 @@ using UnityEngine;
 public class Initialization : MonoBehaviour
 {
 
-    public Action OnInitComplete;
-
     [SerializeField] private Libraries equipmentLibrary;
     [SerializeField] private UICurrencyUpdater uICurrencyUpdater;
 
