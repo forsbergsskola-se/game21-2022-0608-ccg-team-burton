@@ -5,10 +5,15 @@ using UnityEngine;
 public class FusionManager : MonoBehaviour
 {
 
-    private EquipmentSO equipmentData;
-    
-    public void Tester()
+    public void InitiateUpgrade(EquipmentSO equipmentData, ActionItem upgradeMaterial)
     {
-        Debug.Log("TESTER");
+        if (equipmentData.NeededUpgradeMaterial > PlayerPrefs.GetInt(upgradeMaterial.GetItemID()))
+        {
+            Debug.Log("Not enough materials!");
+        }
+        else
+        {
+            Debug.Log("Can upgrade!");
+        }
     }
 }

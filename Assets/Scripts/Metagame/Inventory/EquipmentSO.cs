@@ -15,6 +15,7 @@ public class EquipmentSO : ScriptableObject
     public string RarityID;
     public Rarity Rarity;
     public int BaseUpgradeCost;
+    public int NeededUpgradeMaterial;
 
     private void OnValidate()
     {

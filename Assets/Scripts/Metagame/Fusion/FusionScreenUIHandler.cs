@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class FusionScreenUIHandler : MonoBehaviour
 {
-    [HideInInspector] public EquipmentSO equipmentSoData;
+    [HideInInspector] public EquipmentSO EquipmentSoData;
     [HideInInspector] public ActionItem UpgradeMaterialSoData;
 
     [SerializeField] private FusionManager fusionManager;
@@ -21,21 +21,21 @@ public class FusionScreenUIHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        equipmentIconGameObject.GetComponent<Image>().sprite = equipmentSoData.Icon;
-        rarityText.SetText("Rarity: "+equipmentSoData.Rarity);
-        attributeText.SetText(equipmentSoData.AttributeDescription+" " +equipmentSoData.AttributeValue);
+        equipmentIconGameObject.GetComponent<Image>().sprite = EquipmentSoData.Icon;
+        rarityText.SetText("Rarity: "+EquipmentSoData.Rarity);
+        attributeText.SetText(EquipmentSoData.AttributeDescription+" " +EquipmentSoData.AttributeValue);
         upgradeMaterialsIconGameObject.GetComponent<Image>().sprite = UpgradeMaterialSoData.GetIcon();
         haveMaterialText.SetText("Have: "+PlayerPrefs.GetInt(UpgradeMaterialSoData.GetItemID()));
 
-        Enum.TryParse(equipmentSoData.RarityID, out Rarity currentRarity);
-        var neededMaterials = ((int)currentRarity + 1) +equipmentSoData.BaseUpgradeCost; //Current rarity +1 = addition cost.
+        Enum.TryParse(EquipmentSoData.RarityID, out Rarity currentRarity);
+        EquipmentSoData.NeededUpgradeMaterial = ((int)currentRarity + 1) +EquipmentSoData.BaseUpgradeCost; //Current rarity +1 = addition cost.
         
-        neededMaterialText.SetText($"Need: {neededMaterials}");
+        neededMaterialText.SetText($"Need: {EquipmentSoData.NeededUpgradeMaterial}");
     }
 
     public void PressUpgradeButton()
     {
-            fusionManager.Tester();
+            fusionManager.InitiateUpgrade(EquipmentSoData,UpgradeMaterialSoData);
         
     }
  

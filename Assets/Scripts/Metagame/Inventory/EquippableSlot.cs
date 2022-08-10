@@ -10,7 +10,7 @@ public class EquippableSlot : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         var FusionScreenUI = UpgradeScreen.GetComponent<FusionScreenUIHandler>();
-        FusionScreenUI.equipmentSoData = equipmentSo;
+        FusionScreenUI.EquipmentSoData = equipmentSo;
         FusionScreenUI.UpgradeMaterialSoData = upgradeMaterialSO;
         
         UpgradeScreen.SetActive(true);
