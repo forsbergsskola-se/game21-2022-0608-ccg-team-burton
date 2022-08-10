@@ -18,6 +18,7 @@ public class FusionScreenUIHandler : MonoBehaviour
     [SerializeField] private GameObject upgradeMaterialsIconGameObject;
     [SerializeField] private TMP_Text neededMaterialText;
     [SerializeField] private TMP_Text haveMaterialText;
+    [SerializeField] private GameObject upgradeButton;
     
     private void OnEnable()
     {
@@ -27,7 +28,9 @@ public class FusionScreenUIHandler : MonoBehaviour
     private void UpdateUpgradeUI()
     {
         CalculateNeededMaterials();
-        UpdateUIElements();  
+        UpdateUIElements();
+        MaxLevelCheck();
+
     }
 
     private void CalculateNeededMaterials()
@@ -39,6 +42,7 @@ public class FusionScreenUIHandler : MonoBehaviour
     }
     private void UpdateUIElements()
     {
+        
         equipmentIconGameObject.GetComponent<Image>().sprite = EquipmentSoData.Icon;
         rarityText.SetText("Rarity: "+PlayerPrefs.GetString(EquipmentSoData.RarityID));
         attributeText.SetText(EquipmentSoData.AttributeDescription+" " +PlayerPrefs.GetFloat(PlayerPrefsKeys.AttributeValue.ToString()));
@@ -52,5 +56,17 @@ public class FusionScreenUIHandler : MonoBehaviour
             fusionManager.InitiateUpgrade(EquipmentSoData,UpgradeMaterialSoData);
             UpdateUpgradeUI();
             OnInventoryChange?.Invoke();
+
+    }
+
+    public void MaxLevelCheck()
+    {
+        if (PlayerPrefs.GetString(EquipmentSoData.RarityID).Contains("Legendary"))
+        {
+            upgradeButton.SetActive(false);
+            neededMaterialText.SetText("Max level reached");
+            return;
+        }
+        upgradeButton.SetActive(true);
     }
 }

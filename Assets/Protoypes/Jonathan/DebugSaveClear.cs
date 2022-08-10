@@ -41,4 +41,28 @@ public class DebugSaveClear : MonoBehaviour
       Debug.Log($"Current Buttons: {PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentButtons.ToString())}");
 
    }
+
+   public void AddMetal()
+   {
+      PlayerPrefs.SetInt("upgradematerials.metal", PlayerPrefs.GetInt("upgradematerials.metal")+1);
+      Debug.Log($"Current Metal: {PlayerPrefs.GetInt("upgradematerials.metal")}");
+   }
+   
+   public void RemoveMetal()
+   {
+      PlayerPrefs.SetInt("upgradematerials.metal", PlayerPrefs.GetInt("upgradematerials.metal")-1);
+      Debug.Log($"Current Metal: {PlayerPrefs.GetInt("upgradematerials.metal")}");
+   }
+   
+   public void AddPorcelain()
+   {
+      PlayerPrefs.SetInt("upgradematerials.porcelain", PlayerPrefs.GetInt("upgradematerials.porcelain")+1);
+      Debug.Log($"Current Porcelain: {PlayerPrefs.GetInt("upgradematerials.porcelain")}");
+   }
+   
+   public void RemovePorcelain()
+   {
+      PlayerPrefs.SetInt("upgradematerials.porcelain", PlayerPrefs.GetInt("upgradematerials.porcelain")-1);
+      Debug.Log($"Current Porcelain: {PlayerPrefs.GetInt("upgradematerials.porcelain")}");
+   }
 }
