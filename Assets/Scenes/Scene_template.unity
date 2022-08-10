@@ -3120,6 +3120,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4953517107820749684, guid: f45bb3ffeb3c2d84e9b35b8c67680cfb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -21.4
+      objectReference: {fileID: 0}
     - target: {fileID: 4953517107820749685, guid: f45bb3ffeb3c2d84e9b35b8c67680cfb,
         type: 3}
       propertyPath: m_IsActive
@@ -4815,3 +4820,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 1532513277}
   secondsToActivate: 9.5
+  player: {fileID: 0}
