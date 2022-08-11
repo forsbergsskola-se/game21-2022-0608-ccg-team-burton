@@ -132,6 +132,7 @@ namespace Protoypes.Harry
 
         private void CalculateWalking()
         {
+            var equipmentSpeedModifier = 1+(PlayerPrefs.GetFloat("buequipment.legs.attributevalue")/100);
             
             if (_walkCommand != 0 || _horizontal != 0) 
             {
@@ -142,7 +143,7 @@ namespace Protoypes.Harry
                     _currentHorizontalSpeed += _walkCommand * Acceleration * Time.fixedDeltaTime;
 
                 // clamped by max frame movement
-                _currentHorizontalSpeed = Mathf.Clamp(_currentHorizontalSpeed, -MoveClamp, MoveClamp);
+                _currentHorizontalSpeed = Mathf.Clamp(_currentHorizontalSpeed, -MoveClamp*equipmentSpeedModifier, MoveClamp*equipmentSpeedModifier);
             }
             else 
                 _currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, 0, Deceleration * Time.fixedDeltaTime);
