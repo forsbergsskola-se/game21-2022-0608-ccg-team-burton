@@ -30,7 +30,6 @@ public class FusionScreenUIHandler : MonoBehaviour
         CalculateNeededMaterials();
         UpdateUIElements();
         MaxLevelCheck();
-
     }
 
     private void CalculateNeededMaterials()

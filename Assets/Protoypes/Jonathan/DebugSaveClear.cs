@@ -108,7 +108,5 @@ public class DebugSaveClear : MonoBehaviour
          AddCoins();
          AddButtons();
       }
-      
-      
    }
 }
