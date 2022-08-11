@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 1225281334}
   - component: {fileID: 1225281333}
   m_Layer: 5
-  m_Name: Needed Materials
+  m_Name: Needed Materials Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 1278736993}
   - component: {fileID: 1278736992}
   m_Layer: 5
-  m_Name: UpgradeMaterialSprite
+  m_Name: Upgrade Materials Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 1844787928}
   - component: {fileID: 1844787927}
   m_Layer: 5
-  m_Name: Current Materials
+  m_Name: Have Material Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 2117543598}
   - component: {fileID: 2117543597}
   m_Layer: 5
-  m_Name: CurrentAttribute
+  m_Name: Attribute Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -768,7 +768,7 @@ GameObject:
   - component: {fileID: 88914584138665369}
   - component: {fileID: 7457244861560881611}
   m_Layer: 5
-  m_Name: UpgradeableObjectSprite
+  m_Name: Equipment Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1036,14 +1036,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EquipmentSoData: {fileID: 0}
   UpgradeMaterialSoData: {fileID: 0}
-  fusionManager: {fileID: 0}
-  equipmentIconGameObject: {fileID: 3834205139099808088}
-  rarityText: {fileID: 3106505165143205155}
-  attributeText: {fileID: 2117543597}
-  upgradeMaterialsIconGameObject: {fileID: 1278736990}
-  neededMaterialText: {fileID: 1225281333}
-  haveMaterialText: {fileID: 1844787927}
-  upgradeButton: {fileID: 8250505879793259473}
+  _fusionManager: {fileID: 0}
+  _equipmentIconGameObject: {fileID: 3834205139099808088}
+  _rarityText: {fileID: 3106505165143205155}
+  _attributeText: {fileID: 2117543597}
+  _upgradeMaterialsIconGameObject: {fileID: 1278736990}
+  _neededMaterialText: {fileID: 1225281333}
+  _haveMaterialText: {fileID: 1844787927}
+  _upgradeButton: {fileID: 8250505879793259473}
 --- !u!114 &6075800328692194651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1512,7 +1512,7 @@ GameObject:
   - component: {fileID: 2612803242636278362}
   - component: {fileID: 3106505165143205155}
   m_Layer: 5
-  m_Name: CurrentRarity
+  m_Name: RarityText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
