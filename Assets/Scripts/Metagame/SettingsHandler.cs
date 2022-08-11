@@ -1,4 +1,5 @@
-using System;
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,45 +7,52 @@ namespace Metagame
 {
     public class SettingsHandler : MonoBehaviour
     {
-        FMOD.Studio.VCA VcaController;
-
-        [SerializeField] string VcaName;
-        [SerializeField] Slider slider;
+        [SerializeField] Slider musicSlider;
+        [SerializeField] Slider sfxSlider;
+        [SerializeField] Toggle toggle;
+        VCA _musicVcaController;
+        VCA _sfxVcaController;
 
         void Start(){
-            VcaController = FMODUnity.RuntimeManager.GetVCA("vca:/" + VcaName);
-            slider = GetComponent<Slider>();
+            _musicVcaController = RuntimeManager.GetVCA("vca:/Music");
+            _sfxVcaController = RuntimeManager.GetVCA("vca:/SFX");
+            //musicSlider = GetComponent<Slider>();
+            //sfxSlider = GetComponent<Slider>();
+            Debug.Log(musicSlider.gameObject.name);
             LoadMusicVolume();
             LoadSFXVolume();
-            VcaController.setVolume(PlayerPrefs.GetFloat("MusicVolume"));
-            VcaController.setVolume(PlayerPrefs.GetFloat("SFXVolume"));
+            if (PlayerPrefs.GetInt("ToggleVibrate") == 1)
+                toggle.isOn = true;
+            else
+                toggle.isOn = false;
+            _musicVcaController.setVolume(PlayerPrefs.GetFloat("MusicVolume"));
+            _sfxVcaController.setVolume(PlayerPrefs.GetFloat("SFXVolume"));
         }
 
         public void SetMusicVolume(float volume){
-            VcaController.setVolume(volume);
+            _musicVcaController.setVolume(volume);
             PlayerPrefs.SetFloat("MusicVolume", volume);
         }
 
-        public void LoadMusicVolume(){
-            if (gameObject.name.Contains("Music")){
-                slider.value = PlayerPrefs.GetFloat("MusicVolume");
-            }
-        }
-        public void LoadSFXVolume(){
-            if (gameObject.name.Contains("SFX")){
-                slider.value = PlayerPrefs.GetFloat("SFXVolume");
-            }
-        }
-        
-        
         public void SetSFXVolume(float volume){
-            VcaController.setVolume(volume);
+            _sfxVcaController.setVolume(volume);
             PlayerPrefs.SetFloat("SFXVolume", volume);
         }
-        
 
-        public void ToggleVibration(){
-            
+        public void LoadMusicVolume(){
+            if (musicSlider.gameObject.name.Contains("Music")) musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+        }
+
+        public void LoadSFXVolume(){
+            if (sfxSlider.gameObject.name.Contains("SFX")) sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume");
+        }
+
+
+        public void ToggleVibrate(){
+            if (toggle.isOn){
+                Handheld.Vibrate();
+                PlayerPrefs.SetInt("ToggleVibrate", 1);
+            }
         }
     }
 }
