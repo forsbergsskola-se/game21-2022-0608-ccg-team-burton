@@ -45,7 +45,8 @@ namespace Entity
 
         private void Start()
         {
-            CurrentHealth = _health;
+            var equipmentHealthModifier = PlayerPrefs.GetFloat("buequipment.chest.attributevalue");
+            CurrentHealth = _health+(int)equipmentHealthModifier;
         }
 
         public void ModifyHealth(int healthValueChange)

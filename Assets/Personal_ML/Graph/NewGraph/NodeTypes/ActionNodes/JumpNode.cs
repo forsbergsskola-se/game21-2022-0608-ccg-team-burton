@@ -8,12 +8,13 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         public override void OnStart()
         {
+            Debug.Log("starting jump");
             _startedJump = false;
         }
 
         public override void OnExit()
         {
-            
+            Debug.Log("exit jump");
         }
 
         public override State OnUpdate()
