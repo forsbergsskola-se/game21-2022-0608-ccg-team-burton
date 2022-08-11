@@ -21,12 +21,12 @@ public class BehaviourTreeRunner : MonoBehaviour
 
     private void Setup()
     {
-        var grid = GameObject.FindWithTag("LevelGrid").GetComponent<LevelGrid>();
+       // var grid = GameObject.FindWithTag("LevelGrid").GetComponent<LevelGrid>();
         tree = tree.Clone();
         tree.Bind(new AiAgent()
         {
             enemyTransform = gameObject.transform,
-            grid = grid,
+            //grid = grid,
             anim = GetComponent<Animator>(),
             enemyEyes = GetComponentInChildren<TracerEyes>(),
             body = GetComponent<Rigidbody2D>(),

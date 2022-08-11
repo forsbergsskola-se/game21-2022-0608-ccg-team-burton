@@ -29,7 +29,7 @@ public class SelectNode : CompositeNode
     private void CheckOptions()
     {
         _plusMinus = agent.enemyTransform.right.x > 0;
-        _current = agent.grid.GetSquareFromPoint(agent.enemyTransform.position);
+       // _current = agent.grid.GetSquareFromPoint(agent.enemyTransform.position);
         agent.keepWalking = true;
         if (!agent.enemyEyes.GroundSeen)
         {
