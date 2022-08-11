@@ -14,8 +14,8 @@ namespace Metagame
         void Start(){
             VcaController = FMODUnity.RuntimeManager.GetVCA("vca:/" + VcaName);
             slider = GetComponent<Slider>();
-            slider.value = PlayerPrefs.GetFloat("MusicVolume");
-            slider.value = PlayerPrefs.GetFloat("SFXVolume");
+            LoadMusicVolume();
+            LoadSFXVolume();
             VcaController.setVolume(PlayerPrefs.GetFloat("MusicVolume"));
             VcaController.setVolume(PlayerPrefs.GetFloat("SFXVolume"));
         }
@@ -24,6 +24,18 @@ namespace Metagame
             VcaController.setVolume(volume);
             PlayerPrefs.SetFloat("MusicVolume", volume);
         }
+
+        public void LoadMusicVolume(){
+            if (gameObject.name.Contains("Music")){
+                slider.value = PlayerPrefs.GetFloat("MusicVolume");
+            }
+        }
+        public void LoadSFXVolume(){
+            if (gameObject.name.Contains("SFX")){
+                slider.value = PlayerPrefs.GetFloat("SFXVolume");
+            }
+        }
+        
         
         public void SetSFXVolume(float volume){
             VcaController.setVolume(volume);
