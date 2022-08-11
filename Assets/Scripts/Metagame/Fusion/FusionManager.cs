@@ -39,8 +39,6 @@ public class FusionManager : MonoBehaviour
         } 
         else if (equipmentData.ID.Contains("weapon"))
         {
-            Debug.Log(PlayerPrefs.GetInt(equipmentData.AttributeValueID));
-            Debug.Log(GetCurrentRarity(equipmentData));
             var calculateNewAttribute = 10 + (int) GetCurrentRarity(equipmentData)*5;
             PlayerPrefs.SetFloat(equipmentData.AttributeValueID, calculateNewAttribute);
         }
