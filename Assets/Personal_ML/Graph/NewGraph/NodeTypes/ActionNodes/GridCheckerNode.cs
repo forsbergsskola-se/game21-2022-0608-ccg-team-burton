@@ -5,14 +5,33 @@ namespace NewGraph.NodeTypes.ActionNodes
     public class GridCheckerNode : ActionNode
     {
         private CubeFacts _current;
+
+        private bool _plusMinus;
+
+        private bool _choiceMade;
+        
         public override void OnStart()
         {
+            _plusMinus = agent.enemyTransform.right.x > 0;
             _current = agent.grid.GetSquareFromPoint(agent.enemyTransform.position);
+            
+            CheckOptions();
         }
 
         public override void OnExit()
         {
            
+        }
+
+        private void CheckOptions()
+        {
+            
+       //     var xPos = _current.pointsList.FindAll(x => x.pointType == LevelElements.Gap)[0].location.x;
+       agent.currentDestination = new Vector3(_current.max.x ,agent.enemyTransform.position.y);
+            _choiceMade = true;
+            return;
+            
+       
         }
         
         private bool CheckIfLookingAtTarget()
@@ -24,7 +43,7 @@ namespace NewGraph.NodeTypes.ActionNodes
 
         public override State OnUpdate()
         {
-            throw new System.NotImplementedException();
+            return _choiceMade ? State.Success : State.Update;
         }
     }
 }

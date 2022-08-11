@@ -7,7 +7,7 @@ namespace Entity
     /// <summary>
     /// Health class, which enables things to be damaged or healed.
     /// </summary>
-    public class Health : MonoBehaviour, IDamageable, I_Saveable
+    public class Health : MonoBehaviour, IDamageable
     {
         
                 
@@ -54,6 +54,9 @@ namespace Entity
                     return;  
                 
             CurrentHealth += healthValueChange;
+
+            //if statement for vibrate toggle bool = true vibrate
+            Handheld.Vibrate();
             OnHealthChanged?.Invoke(CurrentHealth);
 
 
@@ -97,10 +100,10 @@ namespace Entity
                 _itemCollector._coinCounter -= _itemCollector._coinCounter;
                 _itemCollector.UpdateCoinText(_itemCollector._coinCounter);
             }
-            playerDies.Invoke();
-            
             gameObject.SetActive(false);
             
+            playerDies.Invoke();
+
             IsDead = true;
 
         }
@@ -114,18 +117,6 @@ namespace Entity
             yield return new WaitForSeconds(invulnFrameTimer);
             GetComponent<SpriteRenderer>().color = originalColor;             //Temp visualization for IFrame (Color stuff)
             _invulnerable = false;
-        }
-
-        public object CaptureState()
-        {
-            return CurrentHealth;
-        }
-
-        public void RestoreState(object state)
-        {
-            CurrentHealth = (int)state;
-            if (CurrentHealth <= 0)
-                OnDeath();
         }
     }
 }

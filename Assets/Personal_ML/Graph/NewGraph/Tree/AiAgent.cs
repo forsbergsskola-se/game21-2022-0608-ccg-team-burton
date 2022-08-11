@@ -10,16 +10,11 @@ public enum STATE
 public enum CurrentCommand
 {
     None,
-    FindCommander,
     MoveToPosition,
-    Interact,
-    PickupItem,
-    DropOfItem,
-    GetInstructions,
-    SearchArea,
-    Gather,
-    Hunt,
-    Find
+    MoveToAttack,
+    OutOfCommands,
+    Jump,
+    Attack
 }
 
 [Serializable]
@@ -33,15 +28,25 @@ public class AiAgent
 {
     public Transform enemyTransform;
     public Transform destination;
-    public CurrentCommand currentCommand;
+  //  public CurrentCommand currentCommand;
 
     public Vector3 currentDestination;
-    public Instruction currentInstruction;
-    public Queue<Vector3> TargetQueue = new();
-
-    public Queue<CurrentCommand> commandQueue = new();
+    
     public Animator anim;
     public LevelGrid grid;
+
+    public bool quitNode;
+
+    public TracerEyes enemyEyes;
+    
+    public Rigidbody2D body;
+
+    public bool keepWalking;
+
+    public float moveSpeed;
+    public float attackInterval = 0.3f;
+    
+    public Action<Action<CompoundActions>> CheckForJump;
     
     public AiAgent()
     {

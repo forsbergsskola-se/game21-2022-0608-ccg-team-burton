@@ -43,13 +43,13 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 0, y: 3951, z: 3022, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -116,18 +116,612 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Cannon_Shoot_0
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 4033
+        width: 544
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb48672c18fb50c43b62ca86c1199289
+      internalID: -1660558284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_1
+      rect:
+        serializedVersion: 2
+        x: 953
+        y: 4033
+        width: 542
+        height: 484
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcb78b12a8a03a24abed7e9a73844287
+      internalID: -1206035538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_2
+      rect:
+        serializedVersion: 2
+        x: 1729
+        y: 4033
+        width: 533
+        height: 479
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 309d18f2657c68a4d9f2c573cb5d92ca
+      internalID: 809725980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_3
+      rect:
+        serializedVersion: 2
+        x: 2510
+        y: 4033
+        width: 519
+        height: 473
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abdb970ed8ac91344acef49109bec883
+      internalID: -180328197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_4
+      rect:
+        serializedVersion: 2
+        x: 3283
+        y: 4033
+        width: 515
+        height: 466
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4795aefd77b51d2438d76ebac32627aa
+      internalID: -703611688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_5
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 3264
+        width: 512
+        height: 461
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f83750d6875f2c146a83c60c04fe005e
+      internalID: -1647114427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_6
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 3264
+        width: 515
+        height: 455
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18ca15e5558065a438158674a706ec1a
+      internalID: -2010769851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_7
+      rect:
+        serializedVersion: 2
+        x: 1747
+        y: 3264
+        width: 515
+        height: 451
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 806a3ce06ea114e4bb5d6a0cb8a6f566
+      internalID: 1524679970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_8
+      rect:
+        serializedVersion: 2
+        x: 2516
+        y: 3264
+        width: 513
+        height: 447
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be67e62cfc655cc4c854428ce4d1a47e
+      internalID: 1263586034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_9
+      rect:
+        serializedVersion: 2
+        x: 3283
+        y: 3264
+        width: 515
+        height: 445
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f49ca3283a733e4497edfc2216669ac
+      internalID: -1709811173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_10
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 2496
+        width: 512
+        height: 444
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02d2ba3adf0e4804faccff30b509dc08
+      internalID: 512667333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_11
+      rect:
+        serializedVersion: 2
+        x: 984
+        y: 2496
+        width: 513
+        height: 450
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f09a9dbfd0c25b9468bbbe71e4b3809f
+      internalID: 1880109054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_12
+      rect:
+        serializedVersion: 2
+        x: 1760
+        y: 2499
+        width: 515
+        height: 463
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f81fc0b06cd76ee4387daf26f66418ab
+      internalID: 1138110773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_13
+      rect:
+        serializedVersion: 2
+        x: 2469
+        y: 2501
+        width: 585
+        height: 493
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a681d399874789341b17dda7df819fbb
+      internalID: -1929988614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_14
+      rect:
+        serializedVersion: 2
+        x: 3139
+        y: 2501
+        width: 691
+        height: 538
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 326f9c04966671147a6f4716f8aa39a0
+      internalID: -1775896014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_15
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 1734
+        width: 753
+        height: 564
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14154e7513cded64a89e6caf7b1be8bc
+      internalID: 999881529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_16
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 1734
+        width: 747
+        height: 562
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b53a1f04382540e4babf3897a483dcb8
+      internalID: 1619679825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_17
+      rect:
+        serializedVersion: 2
+        x: 1569
+        y: 1734
+        width: 725
+        height: 553
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08349a7438fc9fb4595dbd0b324151be
+      internalID: -1719146327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_18
+      rect:
+        serializedVersion: 2
+        x: 2361
+        y: 1734
+        width: 697
+        height: 542
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ab97914cdf4f7e439de90d32a70735e
+      internalID: -1751566105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_19
+      rect:
+        serializedVersion: 2
+        x: 3155
+        y: 1732
+        width: 668
+        height: 530
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ab1b608773d70e41971e8f9b4c80435
+      internalID: -1308216606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_20
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 964
+        width: 639
+        height: 520
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad05b13fcb3f48841ac126d6e87d7279
+      internalID: -279256827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_21
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 962
+        width: 612
+        height: 511
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c53f569a32f4af4295522dbad6546bf
+      internalID: -2085506928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_22
+      rect:
+        serializedVersion: 2
+        x: 1682
+        y: 962
+        width: 591
+        height: 502
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2a55b19d510ce54da8c6d84fe5dd6a0
+      internalID: 1946065786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_23
+      rect:
+        serializedVersion: 2
+        x: 2462
+        y: 962
+        width: 574
+        height: 497
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2555f4b1bb35c6748a0eef914e38adb6
+      internalID: 16315285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_24
+      rect:
+        serializedVersion: 2
+        x: 3237
+        y: 962
+        width: 564
+        height: 493
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 565d64a6177388d4480dd72fb40877eb
+      internalID: -299543729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_25
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 192
+        width: 560
+        height: 493
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74ca531bc32305d4988961f83b365c2d
+      internalID: 1392447737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cannon_Shoot_26
+      rect:
+        serializedVersion: 2
+        x: 935
+        y: 192
+        width: 560
+        height: 493
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cce2f262fabb734782e616327a112cc
+      internalID: -1577445544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Cannon_Shoot_25: 1392447737
+      Cannon_Shoot_22: 1946065786
+      Cannon_Shoot_4: -703611688
+      Cannon_Shoot_3: -180328197
+      Cannon_Shoot_18: -1751566105
+      Cannon_Shoot_20: -279256827
+      Cannon_Shoot_10: 512667333
+      Cannon_Shoot_9: -1709811173
+      Cannon_Shoot_6: -2010769851
+      Cannon_Shoot_24: -299543729
+      Cannon_Shoot_8: 1263586034
+      Cannon_Shoot_26: -1577445544
+      Cannon_Shoot_5: -1647114427
+      Cannon_Shoot_12: 1138110773
+      Cannon_Shoot_7: 1524679970
+      Cannon_Shoot_13: -1929988614
+      Cannon_Shoot_2: 809725980
+      Cannon_Shoot_21: -2085506928
+      Cannon_Shoot_0: -1660558284
+      Cannon_Shoot_23: 16315285
+      Cannon_Shoot_15: 999881529
+      Cannon_Shoot_11: 1880109054
+      Cannon_Shoot_19: -1308216606
+      Cannon_Shoot_17: -1719146327
+      Cannon_Shoot_14: -1775896014
+      Cannon_Shoot_1: -1206035538
+      Cannon_Shoot_16: 1619679825
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

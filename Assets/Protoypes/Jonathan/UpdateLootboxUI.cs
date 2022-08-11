@@ -12,15 +12,8 @@ public class UpdateLootboxUI : MonoBehaviour
 
     private void OnDisable()=> lootBoxController.OnUpdateItemUI -= SetUIElement;
 
-    // public Image[] itemSprite;
-    // public TMP_Text ItemName;
-    // public TMP_Text Rarity;
-    
-
     private void SetUIElement( GameObject itemObject, InventoryItem item)
     {
            itemObject.GetComponent<Image>().sprite = item.GetIcon();
     }
-
-    
 }

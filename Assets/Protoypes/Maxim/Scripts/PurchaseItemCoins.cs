@@ -5,26 +5,19 @@ using UnityEngine;
 public class PurchaseItemCoins : MonoBehaviour
 {
     public SceneLoader sceneLoader;
-    private int _currentCoins;
     public int _price;
-
-    public Action<int> OnCurrencyChange;
-
-    public void Start()
-    {
-        _currentCoins = 1900;
-       OnCurrencyChange?.Invoke(_currentCoins);
-    }
+ 
     
 
     public void PressBuy()
     {
-        
-        if (_price <= _currentCoins)
+        var currentCoins = PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString());
+
+        if (_price <= currentCoins)
         {
-            _currentCoins -= _price;
-            // Save current coins to inentory
-            OnCurrencyChange?.Invoke(_currentCoins);
+            currentCoins -= _price;
+            PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), currentCoins);
+            // Save current coins to inventory
             sceneLoader.LoadScene();
         }
     }

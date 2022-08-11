@@ -7,52 +7,43 @@ using UnityEngine;
 public class BehaviourTreeRunner : MonoBehaviour
 {
     public BehaviourTree tree;
-    public Transform commanderTrans;
-    public bool readyToRun;
+    [HideInInspector] public bool readyToRun;
+
+    [Header("Enemy Attributes")] 
+    [SerializeField, Range(0.2f, 2)]private float attackInterval;
+    [SerializeField, Range(1f, 5)]private float baseMoveSpeed;
+    [SerializeField, Range(5, 10)]private float pursueMoveSpeed;
+    
+    public Action<Action<CompoundActions>> CheckForJump;
     
     void Start()
     {
         Setup();
+        //CheckForJump?.Invoke();
     }
 
+    private void SomethingSomething(Action<int> action)
+    {
+       
+    }
+    
     private void Setup()
     {
-        Queue<CurrentCommand> commands = new Queue<CurrentCommand>();
-        commands.Enqueue(CurrentCommand.MoveToPosition);
-        commands.Enqueue(CurrentCommand.GetInstructions);
-        Queue<Vector3> goals = new Queue<Vector3>();
-        goals.Enqueue(commanderTrans.position);
-        
+       // var grid = GameObject.FindWithTag("LevelGrid").GetComponent<LevelGrid>();
         tree = tree.Clone();
         tree.Bind(new AiAgent()
         {
             enemyTransform = gameObject.transform,
-            currentDestination = GameObject.Find("EnemyCommander").transform.position,
-            commandQueue = commands,
-            TargetQueue = goals
+            //grid = grid,
+            anim = GetComponent<Animator>(),
+            enemyEyes = GetComponentInChildren<TracerEyes>(),
+            body = GetComponent<Rigidbody2D>(),
+            keepWalking = true,
+            attackInterval = attackInterval,
+            moveSpeed = baseMoveSpeed,
+            CheckForJump = CheckForJump
         });
-
         readyToRun = true;
-    }
-    
-    private void OnDisable()
-    {
-    }
-
-    private void OnObjectSeen(TraceType obj)
-    {
-        
-    }
-
-    public Transform GetTopParent(Transform pTrans)
-    {
-        if (pTrans.parent)
-        {
-            pTrans = pTrans.parent;
-            GetTopParent(pTrans);
-        }
-        
-        return pTrans;
     }
     
     void Update()
@@ -60,21 +51,6 @@ public class BehaviourTreeRunner : MonoBehaviour
         if (!readyToRun) return;
         
         tree.Update();
-    }
-
-    public void MoveToDestination(Vector3 destination)
-    {
-       
-    }
-
-    public void SetNextCommand(CurrentCommand command)
-    {
-       
-    }
-
-    public void GetNextDestination(Action<Instruction> callBack)
-    {
-        
     }
 }
 
