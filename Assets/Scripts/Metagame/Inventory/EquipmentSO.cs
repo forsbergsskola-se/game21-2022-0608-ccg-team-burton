@@ -16,11 +16,6 @@ public class EquipmentSO : ScriptableObject
     public Rarity Rarity;
     public int BaseUpgradeCost;
     public int NeededUpgradeMaterial;
-
-    private void OnValidate()
-    {
-        //Update values here?
-    }
 }
 
 

@@ -42,10 +42,9 @@ public class FusionScreenUIHandler : MonoBehaviour
     }
     private void UpdateUIElements()
     {
-        
         equipmentIconGameObject.GetComponent<Image>().sprite = EquipmentSoData.Icon;
         rarityText.SetText("Rarity: "+PlayerPrefs.GetString(EquipmentSoData.RarityID));
-        attributeText.SetText(EquipmentSoData.AttributeDescription+" " +PlayerPrefs.GetFloat(PlayerPrefsKeys.AttributeValue.ToString()));
+        attributeText.SetText(EquipmentSoData.AttributeDescription+" " +PlayerPrefs.GetFloat(EquipmentSoData.AttributeValueID)+"%");
         upgradeMaterialsIconGameObject.GetComponent<Image>().sprite = UpgradeMaterialSoData.GetIcon();
         haveMaterialText.SetText("Have: "+PlayerPrefs.GetInt(UpgradeMaterialSoData.GetItemID()));
         neededMaterialText.SetText($"Need: {PlayerPrefs.GetInt(PlayerPrefsKeys.NeededUpgradeMaterial.ToString())}");

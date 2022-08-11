@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FusionManager : MonoBehaviour
 {
@@ -22,6 +23,14 @@ public class FusionManager : MonoBehaviour
         if (equipmentData.ID.Contains("head"))
         {
             Debug.Log("Upgrade Head here");
+            var calculateNewAttribute = PlayerPrefs.GetInt(equipmentData.AttributeValueID) +
+                                        (int) GetCurrentRarity(equipmentData) * 5;
+            Debug.Log($"ID: {equipmentData.ID}");
+            Debug.Log("Calculated: " +calculateNewAttribute);
+            Debug.Log($"BEFORE: {PlayerPrefs.GetFloat(equipmentData.AttributeValueID, calculateNewAttribute)}");
+            PlayerPrefs.SetFloat(equipmentData.AttributeValueID, calculateNewAttribute);
+            Debug.Log($"After: {PlayerPrefs.GetFloat(equipmentData.AttributeValueID, calculateNewAttribute)}");
+            
         } else if (equipmentData.ID.Contains("chest"))
         {
             Debug.Log("Upgrade Chest here");
@@ -36,13 +45,17 @@ public class FusionManager : MonoBehaviour
 
     private void UpgradeRarity(EquipmentSO equipmentData)
     {
-        Debug.Log($"equipmentdata: {equipmentData.RarityID}");
-        var currentRarityString = PlayerPrefs.GetString(equipmentData.RarityID);
-        Enum.TryParse(currentRarityString, out Rarity currentRarity);
+        var currentRarity = GetCurrentRarity(equipmentData);
         currentRarity += 1;
-        Debug.Log($"equipmentdata: {equipmentData.RarityID}");
 
         PlayerPrefs.SetString(equipmentData.RarityID, currentRarity.ToString());
+    }
+
+    private Rarity GetCurrentRarity(EquipmentSO equipmentData)
+    {
+        var currentRarityString = PlayerPrefs.GetString(equipmentData.RarityID);
+        Enum.TryParse(currentRarityString, out Rarity currentRarity);
+        return currentRarity;
     }
 
     private void CalculateNewMaterialBalance(ActionItem upgradeMaterial)
