@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using Meta.Gacha;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
-public class LootBoxController : MonoBehaviour
+public class LootBoxController : MonoBehaviour, IPointerClickHandler
 {
    public LootBoxSO LootBoxSO;
 
@@ -20,8 +22,6 @@ public class LootBoxController : MonoBehaviour
 
    private bool _boxOpenedCurrentSession;
    
-   public GameObject DroppedItem;
-
    private string itemID;
 
    private void Start()
@@ -34,8 +34,9 @@ public class LootBoxController : MonoBehaviour
       _itemInfoUI.SetActive(false);
    }
 
-   private void OnMouseUp()
-   {
+   public void OnPointerClick(PointerEventData eventData)
+   {   
+
       if (!_boxOpenedCurrentSession)
       {
          Debug.Log("Opening loot box");
@@ -77,4 +78,5 @@ public class LootBoxController : MonoBehaviour
          i++;
       }
    }
+ 
 }

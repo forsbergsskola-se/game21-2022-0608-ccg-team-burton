@@ -231,6 +231,7 @@ GameObject:
   - component: {fileID: 1675575241}
   - component: {fileID: 1675575240}
   - component: {fileID: 1675575239}
+  - component: {fileID: 1675575242}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -304,6 +305,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1675575242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675575238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1 &1756625297
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,6 +433,11 @@ PrefabInstance:
       propertyPath: lootBoxController
       value: 
       objectReference: {fileID: 960981154}
+    - target: {fileID: 2500345111150055376, guid: 2b24a900e88c8a249914c1c1fe8e4510,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2500345111150055382, guid: 2b24a900e88c8a249914c1c1fe8e4510,
         type: 3}
       propertyPath: m_Sprite
@@ -437,6 +459,26 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2500345111201984652, guid: 2b24a900e88c8a249914c1c1fe8e4510,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2500345111504294192, guid: 2b24a900e88c8a249914c1c1fe8e4510,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2500345111541121334, guid: 2b24a900e88c8a249914c1c1fe8e4510,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2500345112022825112, guid: 2b24a900e88c8a249914c1c1fe8e4510,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2500345112022825117, guid: 2b24a900e88c8a249914c1c1fe8e4510,
         type: 3}
       propertyPath: m_Type
@@ -448,6 +490,31 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: aa4b1c1faa4c3bc488c72493458e41f0,
         type: 3}
+    - target: {fileID: 2500345112083868718, guid: 2b24a900e88c8a249914c1c1fe8e4510,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2500345112421056485, guid: 2b24a900e88c8a249914c1c1fe8e4510,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2500345112572535327, guid: 2b24a900e88c8a249914c1c1fe8e4510,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2500345112646941988, guid: 2b24a900e88c8a249914c1c1fe8e4510,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2820970757886194127, guid: 2b24a900e88c8a249914c1c1fe8e4510,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3432007612819368856, guid: 2b24a900e88c8a249914c1c1fe8e4510,
         type: 3}
       propertyPath: m_Pivot.x
@@ -553,10 +620,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6907223180125374732, guid: 2b24a900e88c8a249914c1c1fe8e4510,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8731747406335818595, guid: 2b24a900e88c8a249914c1c1fe8e4510,
         type: 3}
       propertyPath: m_Name
       value: LootBoxUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8731747406335818595, guid: 2b24a900e88c8a249914c1c1fe8e4510,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -680,6 +757,11 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1675575240}
+    - target: {fileID: 5759340382903228420, guid: 6b29348431325284b85900a43f55677e,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5759340382903228423, guid: 6b29348431325284b85900a43f55677e,
         type: 3}
       propertyPath: m_Name

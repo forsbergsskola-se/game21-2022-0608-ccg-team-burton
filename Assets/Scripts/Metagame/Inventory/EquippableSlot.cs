@@ -5,7 +5,7 @@ public class EquippableSlot : MonoBehaviour, IPointerDownHandler
 {
 
     [SerializeField] private EquipmentSO equipmentSo;
-    [SerializeField] private ActionItem upgradeMaterialSO;
+    [SerializeField] private MaterialItem upgradeMaterialSO;
     [SerializeField] private GameObject UpgradeScreen;
     public void OnPointerDown(PointerEventData eventData)
     {

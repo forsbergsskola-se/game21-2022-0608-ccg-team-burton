@@ -4,5 +4,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Materials Library", menuName = "InventorySystem/Libraries/Materials Library")]
 public class MatlerialsLibrarySO : ScriptableObject
 {
-    public List<ActionItem> InventoryLibrary;
+    public List<MaterialItem> InventoryLibrary;
 }

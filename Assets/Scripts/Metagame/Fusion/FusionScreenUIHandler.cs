@@ -7,7 +7,7 @@ public class FusionScreenUIHandler : MonoBehaviour
 {
     public Action OnInventoryChange;
     [HideInInspector] public EquipmentSO EquipmentSoData;
-    [HideInInspector] public ActionItem UpgradeMaterialSoData;
+    [HideInInspector] public MaterialItem UpgradeMaterialSoData;
 
     [SerializeField] private FusionManager fusionManager;
     

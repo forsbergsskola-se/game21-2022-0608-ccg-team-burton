@@ -14,7 +14,7 @@ public class InventorySlot : MonoBehaviour//, IPointerClickHandler
         spriteRenderer = GetComponent<Image>();
     }
 
-    public void SetItemSlot(ActionItem item)
+    public void SetItemSlot(MaterialItem item)
     {
         spriteRenderer.sprite = item.GetIcon();
         name = item.GetDisplayName();
