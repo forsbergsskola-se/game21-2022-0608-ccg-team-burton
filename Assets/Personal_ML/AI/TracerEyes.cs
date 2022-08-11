@@ -45,12 +45,22 @@ public enum PlayerEncounter
 [Flags]
 public enum CompoundActions
 {
-    None = 0,
-    CanJump = 1,
-    CantJump = 2,
-    WalkToTarget = 4,
-    KeepWalking,
-    Rotate = 8
+    None = 1 << 0,
+    CanJump = 1 << 1,
+    WalkToTarget = 1 << 2,
+    KeepWalking = 1 << 3,
+    Rotate = 1 << 4,
+    GroundSeen = 1 << 5,
+    WallSeen= 1 << 6,
+    MakingJump = 1 << 7,
+    PlayerNoticed = 1 << 8,
+    PlayerBehind = 1 << 9,
+    PlayerInFront = 1 << 10,
+    PlayerInAttackRange = 1 << 11,
+    EnemyAttacked = 1 << 12,
+    AwareOfPlayer = 1 << 13,
+    EnemyDead = 1 << 14,
+    WallInTurnRange = 1 << 15,
 }
 
 [Serializable]
@@ -79,7 +89,6 @@ public class TracerEyes : MonoBehaviour
 
     public Vector2 PlayerPos { get; private set; }
     
-    public bool QuitNode { get; private set; }
     
     private bool UnderAttack;
     [HideInInspector] public Transform PlayerTrans;
@@ -93,6 +102,8 @@ public class TracerEyes : MonoBehaviour
 
     private List<RaycastHit2D> _pointsList = new();
     public CompoundActions compoundActions;
+
+    public float distanceToWall;
     
     private void Awake()
     {
@@ -113,6 +124,7 @@ public class TracerEyes : MonoBehaviour
     private void RegisterAttack(int currentHealth)
     {
         playerEncounter |= PlayerEncounter.EnemyAttacked;
+        compoundActions |= CompoundActions.EnemyAttacked;
     }
 
     void Update()
@@ -131,8 +143,31 @@ public class TracerEyes : MonoBehaviour
 
     private void DoAllTraces()
     {
-        GroundSeen = TraceForGround(new Vector3(0, -1), 2);
-        WallSeen = TraceForGround(new Vector3(0, 0), 8);
+        if (TraceForGround(new Vector3(0, -1), 2)) 
+            compoundActions |= CompoundActions.GroundSeen;
+        else compoundActions &= ~CompoundActions.GroundSeen;
+        
+        if (TraceForGround(new Vector3(0, 0), 8)) 
+            compoundActions |= CompoundActions.WallSeen;
+        else compoundActions &= ~CompoundActions.WallSeen;
+
+
+        if (compoundActions.HasFlag(CompoundActions.WallSeen))
+        {
+            if (distanceToWall < 1)
+            {
+                compoundActions |= CompoundActions.WallInTurnRange;
+            }
+        }
+        else
+        {
+            compoundActions &= ~CompoundActions.WallInTurnRange;
+        }
+
+        if (!compoundActions.HasFlag(CompoundActions.GroundSeen))
+        {
+           OtherJumpCheck();
+        }
         
         TraceBox();
     }
@@ -144,18 +179,64 @@ public class TracerEyes : MonoBehaviour
         
         var hit = Physics2D.Raycast(pos, dir, traceDist, _groundMask);
 
+        distanceToWall = hit.distance;
+        
         if (hit)
         {
+            
             Debug.DrawRay(pos, dir *hit.distance, Color.green, traceInterval);
         }
         else
         {
+            
             Debug.DrawRay(pos, dir *traceDist, Color.red, traceInterval);
         }
 
         return hit;
     }
 
+    private void OtherJumpCheck()
+    {
+        var pos = transform.position;
+        var result = Physics2D.BoxCastAll(pos, 
+            traceSize, 0, transform.up, traceSize.y / 10, _boxMask);
+        _somethingHit = false;
+        _pointsList.Clear();
+        
+        compoundActions &= ~CompoundActions.CanJump;
+        compoundActions &= ~CompoundActions.KeepWalking;
+        compoundActions &= ~CompoundActions.Rotate;
+
+        foreach (var h in result)
+        {
+            _somethingHit = true;
+            var layer = h.collider.transform.gameObject.layer;
+
+            if (layer == 13)
+            {
+                if (_pointsList.SingleOrDefault(x => x.point == h.point) == default)
+                {
+                    _pointsList.Add(h);
+                }
+            }
+        }
+
+        _pointsList = _pointsList
+            .OrderBy(x => x.distance).ToList();
+
+        var mag = _pointsList[0].point - _pointsList[^1].point;
+
+        if ( _pointsList.Count < 2 || mag.x > 7)
+        {
+           
+            compoundActions |=  CompoundActions.KeepWalking | CompoundActions.Rotate;
+        }
+        else
+        {
+            compoundActions |= CompoundActions.CanJump;
+        }
+    }
+    
     private void JumpCheck(Action<CompoundActions> callback)
     {
         var pos = transform.position;
@@ -163,7 +244,8 @@ public class TracerEyes : MonoBehaviour
             traceSize, 0, transform.up, traceSize.y / 10, _boxMask);
         _somethingHit = false;
         _pointsList.Clear();
-
+        
+        
         var comp = CompoundActions.None;
 
         foreach (var h in result)
@@ -187,7 +269,7 @@ public class TracerEyes : MonoBehaviour
 
         if ( _pointsList.Count < 2 || mag.x > 7)
         {
-            comp |= CompoundActions.CantJump | CompoundActions.KeepWalking | CompoundActions.Rotate;
+            comp |=  CompoundActions.KeepWalking | CompoundActions.Rotate;
         }
         else
         {
@@ -227,28 +309,7 @@ public class TracerEyes : MonoBehaviour
             playerEncounter = PlayerEncounter.None;
         }
     }
-
-    private void SetPointEncounter()
-    {
-        _pointsList = _pointsList
-            .OrderBy(x => x.distance).ToList();
-
-        var mag = _pointsList[0].point - _pointsList[^1].point;
-        
-        if (mag.x > 5)
-        {
-            compoundActions = CompoundActions.CantJump;
-        }
-        else
-        {
-            
-        }
-        
-        foreach (var p in _pointsList)
-        {
-          //  Debug.Log($"{plus++}: {p.point}, {p.distance}");
-        }
-    }
+    
 
     private void SetPlayerEncounter(RaycastHit2D hit)
     {

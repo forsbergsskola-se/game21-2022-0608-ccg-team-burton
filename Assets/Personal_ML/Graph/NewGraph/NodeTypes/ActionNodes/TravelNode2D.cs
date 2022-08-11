@@ -5,18 +5,25 @@ namespace NewGraph.NodeTypes.ActionNodes
     public class TravelNode2D : ActionNode
     {
         public float waitForExit;
+        public float waitForTurn;
+        public bool canTurn;
         
         public override void OnStart()
         {
             agent.anim.SetBool(Animator.StringToHash("Enemy_Walk2"), true);
             waitForExit = 0;
+            canTurn = true;
          
             if (CheckIfLookingAtTarget() || agent.compoundAction.HasFlag(CompoundActions.Rotate))
             {
-                agent.enemyTransform.Rotate(new Vector3(0, 1,0), 180);
+                RotateEnemy();
             }
         }
-        
+
+        private void RotateEnemy()
+        {
+            agent.enemyTransform.Rotate(new Vector3(0, 1,0), 180);
+        }
         
         public override void OnExit()
         {
@@ -41,12 +48,30 @@ namespace NewGraph.NodeTypes.ActionNodes
         {
             waitForExit += Time.deltaTime;
             if (waitForExit < 0.5f) return State.Update;
+
+            var comp = agent.enemyEyes.compoundActions;
             
             agent.enemyTransform.position += agent.enemyTransform.right * (Time.deltaTime * agent.moveSpeed);
 
+            if (comp.HasFlag(CompoundActions.WallInTurnRange) && canTurn)
+            {
+                canTurn = false;
+                RotateEnemy();
+            }
+
+            if (!canTurn)
+            {
+                waitForTurn += Time.deltaTime;
+                if (waitForTurn > 0.9f)
+                {
+                    waitForTurn -= 0.9f;
+                    canTurn = true;
+                }
+            }
+            
             if (!agent.keepWalking)
             {
-                if (ArrivedAtTarget() || !agent.enemyEyes.GroundSeen)
+                if (ArrivedAtTarget() || !comp.HasFlag(CompoundActions.GroundSeen))
                 {
                     return State.Success;
                 }
@@ -54,7 +79,7 @@ namespace NewGraph.NodeTypes.ActionNodes
             
             else
             {
-                if (!agent.enemyEyes.GroundSeen || agent.enemyEyes.playerEncounter.HasFlag(PlayerEncounter.PlayerNoticed))
+                if (!comp.HasFlag(CompoundActions.GroundSeen) || agent.enemyEyes.playerEncounter.HasFlag(PlayerEncounter.PlayerNoticed))
                 {
                     return State.Success;
                 }

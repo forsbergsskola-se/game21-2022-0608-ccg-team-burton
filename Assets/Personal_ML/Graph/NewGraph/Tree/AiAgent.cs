@@ -27,9 +27,6 @@ public class Instruction
 public class AiAgent
 {
     public Transform enemyTransform;
-    public Transform destination;
-  //  public CurrentCommand currentCommand;
-
     public Vector3 currentDestination;
     
     public Animator anim;
@@ -49,6 +46,8 @@ public class AiAgent
     public Action<Action<CompoundActions>> CheckForJump;
     
     public CompoundActions compoundAction;
+
+    public WalkableGround currentGround;
     
     public AiAgent()
     {

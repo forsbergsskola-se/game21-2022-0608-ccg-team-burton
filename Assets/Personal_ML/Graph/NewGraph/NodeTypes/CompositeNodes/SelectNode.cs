@@ -29,21 +29,25 @@ public class SelectNode : CompositeNode
     
     private void CheckOptions()
     {
-       
         agent.keepWalking = true;
-        if (!agent.enemyEyes.GroundSeen)
+        var eyeComp = agent.enemyEyes.compoundActions;
+        
+        if (!eyeComp.HasFlag(CompoundActions.GroundSeen))
         {
             agent.CheckForJump?.Invoke(x =>
             {
                 agent.compoundAction = x;
             });
             
-            if (agent.compoundAction.HasFlag(CompoundActions.CantJump))
+            if (eyeComp.HasFlag(CompoundActions.CanJump))
             {
-                currentCommand = CurrentCommand.MoveToPosition;
+                currentCommand = CurrentCommand.Jump;
             }
 
-            currentCommand = CurrentCommand.Jump;
+            else
+            {
+                currentCommand = CurrentCommand.MoveToPosition;    
+            }
         }
 
         else if (agent.enemyEyes.playerEncounter.HasFlag(PlayerEncounter.PlayerNoticed))
@@ -63,6 +67,7 @@ public class SelectNode : CompositeNode
     {
         agent.currentDestination = agent.enemyEyes.PlayerPos;
         var playerEncounter = agent.enemyEyes.playerEncounter;
+        var comp = agent.enemyEyes.compoundActions;
         
         if (playerEncounter.HasFlag(PlayerEncounter.PlayerInFront))
         {
@@ -129,8 +134,7 @@ public class SelectNode : CompositeNode
     public override State OnUpdate()
     {
         if(!choiceMade) CheckOptions();
-       // Debug.Log(choiceMade);
-        
+
         if (currentCommand == CurrentCommand.None || !choiceMade) return State.Update;
         
         _currentChoice = ownedNodes[currentCommand];
