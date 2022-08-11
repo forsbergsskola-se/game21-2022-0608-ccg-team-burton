@@ -519,8 +519,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 26.72699, y: 42.0614}
-  m_SizeDelta: {x: 588.5746, y: 149.1652}
+  m_AnchoredPosition: {x: 30.381, y: 47.2368}
+  m_SizeDelta: {x: 721, y: 138.8144}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2117543598
 CanvasRenderer:
@@ -578,8 +578,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 75
-  m_fontSizeBase: 75
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -921,6 +921,8 @@ GameObject:
   - component: {fileID: 8536243300012931608}
   - component: {fileID: 4161867315974066718}
   - component: {fileID: 2135628260}
+  - component: {fileID: 6075800328692194651}
+  - component: {fileID: 5280854866029627457}
   m_Layer: 5
   m_Name: UpgradeScreen
   m_TagString: Untagged
@@ -1042,6 +1044,46 @@ MonoBehaviour:
   neededMaterialText: {fileID: 1225281333}
   haveMaterialText: {fileID: 1844787927}
   upgradeButton: {fileID: 8250505879793259473}
+  sound: {fileID: 5280854866029627457}
+--- !u!114 &6075800328692194651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5752209485782625474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c4f91299ce1f1478ca63b620d20347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MusicTrack:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+--- !u!114 &5280854866029627457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5752209485782625474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f77a58954b299d489d4064d5695f91e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundMananger: {fileID: 6075800328692194651}
+  SoundFile:
+    Guid:
+      Data1: 1503992618
+      Data2: 1197633378
+      Data3: 2020082080
+      Data4: 1417607242
+    Path: event:/Game Play/Objects/PickUpCurrency
 --- !u!1 &6777631334143194772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,8 +1536,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -102.5, y: 147}
-  m_SizeDelta: {x: 330.1206, y: 99.2881}
+  m_AnchoredPosition: {x: -133.78, y: 147.647}
+  m_SizeDelta: {x: 392.68, y: 97.9942}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2612803242636278362
 CanvasRenderer:
