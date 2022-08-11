@@ -97,10 +97,10 @@ namespace Entity
                 _itemCollector._coinCounter -= _itemCollector._coinCounter;
                 _itemCollector.UpdateCoinText(_itemCollector._coinCounter);
             }
-            playerDies.Invoke();
-            
             gameObject.SetActive(false);
             
+            playerDies.Invoke();
+
             IsDead = true;
 
         }
