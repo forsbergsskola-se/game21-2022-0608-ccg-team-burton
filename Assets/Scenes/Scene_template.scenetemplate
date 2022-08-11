@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Scene_template
   m_EditorClassIdentifier: 
   templateScene: {fileID: 102900000, guid: c5246c740780d495193a9f22f0bad810, type: 3}
-  templateName: 
-  description: 
+  templateName: Scene Template for level design
+  description: 'Use this when creating a new level. '
   preview: {fileID: 0}
   dependencies:
   - dependency: {fileID: 1898911566926970745, guid: 2d6b00c7851e249d6811e37acb42f5a9,
@@ -55,7 +55,7 @@ MonoBehaviour:
   - dependency: {fileID: 2800000, guid: 53828700b84dc4fc0acd197451a2081f, type: 3}
     instantiationMode: 1
   - dependency: {fileID: 7400000, guid: f7611f8e7c3a1b64a958ab50bad2b8a9, type: 2}
-    instantiationMode: 0
+    instantiationMode: 1
   - dependency: {fileID: 7400000, guid: 56df9e06829b80f46bb927541034e44b, type: 2}
     instantiationMode: 1
   - dependency: {fileID: 9171843561555806484, guid: 1e98edb67205b9f44a3ec59ef42d6bd6,
@@ -125,7 +125,7 @@ MonoBehaviour:
   - dependency: {fileID: 2800000, guid: 836943ca11d0e4d4481c0da57f9a7919, type: 3}
     instantiationMode: 1
   - dependency: {fileID: 9100000, guid: 6d30e1cb7394a6a4bbb3f764af42ae0a, type: 2}
-    instantiationMode: 0
+    instantiationMode: 1
   - dependency: {fileID: 2100000, guid: df952f7954ea4384996dc66914cabed0, type: 2}
     instantiationMode: 1
   - dependency: {fileID: 2800000, guid: 6c30450a52784a641af0ed40e020261a, type: 3}
