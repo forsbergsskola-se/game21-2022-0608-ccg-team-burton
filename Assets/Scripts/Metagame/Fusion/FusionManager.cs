@@ -7,7 +7,7 @@ public class FusionManager : MonoBehaviour
     [SerializeField] private PlayOneShotSound sound;
 
     
-    public void InitiateUpgrade(EquipmentSO equipmentData, ActionItem upgradeMaterial)
+    public void InitiateUpgrade(EquipmentSO equipmentData, MaterialItem upgradeMaterial)
     {
         if (PlayerPrefs.GetInt(PlayerPrefsKeys.NeededUpgradeMaterial.ToString()) > PlayerPrefs.GetInt(upgradeMaterial.GetItemID()))
             return;
@@ -64,7 +64,7 @@ public class FusionManager : MonoBehaviour
         return currentRarity;
     }
 
-    private void CalculateNewMaterialBalance(ActionItem upgradeMaterial)
+    private void CalculateNewMaterialBalance(MaterialItem upgradeMaterial)
     {
         var newBalance = PlayerPrefs.GetInt(upgradeMaterial.GetItemID()) - PlayerPrefs.GetInt(PlayerPrefsKeys.NeededUpgradeMaterial.ToString());
         PlayerPrefs.SetInt(upgradeMaterial.GetItemID(), newBalance);

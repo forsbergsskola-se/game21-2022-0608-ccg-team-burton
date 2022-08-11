@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GamePlay.Entities.Movement
 {
-    public class MovementManager : MonoBehaviour, I_Saveable
+    public class MovementManager : MonoBehaviour
     {
         private Animator _animator;
         private SpriteRenderer _renderer;
@@ -104,22 +104,6 @@ namespace GamePlay.Entities.Movement
             
             _rb.velocity = new Vector2(_baseMovementSpeed, _rb.velocity.y);
 
-        }
-
-        public object CaptureState()
-        {
-            Dictionary<string, object> data = new Dictionary<string, object>();
-            data["position"] = new SerializableVector(transform.position);
-            data["rotation"] = new SerializableVector(transform.eulerAngles);
-            return data;
-        }
-
-        public void RestoreState(object state)
-        {
-            Dictionary<string , object> data = new Dictionary<string , object>();
-            
-            transform.position = ((SerializableVector)data["position"]).ToVector();
-            transform.eulerAngles = ((SerializableVector)data["rotation"]).ToVector();
         }
     }
 }

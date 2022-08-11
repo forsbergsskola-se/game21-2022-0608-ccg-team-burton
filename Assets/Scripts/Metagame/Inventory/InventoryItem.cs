@@ -12,8 +12,7 @@ using UnityEngine.UI;
 /// In practice, you are likely to use a subclass such as `ActionItem` or
 /// `EquipableItem`.
 /// </remarks>
-[CreateAssetMenu(menuName = ("Inventory/Item"))]
-public class InventoryItem : ScriptableObject, ISerializationCallbackReceiver
+public class InventoryItem : ScriptableObject
 {
     // CONFIG DATA
     [Tooltip("Auto-generated UUID for saving/loading. Clear this field if you want to generate a new one.")]
@@ -24,10 +23,7 @@ public class InventoryItem : ScriptableObject, ISerializationCallbackReceiver
     [SerializeField][TextArea] string description = null;
     [Tooltip("The UI icon to represent this item in the inventory.")]
     [SerializeField] Sprite icon = null;
-    [Tooltip("The prefab that should be spawned when this item is dropped.")]
-    [SerializeField] public Pickup pickup = null; // TODO: Didn't want to make this public, but with the time constraints we have to take the easy solution. :/
-    [Tooltip("If true, multiple items of this type can be stacked in the same inventory slot.")]
-    [SerializeField] bool stackable = false;
+
 
     static Dictionary<string, InventoryItem> itemLookupCache;
 
@@ -69,13 +65,7 @@ public class InventoryItem : ScriptableObject, ISerializationCallbackReceiver
     /// </summary>
     /// <param name="position">Where to spawn the pickup.</param>
     /// <returns>Reference to the pickup object spawned.</returns>
-    public Pickup SpawnPickup(Vector3 position, int number)
-    {
-        var pickup = Instantiate(this.pickup);
-        pickup.transform.position = position;
-        pickup.Setup(this, number);
-        return pickup;
-    }
+   
 
     public Sprite GetIcon()
     {
@@ -87,10 +77,6 @@ public class InventoryItem : ScriptableObject, ISerializationCallbackReceiver
         return itemID;
     }
 
-    public bool IsStackable()
-    {
-        return stackable;
-    }
 
     public string GetDisplayName()
     {
@@ -101,19 +87,5 @@ public class InventoryItem : ScriptableObject, ISerializationCallbackReceiver
     {
         return description;
     }
-
-
-    void ISerializationCallbackReceiver.OnBeforeSerialize()
-    {
-
-        if (string.IsNullOrWhiteSpace(itemID)) // Generate and save a new UUID if this is blank.
-        {
-            itemID = System.Guid.NewGuid().ToString();
-        }
-    }
-
-    void ISerializationCallbackReceiver.OnAfterDeserialize()
-    {
-
-    }
+    
 }
