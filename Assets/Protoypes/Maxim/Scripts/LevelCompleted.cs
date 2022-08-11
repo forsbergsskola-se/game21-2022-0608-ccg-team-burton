@@ -12,6 +12,9 @@ public class LevelCompleted : MonoBehaviour
     public Health playerHealth;
     public ItemCollector itemCollector;
     public int coinBonus = 500;
+
+    public int currentStarsNum = 0;
+    public int levelIndex;
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -28,30 +31,48 @@ public class LevelCompleted : MonoBehaviour
             StarsAchieved();
             UpdateCoinText(currentCoins);
             UpdateTotalCoinText(currentCoins);
+            SaveStars(currentStarsNum);
         }
     }
+
+    
 
     public void StarsAchieved()
     {
         int healthLeft = playerHealth.CurrentHealth;
-        
-       
-        // float percentage = float.Parse(healthMax.ToString()) / float.Parse(healthLeft.ToString()) * 100f;
 
+        
         if (healthLeft <= 2)
         {
             stars[0].enabled = true;
+            stars[1].enabled = false;
+            stars[2].enabled = false;
+            currentStarsNum = 1;
         }
         else if (healthLeft <= 4) 
         {
             stars[0].enabled = true;
             stars[1].enabled = true;
+            stars[2].enabled = false;
+            currentStarsNum = 2;
         }
         else 
         {
             stars[0].enabled = true;
             stars[1].enabled = true;
             stars[2].enabled = true;
+            currentStarsNum = 3;
+        }
+
+    }
+
+    public void SaveStars(int starsNum)
+    {
+        currentStarsNum = starsNum;
+        if (currentStarsNum > PlayerPrefs.GetInt("Lv" + levelIndex))
+        {
+            PlayerPrefs.SetInt("Lv" + levelIndex, starsNum );
+            Debug.Log("saved");
         }
         
     }

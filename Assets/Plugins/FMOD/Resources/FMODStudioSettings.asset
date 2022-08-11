@@ -315,7 +315,8 @@ MonoBehaviour:
   VirtualChannelSettings: []
   RealChannelSettings: []
   Plugins: []
-  MasterBanks: []
+  MasterBanks:
+  - Master
   Banks: []
   BanksToLoad: []
   LiveUpdatePort: 9264
@@ -331,17 +332,17 @@ MonoBehaviour:
   HideSetupWizard: 0
   LastEventReferenceScanVersion: 131591
   Platforms:
-  - {fileID: -5533316148087253781}
-  - {fileID: -2902369060092630077}
-  - {fileID: -2835710392707021825}
-  - {fileID: -1174833433557023307}
-  - {fileID: 376783068407406813}
-  - {fileID: 1925358159914948830}
   - {fileID: 3503091978492691215}
-  - {fileID: 3533137508665968105}
-  - {fileID: 6916922965677762170}
-  - {fileID: 7938093873456449960}
+  - {fileID: -1174833433557023307}
   - {fileID: 8384147402720936256}
+  - {fileID: 376783068407406813}
+  - {fileID: 3533137508665968105}
+  - {fileID: 1925358159914948830}
+  - {fileID: 7938093873456449960}
+  - {fileID: -2902369060092630077}
+  - {fileID: 6916922965677762170}
+  - {fileID: -2835710392707021825}
+  - {fileID: -5533316148087253781}
   MigratedPlatforms: 0c0000000a0000000b0000001200000006000000080000000500000009000000150000000200000001000000
 --- !u!114 &376783068407406813
 MonoBehaviour:

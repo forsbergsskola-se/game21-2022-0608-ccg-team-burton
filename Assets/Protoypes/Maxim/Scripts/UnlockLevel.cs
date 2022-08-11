@@ -42,8 +42,7 @@ public class UnlockLevel : MonoBehaviour
             {
                 Stars[i].enabled = false;
             }
-            //save stats
-           
+
         }
         else
         {
