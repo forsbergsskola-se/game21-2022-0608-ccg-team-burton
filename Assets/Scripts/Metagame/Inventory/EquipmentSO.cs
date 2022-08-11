@@ -4,18 +4,21 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EquipmentData", menuName = "BUInventory/EquipmentData")]
 public class EquipmentSO : ScriptableObject
 {
+    [Header("GENERAL")]
     public string ID;
-    
     public string Name;
-    
-    public string AttributeDescription;
-    public string AttributeValueID;
-    public float AttributeValue;
     public Sprite Icon;
+    [Header("ATTRIBUTE")]
+    public string AttributeValueID;
+    public string AttributeDescription;
+    public float AttributeValue;
+    [Header("RARITY")]
     public string RarityID;
     public Rarity Rarity;
+    [Header("UPGRADE VARIABLES")]
     public int BaseUpgradeCost;
-    public int NeededUpgradeMaterial;
+    [Tooltip("The number increment/rarity level")]
+    public int AttributeUpgradeStepSize;
 }
 
 

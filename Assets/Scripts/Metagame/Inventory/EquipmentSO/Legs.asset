@@ -14,12 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: buequipment.legs
   Name: Legs
-  AttributeDescription: 'Movement speed bonus:'
-  AttributeValueID: buequipment.legs.attributevalue
-  AttributeValue: 0
   Icon: {fileID: 21300000, guid: 01b14a960ba49b54a82035c7a0bd3df6, type: 3}
+  AttributeValueID: buequipment.legs.attributevalue
+  AttributeDescription: 'Movement speed bonus:'
+  AttributeValue: 0
   RarityID: buequipment.legs.rarity
   Rarity: 0
-  UpgradeMaterialIcon: {fileID: 21300000, guid: 442bc57692392fa4ab45d91f5739a17f,
-    type: 3}
   BaseUpgradeCost: 1
+  AttributeUpgradeStepSize: 5

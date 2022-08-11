@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: buequipment.weapon
   Name: Scissor
-  AttributeDescription: 'Attack damage bonus:'
-  AttributeValueID: buequipment.weapon.attributevalue
-  AttributeValue: 10
   Icon: {fileID: 21300000, guid: 43d88332ccfe775478543105f295c5e4, type: 3}
+  AttributeValueID: buequipment.weapon.attributevalue
+  AttributeDescription: 'Attack damage bonus:'
+  AttributeValue: 10
   RarityID: buequipment.weapon.rarity
   Rarity: 0
   BaseUpgradeCost: 1
-  NeededUpgradeMaterial: 0
+  AttributeUpgradeStepSize: 5
