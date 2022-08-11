@@ -68,6 +68,18 @@ public class SoundMananger : MonoBehaviour
         sound.stop(STOP_MODE.IMMEDIATE);
     }
 
+    public void PickUpDiamond()
+    {
+        Debug.Log("PickUpDiamond");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/PickUpDiamond");
+    }
+
+    public void PickUpCeramic()
+    {
+        Debug.Log("PickUpCeramic");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/PickUpCeramic");
+    }
+
     public void LevelFailed()
     {
         Debug.Log("LevelFailed");
