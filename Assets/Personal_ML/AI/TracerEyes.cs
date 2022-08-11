@@ -65,11 +65,11 @@ public class TracerEyes : MonoBehaviour
     [Header("Eye values")]
     [SerializeField] public float pursueDistance;
     [SerializeField] public Vector2 traceSize;
-    
+    [SerializeField, Range(0.2f, 1.5f)]private float traceInterval = 0.4f;
+
     private int _groundMask;
     private int _boxMask;
 
-    private float traceInterval = 0.4f;
     private float timeSinceTrace;
     
     public bool WallSeen { get; private set;}
@@ -100,7 +100,7 @@ public class TracerEyes : MonoBehaviour
         GetComponentInParent<Health>().OnHealthChanged += RegisterAttack;
 
         _groundMask = 1 << 6 | 1 << 10; 
-        _boxMask = 1 << 8 | 1 << 13 | 1 << 7 ;
+        _boxMask = 1 << 8 | 1 << 13 | 1 << 7;
         GroundSeen = true;
     }
     
@@ -133,12 +133,7 @@ public class TracerEyes : MonoBehaviour
     {
         GroundSeen = TraceForGround(new Vector3(0, -1), 2);
         WallSeen = TraceForGround(new Vector3(0, 0), 8);
-
-        if (!GroundSeen)
-        {
-          //  DetermineJump();    
-        }
-
+        
         TraceBox();
     }
 

@@ -46,6 +46,11 @@ public class SelectNode : CompositeNode
             currentCommand = CurrentCommand.Jump;
         }
 
+        else if (agent.enemyEyes.playerEncounter.HasFlag(PlayerEncounter.PlayerNoticed))
+        {
+            PlayerStuff();
+        }
+        
         else
         {
             currentCommand = CurrentCommand.MoveToPosition;
@@ -58,29 +63,27 @@ public class SelectNode : CompositeNode
     {
         agent.currentDestination = agent.enemyEyes.PlayerPos;
         var playerEncounter = agent.enemyEyes.playerEncounter;
-
-        if (playerEncounter.HasFlag(PlayerEncounter.PlayerNoticed))
+        
+        if (playerEncounter.HasFlag(PlayerEncounter.PlayerInFront))
         {
-            if (playerEncounter.HasFlag(PlayerEncounter.PlayerInFront))
+            if (playerEncounter.HasFlag(PlayerEncounter.PlayerInAttackRange))
             {
-                if (playerEncounter.HasFlag(PlayerEncounter.PlayerInAttackRange))
-                {
-                    currentCommand = CurrentCommand.Attack;
-                    return;
-                }
+                currentCommand = CurrentCommand.Attack;
+                return;
+            }
 
-                agent.keepWalking = false;
-                currentCommand = CurrentCommand.MoveToPosition;
-                return;
-            }
-            
-            if (playerEncounter.HasFlag(PlayerEncounter.PlayerBehind))
-            {
-                agent.keepWalking = false;
-                currentCommand = CurrentCommand.MoveToPosition;
-                return;
-            }
+            agent.keepWalking = false;
+            currentCommand = CurrentCommand.MoveToPosition;
+            return;
         }
+        
+        if (playerEncounter.HasFlag(PlayerEncounter.PlayerBehind))
+        {
+            agent.keepWalking = false;
+            currentCommand = CurrentCommand.MoveToPosition;
+            return;
+        }
+        
     }
     
     private void SetPossibleNodes()
