@@ -29,7 +29,7 @@ public class SelectNode : CompositeNode
     private void CheckOptions()
     {
         _plusMinus = agent.enemyTransform.right.x > 0;
-        _current = agent.grid.GetSquareFromPoint(agent.enemyTransform.position);
+       // _current = agent.grid.GetSquareFromPoint(agent.enemyTransform.position);
         agent.keepWalking = true;
         if (!agent.enemyEyes.GroundSeen)
         {
@@ -42,19 +42,17 @@ public class SelectNode : CompositeNode
 
         if (playerEncounter.HasFlag(PlayerEncounter.PlayerNoticed))
         {
-            Debug.Log(playerEncounter);
-            
             if (playerEncounter.HasFlag(PlayerEncounter.PlayerInFront))
             {
                 if (playerEncounter.HasFlag(PlayerEncounter.PlayerInAttackRange))
                 {
                     currentCommand = CurrentCommand.Attack;
                     return;
-                } 
-                
-                currentCommand = CurrentCommand.MoveToPosition;
+                }
+
                 agent.keepWalking = false;
                 agent.currentDestination = agent.enemyEyes.PlayerPos;
+                currentCommand = CurrentCommand.MoveToPosition;
                 return;
             }
             
