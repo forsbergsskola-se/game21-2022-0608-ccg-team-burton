@@ -60,6 +60,7 @@ public class LootBoxController : MonoBehaviour
          PlayerPrefs.SetInt(itemID, PlayerPrefs.GetInt(itemID)+1);
 
       }
+      Handheld.Vibrate();
    }
 
    
