@@ -22,24 +22,26 @@ public class FusionManager : MonoBehaviour
  
         if (equipmentData.ID.Contains("head"))
         {
-            var calculateNewAttribute = PlayerPrefs.GetInt(equipmentData.AttributeValueID) + (int) GetCurrentRarity(equipmentData) * 5;
+            var calculateNewAttribute = (int) GetCurrentRarity(equipmentData) * 5;
             PlayerPrefs.SetFloat(equipmentData.AttributeValueID, calculateNewAttribute);
             
         } 
         else if (equipmentData.ID.Contains("chest"))
         {
-            var calculateNewAttribute = PlayerPrefs.GetInt(equipmentData.AttributeValueID) + (int) GetCurrentRarity(equipmentData);
+            var calculateNewAttribute =   (int) GetCurrentRarity(equipmentData);
             PlayerPrefs.SetFloat(equipmentData.AttributeValueID, calculateNewAttribute);
             
         } 
         else if (equipmentData.ID.Contains("legs"))
         {
-            var calculateNewAttribute = PlayerPrefs.GetInt(equipmentData.AttributeValueID) + (int) GetCurrentRarity(equipmentData) * 5;
+            var calculateNewAttribute =(int) GetCurrentRarity(equipmentData) * 5;
             PlayerPrefs.SetFloat(equipmentData.AttributeValueID, calculateNewAttribute);
         } 
         else if (equipmentData.ID.Contains("weapon"))
         {
-            var calculateNewAttribute = PlayerPrefs.GetInt(equipmentData.AttributeValueID) + (int) GetCurrentRarity(equipmentData)+5;
+            Debug.Log(PlayerPrefs.GetInt(equipmentData.AttributeValueID));
+            Debug.Log(GetCurrentRarity(equipmentData));
+            var calculateNewAttribute = 10 + (int) GetCurrentRarity(equipmentData)*5;
             PlayerPrefs.SetFloat(equipmentData.AttributeValueID, calculateNewAttribute);
         }
     }

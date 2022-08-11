@@ -65,4 +65,50 @@ public class DebugSaveClear : MonoBehaviour
       PlayerPrefs.SetInt("upgradematerials.porcelain", PlayerPrefs.GetInt("upgradematerials.porcelain")-1);
       Debug.Log($"Current Porcelain: {PlayerPrefs.GetInt("upgradematerials.porcelain")}");
    }
+   
+   public void ResetEquipment()
+   {
+
+      foreach (var equipmentSo in Library.EquipmentLibrarySo.EquipablesLibrary)
+      {
+         PlayerPrefs.DeleteKey(equipmentSo.ID);
+         Debug.Log(equipmentSo.ID+" was deleted");
+      }
+      Debug.Log("Creating new data...");
+      if(!PlayerPrefs.HasKey(PlayerPrefsKeys.CurrentCoins.ToString()))
+         PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), 0);
+        
+      if(!PlayerPrefs.HasKey(PlayerPrefsKeys.CurrentButtons.ToString()))
+         PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentButtons.ToString(), 0);
+        
+      foreach (var equipment in Library.EquipmentLibrarySo.EquipablesLibrary)
+      {
+         if (!PlayerPrefs.HasKey(equipment.ID))
+         {
+            Debug.Log($"No entry for {equipment.Name}. Creating new entry with {equipment.Rarity}-rarity. This equipment affects {equipment.AttributeDescription} with a modifier of {equipment.AttributeValue}.");
+            PlayerPrefs.SetString(equipment.ID, equipment.Name);
+            PlayerPrefs.SetString(equipment.RarityID, equipment.Rarity.ToString());
+            PlayerPrefs.SetFloat(equipment.AttributeValueID, equipment.AttributeValue);
+
+         }
+      }
+        
+      PlayerPrefs.SetString(PlayerPrefsKeys.PlayerDataCreated.ToString(), "Data has been created");
+      
+   }
+
+   public void SetupTestPlayer()
+   {
+      ClearInventoryFromItems();
+      ResetEquipment();
+      for (int i = 0; i < 100; i++)
+      {
+         AddPorcelain();
+         AddMetal();
+         AddCoins();
+         AddButtons();
+      }
+      
+      
+   }
 }
