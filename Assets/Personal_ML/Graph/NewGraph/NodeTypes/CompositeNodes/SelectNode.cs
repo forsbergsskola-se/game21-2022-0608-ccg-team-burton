@@ -59,6 +59,8 @@ public class SelectNode : CompositeNode
         {
             currentCommand = CurrentCommand.MoveToPosition;
         }
+        
+        Debug.Log(eyeComp);
         choiceMade = true;
     }
 

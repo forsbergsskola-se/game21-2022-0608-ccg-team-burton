@@ -55,6 +55,7 @@ namespace NewGraph.NodeTypes.ActionNodes
 
             if (comp.HasFlag(CompoundActions.WallInTurnRange) && canTurn)
             {
+                Debug.Log("turn flag");
                 canTurn = false;
                 RotateEnemy();
             }

@@ -111,7 +111,7 @@ public class TracerEyes : MonoBehaviour
 
         if (compoundActions.HasFlag(CompoundActions.WallSeen))
         {
-            if (distanceToWall < 0.5f)
+            if (distanceToWall < 0.9f)
             {
                 compoundActions |= CompoundActions.WallInTurnRange;
             }
