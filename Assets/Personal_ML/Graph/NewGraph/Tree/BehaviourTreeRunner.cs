@@ -14,11 +14,19 @@ public class BehaviourTreeRunner : MonoBehaviour
     [SerializeField, Range(1f, 5)]private float baseMoveSpeed;
     [SerializeField, Range(5, 10)]private float pursueMoveSpeed;
     
+    public Action<Action<CompoundActions>> CheckForJump;
+    
     void Start()
     {
         Setup();
+        //CheckForJump?.Invoke();
     }
 
+    private void SomethingSomething(Action<int> action)
+    {
+       
+    }
+    
     private void Setup()
     {
        // var grid = GameObject.FindWithTag("LevelGrid").GetComponent<LevelGrid>();
@@ -32,7 +40,8 @@ public class BehaviourTreeRunner : MonoBehaviour
             body = GetComponent<Rigidbody2D>(),
             keepWalking = true,
             attackInterval = attackInterval,
-            moveSpeed = baseMoveSpeed
+            moveSpeed = baseMoveSpeed,
+            CheckForJump = CheckForJump
         });
         readyToRun = true;
     }

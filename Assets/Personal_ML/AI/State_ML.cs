@@ -179,15 +179,8 @@ public class Pursue : State_ML
     public override void Update()
     {
         var distance = Vector3.Distance(EnemyVarsMl.tracerEyes.PlayerTrans.position, EnemyVarsMl.enemyRef.gameObject.transform.position);
-        if (EnemyVarsMl.tracerEyes.PlayerInAttackRange)
-        {
-            Debug.Log("Player in attack range");
-            NextStateMl = new Attack(EnemyVarsMl);
-            Stage = EVENT.Exit;
-        }
         
-
-        else if (distance > EnemyVarsMl.GetAttackDistance + 20)
+        if (distance > EnemyVarsMl.GetAttackDistance + 20)
         {
             Debug.Log("Player out of attack range");
             NextStateMl = new Patrol(EnemyVarsMl);

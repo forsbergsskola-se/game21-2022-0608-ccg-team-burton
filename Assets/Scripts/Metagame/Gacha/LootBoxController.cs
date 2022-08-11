@@ -8,21 +8,17 @@ using UnityEngine.EventSystems;
 
 public class LootBoxController : MonoBehaviour, IPointerClickHandler
 {
+   //PUBLIC FIELDS
    public LootBoxSO LootBoxSO;
-
+   public Action<GameObject,InventoryItem> OnUpdateItemUI;
+   public GameObject[] ItemUIGameobjects;
+   
+   //PRIVATE FIELDS
    [SerializeField] private Animator _animator;
    [SerializeField] private GameObject _itemInfoUI;
-   
-   public Action<GameObject,InventoryItem> OnUpdateItemUI;
- 
-   public GameObject[] ItemUIGameobjects;
-
-   // Since we need to update all elements, we can use a list
-   private List<InventoryItem> gainedItems = new();
-
+   private List<InventoryItem> _gainedItems = new();
    private bool _boxOpenedCurrentSession;
-   
-   private string itemID;
+   private string _itemID;
 
    private void Start()
    {
@@ -35,15 +31,13 @@ public class LootBoxController : MonoBehaviour, IPointerClickHandler
    }
 
    public void OnPointerClick(PointerEventData eventData)
-   {   
-
-      if (!_boxOpenedCurrentSession)
-      {
-         Debug.Log("Opening loot box");
-         OpenBox();
-         _boxOpenedCurrentSession = true;
-         _animator.SetBool("OpenLootBox", true); 
-      }
+   {
+      if (_boxOpenedCurrentSession) 
+         return;
+      
+      OpenBox();
+      _boxOpenedCurrentSession = true;
+      _animator.SetBool("OpenLootBox", true);
    }
    
    public void OpenBox()
@@ -51,15 +45,11 @@ public class LootBoxController : MonoBehaviour, IPointerClickHandler
       for (int i = 0; i < LootBoxSO.NumberOfItemsToSpawn; i++)
       {
          var LootedItemSO = LootBoxSO.PickLootTable().PickItem(); //Scriptable object
-         gainedItems.Add(LootedItemSO);
-
-
-         itemID = LootedItemSO.GetItemID();
-         Debug.Log($"Saving item ID: {itemID}, with name: {LootedItemSO.GetDisplayName()}");
+         _gainedItems.Add(LootedItemSO);
+         _itemID = LootedItemSO.GetItemID();
 
          //Saving item
-         PlayerPrefs.SetInt(itemID, PlayerPrefs.GetInt(itemID)+1);
-
+         PlayerPrefs.SetInt(_itemID, PlayerPrefs.GetInt(_itemID)+1);
       }
       Handheld.Vibrate();
    }
@@ -67,16 +57,14 @@ public class LootBoxController : MonoBehaviour, IPointerClickHandler
    
    private void DisplayItem() // called by anim event
    {
-      int i = 0;
+      var i = 0;
       _itemInfoUI.SetActive(true);
 
-      foreach (var item in gainedItems)
+      foreach (var item in _gainedItems)
       {
          ItemUIGameobjects[i].SetActive(true);
          OnUpdateItemUI?.Invoke(ItemUIGameobjects[i],item);
-   
          i++;
       }
    }
- 
 }
