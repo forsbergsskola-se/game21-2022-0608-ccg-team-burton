@@ -5,21 +5,26 @@ using UnityEngine.UI;
 
 public class LevelCompleted : MonoBehaviour
 {
-    public TextMeshProUGUI totalCoinText;
-    public TextMeshProUGUI coinText;
-    public GameObject winScreen;
-    public Image[] stars;
-    public Health playerHealth;
-    public ItemCollector itemCollector;
-    public int coinBonus = 500;
+    public TextMeshProUGUI TotalCoinText;
+    public TextMeshProUGUI CoinText;
+    public GameObject WinScreen;
+    public Image[] Stars;
+    public Health PlayerHealth;
+    public ItemCollector ItemCollector;
+    public int CoinBonus = 500;
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        int currentCoins = itemCollector._coinCounter;
+        int currentCoins = ItemCollector._coinCounter;
         if (collision.tag == "Player")
         {
-            currentCoins += coinBonus;
-            winScreen.SetActive(true);
+            currentCoins += CoinBonus;
+            ItemCollector._coinCounter = currentCoins;
+            
+            //Save coins to inventory
+            PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) + currentCoins);
+
+            WinScreen.SetActive(true);
             Time.timeScale = 0; 
             StarsAchieved();
             UpdateCoinText(currentCoins);
@@ -29,32 +34,32 @@ public class LevelCompleted : MonoBehaviour
 
     public void StarsAchieved()
     {
-        int healthLeft = playerHealth.CurrentHealth;
+        int healthLeft = PlayerHealth.CurrentHealth;
         
        
         // float percentage = float.Parse(healthMax.ToString()) / float.Parse(healthLeft.ToString()) * 100f;
 
         if (healthLeft <= 2)
         {
-            stars[0].enabled = true;
+            Stars[0].enabled = true;
         }
         else if (healthLeft <= 4) 
         {
-            stars[0].enabled = true;
-            stars[1].enabled = true;
+            Stars[0].enabled = true;
+            Stars[1].enabled = true;
         }
         else 
         {
-            stars[0].enabled = true;
-            stars[1].enabled = true;
-            stars[2].enabled = true;
+            Stars[0].enabled = true;
+            Stars[1].enabled = true;
+            Stars[2].enabled = true;
         }
         
     }
     
-    public void UpdateCoinText(int value) => coinText.text = $"{value}";
+    public void UpdateCoinText(int value) => CoinText.text = $"{value}";
 
-    public void UpdateTotalCoinText(int value) => totalCoinText.text = $"Total Coins: {value}";
+    public void UpdateTotalCoinText(int value) => TotalCoinText.text = $"Total Coins: {value}";
 
 
 
