@@ -75,7 +75,7 @@ public class LevelGrid : MonoBehaviour
 
     private List<RaycastHit2D> _hitList = new();
 
-    private List<WalkableGround> _walkableGround = new();
+    public List<WalkableGround> walkableGround = new();
 
     private float _maxJumpDistance = 6f;
 
@@ -108,7 +108,7 @@ public class LevelGrid : MonoBehaviour
 
     private void SpawnPointsOfInterest()
     {
-        foreach (var p in _walkableGround)
+        foreach (var p in walkableGround)
         {
             Instantiate(spawnablePointOfInterest, p.end, Quaternion.identity, transform);
             Instantiate(spawnablePointOfInterest, p.start, Quaternion.identity, transform);
@@ -238,7 +238,7 @@ public class LevelGrid : MonoBehaviour
 
     private bool HasHitBeenRegistered(Vector2 point)
     {
-        foreach (var g in _walkableGround)
+        foreach (var g in walkableGround)
         {
             if (!(point.x > g.start.x) || !(point.x < g.end.x)) continue;
             
@@ -286,7 +286,7 @@ public class LevelGrid : MonoBehaviour
         {
             var hitPoint = ScanUntilEdge(h.point + new Vector2(0,0.2f));
             
-            _walkableGround.Add(new WalkableGround()
+            walkableGround.Add(new WalkableGround()
             {
                 start = h.point,
                 end = hitPoint
@@ -485,15 +485,7 @@ public class LevelGrid : MonoBehaviour
                     {
                         Gizmos.color = Color.yellow;
                     }
-
-                    else if(p.pointType.HasFlag(LevelElements.Platform))
-                    {
-                        Gizmos.color = Color.magenta;
-                    }
-                    else if (p.pointType.HasFlag(LevelElements.TwoWayPass))
-                    {
-                        Gizmos.color = Color.green;
-                    }
+                    
                     else if (p.pointType.HasFlag(LevelElements.Gap))
                     {
                         Gizmos.color = Color.red;
@@ -505,6 +497,12 @@ public class LevelGrid : MonoBehaviour
                     }
 
                     Gizmos.DrawWireSphere(p.location, 0.3f);
+                }
+
+                foreach (var w in walkableGround)
+                {
+                    Gizmos.color = Color.magenta;
+                    Gizmos.DrawLine(w.start, w.end);
                 }
                 
             }

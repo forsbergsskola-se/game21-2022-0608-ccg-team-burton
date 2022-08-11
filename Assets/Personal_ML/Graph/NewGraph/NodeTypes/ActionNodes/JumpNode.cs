@@ -8,12 +8,17 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         public override void OnStart()
         {
+            Debug.Log("starting jump");
+            agent.enemyEyes.compoundActions |= CompoundActions.MakingJump;
+            
             _startedJump = false;
         }
 
         public override void OnExit()
         {
+            agent.enemyEyes.compoundActions &= ~CompoundActions.MakingJump;
             
+            Debug.Log("exit jump");
         }
 
         public override State OnUpdate()
@@ -26,7 +31,7 @@ namespace NewGraph.NodeTypes.ActionNodes
                 _startedJump = true;    
             }
 
-            if (_startedJump && agent.enemyEyes.GroundSeen)
+            if (_startedJump && agent.enemyEyes.compoundActions.HasFlag(CompoundActions.GroundSeen))
             {
                 return State.Success;
             }

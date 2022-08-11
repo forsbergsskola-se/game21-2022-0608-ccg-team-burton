@@ -33,7 +33,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -130,16 +130,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d0a2988ccd9ba45bd8b1bd462e2506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalCoinText: {fileID: 0}
-  coinText: {fileID: 0}
-  winScreen: {fileID: 0}
-  stars:
+  TotalCoinText: {fileID: 0}
+  CoinText: {fileID: 0}
+  WinScreen: {fileID: 0}
+  Stars:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  playerHealth: {fileID: 0}
-  itemCollector: {fileID: 0}
-  coinBonus: 500
+  PlayerHealth: {fileID: 0}
+  ItemCollector: {fileID: 0}
+  CoinBonus: 500
+  currentStarsNum: 0
+  levelIndex: 1
 --- !u!114 &7574128599993746065
 MonoBehaviour:
   m_ObjectHideFlags: 0
