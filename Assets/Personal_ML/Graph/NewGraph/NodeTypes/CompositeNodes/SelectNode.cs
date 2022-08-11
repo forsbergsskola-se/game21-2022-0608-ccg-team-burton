@@ -42,19 +42,17 @@ public class SelectNode : CompositeNode
 
         if (playerEncounter.HasFlag(PlayerEncounter.PlayerNoticed))
         {
-            Debug.Log(playerEncounter);
-            
             if (playerEncounter.HasFlag(PlayerEncounter.PlayerInFront))
             {
                 if (playerEncounter.HasFlag(PlayerEncounter.PlayerInAttackRange))
                 {
                     currentCommand = CurrentCommand.Attack;
                     return;
-                } 
-                
-                currentCommand = CurrentCommand.MoveToPosition;
+                }
+
                 agent.keepWalking = false;
                 agent.currentDestination = agent.enemyEyes.PlayerPos;
+                currentCommand = CurrentCommand.MoveToPosition;
                 return;
             }
             
