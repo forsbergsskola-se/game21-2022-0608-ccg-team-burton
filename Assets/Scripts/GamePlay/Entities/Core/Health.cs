@@ -54,6 +54,7 @@ namespace Entity
                     return;  
                 
             CurrentHealth += healthValueChange;
+            Handheld.Vibrate();
             OnHealthChanged?.Invoke(CurrentHealth);
 
 
