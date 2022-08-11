@@ -70,8 +70,8 @@ public class FusionScreenUIHandler : MonoBehaviour
     public void PressUpgradeButton()
     {
             fusionManager.InitiateUpgrade(EquipmentSoData,UpgradeMaterialSoData);
-            UpdateUpgradeUI();
             OnInventoryChange?.Invoke();
+            UpdateUpgradeUI();
 
     }
 
