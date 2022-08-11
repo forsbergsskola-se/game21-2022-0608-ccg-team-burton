@@ -71,11 +71,9 @@ namespace Entity
                 
             }
         
-            Debug.Log($"New health for {name}: {CurrentHealth}");
 
             if (CurrentHealth <= 0)
             {
-                Debug.Log("Animtrigger");
                 _animator.SetTrigger(Animator.StringToHash("Dead"));
                 StartCoroutine(StartDeath());
             }
@@ -103,7 +101,7 @@ namespace Entity
             }
             gameObject.SetActive(false);
             
-            playerDies.Invoke();
+            playerDies?.Invoke();
 
             IsDead = true;
 

@@ -46,7 +46,7 @@ Transform:
   m_Children:
   - {fileID: 3616007790298403442}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1144139567602091071
 SpriteRenderer:
@@ -217,12 +217,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CamIntensity: 0.05
   CamTime: 0
-  attackRange: 1.5
-  attackPoint: {fileID: 3616007790298403442}
-  enemyLayers:
+  AttackRange: 1.5
+  AttackPoint: {fileID: 3616007790298403442}
+  EnemyLayers:
     serializedVersion: 2
     m_Bits: 128
-  _meleeDamage: 1
   _knockbackMultiplier: 1
   DebugProjectile: {fileID: 0}
   FirePoint: {fileID: 0}

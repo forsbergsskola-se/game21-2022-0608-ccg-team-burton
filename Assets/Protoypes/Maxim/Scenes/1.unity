@@ -15041,12 +15041,12 @@ PrefabInstance:
     - target: {fileID: 3079274145042139584, guid: 1c6348bee5b87a54ba8bd83b644cf334,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 182.54
+      value: -22.6
       objectReference: {fileID: 0}
     - target: {fileID: 3079274145042139584, guid: 1c6348bee5b87a54ba8bd83b644cf334,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 41.743458
+      value: 10.143456
       objectReference: {fileID: 0}
     - target: {fileID: 3079274145042139584, guid: 1c6348bee5b87a54ba8bd83b644cf334,
         type: 3}
@@ -15651,12 +15651,12 @@ PrefabInstance:
     - target: {fileID: 3713123893993751263, guid: 9e5def38a721c5f4fb708274139ecfcb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 182.54
+      value: -22.6
       objectReference: {fileID: 0}
     - target: {fileID: 3713123893993751263, guid: 9e5def38a721c5f4fb708274139ecfcb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 41.743458
+      value: 10.143456
       objectReference: {fileID: 0}
     - target: {fileID: 3713123893993751263, guid: 9e5def38a721c5f4fb708274139ecfcb,
         type: 3}
@@ -16396,6 +16396,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1392969846}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1414347692 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3616007790298403442, guid: c8e35a458123a9f4c913169b6c32a26c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1532513276}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1430962727
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16745,12 +16751,12 @@ PrefabInstance:
     - target: {fileID: 1144139567602091070, guid: c8e35a458123a9f4c913169b6c32a26c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 182.54
+      value: -22.6
       objectReference: {fileID: 0}
     - target: {fileID: 1144139567602091070, guid: c8e35a458123a9f4c913169b6c32a26c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 44.99
+      value: 13.39
       objectReference: {fileID: 0}
     - target: {fileID: 1144139567602091070, guid: c8e35a458123a9f4c913169b6c32a26c,
         type: 3}
@@ -16833,6 +16839,21 @@ PrefabInstance:
       propertyPath: hearts.Array.data[5]
       value: 
       objectReference: {fileID: 2104420289}
+    - target: {fileID: 4797520626450282201, guid: c8e35a458123a9f4c913169b6c32a26c,
+        type: 3}
+      propertyPath: AttackPoint
+      value: 
+      objectReference: {fileID: 1414347692}
+    - target: {fileID: 4797520626450282201, guid: c8e35a458123a9f4c913169b6c32a26c,
+        type: 3}
+      propertyPath: AttackRange
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797520626450282201, guid: c8e35a458123a9f4c913169b6c32a26c,
+        type: 3}
+      propertyPath: EnemyLayers.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: c8e35a458123a9f4c913169b6c32a26c, type: 3}
