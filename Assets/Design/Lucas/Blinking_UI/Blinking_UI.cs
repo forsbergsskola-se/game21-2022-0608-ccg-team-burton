@@ -15,6 +15,7 @@ public class Blinking_UI : MonoBehaviour
       if (other.CompareTag(("Player")))
       {
          blinking_effect.enabled = true;
+         blinking_jump.enabled = true;
       }
    }
 
