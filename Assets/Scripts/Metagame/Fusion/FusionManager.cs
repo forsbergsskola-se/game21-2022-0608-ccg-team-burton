@@ -14,9 +14,6 @@ public class FusionManager : MonoBehaviour
             UpgradeRarity(equipmentData);
 
             UpgradeAttribute(equipmentData);
-            
-            
-
     }
 
     private void UpgradeAttribute(EquipmentSO equipmentData)
