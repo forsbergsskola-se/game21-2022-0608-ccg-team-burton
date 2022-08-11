@@ -37,7 +37,18 @@ public enum PlayerEncounter
     PlayerNoticed = 1,
     PlayerBehind = 2,
     PlayerInFront = 4,
-    PlayerInAttackRange = 8
+    PlayerInAttackRange = 8,
+    EnemyAttacked = 16
+}
+
+[Flags]
+public enum CompoundActions
+{
+    None = 0,
+    CanJump = 1,
+    CantJump = 2,
+    Walk = 4,
+    Rotate = 8
 }
 
 [Serializable]
@@ -58,48 +69,57 @@ public class TracerEyes : MonoBehaviour
 
     private float traceInterval = 0.4f;
     private float timeSinceTrace;
-
     
     public bool WallSeen { get; private set;}
     public bool GroundSeen { get; private set;}
     
     public Vector2 EstimatedJumpForce { get; private set; }
-    public bool PlayerInAttackRange { get; private set;}
-    
+
     public Vector2 PlayerPos { get; private set; }
     
     public bool QuitNode { get; private set; }
     
     private bool UnderAttack;
     [HideInInspector] public Transform PlayerTrans;
-    private List<HitResults> hitResultList = new();
-    
+  
     private Health _playerHealth;
     private Health _enemyHealth;
-
-    private bool JumpReady;
-
     private bool _somethingHit;
 
     public PlayerEncounter playerEncounter;
+    private bool _enemyHit;
 
+    private List<RaycastHit2D> _pointsList = new();
+    public CompoundActions compoundActions;
 
-
+    public event Action CheckForJump;
+    
     private void Awake()
     {
+        GetComponentInParent<BehaviourTreeRunner>().CheckForJump += JumpCheck;
+        GetComponentInParent<Health>().OnHealthChanged += RegisterAttack;
 
-        JumpReady = true;
-        _enemyHealth = GetComponentInParent<Health>();
-        
         _groundMask = 1 << 6 | 1 << 10; 
-        _boxMask = 1 << 8 | 1 << 13;
+        _boxMask = 1 << 8 | 1 << 13 | 1 << 7 ;
         GroundSeen = true;
     }
+
+
+    private void JumpCheck(Action<CompoundActions> callback)
+    {
+        
+        callback.Invoke(CompoundActions.CanJump);
+    }
     
+    private void OnDisable()
+    {
+        GetComponentInParent<Health>().OnHealthChanged -= RegisterAttack;
+        GetComponentInParent<BehaviourTreeRunner>().CheckForJump -= JumpCheck;
+    }
 
     private void RegisterAttack(int currentHealth)
     {
-        
+        playerEncounter |= PlayerEncounter.EnemyAttacked;
     }
     
     void Update()
@@ -120,12 +140,13 @@ public class TracerEyes : MonoBehaviour
     {
         GroundSeen = TraceForGround(new Vector3(0, -1), 2);
         WallSeen = TraceForGround(new Vector3(0, 0), 8);
-        TraceBox();
-    }
 
-    private void TraceForWalls()
-    {
-        
+        if (!GroundSeen)
+        {
+            DetermineJump();    
+        }
+
+        //  TraceBox();
     }
     
     private bool TraceForGround(Vector3 dirMod, float traceDist)
@@ -138,70 +159,163 @@ public class TracerEyes : MonoBehaviour
         if (hit)
         {
             Debug.DrawRay(pos, dir *hit.distance, Color.green, traceInterval);
-            QuitNode = true;
         }
         else
         {
             Debug.DrawRay(pos, dir *traceDist, Color.red, traceInterval);
-            QuitNode = false;
         }
 
         return hit;
     }
-    
-    private bool IsObjectBehind(Vector2 objectPos)
+
+    private void DetermineJump()
     {
-        return Vector2.Dot(transform.TransformDirection(Vector3.right),
-            (Vector3)objectPos - transform.position) < 0;
+        Debug.Log("checking jump");
+        
+        var result = Physics2D.BoxCastAll(transform.position, 
+            traceSize, 0, transform.up, 8, _boxMask);
+        _somethingHit = false;
+        
+        foreach (var h in result)
+        {
+            _somethingHit = true;
+            var layer = h.collider.transform.gameObject.layer;
+
+            switch (layer)
+            {
+                case 7:
+                    break;
+                case 8:
+                    break;
+                case 13:
+                    if (_pointsList.SingleOrDefault(x => x.point == h.point) != default)
+                    {
+                        _pointsList.Add(h);
+                    }
+                    break;
+            }
+        }
+        
+        _pointsList = _pointsList
+            .OrderBy(x => x.distance).ToList();
+
+        var mag = _pointsList[0].point - _pointsList[^1].point;
+        
+        if (mag.x > 5)
+        {
+            compoundActions = CompoundActions.CantJump;
+        }
     }
-    
+
     private void TraceBox()
     {
         var result = Physics2D.BoxCastAll(transform.position, 
             traceSize, 0, transform.up, 8, _boxMask);
-        var awareOfPlayer = false;
-        
+        _somethingHit = false;
+        var playerNoticed = false;
+
+        _pointsList.Clear();
+
         foreach (var h in result)
         {
-            if (h.collider.transform.gameObject.layer == 8)
+            _somethingHit = true;
+            var layer = h.collider.transform.gameObject.layer;
+
+            switch (layer)
             {
-                var seeing = CheckIfLookingAtTarget(h.point);
-                PlayerPos = h.collider.transform.position;
-                var distance = Vector2.Distance(PlayerPos, transform.position);
+                case 7:
+                    break;
+                case 8:
+                    SetPlayerEncounter(h);
+                    playerNoticed = true;
+                    break;
+                case 13:
+                    if (_pointsList.SingleOrDefault(x => x.point == h.point) != default)
+                    {
+                        _pointsList.Add(h);
+                    }
+                    break;
+            }
+        }
 
-                if (seeing)
-                {
-                    if (distance < 2)
-                    {
-                        playerEncounter |= PlayerEncounter.PlayerInAttackRange;
-                    }
-                    else
-                    {
-                        playerEncounter &= ~PlayerEncounter.PlayerInAttackRange;    
-                    }
-                    awareOfPlayer = true;
-                    if (playerEncounter.HasFlag(PlayerEncounter.None))
-                    {
-                        playerEncounter |= PlayerEncounter.PlayerNoticed;
-                    }
+        
+        if (!GroundSeen)
+        {
+            if (_pointsList.Count > 1)
+            {
+                SetPointEncounter();
+            }
+            else
+            {
+                compoundActions |= CompoundActions.CantJump;
+            }
+        }
+    
+        
+        if (!playerNoticed)
+        {
+            playerEncounter = PlayerEncounter.None;
+        }
+    }
 
-                    playerEncounter &= ~PlayerEncounter.PlayerBehind;
-                    playerEncounter |= PlayerEncounter.PlayerInFront;
-                }
-                else
-                {
-                    if (playerEncounter.HasFlag(PlayerEncounter.PlayerNoticed))
-                    {
-                        awareOfPlayer = true;
-                        playerEncounter &= ~PlayerEncounter.PlayerInFront;
-                        playerEncounter |= PlayerEncounter.PlayerBehind;
-                    }
-                }
-              
+    private void SetPointEncounter()
+    {
+        _pointsList = _pointsList
+            .OrderBy(x => x.distance).ToList();
+
+        var mag = _pointsList[0].point - _pointsList[^1].point;
+        
+        if (mag.x > 5)
+        {
+            compoundActions = CompoundActions.CantJump;
+        }
+        else
+        {
+            
+        }
+        
+        foreach (var p in _pointsList)
+        {
+          //  Debug.Log($"{plus++}: {p.point}, {p.distance}");
+        }
+    }
+
+    private void SetPlayerEncounter(RaycastHit2D hit)
+    {
+        var seeing = CheckIfLookingAtTarget(hit.point);
+        PlayerPos = hit.collider.transform.position;
+        var distance = Vector2.Distance(PlayerPos, transform.position);
+        var awareOfPlayer = false;
+        
+        playerEncounter &= ~PlayerEncounter.PlayerInFront;
+        playerEncounter &= ~PlayerEncounter.PlayerInAttackRange;
+        playerEncounter &= ~PlayerEncounter.PlayerBehind;
+        playerEncounter &= ~PlayerEncounter.PlayerNoticed;
+        
+        if (seeing)
+        {
+            playerEncounter |= PlayerEncounter.PlayerInFront;
+            playerEncounter |= PlayerEncounter.PlayerNoticed;
+            
+            if (distance < 2)
+            {
+                playerEncounter |= PlayerEncounter.PlayerInAttackRange;
             }
         }
         
-     //   Debug.Log(playerEncounter);
+        else
+        {
+            if (playerEncounter.HasFlag(PlayerEncounter.EnemyAttacked))
+            {
+                playerEncounter |= PlayerEncounter.PlayerBehind;
+                playerEncounter |= PlayerEncounter.PlayerNoticed;
+            }
+                    
+            if (playerEncounter.HasFlag(PlayerEncounter.PlayerNoticed))
+            {
+                playerEncounter |= PlayerEncounter.PlayerBehind;
+            }
+        }
     }
 
     private bool CheckIfLookingAtTarget(Vector2 enemyPos)
@@ -211,20 +325,12 @@ public class TracerEyes : MonoBehaviour
         return dotProd < 0.9f;
     }
     
-    
-    private IEnumerator JumpInProgress()
-    {
-        JumpReady = false;
-        yield return new WaitForSeconds(2f);
-        JumpReady = true;
-    }
-
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         Gizmos.color = _somethingHit ? Color.green : Color.red;
 
         Gizmos.DrawWireCube(transform.position, traceSize);
     }
-    #endif
+#endif
 }

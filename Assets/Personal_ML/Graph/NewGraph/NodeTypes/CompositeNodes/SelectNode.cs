@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,16 +29,33 @@ public class SelectNode : CompositeNode
     
     private void CheckOptions()
     {
-        _plusMinus = agent.enemyTransform.right.x > 0;
-       // _current = agent.grid.GetSquareFromPoint(agent.enemyTransform.position);
+        var comp = CompoundActions.None;
+        
+        
+        agent.CheckForJump?.Invoke(x =>
+        {
+            comp = x;
+        });
+        
+        
+        Debug.Log("Checking options");
         agent.keepWalking = true;
         if (!agent.enemyEyes.GroundSeen)
         {
-            _choiceMade = true;
+            Debug.Log(agent.enemyEyes.compoundActions);
+            if (agent.enemyEyes.compoundActions.HasFlag(CompoundActions.CantJump))
+            {
+                currentCommand = CurrentCommand.MoveToPosition;
+                choiceMade = true;
+                return;
+            }
+
             currentCommand = CurrentCommand.Jump;
+            choiceMade = true;
             return;
         }
-
+        
+        agent.currentDestination = agent.enemyEyes.PlayerPos;
         var playerEncounter = agent.enemyEyes.playerEncounter;
 
         if (playerEncounter.HasFlag(PlayerEncounter.PlayerNoticed))
@@ -51,7 +69,6 @@ public class SelectNode : CompositeNode
                 }
 
                 agent.keepWalking = false;
-                agent.currentDestination = agent.enemyEyes.PlayerPos;
                 currentCommand = CurrentCommand.MoveToPosition;
                 return;
             }
@@ -59,13 +76,13 @@ public class SelectNode : CompositeNode
             if (playerEncounter.HasFlag(PlayerEncounter.PlayerBehind))
             {
                 agent.keepWalking = false;
-                agent.currentDestination = agent.enemyEyes.PlayerPos;
                 currentCommand = CurrentCommand.MoveToPosition;
                 return;
             }
         }
-
+        
         currentCommand = CurrentCommand.MoveToPosition;
+     //   Debug.Log(currentCommand);
     }
 
     private void SetPossibleNodes()
@@ -110,6 +127,7 @@ public class SelectNode : CompositeNode
     
     public override State OnUpdate()
     {
+        CheckOptions();
         if (currentCommand == CurrentCommand.None || !choiceMade) return State.Update;
         
         var child = ownedNodes[currentCommand];
@@ -123,7 +141,7 @@ public class SelectNode : CompositeNode
                 return State.Update;
 
             case State.Success:
-                CheckOptions();
+                choiceMade = false;
                 break;
         }
 

@@ -46,6 +46,8 @@ public class AiAgent
     public float moveSpeed;
     public float attackInterval = 0.3f;
     
+    public Action<Action<CompoundActions>> CheckForJump;
+    
     public AiAgent()
     {
         currentDestination = new Vector3(0, 0, 0);
