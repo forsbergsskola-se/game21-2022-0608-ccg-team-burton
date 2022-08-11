@@ -13,7 +13,7 @@ public class SelectNode : CompositeNode
     [HideInInspector] public CurrentCommand currentCommand;
     [HideInInspector] public STATE nextState;
     private Dictionary<CurrentCommand, BaseNode> ownedNodes = new();
-    
+    private BaseNode _currentChoice;
     private CubeFacts _current;
     private bool _plusMinus;
 
@@ -29,32 +29,33 @@ public class SelectNode : CompositeNode
     
     private void CheckOptions()
     {
-        var comp = CompoundActions.None;
-        
-        
-        agent.CheckForJump?.Invoke(x =>
-        {
-            comp = x;
-        });
-        
-        
-        Debug.Log("Checking options");
+       
         agent.keepWalking = true;
         if (!agent.enemyEyes.GroundSeen)
         {
-            Debug.Log(agent.enemyEyes.compoundActions);
-            if (agent.enemyEyes.compoundActions.HasFlag(CompoundActions.CantJump))
+            agent.CheckForJump?.Invoke(x =>
+            {
+                agent.compoundAction = x;
+            });
+            
+            if (agent.compoundAction.HasFlag(CompoundActions.CantJump))
             {
                 currentCommand = CurrentCommand.MoveToPosition;
-                choiceMade = true;
-                return;
             }
 
             currentCommand = CurrentCommand.Jump;
-            choiceMade = true;
-            return;
         }
-        
+
+        else
+        {
+            currentCommand = CurrentCommand.MoveToPosition;
+        }
+        choiceMade = true;
+    }
+
+
+    private void PlayerStuff()
+    {
         agent.currentDestination = agent.enemyEyes.PlayerPos;
         var playerEncounter = agent.enemyEyes.playerEncounter;
 
@@ -80,11 +81,8 @@ public class SelectNode : CompositeNode
                 return;
             }
         }
-        
-        currentCommand = CurrentCommand.MoveToPosition;
-     //   Debug.Log(currentCommand);
     }
-
+    
     private void SetPossibleNodes()
     {
         foreach (var n in children)
@@ -127,12 +125,14 @@ public class SelectNode : CompositeNode
     
     public override State OnUpdate()
     {
-        CheckOptions();
+        if(!choiceMade) CheckOptions();
+       // Debug.Log(choiceMade);
+        
         if (currentCommand == CurrentCommand.None || !choiceMade) return State.Update;
         
-        var child = ownedNodes[currentCommand];
+        _currentChoice = ownedNodes[currentCommand];
 
-        switch (child.Update())
+        switch (_currentChoice.Update())
         {
             case State.Failure:
                 return State.Failure;
