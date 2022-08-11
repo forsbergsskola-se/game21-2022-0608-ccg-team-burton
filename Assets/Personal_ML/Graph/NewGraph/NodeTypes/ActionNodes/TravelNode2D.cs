@@ -8,13 +8,11 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         public override void OnStart()
         {
-            Debug.Log("starting to walk");
             agent.anim.SetBool(Animator.StringToHash("Enemy_Walk2"), true);
             waitForExit = 0;
          
-            if (CheckIfLookingAtTarget() || !agent.enemyEyes.GroundSeen)
+            if (CheckIfLookingAtTarget() || agent.compoundAction.HasFlag(CompoundActions.Rotate))
             {
-                Debug.Log("turning");
                 agent.enemyTransform.Rotate(new Vector3(0, 1,0), 180);
             }
         }
@@ -42,7 +40,7 @@ namespace NewGraph.NodeTypes.ActionNodes
         public override State OnUpdate()
         {
             waitForExit += Time.deltaTime;
-            if (waitForExit < 0.1f) return State.Update;
+            if (waitForExit < 0.5f) return State.Update;
             
             agent.enemyTransform.position += agent.enemyTransform.right * (Time.deltaTime * agent.moveSpeed);
 
@@ -50,7 +48,6 @@ namespace NewGraph.NodeTypes.ActionNodes
             {
                 if (ArrivedAtTarget() || !agent.enemyEyes.GroundSeen)
                 {
-                    Debug.Log("arriving at target");
                     return State.Success;
                 }
             }
@@ -59,7 +56,6 @@ namespace NewGraph.NodeTypes.ActionNodes
             {
                 if (!agent.enemyEyes.GroundSeen || agent.enemyEyes.playerEncounter.HasFlag(PlayerEncounter.PlayerNoticed))
                 {
-                    Debug.Log("target reached");
                     return State.Success;
                 }
                 if (agent.enemyEyes.playerEncounter.HasFlag(PlayerEncounter.PlayerNoticed))

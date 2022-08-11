@@ -48,6 +48,8 @@ public class AiAgent
     
     public Action<Action<CompoundActions>> CheckForJump;
     
+    public CompoundActions compoundAction;
+    
     public AiAgent()
     {
         currentDestination = new Vector3(0, 0, 0);
