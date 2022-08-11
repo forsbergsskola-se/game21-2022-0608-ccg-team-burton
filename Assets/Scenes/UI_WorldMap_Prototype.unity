@@ -431,7 +431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd580320f7d31ea4bb17c5a2c968341a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VcaName: Master
+  VcaName: Music
   slider: {fileID: 1418718427}
 --- !u!1001 &1472958613
 PrefabInstance:
@@ -941,7 +941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 159655963, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 159655963, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
       propertyPath: m_AnchorMax.y
@@ -969,11 +969,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 175172984, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetVolume
+      value: SetMusicVolume
       objectReference: {fileID: 0}
     - target: {fileID: 175172984, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Metagame.VolumController, Assembly-CSharp
+      value: Metagame.SettingsHandler, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 175172984, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -989,7 +989,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511072276, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511072276, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
       propertyPath: m_AnchorMax.y
@@ -997,15 +997,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 511072276, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 511072276, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -5.200012
+      value: -5.1999817
       objectReference: {fileID: 0}
     - target: {fileID: 648702168, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 648702168, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1037,11 +1037,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1093039843, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetVolume
+      value: SetSFXVolume
       objectReference: {fileID: 0}
     - target: {fileID: 1093039843, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Metagame.VolumController, Assembly-CSharp
+      value: Metagame.SettingsHandler, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1093039843, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1053,11 +1053,11 @@ PrefabInstance:
       objectReference: {fileID: 2054798412}
     - target: {fileID: 1213904277, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1601795198, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1601795198, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1065,7 +1065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1601795198, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1601795198, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
       propertyPath: m_AnchoredPosition.x
