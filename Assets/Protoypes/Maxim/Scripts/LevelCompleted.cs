@@ -20,6 +20,7 @@ public class LevelCompleted : MonoBehaviour
         if (collision.tag == "Player")
         {
             currentCoins += coinBonus;
+            
             //Save coins to inventory
             PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) + currentCoins);
 
