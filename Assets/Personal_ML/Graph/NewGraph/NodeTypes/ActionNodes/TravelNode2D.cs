@@ -79,11 +79,11 @@ namespace NewGraph.NodeTypes.ActionNodes
             
             else
             {
-                if (!comp.HasFlag(CompoundActions.GroundSeen) || agent.enemyEyes.playerEncounter.HasFlag(PlayerEncounter.PlayerNoticed))
+                if (!comp.HasFlag(CompoundActions.GroundSeen) || comp.HasFlag(CompoundActions.PlayerNoticed))
                 {
                     return State.Success;
                 }
-                if (agent.enemyEyes.playerEncounter.HasFlag(PlayerEncounter.PlayerNoticed))
+                if (comp.HasFlag(CompoundActions.PlayerNoticed))
                 {
                     return State.Success;
                 }
