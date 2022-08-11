@@ -24,25 +24,25 @@ public class FusionManager : MonoBehaviour
  
         if (equipmentData.ID.Contains("head"))
         {
-            var calculateNewAttribute = (int) GetCurrentRarity(equipmentData) * 5;
-            PlayerPrefs.SetFloat(equipmentData.AttributeValueID, calculateNewAttribute);
+            var newAttributeValue = (int) GetCurrentRarity(equipmentData) * equipmentData.AttributeUpgradeStepSize;
+            PlayerPrefs.SetFloat(equipmentData.AttributeValueID, newAttributeValue);
             
         } 
         else if (equipmentData.ID.Contains("chest"))
         {
-            var calculateNewAttribute =   (int) GetCurrentRarity(equipmentData);
-            PlayerPrefs.SetFloat(equipmentData.AttributeValueID, calculateNewAttribute);
+            var newAttributeValue =   (int) GetCurrentRarity(equipmentData)*equipmentData.AttributeUpgradeStepSize;
+            PlayerPrefs.SetFloat(equipmentData.AttributeValueID, newAttributeValue);
             
         } 
         else if (equipmentData.ID.Contains("legs"))
         {
-            var calculateNewAttribute =(int) GetCurrentRarity(equipmentData) * 5;
-            PlayerPrefs.SetFloat(equipmentData.AttributeValueID, calculateNewAttribute);
+            var newAttributeValue =(int) GetCurrentRarity(equipmentData) * equipmentData.AttributeUpgradeStepSize;
+            PlayerPrefs.SetFloat(equipmentData.AttributeValueID, newAttributeValue);
         } 
         else if (equipmentData.ID.Contains("weapon"))
         {
-            var calculateNewAttribute = 10 + (int) GetCurrentRarity(equipmentData)*5;
-            PlayerPrefs.SetFloat(equipmentData.AttributeValueID, calculateNewAttribute);
+            var newAttributeValue = 10 + (int) GetCurrentRarity(equipmentData)*equipmentData.AttributeUpgradeStepSize;
+            PlayerPrefs.SetFloat(equipmentData.AttributeValueID, newAttributeValue);
         }
     }
 
