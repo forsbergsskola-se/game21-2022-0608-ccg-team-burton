@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class FusionManager : MonoBehaviour
 {
+    [SerializeField] private PlayOneShotSound sound;
+
+    
     public void InitiateUpgrade(EquipmentSO equipmentData, ActionItem upgradeMaterial)
     {
         if (PlayerPrefs.GetInt(PlayerPrefsKeys.NeededUpgradeMaterial.ToString()) > PlayerPrefs.GetInt(upgradeMaterial.GetItemID()))
@@ -15,6 +18,8 @@ public class FusionManager : MonoBehaviour
             UpgradeRarity(equipmentData);
 
             UpgradeAttribute(equipmentData);
+            sound.PlaySound();
+
     }
 
     private void UpgradeAttribute(EquipmentSO equipmentData)

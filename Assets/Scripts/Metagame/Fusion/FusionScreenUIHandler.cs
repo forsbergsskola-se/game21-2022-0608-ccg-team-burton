@@ -19,7 +19,6 @@ public class FusionScreenUIHandler : MonoBehaviour
     [SerializeField] private TMP_Text neededMaterialText;
     [SerializeField] private TMP_Text haveMaterialText;
     [SerializeField] private GameObject upgradeButton;
-    [SerializeField] private PlayOneShotSound sound;
 
     
     private void OnEnable()
@@ -72,7 +71,6 @@ public class FusionScreenUIHandler : MonoBehaviour
     {
             fusionManager.InitiateUpgrade(EquipmentSoData,UpgradeMaterialSoData);
             //play sound here
-            sound.PlaySound();
             OnInventoryChange?.Invoke();
             UpdateUpgradeUI();
 
