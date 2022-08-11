@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6548483289138556159}
   - component: {fileID: 6548483289138556156}
   - component: {fileID: 3678533437073736364}
-  - component: {fileID: -1403271996779806732}
   m_Layer: 5
   m_Name: NewSlot
   m_TagString: Untagged
@@ -119,20 +118,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 100, y: 100}
   m_EdgeRadius: 0
---- !u!114 &-1403271996779806732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6548483289138556154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96ae0cac2bb81704eb1b3461eada51be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  travelVector: {x: 0, y: 0}
-  lifetime: 20
 --- !u!1 &6548483289540091373
 GameObject:
   m_ObjectHideFlags: 0
