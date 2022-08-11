@@ -22,24 +22,25 @@ public class FusionManager : MonoBehaviour
  
         if (equipmentData.ID.Contains("head"))
         {
-            Debug.Log("Upgrade Head here");
-            var calculateNewAttribute = PlayerPrefs.GetInt(equipmentData.AttributeValueID) +
-                                        (int) GetCurrentRarity(equipmentData) * 5;
-            Debug.Log($"ID: {equipmentData.ID}");
-            Debug.Log("Calculated: " +calculateNewAttribute);
-            Debug.Log($"BEFORE: {PlayerPrefs.GetFloat(equipmentData.AttributeValueID, calculateNewAttribute)}");
+            var calculateNewAttribute = PlayerPrefs.GetInt(equipmentData.AttributeValueID) + (int) GetCurrentRarity(equipmentData) * 5;
             PlayerPrefs.SetFloat(equipmentData.AttributeValueID, calculateNewAttribute);
-            Debug.Log($"After: {PlayerPrefs.GetFloat(equipmentData.AttributeValueID, calculateNewAttribute)}");
             
-        } else if (equipmentData.ID.Contains("chest"))
+        } 
+        else if (equipmentData.ID.Contains("chest"))
         {
-            Debug.Log("Upgrade Chest here");
-        } else if (equipmentData.ID.Contains("legs"))
+            var calculateNewAttribute = PlayerPrefs.GetInt(equipmentData.AttributeValueID) + (int) GetCurrentRarity(equipmentData);
+            PlayerPrefs.SetFloat(equipmentData.AttributeValueID, calculateNewAttribute);
+            
+        } 
+        else if (equipmentData.ID.Contains("legs"))
         {
-            Debug.Log("Upgrade Legs here");
-        } else if (equipmentData.ID.Contains("weapon"))
+            var calculateNewAttribute = PlayerPrefs.GetInt(equipmentData.AttributeValueID) + (int) GetCurrentRarity(equipmentData) * 5;
+            PlayerPrefs.SetFloat(equipmentData.AttributeValueID, calculateNewAttribute);
+        } 
+        else if (equipmentData.ID.Contains("weapon"))
         {
-            Debug.Log("Upgrade Weapon here");
+            var calculateNewAttribute = PlayerPrefs.GetInt(equipmentData.AttributeValueID) + (int) GetCurrentRarity(equipmentData)+5;
+            PlayerPrefs.SetFloat(equipmentData.AttributeValueID, calculateNewAttribute);
         }
     }
 

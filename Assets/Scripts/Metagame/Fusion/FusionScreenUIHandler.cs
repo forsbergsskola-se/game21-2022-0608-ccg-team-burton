@@ -44,10 +44,27 @@ public class FusionScreenUIHandler : MonoBehaviour
     {
         equipmentIconGameObject.GetComponent<Image>().sprite = EquipmentSoData.Icon;
         rarityText.SetText("Rarity: "+PlayerPrefs.GetString(EquipmentSoData.RarityID));
-        attributeText.SetText(EquipmentSoData.AttributeDescription+" " +PlayerPrefs.GetFloat(EquipmentSoData.AttributeValueID)+"%");
+        
+        SetAttributeText();
+        
         upgradeMaterialsIconGameObject.GetComponent<Image>().sprite = UpgradeMaterialSoData.GetIcon();
         haveMaterialText.SetText("Have: "+PlayerPrefs.GetInt(UpgradeMaterialSoData.GetItemID()));
         neededMaterialText.SetText($"Need: {PlayerPrefs.GetInt(PlayerPrefsKeys.NeededUpgradeMaterial.ToString())}");
+    }
+
+    private void SetAttributeText()
+    {
+        //HAAAACKYYYYYYYYY
+        if (EquipmentSoData.ID.Contains("legs") || EquipmentSoData.ID.Contains("head"))
+        {
+            attributeText.SetText(EquipmentSoData.AttributeDescription + " " +
+                                  PlayerPrefs.GetFloat(EquipmentSoData.AttributeValueID) + "%");
+        }
+        else
+        {
+            attributeText.SetText(EquipmentSoData.AttributeDescription + " " +
+                                  PlayerPrefs.GetFloat(EquipmentSoData.AttributeValueID));
+        }
     }
 
     public void PressUpgradeButton()

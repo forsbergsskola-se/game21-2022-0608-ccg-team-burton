@@ -15,6 +15,7 @@ public class Initialization : MonoBehaviour
         //Update UI after init
         uICurrencyUpdater.OnCurrencyChanged?.Invoke();
     }
+    
 //TODO: Should be called on like main map for first time setup. On second start (player prefs present) --> nothing will happen here
     private void NewGamePlayerStats()
     {
