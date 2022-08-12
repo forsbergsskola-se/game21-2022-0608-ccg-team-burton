@@ -50,8 +50,7 @@ public class LevelCompleted : MonoBehaviour
     private void StarsAchieved()
         {
             var healthLeft = PlayerHealth.CurrentHealth;
-            // float percentage = float.Parse(healthMax.ToString()) / float.Parse(healthLeft.ToString()) * 100f;
-
+           
             switch (healthLeft)
             {
                 case <= 2:
