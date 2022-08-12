@@ -10,14 +10,13 @@ namespace Metagame
         [SerializeField] Slider musicSlider;
         [SerializeField] Slider sfxSlider;
         [SerializeField] Toggle toggle;
+
         VCA _musicVcaController;
         VCA _sfxVcaController;
 
-        void Start(){
+        private void Start(){
             _musicVcaController = RuntimeManager.GetVCA("vca:/Music");
             _sfxVcaController = RuntimeManager.GetVCA("vca:/SFX");
-            //musicSlider = GetComponent<Slider>();
-            //sfxSlider = GetComponent<Slider>();
             Debug.Log(musicSlider.gameObject.name);
             LoadMusicVolume();
             LoadSFXVolume();
