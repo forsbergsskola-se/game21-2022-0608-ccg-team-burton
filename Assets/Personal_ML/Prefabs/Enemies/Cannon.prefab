@@ -104,6 +104,7 @@ MonoBehaviour:
   pursueDistance: 0
   traceSize: {x: 30, y: 10}
   traceInterval: 0.4
+  enemyType: 1
   PlayerTrans: {fileID: 0}
   compoundActions: 0
   distanceToWall: 0
@@ -176,8 +177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 494146e96e76323448752fea8c77fd68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree: {fileID: 0}
+  tree: {fileID: 11400000, guid: 9bd5a5207455ceb4380a8977e4c6136d, type: 2}
   readyToRun: 0
-  attackInterval: 0
+  attackInterval: 0.47
   baseMoveSpeed: 0
   pursueMoveSpeed: 0

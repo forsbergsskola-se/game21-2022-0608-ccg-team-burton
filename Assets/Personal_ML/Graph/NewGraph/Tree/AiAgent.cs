@@ -14,7 +14,8 @@ public enum CurrentCommand
     MoveToAttack,
     OutOfCommands,
     Jump,
-    Attack
+    Attack,
+    Idle
 }
 
 [Serializable]
