@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4340430052613549718}
   - component: {fileID: 4340430052613549714}
   - component: {fileID: 4340430052613549715}
+  - component: {fileID: 5859689361833792260}
   m_Layer: 0
   m_Name: Cannon
   m_TagString: Untagged
@@ -34,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!212 &4340430052613549712
 SpriteRenderer:
@@ -95,15 +96,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4340430052613549717}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 951e75a4d05bfb14f9f2da86d5ee89a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pursueDistance: 0
   traceSize: {x: 30, y: 10}
+  traceInterval: 0.4
   PlayerTrans: {fileID: 0}
-  playerEncounter: 0
+  compoundActions: 0
+  distanceToWall: 0
 --- !u!95 &4340430052613549718
 Animator:
   serializedVersion: 4
@@ -161,3 +164,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5859689361833792260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4340430052613549717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 494146e96e76323448752fea8c77fd68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tree: {fileID: 0}
+  readyToRun: 0
+  attackInterval: 0
+  baseMoveSpeed: 0
+  pursueMoveSpeed: 0
