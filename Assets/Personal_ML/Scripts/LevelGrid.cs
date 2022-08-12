@@ -121,7 +121,7 @@ public class LevelGrid : MonoBehaviour
         SpawnPointsOfInterest();
     }
 
-    public WalkableGround GetCurrentGround(Vector2 currentPos, float yTolerance)
+    public WalkableGround GetCurrentGround(Vector2 currentPos)
     {
         foreach (var w in walkableGround)
         {
@@ -129,12 +129,10 @@ public class LevelGrid : MonoBehaviour
             {
                 if (currentPos.y >= w.min.y && currentPos.y < w.max.y)
                 {
-                    
                     return w;
                 }
             }
         }
-        
         return null;
     }
     
@@ -169,9 +167,12 @@ public class LevelGrid : MonoBehaviour
             var aHit = SingleTrace(startPoint, new Vector2(0,-1), 0.4f);
             if (!aHit) breakLoop = true;
 
+            newHits.Add(aHit.point);
+            
             startPoint += new Vector2(0.5f,0);
             
-            newHits.Add(aHit.point);
+            if(aHit.point.x > _max.x) breakLoop = true;
+            if(aHit.point.x < _min.x) breakLoop = true;
         }
 
         return newHits[^2];
@@ -343,8 +344,6 @@ public class LevelGrid : MonoBehaviour
                     var center = new Vector2(w.start.x + (w.end.x - w.start.x) / 2, w.start.y + adjust / 2);
                     var size = new Vector2(w.end.x - w.start.x, adjust);
                     
-                    Gizmos.DrawWireSphere(w.start, 0.5f);
-                    Gizmos.DrawWireSphere(w.end, 0.5f);
                     Gizmos.DrawWireCube(center, size);
                 }
                 

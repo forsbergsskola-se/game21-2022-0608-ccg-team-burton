@@ -28,12 +28,12 @@ public class SelectNode : CompositeNode
     
     private void CheckOptions()
     {
-        Debug.Log("checking options");
+        Debug.Log("chekOptions");
         if (!agent.enemyEyes.compoundActions.HasFlag(CompoundActions.GroundSeen))
         {
             var ground = agent.grid
                 .GetCurrentGround(agent.enemyTransform.position +
-                                  new Vector3(agent.enemyTransform.right.x * 9,0), 2);
+                                  new Vector3(agent.enemyTransform.right.x * 9,0));
             
             if (ground == null)
             {
@@ -47,20 +47,20 @@ public class SelectNode : CompositeNode
 
         else
         {
-            GetTarget(false);
+            GetTarget(Vector2.Distance(agent.currentDestination, agent.enemyTransform.position) < 3);
         }
 
         _choiceMade = true;
-        Debug.Log(choiceMade);
     }
     
     private void GetTarget(bool atEnd)
     {
         agent.keepWalking = false;
-        var ground = agent.grid.GetCurrentGround(agent.enemyTransform.position, 4);
+        var ground = agent.grid.GetCurrentGround(agent.enemyTransform.position);
 
         var dir = agent.enemyTransform.right.x > 0;
-
+        
+        
         if (dir)
         {
             agent.currentDestination = atEnd ? ground.start : ground.end;
@@ -69,6 +69,7 @@ public class SelectNode : CompositeNode
         {
             agent.currentDestination = atEnd ? ground.end : ground.start;
         }
+        
         
         currentCommand = CurrentCommand.MoveToPosition;
     }
@@ -197,7 +198,6 @@ public class SelectNode : CompositeNode
             case State.Success:
                 choiceMade = false;
                 CheckOptions();
-                Debug.Log("exit a node");
                 break;
         }
 
