@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 4128984599146211447}
   - component: {fileID: 4128984599146211452}
   - component: {fileID: 4128984598227694882}
-  - component: {fileID: 8016638371360850485}
   - component: {fileID: 4402422638478631334}
   - component: {fileID: 7797421452348913917}
   - component: {fileID: 9132859628408954427}
@@ -198,29 +197,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _combat: {fileID: 4128984599146211447}
---- !u!114 &8016638371360850485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2277822467958081816}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d278368937f35c4bb571041fe3dfa24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyVars:
-    AttackDistance: 2
-    PursueDistance: 8
-    MoveSpeed: 2
-    AttackInterval: 2
-    EnemyType: 0
-    animator: {fileID: 0}
-    enemyRef: {fileID: 0}
-    firePoint: {fileID: 0}
-    tracerEyes: {fileID: 0}
-  turnBack: 0
 --- !u!95 &4402422638478631334
 Animator:
   serializedVersion: 4
@@ -316,6 +292,7 @@ MonoBehaviour:
   attackInterval: 0.5
   baseMoveSpeed: 2.41
   pursueMoveSpeed: 6.94
+  projectile: {fileID: 0}
 --- !u!1 &4128984599192095207
 GameObject:
   m_ObjectHideFlags: 0

@@ -45,6 +45,8 @@ public class TracerEyes : MonoBehaviour
     private int _groundMask;
     private int _boxMask;
 
+    [HideInInspector] public LevelGrid grid;
+
     private float timeSinceTrace;
     
     public Vector2 EstimatedJumpForce { get; private set; }
@@ -110,7 +112,7 @@ public class TracerEyes : MonoBehaviour
     {
         if (enemyType == EnemyType.Melee)
         {
-            if (TraceForGround(new Vector3(0, -1), 2))
+            if (TraceForGround(new Vector3(0, -0.45f), 2))
                 compoundActions |= CompoundActions.GroundSeen;
             else compoundActions &= ~CompoundActions.GroundSeen;
 
