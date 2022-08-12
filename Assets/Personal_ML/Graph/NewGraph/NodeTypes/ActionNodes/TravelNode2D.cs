@@ -28,7 +28,6 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         public override void OnExit()
         {
-            Debug.Log("stop walking");
             agent.anim.SetBool(Animator.StringToHash("Enemy_Walk2"), false);
         }
         
@@ -56,8 +55,7 @@ namespace NewGraph.NodeTypes.ActionNodes
 
             waitForExit += Time.deltaTime;
             if (waitForExit < 0.5f) return State.Update;
-
-
+            
             agent.enemyTransform.position += agent.enemyTransform.right * (Time.deltaTime * agent.moveSpeed);
 
             if (comp.HasFlag(CompoundActions.WallInTurnRange) && canTurn)

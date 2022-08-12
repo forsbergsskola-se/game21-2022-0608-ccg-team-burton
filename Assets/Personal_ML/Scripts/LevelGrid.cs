@@ -41,12 +41,8 @@ public class PointsOfInterest
 public class CubeFacts
 {
     public Vector2 location;
-    public Color color;
     public Vector2 min;
     public Vector2 max;
-    public List<PointsOfInterest> pointsList = new();
-    public float lowestGroundY = 9999;
-    public TileOptions options;
 }
 
 [Serializable]
@@ -55,20 +51,21 @@ public class WalkableGround
     public Vector2 start;
     public Vector2 end;
     public float groundSize;
-    public string guid;
-
     public Vector2 min;
     public Vector2 max;
 }
 
 public class LevelGrid : MonoBehaviour
 {
-    [Header("Input values")]
+    [Header("Grid values")]
     [SerializeField] private Vector2 cubeSize;
     [Range(0, 1),SerializeField] private float delayUpdate;
-    [SerializeField] private GameObject spawnablePointOfInterest;
     [SerializeField, Range(1, 20)] private int numberCubesX;
     [SerializeField, Range(1, 20)] private int numberCubesY;
+    [SerializeField, Range(1, 6)] private float areaHeight;
+    [SerializeField, Range(1, 4)] private float minimumPlatformWidth;
+
+    [HideInInspector] public List<WalkableGround> walkableGround = new();
     
     private List<List<CubeFacts>> _gridList = new();
     private Vector2 _min;
@@ -78,9 +75,7 @@ public class LevelGrid : MonoBehaviour
     private float _traceTime = 0.5f;
 
     private List<RaycastHit2D> _hitList = new();
-
-    [HideInInspector] public List<WalkableGround> walkableGround = new();
-
+    
     private float _maxJumpDistance = 6f;
 
     private void Awake()
@@ -118,7 +113,6 @@ public class LevelGrid : MonoBehaviour
                 ScanForEnemies(cube.location);
             }
         }
-        SpawnPointsOfInterest();
     }
 
     public WalkableGround GetCurrentGround(Vector2 currentPos)
@@ -134,15 +128,6 @@ public class LevelGrid : MonoBehaviour
             }
         }
         return null;
-    }
-    
-    private void SpawnPointsOfInterest()
-    {
-        foreach (var p in walkableGround)
-        {
-            Instantiate(spawnablePointOfInterest, p.end, Quaternion.identity, transform);
-            Instantiate(spawnablePointOfInterest, p.start, Quaternion.identity, transform);
-        }
     }
     
     public CubeFacts GetSquareFromPoint(Vector2 thePoint)
@@ -211,11 +196,6 @@ public class LevelGrid : MonoBehaviour
                     if (_hitList.SingleOrDefault(x => (int) x.point.y == (int) aHit.point.y) == default)
                     {
                         _hitList.Add(aHit);
-                        cube.pointsList.Add(new PointsOfInterest()
-                        {
-                            location = aHit.point,
-                            pointType = LevelElements.Edge
-                        });
                     }
                 }
             }
@@ -228,22 +208,18 @@ public class LevelGrid : MonoBehaviour
             var start = h.point;
             var end = hitPoint;
 
-            var  ySize = 4f;
-            var center = new Vector2(start.x + (end.x - start.x) / 2, start.y + ySize / 2);
-            var size = new Vector2(end.x - start.x, ySize);
+            var center = new Vector2(start.x + (end.x - start.x) / 2, start.y + areaHeight / 2);
+            var size = new Vector2(end.x - start.x, areaHeight);
+
+            if(size.x < minimumPlatformWidth) continue;
             
             walkableGround.Add(new WalkableGround()
             {
                 start = h.point,
                 end = hitPoint,
                 min = center - size / 2,
-                max = center + size / 2
-            });
-
-            cube.pointsList.Add(new PointsOfInterest()
-            {
-                location = hitPoint,
-                pointType = LevelElements.Edge
+                max = center + size / 2,
+                groundSize = size.x
             });
         }
     }
@@ -275,7 +251,6 @@ public class LevelGrid : MonoBehaviour
                 var minMax = GetMinMax(next, cubeSize);
                 newList.Add( new CubeFacts()
                 {
-                    color = Color.red,
                     location = next,
                     min = minMax.Item1,
                     max = minMax.Item2,
@@ -310,46 +285,14 @@ public class LevelGrid : MonoBehaviour
         }
 
         if (!Application.isPlaying) return;
-        
-        for (var i = 0; i < numberCubesY; i++)
+      
+        foreach (var w in walkableGround)
         {
-            for (var j = 0; j < numberCubesX; j++)
-            {
-                var cube = _gridList[i][j];
-
-                foreach (var p in cube.pointsList)
-                {
-                    if (p.pointType.HasFlag(LevelElements.Edge))
-                    {
-                        Gizmos.color = Color.yellow;
-                    }
-                    
-                    else if (p.pointType.HasFlag(LevelElements.Gap))
-                    {
-                        Gizmos.color = Color.red;
-                    }
-
-                    else
-                    {
-                        Gizmos.color = Color.black;
-                    }
-
-                    Gizmos.DrawWireSphere(p.location, 0.3f);
-                }
-
-                foreach (var w in walkableGround)
-                {
-                    Gizmos.color = Color.magenta;
-                    var  adjust = 4f;
-                    var center = new Vector2(w.start.x + (w.end.x - w.start.x) / 2, w.start.y + adjust / 2);
-                    var size = new Vector2(w.end.x - w.start.x, adjust);
-                    
-                    Gizmos.DrawWireCube(center, size);
-                }
-                
-            }
+            Gizmos.color = Color.magenta;
+            var center = new Vector2(w.start.x + (w.end.x - w.start.x) / 2, w.start.y + areaHeight / 2);
+            var size = new Vector2(w.end.x - w.start.x, areaHeight);
+            Gizmos.DrawWireCube(center, size);
         }
-        
     }
     #endif
 }

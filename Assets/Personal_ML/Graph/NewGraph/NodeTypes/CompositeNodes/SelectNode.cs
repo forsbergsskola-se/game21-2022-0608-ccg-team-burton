@@ -28,8 +28,8 @@ public class SelectNode : CompositeNode
     
     private void CheckOptions()
     {
-        Debug.Log("chekOptions");
-        if (!agent.enemyEyes.compoundActions.HasFlag(CompoundActions.GroundSeen))
+        var comp = agent.enemyEyes.compoundActions; 
+        if (!comp.HasFlag(CompoundActions.GroundSeen))
         {
             var ground = agent.grid
                 .GetCurrentGround(agent.enemyTransform.position +
@@ -44,6 +44,10 @@ public class SelectNode : CompositeNode
                 currentCommand = CurrentCommand.Jump;
             }
         }
+        else if (comp.HasFlag(CompoundActions.PlayerNoticed))
+        {
+            PlayerStuff();
+        }
 
         else
         {
@@ -57,9 +61,7 @@ public class SelectNode : CompositeNode
     {
         agent.keepWalking = false;
         var ground = agent.grid.GetCurrentGround(agent.enemyTransform.position);
-
         var dir = agent.enemyTransform.right.x > 0;
-        
         
         if (dir)
         {
@@ -69,78 +71,36 @@ public class SelectNode : CompositeNode
         {
             agent.currentDestination = atEnd ? ground.end : ground.start;
         }
-        
-        
+
         currentCommand = CurrentCommand.MoveToPosition;
     }
     
-    private void Save()
+    
+    private void PlayerStuff()
     {
-        var eyeComp = agent.enemyEyes.compoundActions;
+        agent.currentDestination = agent.enemyEyes.PlayerPos;
+        var comp = agent.enemyEyes.compoundActions;
         
-        if (eyeComp.HasFlag(CompoundActions.EnemyDead))
+        if (comp.HasFlag(CompoundActions.PlayerInFront))
         {
-            choiceMade = false;
-            return;
-        }
-        
-        if (!eyeComp.HasFlag(CompoundActions.GroundSeen))
-        {
-            agent.CheckForJump?.Invoke(x =>
+            if (comp.HasFlag(CompoundActions.PlayerInAttackRange))
             {
-                agent.compoundAction = x;
-            });
-            
-            if (eyeComp.HasFlag(CompoundActions.CanJump))
-            {
-                currentCommand = CurrentCommand.Jump;
+                currentCommand = CurrentCommand.Attack;
             }
-
             else
             {
                 currentCommand = CurrentCommand.MoveToPosition;    
             }
-        }
-
-        else if (eyeComp.HasFlag(CompoundActions.PlayerNoticed))
-        {
-            PlayerStuff();
-        }
-        
-        else
-        {
-            currentCommand = CurrentCommand.MoveToPosition;
-        }
-        choiceMade = true;
-    }
-    
-
-    private void PlayerStuff()
-    {
-        agent.currentDestination = agent.enemyEyes.PlayerPos;
-        var playerEncounter = agent.enemyEyes.compoundActions;
-        var comp = agent.enemyEyes.compoundActions;
-        
-        if (playerEncounter.HasFlag(CompoundActions.PlayerInFront))
-        {
-            if (playerEncounter.HasFlag(CompoundActions.PlayerInAttackRange))
-            {
-                currentCommand = CurrentCommand.Attack;
-                return;
-            }
 
             agent.keepWalking = false;
-            currentCommand = CurrentCommand.MoveToPosition;
             return;
         }
         
-        if (playerEncounter.HasFlag(CompoundActions.PlayerBehind))
+        if (comp.HasFlag(CompoundActions.PlayerBehind))
         {
             agent.keepWalking = false;
             currentCommand = CurrentCommand.MoveToPosition;
-            return;
         }
-        
     }
     
     private void SetPossibleNodes()
