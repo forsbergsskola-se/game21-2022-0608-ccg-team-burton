@@ -54,7 +54,7 @@ public class WalkableGround
 {
     public Vector2 start;
     public Vector2 end;
-    
+    public float groundSize;
 }
 
 public class LevelGrid : MonoBehaviour
@@ -101,7 +101,6 @@ public class LevelGrid : MonoBehaviour
                 AdvancedTrace(new Vector2(i,j));
             }
         }
-        
         SpawnPointsOfInterest();
     }
 
@@ -112,97 +111,6 @@ public class LevelGrid : MonoBehaviour
         {
             Instantiate(spawnablePointOfInterest, p.end, Quaternion.identity, transform);
             Instantiate(spawnablePointOfInterest, p.start, Quaternion.identity, transform);
-        }
-    }
-    
-    private void SetOptions(CubeFacts cube)
-    {
-        if (cube.pointsList.SingleOrDefault(x => x.pointType == LevelElements.TwoWayPass) != default)
-        {
-            cube.options |= TileOptions.OpenMinus | TileOptions.OpenPlus;
-        }
-    }
-
-    private void CheckForGround(CubeFacts cube)
-    {
-        
-    }
-    
-    private void CheckUnder(CubeFacts cube)
-    {
-        var hitCount = 0;
-        var missCount = 0;
-
-        for (var i = 0; i < _hitList.Count; i++)
-        {
-            if (_hitList[i])
-            {
-                hitCount++;
-            }
-            
-            if (i <= 0 || i >= _hitList.Count - 1) continue;
-            
-            var past = _hitList[i - 1];
-            var present = _hitList[i];
-            var future = _hitList[i + 1];
-
-            if (!past && present)
-            {
-                cube.pointsList.Add(new PointsOfInterest()
-                {
-                    location = present.point + new Vector2(0, 2),
-                    pointType = LevelElements.Edge
-                });
-            }
-            if (!future && present)
-            {
-                cube.pointsList.Add(new PointsOfInterest()
-                {
-                    location = present.point+ new Vector2(0, 2),
-                    pointType = LevelElements.Edge
-                });
-            }
-        }
-
-        if (cube.pointsList.Count > 0)
-        {
-            cube.lowestGroundY = cube.pointsList
-                .OrderBy(x => x.location.y).ToList()[0].location.y;
-        }
-        
-
-        if (hitCount == _hitList.Count)
-        {
-            cube.pointsList.Add(new PointsOfInterest()
-            {
-                location = cube.location,
-                pointType = LevelElements.TwoWayPass
-            });
-        }
-        else if(hitCount == 0)
-        {
-            cube.pointsList.Add(new PointsOfInterest()
-            {
-                location = cube.location,
-                pointType = LevelElements.Gap
-            });
-        }
-    }
-    
-    private bool CheckIfLookingAtTarget(Transform enemyTrans, Vector3 destination)
-    {
-        var dirFromAtoB = (enemyTrans.position - destination).normalized;
-        var dotProd = Vector2.Dot(dirFromAtoB, enemyTrans.right);
-        return dotProd > 0.9f;
-    }
-
-    public void GetOptions(Vector2 point)
-    {
-        var current = GetSquareFromPoint(point);
-
-        foreach (var p in current.pointsList)
-        {
-            
         }
     }
     
@@ -280,8 +188,6 @@ public class LevelGrid : MonoBehaviour
             topCorner += new Vector2(increment, 0);
         }
         
-        List<RaycastHit2D> newHits = new();
-        
         foreach (var h in _hitList)
         {
             var hitPoint = ScanUntilEdge(h.point + new Vector2(0,0.2f));
@@ -298,8 +204,6 @@ public class LevelGrid : MonoBehaviour
                 pointType = LevelElements.Edge
             });
         }
-        
-    
     }
     
     private RaycastHit2D SingleTrace(Vector2 startPos, Vector2 traceDir, float traceLength)
@@ -316,114 +220,6 @@ public class LevelGrid : MonoBehaviour
         }
         
         return hit;
-    }
-
-
-    private void ScanInDirection(Vector2 scanDir, Vector2 moveDir, Vector2 index, Vector2 startPos)
-    {
-        _hitList.Clear();
-        var cube = _gridList[(int) index.x][(int) index.y];
-        var numberTraces = 15;
-        var increment = cubeSize.x / numberTraces;
-        
-        for (var i = 0; i < numberTraces; i++)
-        {
-
-            startPos += new Vector2(increment, 0);
-        }
-    }
-    
-    private void ScanABox(Vector2 index, Vector2 startPos, Vector2 traceDir)
-    {
-        _hitList.Clear();
-        var cube = _gridList[(int) index.x][(int) index.y];
-  
-        var numberTraces = 15;
-        var increment = cubeSize.x / numberTraces;
-        var start = cube.location + startPos * new Vector2(cubeSize.x / 2, cubeSize.y / 2);
-        
-        for (var i = 0; i < numberTraces; i++)
-        {
-            var hit = Physics2D.Raycast(startPos, traceDir, cubeSize.y, _layerMask);
-            _hitList.Add(hit);
-            if (hit)
-            {
-                Debug.DrawLine(startPos, hit.point, Color.green, _traceTime);
-            }
-            else
-            {
-                Debug.DrawLine(startPos, startPos + traceDir *cubeSize.y, Color.red, _traceTime);
-            }
-            
-            startPos += new Vector2(increment, 0);
-        }
-    }
-
-    private void AnalyzeHits()
-    {
-           var numberHits = 0;
-        for (var i = 0; i < _hitList.Count; i++)
-        {
-            var hitLocation = _hitList[i].point;
-            var pointType = LevelElements.None;
-            var storePoint = false;
-            var lowest = hitLocation;
-            
-            if (i > 0 && i < _hitList.Count - 1)
-            {
-                var past = _hitList[i - 1];
-                var current = _hitList[i];
-                var future = _hitList[i + 1];
-
-                if (current) numberHits++;
-                
-                if (!past || !future)
-                {
-                    if (!past && current)
-                    {
-                        hitLocation = _hitList[i].point;
-                        pointType = LevelElements.Ground | LevelElements.Edge;
-                        storePoint = true;
-                    }
-                    
-                    if (!future && current)
-                    {
-                        hitLocation = _hitList[i].point;
-                        pointType = LevelElements.Ground | LevelElements.Edge;
-                        storePoint = true;
-                    }
-                }
-
-                else if (past && current)
-                {
-                    if (past.point.y < current.point.y)
-                    {
-                        if (Vector2.Distance(past.point, current.point) > 1)
-                        {
-                            pointType = LevelElements.Platform | LevelElements.Edge;
-                            storePoint = true;
-                        }
-                    }
-                }
-                
-                else if (current && future)
-                {
-                    if (current.point.y > future.point.y)
-                    {
-                        if (Vector2.Distance(current.point, future.point) > 1)
-                        {
-                            pointType = LevelElements.Platform | LevelElements.Edge;
-                            storePoint = true;
-                        }
-                    }
-                }
-
-                if (storePoint)
-                {
-                }
-            }
-          
-        }
     }
     
     private void SetNewList()

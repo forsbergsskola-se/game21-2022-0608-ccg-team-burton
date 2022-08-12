@@ -9,40 +9,6 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [Flags]
-public enum TraceType
-{
-    None = 0,
-    Ground = 1,
-    Wall = 2,
-    Player = 4,
-    Platform = 8,
-    Enemy = 16,
-}
-
-public enum Actions
-{
-    None,
-    TurnAround,
-    TestForJump,
-    Jump,
-    PlatformJump,
-    Pursue,
-    Stop
-}
-
-[Flags]
-public enum PlayerEncounter
-{
-    None = 0,
-    PlayerNoticed = 1,
-    PlayerBehind = 2,
-    PlayerInFront = 4,
-    PlayerInAttackRange = 8,
-    EnemyAttacked = 16,
-    AwareOfPlayer = 32
-}
-
-[Flags]
 public enum CompoundActions
 {
     None = 1 << 0,
@@ -51,7 +17,7 @@ public enum CompoundActions
     KeepWalking = 1 << 3,
     Rotate = 1 << 4,
     GroundSeen = 1 << 5,
-    WallSeen= 1 << 6,
+    WallSeen = 1 << 6,
     MakingJump = 1 << 7,
     PlayerNoticed = 1 << 8,
     PlayerBehind = 1 << 9,
@@ -61,13 +27,6 @@ public enum CompoundActions
     AwareOfPlayer = 1 << 13,
     EnemyDead = 1 << 14,
     WallInTurnRange = 1 << 15,
-}
-
-[Serializable]
-public class HitResults
-{
-    public RaycastHit2D theHit;
-    public TraceType theHitType;
 }
 
 public class TracerEyes : MonoBehaviour
@@ -96,8 +55,7 @@ public class TracerEyes : MonoBehaviour
     private Health _playerHealth;
     private Health _enemyHealth;
     private bool _somethingHit;
-
-    public PlayerEncounter playerEncounter;
+    
     private bool _enemyHit;
 
     private List<RaycastHit2D> _pointsList = new();
@@ -123,8 +81,12 @@ public class TracerEyes : MonoBehaviour
 
     private void RegisterAttack(int currentHealth)
     {
-        playerEncounter |= PlayerEncounter.EnemyAttacked;
         compoundActions |= CompoundActions.EnemyAttacked;
+
+        if (currentHealth <= 0)
+        {
+            compoundActions = CompoundActions.EnemyDead;
+        }
     }
 
     void Update()
@@ -154,7 +116,7 @@ public class TracerEyes : MonoBehaviour
 
         if (compoundActions.HasFlag(CompoundActions.WallSeen))
         {
-            if (distanceToWall < 1)
+            if (distanceToWall < 0.9f)
             {
                 compoundActions |= CompoundActions.WallInTurnRange;
             }
@@ -306,7 +268,10 @@ public class TracerEyes : MonoBehaviour
 
         if (!playerNoticed)
         {
-            playerEncounter = PlayerEncounter.None;
+            compoundActions  &= ~CompoundActions.PlayerInFront;
+            compoundActions  &= ~CompoundActions.PlayerInAttackRange;
+            compoundActions  &= ~CompoundActions.PlayerBehind;
+            compoundActions  &= ~CompoundActions.PlayerNoticed;
         }
     }
     
@@ -318,35 +283,39 @@ public class TracerEyes : MonoBehaviour
         var distance = Vector2.Distance(PlayerPos, transform.position);
         var awareOfPlayer = false;
         
-        playerEncounter &= ~PlayerEncounter.PlayerInFront;
-        playerEncounter &= ~PlayerEncounter.PlayerInAttackRange;
-        playerEncounter &= ~PlayerEncounter.PlayerBehind;
-        playerEncounter &= ~PlayerEncounter.PlayerNoticed;
+        compoundActions  &= ~CompoundActions.PlayerInFront;
+        compoundActions  &= ~CompoundActions.PlayerInAttackRange;
+        compoundActions  &= ~CompoundActions.PlayerBehind;
+        compoundActions  &= ~CompoundActions.PlayerNoticed;
         
         if (seeing)
         {
-            playerEncounter |= PlayerEncounter.PlayerInFront;
-            playerEncounter |= PlayerEncounter.PlayerNoticed;
-            playerEncounter |= PlayerEncounter.AwareOfPlayer;
+            compoundActions |= CompoundActions.PlayerNoticed;
+            compoundActions |= CompoundActions.PlayerInFront;
+            compoundActions |= CompoundActions.AwareOfPlayer;
             
             if (distance < 2)
             {
-                playerEncounter |= PlayerEncounter.PlayerInAttackRange;
+                compoundActions |= CompoundActions.PlayerInAttackRange;
+            }
+            else
+            {
+                compoundActions  &= ~CompoundActions.PlayerInAttackRange;
             }
         }
         
         else
         {
-            if (playerEncounter.HasFlag(PlayerEncounter.EnemyAttacked))
+            if (compoundActions.HasFlag(CompoundActions.EnemyAttacked))
             {
-                playerEncounter |= PlayerEncounter.AwareOfPlayer;
-                playerEncounter |= PlayerEncounter.PlayerBehind;
-                playerEncounter |= PlayerEncounter.PlayerNoticed;
+                compoundActions |= CompoundActions.AwareOfPlayer;
+                compoundActions |= CompoundActions.PlayerBehind;
+                compoundActions |= CompoundActions.PlayerNoticed;
             }
                     
-            if (playerEncounter.HasFlag(PlayerEncounter.PlayerNoticed))
+            if (compoundActions.HasFlag(CompoundActions.PlayerNoticed))
             {
-                playerEncounter |= PlayerEncounter.PlayerBehind;
+                compoundActions |= CompoundActions.PlayerBehind;
             }
         }
     }

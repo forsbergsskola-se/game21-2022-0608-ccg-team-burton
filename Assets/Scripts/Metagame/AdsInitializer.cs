@@ -323,7 +323,7 @@ namespace Metagame
             
             var newCoinValue = Mathf.CeilToInt(Coins * rewardType);
             coinText.text = $"{newCoinValue}";
-            totalCoinText.text = $"{newCoinValue}";
+            totalCoinText.text = $"Total Coins : {newCoinValue}";
             Debug.Log($"Coins after Ad {newCoinValue}");
             var difference = newCoinValue - Coins;
             Debug.Log($"Difference = {difference}");

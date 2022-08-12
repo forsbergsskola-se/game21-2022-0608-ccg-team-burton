@@ -55,6 +55,7 @@ namespace NewGraph.NodeTypes.ActionNodes
 
             if (comp.HasFlag(CompoundActions.WallInTurnRange) && canTurn)
             {
+                Debug.Log("turn flag");
                 canTurn = false;
                 RotateEnemy();
             }
@@ -79,11 +80,11 @@ namespace NewGraph.NodeTypes.ActionNodes
             
             else
             {
-                if (!comp.HasFlag(CompoundActions.GroundSeen) || agent.enemyEyes.playerEncounter.HasFlag(PlayerEncounter.PlayerNoticed))
+                if (!comp.HasFlag(CompoundActions.GroundSeen) || comp.HasFlag(CompoundActions.PlayerNoticed))
                 {
                     return State.Success;
                 }
-                if (agent.enemyEyes.playerEncounter.HasFlag(PlayerEncounter.PlayerNoticed))
+                if (comp.HasFlag(CompoundActions.PlayerNoticed))
                 {
                     return State.Success;
                 }
