@@ -9,12 +9,13 @@ public class Bullet_ML : MonoBehaviour
     public Vector2 travelVector;
     [HideInInspector] public float lifetime = 20;
     private float timeAlive;
+    public int damageAmount;
     
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            col.gameObject.GetComponent<IDamageable>().ModifyHealth(-3);
+            col.gameObject.GetComponent<IDamageable>().ModifyHealth(-damageAmount);
             gameObject.SetActive(false);
         }
 

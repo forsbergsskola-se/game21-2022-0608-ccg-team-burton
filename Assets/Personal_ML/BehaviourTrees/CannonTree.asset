@@ -19,86 +19,9 @@ MonoBehaviour:
   state: 1
   nodes:
   - {fileID: 4822659091266032158}
-  - {fileID: 2386939477039861413}
-  - {fileID: 4661284146471531918}
---- !u!114 &2386939477039861413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95b3a67299306d946993bd31dc8e7e5a, type: 3}
-  m_Name: SelectNode
-  m_EditorClassIdentifier: 
-  state: 1
-  started: 0
-  guid: c9f32eda73d316541b6205c807a11be7
-  position: {x: 7.9999995, y: 204.9107}
-  blackboard:
-    moveToPos: {x: 0, y: 0, z: 0}
-    moveToObject: {fileID: 0}
-  agent:
-    enemyTransform: {fileID: 0}
-    currentDestination: {x: 0, y: 0, z: 0}
-    anim: {fileID: 0}
-    grid: {fileID: 0}
-    quitNode: 0
-    enemyEyes: {fileID: 0}
-    body: {fileID: 0}
-    keepWalking: 0
-    moveSpeed: 0
-    attackInterval: 0.3
-    compoundAction: 0
-    currentGround:
-      start: {x: 0, y: 0}
-      end: {x: 0, y: 0}
-      groundSize: 0
-  description: 
-  children:
-  - {fileID: 4661284146471531918}
-  choiceMade: 0
-  currentCommand: 0
-  nextState: 0
---- !u!114 &4661284146471531918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 612b99fd65224ce18112bdcf752da225, type: 3}
-  m_Name: AttackNode
-  m_EditorClassIdentifier: 
-  state: 1
-  started: 0
-  guid: 6b1813507e8aad3469692cbbe4efb9cc
-  position: {x: 16.000027, y: 403.99124}
-  blackboard:
-    moveToPos: {x: 0, y: 0, z: 0}
-    moveToObject: {fileID: 0}
-  agent:
-    enemyTransform: {fileID: 0}
-    currentDestination: {x: 0, y: 0, z: 0}
-    anim: {fileID: 0}
-    grid: {fileID: 0}
-    quitNode: 0
-    enemyEyes: {fileID: 0}
-    body: {fileID: 0}
-    keepWalking: 0
-    moveSpeed: 0
-    attackInterval: 0.3
-    compoundAction: 0
-    currentGround:
-      start: {x: 0, y: 0}
-      end: {x: 0, y: 0}
-      groundSize: 0
-  description: 
-  stateType: 0
+  - {fileID: 6157568167314772155}
+  - {fileID: 7988249518847532053}
+  - {fileID: 5422447880677311173}
 --- !u!114 &4822659091266032158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,4 +58,118 @@ MonoBehaviour:
       end: {x: 0, y: 0}
       groundSize: 0
   description: 
-  child: {fileID: 2386939477039861413}
+  child: {fileID: 6157568167314772155}
+--- !u!114 &5422447880677311173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b387e0744a9e4e8991570596eb5a9219, type: 3}
+  m_Name: RangedAttackNode
+  m_EditorClassIdentifier: 
+  state: 1
+  started: 0
+  guid: 36294308f43c80141b13bf28a17f1b20
+  position: {x: -118.800064, y: 518.4001}
+  blackboard:
+    moveToPos: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  agent:
+    enemyTransform: {fileID: 0}
+    currentDestination: {x: 0, y: 0, z: 0}
+    anim: {fileID: 0}
+    grid: {fileID: 0}
+    quitNode: 0
+    enemyEyes: {fileID: 0}
+    body: {fileID: 0}
+    keepWalking: 0
+    moveSpeed: 0
+    attackInterval: 0.3
+    compoundAction: 0
+    currentGround:
+      start: {x: 0, y: 0}
+      end: {x: 0, y: 0}
+      groundSize: 0
+  description: 
+  stateType: 0
+--- !u!114 &6157568167314772155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e164da33561419c8312d2e1d7179d6d, type: 3}
+  m_Name: CannonSelectNode
+  m_EditorClassIdentifier: 
+  state: 1
+  started: 0
+  guid: 96c99bdda9133b946a5cfb71c9ff6edc
+  position: {x: -26.487844, y: 246.84848}
+  blackboard:
+    moveToPos: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  agent:
+    enemyTransform: {fileID: 0}
+    currentDestination: {x: 0, y: 0, z: 0}
+    anim: {fileID: 0}
+    grid: {fileID: 0}
+    quitNode: 0
+    enemyEyes: {fileID: 0}
+    body: {fileID: 0}
+    keepWalking: 0
+    moveSpeed: 0
+    attackInterval: 0.3
+    compoundAction: 0
+    currentGround:
+      start: {x: 0, y: 0}
+      end: {x: 0, y: 0}
+      groundSize: 0
+  description: 
+  children:
+  - {fileID: 7988249518847532053}
+  - {fileID: 5422447880677311173}
+  currentCommand: 0
+--- !u!114 &7988249518847532053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34091028c11b4184811e6eddd9e85fba, type: 3}
+  m_Name: IdleNode
+  m_EditorClassIdentifier: 
+  state: 1
+  started: 0
+  guid: 5a42197ac74fbd646b2db23219d886a0
+  position: {x: 105.600006, y: 510.15384}
+  blackboard:
+    moveToPos: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  agent:
+    enemyTransform: {fileID: 0}
+    currentDestination: {x: 0, y: 0, z: 0}
+    anim: {fileID: 0}
+    grid: {fileID: 0}
+    quitNode: 0
+    enemyEyes: {fileID: 0}
+    body: {fileID: 0}
+    keepWalking: 0
+    moveSpeed: 0
+    attackInterval: 0.3
+    compoundAction: 0
+    currentGround:
+      start: {x: 0, y: 0}
+      end: {x: 0, y: 0}
+      groundSize: 0
+  description: 
+  stateType: 0

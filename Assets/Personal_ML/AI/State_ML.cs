@@ -81,20 +81,7 @@ public class Idle : State_ML
     
     public override void Update()
     {
-        time += Time.deltaTime * Random.Range(0, 11);
-        if (time > 10)
-        {
-            if ((int) EnemyVarsMl.GetEnemyType < 2)
-            {
-                NextStateMl = new Patrol(EnemyVarsMl);
-            }
-            else
-            {
-                NextStateMl = new Sentry(EnemyVarsMl);
-            }
-
-            Stage = EVENT.Exit;
-        }
+        
     }
 
     public override void Exit()
@@ -235,22 +222,6 @@ public class Attack : State_ML
 
     public override void Update()
     {
-        
-
-        if (attackDelay >= EnemyVarsMl.GetAttackInterval)
-        {
-            EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("Enemy_Attack")); //Should I put attack animation here?
-
-            if (EnemyVarsMl.GetEnemyType == EnemyType.Ranged)
-            {
-                AssetPool.RequestEffectStatic(EffectType.FireBall, EnemyVarsMl.firePoint.position, EnemyVarsMl.enemyRef.transform.right);
-            }
-
-            
-            attackDelay -= EnemyVarsMl.GetAttackInterval;
-        }
-        
-       
 
         attackDelay +=  Time.deltaTime;
     }
@@ -346,12 +317,6 @@ public class PlatformJump : State_ML
         {
             body.AddForce(EnemyVarsMl.tracerEyes.EstimatedJumpForce * new Vector2(1f, 5.5f), ForceMode2D.Impulse);
             jumped = true;
-        }
-        
-        if (EnemyVarsMl.tracerEyes.GroundSeen && jumped)
-        {
-            Stage = EVENT.Exit;
-            NextStateMl = new Idle(EnemyVarsMl);
         }
 
     }
