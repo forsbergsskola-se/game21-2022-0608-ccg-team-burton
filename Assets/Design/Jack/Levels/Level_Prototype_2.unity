@@ -1145,12 +1145,12 @@ PrefabInstance:
         type: 3}
       propertyPath: CoinText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 812601043}
     - target: {fileID: 2604721245304753354, guid: b9aa7a6f3e6fab8449664cdada4bd995,
         type: 3}
       propertyPath: WinScreen
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1186290163}
     - target: {fileID: 2604721245304753354, guid: b9aa7a6f3e6fab8449664cdada4bd995,
         type: 3}
       propertyPath: PlayerHealth
@@ -1165,7 +1165,7 @@ PrefabInstance:
         type: 3}
       propertyPath: TotalCoinText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 388092759}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: b9aa7a6f3e6fab8449664cdada4bd995, type: 3}
@@ -2012,6 +2012,18 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 06932baa51403d543857f2b7958cdf27, type: 3}
+--- !u!114 &388092759 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2002920840563482947, guid: 017552a38a6d0df448d65fee96f65c91,
+    type: 3}
+  m_PrefabInstance: {fileID: 812601042}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &393692511 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9171843561555806483, guid: 2ce3c56b6e245884787a8420c15c0cf2,
@@ -10614,6 +10626,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9171843561555806483, guid: 2ce3c56b6e245884787a8420c15c0cf2,
     type: 3}
   m_PrefabInstance: {fileID: 227093586}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1186290163 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2002920839976310751, guid: 017552a38a6d0df448d65fee96f65c91,
+    type: 3}
+  m_PrefabInstance: {fileID: 812601042}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1209810248 stripped
 Transform:
