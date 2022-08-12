@@ -10,17 +10,14 @@ public class UnlockLevel : MonoBehaviour
     public Image[] Stars;
 
     public Sprite fullStar;
-    // SavingWrapper wrapper;
-    //
-    // private void Start()
-    // {
-    //     wrapper = FindObjectOfType<SavingWrapper>();
-    // }
+    
     private void Update()
     {
         UpdateLevelImage(); 
         UpdateLevelStatus();
     } 
+    
+    
 
     private void UpdateLevelStatus()
     {

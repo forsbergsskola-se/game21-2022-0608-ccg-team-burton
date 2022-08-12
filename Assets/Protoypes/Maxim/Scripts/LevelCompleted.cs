@@ -23,7 +23,7 @@ public class LevelCompleted : MonoBehaviour
         if (collision.tag == "Player")
         {
             currentCoins += coinBonus;
-            
+
             //Save coins to inventory
             PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) + currentCoins);
 
@@ -72,8 +72,8 @@ public class LevelCompleted : MonoBehaviour
         currentStarsNum = starsNum;
         if (currentStarsNum > PlayerPrefs.GetInt("Lv" + levelIndex))
         {
-            PlayerPrefs.SetInt("Lv" + levelIndex, starsNum );
-            Debug.Log("saved");
+            PlayerPrefs.SetInt("Lv" + levelIndex, starsNum);
+            Debug.Log("Saved as " + PlayerPrefs.GetInt("Lv" + levelIndex, starsNum).ToString());
         }
         
     }
