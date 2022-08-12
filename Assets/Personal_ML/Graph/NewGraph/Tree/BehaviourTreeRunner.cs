@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -27,14 +28,15 @@ public class BehaviourTreeRunner : MonoBehaviour
 
     private void Setup()
     {
-        var grid = GameObject.FindWithTag("LevelGrid").GetComponent<LevelGrid>();
+        var grid = GameObject.FindGameObjectsWithTag("LevelGrid")
+            .OrderBy(x => Vector2.Distance(x.transform.position, transform.position))
+            .ToArray()[0].GetComponent<LevelGrid>();
 
         var attackPoint = GetComponentInChildren<Transform>();
         tree = tree.Clone();
         tree.Bind(new AiAgent()
         {
             enemyTransform = gameObject.transform,
-            //grid = grid,
             anim = GetComponent<Animator>(),
             enemyEyes = GetComponentInChildren<TracerEyes>(),
             body = GetComponent<Rigidbody2D>(),
