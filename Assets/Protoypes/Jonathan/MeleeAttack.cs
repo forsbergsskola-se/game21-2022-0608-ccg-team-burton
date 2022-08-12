@@ -5,16 +5,22 @@ using UnityEngine;
 
 public class MeleeAttack : MonoBehaviour
 {
+ //PRIVATE VARIABLES
  [SerializeField] Combat _combat;
+ private float _finalAttackDelay;
  [SerializeField] float _attackDelaySec = 2f;
  CommandContainer _commandContainer;
  private SoundMananger _soundMananger;
-
  bool _allowAttack = true;
 
  void Awake(){
   _commandContainer = FindObjectOfType<CommandContainer>();
 
+ }
+
+ private void Start()
+ {
+  _finalAttackDelay = _attackDelaySec / (1+(PlayerPrefs.GetFloat("buequipment.head.attributevalue")/100));
  }
 
  private void Update()
@@ -31,7 +37,7 @@ public class MeleeAttack : MonoBehaviour
   _combat.MeleeAttack();
 
   _allowAttack = false;
-  yield return new WaitForSeconds(_attackDelaySec);
+  yield return new WaitForSeconds(_finalAttackDelay);
   _allowAttack = true;
  }
 }
