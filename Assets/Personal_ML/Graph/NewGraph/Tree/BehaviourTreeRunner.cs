@@ -10,9 +10,12 @@ public class BehaviourTreeRunner : MonoBehaviour
     [HideInInspector] public bool readyToRun;
 
     [Header("Enemy Attributes")] 
-    [SerializeField, Range(0.2f, 2)]private float attackInterval;
+    [SerializeField, Range(0.5f, 4)]private float attackInterval;
     [SerializeField, Range(1f, 5)]private float baseMoveSpeed;
     [SerializeField, Range(5, 10)]private float pursueMoveSpeed;
+
+    [Header("Ranged specific")]
+    [SerializeField] private GameObject projectile;
     
     public Action<Action<CompoundActions>> CheckForJump;
     
@@ -25,6 +28,8 @@ public class BehaviourTreeRunner : MonoBehaviour
     private void Setup()
     {
         var grid = GameObject.FindWithTag("LevelGrid").GetComponent<LevelGrid>();
+
+        var attackPoint = GetComponentInChildren<Transform>();
         tree = tree.Clone();
         tree.Bind(new AiAgent()
         {
@@ -36,7 +41,9 @@ public class BehaviourTreeRunner : MonoBehaviour
             keepWalking = true,
             attackInterval = attackInterval,
             moveSpeed = baseMoveSpeed,
-            CheckForJump = CheckForJump
+            CheckForJump = CheckForJump,
+            attackPoint = attackPoint,
+            projectile = projectile
         });
         readyToRun = true;
     }
