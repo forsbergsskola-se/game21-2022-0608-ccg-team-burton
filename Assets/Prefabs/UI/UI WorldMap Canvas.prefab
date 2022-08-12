@@ -1149,6 +1149,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62c077f746464248b08aa479048ce37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _levelSlots: []
+  _inventorySlots: []
+  _library: {fileID: 0}
+  _inventoryItem: {fileID: 0}
+  _inventorySlotParentTransform: {fileID: 0}
 --- !u!1 &622856384
 GameObject:
   m_ObjectHideFlags: 0
@@ -4048,7 +4053,7 @@ GameObject:
   - component: {fileID: 2827410447164614050}
   - component: {fileID: 7038996786895201128}
   m_Layer: 5
-  m_Name: GemSlot2
+  m_Name: InvSlot2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4206,7 +4211,7 @@ GameObject:
   - component: {fileID: 2490286534750573905}
   - component: {fileID: 3177458558313959040}
   m_Layer: 5
-  m_Name: GemSlot1
+  m_Name: InvSlot1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4336,7 +4341,7 @@ GameObject:
   - component: {fileID: 6895586373979600827}
   - component: {fileID: 4874097427445012325}
   m_Layer: 5
-  m_Name: GemSlot3
+  m_Name: InvSlot3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
