@@ -28,13 +28,9 @@ public class LevelCompleted : MonoBehaviour
             PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(),
                 PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) + currentCoins);
 
-            if (!collision.CompareTag("Player")) return;
-            currentCoins += CoinBonus;
+
             ItemCollector._coinCounter += CoinBonus;
 
-            //Save coins to inventory
-            PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(),
-                PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) + currentCoins);
 
             WinScreen.SetActive(true);
 
@@ -77,7 +73,7 @@ public class LevelCompleted : MonoBehaviour
         {
             currentStarsNum = starsNum;
 
-            if (currentStarsNum <= PlayerPrefs.GetInt("Lv" + levelIndex)) return;
+           
 
             if (currentStarsNum > PlayerPrefs.GetInt("Lv" + levelIndex))
             {
@@ -85,8 +81,6 @@ public class LevelCompleted : MonoBehaviour
                 Debug.Log("Saved as " + PlayerPrefs.GetInt("Lv" + levelIndex, starsNum).ToString());
             }
 
-            PlayerPrefs.SetInt("Lv" + levelIndex, starsNum);
-            Debug.Log("saved");
         }
 
         private void UpdateCoinText(int value) => CoinText.text = $"{value}";
