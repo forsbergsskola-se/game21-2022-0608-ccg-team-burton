@@ -18,19 +18,25 @@ namespace NewGraph.NodeTypes.ActionNodes
 
         public override State OnUpdate()
         {
-            var playerEncounter = agent.enemyEyes.compoundActions;
+            var comp = agent.enemyEyes.compoundActions;
+            
+            if (comp.HasFlag(CompoundActions.EnemyDead))
+            {
+                return State.Success;
+            }
+
             if (timeSinceAttack >= agent.attackInterval)
             {
                 agent.anim.SetTrigger(Animator.StringToHash("Enemy_Attack"));
                 timeSinceAttack -= agent.attackInterval;
             }
 
-            if (!playerEncounter.HasFlag(CompoundActions.PlayerInAttackRange))
+            if (!comp.HasFlag(CompoundActions.PlayerInAttackRange))
             {
                 return State.Success;
             }
             
-            if (playerEncounter.HasFlag(CompoundActions.PlayerBehind))
+            if (comp.HasFlag(CompoundActions.PlayerBehind))
             {
                 return State.Success;
             }

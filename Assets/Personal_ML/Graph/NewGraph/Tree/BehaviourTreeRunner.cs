@@ -43,7 +43,8 @@ public class BehaviourTreeRunner : MonoBehaviour
             moveSpeed = baseMoveSpeed,
             CheckForJump = CheckForJump,
             attackPoint = attackPoint,
-            projectile = projectile
+            projectile = projectile,
+            grid = grid
         });
         readyToRun = true;
     }

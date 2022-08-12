@@ -10,6 +10,7 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         public override void OnStart()
         {
+            Debug.Log("start walking");
             agent.anim.SetBool(Animator.StringToHash("Enemy_Walk2"), true);
             waitForExit = 0;
             canTurn = true;
@@ -46,16 +47,20 @@ namespace NewGraph.NodeTypes.ActionNodes
 
         public override State OnUpdate()
         {
+            var comp = agent.enemyEyes.compoundActions;
+            if (comp.HasFlag(CompoundActions.EnemyDead))
+            {
+                return State.Success;
+            }
+
             waitForExit += Time.deltaTime;
             if (waitForExit < 0.5f) return State.Update;
 
-            var comp = agent.enemyEyes.compoundActions;
-            
+
             agent.enemyTransform.position += agent.enemyTransform.right * (Time.deltaTime * agent.moveSpeed);
 
             if (comp.HasFlag(CompoundActions.WallInTurnRange) && canTurn)
             {
-                Debug.Log("turn flag");
                 canTurn = false;
                 RotateEnemy();
             }

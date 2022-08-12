@@ -23,14 +23,56 @@ public class SelectNode : CompositeNode
     {
         SetPossibleNodes();
         CheckOptions();
-        choiceMade = true;
-        currentCommand = CurrentCommand.MoveToPosition;
+      
     }
     
     private void CheckOptions()
     {
-        agent.keepWalking = true;
+        if (!agent.enemyEyes.compoundActions.HasFlag(CompoundActions.GroundSeen))
+        {
+            var ground = agent.grid
+                .GetCurrentGround(agent.enemyTransform.position + 
+                                  new Vector3(agent.enemyTransform.right.x * 7,0), 3);
+            if (ground == null)
+            {
+                agent.enemyTransform.Rotate(new Vector3(0,1,0), 180);
+                GetTarget();
+            }
+        }
+
+        
+        
+        else
+        {
+            GetTarget();
+        }
+
+        _choiceMade = true;
+    }
+
+    
+    
+    
+    private void GetTarget()
+    {
+        agent.keepWalking = false;
+        var ground = agent.grid.GetCurrentGround(agent.enemyTransform.position, 4);
+
+        var dir = agent.enemyTransform.right.x > 0;
+        
+        agent.currentDestination = dir ? ground.end : ground.start;
+        currentCommand = CurrentCommand.MoveToPosition;
+    }
+    
+    private void Save()
+    {
         var eyeComp = agent.enemyEyes.compoundActions;
+        
+        if (eyeComp.HasFlag(CompoundActions.EnemyDead))
+        {
+            choiceMade = false;
+            return;
+        }
         
         if (!eyeComp.HasFlag(CompoundActions.GroundSeen))
         {
@@ -59,11 +101,9 @@ public class SelectNode : CompositeNode
         {
             currentCommand = CurrentCommand.MoveToPosition;
         }
-        
-        Debug.Log(eyeComp);
         choiceMade = true;
     }
-
+    
 
     private void PlayerStuff()
     {
@@ -137,7 +177,7 @@ public class SelectNode : CompositeNode
     {
         if(!choiceMade) CheckOptions();
 
-        if (currentCommand == CurrentCommand.None || !choiceMade) return State.Update;
+       // if (currentCommand == CurrentCommand.None || !choiceMade) return State.Update;
         
         _currentChoice = ownedNodes[currentCommand];
 

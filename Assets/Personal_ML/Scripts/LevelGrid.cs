@@ -55,16 +55,17 @@ public class WalkableGround
     public Vector2 start;
     public Vector2 end;
     public float groundSize;
+    public string guid;
 }
 
 public class LevelGrid : MonoBehaviour
 {
     [Header("Input values")]
     [SerializeField] private Vector2 cubeSize;
-    [SerializeField] private Vector2 numberCubes;
     [Range(0, 1),SerializeField] private float delayUpdate;
-    [SerializeField] private LevelMemory memory;
     [SerializeField] private GameObject spawnablePointOfInterest;
+    [SerializeField, Range(1, 20)] private int numberCubesX;
+    [SerializeField, Range(1, 20)] private int numberCubesY;
     
     private List<List<CubeFacts>> _gridList = new();
     private Vector2 _min;
@@ -75,7 +76,7 @@ public class LevelGrid : MonoBehaviour
 
     private List<RaycastHit2D> _hitList = new();
 
-    public List<WalkableGround> walkableGround = new();
+    [HideInInspector] public List<WalkableGround> walkableGround = new();
 
     private float _maxJumpDistance = 6f;
 
@@ -90,21 +91,52 @@ public class LevelGrid : MonoBehaviour
         ScanAll();
     }
 
+    private void ScanForEnemies(Vector2 pos)
+    {
+        var enemyMask = 1 << 7;
+        var result = Physics2D.BoxCastAll(pos, 
+            cubeSize, 0, transform.up, cubeSize.y / 2, enemyMask);
+
+        foreach (var e in result)
+        {
+            e.collider.transform.gameObject.GetComponentInChildren<TracerEyes>().grid = this;
+        }
+    }
+
     private void ScanAll()
     {
-        for (var i = 0; i < numberCubes.y; i++)
+        for (var i = 0; i < numberCubesY; i++)
         {
-            for (var j = 0; j < numberCubes.x; j++)
+            for (var j = 0; j < numberCubesX; j++)
             {
                 var cube = _gridList[i][j];
                 var start = cube.location + new Vector2(-1,-1f) * new Vector2(cubeSize.x / 2, cubeSize.y / 2);
                 AdvancedTrace(new Vector2(i,j));
+                
+                ScanForEnemies(cube.location);
             }
         }
         SpawnPointsOfInterest();
     }
 
+    public WalkableGround GetCurrentGround(Vector2 currentPos, float yTolerance)
+    {
+        foreach (var w in walkableGround)
+        {
+            var diff = Mathf.Abs(currentPos.y - w.start.y);
 
+            if (currentPos.x > w.start.x && currentPos.x < w.end.x)
+            {
+                if (diff < yTolerance)
+                {
+                    return w;
+                }
+            }
+        }
+
+        return null;
+    }
+    
     private void SpawnPointsOfInterest()
     {
         foreach (var p in walkableGround)
@@ -168,7 +200,7 @@ public class LevelGrid : MonoBehaviour
         
         for (var i = 0; i < numberTraces; i++)
         {
-            var aHit = SingleTrace(topCorner, new Vector2(0,-1), cubeSize.y * numberCubes.y);
+            var aHit = SingleTrace(topCorner, new Vector2(0,-1), cubeSize.y * numberCubesY);
             
             if (aHit)
             {
@@ -224,10 +256,10 @@ public class LevelGrid : MonoBehaviour
     
     private void SetNewList()
     {
-        for (var i = 0; i < numberCubes.y; i++)
+        for (var i = 0; i < numberCubesY; i++)
         {
-            var newList = new List<CubeFacts>((int)numberCubes.x);
-            for (var j = 0; j < numberCubes.x; j++)
+            var newList = new List<CubeFacts>((int)numberCubesX);
+            for (var j = 0; j < numberCubesX; j++)
             {
                 var next = transform.position + new Vector3(j * cubeSize.x ,i * cubeSize.y);
                 var minMax = GetMinMax(next, cubeSize);
@@ -258,9 +290,9 @@ public class LevelGrid : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        for (var i = 0; i < numberCubes.y; i++)
+        for (var i = 0; i < numberCubesY; i++)
         {
-            for (var j = 0; j < numberCubes.x; j++)
+            for (var j = 0; j < numberCubesX; j++)
             {
                 var next = transform.position + new Vector3(j * cubeSize.x ,i * cubeSize.y);
                 Gizmos.DrawWireCube(next, new Vector3(cubeSize.x ,cubeSize.y));
@@ -269,9 +301,9 @@ public class LevelGrid : MonoBehaviour
 
         if (!Application.isPlaying) return;
         
-        for (var i = 0; i < numberCubes.y; i++)
+        for (var i = 0; i < numberCubesY; i++)
         {
-            for (var j = 0; j < numberCubes.x; j++)
+            for (var j = 0; j < numberCubesX; j++)
             {
                 var cube = _gridList[i][j];
 
