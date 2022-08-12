@@ -13,7 +13,7 @@ public class SelectNode : CompositeNode
     [HideInInspector] public CurrentCommand currentCommand;
     [HideInInspector] public STATE nextState;
     private Dictionary<CurrentCommand, BaseNode> ownedNodes = new();
-    
+    private BaseNode _currentChoice;
     private CubeFacts _current;
     private bool _plusMinus;
 
@@ -29,62 +29,70 @@ public class SelectNode : CompositeNode
     
     private void CheckOptions()
     {
-        var comp = CompoundActions.None;
-        
-        
-        agent.CheckForJump?.Invoke(x =>
-        {
-            comp = x;
-        });
-        
-        
-        Debug.Log("Checking options");
         agent.keepWalking = true;
-        if (!agent.enemyEyes.GroundSeen)
+        var eyeComp = agent.enemyEyes.compoundActions;
+        
+        if (!eyeComp.HasFlag(CompoundActions.GroundSeen))
         {
-            Debug.Log(agent.enemyEyes.compoundActions);
-            if (agent.enemyEyes.compoundActions.HasFlag(CompoundActions.CantJump))
+            agent.CheckForJump?.Invoke(x =>
             {
-                currentCommand = CurrentCommand.MoveToPosition;
-                choiceMade = true;
+                agent.compoundAction = x;
+            });
+            
+            if (eyeComp.HasFlag(CompoundActions.CanJump))
+            {
+                currentCommand = CurrentCommand.Jump;
+            }
+
+            else
+            {
+                currentCommand = CurrentCommand.MoveToPosition;    
+            }
+        }
+
+        else if (eyeComp.HasFlag(CompoundActions.PlayerNoticed))
+        {
+            PlayerStuff();
+        }
+        
+        else
+        {
+            currentCommand = CurrentCommand.MoveToPosition;
+        }
+        
+        Debug.Log(eyeComp);
+        choiceMade = true;
+    }
+
+
+    private void PlayerStuff()
+    {
+        agent.currentDestination = agent.enemyEyes.PlayerPos;
+        var playerEncounter = agent.enemyEyes.compoundActions;
+        var comp = agent.enemyEyes.compoundActions;
+        
+        if (playerEncounter.HasFlag(CompoundActions.PlayerInFront))
+        {
+            if (playerEncounter.HasFlag(CompoundActions.PlayerInAttackRange))
+            {
+                currentCommand = CurrentCommand.Attack;
                 return;
             }
 
-            currentCommand = CurrentCommand.Jump;
-            choiceMade = true;
+            agent.keepWalking = false;
+            currentCommand = CurrentCommand.MoveToPosition;
             return;
         }
         
-        agent.currentDestination = agent.enemyEyes.PlayerPos;
-        var playerEncounter = agent.enemyEyes.playerEncounter;
-
-        if (playerEncounter.HasFlag(PlayerEncounter.PlayerNoticed))
+        if (playerEncounter.HasFlag(CompoundActions.PlayerBehind))
         {
-            if (playerEncounter.HasFlag(PlayerEncounter.PlayerInFront))
-            {
-                if (playerEncounter.HasFlag(PlayerEncounter.PlayerInAttackRange))
-                {
-                    currentCommand = CurrentCommand.Attack;
-                    return;
-                }
-
-                agent.keepWalking = false;
-                currentCommand = CurrentCommand.MoveToPosition;
-                return;
-            }
-            
-            if (playerEncounter.HasFlag(PlayerEncounter.PlayerBehind))
-            {
-                agent.keepWalking = false;
-                currentCommand = CurrentCommand.MoveToPosition;
-                return;
-            }
+            agent.keepWalking = false;
+            currentCommand = CurrentCommand.MoveToPosition;
+            return;
         }
         
-        currentCommand = CurrentCommand.MoveToPosition;
-     //   Debug.Log(currentCommand);
     }
-
+    
     private void SetPossibleNodes()
     {
         foreach (var n in children)
@@ -127,12 +135,13 @@ public class SelectNode : CompositeNode
     
     public override State OnUpdate()
     {
-        CheckOptions();
+        if(!choiceMade) CheckOptions();
+
         if (currentCommand == CurrentCommand.None || !choiceMade) return State.Update;
         
-        var child = ownedNodes[currentCommand];
+        _currentChoice = ownedNodes[currentCommand];
 
-        switch (child.Update())
+        switch (_currentChoice.Update())
         {
             case State.Failure:
                 return State.Failure;

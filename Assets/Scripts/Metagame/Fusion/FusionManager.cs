@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class FusionManager : MonoBehaviour
 {
-    [SerializeField] private PlayOneShotSound sound;
+    [SerializeField] private PlayOneShotSound _soundOneShot;
 
     
     public void InitiateUpgrade(EquipmentSO equipmentData, MaterialItem upgradeMaterial)
@@ -12,14 +12,11 @@ public class FusionManager : MonoBehaviour
         if (PlayerPrefs.GetInt(PlayerPrefsKeys.NeededUpgradeMaterial.ToString()) > PlayerPrefs.GetInt(upgradeMaterial.GetItemID()))
             return;
         
-            Debug.Log("Upgrading!");
-            
             CalculateNewMaterialBalance(upgradeMaterial);
             UpgradeRarity(equipmentData);
 
             UpgradeAttribute(equipmentData);
-            sound.PlaySound();
-
+            _soundOneShot.PlaySound();
     }
 
     private void UpgradeAttribute(EquipmentSO equipmentData)
@@ -27,25 +24,25 @@ public class FusionManager : MonoBehaviour
  
         if (equipmentData.ID.Contains("head"))
         {
-            var calculateNewAttribute = (int) GetCurrentRarity(equipmentData) * 5;
-            PlayerPrefs.SetFloat(equipmentData.AttributeValueID, calculateNewAttribute);
+            var newAttributeValue = (int) GetCurrentRarity(equipmentData) * equipmentData.AttributeUpgradeStepSize;
+            PlayerPrefs.SetFloat(equipmentData.AttributeValueID, newAttributeValue);
             
         } 
         else if (equipmentData.ID.Contains("chest"))
         {
-            var calculateNewAttribute =   (int) GetCurrentRarity(equipmentData);
-            PlayerPrefs.SetFloat(equipmentData.AttributeValueID, calculateNewAttribute);
+            var newAttributeValue =   (int) GetCurrentRarity(equipmentData)*equipmentData.AttributeUpgradeStepSize;
+            PlayerPrefs.SetFloat(equipmentData.AttributeValueID, newAttributeValue);
             
         } 
         else if (equipmentData.ID.Contains("legs"))
         {
-            var calculateNewAttribute =(int) GetCurrentRarity(equipmentData) * 5;
-            PlayerPrefs.SetFloat(equipmentData.AttributeValueID, calculateNewAttribute);
+            var newAttributeValue =(int) GetCurrentRarity(equipmentData) * equipmentData.AttributeUpgradeStepSize;
+            PlayerPrefs.SetFloat(equipmentData.AttributeValueID, newAttributeValue);
         } 
         else if (equipmentData.ID.Contains("weapon"))
         {
-            var calculateNewAttribute = 10 + (int) GetCurrentRarity(equipmentData)*5;
-            PlayerPrefs.SetFloat(equipmentData.AttributeValueID, calculateNewAttribute);
+            var newAttributeValue = 10 + (int) GetCurrentRarity(equipmentData)*equipmentData.AttributeUpgradeStepSize;
+            PlayerPrefs.SetFloat(equipmentData.AttributeValueID, newAttributeValue);
         }
     }
 
@@ -66,7 +63,7 @@ public class FusionManager : MonoBehaviour
 
     private void CalculateNewMaterialBalance(MaterialItem upgradeMaterial)
     {
-        var newBalance = PlayerPrefs.GetInt(upgradeMaterial.GetItemID()) - PlayerPrefs.GetInt(PlayerPrefsKeys.NeededUpgradeMaterial.ToString());
-        PlayerPrefs.SetInt(upgradeMaterial.GetItemID(), newBalance);
+        var newMaterialCount = PlayerPrefs.GetInt(upgradeMaterial.GetItemID()) - PlayerPrefs.GetInt(PlayerPrefsKeys.NeededUpgradeMaterial.ToString());
+        PlayerPrefs.SetInt(upgradeMaterial.GetItemID(), newMaterialCount);
     }
 }

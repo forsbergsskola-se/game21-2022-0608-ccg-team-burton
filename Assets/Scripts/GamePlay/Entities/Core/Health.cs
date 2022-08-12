@@ -45,7 +45,8 @@ namespace Entity
 
         private void Start()
         {
-            CurrentHealth = _health;
+            var equipmentHealthModifier = PlayerPrefs.GetFloat("buequipment.chest.attributevalue");
+            CurrentHealth = _health+(int)equipmentHealthModifier;
         }
 
         public void ModifyHealth(int healthValueChange)
@@ -70,11 +71,9 @@ namespace Entity
                 
             }
         
-            Debug.Log($"New health for {name}: {CurrentHealth}");
 
             if (CurrentHealth <= 0)
             {
-                Debug.Log("Animtrigger");
                 _animator.SetTrigger(Animator.StringToHash("Dead"));
                 StartCoroutine(StartDeath());
             }
@@ -102,7 +101,7 @@ namespace Entity
             }
             gameObject.SetActive(false);
             
-            playerDies.Invoke();
+            playerDies?.Invoke();
 
             IsDead = true;
 

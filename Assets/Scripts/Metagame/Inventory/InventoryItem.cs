@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
-
-/// <summary>
-/// A ScriptableObject that represents any item that can be put in an
-/// inventory.
-/// </summary>
-/// <remarks>
-/// In practice, you are likely to use a subclass such as `ActionItem` or
-/// `EquipableItem`.
-/// </remarks>
 public class InventoryItem : ScriptableObject
 {
     // CONFIG DATA
@@ -24,68 +12,16 @@ public class InventoryItem : ScriptableObject
     [Tooltip("The UI icon to represent this item in the inventory.")]
     [SerializeField] Sprite icon = null;
 
-
-    static Dictionary<string, InventoryItem> itemLookupCache;
-
-    // PUBLIC
-
-    /// <summary>
-    /// Get the inventory item instance from its UUID.
-    /// </summary>
-    /// <param name="itemID">
-    /// String UUID that persists between game instances.
-    /// </param>
-    /// <returns>
-    /// Inventory item instance corresponding to the ID.
-    /// </returns>
-    public static InventoryItem GetFromID(string itemID)
-    {
-        if (itemLookupCache == null)
-        {
-            itemLookupCache = new Dictionary<string, InventoryItem>();
-            var itemList = Resources.LoadAll<InventoryItem>("");
-            foreach (var item in itemList)
-            {
-                if (itemLookupCache.ContainsKey(item.itemID))
-                {
-                    Debug.LogError(string.Format("there is a duplicate Team5.UI.InventorySystem ID for objects: {0} and {1}", itemLookupCache[item.itemID], item));
-                    continue;
-                }
-
-                itemLookupCache[item.itemID] = item;
-            }
-        }
-
-        if (itemID == null || !itemLookupCache.ContainsKey(itemID)) return null;
-        return itemLookupCache[itemID];
-    }
-
-    /// <summary>
-    /// Spawn the pickup gameobject into the world.
-    /// </summary>
-    /// <param name="position">Where to spawn the pickup.</param>
-    /// <returns>Reference to the pickup object spawned.</returns>
-   
-
     public Sprite GetIcon()
     {
         return icon;
     }
-
     public string GetItemID()
     {
         return itemID;
     }
-
-
     public string GetDisplayName()
     {
         return displayName;
     }
-
-    public string GetDescription()
-    {
-        return description;
-    }
-    
 }

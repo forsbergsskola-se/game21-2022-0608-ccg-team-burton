@@ -9,16 +9,19 @@ public class FusionScreenUIHandler : MonoBehaviour
     [HideInInspector] public EquipmentSO EquipmentSoData;
     [HideInInspector] public MaterialItem UpgradeMaterialSoData;
 
-    [SerializeField] private FusionManager fusionManager;
+    
+    
+    //PRIVATE VARIABLES
+    [SerializeField] private FusionManager _fusionManager;
     
     //UI FIELDS
-    [SerializeField] private GameObject equipmentIconGameObject;
-    [SerializeField] private TMP_Text rarityText;
-    [SerializeField] private TMP_Text attributeText;
-    [SerializeField] private GameObject upgradeMaterialsIconGameObject;
-    [SerializeField] private TMP_Text neededMaterialText;
-    [SerializeField] private TMP_Text haveMaterialText;
-    [SerializeField] private GameObject upgradeButton;
+    [SerializeField] private GameObject _equipmentIconGameObject;
+    [SerializeField] private TMP_Text _rarityText;
+    [SerializeField] private TMP_Text _attributeText;
+    [SerializeField] private GameObject _upgradeMaterialsIconGameObject;
+    [SerializeField] private TMP_Text _neededMaterialText;
+    [SerializeField] private TMP_Text _haveMaterialText;
+    [SerializeField] private GameObject _upgradeButton;
 
     
     private void OnEnable()
@@ -26,6 +29,13 @@ public class FusionScreenUIHandler : MonoBehaviour
         UpdateUpgradeUI();
     }
 
+    public void PressUpgradeButton()
+    {
+        _fusionManager.InitiateUpgrade(EquipmentSoData,UpgradeMaterialSoData);
+        OnInventoryChange?.Invoke();
+        UpdateUpgradeUI();
+    }
+    
     private void UpdateUpgradeUI()
     {
         CalculateNeededMaterials();
@@ -42,48 +52,36 @@ public class FusionScreenUIHandler : MonoBehaviour
     }
     private void UpdateUIElements()
     {
-        equipmentIconGameObject.GetComponent<Image>().sprite = EquipmentSoData.Icon;
-        rarityText.SetText("Rarity: "+PlayerPrefs.GetString(EquipmentSoData.RarityID));
+        _equipmentIconGameObject.GetComponent<Image>().sprite = EquipmentSoData.Icon;
+        _rarityText.SetText("Rarity: "+PlayerPrefs.GetString(EquipmentSoData.RarityID));
         
         SetAttributeText();
         
-        upgradeMaterialsIconGameObject.GetComponent<Image>().sprite = UpgradeMaterialSoData.GetIcon();
-        haveMaterialText.SetText("Have: "+PlayerPrefs.GetInt(UpgradeMaterialSoData.GetItemID()));
-        neededMaterialText.SetText($"Need: {PlayerPrefs.GetInt(PlayerPrefsKeys.NeededUpgradeMaterial.ToString())}");
+        _upgradeMaterialsIconGameObject.GetComponent<Image>().sprite = UpgradeMaterialSoData.GetIcon();
+        _haveMaterialText.SetText("Have: "+PlayerPrefs.GetInt(UpgradeMaterialSoData.GetItemID()));
+        _neededMaterialText.SetText($"Need: {PlayerPrefs.GetInt(PlayerPrefsKeys.NeededUpgradeMaterial.ToString())}");
     }
 
     private void SetAttributeText()
     {
-        //HAAAACKYYYYYYYYY
         if (EquipmentSoData.ID.Contains("legs") || EquipmentSoData.ID.Contains("head"))
         {
-            attributeText.SetText(EquipmentSoData.AttributeDescription + " " +
-                                  PlayerPrefs.GetFloat(EquipmentSoData.AttributeValueID) + "%");
+            _attributeText.SetText(EquipmentSoData.AttributeDescription + " " + PlayerPrefs.GetFloat(EquipmentSoData.AttributeValueID) + "%");
         }
         else
         {
-            attributeText.SetText(EquipmentSoData.AttributeDescription + " " +
-                                  PlayerPrefs.GetFloat(EquipmentSoData.AttributeValueID));
+            _attributeText.SetText(EquipmentSoData.AttributeDescription + " " + PlayerPrefs.GetFloat(EquipmentSoData.AttributeValueID));
         }
     }
 
-    public void PressUpgradeButton()
-    {
-            fusionManager.InitiateUpgrade(EquipmentSoData,UpgradeMaterialSoData);
-            //play sound here
-            OnInventoryChange?.Invoke();
-            UpdateUpgradeUI();
-
-    }
-
-    public void MaxLevelCheck()
+    private void MaxLevelCheck()
     {
         if (PlayerPrefs.GetString(EquipmentSoData.RarityID).Contains("Legendary"))
         {
-            upgradeButton.SetActive(false);
-            neededMaterialText.SetText("Max level reached");
+            _upgradeButton.SetActive(false);
+            _neededMaterialText.SetText("Max level reached");
             return;
         }
-        upgradeButton.SetActive(true);
+        _upgradeButton.SetActive(true);
     }
 }

@@ -68,6 +68,26 @@ public class SoundMananger : MonoBehaviour
         sound.stop(STOP_MODE.IMMEDIATE);
     }
 
+
+
+    public void NextLevel()
+    {
+        Debug.Log("NextLevel");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game Play/Info-Messages/NextLevel");
+    }
+
+    public void UpgrSissor()
+    {
+        Debug.Log("UpgrSissor");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game Play/Info-Messages/UpgrSissor");
+    }
+
+    public void UpgrCeramic()
+    {
+        Debug.Log("UpgrCeramic");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Game Play/Info-Messages/UpgrCeramic");
+    }
+
     public void SoldierIdle()
     {
         Debug.Log("SoldierIdle");
@@ -217,6 +237,12 @@ public class SoundMananger : MonoBehaviour
     {
         Debug.Log("SelectButton3");
         FMODUnity.RuntimeManager.PlayOneShot("event:/Ui/SelectButton3");
+    }
+
+    public void SelectButton4()
+    {
+        Debug.Log("SelectButton4");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Ui/SelectButton4");
     }
 
     public void PlayerIdle()

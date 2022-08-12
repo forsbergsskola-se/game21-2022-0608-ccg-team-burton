@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.UI;
@@ -18,7 +16,7 @@ namespace Metagame
         [Header("AD IDs")]
         public bool ShowBannerOnStartup;
 
-        private bool ShowBanner;
+        private bool _showBanner;
         private bool _shouldReactivateBanner;
         private bool OnlyOnce = true;
 
@@ -42,11 +40,16 @@ namespace Metagame
         public Button HideBannerAdButton;
         #endregion
 
-        #region Rewards
+        #region Reward Settings
         [Header("Reward Type")]
         public bool Multiplier = true;
-        public GameObject CoinTextAsset;
-        private TMP_Text CoinText;
+
+        public bool InterstitialAd = false;
+        public bool RewardAd = false;
+        public bool BannerAd = false;
+        public TextMeshProUGUI coinText;
+        public TextMeshProUGUI totalCoinText;
+        public ItemCollector itemCollector;
         private int Coins;
         #endregion
 
@@ -64,20 +67,16 @@ namespace Metagame
         public float RewardSkippedMultiplier;
         #endregion
         
-        private void Awake()
+        private void Start()
         {
-            if (!Advertisement.isInitialized)
+            //if (!Advertisement.isInitialized)
                 InitializeAds();
 
             AssignButtons();
 
-            if (ShowBannerOnStartup)
-            {
-                LoadBannerAd();
-                ShowBannerAd();
-            }
-
-            CoinText = CoinTextAsset.GameObject().GetComponent<TMP_Text>();
+            if (!ShowBannerOnStartup) return;
+            LoadBannerAd();
+            ShowBannerAd();
         }
 
 
@@ -106,11 +105,19 @@ namespace Metagame
 
         private void AssignButtons()
         {
-            ShowInterstitialAdButton.onClick.AddListener(LoadInterstitialAd);
-            ShowInterstitialAdButton.interactable = true;
-            
-            ShowRewardAdButton.onClick.AddListener(LoadRewardedAd);
-            ShowRewardAdButton.interactable = true;
+            if (InterstitialAd)
+            {
+                ShowInterstitialAdButton.onClick.AddListener(LoadInterstitialAd);
+                ShowInterstitialAdButton.interactable = true;
+            }
+
+            if (RewardAd)
+            {
+                ShowRewardAdButton.onClick.AddListener(LoadRewardedAd);
+                ShowRewardAdButton.interactable = true;
+            }
+
+            if (!BannerAd) return;
             
             ShowBannerAdButton.onClick.AddListener(ShowBannerAd);
             ShowBannerAdButton.interactable = true;
@@ -153,7 +160,7 @@ namespace Metagame
                 OnlyOnce = false;
             }
             
-            ShowBanner = true;
+            _showBanner = true;
             if (Advertisement.Banner.isLoaded == false)
                 StartCoroutine(RepeatShowBanner());
             
@@ -164,7 +171,7 @@ namespace Metagame
 
         private void HideBannerAd()
         {
-            ShowBanner = false;
+            _showBanner = false;
             Advertisement.Banner.Hide(false);
         }
 
@@ -249,8 +256,8 @@ namespace Metagame
         
         public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
         {
-            //TODO: UPDATE COINS REFERENCE
-            Coins = Convert.ToInt32(CoinText.text);
+            Time.timeScale = 1;
+            Coins = itemCollector._coinCounter;
 
             if (placementId == _interstitialID && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
                 CalculateReward(placementId, showCompletionState, "watching", InterstitialMultiplier, InterstitialAmount);
@@ -295,16 +302,35 @@ namespace Metagame
 
         private void RewardPlayerSum(int rewardType)
         {
+            Debug.Log($"Coins before Ad {Coins}");
+            Debug.Log($"Total Coins before Ad {PlayerPrefsKeys.CurrentCoins.ToString()}");
+
             Coins += rewardType;
-            CoinText.text = $"{Coins}";
+            coinText.text = $"{Coins}";
+            totalCoinText.text = $"{Coins}";
+            Debug.Log($"Coins after Ad {Coins}");
+            Debug.Log($"Total Coins before Ad {PlayerPrefsKeys.CurrentCoins.ToString()}");
+
+            PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) + rewardType);
         }
         
         
         
         private void RewardPlayerCalc(float rewardType)
         {
-            Coins = Mathf.CeilToInt(Coins * rewardType);
-            CoinText.text = $"{Coins}";
+            Debug.Log($"Coins before Ad {Coins}");
+            Debug.Log($"Total Coins before Ad {PlayerPrefsKeys.CurrentCoins.ToString()}");
+            
+            var newCoinValue = Mathf.CeilToInt(Coins * rewardType);
+            coinText.text = $"{newCoinValue}";
+            totalCoinText.text = $"{newCoinValue}";
+            Debug.Log($"Coins after Ad {newCoinValue}");
+            var difference = newCoinValue - Coins;
+            Debug.Log($"Difference = {difference}");
+            
+            PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) + difference);
+
+            Time.timeScale = 0;
         }
     }
 }

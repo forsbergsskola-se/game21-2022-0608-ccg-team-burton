@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: buequipment.head
   Name: Head
-  AttributeDescription: 'Attack speed bonus:'
-  AttributeValueID: buequipment.head.attributevalue
-  AttributeValue: 0
   Icon: {fileID: 21300000, guid: 44b15e74ef6a3e64e87ce1681acd05b1, type: 3}
+  AttributeValueID: buequipment.head.attributevalue
+  AttributeDescription: 'Attack speed bonus:'
+  AttributeValue: 0
   RarityID: buequipment.head.rarity
   Rarity: 0
   BaseUpgradeCost: 1
-  NeededUpgradeMaterial: 0
+  AttributeUpgradeStepSize: 5
