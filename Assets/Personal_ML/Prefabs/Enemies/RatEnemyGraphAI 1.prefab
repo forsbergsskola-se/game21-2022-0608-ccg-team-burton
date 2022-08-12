@@ -20,7 +20,6 @@ GameObject:
   - component: {fileID: 7797421452348913917}
   - component: {fileID: 9132859628408954427}
   - component: {fileID: 9132859628310572840}
-  - component: {fileID: 9132859629622197475}
   - component: {fileID: 9132859628449733911}
   m_Layer: 7
   m_Name: RatEnemyGraphAI 1
@@ -250,19 +249,6 @@ CapsuleCollider2D:
   m_Size: {x: 2.8200004, y: 1.3594152}
   m_Direction: 1
 --- !u!114 &9132859628310572840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2277822467958081816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d647cd166645fb4790db0e667c3cb9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _coinValue: 10
---- !u!114 &9132859629622197475
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

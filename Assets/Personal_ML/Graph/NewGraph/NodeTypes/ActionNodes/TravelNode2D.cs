@@ -28,6 +28,7 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         public override void OnExit()
         {
+            Debug.Log("stop walking");
             agent.anim.SetBool(Animator.StringToHash("Enemy_Walk2"), false);
         }
         
@@ -41,7 +42,7 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         private bool ArrivedAtTarget()
         {
-            return Vector3.Distance(agent.enemyTransform.position, agent.currentDestination) < 3f;
+            return Vector3.Distance(agent.enemyTransform.position, agent.currentDestination) < 2.5f;
         }
         
 

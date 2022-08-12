@@ -8,19 +8,19 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         public override void OnStart()
         {
-            agent.enemyEyes.compoundActions |= CompoundActions.MakingJump;
             _startedJump = false;
+            Debug.Log("starting jump");
         }
 
         public override void OnExit()
         {
-            agent.enemyEyes.compoundActions &= ~CompoundActions.MakingJump;
         }
 
         public override State OnUpdate()
         {
             if (!_startedJump)
             {
+                Debug.Log("here is jump");
                 var right = agent.enemyTransform.right;
                 agent.body.AddForce( new Vector2(right.x * 10f, 10f), ForceMode2D.Impulse);
                 agent.anim.SetTrigger(Animator.StringToHash("Enemy_Jump"));

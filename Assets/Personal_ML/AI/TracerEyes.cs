@@ -68,6 +68,11 @@ public class TracerEyes : MonoBehaviour
 
     public float distanceToWall;
 
+    private void Awake()
+    {
+        compoundActions |= CompoundActions.GroundSeen;
+    }
+
     private void Start()
     {
         
@@ -178,8 +183,6 @@ public class TracerEyes : MonoBehaviour
         _pointsList.Clear();
         
         compoundActions &= ~CompoundActions.CanJump;
-        compoundActions &= ~CompoundActions.KeepWalking;
-        compoundActions &= ~CompoundActions.Rotate;
 
         foreach (var h in result)
         {
@@ -202,12 +205,11 @@ public class TracerEyes : MonoBehaviour
 
         if ( _pointsList.Count < 2 || mag.x > 7)
         {
-           
-            compoundActions |=  CompoundActions.KeepWalking | CompoundActions.Rotate;
+            
         }
         else
         {
-            compoundActions |= CompoundActions.CanJump;
+          //  compoundActions |= CompoundActions.CanJump;
         }
     }
 

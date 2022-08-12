@@ -28,39 +28,48 @@ public class SelectNode : CompositeNode
     
     private void CheckOptions()
     {
+        Debug.Log("checking options");
         if (!agent.enemyEyes.compoundActions.HasFlag(CompoundActions.GroundSeen))
         {
             var ground = agent.grid
-                .GetCurrentGround(agent.enemyTransform.position + 
-                                  new Vector3(agent.enemyTransform.right.x * 7,0), 3);
+                .GetCurrentGround(agent.enemyTransform.position +
+                                  new Vector3(agent.enemyTransform.right.x * 9,0), 2);
+            
             if (ground == null)
             {
-                agent.enemyTransform.Rotate(new Vector3(0,1,0), 180);
-                GetTarget();
+               GetTarget(true);
+            }
+            else
+            {
+                currentCommand = CurrentCommand.Jump;
             }
         }
 
-        
-        
         else
         {
-            GetTarget();
+            GetTarget(false);
         }
 
         _choiceMade = true;
+        Debug.Log(choiceMade);
     }
-
     
-    
-    
-    private void GetTarget()
+    private void GetTarget(bool atEnd)
     {
         agent.keepWalking = false;
         var ground = agent.grid.GetCurrentGround(agent.enemyTransform.position, 4);
 
         var dir = agent.enemyTransform.right.x > 0;
+
+        if (dir)
+        {
+            agent.currentDestination = atEnd ? ground.start : ground.end;
+        }
+        else
+        {
+            agent.currentDestination = atEnd ? ground.end : ground.start;
+        }
         
-        agent.currentDestination = dir ? ground.end : ground.start;
         currentCommand = CurrentCommand.MoveToPosition;
     }
     
@@ -175,10 +184,6 @@ public class SelectNode : CompositeNode
     
     public override State OnUpdate()
     {
-        if(!choiceMade) CheckOptions();
-
-       // if (currentCommand == CurrentCommand.None || !choiceMade) return State.Update;
-        
         _currentChoice = ownedNodes[currentCommand];
 
         switch (_currentChoice.Update())
@@ -191,6 +196,8 @@ public class SelectNode : CompositeNode
 
             case State.Success:
                 choiceMade = false;
+                CheckOptions();
+                Debug.Log("exit a node");
                 break;
         }
 

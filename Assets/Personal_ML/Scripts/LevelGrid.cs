@@ -56,6 +56,9 @@ public class WalkableGround
     public Vector2 end;
     public float groundSize;
     public string guid;
+
+    public Vector2 min;
+    public Vector2 max;
 }
 
 public class LevelGrid : MonoBehaviour
@@ -72,7 +75,7 @@ public class LevelGrid : MonoBehaviour
     private Vector2 _max;
     private int _layerMask;
 
-    private float _traceTime = 20f;
+    private float _traceTime = 0.5f;
 
     private List<RaycastHit2D> _hitList = new();
 
@@ -110,9 +113,8 @@ public class LevelGrid : MonoBehaviour
             for (var j = 0; j < numberCubesX; j++)
             {
                 var cube = _gridList[i][j];
-                var start = cube.location + new Vector2(-1,-1f) * new Vector2(cubeSize.x / 2, cubeSize.y / 2);
-                AdvancedTrace(new Vector2(i,j));
                 
+                AdvancedTrace(new Vector2(i,j));
                 ScanForEnemies(cube.location);
             }
         }
@@ -123,17 +125,16 @@ public class LevelGrid : MonoBehaviour
     {
         foreach (var w in walkableGround)
         {
-            var diff = Mathf.Abs(currentPos.y - w.start.y);
-
-            if (currentPos.x > w.start.x && currentPos.x < w.end.x)
+            if (currentPos.x > w.min.x && currentPos.x < w.max.x)
             {
-                if (diff < yTolerance)
+                if (currentPos.y >= w.min.y && currentPos.y < w.max.y)
                 {
+                    
                     return w;
                 }
             }
         }
-
+        
         return null;
     }
     
@@ -223,11 +224,19 @@ public class LevelGrid : MonoBehaviour
         foreach (var h in _hitList)
         {
             var hitPoint = ScanUntilEdge(h.point + new Vector2(0,0.2f));
+            var start = h.point;
+            var end = hitPoint;
+
+            var  ySize = 4f;
+            var center = new Vector2(start.x + (end.x - start.x) / 2, start.y + ySize / 2);
+            var size = new Vector2(end.x - start.x, ySize);
             
             walkableGround.Add(new WalkableGround()
             {
                 start = h.point,
-                end = hitPoint
+                end = hitPoint,
+                min = center - size / 2,
+                max = center + size / 2
             });
 
             cube.pointsList.Add(new PointsOfInterest()
@@ -330,7 +339,13 @@ public class LevelGrid : MonoBehaviour
                 foreach (var w in walkableGround)
                 {
                     Gizmos.color = Color.magenta;
-                    Gizmos.DrawLine(w.start, w.end);
+                    var  adjust = 4f;
+                    var center = new Vector2(w.start.x + (w.end.x - w.start.x) / 2, w.start.y + adjust / 2);
+                    var size = new Vector2(w.end.x - w.start.x, adjust);
+                    
+                    Gizmos.DrawWireSphere(w.start, 0.5f);
+                    Gizmos.DrawWireSphere(w.end, 0.5f);
+                    Gizmos.DrawWireCube(center, size);
                 }
                 
             }
