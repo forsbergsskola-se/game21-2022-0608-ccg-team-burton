@@ -17,61 +17,79 @@ public class LevelCompleted : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         var currentCoins = ItemCollector._coinCounter;
 
-        if (!collision.CompareTag("Player")) return;
-        currentCoins += CoinBonus;
-        ItemCollector._coinCounter += CoinBonus;
+        if (collision.CompareTag("Player"))
+        {
+            currentCoins += CoinBonus;
 
-        //Save coins to inventory
-        PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) + currentCoins);
+            //Save coins to inventory
+            PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(),
+                PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) + currentCoins);
 
-        WinScreen.SetActive(true);
+            if (!collision.CompareTag("Player")) return;
+            currentCoins += CoinBonus;
+            ItemCollector._coinCounter += CoinBonus;
 
-        Time.timeScale = 0; 
-        StarsAchieved();
-        UpdateCoinText(currentCoins);
-        UpdateTotalCoinText(currentCoins);
-        SaveStars(currentStarsNum);
+            //Save coins to inventory
+            PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(),
+                PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) + currentCoins);
+
+            WinScreen.SetActive(true);
+
+            Time.timeScale = 0;
+            StarsAchieved();
+            UpdateCoinText(currentCoins);
+            UpdateTotalCoinText(currentCoins);
+            SaveStars(currentStarsNum);
+        }
+
     }
-
 
     private void StarsAchieved()
-    {
-        var healthLeft = PlayerHealth.CurrentHealth;
-        // float percentage = float.Parse(healthMax.ToString()) / float.Parse(healthLeft.ToString()) * 100f;
-
-        switch (healthLeft)
         {
-            case <= 2:
-                Stars[0].enabled = true;
-                break;
-            
-            case <= 4:
-                Stars[0].enabled = true;
-                Stars[1].enabled = true;
-                break;
-            
-            default:
-                Stars[0].enabled = true;
-                Stars[1].enabled = true;
-                Stars[2].enabled = true;
+            var healthLeft = PlayerHealth.CurrentHealth;
+            // float percentage = float.Parse(healthMax.ToString()) / float.Parse(healthLeft.ToString()) * 100f;
 
-                currentStarsNum = 1;
-                break;
+            switch (healthLeft)
+            {
+                case <= 2:
+                    Stars[0].enabled = true;
+                    break;
+
+                case <= 4:
+                    Stars[0].enabled = true;
+                    Stars[1].enabled = true;
+                    break;
+
+                default:
+                    Stars[0].enabled = true;
+                    Stars[1].enabled = true;
+                    Stars[2].enabled = true;
+
+                    currentStarsNum = 1;
+                    break;
+            }
         }
+
+        private void SaveStars(int starsNum)
+        {
+            currentStarsNum = starsNum;
+
+            if (currentStarsNum <= PlayerPrefs.GetInt("Lv" + levelIndex)) return;
+
+            if (currentStarsNum > PlayerPrefs.GetInt("Lv" + levelIndex))
+            {
+                PlayerPrefs.SetInt("Lv" + levelIndex, starsNum);
+                Debug.Log("Saved as " + PlayerPrefs.GetInt("Lv" + levelIndex, starsNum).ToString());
+            }
+
+            PlayerPrefs.SetInt("Lv" + levelIndex, starsNum);
+            Debug.Log("saved");
+        }
+
+        private void UpdateCoinText(int value) => CoinText.text = $"{value}";
+
+        private void UpdateTotalCoinText(int value) => TotalCoinText.text = $"Total Coins : {value}";
     }
-
-    private void SaveStars(int starsNum)
-    {
-        currentStarsNum = starsNum;
-        if (currentStarsNum <= PlayerPrefs.GetInt("Lv" + levelIndex)) return;
-        
-        PlayerPrefs.SetInt("Lv" + levelIndex, starsNum );
-        Debug.Log("saved");
-    }
-
-    private void UpdateCoinText(int value) => CoinText.text = $"{value}";
-
-    private void UpdateTotalCoinText(int value) => TotalCoinText.text = $"Total Coins : {value}";
-}
