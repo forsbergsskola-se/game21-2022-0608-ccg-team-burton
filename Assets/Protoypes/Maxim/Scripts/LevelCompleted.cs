@@ -73,5 +73,5 @@ public class LevelCompleted : MonoBehaviour
 
     private void UpdateCoinText(int value) => CoinText.text = $"{value}";
 
-    private void UpdateTotalCoinText(int value) => TotalCoinText.text = $"Total Coins: {value}";
+    private void UpdateTotalCoinText(int value) => TotalCoinText.text = $"Total Coins : {value}";
 }
