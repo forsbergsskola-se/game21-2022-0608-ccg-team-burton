@@ -49,6 +49,10 @@ public class AiAgent
     public CompoundActions compoundAction;
 
     public WalkableGround currentGround;
+
+    public GameObject projectile;
+
+    public Transform attackPoint;
     
     public AiAgent()
     {

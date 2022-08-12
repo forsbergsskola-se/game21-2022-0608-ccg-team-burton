@@ -65,16 +65,17 @@ public class TracerEyes : MonoBehaviour
     [HideInInspector] public CompoundActions compoundActions;
 
     public float distanceToWall;
-    
-    private void Awake()
+
+    private void Start()
     {
+        
         GetComponentInParent<BehaviourTreeRunner>().CheckForJump += JumpCheck;
         GetComponentInParent<Health>().OnHealthChanged += RegisterAttack;
 
         _groundMask = 1 << 6 | 1 << 10; 
         _boxMask = 1 << 8 | 1 << 13 | 1 << 7;
     }
-    
+
     private void OnDisable()
     {
         GetComponentInParent<Health>().OnHealthChanged -= RegisterAttack;
@@ -252,11 +253,12 @@ public class TracerEyes : MonoBehaviour
 
     private void CannonTrace()
     {
+        var newMask = 1 << 8;
         var result = Physics2D.BoxCastAll(transform.position, 
-            traceSize, 0, transform.up, traceSize.y / 2, _boxMask);
+            traceSize, 0, transform.up, traceSize.y, newMask);
         _somethingHit = false;
         var playerNoticed = false;
-
+        
         _pointsList.Clear();
         
         foreach (var h in result)
@@ -269,20 +271,20 @@ public class TracerEyes : MonoBehaviour
                 case 7:
                     break;
                 case 8:
-                    SetPlayerEncounter(h);
                     playerNoticed = true;
                     break;
             }
         }
-        
-        if (!playerNoticed)
+
+        if (playerNoticed)
         {
-            compoundActions  &= ~CompoundActions.PlayerInFront;
-            compoundActions  &= ~CompoundActions.PlayerInAttackRange;
-            compoundActions  &= ~CompoundActions.PlayerBehind;
+            compoundActions |= CompoundActions.PlayerNoticed;
+        }
+        else
+        {
             compoundActions  &= ~CompoundActions.PlayerNoticed;
         }
-        
+
     }
 
     private void TraceBox()

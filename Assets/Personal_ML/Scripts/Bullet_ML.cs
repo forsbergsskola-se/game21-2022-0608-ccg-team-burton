@@ -24,13 +24,13 @@ public class Bullet_ML : MonoBehaviour
             gameObject.SetActive(false);
         }
         
-        gameObject.SetActive(false);
+      //  gameObject.SetActive(false);
     }
 
     void Update()
     {
-        gameObject.transform.position += (Vector3) travelVector * Time.deltaTime;
-        timeAlive += Time.deltaTime * 1;
+       // gameObject.transform.position += (Vector3) travelVector * Time.deltaTime;
+        timeAlive += Time.deltaTime;
 
         if (timeAlive >= lifetime)
         {

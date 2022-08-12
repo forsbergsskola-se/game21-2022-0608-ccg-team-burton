@@ -14,6 +14,7 @@ namespace NewGraph.NodeTypes.CompositeNodes
         public override void OnStart()
         {
             SetPossibleNodes();
+            CheckOptions();
         }
 
         public override void OnExit()
@@ -24,7 +25,7 @@ namespace NewGraph.NodeTypes.CompositeNodes
         {
             foreach (var n in children)
             {
-                var attack = n as AttackNode;
+                var attack = n as RangedAttackNode;
 
                 if (attack)
                 {
@@ -43,23 +44,17 @@ namespace NewGraph.NodeTypes.CompositeNodes
         private void CheckOptions()
         {
             var eyeComp = agent.enemyEyes.compoundActions;
-
+            
             if (eyeComp.HasFlag(CompoundActions.PlayerNoticed))
             {
-                if (eyeComp.HasFlag(CompoundActions.PlayerInFront))
-                {
-                    if (eyeComp.HasFlag(CompoundActions.PlayerInAttackRange))
-                    {
-                        currentCommand = CurrentCommand.Attack;
-                    }
-                    
-                    currentCommand = CurrentCommand.Idle;
-                }
-        
-                if (eyeComp.HasFlag(CompoundActions.PlayerBehind))
-                {
-                    currentCommand = CurrentCommand.Idle;
-                }
+                Debug.Log("player noticed");
+
+                currentCommand = CurrentCommand.Attack;
+            }
+
+            else
+            {
+                currentCommand = CurrentCommand.Idle;
             }
             choiceMade = true;
         }
