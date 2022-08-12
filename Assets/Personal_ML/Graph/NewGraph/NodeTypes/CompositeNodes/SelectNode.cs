@@ -29,24 +29,28 @@ public class SelectNode : CompositeNode
     
     private void CheckOptions()
     {
-       
         agent.keepWalking = true;
-        if (!agent.enemyEyes.GroundSeen)
+        var eyeComp = agent.enemyEyes.compoundActions;
+        
+        if (!eyeComp.HasFlag(CompoundActions.GroundSeen))
         {
             agent.CheckForJump?.Invoke(x =>
             {
                 agent.compoundAction = x;
             });
             
-            if (agent.compoundAction.HasFlag(CompoundActions.CantJump))
+            if (eyeComp.HasFlag(CompoundActions.CanJump))
             {
-                currentCommand = CurrentCommand.MoveToPosition;
+                currentCommand = CurrentCommand.Jump;
             }
 
-            currentCommand = CurrentCommand.Jump;
+            else
+            {
+                currentCommand = CurrentCommand.MoveToPosition;    
+            }
         }
 
-        else if (agent.enemyEyes.playerEncounter.HasFlag(PlayerEncounter.PlayerNoticed))
+        else if (eyeComp.HasFlag(CompoundActions.PlayerNoticed))
         {
             PlayerStuff();
         }
@@ -55,6 +59,8 @@ public class SelectNode : CompositeNode
         {
             currentCommand = CurrentCommand.MoveToPosition;
         }
+        
+        Debug.Log(eyeComp);
         choiceMade = true;
     }
 
@@ -62,11 +68,12 @@ public class SelectNode : CompositeNode
     private void PlayerStuff()
     {
         agent.currentDestination = agent.enemyEyes.PlayerPos;
-        var playerEncounter = agent.enemyEyes.playerEncounter;
+        var playerEncounter = agent.enemyEyes.compoundActions;
+        var comp = agent.enemyEyes.compoundActions;
         
-        if (playerEncounter.HasFlag(PlayerEncounter.PlayerInFront))
+        if (playerEncounter.HasFlag(CompoundActions.PlayerInFront))
         {
-            if (playerEncounter.HasFlag(PlayerEncounter.PlayerInAttackRange))
+            if (playerEncounter.HasFlag(CompoundActions.PlayerInAttackRange))
             {
                 currentCommand = CurrentCommand.Attack;
                 return;
@@ -77,7 +84,7 @@ public class SelectNode : CompositeNode
             return;
         }
         
-        if (playerEncounter.HasFlag(PlayerEncounter.PlayerBehind))
+        if (playerEncounter.HasFlag(CompoundActions.PlayerBehind))
         {
             agent.keepWalking = false;
             currentCommand = CurrentCommand.MoveToPosition;
@@ -129,8 +136,7 @@ public class SelectNode : CompositeNode
     public override State OnUpdate()
     {
         if(!choiceMade) CheckOptions();
-       // Debug.Log(choiceMade);
-        
+
         if (currentCommand == CurrentCommand.None || !choiceMade) return State.Update;
         
         _currentChoice = ownedNodes[currentCommand];

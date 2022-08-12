@@ -19,17 +19,12 @@ public class BehaviourTreeRunner : MonoBehaviour
     void Start()
     {
         Setup();
-        //CheckForJump?.Invoke();
     }
 
-    private void SomethingSomething(Action<int> action)
-    {
-       
-    }
-    
+
     private void Setup()
     {
-       // var grid = GameObject.FindWithTag("LevelGrid").GetComponent<LevelGrid>();
+        var grid = GameObject.FindWithTag("LevelGrid").GetComponent<LevelGrid>();
         tree = tree.Clone();
         tree.Bind(new AiAgent()
         {
