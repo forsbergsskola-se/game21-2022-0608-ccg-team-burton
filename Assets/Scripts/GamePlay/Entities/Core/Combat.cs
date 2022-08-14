@@ -37,6 +37,7 @@ public class Combat : MonoBehaviour
 
      public void MeleeAttack()
      {
+         Debug.Log("attack");
          //Play Melee Attack
         _anim.SetTrigger("Attack");
         
@@ -49,7 +50,20 @@ public class Combat : MonoBehaviour
             Debug.Log("Camera shakiee");
         }
     }
-    
+
+     public void EnemyAttack()
+     {
+         EnemyLayers = LayerMask.GetMask("Player");
+         
+         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackPoint.position, AttackRange, EnemyLayers);
+         foreach (Collider2D enemy in hitEnemies)
+            
+         {
+             DealDamage(enemy);
+             _cameraShake.ShakeCamera(CamIntensity,CamTime);
+             Debug.Log("Camera shakiee");
+         }
+     }
     
     
     public void RangedAttack()
@@ -61,6 +75,7 @@ public class Combat : MonoBehaviour
     
     private void DealDamage(Collider2D enemy)
     {
+        Debug.Log("player found");
         //TODO: Cleanup - GetComponent is inefficient but we need to get that particular enemy script. Looking into make this better.
         Debug.Log($"DAMAGE: {_meleeDamage}");
         enemy.GetComponent<IDamageable>().ModifyHealth(-_meleeDamage); // TODO: Implement damage of weapon here

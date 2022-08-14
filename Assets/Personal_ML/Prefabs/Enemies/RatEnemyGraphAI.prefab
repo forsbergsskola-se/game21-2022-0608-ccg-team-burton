@@ -46,7 +46,6 @@ GameObject:
   - component: {fileID: 5811992530573709456}
   - component: {fileID: 1586277627966722529}
   - component: {fileID: 1586277627966722538}
-  - component: {fileID: 1586277628960804020}
   - component: {fileID: 1321246377314359344}
   - component: {fileID: 4861794107799126379}
   - component: {fileID: 5904467555340412845}
@@ -185,7 +184,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3518153481753702542}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45da3103cf2a5f441a32f6c98306be6d, type: 3}
   m_Name: 
@@ -214,19 +213,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseKnockback: 1
   knockbackDuration: 1
---- !u!114 &1586277628960804020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3518153481753702542}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d178907b9ec7da44ae3ee45249ef05d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _combat: {fileID: 1586277627966722529}
 --- !u!95 &1321246377314359344
 Animator:
   serializedVersion: 4

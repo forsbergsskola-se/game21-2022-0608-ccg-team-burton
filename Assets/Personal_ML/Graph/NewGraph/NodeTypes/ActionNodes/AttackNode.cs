@@ -9,7 +9,7 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         public override void OnStart()
         {
-            agent.anim.SetTrigger(Animator.StringToHash("Idle_Trigger"));
+            
         }
 
         public override void OnExit()
@@ -20,13 +20,13 @@ namespace NewGraph.NodeTypes.ActionNodes
         public void MeleeAttack()
         {
             var pLayer = 1 << 8;
-            //agent.anim.SetTrigger(Animator.StringToHash("Enemy_Attack"));
-            
+            agent.anim.SetTrigger(Animator.StringToHash("Attack_Trigger"));
+
             Collider2D[] hitEnemies = Physics2D
                 .OverlapCircleAll(agent.attackPointTrans.position, agent.attackRange, pLayer);
             foreach (Collider2D enemy in hitEnemies)
             {
-             //   DealDamage(enemy);
+                DealDamage(enemy);
                // _cameraShake.ShakeCamera(CamIntensity,CamTime);
             }
         }
@@ -51,10 +51,14 @@ namespace NewGraph.NodeTypes.ActionNodes
 
             if (timeSinceAttack >= agent.attackInterval && !comp.HasFlag(CompoundActions.EnemyDead))
             {
-                MeleeAttack();
+                agent.anim.SetTrigger(Animator.StringToHash("Attack_Trigger"));
                 timeSinceAttack -= agent.attackInterval;
             }
-            timeSinceAttack += Time.deltaTime;
+            if (!agent.anim.GetCurrentAnimatorStateInfo(0).IsName("Rat_Attack"))
+            {
+                timeSinceAttack += Time.deltaTime;
+            }
+            
             
             if (!comp.HasFlag(CompoundActions.PlayerInAttackRange))
             {
