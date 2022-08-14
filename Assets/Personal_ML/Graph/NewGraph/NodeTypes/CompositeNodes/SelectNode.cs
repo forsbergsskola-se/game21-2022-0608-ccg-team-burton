@@ -114,14 +114,7 @@ public class SelectNode : CompositeNode
                 ownedNodes.Add(CurrentCommand.MoveToPosition, traveler);
                 continue;
             }
-
-            var check = n as GridCheckerNode;
-
-            if (check)
-            {
-                ownedNodes.Add(CurrentCommand.OutOfCommands, check);
-            }
-
+            
             var jump = n as JumpNode;
 
             if (jump)

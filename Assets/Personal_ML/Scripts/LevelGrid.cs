@@ -5,38 +5,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[Flags]
-public enum LevelElements
-{
-    None = 0,
-    Platform = 1,
-    Ground = 2,
-    Edge = 4,
-    Jump = 8,
-    TwoWayPass = 16,
-    Gap = 32,
-    TotalBlock = 64,
-}
-
-[Flags]
-public enum TileOptions
-{
-    None = 0,
-    OpenMinus = 1,
-    OpenPlus = 2,
-    JumpPlus = 4,
-    JumpMinus = 8,
-    WallPlus = 16,
-    WallMinus = 32
-}
-
-[Serializable]
-public class PointsOfInterest
-{
-    public Vector2 location;
-    public LevelElements pointType;
-}
-
 [Serializable]
 public class CubeFacts
 {
