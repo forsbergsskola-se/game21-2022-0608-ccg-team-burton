@@ -25,7 +25,7 @@ namespace NewGraph.NodeTypes.ActionNodes
                 return State.Success;
             }
 
-            if (timeSinceAttack >= agent.attackInterval)
+            if (timeSinceAttack >= agent.attackInterval && !comp.HasFlag(CompoundActions.EnemyDead))
             {
                 agent.anim.SetTrigger(Animator.StringToHash("Enemy_Attack"));
                 timeSinceAttack -= agent.attackInterval;
