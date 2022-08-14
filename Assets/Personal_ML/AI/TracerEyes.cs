@@ -137,13 +137,9 @@ public class TracerEyes : MonoBehaviour
             {
                 compoundActions &= ~CompoundActions.WallInTurnRange;
             }
-
-            if (!compoundActions.HasFlag(CompoundActions.GroundSeen))
-            {
-                //OtherJumpCheck();
-            }
             
             TraceBox();
+           // Debug.Log(compoundActions);
         }
         
         else if (enemyType == EnemyType.Cannon)
@@ -324,17 +320,14 @@ public class TracerEyes : MonoBehaviour
         var distance = Vector2.Distance(PlayerPos, transform.position);
         var awareOfPlayer = false;
         
-        compoundActions  &= ~CompoundActions.PlayerInFront;
-        compoundActions  &= ~CompoundActions.PlayerInAttackRange;
-        compoundActions  &= ~CompoundActions.PlayerBehind;
-        compoundActions  &= ~CompoundActions.PlayerNoticed;
-        
         if (seeing)
         {
             compoundActions |= CompoundActions.PlayerNoticed;
             compoundActions |= CompoundActions.PlayerInFront;
             compoundActions |= CompoundActions.AwareOfPlayer;
             
+            compoundActions  &= ~CompoundActions.PlayerBehind;
+
             if (distance < 2)
             {
                 compoundActions |= CompoundActions.PlayerInAttackRange;
@@ -349,6 +342,8 @@ public class TracerEyes : MonoBehaviour
         {
             if (compoundActions.HasFlag(CompoundActions.EnemyAttacked))
             {
+                compoundActions  &= ~CompoundActions.PlayerInFront;
+                
                 compoundActions |= CompoundActions.AwareOfPlayer;
                 compoundActions |= CompoundActions.PlayerBehind;
                 compoundActions |= CompoundActions.PlayerNoticed;
@@ -359,6 +354,7 @@ public class TracerEyes : MonoBehaviour
                 compoundActions |= CompoundActions.PlayerBehind;
             }
         }
+      // Debug.Log(compoundActions);
     }
 
     private bool CheckIfLookingAtTarget(Vector2 enemyPos)

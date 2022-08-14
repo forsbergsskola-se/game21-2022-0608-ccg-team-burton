@@ -28,31 +28,50 @@ public class SelectNode : CompositeNode
     
     private void CheckOptions()
     {
-        var comp = agent.enemyEyes.compoundActions; 
-        if (!comp.HasFlag(CompoundActions.GroundSeen))
+        var comp = agent.enemyEyes.compoundActions;
+        if (!comp.HasFlag(CompoundActions.GroundSeen) && !comp.HasFlag(CompoundActions.PlayerNoticed))
         {
+            Debug.Log("jump stuff");
             var ground = agent.grid
                 .GetCurrentGround(agent.enemyTransform.position +
                                   new Vector3(agent.enemyTransform.right.x * 9,0));
             
             if (ground == null)
             {
-               GetTarget(true);
+                GetTarget(true);
             }
             else
             {
                 currentCommand = CurrentCommand.Jump;
             }
-        }
-        
-        if (comp.HasFlag(CompoundActions.PlayerNoticed))
-        {
-            PlayerStuff();
+            
         }
 
+        else if (comp.HasFlag(CompoundActions.PlayerNoticed) && comp.HasFlag(CompoundActions.GroundSeen))
+        {
+            agent.currentDestination = agent.enemyEyes.PlayerPos;
+            if (comp.HasFlag(CompoundActions.PlayerInFront))
+            {
+                if (comp.HasFlag(CompoundActions.PlayerInAttackRange))
+                {
+                    currentCommand = CurrentCommand.Attack;
+                }
+                else
+                {
+                    currentCommand = CurrentCommand.MoveToPosition;
+                    Debug.Log($"moving to player at: {agent.currentDestination}, {currentCommand}");
+                }
+            }
+            
+            if (comp.HasFlag(CompoundActions.PlayerBehind))
+            {
+                currentCommand = CurrentCommand.MoveToPosition;
+            }
+           
+        }
         else
         {
-            GetTarget(Vector2.Distance(agent.currentDestination, agent.enemyTransform.position) < 3);
+            GetTarget(Vector2.Distance(agent.currentDestination, agent.enemyTransform.position) <= agent.turnDistance);
         }
 
         _choiceMade = true;
@@ -60,7 +79,6 @@ public class SelectNode : CompositeNode
     
     private void GetTarget(bool atEnd)
     {
-        agent.keepWalking = false;
         var ground = agent.grid.GetCurrentGround(agent.enemyTransform.position);
         var dir = agent.enemyTransform.right.x > 0;
         
@@ -77,32 +95,6 @@ public class SelectNode : CompositeNode
     }
     
     
-    private void PlayerStuff()
-    {
-        agent.currentDestination = agent.enemyEyes.PlayerPos;
-        var comp = agent.enemyEyes.compoundActions;
-        
-        if (comp.HasFlag(CompoundActions.PlayerInFront))
-        {
-            if (comp.HasFlag(CompoundActions.PlayerInAttackRange))
-            {
-                currentCommand = CurrentCommand.Attack;
-            }
-            else
-            {
-                currentCommand = CurrentCommand.MoveToPosition;    
-            }
-
-            agent.keepWalking = false;
-            return;
-        }
-        
-        if (comp.HasFlag(CompoundActions.PlayerBehind))
-        {
-            agent.keepWalking = false;
-            currentCommand = CurrentCommand.MoveToPosition;
-        }
-    }
     
     private void SetPossibleNodes()
     {

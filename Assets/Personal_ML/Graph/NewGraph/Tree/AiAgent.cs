@@ -38,9 +38,7 @@ public class AiAgent
     public TracerEyes enemyEyes;
     
     public Rigidbody2D body;
-
-    public bool keepWalking;
-
+    
     public float moveSpeed;
     public float attackInterval = 0.3f;
     
@@ -53,6 +51,10 @@ public class AiAgent
     public GameObject projectile;
 
     public Transform attackPoint;
+
+    public float turnDistance = 1;
+
+    public Vector2 attackPointPos;
     
     public AiAgent()
     {

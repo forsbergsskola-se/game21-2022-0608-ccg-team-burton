@@ -40,22 +40,17 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         private bool ArrivedAtTarget()
         {
-            return Vector3.Distance(agent.enemyTransform.position, agent.currentDestination) < 2.5f;
+            return Vector3.Distance(agent.enemyTransform.position, agent.currentDestination) < agent.turnDistance;
         }
         
 
         public override State OnUpdate()
         {
             var comp = agent.enemyEyes.compoundActions;
-            if (comp.HasFlag(CompoundActions.EnemyDead))
-            {
-                return State.Success;
-            }
-
+       
             waitForExit += Time.deltaTime;
             if (waitForExit < 0.5f) return State.Update;
-            
-            agent.enemyTransform.position += agent.enemyTransform.right * (Time.deltaTime * agent.moveSpeed);
+
 
             if (comp.HasFlag(CompoundActions.WallInTurnRange) && canTurn)
             {
@@ -72,27 +67,23 @@ namespace NewGraph.NodeTypes.ActionNodes
                     canTurn = true;
                 }
             }
-            
-            if (!agent.keepWalking)
+
+
+            if (comp.HasFlag(CompoundActions.EnemyDead)) return State.Success;
+
+            if (!comp.HasFlag(CompoundActions.GroundSeen) || comp.HasFlag(CompoundActions.PlayerInAttackRange))
             {
-                if (ArrivedAtTarget() || !comp.HasFlag(CompoundActions.GroundSeen))
-                {
-                    return State.Success;
-                }
-            }
-            
-            else
-            {
-                if (!comp.HasFlag(CompoundActions.GroundSeen) || comp.HasFlag(CompoundActions.PlayerNoticed))
-                {
-                    return State.Success;
-                }
-                if (comp.HasFlag(CompoundActions.PlayerNoticed))
-                {
-                    return State.Success;
-                }
+                return State.Success;
             }
 
+            if (ArrivedAtTarget())
+            {
+                return State.Success;
+            }
+
+
+            agent.enemyTransform.position += agent.enemyTransform.right * (Time.deltaTime * agent.moveSpeed);
+            
             return State.Update;
         }
     }

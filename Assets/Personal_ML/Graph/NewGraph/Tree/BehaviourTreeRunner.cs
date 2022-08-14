@@ -40,13 +40,13 @@ public class BehaviourTreeRunner : MonoBehaviour
             anim = GetComponent<Animator>(),
             enemyEyes = GetComponentInChildren<TracerEyes>(),
             body = GetComponent<Rigidbody2D>(),
-            keepWalking = true,
             attackInterval = attackInterval,
             moveSpeed = baseMoveSpeed,
             CheckForJump = CheckForJump,
             attackPoint = attackPoint,
             projectile = projectile,
-            grid = grid
+            grid = grid,
+            attackPointPos = gameObject.transform.position + GetComponentInChildren<Transform>().position
         });
         readyToRun = true;
     }
