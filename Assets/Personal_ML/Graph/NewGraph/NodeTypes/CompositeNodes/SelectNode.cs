@@ -71,7 +71,7 @@ public class SelectNode : CompositeNode
         }
         else
         {
-            GetTarget(Vector2.Distance(agent.currentDestination, agent.attackPointPos.position) <= agent.turnDistance);
+            GetTarget(Vector2.Distance(agent.currentDestination, agent.attackPointTrans.position) <= agent.turnDistance);
         }
 
         _choiceMade = true;

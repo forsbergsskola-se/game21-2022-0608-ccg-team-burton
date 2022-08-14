@@ -10,7 +10,7 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         public override void OnStart()
         {
-            agent.anim.SetBool(Animator.StringToHash("Enemy_Walk2"), true);
+            agent.anim.SetBool(Animator.StringToHash("Enemy_Walk"), true);
             waitForExit = 0;
             canTurn = true;
          
@@ -27,7 +27,7 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         public override void OnExit()
         {
-            agent.anim.SetBool(Animator.StringToHash("Enemy_Walk2"), false);
+            agent.anim.SetBool(Animator.StringToHash("Enemy_Walk"), false);
         }
         
         private bool CheckIfLookingAtTarget()
@@ -42,7 +42,7 @@ namespace NewGraph.NodeTypes.ActionNodes
         {
             //Debug.Log(Vector3.Distance(agent.attackPointPos.position, agent.currentDestination));
             //Debug.Log(Vector3.Distance(agent.enemyTransform.position, agent.currentDestination));
-            return Vector3.Distance(agent.attackPointPos.position, agent.currentDestination) < agent.turnDistance;
+            return Vector3.Distance(agent.attackPointTrans.position, agent.currentDestination) < agent.turnDistance;
         }
         
 

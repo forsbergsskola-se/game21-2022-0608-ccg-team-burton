@@ -47,14 +47,14 @@ public class TracerEyes : MonoBehaviour
 
     [HideInInspector] public LevelGrid grid;
 
-    private float timeSinceTrace;
+    private float _timeSinceTrace;
     
     public Vector2 EstimatedJumpForce { get; private set; }
 
     public Vector2 PlayerPos { get; private set; }
     
     
-    private bool UnderAttack;
+    private bool _underAttack;
 
     private Health _playerHealth;
     private Health _enemyHealth;
@@ -75,8 +75,6 @@ public class TracerEyes : MonoBehaviour
 
     private void Start()
     {
-        
-        GetComponentInParent<BehaviourTreeRunner>().CheckForJump += JumpCheck;
         GetComponentInParent<Health>().OnHealthChanged += RegisterAttack;
 
         _groundMask = 1 << 6 | 1 << 10 | 1 << 7; 
@@ -86,7 +84,6 @@ public class TracerEyes : MonoBehaviour
     private void OnDisable()
     {
         GetComponentInParent<Health>().OnHealthChanged -= RegisterAttack;
-        GetComponentInParent<BehaviourTreeRunner>().CheckForJump -= JumpCheck;
     }
 
     private void RegisterAttack(int currentHealth)
@@ -101,11 +98,11 @@ public class TracerEyes : MonoBehaviour
 
     void Update()
     {
-        timeSinceTrace += Time.deltaTime;
+        _timeSinceTrace += Time.deltaTime;
 
-        if (timeSinceTrace >= traceInterval)
+        if (_timeSinceTrace >= traceInterval)
         {
-            timeSinceTrace -= traceInterval;
+            _timeSinceTrace -= traceInterval;
             DoAllTraces();
         }
     }
