@@ -29,6 +29,7 @@ public class Combat : MonoBehaviour
      {
          _anim = GetComponent<Animator>();
          _cameraShake = FindObjectOfType<CameraShake>().GetComponent<CameraShake>();
+         PlayerPrefs.SetFloat("buequipment.weapon.attributevalue", 1);
      }
 
      private void Start()

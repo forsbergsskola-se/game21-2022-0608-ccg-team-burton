@@ -44,7 +44,8 @@ public class SelectNode : CompositeNode
                 currentCommand = CurrentCommand.Jump;
             }
         }
-        else if (comp.HasFlag(CompoundActions.PlayerNoticed))
+        
+        if (comp.HasFlag(CompoundActions.PlayerNoticed))
         {
             PlayerStuff();
         }

@@ -71,7 +71,6 @@ public class LevelGrid : MonoBehaviour
 
     private void ScanAll()
     {
-        Debug.Log(_gridList[0].Count);
         for (var i = 0; i < numberCubesY; i++)
         {
             for (var j = 0; j < numberCubesX; j++)
@@ -207,8 +206,6 @@ public class LevelGrid : MonoBehaviour
                 groundSize = size.x
             });
         }
-        Debug.Log(walkableGround.Count);
-
     }
     
     private RaycastHit2D SingleTrace(Vector2 startPos, Vector2 traceDir, float traceLength)
