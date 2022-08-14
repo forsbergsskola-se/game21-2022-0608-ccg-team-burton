@@ -40,7 +40,7 @@ public class LevelGrid : MonoBehaviour
     private Vector2 _max;
     private int _layerMask;
 
-    private float _traceTime = 0.5f;
+    private float _traceTime = 20.5f;
 
     private List<RaycastHit2D> _hitList = new();
     
@@ -76,7 +76,7 @@ public class LevelGrid : MonoBehaviour
             for (var j = 0; j < numberCubesX; j++)
             {
                 var cube = _gridList[i][j];
-                
+                Debug.Log("something");
                 AdvancedTrace(new Vector2(i,j));
                 ScanForEnemies(cube.location);
             }
@@ -172,9 +172,11 @@ public class LevelGrid : MonoBehaviour
         
         foreach (var h in _hitList)
         {
-            var hitPoint = ScanUntilEdge(h.point + new Vector2(0,0.2f));
+            var hitPointEnd = ScanUntilEdge(h.point + new Vector2(0,0.2f));
+            //var hitPointStart = ScanUntilEdge(h.point - new Vector2(0,0.2f));
+           // Debug.Log(hitPointStart);
             var start = h.point;
-            var end = hitPoint;
+            var end = hitPointEnd;
 
             var center = new Vector2(start.x + (end.x - start.x) / 2, start.y + areaHeight / 2);
             var size = new Vector2(end.x - start.x, areaHeight);
@@ -184,7 +186,7 @@ public class LevelGrid : MonoBehaviour
             walkableGround.Add(new WalkableGround()
             {
                 start = h.point,
-                end = hitPoint,
+                end = hitPointEnd,
                 min = center - size / 2,
                 max = center + size / 2,
                 groundSize = size.x
