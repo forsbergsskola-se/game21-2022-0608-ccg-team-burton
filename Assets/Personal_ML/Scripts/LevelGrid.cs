@@ -71,12 +71,12 @@ public class LevelGrid : MonoBehaviour
 
     private void ScanAll()
     {
+        Debug.Log(_gridList[0].Count);
         for (var i = 0; i < numberCubesY; i++)
         {
             for (var j = 0; j < numberCubesX; j++)
             {
                 var cube = _gridList[i][j];
-                Debug.Log("something");
                 AdvancedTrace(new Vector2(i,j));
                 ScanForEnemies(cube.location);
             }
@@ -109,11 +109,24 @@ public class LevelGrid : MonoBehaviour
         return square;
     }
 
-    private Vector2 ScanUntilEdge(Vector2 startPoint)
+    private Tuple<Vector2, Vector2> ScanUntilEdges(Vector2 startPoint)
+    {
+        var result = new Tuple<Vector2, Vector2>(Vector2.zero, Vector2.zero);
+
+        var point = startPoint;
+
+        
+        
+        return result;
+    }
+
+    private Vector2 ScanUntilEdge(Vector2 startPoint, float increment)
     {
         var breakLoop = false;
         
         List<Vector2> newHits = new();
+        
+        
 
         while (!breakLoop)
         {
@@ -122,7 +135,7 @@ public class LevelGrid : MonoBehaviour
 
             newHits.Add(aHit.point);
             
-            startPoint += new Vector2(0.5f,0);
+            startPoint += new Vector2(increment,0);
             
             if(aHit.point.x > _max.x) breakLoop = true;
             if(aHit.point.x < _min.x) breakLoop = true;
@@ -136,7 +149,7 @@ public class LevelGrid : MonoBehaviour
         foreach (var g in walkableGround)
         {
             if (!(point.x > g.start.x) || !(point.x < g.end.x)) continue;
-            
+
             if ((int) point.y == (int) g.start.y)
             {
                 return true;
@@ -172,10 +185,9 @@ public class LevelGrid : MonoBehaviour
         
         foreach (var h in _hitList)
         {
-            var hitPointEnd = ScanUntilEdge(h.point + new Vector2(0,0.2f));
-            //var hitPointStart = ScanUntilEdge(h.point - new Vector2(0,0.2f));
-           // Debug.Log(hitPointStart);
-            var start = h.point;
+            var hitPointEnd = ScanUntilEdge(h.point + new Vector2(0,0.2f), 0.2f);
+            var hitPointStart = ScanUntilEdge(h.point + new Vector2(0,0.2f), -0.2f);
+            var start = hitPointStart;
             var end = hitPointEnd;
 
             var center = new Vector2(start.x + (end.x - start.x) / 2, start.y + areaHeight / 2);
@@ -183,15 +195,20 @@ public class LevelGrid : MonoBehaviour
 
             if(size.x < minimumPlatformWidth) continue;
             
+            if(walkableGround.Where(x => (int)x.start.x == (int)hitPointStart.x).ToArray().Length > 0)
+                continue;
+            
             walkableGround.Add(new WalkableGround()
             {
-                start = h.point,
+                start = hitPointStart,
                 end = hitPointEnd,
                 min = center - size / 2,
                 max = center + size / 2,
                 groundSize = size.x
             });
         }
+        Debug.Log(walkableGround.Count);
+
     }
     
     private RaycastHit2D SingleTrace(Vector2 startPos, Vector2 traceDir, float traceLength)

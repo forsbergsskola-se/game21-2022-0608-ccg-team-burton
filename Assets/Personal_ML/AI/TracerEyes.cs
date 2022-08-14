@@ -79,7 +79,7 @@ public class TracerEyes : MonoBehaviour
         GetComponentInParent<BehaviourTreeRunner>().CheckForJump += JumpCheck;
         GetComponentInParent<Health>().OnHealthChanged += RegisterAttack;
 
-        _groundMask = 1 << 6 | 1 << 10; 
+        _groundMask = 1 << 6 | 1 << 10 | 1 << 7; 
         _boxMask = 1 << 8 | 1 << 13 | 1 << 7;
     }
 
@@ -117,12 +117,13 @@ public class TracerEyes : MonoBehaviour
     {
         if (enemyType == EnemyType.Melee)
         {
-            if (TraceForGround(new Vector3(0, -0.45f), 2))
-                compoundActions |= CompoundActions.GroundSeen;
+            var groundTrace = TraceForGround(new Vector3(0, -0.45f), 2);
+            var wallTrace = TraceForGround(new Vector3(0, 0), 8);
+                
+            if (groundTrace) compoundActions |= CompoundActions.GroundSeen;
             else compoundActions &= ~CompoundActions.GroundSeen;
-
-            if (TraceForGround(new Vector3(0, 0), 8))
-                compoundActions |= CompoundActions.WallSeen;
+            
+            if (wallTrace) compoundActions |= CompoundActions.WallSeen;
             else compoundActions &= ~CompoundActions.WallSeen;
             
             if (compoundActions.HasFlag(CompoundActions.WallSeen))
@@ -139,7 +140,7 @@ public class TracerEyes : MonoBehaviour
 
             if (!compoundActions.HasFlag(CompoundActions.GroundSeen))
             {
-                OtherJumpCheck();
+                //OtherJumpCheck();
             }
             
             TraceBox();
@@ -200,17 +201,7 @@ public class TracerEyes : MonoBehaviour
 
         _pointsList = _pointsList
             .OrderBy(x => x.distance).ToList();
-
-        var mag = _pointsList[0].point - _pointsList[^1].point;
-
-        if ( _pointsList.Count < 2 || mag.x > 7)
-        {
-            
-        }
-        else
-        {
-          //  compoundActions |= CompoundActions.CanJump;
-        }
+        
     }
 
     private void JumpCheck(Action<CompoundActions> callback)
