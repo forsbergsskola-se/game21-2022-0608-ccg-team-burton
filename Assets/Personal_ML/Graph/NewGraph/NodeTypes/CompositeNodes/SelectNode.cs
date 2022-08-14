@@ -29,9 +29,15 @@ public class SelectNode : CompositeNode
     private void CheckOptions()
     {
         var comp = agent.enemyEyes.compoundActions;
+
+        if (comp.HasFlag(CompoundActions.EnemyDead))
+        {
+            agent.body.constraints = RigidbodyConstraints2D.FreezeAll;
+            return;
+        }
+        
         if (!comp.HasFlag(CompoundActions.GroundSeen) && !comp.HasFlag(CompoundActions.PlayerNoticed))
         {
-            Debug.Log("jump stuff");
             var ground = agent.grid
                 .GetCurrentGround(agent.enemyTransform.position +
                                   new Vector3(agent.enemyTransform.right.x * 9,0));
@@ -59,7 +65,6 @@ public class SelectNode : CompositeNode
                 else
                 {
                     currentCommand = CurrentCommand.MoveToPosition;
-                    Debug.Log($"moving to player at: {agent.currentDestination}, {currentCommand}");
                 }
             }
             

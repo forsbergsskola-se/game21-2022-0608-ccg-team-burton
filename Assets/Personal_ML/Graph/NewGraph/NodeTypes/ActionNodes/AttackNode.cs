@@ -9,37 +9,14 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         public override void OnStart()
         {
-            
+            agent.body.constraints = RigidbodyConstraints2D.FreezeAll;
         }
 
         public override void OnExit()
         {
-            
+            agent.body.constraints = RigidbodyConstraints2D.None;
         }
         
-        public void MeleeAttack()
-        {
-            var pLayer = 1 << 8;
-            agent.anim.SetTrigger(Animator.StringToHash("Attack_Trigger"));
-
-            Collider2D[] hitEnemies = Physics2D
-                .OverlapCircleAll(agent.attackPointTrans.position, agent.attackRange, pLayer);
-            foreach (Collider2D enemy in hitEnemies)
-            {
-                DealDamage(enemy);
-               // _cameraShake.ShakeCamera(CamIntensity,CamTime);
-            }
-        }
-
-        
-        private void DealDamage(Collider2D enemy)
-        {
-            enemy.GetComponent<IDamageable>().ModifyHealth(-agent.damageAmount);
-            enemy.GetComponent<Knockback>()?.DoKnockBack(enemy.GetComponent<Rigidbody2D>(), agent.attackPointTrans.position, 1); 
-            agent.enemyTransform.GetComponent<HitEffect>().TimeStop();
-        
-        }
-
         public override State OnUpdate()
         {
             var comp = agent.enemyEyes.compoundActions;
