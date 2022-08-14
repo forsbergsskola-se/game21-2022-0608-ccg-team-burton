@@ -40,7 +40,9 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         private bool ArrivedAtTarget()
         {
-            return Vector3.Distance(agent.enemyTransform.position, agent.currentDestination) < agent.turnDistance;
+            //Debug.Log(Vector3.Distance(agent.attackPointPos.position, agent.currentDestination));
+            //Debug.Log(Vector3.Distance(agent.enemyTransform.position, agent.currentDestination));
+            return Vector3.Distance(agent.attackPointPos.position, agent.currentDestination) < agent.turnDistance;
         }
         
 
@@ -78,6 +80,7 @@ namespace NewGraph.NodeTypes.ActionNodes
 
             if (ArrivedAtTarget())
             {
+                Debug.Log("arrived at target");
                 return State.Success;
             }
 

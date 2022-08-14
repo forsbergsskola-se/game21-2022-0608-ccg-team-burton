@@ -45,16 +45,12 @@ public class AiAgent
     public Action<Action<CompoundActions>> CheckForJump;
     
     public CompoundActions compoundAction;
-
-    public WalkableGround currentGround;
-
+    
     public GameObject projectile;
 
-    public Transform attackPoint;
+    public float turnDistance = 1.5f;
 
-    public float turnDistance = 1;
-
-    public Vector2 attackPointPos;
+    public Transform attackPointPos;
     
     public AiAgent()
     {

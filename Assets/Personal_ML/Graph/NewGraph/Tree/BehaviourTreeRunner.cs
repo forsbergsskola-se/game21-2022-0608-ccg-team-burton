@@ -43,10 +43,9 @@ public class BehaviourTreeRunner : MonoBehaviour
             attackInterval = attackInterval,
             moveSpeed = baseMoveSpeed,
             CheckForJump = CheckForJump,
-            attackPoint = attackPoint,
             projectile = projectile,
             grid = grid,
-            attackPointPos = gameObject.transform.position + GetComponentInChildren<Transform>().position
+            attackPointPos = GetComponentsInChildren<Transform>()[^1]
         });
         readyToRun = true;
     }

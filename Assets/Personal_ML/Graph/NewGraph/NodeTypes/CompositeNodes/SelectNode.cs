@@ -71,7 +71,7 @@ public class SelectNode : CompositeNode
         }
         else
         {
-            GetTarget(Vector2.Distance(agent.currentDestination, agent.enemyTransform.position) <= agent.turnDistance);
+            GetTarget(Vector2.Distance(agent.currentDestination, agent.attackPointPos.position) <= agent.turnDistance);
         }
 
         _choiceMade = true;
@@ -81,9 +81,10 @@ public class SelectNode : CompositeNode
     {
         var ground = agent.grid.GetCurrentGround(agent.enemyTransform.position);
         var dir = agent.enemyTransform.right.x > 0;
-        
+
         if (dir)
         {
+            
             agent.currentDestination = atEnd ? ground.start : ground.end;
         }
         else

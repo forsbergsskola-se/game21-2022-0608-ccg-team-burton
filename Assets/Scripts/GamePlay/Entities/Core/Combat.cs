@@ -22,8 +22,6 @@ public class Combat : MonoBehaviour
      private int _knockbackMultiplier = 1;
      public GameObject DebugProjectile;
      public Transform FirePoint;
-
-     
      
      void Awake()
      {
@@ -38,8 +36,8 @@ public class Combat : MonoBehaviour
      }
 
      public void MeleeAttack()
-    {
-        //Play Melee Attack
+     {
+         //Play Melee Attack
         _anim.SetTrigger("Attack");
         
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackPoint.position, AttackRange, EnemyLayers);
