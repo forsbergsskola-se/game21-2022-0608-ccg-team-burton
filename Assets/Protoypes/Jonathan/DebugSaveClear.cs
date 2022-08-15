@@ -65,6 +65,19 @@ public class DebugSaveClear : MonoBehaviour
       PlayerPrefs.SetInt("upgradematerials.porcelain", PlayerPrefs.GetInt("upgradematerials.porcelain")-1);
       Debug.Log($"Current Porcelain: {PlayerPrefs.GetInt("upgradematerials.porcelain")}");
    }
+
+   public void AddGems()
+   {
+      foreach (var materialItem in Library.MatlerialsLibrarySo.InventoryLibrary)
+      {
+         if (materialItem.GetItemID().Contains("red") || materialItem.GetItemID().Contains("blue") ||
+             materialItem.GetItemID().Contains("green"))
+         {
+            PlayerPrefs.SetInt(materialItem.GetItemID(), PlayerPrefs.GetInt(materialItem.GetItemID())+1);
+            Debug.Log($"Current {materialItem.GetDisplayName()}: {PlayerPrefs.GetInt(materialItem.GetItemID())}"); 
+         }
+      }
+   }
    
    public void ResetEquipment()
    {
@@ -107,6 +120,7 @@ public class DebugSaveClear : MonoBehaviour
          AddMetal();
          AddCoins();
          AddButtons();
+         AddGems();
       }
    }
 }
