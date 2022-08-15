@@ -15,9 +15,14 @@ public class GemLevelInventoryManager : MonoBehaviour
     [SerializeField] private Transform _inventorySlotParentTransform;
     [SerializeField] private Transform _levelSlotParentTransform;
     private List<GameObject> _currentItemsInInventory = new();
-    private int _levelSlotIndex = 0;
+    private GameObject[] _currentSlottedGems;
+    public int _levelSlotIndex = 0;
 
- 
+    private void Start()
+    {
+        _currentSlottedGems = new GameObject[_levelSlots.Length];
+    }
+
     private void OnEnable()
     {
         LoadGemsFromInventory();   
@@ -62,26 +67,63 @@ public class GemLevelInventoryManager : MonoBehaviour
 
     public void SlotGemInLevel(MaterialItem gem)
     {
-
+        
         if (!FreeSlotExist())
             return;
+
+
+        var gemInSlot = Instantiate(_inventoryItem, Vector2.zero, Quaternion.identity);
+        for (int i = 0; i < _levelSlots.Length; i++)
+        {
+            if (_currentSlottedGems[i] == null)
+            {
+                Debug.Log("null");
+                _levelSlotIndex = i;
+                break;
+            }
+        }
+        _currentSlottedGems[_levelSlotIndex] = gemInSlot;
         
-        var gemInSlot = Instantiate(_inventoryItem, _levelSlots[_levelSlotIndex].transform.position, Quaternion.identity);
+        gemInSlot.transform.position = _levelSlots[_levelSlotIndex].transform.position;
         gemInSlot.GetComponent<LevelGemSlot>().SetItemSlot(gem);
         gemInSlot.GetComponentInChildren<TMP_Text>().SetText("");
         gemInSlot.transform.parent = _levelSlotParentTransform;
-        _levelSlotIndex++;
-        
-        LoadGemsFromInventory();
+        // _levelSlotIndex++;
+    }
+
+    public void DestroyCurrentSlottedGems()
+    {
+        foreach (var slottedGem in _currentSlottedGems)
+        {
+            Destroy(slottedGem);
+        }
+
+
     }
     public bool FreeSlotExist()
     {
-        return _levelSlotIndex < _levelSlots.Length;
+        foreach (var slottedGem in _currentSlottedGems)
+        {
+            if (slottedGem == null)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
     
     private void OnDisable()
     {
         _levelSlotIndex = 0;
+    }
+
+    public void SaveGemModifiersOnPlay()
+    {
+        // foreach (var VARIABLE in COLLECTION)
+        // {
+        //     
+        // }
     }
 
 }
