@@ -68,6 +68,7 @@ namespace NewGraph.NodeTypes.ActionNodes
             }
             
             if (comp.HasFlag(CompoundActions.EnemyDead)) return State.Success;
+            if (comp.HasFlag(CompoundActions.EnemyAttacked)) return State.Success;
 
             if (!comp.HasFlag(CompoundActions.GroundSeen) || comp.HasFlag(CompoundActions.PlayerInAttackRange))
             {

@@ -82,7 +82,7 @@ public class TracerEyes : MonoBehaviour
     private void RegisterAttack(int currentHealth)
     {
         compoundActions |= CompoundActions.EnemyAttacked;
-        
+
         if (_somethingHit)
         {
         }
@@ -271,6 +271,7 @@ public class TracerEyes : MonoBehaviour
                 compoundActions |= CompoundActions.AwareOfPlayer;
                 compoundActions |= CompoundActions.PlayerBehind;
                 compoundActions |= CompoundActions.PlayerNoticed;
+                Debug.Log($"tracer choice: {compoundActions}");
             }
                     
             if (compoundActions.HasFlag(CompoundActions.PlayerNoticed))
