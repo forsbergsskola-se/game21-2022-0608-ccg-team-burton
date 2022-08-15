@@ -23,7 +23,8 @@ namespace Scene
             LoadSpriteSheet();
         }
 
-        void LoadSpriteSheet(){
+        void LoadSpriteSheet()
+        {
             _sprites = Resources.LoadAll<Sprite>("")
         }
     }
