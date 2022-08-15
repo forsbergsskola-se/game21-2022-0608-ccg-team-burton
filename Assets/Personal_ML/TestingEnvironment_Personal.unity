@@ -8160,6 +8160,11 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3064153529499640356, guid: da29a34ad1f09f84f9ca5c1088b7b667,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4340430052613549713, guid: da29a34ad1f09f84f9ca5c1088b7b667,
         type: 3}
       propertyPath: m_RootOrder
@@ -8220,6 +8225,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cannon
       objectReference: {fileID: 0}
+    - target: {fileID: 4340430052613549717, guid: da29a34ad1f09f84f9ca5c1088b7b667,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5506537528214203840, guid: da29a34ad1f09f84f9ca5c1088b7b667,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5859689361833792260, guid: da29a34ad1f09f84f9ca5c1088b7b667,
+        type: 3}
+      propertyPath: baseMoveSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5859689361833792260, guid: da29a34ad1f09f84f9ca5c1088b7b667,
         type: 3}
       propertyPath: attackInterval
@@ -8228,12 +8248,12 @@ PrefabInstance:
     - target: {fileID: 7312133875317609992, guid: da29a34ad1f09f84f9ca5c1088b7b667,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.58
+      value: 2.82
       objectReference: {fileID: 0}
     - target: {fileID: 7312133875317609992, guid: da29a34ad1f09f84f9ca5c1088b7b667,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.42
+      value: -0.57
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

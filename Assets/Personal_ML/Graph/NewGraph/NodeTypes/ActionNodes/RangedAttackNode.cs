@@ -19,8 +19,10 @@ namespace NewGraph.NodeTypes.ActionNodes
         {
             var right = agent.enemyTransform.right;
             var pos = agent.attackPointTrans.position;
-            var temp = Instantiate(agent.projectile, pos, Quaternion.identity, agent.enemyTransform);
-            temp.GetComponent<Bullet_ML>().travelVector = right;
+            var temp = Instantiate(agent.projectile, pos, Quaternion.identity, agent.enemyTransform).GetComponent<Bullet_ML>();
+            temp.travelVector = right;
+            temp.moveSpeed = agent.moveSpeed;
+            temp.damageAmount = agent.damageAmount;
         }
         
         public override State OnUpdate()
@@ -43,12 +45,8 @@ namespace NewGraph.NodeTypes.ActionNodes
             {
                 return State.Success;
             }
-
-            if (!playerEncounter.HasFlag(CompoundActions.PlayerInFront))
-            {
-              //  return State.Success;
-            }
-
+            
+            
             return State.Update;
         }
     }

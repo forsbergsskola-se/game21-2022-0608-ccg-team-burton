@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7312133875317609992}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackPoint
   m_TagString: AttackPoint
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 5859689361833792260}
   - component: {fileID: 8835822832763328521}
   - component: {fileID: 4603696618562622562}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,6 +310,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TracerEyes
+      objectReference: {fileID: 0}
+    - target: {fileID: 8729064712740827526, guid: 710f3cf467f8dbc46bd4a2768ad01818,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
