@@ -19,6 +19,7 @@ public class BehaviourTreeRunner : MonoBehaviour
 
     [Header("Ranged specific")]
     [SerializeField] private GameObject projectile;
+    [SerializeField] private AssetPool assetPool;
 
     void Start()
     {
@@ -41,11 +42,11 @@ public class BehaviourTreeRunner : MonoBehaviour
             body = GetComponent<Rigidbody2D>(),
             attackInterval = attackInterval,
             moveSpeed = baseMoveSpeed,
-            projectile = projectile,
             grid = grid,
             attackPointTrans = GetComponentsInChildren<Transform>()[^2],
             turnDistance = turnDistance,
-            damageAmount = damageAmount
+            damageAmount = damageAmount,
+            assetPool = GameObject.FindWithTag("AssetPool").GetComponent<AssetPool>()
         });
         readyToRun = true;
     }

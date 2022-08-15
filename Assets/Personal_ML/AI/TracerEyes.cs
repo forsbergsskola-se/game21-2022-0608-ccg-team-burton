@@ -43,9 +43,7 @@ public class TracerEyes : MonoBehaviour
     [SerializeField, Range(0.2f, 1.5f)]private float traceInterval = 0.4f;
     [SerializeField] private EnemyType enemyType;
     [SerializeField] private CapsuleCollider2D _collider2D;
-    [SerializeField, Range(0, 50)] private float adjustBoxTraceX;
-    [SerializeField, Range(0, 50)] private float adjustBoxTraceY;
-    
+
     private int _groundMask;
     private int _boxMask;
     
@@ -163,7 +161,7 @@ public class TracerEyes : MonoBehaviour
     {
         var newMask = 1 << 8;
         var result = Physics2D.BoxCastAll(transform.position, 
-            traceSize, 0, transform.up, traceSize.y / 2, newMask);
+            traceSize, 0, transform.up, traceSize.y / 10, newMask);
         _somethingHit = false;
         var playerNoticed = false;
         
@@ -173,26 +171,29 @@ public class TracerEyes : MonoBehaviour
         {
             _somethingHit = true;
             var layer = h.collider.transform.gameObject.layer;
-
-            switch (layer)
+            
+            if (layer == 8)
             {
-                case 7:
-                    break;
-                case 8:
-                    playerNoticed = true;
-                    break;
+                playerNoticed = true;
+                
+                compoundActions |= CompoundActions.PlayerNoticed;
+                if (CheckIfLookingAtTarget(h.point))
+                {
+                    compoundActions |= CompoundActions.PlayerInFront;
+                }
+                else
+                {
+                    compoundActions  &= ~CompoundActions.PlayerNoticed;
+                    compoundActions  &= ~CompoundActions.PlayerInFront;
+                }
             }
         }
 
-        if (playerNoticed)
-        {
-            compoundActions |= CompoundActions.PlayerNoticed;
-        }
-        else
+        if (!playerNoticed)
         {
             compoundActions  &= ~CompoundActions.PlayerNoticed;
+            compoundActions  &= ~CompoundActions.PlayerInFront;
         }
-
     }
 
     private void TraceBox()

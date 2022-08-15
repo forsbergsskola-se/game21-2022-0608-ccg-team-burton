@@ -41,8 +41,6 @@ public class AiAgent
     public float attackInterval = 0.3f;
     
     public CompoundActions compoundAction;
-    
-    public GameObject projectile;
 
     public float turnDistance = 1f;
 
@@ -51,6 +49,8 @@ public class AiAgent
     public int damageAmount = 1;
 
     public float attackRange = 2;
+
+    public AssetPool assetPool;
     
     public AiAgent()
     {
