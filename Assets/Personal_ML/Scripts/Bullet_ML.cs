@@ -7,9 +7,10 @@ using UnityEngine;
 public class Bullet_ML : MonoBehaviour
 {
     public Vector2 travelVector;
-    [HideInInspector] public float lifetime = 20;
-    private float timeAlive;
+    [HideInInspector] public float lifetime = 10;
+    private float _timeAlive;
     public int damageAmount;
+    public float moveSpeed;
     
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -29,10 +30,10 @@ public class Bullet_ML : MonoBehaviour
 
     void Update()
     {
-       // gameObject.transform.position += (Vector3) travelVector * Time.deltaTime;
-        timeAlive += Time.deltaTime;
+        gameObject.transform.position += (Vector3) travelVector * (Time.deltaTime * moveSpeed);
+        _timeAlive += Time.deltaTime;
 
-        if (timeAlive >= lifetime)
+        if (_timeAlive >= lifetime)
         {
             gameObject.SetActive(false);
         }
