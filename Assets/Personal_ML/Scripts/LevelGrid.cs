@@ -40,7 +40,7 @@ public class LevelGrid : MonoBehaviour
     private Vector2 _max;
     private int _layerMask;
 
-    private float _traceTime = 20.5f;
+    private float _traceTime = 0.5f;
 
     private List<RaycastHit2D> _hitList = new();
     

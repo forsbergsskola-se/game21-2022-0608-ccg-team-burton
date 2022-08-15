@@ -82,7 +82,7 @@ public class TracerEyes : MonoBehaviour
     private void RegisterAttack(int currentHealth)
     {
         compoundActions |= CompoundActions.EnemyAttacked;
-        
+
         if (_somethingHit)
         {
         }
@@ -193,12 +193,9 @@ public class TracerEyes : MonoBehaviour
                 }
             }
         }
-        //Debug.Log($"Compound hit: {compoundActions}");
 
         if (_somethingHit) return;
-        
-        //Debug.Log($"Compound miss: {compoundActions}");
-        
+
         compoundActions  &= ~CompoundActions.PlayerNoticed;
         compoundActions  &= ~CompoundActions.PlayerInFront;
     }
