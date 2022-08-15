@@ -47,8 +47,6 @@ namespace NewGraph.NodeTypes.CompositeNodes
             
             if (eyeComp.HasFlag(CompoundActions.PlayerNoticed))
             {
-                Debug.Log("player noticed");
-
                 currentCommand = CurrentCommand.Attack;
             }
 
@@ -63,8 +61,6 @@ namespace NewGraph.NodeTypes.CompositeNodes
 
         public override State OnUpdate()
         {
-            if(!choiceMade) CheckOptions();
-
             if (currentCommand == CurrentCommand.None) return State.Update;
         
             _currentChoice = ownedNodes[currentCommand];
@@ -79,6 +75,7 @@ namespace NewGraph.NodeTypes.CompositeNodes
 
                 case State.Success:
                     choiceMade = false;
+                    CheckOptions();
                     break;
             }
             return State.Update;

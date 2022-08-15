@@ -51,6 +51,7 @@ public class Combat : MonoBehaviour
         }
     }
 
+     //Is triggered in rat attack animation event
      public void EnemyAttack()
      {
          EnemyLayers = LayerMask.GetMask("Player");

@@ -50,7 +50,6 @@ public class SelectNode : CompositeNode
             {
                 currentCommand = CurrentCommand.Jump;
             }
-            
         }
 
         else if (comp.HasFlag(CompoundActions.PlayerNoticed) && comp.HasFlag(CompoundActions.GroundSeen))
@@ -137,6 +136,7 @@ public class SelectNode : CompositeNode
     
     public override State OnUpdate()
     {
+        if (!choiceMade) return State.Update;
         _currentChoice = ownedNodes[currentCommand];
 
         switch (_currentChoice.Update())

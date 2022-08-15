@@ -158,33 +158,14 @@ public class Pursue : State_ML
     public Pursue(EnemyVars_ML enemyVarsMl)
         : base(enemyVarsMl)
     {
-        Debug.Log("Pursue state");
         EnemyVarsMl.animator.SetBool(Animator.StringToHash("Enemy_Walk"), true);
         Name = STATE.Pursue;
     }
 
     public override void Update()
     {
-        var distance = Vector3.Distance(EnemyVarsMl.tracerEyes.PlayerTrans.position, EnemyVarsMl.enemyRef.gameObject.transform.position);
+      
         
-        if (distance > EnemyVarsMl.GetAttackDistance + 20)
-        {
-            Debug.Log("Player out of attack range");
-            NextStateMl = new Patrol(EnemyVarsMl);
-            Stage = EVENT.Exit;
-        }
-
-        else if(EnemyVarsMl.tracerEyes.GetPlayerHealth() <= 0)
-        {
-            Debug.Log("Player is dead");
-            NextStateMl = new Patrol(EnemyVarsMl);
-            Stage = EVENT.Exit;
-        }
-        
-        else
-        {
-            SimpleMove();
-        }
     }
     
     private void TurnAround()

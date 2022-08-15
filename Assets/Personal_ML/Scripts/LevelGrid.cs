@@ -65,7 +65,7 @@ public class LevelGrid : MonoBehaviour
 
         foreach (var e in result)
         {
-            e.collider.transform.gameObject.GetComponentInChildren<TracerEyes>().grid = this;
+          
         }
     }
 
@@ -107,26 +107,12 @@ public class LevelGrid : MonoBehaviour
 
         return square;
     }
-
-    private Tuple<Vector2, Vector2> ScanUntilEdges(Vector2 startPoint)
-    {
-        var result = new Tuple<Vector2, Vector2>(Vector2.zero, Vector2.zero);
-
-        var point = startPoint;
-
-        
-        
-        return result;
-    }
-
+    
     private Vector2 ScanUntilEdge(Vector2 startPoint, float increment)
     {
         var breakLoop = false;
-        
         List<Vector2> newHits = new();
         
-        
-
         while (!breakLoop)
         {
             var aHit = SingleTrace(startPoint, new Vector2(0,-1), 0.4f);

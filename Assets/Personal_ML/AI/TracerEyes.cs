@@ -48,26 +48,15 @@ public class TracerEyes : MonoBehaviour
     
     private int _groundMask;
     private int _boxMask;
-
-    [HideInInspector] public LevelGrid grid;
-
-    private float _timeSinceTrace;
     
-  //  public Vector2 EstimatedJumpForce { get; private set; }
-
+    private float _timeSinceTrace;
     public Vector2 PlayerPos { get; private set; }
     
-    
-    private bool _underAttack;
-
     private Health _playerHealth;
     private Health _enemyHealth;
     private bool _somethingHit;
 
-    private bool _enemyHit;
-
     private List<RaycastHit2D> _pointsList = new();
-    [HideInInspector] public Transform PlayerTrans;
     [HideInInspector] public CompoundActions compoundActions;
     [HideInInspector] public float distanceToWall;
 
@@ -232,13 +221,11 @@ public class TracerEyes : MonoBehaviour
             }
         }
 
-        if (!playerNoticed)
-        {
-            compoundActions  &= ~CompoundActions.PlayerInFront;
-            compoundActions  &= ~CompoundActions.PlayerInAttackRange;
-            compoundActions  &= ~CompoundActions.PlayerBehind;
-            compoundActions  &= ~CompoundActions.PlayerNoticed;
-        }
+        if (playerNoticed) return;
+        compoundActions  &= ~CompoundActions.PlayerInFront;
+        compoundActions  &= ~CompoundActions.PlayerInAttackRange;
+        compoundActions  &= ~CompoundActions.PlayerBehind;
+        compoundActions  &= ~CompoundActions.PlayerNoticed;
     }
     
 
@@ -247,8 +234,7 @@ public class TracerEyes : MonoBehaviour
         var seeing = CheckIfLookingAtTarget(hit.point);
         PlayerPos = hit.collider.transform.position;
         var distance = Vector2.Distance(PlayerPos, transform.position);
-        var awareOfPlayer = false;
-        
+
         if (seeing)
         {
             compoundActions |= CompoundActions.PlayerNoticed;
@@ -272,6 +258,7 @@ public class TracerEyes : MonoBehaviour
             if (compoundActions.HasFlag(CompoundActions.EnemyAttacked))
             {
                 compoundActions  &= ~CompoundActions.PlayerInFront;
+                compoundActions  &= ~CompoundActions.EnemyAttacked;
                 
                 compoundActions |= CompoundActions.AwareOfPlayer;
                 compoundActions |= CompoundActions.PlayerBehind;
