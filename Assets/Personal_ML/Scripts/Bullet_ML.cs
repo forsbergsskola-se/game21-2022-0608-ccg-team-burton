@@ -39,7 +39,7 @@ public class Bullet_ML : MonoBehaviour
         gameObject.transform.position += (Vector3) travelVector * (Time.deltaTime * moveSpeed);
         _timeAlive += Time.deltaTime;
 
-        if (_timeAlive >= lifetime)
+        if (_timeAlive >= maxLifespan)
         {
             gameObject.SetActive(false);
         }
