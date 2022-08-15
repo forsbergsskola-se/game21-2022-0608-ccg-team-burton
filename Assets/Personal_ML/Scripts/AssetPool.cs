@@ -92,5 +92,6 @@ public class AssetPool : MonoBehaviour
         comp.moveSpeed = moveSpeed;
         comp.damageAmount = damageAmount;
         comp.maxLifespan = maxLifespan;
+        comp.timeAlive = 0;
     }
 }

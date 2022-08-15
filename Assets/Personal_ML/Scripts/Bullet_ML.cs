@@ -8,15 +8,15 @@ using UnityEngine;
 public class Bullet_ML : MonoBehaviour
 {
     public Vector2 travelVector;
-    [HideInInspector] public float lifetime = 10;
-    private float _timeAlive;
+    public float timeAlive;
     public int damageAmount;
     public float moveSpeed;
     public float maxLifespan;
 
     private void Start()
     {
-        _timeAlive = 0;
+        timeAlive = 0;
+        Debug.Log($"start bullet: {timeAlive}");
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -28,7 +28,7 @@ public class Bullet_ML : MonoBehaviour
             col.gameObject.GetComponent<IDamageable>().ModifyHealth(-damageAmount);
             gameObject.SetActive(false);
         }
-        else if( _timeAlive < 1)
+        else if( timeAlive < 1)
         {
             Physics2D.IgnoreCollision(col, transform.GetComponent<Collider2D>());
         }
@@ -37,10 +37,11 @@ public class Bullet_ML : MonoBehaviour
     void Update()
     {
         gameObject.transform.position += (Vector3) travelVector * (Time.deltaTime * moveSpeed);
-        _timeAlive += Time.deltaTime;
+        timeAlive += Time.deltaTime;
 
-        if (_timeAlive >= maxLifespan)
+        if (timeAlive >= maxLifespan)
         {
+            Debug.Log("remove bullet");
             gameObject.SetActive(false);
         }
     }
