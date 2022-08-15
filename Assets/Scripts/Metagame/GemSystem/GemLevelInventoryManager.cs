@@ -27,6 +27,10 @@ public class GemLevelInventoryManager : MonoBehaviour
     private List<GameObject> _currentItemsInInventory = new();
     private GameObject[] _currentSlottedGems;
     
+    private float _calcAtkBonus;
+    private float  _calcHPBonus;
+    private float _calcMoveSpeedBonus;
+    
     private void Start()
     {
         _currentSlottedGems = new GameObject[_levelSlots.Length];
@@ -82,7 +86,7 @@ public class GemLevelInventoryManager : MonoBehaviour
 
 
         var gemInSlot = Instantiate(_inventoryItem, Vector2.zero, Quaternion.identity);
-        for (int i = 0; i < _levelSlots.Length; i++)
+        for (var i = 0; i < _levelSlots.Length; i++)
         {
             if (_currentSlottedGems[i] != null) continue;
             _levelSlotIndex = i;
@@ -99,36 +103,36 @@ public class GemLevelInventoryManager : MonoBehaviour
         _oneShotSound.PlaySound();
     }
 
-   float atkBonus = 0f;
-        float  hPBonus = 0f;
-        float moveSpeedBonus = 0f;
+
     public void CalculateBonuses(MaterialItem item, bool subtraction)
     {
      
             if (item.GetItemID().Contains("red"))
             {
                 if (subtraction)
-                    atkBonus -= item.LevelBonus;
+                    _calcAtkBonus -= item.LevelBonus;
                 else
-                    atkBonus += item.LevelBonus;
+                    _calcAtkBonus += item.LevelBonus;
                 
-            } else if (item.GetItemID().Contains("green"))
+            }
+            else if (item.GetItemID().Contains("green"))
             {
                 if (subtraction)
-                    hPBonus -= item.LevelBonus;
+                    _calcHPBonus -= item.LevelBonus;
                 else
-                    hPBonus += item.LevelBonus;
+                    _calcHPBonus += item.LevelBonus;
     
-            } else if (item.GetItemID().Contains("blue"))
+            }
+            else if (item.GetItemID().Contains("blue"))
             {
                 if (subtraction)
-                    moveSpeedBonus -= item.LevelBonus;
+                    _calcMoveSpeedBonus -= item.LevelBonus;
                 else
-                    moveSpeedBonus += item.LevelBonus;
+                    _calcMoveSpeedBonus += item.LevelBonus;
                 
             }
             
-            UpdateBonusTexts(atkBonus,hPBonus,moveSpeedBonus);
+            UpdateBonusTexts(_calcAtkBonus,_calcHPBonus,_calcMoveSpeedBonus);
         
     }
 
@@ -149,10 +153,10 @@ public class GemLevelInventoryManager : MonoBehaviour
     private void OnDisable()
     {
         _levelSlotIndex = 0;
-        hPBonus = 0;
-        atkBonus = 0;
-        moveSpeedBonus = 0;
-        UpdateBonusTexts(atkBonus,hPBonus,moveSpeedBonus);
+        _calcHPBonus = 0;
+        _calcAtkBonus = 0;
+        _calcMoveSpeedBonus = 0;
+        UpdateBonusTexts(_calcAtkBonus,_calcHPBonus,_calcMoveSpeedBonus);
     }
 
     public void SaveGemModifiersOnPlay() //Called on starting level button
@@ -164,5 +168,4 @@ public class GemLevelInventoryManager : MonoBehaviour
             PlayerPrefs.SetInt(slottedGemData.GetItemID(), PlayerPrefs.GetInt(slottedGemData.GetItemID()) -1);
         }
     }
-
 }
