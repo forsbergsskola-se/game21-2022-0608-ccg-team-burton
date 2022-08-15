@@ -65,7 +65,7 @@ public class GemLevelInventoryManager : MonoBehaviour
 
         if (!FreeSlotExist())
             return;
-        Debug.Log($"Time to slot: {gem.GetDisplayName()}");
+        
         var gemInSlot = Instantiate(_inventoryItem, _levelSlots[_levelSlotIndex].transform.position, Quaternion.identity);
         gemInSlot.GetComponent<LevelGemSlot>().SetItemSlot(gem);
         gemInSlot.GetComponentInChildren<TMP_Text>().SetText("");
