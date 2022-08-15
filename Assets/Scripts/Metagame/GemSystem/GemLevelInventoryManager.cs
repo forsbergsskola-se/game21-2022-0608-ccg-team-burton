@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -102,15 +103,7 @@ public class GemLevelInventoryManager : MonoBehaviour
     }
     public bool FreeSlotExist()
     {
-        foreach (var slottedGem in _currentSlottedGems)
-        {
-            if (slottedGem == null)
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return _currentSlottedGems.Any(slottedGem => slottedGem == null);
     }
     
     private void OnDisable()
