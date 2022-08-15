@@ -9,7 +9,7 @@ public class LevelGemSlot : MonoBehaviour, IPointerClickHandler
     [SerializeField] private TMP_Text _amount;
     private Image _spriteRenderer;
     private GemLevelInventoryManager _slotManager => FindObjectOfType<GemLevelInventoryManager>();
-    private MaterialItem _item { get; set; }
+    public MaterialItem _item { get; private set; }
 
     private void Awake()
     {

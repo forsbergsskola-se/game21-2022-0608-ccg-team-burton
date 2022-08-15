@@ -36,7 +36,7 @@ public class GemLevelInventoryManager : MonoBehaviour
         
         DestroyCurrentItemsInInventory();
         
-        foreach (var materialItem in _library.MatlerialsLibrarySo.InventoryLibrary)
+        foreach (var materialItem in _library.MatlerialsLibrarySo.Materials)
         {
             if (materialItem.GetItemID().Contains("red")||materialItem.GetItemID().Contains("blue")||materialItem.GetItemID().Contains("green"))
             {
@@ -76,12 +76,9 @@ public class GemLevelInventoryManager : MonoBehaviour
         var gemInSlot = Instantiate(_inventoryItem, Vector2.zero, Quaternion.identity);
         for (int i = 0; i < _levelSlots.Length; i++)
         {
-            if (_currentSlottedGems[i] == null)
-            {
-                Debug.Log("null");
-                _levelSlotIndex = i;
-                break;
-            }
+            if (_currentSlottedGems[i] != null) continue;
+            _levelSlotIndex = i;
+            break;
         }
         _currentSlottedGems[_levelSlotIndex] = gemInSlot;
         
@@ -89,7 +86,6 @@ public class GemLevelInventoryManager : MonoBehaviour
         gemInSlot.GetComponent<LevelGemSlot>().SetItemSlot(gem);
         gemInSlot.GetComponentInChildren<TMP_Text>().SetText("");
         gemInSlot.transform.parent = _levelSlotParentTransform;
-        // _levelSlotIndex++;
     }
 
     public void DestroyCurrentSlottedGems()
@@ -111,12 +107,13 @@ public class GemLevelInventoryManager : MonoBehaviour
         _levelSlotIndex = 0;
     }
 
-    public void SaveGemModifiersOnPlay()
+    public void SaveGemModifiersOnPlay() //Called on starting level button
     {
-        // foreach (var VARIABLE in COLLECTION)
-        // {
-        //     
-        // }
+        foreach (var slottedGem in _currentSlottedGems)
+        {
+            var slottedGemData = slottedGem.GetComponent<LevelGemSlot>()._item;
+            PlayerPrefs.SetFloat(slottedGemData.LevelBonusID, slottedGemData.LevelBonus);
+        }
     }
 
 }

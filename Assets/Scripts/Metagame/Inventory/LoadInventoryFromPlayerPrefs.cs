@@ -34,7 +34,7 @@ public class LoadInventoryFromPlayerPrefs : MonoBehaviour
         }
         var index = 0;
         
-        foreach (var item in _libraries.MatlerialsLibrarySo.InventoryLibrary)
+        foreach (var item in _libraries.MatlerialsLibrarySo.Materials)
         {
             if (PlayerPrefs.GetInt(item.GetItemID()) <= 0) continue;
             var itemInSlot = Instantiate(_inventorySlot, _inventorySlots[index].transform.position , Quaternion.identity);

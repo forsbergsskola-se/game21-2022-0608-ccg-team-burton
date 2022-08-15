@@ -8,7 +8,7 @@ public class DebugSaveClear : MonoBehaviour
    
    public void ClearInventoryFromItems()
    {
-      foreach (var item in Library.MatlerialsLibrarySo.InventoryLibrary)
+      foreach (var item in Library.MatlerialsLibrarySo.Materials)
       {
          PlayerPrefs.DeleteKey(item.GetItemID());
          Debug.Log(item.GetItemID() +" was deleted!");
@@ -68,7 +68,7 @@ public class DebugSaveClear : MonoBehaviour
 
    public void AddGems()
    {
-      foreach (var materialItem in Library.MatlerialsLibrarySo.InventoryLibrary)
+      foreach (var materialItem in Library.MatlerialsLibrarySo.Materials)
       {
          if (materialItem.GetItemID().Contains("red") || materialItem.GetItemID().Contains("blue") ||
              materialItem.GetItemID().Contains("green"))
