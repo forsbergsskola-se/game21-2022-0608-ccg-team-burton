@@ -19,7 +19,7 @@ namespace NewGraph.NodeTypes.ActionNodes
         {
             var right = agent.enemyTransform.right;
             var pos = agent.attackPointTrans.position;
-            agent.assetPool.RequestObject(pos, right, agent.moveSpeed, agent.damageAmount, agent.projectileLifespan);
+            agent.assetPool.RequestBullet(pos, right, agent.moveSpeed, agent.damageAmount, agent.projectileLifespan);
         }
         
         public override State OnUpdate()
