@@ -85,10 +85,10 @@ public class SelectNode : CompositeNode
     {
         var ground = agent.grid.GetCurrentGround(agent.enemyTransform.position);
         var dir = agent.enemyTransform.right.x > 0;
-
+        
         if (dir)
         {
-            
+
             agent.currentDestination = atEnd ? ground.start : ground.end;
         }
         else
@@ -136,7 +136,7 @@ public class SelectNode : CompositeNode
     
     public override State OnUpdate()
     {
-        if (!choiceMade) return State.Update;
+        //if (!choiceMade) return State.Update;
         _currentChoice = ownedNodes[currentCommand];
 
         switch (_currentChoice.Update())

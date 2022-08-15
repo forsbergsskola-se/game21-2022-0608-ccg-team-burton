@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7312133875317609992}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackPoint
   m_TagString: AttackPoint
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -45,7 +45,9 @@ GameObject:
   - component: {fileID: 4340430052613549714}
   - component: {fileID: 4340430052613549715}
   - component: {fileID: 5859689361833792260}
-  m_Layer: 0
+  - component: {fileID: 8835822832763328521}
+  - component: {fileID: 4603696618562622562}
+  m_Layer: 7
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +179,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5
 --- !u!114 &5859689361833792260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,11 +194,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tree: {fileID: 11400000, guid: 9bd5a5207455ceb4380a8977e4c6136d, type: 2}
   readyToRun: 0
-  attackInterval: 2
-  baseMoveSpeed: 0
-  pursueMoveSpeed: 0
+  attackInterval: 4
+  baseMoveSpeed: 5
+  pursueMoveSpeed: 5.74
+  turnDistance: 0.75
+  damageAmount: 1
   projectile: {fileID: 4633007875306360498, guid: 5bd700310da3252438f7efa5d29d6a4b,
     type: 3}
+--- !u!114 &8835822832763328521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4340430052613549717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a62179065a33a8c43879a7035312207e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 2
+  _invulnerablilityTime: 1
+  playerDies: {fileID: 0}
+--- !u!114 &4603696618562622562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4340430052613549717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d647cd166645fb4790db0e667c3cb9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _coinValue: 10
 --- !u!1001 &3839592114711223366
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -279,6 +311,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TracerEyes
+      objectReference: {fileID: 0}
+    - target: {fileID: 8729064712740827526, guid: 710f3cf467f8dbc46bd4a2768ad01818,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
