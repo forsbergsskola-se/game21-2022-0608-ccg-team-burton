@@ -44,29 +44,31 @@ public class LevelCompleted : MonoBehaviour
     }
 
     private void StarsAchieved()
+    {
+        var healthLeft = PlayerHealth.CurrentHealth;
+
+        if (healthLeft <= 2)
         {
-            var healthLeft = PlayerHealth.CurrentHealth;
-           
-            switch (healthLeft)
-            {
-                case <= 2:
-                    Stars[0].enabled = true;
-                    break;
+            Stars[0].enabled = true;
 
-                case <= 4:
-                    Stars[0].enabled = true;
-                    Stars[1].enabled = true;
-                    break;
-
-                default:
-                    Stars[0].enabled = true;
-                    Stars[1].enabled = true;
-                    Stars[2].enabled = true;
-
-                    currentStarsNum = 1;
-                    break;
-            }
+            currentStarsNum = 1;
         }
+        else if (healthLeft <= 4)
+        {
+            Stars[0].enabled = true;
+            Stars[1].enabled = true;
+
+            currentStarsNum = 2;
+        }
+        else
+        {
+            Stars[0].enabled = true;
+            Stars[1].enabled = true;
+            Stars[2].enabled = true;
+
+            currentStarsNum = 3;
+        }
+    }
 
         private void SaveStars(int starsNum)
         {

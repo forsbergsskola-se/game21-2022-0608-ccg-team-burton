@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Entity;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Bullet_ML : MonoBehaviour
@@ -11,21 +12,29 @@ public class Bullet_ML : MonoBehaviour
     private float _timeAlive;
     public int damageAmount;
     public float moveSpeed;
-    
+
+    private void Start()
+    {
+        _timeAlive = 0;
+    }
+
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Player"))
+        var layer = col.transform.gameObject.layer;
+        
+        if (layer == 8)
         {
             col.gameObject.GetComponent<IDamageable>().ModifyHealth(-damageAmount);
             gameObject.SetActive(false);
         }
-
-        if (col.gameObject.CompareTag("Enemy"))
+        else if( _timeAlive < 1)
+        {
+            Physics2D.IgnoreCollision(col, transform.GetComponent<Collider2D>());
+        }
+        else if(layer is 6 or 10)
         {
             gameObject.SetActive(false);
         }
-        
-      //  gameObject.SetActive(false);
     }
 
     void Update()
