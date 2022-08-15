@@ -9,16 +9,21 @@ using UnityEngine.EventSystems;
 
 public class GemLevelInventoryManager : MonoBehaviour
 {
+    
+    //Public fields
+    public int _levelSlotIndex = 0;
+
+    //Private fields
     [SerializeField] private GameObject[] _levelSlots;
     [SerializeField] private GameObject[] _inventorySlots;
     [SerializeField] private Libraries _library;
     [SerializeField] private GameObject _inventoryItem;
     [SerializeField] private Transform _inventorySlotParentTransform;
     [SerializeField] private Transform _levelSlotParentTransform;
+    [SerializeField] private PlayOneShotSound _oneShotSound;
     private List<GameObject> _currentItemsInInventory = new();
     private GameObject[] _currentSlottedGems;
-    public int _levelSlotIndex = 0;
-
+    
     private void Start()
     {
         _currentSlottedGems = new GameObject[_levelSlots.Length];
@@ -86,6 +91,7 @@ public class GemLevelInventoryManager : MonoBehaviour
         gemInSlot.GetComponent<LevelGemSlot>().SetItemSlot(gem);
         gemInSlot.GetComponentInChildren<TMP_Text>().SetText("");
         gemInSlot.transform.parent = _levelSlotParentTransform;
+        _oneShotSound.PlaySound();
     }
 
     public void DestroyCurrentSlottedGems()
