@@ -1,6 +1,7 @@
 using Entity;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class LevelCompleted : MonoBehaviour
@@ -12,8 +13,9 @@ public class LevelCompleted : MonoBehaviour
     public Health PlayerHealth;
     public ItemCollector ItemCollector;
     public int CoinBonus = 500;
-    public int currentStarsNum = 0;
-    public int levelIndex;
+    public int CurrentStarsNum = 0;
+    public int LevelIndex;
+    public GameObject[] Enemies;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -38,7 +40,7 @@ public class LevelCompleted : MonoBehaviour
             StarsAchieved();
             UpdateCoinText(currentCoins);
             UpdateTotalCoinText(currentCoins);
-            SaveStars(currentStarsNum);
+            SaveStars(CurrentStarsNum);
         }
 
     }
@@ -47,39 +49,30 @@ public class LevelCompleted : MonoBehaviour
     {
         var healthLeft = PlayerHealth.CurrentHealth;
 
-        if (healthLeft <= 2)
+        if (healthLeft == 6)
         {
-            Stars[0].enabled = true;
-
-            currentStarsNum = 1;
+            CurrentStarsNum = 1;
         }
-        else if (healthLeft <= 4)
-        {
-            Stars[0].enabled = true;
-            Stars[1].enabled = true;
-
-            currentStarsNum = 2;
-        }
-        else
-        {
-            Stars[0].enabled = true;
-            Stars[1].enabled = true;
-            Stars[2].enabled = true;
-
-            currentStarsNum = 3;
-        }
+        // else if (healthLeft <= 4)
+        // {
+        //     currentStarsNum = 0;
+        // }
+        // else
+        // {
+        //     currentStarsNum = 0;
+        // }
     }
 
         private void SaveStars(int starsNum)
         {
-            currentStarsNum = starsNum;
+            CurrentStarsNum = starsNum;
 
            
 
-            if (currentStarsNum > PlayerPrefs.GetInt("Lv" + levelIndex))
+            if (CurrentStarsNum > PlayerPrefs.GetInt("Lv" + LevelIndex))
             {
-                PlayerPrefs.SetInt("Lv" + levelIndex, starsNum);
-                Debug.Log("Saved as " + PlayerPrefs.GetInt("Lv" + levelIndex, starsNum).ToString());
+                PlayerPrefs.SetInt("Lv" + LevelIndex, starsNum);
+                Debug.Log("Saved as " + PlayerPrefs.GetInt("Lv" + LevelIndex, starsNum).ToString());
             }
 
         }
