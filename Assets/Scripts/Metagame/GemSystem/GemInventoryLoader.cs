@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GemInventoryLoader : MonoBehaviour
 {
@@ -12,7 +13,6 @@ public class GemInventoryLoader : MonoBehaviour
     [SerializeField] private Transform _inventorySlotParentTransform;
     private List<GameObject> _currentItems = new() ;
 
-    
     
     // Start is called before the first frame update
     void Start()
@@ -43,7 +43,7 @@ public class GemInventoryLoader : MonoBehaviour
         var gemInSlot = Instantiate(_inventoryItem, _inventorySlots[index].transform.position, Quaternion.identity);
         _currentItems.Add(gemInSlot);
         gemInSlot.transform.parent = _inventorySlotParentTransform;
-        gemInSlot.GetComponent<InventorySlot>().SetItemSlot(materialItem);
+        gemInSlot.GetComponent<LevelInventorySlotLevel>().SetItemSlot(materialItem);
         index++;
         return false;
     }
