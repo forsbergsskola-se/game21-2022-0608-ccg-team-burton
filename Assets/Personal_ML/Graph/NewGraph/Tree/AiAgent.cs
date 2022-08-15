@@ -51,6 +51,8 @@ public class AiAgent
     public float attackRange = 2;
 
     public AssetPool assetPool;
+
+    public float projectileLifespan;
     
     public AiAgent()
     {
