@@ -123,6 +123,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!224 &857806209 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 328214327, guid: 1c9a3b07db90ccc4985c681aa62b3ec8,
+    type: 3}
+  m_PrefabInstance: {fileID: 8188770375034683487}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1136247761
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,6 +562,16 @@ PrefabInstance:
       propertyPath: currencyUpdater
       value: 
       objectReference: {fileID: 2054798412}
+    - target: {fileID: 236905935625410424, guid: 1c9a3b07db90ccc4985c681aa62b3ec8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3441949836686083656, guid: 1c9a3b07db90ccc4985c681aa62b3ec8,
+        type: 3}
+      propertyPath: _levelSlotParentTransform
+      value: 
+      objectReference: {fileID: 857806209}
     - target: {fileID: 8188770375977295125, guid: 1c9a3b07db90ccc4985c681aa62b3ec8,
         type: 3}
       propertyPath: m_Pivot.x

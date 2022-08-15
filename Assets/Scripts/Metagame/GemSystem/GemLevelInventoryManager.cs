@@ -1,20 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GemInventoryLoader : MonoBehaviour
+public class GemLevelInventoryManager : MonoBehaviour
 {
-
     [SerializeField] private GameObject[] _levelSlots;
     [SerializeField] private GameObject[] _inventorySlots;
     [SerializeField] private Libraries _library;
     [SerializeField] private GameObject _inventoryItem;
     [SerializeField] private Transform _inventorySlotParentTransform;
-    private List<GameObject> _currentItems = new() ;
-
+    [SerializeField] private Transform _levelSlotParentTransform;
+    private List<GameObject> _currentSlottedGems = new();
+    private List<GameObject> _currentItemsInInventory = new() ;
     
-    // Start is called before the first frame update
     void Start()
     {
      LoadGemsFromInventory();   
@@ -41,7 +41,7 @@ public class GemInventoryLoader : MonoBehaviour
             return true;
 
         var gemInSlot = Instantiate(_inventoryItem, _inventorySlots[index].transform.position, Quaternion.identity);
-        _currentItems.Add(gemInSlot);
+        _currentItemsInInventory.Add(gemInSlot);
         gemInSlot.transform.parent = _inventorySlotParentTransform;
         gemInSlot.GetComponent<LevelInventorySlotLevel>().SetItemSlot(materialItem);
         index++;
@@ -50,9 +50,25 @@ public class GemInventoryLoader : MonoBehaviour
 
     private void DestroyCurrentItemsInInventory()
     {
-        foreach (var currentItem in _currentItems)
+        foreach (var currentItem in _currentItemsInInventory)
         {
             Destroy(currentItem);
         }
+    }
+
+    private int index = 0;
+    public void SlotGemInLevel(MaterialItem gem)
+    {
+
+        if (index >= _levelSlots.Length)
+            return;
+        Debug.Log($"Time to slot: {gem.GetDisplayName()}");
+        var gemInSlot = Instantiate(_inventoryItem, _levelSlots[index].transform.position, Quaternion.identity);
+        gemInSlot.transform.parent = _levelSlotParentTransform;
+        index++;
+        
+        PlayerPrefs.SetInt(gem.GetItemID(), PlayerPrefs.GetInt(gem.GetItemID())-1);
+        LoadGemsFromInventory();
+
     }
 }

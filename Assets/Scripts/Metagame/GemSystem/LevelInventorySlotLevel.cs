@@ -26,6 +26,6 @@ public class LevelInventorySlotLevel : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log($"Item: {_item.GetDisplayName()}");
+        GetComponentInParent<GemLevelInventoryManager>().SlotGemInLevel(_item);
     }
 }
