@@ -594,7 +594,7 @@ GameObject:
   - component: {fileID: 898239390}
   - component: {fileID: 898239391}
   m_Layer: 5
-  m_Name: Retry
+  m_Name: Retry Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -755,7 +755,7 @@ PrefabInstance:
     - target: {fileID: 7170323028909286968, guid: 04c10a054cd8e4e4d84845555b4486e4,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7170323028909286970, guid: 04c10a054cd8e4e4d84845555b4486e4,
         type: 3}
@@ -1195,6 +1195,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8416864657275709948, guid: 83c6e3622e3a81d4da7fb889064a7ebe,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 864183908}
+    - targetCorrespondingSourceObject: {fileID: 8416864657275709948, guid: 83c6e3622e3a81d4da7fb889064a7ebe,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1735990706}
     - targetCorrespondingSourceObject: {fileID: 8416864657275709948, guid: 83c6e3622e3a81d4da7fb889064a7ebe,
         type: 3}
@@ -1208,10 +1212,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1738854638}
-    - targetCorrespondingSourceObject: {fileID: 8416864657275709948, guid: 83c6e3622e3a81d4da7fb889064a7ebe,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 864183908}
     - targetCorrespondingSourceObject: {fileID: 8416864657275709948, guid: 83c6e3622e3a81d4da7fb889064a7ebe,
         type: 3}
       insertIndex: -1
@@ -1373,7 +1373,7 @@ GameObject:
   - component: {fileID: 1735454048}
   - component: {fileID: 1735454051}
   m_Layer: 5
-  m_Name: Settings
+  m_Name: Settings Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1455,6 +1455,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1735454049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1524,7 +1536,7 @@ GameObject:
   - component: {fileID: 1735990707}
   - component: {fileID: 1735990710}
   m_Layer: 5
-  m_Name: Resume
+  m_Name: Resume Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1547,7 +1559,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.197}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 12.914966, y: 81.85502}
+  m_AnchoredPosition: {x: 13, y: 82}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1735990707
@@ -1676,7 +1688,7 @@ GameObject:
   - component: {fileID: 1738854642}
   - component: {fileID: 1738854643}
   m_Layer: 5
-  m_Name: Home
+  m_Name: Home Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1911,18 +1923,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 864183907}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 762462495}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6

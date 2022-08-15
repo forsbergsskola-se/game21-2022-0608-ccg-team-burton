@@ -22,16 +22,14 @@ public class PauseMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     
     public void OnPointerEnter(PointerEventData eventData)
     {
-        DebugText.text = $"Hovering over {name}";
-        PauseMenuImage.sprite = PauseMenuChange;
+        //PauseMenuImage.sprite = PauseMenuChange;
     }
 
     
     
     public void OnPointerExit(PointerEventData eventData)
     {
-        DebugText.text = "Nothing Selected";
-        PauseMenuImage.sprite = PauseMenuOriginal;
+        //PauseMenuImage.sprite = PauseMenuOriginal;
     }
 
     
