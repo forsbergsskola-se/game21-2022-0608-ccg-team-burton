@@ -29,7 +29,6 @@ public class SelectNode : CompositeNode
     private void CheckOptions()
     {
         var comp = agent.enemyEyes.compoundActions;
-        Debug.Log("check");
 
         if (comp.HasFlag(CompoundActions.EnemyDead))
         {
@@ -76,7 +75,6 @@ public class SelectNode : CompositeNode
         }
         else
         {
-            Debug.Log("check2");
             GetTarget(Vector2.Distance(agent.currentDestination, agent.attackPointTrans.position) <= agent.turnDistance);
         }
 
@@ -87,18 +85,15 @@ public class SelectNode : CompositeNode
     {
         var ground = agent.grid.GetCurrentGround(agent.enemyTransform.position);
         var dir = agent.enemyTransform.right.x > 0;
-
-        Debug.Log("check3");
+        
         if (dir)
         {
-            Debug.Log("check4");
-            
+
             agent.currentDestination = atEnd ? ground.start : ground.end;
         }
         else
         {
             agent.currentDestination = atEnd ? ground.end : ground.start;
-            Debug.Log(agent.currentDestination);
         }
 
         currentCommand = CurrentCommand.MoveToPosition;

@@ -10,7 +10,6 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         public override void OnStart()
         {
-            Debug.Log("walking");
             agent.anim.SetBool(Animator.StringToHash("Enemy_Walk"), true);
             waitForExit = 0;
             canTurn = true;
