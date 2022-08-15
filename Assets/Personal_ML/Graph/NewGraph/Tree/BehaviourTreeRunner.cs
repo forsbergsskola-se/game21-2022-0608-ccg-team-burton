@@ -17,10 +17,6 @@ public class BehaviourTreeRunner : MonoBehaviour
     [SerializeField, Range(0.5f, 3f)]private float turnDistance;
     [SerializeField, Range(0, 10)]private int damageAmount;
 
-    [Header("Ranged specific")]
-    [SerializeField] private GameObject projectile;
-    [SerializeField] private AssetPool assetPool;
-
     void Start()
     {
         Setup();
