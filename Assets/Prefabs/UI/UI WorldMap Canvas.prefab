@@ -1296,6 +1296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62c077f746464248b08aa479048ce37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _levelSlotIndex: 0
   _levelSlots:
   - {fileID: 1571935394}
   - {fileID: 716817725}
@@ -1311,7 +1312,7 @@ MonoBehaviour:
     type: 3}
   _inventorySlotParentTransform: {fileID: 617601907}
   _levelSlotParentTransform: {fileID: 328214327}
-  _levelSlotIndex: 0
+  _oneShotSound: {fileID: 0}
 --- !u!1 &622856384
 GameObject:
   m_ObjectHideFlags: 0
