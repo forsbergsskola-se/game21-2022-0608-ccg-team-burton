@@ -112,7 +112,8 @@ public class GemLevelInventoryManager : MonoBehaviour
         foreach (var slottedGem in _currentSlottedGems)
         {
             var slottedGemData = slottedGem.GetComponent<LevelGemSlot>()._item;
-            PlayerPrefs.SetFloat(slottedGemData.LevelBonusID, slottedGemData.LevelBonus);
+            PlayerPrefs.SetFloat(slottedGemData.LevelBonusID, PlayerPrefs.GetFloat(slottedGemData.LevelBonusID)+slottedGemData.LevelBonus);
+            PlayerPrefs.SetInt(slottedGemData.GetItemID(), PlayerPrefs.GetInt(slottedGemData.GetItemID()) -1);
         }
     }
 
