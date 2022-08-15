@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,12 +14,14 @@ public class GemLevelInventoryManager : MonoBehaviour
     [SerializeField] private GameObject _inventoryItem;
     [SerializeField] private Transform _inventorySlotParentTransform;
     [SerializeField] private Transform _levelSlotParentTransform;
-    private List<GameObject> _currentSlottedGems = new();
-    private List<GameObject> _currentItemsInInventory = new() ;
-    
-    void Start()
+    private List<GameObject> _currentItemsInInventory = new();
+    private int _levelSlotIndex = 0;
+
+ 
+    private void OnEnable()
     {
-     LoadGemsFromInventory();   
+        LoadGemsFromInventory();   
+
     }
 
     public void LoadGemsFromInventory()
@@ -43,7 +47,7 @@ public class GemLevelInventoryManager : MonoBehaviour
         var gemInSlot = Instantiate(_inventoryItem, _inventorySlots[index].transform.position, Quaternion.identity);
         _currentItemsInInventory.Add(gemInSlot);
         gemInSlot.transform.parent = _inventorySlotParentTransform;
-        gemInSlot.GetComponent<LevelInventorySlotLevel>().SetItemSlot(materialItem);
+        gemInSlot.GetComponent<LevelGemSlot>().SetItemSlot(materialItem);
         index++;
         return false;
     }
@@ -56,19 +60,24 @@ public class GemLevelInventoryManager : MonoBehaviour
         }
     }
 
-    private int index = 0;
     public void SlotGemInLevel(MaterialItem gem)
     {
 
-        if (index >= _levelSlots.Length)
+        if (_levelSlotIndex >= _levelSlots.Length)
             return;
         Debug.Log($"Time to slot: {gem.GetDisplayName()}");
-        var gemInSlot = Instantiate(_inventoryItem, _levelSlots[index].transform.position, Quaternion.identity);
+        var gemInSlot = Instantiate(_inventoryItem, _levelSlots[_levelSlotIndex].transform.position, Quaternion.identity);
+        gemInSlot.GetComponent<LevelGemSlot>().SetItemSlot(gem);
+        gemInSlot.GetComponentInChildren<TMP_Text>().SetText("");
         gemInSlot.transform.parent = _levelSlotParentTransform;
-        index++;
+        _levelSlotIndex++;
         
-        PlayerPrefs.SetInt(gem.GetItemID(), PlayerPrefs.GetInt(gem.GetItemID())-1);
         LoadGemsFromInventory();
 
+    }
+
+    private void OnDisable()
+    {
+        _levelSlotIndex = 0;
     }
 }
