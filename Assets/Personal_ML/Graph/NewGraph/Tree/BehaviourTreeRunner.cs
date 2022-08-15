@@ -12,17 +12,22 @@ public class BehaviourTreeRunner : MonoBehaviour
 
     [Header("Enemy Attributes")] 
     [SerializeField, Range(0.5f, 4)]private float attackInterval;
-    [SerializeField, Range(1f, 5)]private float baseMoveSpeed;
+    [SerializeField, Range(1f, 20)]private float baseMoveSpeed;
     [SerializeField, Range(5, 10)]private float pursueMoveSpeed;
     [SerializeField, Range(0.5f, 3f)]private float turnDistance;
     [SerializeField, Range(0, 10)]private int damageAmount;
+    
+    [Header("Ranged Specific")]
+    [SerializeField, Range(0.5f, 20)]private float projectileLifespan;
+    
+    [SerializeField] private PolygonCollider2D[] colliders;
+    private int currentColliderIndex = 0;
 
     void Start()
     {
         Setup();
     }
-
-
+    
     private void Setup()
     {
         var grid = GameObject.FindGameObjectsWithTag("LevelGrid")
@@ -42,7 +47,8 @@ public class BehaviourTreeRunner : MonoBehaviour
             attackPointTrans = GetComponentsInChildren<Transform>()[^2],
             turnDistance = turnDistance,
             damageAmount = damageAmount,
-            assetPool = GameObject.FindWithTag("AssetPool").GetComponent<AssetPool>()
+            assetPool = GameObject.FindWithTag("AssetPool").GetComponent<AssetPool>(),
+            projectileLifespan = projectileLifespan
         });
         readyToRun = true;
     }

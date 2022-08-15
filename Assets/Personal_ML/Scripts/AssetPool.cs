@@ -65,7 +65,7 @@ public class AssetPool : MonoBehaviour
         return output;
     }
 
-    public void RequestObject(Vector2 location, Vector2 travelVector, float moveSpeed, int damageAmount)
+    public void RequestObject(Vector2 location, Vector2 travelVector, float moveSpeed, int damageAmount, float maxLifespan)
     {
         GameObject asset = null;
         
@@ -91,5 +91,6 @@ public class AssetPool : MonoBehaviour
         comp.travelVector = travelVector;
         comp.moveSpeed = moveSpeed;
         comp.damageAmount = damageAmount;
+        comp.maxLifespan = maxLifespan;
     }
 }

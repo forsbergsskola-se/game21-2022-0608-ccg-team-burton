@@ -12,6 +12,7 @@ public class Bullet_ML : MonoBehaviour
     private float _timeAlive;
     public int damageAmount;
     public float moveSpeed;
+    public float maxLifespan;
 
     private void Start()
     {
@@ -31,10 +32,6 @@ public class Bullet_ML : MonoBehaviour
         {
             Physics2D.IgnoreCollision(col, transform.GetComponent<Collider2D>());
         }
-        else if(layer is 6 or 10)
-        {
-            gameObject.SetActive(false);
-        }
     }
 
     void Update()
@@ -42,7 +39,7 @@ public class Bullet_ML : MonoBehaviour
         gameObject.transform.position += (Vector3) travelVector * (Time.deltaTime * moveSpeed);
         _timeAlive += Time.deltaTime;
 
-        if (_timeAlive >= lifetime)
+        if (_timeAlive >= maxLifespan)
         {
             gameObject.SetActive(false);
         }
