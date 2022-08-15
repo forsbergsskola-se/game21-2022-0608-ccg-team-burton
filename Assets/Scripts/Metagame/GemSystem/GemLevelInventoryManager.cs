@@ -26,7 +26,7 @@ public class GemLevelInventoryManager : MonoBehaviour
 
     public void LoadGemsFromInventory()
     {
-        var index = 0;
+        var inventorySlotIndex = 0;
         
         DestroyCurrentItemsInInventory();
         
@@ -34,21 +34,21 @@ public class GemLevelInventoryManager : MonoBehaviour
         {
             if (materialItem.GetItemID().Contains("red")||materialItem.GetItemID().Contains("blue")||materialItem.GetItemID().Contains("green"))
             {
-                if (SetItemOnSlot(materialItem, ref index)) ;
+                if (SetItemOnSlot(materialItem, ref inventorySlotIndex)) ;
             }
         }
     }
 
-    private bool SetItemOnSlot(MaterialItem materialItem, ref int index)
+    private bool SetItemOnSlot(MaterialItem materialItem, ref int inventorySlotIndex)
     {
         if (PlayerPrefs.GetInt(materialItem.GetItemID()) <= 0)
             return true;
 
-        var gemInSlot = Instantiate(_inventoryItem, _inventorySlots[index].transform.position, Quaternion.identity);
+        var gemInSlot = Instantiate(_inventoryItem, _inventorySlots[inventorySlotIndex].transform.position, Quaternion.identity);
         _currentItemsInInventory.Add(gemInSlot);
         gemInSlot.transform.parent = _inventorySlotParentTransform;
         gemInSlot.GetComponent<LevelGemSlot>().SetItemSlot(materialItem);
-        index++;
+        inventorySlotIndex++;
         return false;
     }
 
@@ -63,7 +63,7 @@ public class GemLevelInventoryManager : MonoBehaviour
     public void SlotGemInLevel(MaterialItem gem)
     {
 
-        if (_levelSlotIndex >= _levelSlots.Length)
+        if (!FreeSlotExist())
             return;
         Debug.Log($"Time to slot: {gem.GetDisplayName()}");
         var gemInSlot = Instantiate(_inventoryItem, _levelSlots[_levelSlotIndex].transform.position, Quaternion.identity);
@@ -73,11 +73,15 @@ public class GemLevelInventoryManager : MonoBehaviour
         _levelSlotIndex++;
         
         LoadGemsFromInventory();
-
     }
-
+    public bool FreeSlotExist()
+    {
+        return _levelSlotIndex < _levelSlots.Length;
+    }
+    
     private void OnDisable()
     {
         _levelSlotIndex = 0;
     }
+
 }
