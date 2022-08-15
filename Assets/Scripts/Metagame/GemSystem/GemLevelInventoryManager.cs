@@ -20,6 +20,9 @@ public class GemLevelInventoryManager : MonoBehaviour
     [SerializeField] private GameObject _inventoryItem;
     [SerializeField] private Transform _inventorySlotParentTransform;
     [SerializeField] private Transform _levelSlotParentTransform;
+    [SerializeField] private TMP_Text _atkBonusText;
+    [SerializeField] private TMP_Text _hPBonusText;
+    [SerializeField] private TMP_Text _moveSpeedBonusText;
     [SerializeField] private PlayOneShotSound _oneShotSound;
     private List<GameObject> _currentItemsInInventory = new();
     private GameObject[] _currentSlottedGems;
@@ -91,18 +94,53 @@ public class GemLevelInventoryManager : MonoBehaviour
         gemInSlot.GetComponent<LevelGemSlot>().SetItemSlot(gem);
         gemInSlot.GetComponentInChildren<TMP_Text>().SetText("");
         gemInSlot.transform.parent = _levelSlotParentTransform;
+        
+        CalculateBonuses(gem, false);
         _oneShotSound.PlaySound();
     }
 
-    public void DestroyCurrentSlottedGems()
+   float atkBonus = 0f;
+        float  hPBonus = 0f;
+        float moveSpeedBonus = 0f;
+    public void CalculateBonuses(MaterialItem item, bool subtraction)
     {
-        foreach (var slottedGem in _currentSlottedGems)
-        {
-            Destroy(slottedGem);
-        }
-
-
+     
+            if (item.GetItemID().Contains("red"))
+            {
+                if (subtraction)
+                    atkBonus -= item.LevelBonus;
+                else
+                    atkBonus += item.LevelBonus;
+                
+            } else if (item.GetItemID().Contains("green"))
+            {
+                if (subtraction)
+                    hPBonus -= item.LevelBonus;
+                else
+                    hPBonus += item.LevelBonus;
+    
+            } else if (item.GetItemID().Contains("blue"))
+            {
+                if (subtraction)
+                    moveSpeedBonus -= item.LevelBonus;
+                else
+                    moveSpeedBonus += item.LevelBonus;
+                
+            }
+            
+            UpdateBonusTexts(atkBonus,hPBonus,moveSpeedBonus);
+        
     }
+
+    public void UpdateBonusTexts(float atkBonus, float hPBonus, float moveSpeedBonus)
+    {
+        _atkBonusText.SetText("Atk bonus: " +atkBonus);
+        _hPBonusText.SetText("HP bonus: " +hPBonus);
+        _moveSpeedBonusText.SetText("Move speed bonus: " +moveSpeedBonus);
+    }
+    
+    
+
     public bool FreeSlotExist()
     {
         return _currentSlottedGems.Any(slottedGem => slottedGem == null);
@@ -111,6 +149,10 @@ public class GemLevelInventoryManager : MonoBehaviour
     private void OnDisable()
     {
         _levelSlotIndex = 0;
+        hPBonus = 0;
+        atkBonus = 0;
+        moveSpeedBonus = 0;
+        UpdateBonusTexts(atkBonus,hPBonus,moveSpeedBonus);
     }
 
     public void SaveGemModifiersOnPlay() //Called on starting level button
