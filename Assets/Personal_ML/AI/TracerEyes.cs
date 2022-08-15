@@ -58,6 +58,7 @@ public class TracerEyes : MonoBehaviour
     [HideInInspector] public CompoundActions compoundActions;
     [HideInInspector] public float distanceToWall;
 
+    private int _maxHealth;
     private void Awake()
     {
         compoundActions |= CompoundActions.GroundSeen;
@@ -65,7 +66,9 @@ public class TracerEyes : MonoBehaviour
 
     private void Start()
     {
-        GetComponentInParent<Health>().OnHealthChanged += RegisterAttack;
+        _enemyHealth = GetComponentInParent<Health>();
+        _maxHealth = _enemyHealth.CurrentHealth;
+        _enemyHealth.OnHealthChanged += RegisterAttack;
 
         _groundMask = 1 << 6 | 1 << 10; 
         _boxMask = 1 << 8 | 1 << 13 | 1 << 7;
@@ -73,12 +76,17 @@ public class TracerEyes : MonoBehaviour
 
     private void OnDisable()
     {
-        GetComponentInParent<Health>().OnHealthChanged -= RegisterAttack;
+        _enemyHealth.OnHealthChanged -= RegisterAttack;
     }
 
     private void RegisterAttack(int currentHealth)
     {
         compoundActions |= CompoundActions.EnemyAttacked;
+        
+        if (_somethingHit)
+        {
+            _enemyHealth.CurrentHealth = _maxHealth;
+        }
 
         if (currentHealth <= 0)
         {
@@ -163,19 +171,17 @@ public class TracerEyes : MonoBehaviour
         var result = Physics2D.BoxCastAll(transform.position, 
             traceSize, 0, transform.up, traceSize.y / 10, newMask);
         _somethingHit = false;
-        var playerNoticed = false;
-        
+
         _pointsList.Clear();
         
         foreach (var h in result)
         {
-            _somethingHit = true;
             var layer = h.collider.transform.gameObject.layer;
             
             if (layer == 8)
             {
-                playerNoticed = true;
-                
+                _somethingHit = true;
+
                 compoundActions |= CompoundActions.PlayerNoticed;
                 if (CheckIfLookingAtTarget(h.point))
                 {
@@ -188,12 +194,14 @@ public class TracerEyes : MonoBehaviour
                 }
             }
         }
+        //Debug.Log($"Compound hit: {compoundActions}");
 
-        if (!playerNoticed)
-        {
-            compoundActions  &= ~CompoundActions.PlayerNoticed;
-            compoundActions  &= ~CompoundActions.PlayerInFront;
-        }
+        if (_somethingHit) return;
+        
+        //Debug.Log($"Compound miss: {compoundActions}");
+        
+        compoundActions  &= ~CompoundActions.PlayerNoticed;
+        compoundActions  &= ~CompoundActions.PlayerInFront;
     }
 
     private void TraceBox()
