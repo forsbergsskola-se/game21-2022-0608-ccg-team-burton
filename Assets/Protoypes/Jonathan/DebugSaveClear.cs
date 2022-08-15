@@ -73,7 +73,7 @@ public class DebugSaveClear : MonoBehaviour
          if (materialItem.GetItemID().Contains("red") || materialItem.GetItemID().Contains("blue") ||
              materialItem.GetItemID().Contains("green"))
          {
-            PlayerPrefs.SetInt(materialItem.GetItemID(), PlayerPrefs.GetInt(materialItem.GetItemID())+10);
+            PlayerPrefs.SetInt(materialItem.GetItemID(), PlayerPrefs.GetInt(materialItem.GetItemID())+1);
             Debug.Log($"Current {materialItem.GetDisplayName()}: {PlayerPrefs.GetInt(materialItem.GetItemID())}"); 
          }
       }
