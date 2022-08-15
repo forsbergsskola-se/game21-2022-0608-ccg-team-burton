@@ -50,8 +50,7 @@ namespace NewGraph.NodeTypes.ActionNodes
        
             waitForExit += Time.deltaTime;
             if (waitForExit < 0.5f) return State.Update;
-
-
+            
             if (comp.HasFlag(CompoundActions.WallInTurnRange) && canTurn)
             {
                 canTurn = false;
@@ -67,8 +66,7 @@ namespace NewGraph.NodeTypes.ActionNodes
                     canTurn = true;
                 }
             }
-
-
+            
             if (comp.HasFlag(CompoundActions.EnemyDead)) return State.Success;
 
             if (!comp.HasFlag(CompoundActions.GroundSeen) || comp.HasFlag(CompoundActions.PlayerInAttackRange))
@@ -80,8 +78,7 @@ namespace NewGraph.NodeTypes.ActionNodes
             {
                 return State.Success;
             }
-
-
+            
             agent.enemyTransform.position += agent.enemyTransform.right * (Time.deltaTime * agent.moveSpeed);
             
             return State.Update;

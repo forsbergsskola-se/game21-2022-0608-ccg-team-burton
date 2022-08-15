@@ -43,8 +43,8 @@ public class TracerEyes : MonoBehaviour
     [SerializeField, Range(0.2f, 1.5f)]private float traceInterval = 0.4f;
     [SerializeField] private EnemyType enemyType;
     [SerializeField] private CapsuleCollider2D _collider2D;
-    [SerializeField] private float adjustBoxTraceX;
-    [SerializeField] private float adjustBoxTraceY;
+    [SerializeField, Range(0, 50)] private float adjustBoxTraceX;
+    [SerializeField, Range(0, 50)] private float adjustBoxTraceY;
     
     private int _groundMask;
     private int _boxMask;
@@ -163,7 +163,7 @@ public class TracerEyes : MonoBehaviour
     {
         var newMask = 1 << 8;
         var result = Physics2D.BoxCastAll(transform.position, 
-            traceSize, 0, transform.up, traceSize.y, newMask);
+            traceSize, 0, transform.up, traceSize.y / 2, newMask);
         _somethingHit = false;
         var playerNoticed = false;
         
@@ -198,7 +198,7 @@ public class TracerEyes : MonoBehaviour
     private void TraceBox()
     {
         var result = Physics2D.BoxCastAll(transform.position, 
-            traceSize, 0, transform.up, traceSize.y / 2, _boxMask);
+            traceSize, 0, transform.up, traceSize.y / 4, _boxMask);
         _somethingHit = false;
         var playerNoticed = false;
 

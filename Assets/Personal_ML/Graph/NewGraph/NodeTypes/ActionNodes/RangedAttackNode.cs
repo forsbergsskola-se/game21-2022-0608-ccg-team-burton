@@ -8,7 +8,6 @@ namespace NewGraph.NodeTypes.ActionNodes
 
         public override void OnStart()
         {
-            Debug.Log("enter attack mode");
         }
 
         public override void OnExit()
@@ -19,9 +18,11 @@ namespace NewGraph.NodeTypes.ActionNodes
         private void SpawnProjectile()
         {
             var right = agent.enemyTransform.right;
-            var pos = agent.enemyTransform.position;
-            var temp = Instantiate(agent.projectile, pos, Quaternion.identity);
-            temp.GetComponent<Rigidbody2D>().AddForce(new Vector2(right.x * 10, 10), ForceMode2D.Impulse);
+            var pos = agent.attackPointTrans.position;
+            var temp = Instantiate(agent.projectile, pos, Quaternion.identity, agent.enemyTransform).GetComponent<Bullet_ML>();
+            temp.travelVector = right;
+            temp.moveSpeed = agent.moveSpeed;
+            temp.damageAmount = agent.damageAmount;
         }
         
         public override State OnUpdate()
@@ -33,18 +34,19 @@ namespace NewGraph.NodeTypes.ActionNodes
                 _timeSinceAttack -= agent.attackInterval;
                 SpawnProjectile();
             }
-            _timeSinceAttack += Time.deltaTime;
+            
+            if (!agent.anim.GetCurrentAnimatorStateInfo(0).IsName("Cannon_Shoot"))
+            {
+                _timeSinceAttack += Time.deltaTime;
+            }
+            
             
             if (!playerEncounter.HasFlag(CompoundActions.PlayerNoticed))
             {
                 return State.Success;
             }
-
-            if (!playerEncounter.HasFlag(CompoundActions.PlayerInFront))
-            {
-              //  return State.Success;
-            }
-
+            
+            
             return State.Update;
         }
     }
