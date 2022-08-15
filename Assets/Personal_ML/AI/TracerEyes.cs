@@ -85,7 +85,6 @@ public class TracerEyes : MonoBehaviour
         
         if (_somethingHit)
         {
-            _enemyHealth.CurrentHealth = _maxHealth;
         }
 
         if (currentHealth <= 0)

@@ -442,9 +442,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2604721245304753354, guid: a56e798c588094347b4fc82ce4ea2541,
         type: 3}
+      propertyPath: CoinText
+      value: 
+      objectReference: {fileID: 5096428008762714202}
+    - target: {fileID: 2604721245304753354, guid: a56e798c588094347b4fc82ce4ea2541,
+        type: 3}
       propertyPath: coinText
       value: 
       objectReference: {fileID: 5096428008762714202}
+    - target: {fileID: 2604721245304753354, guid: a56e798c588094347b4fc82ce4ea2541,
+        type: 3}
+      propertyPath: WinScreen
+      value: 
+      objectReference: {fileID: 5096428008762714201}
     - target: {fileID: 2604721245304753354, guid: a56e798c588094347b4fc82ce4ea2541,
         type: 3}
       propertyPath: winScreen
@@ -452,9 +462,29 @@ PrefabInstance:
       objectReference: {fileID: 5096428008762714201}
     - target: {fileID: 2604721245304753354, guid: a56e798c588094347b4fc82ce4ea2541,
         type: 3}
+      propertyPath: LevelIndex
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2604721245304753354, guid: a56e798c588094347b4fc82ce4ea2541,
+        type: 3}
+      propertyPath: PlayerHealth
+      value: 
+      objectReference: {fileID: 1532513279}
+    - target: {fileID: 2604721245304753354, guid: a56e798c588094347b4fc82ce4ea2541,
+        type: 3}
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 1532513279}
+    - target: {fileID: 2604721245304753354, guid: a56e798c588094347b4fc82ce4ea2541,
+        type: 3}
+      propertyPath: ItemCollector
+      value: 
+      objectReference: {fileID: 1532513278}
+    - target: {fileID: 2604721245304753354, guid: a56e798c588094347b4fc82ce4ea2541,
+        type: 3}
+      propertyPath: TotalCoinText
+      value: 
+      objectReference: {fileID: 5096428008762714200}
     - target: {fileID: 2604721245304753354, guid: a56e798c588094347b4fc82ce4ea2541,
         type: 3}
       propertyPath: itemCollector
@@ -14720,7 +14750,7 @@ PrefabInstance:
     - target: {fileID: 6915852265874559633, guid: 80bc8a34c4c44f94d8cfb2477fa07b95,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6915852265874559661, guid: 80bc8a34c4c44f94d8cfb2477fa07b95,
         type: 3}

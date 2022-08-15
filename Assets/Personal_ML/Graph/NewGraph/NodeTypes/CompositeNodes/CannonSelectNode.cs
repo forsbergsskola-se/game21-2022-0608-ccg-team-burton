@@ -10,6 +10,8 @@ namespace NewGraph.NodeTypes.CompositeNodes
         private Dictionary<CurrentCommand, BaseNode> ownedNodes = new();
         [HideInInspector] public CurrentCommand currentCommand;
         private BaseNode _currentChoice;
+        private float _timeAlive;
+        private bool _setStatic;
 
         public override void OnStart()
         {
@@ -44,7 +46,7 @@ namespace NewGraph.NodeTypes.CompositeNodes
         private void CheckOptions()
         {
             var eyeComp = agent.enemyEyes.compoundActions;
-            
+
             if (eyeComp.HasFlag(CompoundActions.PlayerNoticed))
             {
                 currentCommand = CurrentCommand.Attack;
@@ -61,6 +63,7 @@ namespace NewGraph.NodeTypes.CompositeNodes
 
         public override State OnUpdate()
         {
+            _timeAlive += Time.deltaTime;
             if (currentCommand == CurrentCommand.None) return State.Update;
         
             _currentChoice = ownedNodes[currentCommand];
