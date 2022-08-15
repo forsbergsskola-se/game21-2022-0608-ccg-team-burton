@@ -10,7 +10,7 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         public override void OnStart()
         {
-            agent.anim.SetBool(Animator.StringToHash("Enemy_Walk2"), true);
+            agent.anim.SetBool(Animator.StringToHash("Enemy_Walk"), true);
             waitForExit = 0;
             canTurn = true;
          
@@ -27,7 +27,7 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         public override void OnExit()
         {
-            agent.anim.SetBool(Animator.StringToHash("Enemy_Walk2"), false);
+            agent.anim.SetBool(Animator.StringToHash("Enemy_Walk"), false);
         }
         
         private bool CheckIfLookingAtTarget()
@@ -40,22 +40,19 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         private bool ArrivedAtTarget()
         {
-            return Vector3.Distance(agent.enemyTransform.position, agent.currentDestination) < 3f;
+            return Vector3.Distance(agent.attackPointTrans.position, agent.currentDestination) < agent.turnDistance;
         }
         
 
         public override State OnUpdate()
         {
+            var comp = agent.enemyEyes.compoundActions;
+       
             waitForExit += Time.deltaTime;
             if (waitForExit < 0.5f) return State.Update;
-
-            var comp = agent.enemyEyes.compoundActions;
             
-            agent.enemyTransform.position += agent.enemyTransform.right * (Time.deltaTime * agent.moveSpeed);
-
             if (comp.HasFlag(CompoundActions.WallInTurnRange) && canTurn)
             {
-                Debug.Log("turn flag");
                 canTurn = false;
                 RotateEnemy();
             }
@@ -70,26 +67,20 @@ namespace NewGraph.NodeTypes.ActionNodes
                 }
             }
             
-            if (!agent.keepWalking)
+            if (comp.HasFlag(CompoundActions.EnemyDead)) return State.Success;
+
+            if (!comp.HasFlag(CompoundActions.GroundSeen) || comp.HasFlag(CompoundActions.PlayerInAttackRange))
             {
-                if (ArrivedAtTarget() || !comp.HasFlag(CompoundActions.GroundSeen))
-                {
-                    return State.Success;
-                }
-            }
-            
-            else
-            {
-                if (!comp.HasFlag(CompoundActions.GroundSeen) || comp.HasFlag(CompoundActions.PlayerNoticed))
-                {
-                    return State.Success;
-                }
-                if (comp.HasFlag(CompoundActions.PlayerNoticed))
-                {
-                    return State.Success;
-                }
+                return State.Success;
             }
 
+            if (ArrivedAtTarget())
+            {
+                return State.Success;
+            }
+            
+            agent.enemyTransform.position += agent.enemyTransform.right * (Time.deltaTime * agent.moveSpeed);
+            
             return State.Update;
         }
     }

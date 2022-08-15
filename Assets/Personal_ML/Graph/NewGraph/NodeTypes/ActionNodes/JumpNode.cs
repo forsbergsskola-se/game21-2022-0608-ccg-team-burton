@@ -8,13 +8,11 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         public override void OnStart()
         {
-            agent.enemyEyes.compoundActions |= CompoundActions.MakingJump;
             _startedJump = false;
         }
 
         public override void OnExit()
         {
-            agent.enemyEyes.compoundActions &= ~CompoundActions.MakingJump;
         }
 
         public override State OnUpdate()

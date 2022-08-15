@@ -9,8 +9,6 @@ namespace Entity
     /// </summary>
     public class Health : MonoBehaviour, IDamageable
     {
-        
-                
         public Action<int> OnHealthChanged;
         [SerializeField]
         private int _health;
@@ -27,7 +25,6 @@ namespace Entity
         ItemCollector _itemCollector;
 
         [SerializeField] GameEvent playerDies;
-        
         
         public int CurrentHealth
         {
@@ -70,8 +67,7 @@ namespace Entity
                 }
                 
             }
-        
-
+            
             if (CurrentHealth <= 0)
             {
                 _animator.SetTrigger(Animator.StringToHash("Dead"));

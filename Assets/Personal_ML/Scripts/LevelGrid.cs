@@ -5,48 +5,12 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[Flags]
-public enum LevelElements
-{
-    None = 0,
-    Platform = 1,
-    Ground = 2,
-    Edge = 4,
-    Jump = 8,
-    TwoWayPass = 16,
-    Gap = 32,
-    TotalBlock = 64,
-}
-
-[Flags]
-public enum TileOptions
-{
-    None = 0,
-    OpenMinus = 1,
-    OpenPlus = 2,
-    JumpPlus = 4,
-    JumpMinus = 8,
-    WallPlus = 16,
-    WallMinus = 32
-}
-
-[Serializable]
-public class PointsOfInterest
-{
-    public Vector2 location;
-    public LevelElements pointType;
-}
-
 [Serializable]
 public class CubeFacts
 {
     public Vector2 location;
-    public Color color;
     public Vector2 min;
     public Vector2 max;
-    public List<PointsOfInterest> pointsList = new();
-    public float lowestGroundY = 9999;
-    public TileOptions options;
 }
 
 [Serializable]
@@ -55,28 +19,31 @@ public class WalkableGround
     public Vector2 start;
     public Vector2 end;
     public float groundSize;
+    public Vector2 min;
+    public Vector2 max;
 }
 
 public class LevelGrid : MonoBehaviour
 {
-    [Header("Input values")]
+    [Header("Grid values")]
     [SerializeField] private Vector2 cubeSize;
-    [SerializeField] private Vector2 numberCubes;
     [Range(0, 1),SerializeField] private float delayUpdate;
-    [SerializeField] private LevelMemory memory;
-    [SerializeField] private GameObject spawnablePointOfInterest;
+    [SerializeField, Range(1, 20)] private int numberCubesX;
+    [SerializeField, Range(1, 20)] private int numberCubesY;
+    [SerializeField, Range(1, 6)] private float areaHeight;
+    [SerializeField, Range(1, 4)] private float minimumPlatformWidth;
+
+    [HideInInspector] public List<WalkableGround> walkableGround = new();
     
     private List<List<CubeFacts>> _gridList = new();
     private Vector2 _min;
     private Vector2 _max;
     private int _layerMask;
 
-    private float _traceTime = 20f;
+    private float _traceTime = 20.5f;
 
     private List<RaycastHit2D> _hitList = new();
-
-    public List<WalkableGround> walkableGround = new();
-
+    
     private float _maxJumpDistance = 6f;
 
     private void Awake()
@@ -90,28 +57,44 @@ public class LevelGrid : MonoBehaviour
         ScanAll();
     }
 
-    private void ScanAll()
+    private void ScanForEnemies(Vector2 pos)
     {
-        for (var i = 0; i < numberCubes.y; i++)
+        var enemyMask = 1 << 7;
+        var result = Physics2D.BoxCastAll(pos, 
+            cubeSize, 0, transform.up, cubeSize.y / 2, enemyMask);
+
+        foreach (var e in result)
         {
-            for (var j = 0; j < numberCubes.x; j++)
-            {
-                var cube = _gridList[i][j];
-                var start = cube.location + new Vector2(-1,-1f) * new Vector2(cubeSize.x / 2, cubeSize.y / 2);
-                AdvancedTrace(new Vector2(i,j));
-            }
+          
         }
-        SpawnPointsOfInterest();
     }
 
-
-    private void SpawnPointsOfInterest()
+    private void ScanAll()
     {
-        foreach (var p in walkableGround)
+        for (var i = 0; i < numberCubesY; i++)
         {
-            Instantiate(spawnablePointOfInterest, p.end, Quaternion.identity, transform);
-            Instantiate(spawnablePointOfInterest, p.start, Quaternion.identity, transform);
+            for (var j = 0; j < numberCubesX; j++)
+            {
+                var cube = _gridList[i][j];
+                AdvancedTrace(new Vector2(i,j));
+                ScanForEnemies(cube.location);
+            }
         }
+    }
+
+    public WalkableGround GetCurrentGround(Vector2 currentPos)
+    {
+        foreach (var w in walkableGround)
+        {
+            if (currentPos.x > w.min.x && currentPos.x < w.max.x)
+            {
+                if (currentPos.y >= w.min.y && currentPos.y < w.max.y)
+                {
+                    return w;
+                }
+            }
+        }
+        return null;
     }
     
     public CubeFacts GetSquareFromPoint(Vector2 thePoint)
@@ -124,21 +107,23 @@ public class LevelGrid : MonoBehaviour
 
         return square;
     }
-
-    private Vector2 ScanUntilEdge(Vector2 startPoint)
+    
+    private Vector2 ScanUntilEdge(Vector2 startPoint, float increment)
     {
         var breakLoop = false;
-        
         List<Vector2> newHits = new();
-
+        
         while (!breakLoop)
         {
             var aHit = SingleTrace(startPoint, new Vector2(0,-1), 0.4f);
             if (!aHit) breakLoop = true;
 
-            startPoint += new Vector2(0.5f,0);
-            
             newHits.Add(aHit.point);
+            
+            startPoint += new Vector2(increment,0);
+            
+            if(aHit.point.x > _max.x) breakLoop = true;
+            if(aHit.point.x < _min.x) breakLoop = true;
         }
 
         return newHits[^2];
@@ -149,7 +134,7 @@ public class LevelGrid : MonoBehaviour
         foreach (var g in walkableGround)
         {
             if (!(point.x > g.start.x) || !(point.x < g.end.x)) continue;
-            
+
             if ((int) point.y == (int) g.start.y)
             {
                 return true;
@@ -168,7 +153,7 @@ public class LevelGrid : MonoBehaviour
         
         for (var i = 0; i < numberTraces; i++)
         {
-            var aHit = SingleTrace(topCorner, new Vector2(0,-1), cubeSize.y * numberCubes.y);
+            var aHit = SingleTrace(topCorner, new Vector2(0,-1), cubeSize.y * numberCubesY);
             
             if (aHit)
             {
@@ -177,11 +162,6 @@ public class LevelGrid : MonoBehaviour
                     if (_hitList.SingleOrDefault(x => (int) x.point.y == (int) aHit.point.y) == default)
                     {
                         _hitList.Add(aHit);
-                        cube.pointsList.Add(new PointsOfInterest()
-                        {
-                            location = aHit.point,
-                            pointType = LevelElements.Edge
-                        });
                     }
                 }
             }
@@ -190,18 +170,26 @@ public class LevelGrid : MonoBehaviour
         
         foreach (var h in _hitList)
         {
-            var hitPoint = ScanUntilEdge(h.point + new Vector2(0,0.2f));
+            var hitPointEnd = ScanUntilEdge(h.point + new Vector2(0,0.2f), 0.2f);
+            var hitPointStart = ScanUntilEdge(h.point + new Vector2(0,0.2f), -0.2f);
+            var start = hitPointStart;
+            var end = hitPointEnd;
+
+            var center = new Vector2(start.x + (end.x - start.x) / 2, start.y + areaHeight / 2);
+            var size = new Vector2(end.x - start.x, areaHeight);
+
+            if(size.x < minimumPlatformWidth) continue;
+            
+            if(walkableGround.Where(x => (int)x.start.x == (int)hitPointStart.x).ToArray().Length > 0)
+                continue;
             
             walkableGround.Add(new WalkableGround()
             {
-                start = h.point,
-                end = hitPoint
-            });
-
-            cube.pointsList.Add(new PointsOfInterest()
-            {
-                location = hitPoint,
-                pointType = LevelElements.Edge
+                start = hitPointStart,
+                end = hitPointEnd,
+                min = center - size / 2,
+                max = center + size / 2,
+                groundSize = size.x
             });
         }
     }
@@ -224,16 +212,15 @@ public class LevelGrid : MonoBehaviour
     
     private void SetNewList()
     {
-        for (var i = 0; i < numberCubes.y; i++)
+        for (var i = 0; i < numberCubesY; i++)
         {
-            var newList = new List<CubeFacts>((int)numberCubes.x);
-            for (var j = 0; j < numberCubes.x; j++)
+            var newList = new List<CubeFacts>((int)numberCubesX);
+            for (var j = 0; j < numberCubesX; j++)
             {
                 var next = transform.position + new Vector3(j * cubeSize.x ,i * cubeSize.y);
                 var minMax = GetMinMax(next, cubeSize);
                 newList.Add( new CubeFacts()
                 {
-                    color = Color.red,
                     location = next,
                     min = minMax.Item1,
                     max = minMax.Item2,
@@ -258,9 +245,9 @@ public class LevelGrid : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        for (var i = 0; i < numberCubes.y; i++)
+        for (var i = 0; i < numberCubesY; i++)
         {
-            for (var j = 0; j < numberCubes.x; j++)
+            for (var j = 0; j < numberCubesX; j++)
             {
                 var next = transform.position + new Vector3(j * cubeSize.x ,i * cubeSize.y);
                 Gizmos.DrawWireCube(next, new Vector3(cubeSize.x ,cubeSize.y));
@@ -268,42 +255,14 @@ public class LevelGrid : MonoBehaviour
         }
 
         if (!Application.isPlaying) return;
-        
-        for (var i = 0; i < numberCubes.y; i++)
+      
+        foreach (var w in walkableGround)
         {
-            for (var j = 0; j < numberCubes.x; j++)
-            {
-                var cube = _gridList[i][j];
-
-                foreach (var p in cube.pointsList)
-                {
-                    if (p.pointType.HasFlag(LevelElements.Edge))
-                    {
-                        Gizmos.color = Color.yellow;
-                    }
-                    
-                    else if (p.pointType.HasFlag(LevelElements.Gap))
-                    {
-                        Gizmos.color = Color.red;
-                    }
-
-                    else
-                    {
-                        Gizmos.color = Color.black;
-                    }
-
-                    Gizmos.DrawWireSphere(p.location, 0.3f);
-                }
-
-                foreach (var w in walkableGround)
-                {
-                    Gizmos.color = Color.magenta;
-                    Gizmos.DrawLine(w.start, w.end);
-                }
-                
-            }
+            Gizmos.color = Color.magenta;
+            var center = new Vector2(w.start.x + (w.end.x - w.start.x) / 2, w.start.y + areaHeight / 2);
+            var size = new Vector2(w.end.x - w.start.x, areaHeight);
+            Gizmos.DrawWireCube(center, size);
         }
-        
     }
     #endif
 }

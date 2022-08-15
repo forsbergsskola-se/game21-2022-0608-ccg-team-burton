@@ -12,20 +12,37 @@ public class PauseMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public Image PauseMenuImage;
     public Sprite PauseMenuChange;
     private Sprite PauseMenuOriginal;
+    public GameObject SettingsMenu;
+    public GameObject PauseMenuGO;
     #endregion
 
     private void Awake() => PauseMenuOriginal = PauseMenuImage.sprite;
 
+    
+    
     public void OnPointerEnter(PointerEventData eventData)
     {
-        DebugText.text = $"Hovering over {name}";
-        PauseMenuImage.sprite = PauseMenuChange;
+        //PauseMenuImage.sprite = PauseMenuChange;
     }
 
+    
+    
     public void OnPointerExit(PointerEventData eventData)
     {
-        DebugText.text = "Nothing Selected";
-        PauseMenuImage.sprite = PauseMenuOriginal;
+        //PauseMenuImage.sprite = PauseMenuOriginal;
+    }
 
+    
+    
+    public void OpenSettings()
+    {
+        SettingsMenu.SetActive(true);
+        PauseMenuGO.SetActive(false);
+    }
+
+
+    public void ResumeGame()
+    {
+        PauseMenuGO.SetActive(false);
     }
 }

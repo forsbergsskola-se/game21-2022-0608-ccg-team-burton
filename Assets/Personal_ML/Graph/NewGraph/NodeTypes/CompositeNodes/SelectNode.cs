@@ -23,75 +23,83 @@ public class SelectNode : CompositeNode
     {
         SetPossibleNodes();
         CheckOptions();
-        choiceMade = true;
-        currentCommand = CurrentCommand.MoveToPosition;
+      
     }
     
     private void CheckOptions()
     {
-        agent.keepWalking = true;
-        var eyeComp = agent.enemyEyes.compoundActions;
-        
-        if (!eyeComp.HasFlag(CompoundActions.GroundSeen))
+        var comp = agent.enemyEyes.compoundActions;
+
+        if (comp.HasFlag(CompoundActions.EnemyDead))
         {
-            agent.CheckForJump?.Invoke(x =>
-            {
-                agent.compoundAction = x;
-            });
+            agent.body.constraints = RigidbodyConstraints2D.FreezeAll;
+            return;
+        }
+        
+        if (!comp.HasFlag(CompoundActions.GroundSeen) && !comp.HasFlag(CompoundActions.PlayerNoticed))
+        {
+            var ground = agent.grid
+                .GetCurrentGround(agent.enemyTransform.position +
+                                  new Vector3(agent.enemyTransform.right.x * 9,0));
             
-            if (eyeComp.HasFlag(CompoundActions.CanJump))
+            if (ground == null)
+            {
+                GetTarget(true);
+            }
+            else
             {
                 currentCommand = CurrentCommand.Jump;
             }
-
-            else
-            {
-                currentCommand = CurrentCommand.MoveToPosition;    
-            }
         }
 
-        else if (eyeComp.HasFlag(CompoundActions.PlayerNoticed))
+        else if (comp.HasFlag(CompoundActions.PlayerNoticed) && comp.HasFlag(CompoundActions.GroundSeen))
         {
-            PlayerStuff();
+            agent.currentDestination = agent.enemyEyes.PlayerPos;
+            if (comp.HasFlag(CompoundActions.PlayerInFront))
+            {
+                if (comp.HasFlag(CompoundActions.PlayerInAttackRange))
+                {
+                    currentCommand = CurrentCommand.Attack;
+                }
+                else
+                {
+                    currentCommand = CurrentCommand.MoveToPosition;
+                }
+            }
+            
+            if (comp.HasFlag(CompoundActions.PlayerBehind))
+            {
+                currentCommand = CurrentCommand.MoveToPosition;
+            }
+           
         }
-        
         else
         {
-            currentCommand = CurrentCommand.MoveToPosition;
+            GetTarget(Vector2.Distance(agent.currentDestination, agent.attackPointTrans.position) <= agent.turnDistance);
         }
-        
-        Debug.Log(eyeComp);
-        choiceMade = true;
+
+        _choiceMade = true;
     }
-
-
-    private void PlayerStuff()
+    
+    private void GetTarget(bool atEnd)
     {
-        agent.currentDestination = agent.enemyEyes.PlayerPos;
-        var playerEncounter = agent.enemyEyes.compoundActions;
-        var comp = agent.enemyEyes.compoundActions;
+        var ground = agent.grid.GetCurrentGround(agent.enemyTransform.position);
+        var dir = agent.enemyTransform.right.x > 0;
         
-        if (playerEncounter.HasFlag(CompoundActions.PlayerInFront))
+        if (dir)
         {
-            if (playerEncounter.HasFlag(CompoundActions.PlayerInAttackRange))
-            {
-                currentCommand = CurrentCommand.Attack;
-                return;
-            }
 
-            agent.keepWalking = false;
-            currentCommand = CurrentCommand.MoveToPosition;
-            return;
+            agent.currentDestination = atEnd ? ground.start : ground.end;
         }
-        
-        if (playerEncounter.HasFlag(CompoundActions.PlayerBehind))
+        else
         {
-            agent.keepWalking = false;
-            currentCommand = CurrentCommand.MoveToPosition;
-            return;
+            agent.currentDestination = atEnd ? ground.end : ground.start;
         }
-        
+
+        currentCommand = CurrentCommand.MoveToPosition;
     }
+    
+    
     
     private void SetPossibleNodes()
     {
@@ -104,14 +112,7 @@ public class SelectNode : CompositeNode
                 ownedNodes.Add(CurrentCommand.MoveToPosition, traveler);
                 continue;
             }
-
-            var check = n as GridCheckerNode;
-
-            if (check)
-            {
-                ownedNodes.Add(CurrentCommand.OutOfCommands, check);
-            }
-
+            
             var jump = n as JumpNode;
 
             if (jump)
@@ -135,10 +136,7 @@ public class SelectNode : CompositeNode
     
     public override State OnUpdate()
     {
-        if(!choiceMade) CheckOptions();
-
-        if (currentCommand == CurrentCommand.None || !choiceMade) return State.Update;
-        
+        //if (!choiceMade) return State.Update;
         _currentChoice = ownedNodes[currentCommand];
 
         switch (_currentChoice.Update())
@@ -151,6 +149,7 @@ public class SelectNode : CompositeNode
 
             case State.Success:
                 choiceMade = false;
+                CheckOptions();
                 break;
         }
 

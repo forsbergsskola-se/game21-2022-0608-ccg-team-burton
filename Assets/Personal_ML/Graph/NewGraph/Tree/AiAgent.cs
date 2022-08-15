@@ -33,26 +33,24 @@ public class AiAgent
     public Animator anim;
     public LevelGrid grid;
 
-    public bool quitNode;
-
     public TracerEyes enemyEyes;
     
     public Rigidbody2D body;
-
-    public bool keepWalking;
-
+    
     public float moveSpeed;
     public float attackInterval = 0.3f;
     
-    public Action<Action<CompoundActions>> CheckForJump;
-    
     public CompoundActions compoundAction;
-
-    public WalkableGround currentGround;
-
+    
     public GameObject projectile;
 
-    public Transform attackPoint;
+    public float turnDistance = 1f;
+
+    public Transform attackPointTrans;
+
+    public int damageAmount = 1;
+
+    public float attackRange = 2;
     
     public AiAgent()
     {

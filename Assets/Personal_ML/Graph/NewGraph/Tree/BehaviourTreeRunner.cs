@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -13,12 +14,12 @@ public class BehaviourTreeRunner : MonoBehaviour
     [SerializeField, Range(0.5f, 4)]private float attackInterval;
     [SerializeField, Range(1f, 5)]private float baseMoveSpeed;
     [SerializeField, Range(5, 10)]private float pursueMoveSpeed;
+    [SerializeField, Range(0.5f, 3f)]private float turnDistance;
+    [SerializeField, Range(0, 10)]private int damageAmount;
 
     [Header("Ranged specific")]
     [SerializeField] private GameObject projectile;
-    
-    public Action<Action<CompoundActions>> CheckForJump;
-    
+
     void Start()
     {
         Setup();
@@ -27,23 +28,24 @@ public class BehaviourTreeRunner : MonoBehaviour
 
     private void Setup()
     {
-        var grid = GameObject.FindWithTag("LevelGrid").GetComponent<LevelGrid>();
-
-        var attackPoint = GetComponentInChildren<Transform>();
+        var grid = GameObject.FindGameObjectsWithTag("LevelGrid")
+            .OrderBy(x => Vector2.Distance(x.transform.position, transform.position))
+            .ToArray()[0].GetComponent<LevelGrid>();
+        
         tree = tree.Clone();
         tree.Bind(new AiAgent()
         {
             enemyTransform = gameObject.transform,
-            //grid = grid,
             anim = GetComponent<Animator>(),
             enemyEyes = GetComponentInChildren<TracerEyes>(),
             body = GetComponent<Rigidbody2D>(),
-            keepWalking = true,
             attackInterval = attackInterval,
             moveSpeed = baseMoveSpeed,
-            CheckForJump = CheckForJump,
-            attackPoint = attackPoint,
-            projectile = projectile
+            projectile = projectile,
+            grid = grid,
+            attackPointTrans = GetComponentsInChildren<Transform>()[^2],
+            turnDistance = turnDistance,
+            damageAmount = damageAmount
         });
         readyToRun = true;
     }
