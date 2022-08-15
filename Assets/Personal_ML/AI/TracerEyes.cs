@@ -193,12 +193,9 @@ public class TracerEyes : MonoBehaviour
                 }
             }
         }
-        //Debug.Log($"Compound hit: {compoundActions}");
 
         if (_somethingHit) return;
-        
-        //Debug.Log($"Compound miss: {compoundActions}");
-        
+
         compoundActions  &= ~CompoundActions.PlayerNoticed;
         compoundActions  &= ~CompoundActions.PlayerInFront;
     }
@@ -271,7 +268,6 @@ public class TracerEyes : MonoBehaviour
                 compoundActions |= CompoundActions.AwareOfPlayer;
                 compoundActions |= CompoundActions.PlayerBehind;
                 compoundActions |= CompoundActions.PlayerNoticed;
-                Debug.Log($"tracer choice: {compoundActions}");
             }
                     
             if (compoundActions.HasFlag(CompoundActions.PlayerNoticed))

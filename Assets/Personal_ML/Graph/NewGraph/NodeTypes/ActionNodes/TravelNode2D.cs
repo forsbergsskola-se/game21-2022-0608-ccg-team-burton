@@ -10,6 +10,7 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         public override void OnStart()
         {
+            Debug.Log("start walking");
             agent.anim.SetBool(Animator.StringToHash("Enemy_Walk"), true);
             waitForExit = 0;
             canTurn = true;
@@ -27,6 +28,7 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         public override void OnExit()
         {
+            Debug.Log("stop walking");
             agent.anim.SetBool(Animator.StringToHash("Enemy_Walk"), false);
         }
         
@@ -68,20 +70,12 @@ namespace NewGraph.NodeTypes.ActionNodes
             }
             
             if (comp.HasFlag(CompoundActions.EnemyDead)) return State.Success;
-            if (comp.HasFlag(CompoundActions.EnemyAttacked)) return State.Success;
-
-            if (!comp.HasFlag(CompoundActions.GroundSeen) || comp.HasFlag(CompoundActions.PlayerInAttackRange))
-            {
-                return State.Success;
-            }
-
-            if (ArrivedAtTarget())
-            {
-                return State.Success;
-            }
+            if (comp.HasFlag(CompoundActions.PlayerBehind)) return State.Success;
+            if (!comp.HasFlag(CompoundActions.GroundSeen))return State.Success;
+            if (comp.HasFlag(CompoundActions.PlayerInAttackRange))return State.Success;
+            if (ArrivedAtTarget()) return State.Success;
             
             agent.enemyTransform.position += agent.enemyTransform.right * (Time.deltaTime * agent.moveSpeed);
-            
             return State.Update;
         }
     }

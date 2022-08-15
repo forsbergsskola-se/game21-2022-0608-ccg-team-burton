@@ -36,20 +36,29 @@ public class SelectNode : CompositeNode
         
         if (comp.HasFlag(CompoundActions.GroundSeen))
         {
+            Debug.Log(comp);
             if (comp.HasFlag(CompoundActions.PlayerNoticed))
             {
                 if (comp.HasFlag(CompoundActions.PlayerInAttackRange))
                 {
                     currentCommand = CurrentCommand.Attack;
                 }
-                else
+                else if(!comp.HasFlag(CompoundActions.PlayerInAttackRange))
                 {
-                    GetTarget(true);
+                    Debug.Log("move to player");
+                    agent.currentDestination = agent.enemyEyes.PlayerPos;
+                    currentCommand = CurrentCommand.MoveToPosition;
                 }
             }
+            else if (!comp.HasFlag(CompoundActions.PlayerNoticed))
+            {
+               // GetClosestTarget();
+                GetTarget(Vector2.Distance(agent.currentDestination, agent.attackPointTrans.position) <= agent.turnDistance);
+            }
+            
             else
             {
-                GetTarget(Vector2.Distance(agent.currentDestination, agent.attackPointTrans.position) <= agent.turnDistance);
+               // GetTarget(Vector2.Distance(agent.currentDestination, agent.attackPointTrans.position) <= agent.turnDistance);
             }
         }
         
@@ -71,10 +80,31 @@ public class SelectNode : CompositeNode
                 }
             }
         }
-        
-        // GetTarget(Vector2.Distance(agent.currentDestination, agent.attackPointTrans.position) <= agent.turnDistance);
-        
+
         _choiceMade = true;
+    }
+
+    private void GetClosestTarget()
+    {
+        var pos = agent.enemyTransform.position;
+        var ground = agent.grid.GetCurrentGround(pos);
+        var start = Vector2.Distance(pos, ground.start);
+        var end = Vector2.Distance(pos, ground.start);
+        
+        var dir = agent.enemyTransform.right.x > 0;
+        
+        if (dir)
+        {
+            agent.currentDestination =  ground.end;
+        }
+        else
+        {
+            agent.currentDestination = ground.start;
+        }
+
+        agent.currentDestination = ground.start;
+        
+        currentCommand = CurrentCommand.MoveToPosition;
     }
     
     private void GetTarget(bool atEnd)
