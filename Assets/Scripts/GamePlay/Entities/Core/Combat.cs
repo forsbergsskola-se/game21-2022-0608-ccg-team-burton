@@ -37,6 +37,7 @@ public class Combat : MonoBehaviour
 
      public void MeleeAttack()
      {
+         EnemyLayers = LayerMask.GetMask("Enemies");
          Debug.Log("attack");
          //Play Melee Attack
         _anim.SetTrigger("Attack");
