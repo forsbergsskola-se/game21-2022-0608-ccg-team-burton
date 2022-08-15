@@ -42,7 +42,7 @@ public class BehaviourTreeRunner : MonoBehaviour
             moveSpeed = baseMoveSpeed,
             projectile = projectile,
             grid = grid,
-            attackPointTrans = GetComponentsInChildren<Transform>()[^1],
+            attackPointTrans = GetComponentsInChildren<Transform>()[^2],
             turnDistance = turnDistance
         });
         readyToRun = true;
