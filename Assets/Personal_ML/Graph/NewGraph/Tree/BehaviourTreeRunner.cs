@@ -15,6 +15,7 @@ public class BehaviourTreeRunner : MonoBehaviour
     [SerializeField, Range(1f, 5)]private float baseMoveSpeed;
     [SerializeField, Range(5, 10)]private float pursueMoveSpeed;
     [SerializeField, Range(0.5f, 3f)]private float turnDistance;
+    [SerializeField, Range(0, 10)]private int damageAmount;
 
     [Header("Ranged specific")]
     [SerializeField] private GameObject projectile;
@@ -43,7 +44,8 @@ public class BehaviourTreeRunner : MonoBehaviour
             projectile = projectile,
             grid = grid,
             attackPointTrans = GetComponentsInChildren<Transform>()[^2],
-            turnDistance = turnDistance
+            turnDistance = turnDistance,
+            damageAmount = damageAmount
         });
         readyToRun = true;
     }
