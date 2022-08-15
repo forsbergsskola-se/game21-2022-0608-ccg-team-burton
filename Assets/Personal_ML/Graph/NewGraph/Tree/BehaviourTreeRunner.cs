@@ -19,7 +19,6 @@ public class BehaviourTreeRunner : MonoBehaviour
 
     [Header("Ranged specific")]
     [SerializeField] private GameObject projectile;
-    [SerializeField] private AssetPool assetPool;
 
     void Start()
     {
