@@ -52,6 +52,16 @@ public class SelectNode : CompositeNode
             {
                 GetTarget(Vector2.Distance(agent.currentDestination, agent.attackPointTrans.position) <= agent.turnDistance);
             }
+            
+            else if (comp.HasFlag(CompoundActions.WallSeen))
+            {
+                if (comp.HasFlag(CompoundActions.HigherGroundSeen))
+                {
+                    Debug.Log("higher");
+                    currentCommand = CurrentCommand.Jump;
+                }   
+            }
+            
         }
         
         else if (!comp.HasFlag(CompoundActions.GroundSeen))

@@ -16,22 +16,46 @@ public class Bullet_ML : MonoBehaviour
     private void Start()
     {
         timeAlive = 0;
-        Debug.Log($"start bullet: {timeAlive}");
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnCollisionEnter2D(Collision2D col)
     {
         var layer = col.transform.gameObject.layer;
-        
+   
+        Debug.Log(col.collider.transform.name);
         if (layer == 8)
         {
+            Debug.Log("player hit");
             col.gameObject.GetComponent<IDamageable>().ModifyHealth(-damageAmount);
             gameObject.SetActive(false);
         }
-        else if( timeAlive < 1)
+        else
         {
-            Physics2D.IgnoreCollision(col, transform.GetComponent<Collider2D>());
+            Debug.Log("player hit");
         }
+    }
+    
+
+     private void OnTriggerEnter2D(Collider2D col)
+    {
+        var layer = col.transform.gameObject.layer;
+    
+        Debug.Log("trigger something");
+        if (layer == 8)
+        {
+            Debug.Log("player hit");
+            col.gameObject.GetComponent<IDamageable>().ModifyHealth(-damageAmount);
+            gameObject.SetActive(false);
+        }
+        else if(layer == 0)
+        {
+            Debug.Log("trigger something");
+        }
+    
+        //else if(timeAlive < 1)
+        //{
+        //    //     Physics2D.IgnoreCollision(col, gameObject.GetComponent<Collider2D>());
+        //}
     }
 
     void Update()
@@ -41,7 +65,6 @@ public class Bullet_ML : MonoBehaviour
 
         if (timeAlive >= maxLifespan)
         {
-            Debug.Log("remove bullet");
             gameObject.SetActive(false);
         }
     }
