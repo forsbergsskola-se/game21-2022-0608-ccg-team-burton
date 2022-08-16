@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using FMOD.Studio;
+using FMODUnity;
 
 public class FusionManager : MonoBehaviour
 {
@@ -16,7 +18,8 @@ public class FusionManager : MonoBehaviour
             UpgradeRarity(equipmentData);
 
             UpgradeAttribute(equipmentData);
-            _soundOneShot.PlayStackingSound();
+            
+            _soundOneShot.PlayStackingSound(equipmentData.SoundFile);
     }
 
     private void UpgradeAttribute(EquipmentSO equipmentData)

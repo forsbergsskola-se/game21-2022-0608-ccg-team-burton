@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 
 
@@ -17,6 +19,7 @@ public class EquipmentSO : ScriptableObject
     public Rarity Rarity;
     [Header("UPGRADE VARIABLES")]
     public int BaseUpgradeCost;
+    public EventReference SoundFile;
     [Tooltip("The number increment/rarity level")]
     public int AttributeUpgradeStepSize;
 }
