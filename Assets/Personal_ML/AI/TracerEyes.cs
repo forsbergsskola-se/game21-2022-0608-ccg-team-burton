@@ -125,9 +125,7 @@ public class TracerEyes : MonoBehaviour
         if (enemyType == EnemyType.Melee)
         {
             TraceForGround();
-            
             TraceForWalls();
-            
             TraceBox();
         }
         
@@ -147,15 +145,15 @@ public class TracerEyes : MonoBehaviour
         if (compoundActions.HasFlag(CompoundActions.WallSeen))
         {
             var tracePos = transform.position + new Vector3(2, 8);
-            //SpecTrace(tracePos, Vector2.down, 12);
 
-            if (distanceToWall <= 2)
+            if (distanceToWall is < 4 and > 0.5f)
             {
-                
-                if (distanceToWall < 0.5f)
-                {
-                    compoundActions |= CompoundActions.WallInTurnRange;
-                }
+                SpecTrace(tracePos, Vector2.down, 12);
+            }
+            
+            if (distanceToWall < 0.5f)
+            {
+                compoundActions |= CompoundActions.WallInTurnRange;
             }
         }
         
@@ -178,7 +176,7 @@ public class TracerEyes : MonoBehaviour
 
         if (!compoundActions.HasFlag(CompoundActions.GroundSeen))
         {
-            var groundTrace2 = SpecTrace(otherPos, new Vector2(0, -1), 5);
+            var groundTrace2 = SpecTrace(otherPos, new Vector2(0, -1), 2.5f);
             
             if (groundTrace2) compoundActions |= CompoundActions.LowerGroundSeen;
             else compoundActions &= ~CompoundActions.LowerGroundSeen;

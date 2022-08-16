@@ -506,65 +506,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DebugMenu
       objectReference: {fileID: 0}
-    - target: {fileID: 2758122906233196157, guid: 440d18354c9726f419c470a62de00a4e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -758
-      objectReference: {fileID: 0}
-    - target: {fileID: 4300237063704229397, guid: 440d18354c9726f419c470a62de00a4e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4300237063704229397, guid: 440d18354c9726f419c470a62de00a4e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4300237063704229397, guid: 440d18354c9726f419c470a62de00a4e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2375309748227013372}
-    - target: {fileID: 4300237063704229397, guid: 440d18354c9726f419c470a62de00a4e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4300237063704229397, guid: 440d18354c9726f419c470a62de00a4e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 4300237063704229397, guid: 440d18354c9726f419c470a62de00a4e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SceneLoader, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4300237063704229397, guid: 440d18354c9726f419c470a62de00a4e,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 440d18354c9726f419c470a62de00a4e, type: 3}
---- !u!1 &2375309748227013371 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1299111386438546928, guid: 440d18354c9726f419c470a62de00a4e,
-    type: 3}
-  m_PrefabInstance: {fileID: 2375309748227013370}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2375309748227013372
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2375309748227013371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 789de8b76f8535e44b53212b96d899b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sceneName: UI_WorldMap_Prototype
