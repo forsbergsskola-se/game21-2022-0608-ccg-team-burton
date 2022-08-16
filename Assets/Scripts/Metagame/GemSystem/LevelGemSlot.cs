@@ -36,7 +36,6 @@ public class LevelGemSlot : MonoBehaviour, IPointerClickHandler
         } else if(transform.parent.name.Contains("Gem"))
         {
             _slotManager.UnSlotGemInLevel(_item,true,gameObject);
-            _slotManager.CalculateCoinCost();
             Destroy(gameObject);
 
         }

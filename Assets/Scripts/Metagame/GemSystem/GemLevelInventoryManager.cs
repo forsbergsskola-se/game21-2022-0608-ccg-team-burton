@@ -109,6 +109,7 @@ CalculateCoinCost();
     {
         CalculateBonuses(item,subtractionOfBonus);
         ClearSlottedGemFromArray(gemGO);
+        CalculateCoinCost();
     }
 
     public void CalculateCoinCost()
@@ -211,11 +212,8 @@ CalculateCoinCost();
 
 
         }
-        //
-        // Debug.Log(LevelStartCost);
-        PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(),
-            PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) - LevelStartCost);
-        Debug.Log("LEVEL START COST "+LevelStartCost); 
+        
+        PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) - LevelStartCost);
         _sceneLoader.LoadScene();
 
     }
