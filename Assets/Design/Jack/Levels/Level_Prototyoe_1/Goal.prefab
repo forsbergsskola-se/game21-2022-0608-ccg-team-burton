@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 2604721245304753353}
   - component: {fileID: 2604721245304753354}
   - component: {fileID: 7574128599993746065}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Goal
-  m_TagString: Player
+  m_TagString: LevelGrid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,7 +33,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -140,8 +140,10 @@ MonoBehaviour:
   PlayerHealth: {fileID: 0}
   ItemCollector: {fileID: 0}
   CoinBonus: 500
-  currentStarsNum: 0
-  levelIndex: 1
+  CurrentStarsNum: 0
+  LevelIndex: 4
+  Enemies: []
+  TextTimer: {fileID: 0}
 --- !u!114 &7574128599993746065
 MonoBehaviour:
   m_ObjectHideFlags: 0
