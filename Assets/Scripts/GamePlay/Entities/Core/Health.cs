@@ -44,6 +44,7 @@ namespace Entity
         {
             var equipmentHealthModifier = PlayerPrefs.GetFloat("buequipment.chest.attributevalue") + PlayerPrefs.GetFloat("gems.greengem.bonusid");
             CurrentHealth = _health+(int)equipmentHealthModifier;
+            OnHealthChanged?.Invoke(CurrentHealth);
         }
 
         public void ModifyHealth(int healthValueChange)
