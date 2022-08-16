@@ -103,6 +103,7 @@ public class TracerEyes : MonoBehaviour
         {
             if (_somethingHit)
             {
+                _enemyHealth.CurrentHealth = _maxHealth;
             }
         }
 
@@ -272,15 +273,16 @@ public class TracerEyes : MonoBehaviour
             
             if (layer == 8)
             {
-                _somethingHit = true;
-
                 compoundActions |= CompoundActions.PlayerNoticed;
                 if (CheckIfLookingAtTarget(h.point))
                 {
                     compoundActions |= CompoundActions.PlayerInFront;
+                    compoundActions  &= ~CompoundActions.PlayerBehind;
+                    _somethingHit = true;
                 }
                 else
                 {
+                    compoundActions |= CompoundActions.PlayerBehind;
                     compoundActions  &= ~CompoundActions.PlayerNoticed;
                     compoundActions  &= ~CompoundActions.PlayerInFront;
                 }
