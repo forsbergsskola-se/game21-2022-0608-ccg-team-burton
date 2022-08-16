@@ -83,8 +83,11 @@ public class TracerEyes : MonoBehaviour
     {
         compoundActions |= CompoundActions.EnemyAttacked;
         
-        if (_somethingHit)
+        if (enemyType == EnemyType.Cannon)
         {
+            if (_somethingHit)
+            {
+            }
         }
 
         if (currentHealth <= 0)
@@ -193,12 +196,9 @@ public class TracerEyes : MonoBehaviour
                 }
             }
         }
-        //Debug.Log($"Compound hit: {compoundActions}");
 
         if (_somethingHit) return;
-        
-        //Debug.Log($"Compound miss: {compoundActions}");
-        
+
         compoundActions  &= ~CompoundActions.PlayerNoticed;
         compoundActions  &= ~CompoundActions.PlayerInFront;
     }

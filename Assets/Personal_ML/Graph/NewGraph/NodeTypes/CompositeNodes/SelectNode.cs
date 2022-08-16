@@ -9,9 +9,7 @@ using UnityEngine;
 
 public class SelectNode : CompositeNode
 {
-    [HideInInspector] public bool choiceMade;
     [HideInInspector] public CurrentCommand currentCommand;
-    [HideInInspector] public STATE nextState;
     private Dictionary<CurrentCommand, BaseNode> ownedNodes = new();
     private BaseNode _currentChoice;
     private CubeFacts _current;
@@ -36,65 +34,107 @@ public class SelectNode : CompositeNode
             return;
         }
         
-        if (!comp.HasFlag(CompoundActions.GroundSeen) && !comp.HasFlag(CompoundActions.PlayerNoticed))
+        if (comp.HasFlag(CompoundActions.GroundSeen))
         {
-            var ground = agent.grid
-                .GetCurrentGround(agent.enemyTransform.position +
-                                  new Vector3(agent.enemyTransform.right.x * 9,0));
-            
-            if (ground == null)
-            {
-                GetTarget(true);
-            }
-            else
-            {
-                currentCommand = CurrentCommand.Jump;
-            }
-        }
-
-        else if (comp.HasFlag(CompoundActions.PlayerNoticed) && comp.HasFlag(CompoundActions.GroundSeen))
-        {
-            agent.currentDestination = agent.enemyEyes.PlayerPos;
-            if (comp.HasFlag(CompoundActions.PlayerInFront))
+            Debug.Log(comp);
+            if (comp.HasFlag(CompoundActions.PlayerNoticed))
             {
                 if (comp.HasFlag(CompoundActions.PlayerInAttackRange))
                 {
                     currentCommand = CurrentCommand.Attack;
                 }
-                else
+                else if(!comp.HasFlag(CompoundActions.PlayerInAttackRange))
                 {
+                    Debug.Log("move to player");
+                    agent.currentDestination = agent.enemyEyes.PlayerPos;
                     currentCommand = CurrentCommand.MoveToPosition;
                 }
             }
-            
-            if (comp.HasFlag(CompoundActions.PlayerBehind))
+            else if (!comp.HasFlag(CompoundActions.PlayerNoticed))
             {
-                currentCommand = CurrentCommand.MoveToPosition;
+               // GetClosestTarget();
+                GetTarget(Vector2.Distance(agent.currentDestination, agent.attackPointTrans.position) <= agent.turnDistance);
             }
-           
+            
+            else
+            {
+               // GetTarget(Vector2.Distance(agent.currentDestination, agent.attackPointTrans.position) <= agent.turnDistance);
+            }
         }
-        else
+        
+        else if (!comp.HasFlag(CompoundActions.GroundSeen))
         {
-            GetTarget(Vector2.Distance(agent.currentDestination, agent.attackPointTrans.position) <= agent.turnDistance);
+            if (!comp.HasFlag(CompoundActions.PlayerNoticed))
+            {
+                var ground = agent.grid
+                    .GetCurrentGround(agent.enemyTransform.position +
+                                      new Vector3(agent.enemyTransform.right.x * 9,0));
+            
+                if (ground == null)
+                {
+                    GetTarget(true);
+                }
+                else
+                {
+                    currentCommand = CurrentCommand.Jump;
+                }
+            }
         }
 
         _choiceMade = true;
+    }
+
+    private void GetClosestTarget()
+    {
+        var pos = agent.enemyTransform.position;
+        var ground = agent.grid.GetCurrentGround(pos);
+        var start = Vector2.Distance(pos, ground.start);
+        var end = Vector2.Distance(pos, ground.start);
+        
+        var dir = agent.enemyTransform.right.x > 0;
+        
+        if (dir)
+        {
+            agent.currentDestination =  ground.end;
+        }
+        else
+        {
+            agent.currentDestination = ground.start;
+        }
+
+        agent.currentDestination = ground.start;
+        
+        currentCommand = CurrentCommand.MoveToPosition;
     }
     
     private void GetTarget(bool atEnd)
     {
         var ground = agent.grid.GetCurrentGround(agent.enemyTransform.position);
         var dir = agent.enemyTransform.right.x > 0;
-        
-        if (dir)
-        {
+        var comp = agent.enemyEyes.compoundActions;
 
-            agent.currentDestination = atEnd ? ground.start : ground.end;
-        }
-        else
+        if (comp.HasFlag(CompoundActions.PlayerBehind))
         {
-            agent.currentDestination = atEnd ? ground.end : ground.start;
+            agent.currentDestination = agent.enemyEyes.PlayerPos;
         }
+        else if (comp.HasFlag(CompoundActions.PlayerNoticed))
+        {
+            agent.currentDestination = agent.enemyEyes.PlayerPos;
+        }
+        
+        else if (!comp.HasFlag(CompoundActions.PlayerNoticed))
+        {
+            if (dir)
+            {
+                agent.currentDestination = atEnd ? ground.start : ground.end;
+            }
+            else
+            {
+                agent.currentDestination = atEnd ? ground.end : ground.start;
+            }
+        }
+ 
+        
 
         currentCommand = CurrentCommand.MoveToPosition;
     }
@@ -136,7 +176,8 @@ public class SelectNode : CompositeNode
     
     public override State OnUpdate()
     {
-        //if (!choiceMade) return State.Update;
+        if (!_choiceMade) return State.Update;
+        if (currentCommand == CurrentCommand.None) return State.Update;
         _currentChoice = ownedNodes[currentCommand];
 
         switch (_currentChoice.Update())
@@ -148,7 +189,7 @@ public class SelectNode : CompositeNode
                 return State.Update;
 
             case State.Success:
-                choiceMade = false;
+                _choiceMade = false;
                 CheckOptions();
                 break;
         }

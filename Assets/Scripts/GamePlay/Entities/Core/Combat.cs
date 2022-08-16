@@ -15,7 +15,7 @@ public class Combat : MonoBehaviour
     //PRIVATE VARIABLES
     private CameraShake _cameraShake;
     private Animator _anim;
-    private int _meleeDamage;
+    [SerializeField] private int _meleeDamage;
     
     [Header("DEBUGSTATS")] 
     [SerializeField]
@@ -27,12 +27,11 @@ public class Combat : MonoBehaviour
      {
          _anim = GetComponent<Animator>();
          _cameraShake = FindObjectOfType<CameraShake>().GetComponent<CameraShake>();
-         PlayerPrefs.SetFloat("buequipment.weapon.attributevalue", 1);
      }
 
      private void Start()
      {
-         _meleeDamage = (int)PlayerPrefs.GetFloat("buequipment.weapon.attributevalue");
+         _meleeDamage += (int)PlayerPrefs.GetFloat("buequipment.weapon.attributevalue") + (int)PlayerPrefs.GetFloat("gems.redgem.bonusid");
      }
 
      public void MeleeAttack()

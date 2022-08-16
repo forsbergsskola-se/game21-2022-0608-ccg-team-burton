@@ -9,7 +9,7 @@ public class LevelGemSlot : MonoBehaviour, IPointerClickHandler
     [SerializeField] private TMP_Text _amount;
     private Image _spriteRenderer;
     private GemLevelInventoryManager _slotManager => FindObjectOfType<GemLevelInventoryManager>();
-    private MaterialItem _item { get; set; }
+    public MaterialItem _item { get; private set; }
 
     private void Awake()
     {
@@ -31,10 +31,13 @@ public class LevelGemSlot : MonoBehaviour, IPointerClickHandler
             PlayerPrefs.SetInt(_item.GetItemID(), PlayerPrefs.GetInt(_item.GetItemID())-1);
             
            _slotManager.SlotGemInLevel(_item);
+           _slotManager.CalculateBonuses(_item, true);
+
             
         } else if(transform.parent.name.Contains("Gem"))
         {
             Destroy(gameObject);
+            _slotManager.CalculateBonuses(_item, true);
 
 
         }
