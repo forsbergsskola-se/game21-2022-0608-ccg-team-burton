@@ -957,9 +957,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 960, y: 540}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8616620451430531625
 Canvas:
   m_ObjectHideFlags: 0
@@ -1058,11 +1058,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MusicTrack:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -606211590
+      Data2: 1274837012
+      Data3: -64651085
+      Data4: -664038866
+    Path: event:/Music/MusicTrack1
 --- !u!114 &5280854866029627457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1075,7 +1075,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f77a58954b299d489d4064d5695f91e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundMananger: {fileID: 6075800328692194651}
+  _soundMananger: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
+    type: 3}
   SoundFile:
     Guid:
       Data1: 1503992618

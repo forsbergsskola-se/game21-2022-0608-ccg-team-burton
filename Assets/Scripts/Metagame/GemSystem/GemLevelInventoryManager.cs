@@ -11,7 +11,7 @@ public class GemLevelInventoryManager : MonoBehaviour
 {
     
     //Public fields
-    public int _levelSlotIndex = 0;
+    [HideInInspector]public int LevelSlotIndex = 0;
 
     //Private fields
     [SerializeField] private GameObject[] _levelSlots;
@@ -89,18 +89,18 @@ public class GemLevelInventoryManager : MonoBehaviour
         for (var i = 0; i < _levelSlots.Length; i++)
         {
             if (_currentSlottedGems[i] != null) continue;
-            _levelSlotIndex = i;
+            LevelSlotIndex = i;
             break;
         }
-        _currentSlottedGems[_levelSlotIndex] = gemInSlot;
+        _currentSlottedGems[LevelSlotIndex] = gemInSlot;
         
-        gemInSlot.transform.position = _levelSlots[_levelSlotIndex].transform.position;
+        gemInSlot.transform.position = _levelSlots[LevelSlotIndex].transform.position;
         gemInSlot.GetComponent<LevelGemSlot>().SetItemSlot(gem);
         gemInSlot.GetComponentInChildren<TMP_Text>().SetText("");
         gemInSlot.transform.parent = _levelSlotParentTransform;
         
         CalculateBonuses(gem, false);
-        // _oneShotSound.PlaySound();
+        _oneShotSound.PlaySound();
     }
 
 
@@ -154,7 +154,7 @@ public class GemLevelInventoryManager : MonoBehaviour
     
     private void OnDisable()
     {
-        _levelSlotIndex = 0;
+        LevelSlotIndex = 0;
         _calcHPBonus = 0;
         _calcAtkBonus = 0;
         _calcMoveSpeedBonus = 0;
