@@ -14,7 +14,6 @@ namespace NewGraph.NodeTypes.ActionNodes
 
         public override void OnExit()
         {
-            agent.body.constraints = RigidbodyConstraints2D.None;
             agent.body.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
         
@@ -36,7 +35,6 @@ namespace NewGraph.NodeTypes.ActionNodes
             {
                 timeSinceAttack += Time.deltaTime;
             }
-            
             
             if (!comp.HasFlag(CompoundActions.PlayerInAttackRange))
             {
