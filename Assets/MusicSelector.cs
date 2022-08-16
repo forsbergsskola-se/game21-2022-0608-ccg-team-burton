@@ -1,14 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 
 public class MusicSelector : MonoBehaviour
 {
-    private SoundMananger _soundMananger => FindObjectOfType<SoundMananger>();
-    public FMODUnity.EventReference SoundFile;
+    public EventReference SoundFile;
+    SoundMananger _soundMananger => FindObjectOfType<SoundMananger>();
 
-    void Start()
-    {
+    void Start(){
         _soundMananger.StartMusic(SoundFile);
+    }
+
+    void ReleaseAll(){
     }
 }
