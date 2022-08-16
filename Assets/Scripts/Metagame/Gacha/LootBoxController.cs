@@ -66,5 +66,7 @@ public class LootBoxController : MonoBehaviour, IPointerClickHandler
          OnUpdateItemUI?.Invoke(ItemUIGameobjects[i],item);
          i++;
       }
+      
+      
    }
 }
