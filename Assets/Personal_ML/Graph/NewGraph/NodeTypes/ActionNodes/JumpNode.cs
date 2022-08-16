@@ -5,14 +5,17 @@ namespace NewGraph.NodeTypes.ActionNodes
     public class JumpNode : ActionNode
     {
         private bool _startedJump;
+        private float _delayQuit;
         
         public override void OnStart()
         {
             _startedJump = false;
+            _delayQuit = 0;
         }
 
         public override void OnExit()
         {
+         
         }
 
         public override State OnUpdate()
@@ -24,7 +27,10 @@ namespace NewGraph.NodeTypes.ActionNodes
                 agent.anim.SetTrigger(Animator.StringToHash("Enemy_Jump"));
                 _startedJump = true;    
             }
-
+            _delayQuit += Time.deltaTime;
+            
+            
+            //if (_delayQuit < 2f) return State.Update;
             if (_startedJump && agent.enemyEyes.compoundActions.HasFlag(CompoundActions.GroundSeen))
             {
                 return State.Success;

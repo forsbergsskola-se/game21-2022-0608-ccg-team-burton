@@ -69,7 +69,7 @@ Transform:
   - {fileID: 738219081596348140}
   - {fileID: 4163863697899335466}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!212 &6015414309975940724
 SpriteRenderer:
@@ -244,13 +244,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2476108946178221721, guid: 710f3cf467f8dbc46bd4a2768ad01818,
         type: 3}
+      propertyPath: _collider2D
+      value: 
+      objectReference: {fileID: 7711834838784952237}
+    - target: {fileID: 2476108946178221721, guid: 710f3cf467f8dbc46bd4a2768ad01818,
+        type: 3}
       propertyPath: traceSize.x
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2476108946178221721, guid: 710f3cf467f8dbc46bd4a2768ad01818,
         type: 3}
       propertyPath: traceSize.y
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7189642783579227016, guid: 710f3cf467f8dbc46bd4a2768ad01818,
         type: 3}
@@ -265,7 +270,7 @@ PrefabInstance:
     - target: {fileID: 7189642783579227016, guid: 710f3cf467f8dbc46bd4a2768ad01818,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.17
       objectReference: {fileID: 0}
     - target: {fileID: 7189642783579227016, guid: 710f3cf467f8dbc46bd4a2768ad01818,
         type: 3}

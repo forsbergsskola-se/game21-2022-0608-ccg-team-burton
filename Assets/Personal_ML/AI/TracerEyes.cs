@@ -30,6 +30,7 @@ public enum CompoundActions
     IgnoreTraceForSeconds = 1 << 16,
     LowerGroundSeen = 1 << 17,
     HigherGroundSeen = 1 << 18,
+    ArrivedAtTarget = 1 << 19,
 }
 
 public enum EnemyType
@@ -65,15 +66,14 @@ public class TracerEyes : MonoBehaviour
     private List<RaycastHit2D> _pointsList = new();
     [HideInInspector] public CompoundActions compoundActions;
     [HideInInspector] public float distanceToWall;
-
     [HideInInspector] public bool lockGroundTrace;
-    
     
     private int _maxHealth;
     private void Awake()
     {
         _debugPoints = new Vector2[10];
         compoundActions |= CompoundActions.GroundSeen;
+        compoundActions &= ~CompoundActions.EnemyAttacked;
     }
 
     private void Start()
@@ -88,6 +88,7 @@ public class TracerEyes : MonoBehaviour
 
         _groundMask = 1 << 6 | 1 << 10 | 1 << 11; 
         _boxMask = 1 << 8 | 1 << 13 | 1 << 7;
+        compoundActions &= ~CompoundActions.EnemyAttacked;
     }
 
     private void OnDisable()
@@ -147,7 +148,7 @@ public class TracerEyes : MonoBehaviour
         var wallTrace = BaseTrace(new Vector3(0, 0), 8, true);
         if (wallTrace) compoundActions |= CompoundActions.WallSeen;
         else compoundActions &= ~CompoundActions.WallSeen;
-        
+       // Debug.Log(compoundActions);
         
         if (compoundActions.HasFlag(CompoundActions.WallSeen))
         {
@@ -158,18 +159,21 @@ public class TracerEyes : MonoBehaviour
             {
                 var some =  _grid.GetCurrentGround(tracePos);
                 AddDebugPointAt(tracePos, 0);
-                
-                if (some != null)
-                {
-                    compoundActions |= CompoundActions.HigherGroundSeen;
-                  //  Debug.Log("very higher");
-                }
-                
+              //  
+              //  if (some != null)
+              //  {
+              //      compoundActions |= CompoundActions.HigherGroundSeen;
+              //  }
             }
             
             if (distanceToWall < 0.5f)
             {
                 compoundActions |= CompoundActions.WallInTurnRange;
+            }
+            
+            else
+            {
+                compoundActions &= ~CompoundActions.WallInTurnRange;
             }
         }
         
@@ -198,7 +202,7 @@ public class TracerEyes : MonoBehaviour
 
         if (!compoundActions.HasFlag(CompoundActions.GroundSeen))
         {
-            var groundTrace2 = SpecTrace(otherPos, new Vector2(0, -1), 2.5f);
+            var groundTrace2 = false;
             AddDebugPointAt(otherPos2, 1);
             var some = _grid.GetCurrentGround(otherPos2);
 
@@ -208,10 +212,8 @@ public class TracerEyes : MonoBehaviour
                 {
                     groundTrace2 = true;
                 }
-                else groundTrace2 = false;
             }
-            else groundTrace2 = false;
-            
+
             if (groundTrace2) compoundActions |= CompoundActions.LowerGroundSeen;
             else compoundActions &= ~CompoundActions.LowerGroundSeen;
         }
