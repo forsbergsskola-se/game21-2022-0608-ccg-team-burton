@@ -56,12 +56,11 @@ public class SelectNode : CompositeNode
         
         else if (!comp.HasFlag(CompoundActions.GroundSeen))
         {
-            if (!comp.HasFlag(CompoundActions.PlayerNoticed))
+            var ground = agent.grid
+                .GetCurrentGround(agent.enemyTransform.position +
+                                  new Vector3(agent.enemyTransform.right.x * 9,0));
+            if (!comp.HasFlag(CompoundActions.PlayerNoticed) && !comp.HasFlag(CompoundActions.LowerGroundSeen))
             {
-                var ground = agent.grid
-                    .GetCurrentGround(agent.enemyTransform.position +
-                                      new Vector3(agent.enemyTransform.right.x * 9,0));
-               
                 if (ground == null)
                 {
                     GetTarget(true);
@@ -71,7 +70,12 @@ public class SelectNode : CompositeNode
                     currentCommand = CurrentCommand.Jump;
                 }
 
-              //  CheckForJumps(false);
+            }
+            
+            if (!comp.HasFlag(CompoundActions.PlayerNoticed) && comp.HasFlag(CompoundActions.LowerGroundSeen))
+            {
+                var dir = agent.enemyTransform.right.x > 0;
+                agent.currentDestination = dir ? ground.end : ground.start;
             }
         }
 
@@ -94,7 +98,7 @@ public class SelectNode : CompositeNode
         {
             currentCommand = CurrentCommand.MoveToPosition;
             
-          //  agent.currentDestination = ;
+            agent.currentDestination = nexGround.end;
         }
     }
     

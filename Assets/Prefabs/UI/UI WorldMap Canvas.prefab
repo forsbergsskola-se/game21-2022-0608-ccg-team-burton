@@ -824,18 +824,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 69117682}
-        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 3441949836686083656}
         m_TargetAssemblyTypeName: GemLevelInventoryManager, Assembly-CSharp
         m_MethodName: SaveGemModifiersOnPlay
@@ -913,7 +901,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62c077f746464248b08aa479048ce37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelSlotIndex: 0
+  LevelSlotIndex: 0
+  CoinPerGemFee: 0
+  _sceneLoader: {fileID: 0}
   _levelSlots:
   - {fileID: 340427494}
   - {fileID: 1284404204}
@@ -932,6 +922,7 @@ MonoBehaviour:
   _atkBonusText: {fileID: 0}
   _hPBonusText: {fileID: 0}
   _moveSpeedBonusText: {fileID: 0}
+  _coinsCostText: {fileID: 0}
   _oneShotSound: {fileID: 0}
 --- !u!1 &96612865
 GameObject:
@@ -2129,7 +2120,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 90.7, y: -90.7}
+  m_AnchoredPosition: {x: -140, y: -209}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &272025292
@@ -2160,17 +2151,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Move speed bonus: 0'
+  m_text: 'Speed bonus: 0'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 28d1dd93e1b25e143b2e88fa1216a08a, type: 2}
+  m_sharedMaterial: {fileID: -2717891193415401434, guid: 28d1dd93e1b25e143b2e88fa1216a08a,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4285729024
+  m_fontColor: {r: 0, g: 0.033751328, b: 0.4528302, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2187,8 +2179,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2223,7 +2215,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -407.6922, w: 0}
+  m_margin: {x: 0, y: 0, z: -34.90686, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2490,7 +2482,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62c077f746464248b08aa479048ce37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelSlotIndex: 0
+  LevelSlotIndex: 0
+  CoinPerGemFee: 0
+  _sceneLoader: {fileID: 0}
   _levelSlots:
   - {fileID: 1262849240}
   - {fileID: 598193846}
@@ -2509,6 +2503,7 @@ MonoBehaviour:
   _atkBonusText: {fileID: 0}
   _hPBonusText: {fileID: 0}
   _moveSpeedBonusText: {fileID: 0}
+  _coinsCostText: {fileID: 0}
   _oneShotSound: {fileID: 0}
 --- !u!1 &305601835
 GameObject:
@@ -2562,7 +2557,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62c077f746464248b08aa479048ce37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelSlotIndex: 0
+  LevelSlotIndex: 0
+  CoinPerGemFee: 0
+  _sceneLoader: {fileID: 0}
   _levelSlots:
   - {fileID: 1044616765}
   - {fileID: 339152853}
@@ -2581,6 +2578,7 @@ MonoBehaviour:
   _atkBonusText: {fileID: 0}
   _hPBonusText: {fileID: 0}
   _moveSpeedBonusText: {fileID: 0}
+  _coinsCostText: {fileID: 0}
   _oneShotSound: {fileID: 0}
 --- !u!1 &325939987
 GameObject:
@@ -5076,7 +5074,6 @@ GameObject:
   - component: {fileID: 617601907}
   - component: {fileID: 3441949836686083656}
   - component: {fileID: 8188770375034683492}
-  - component: {fileID: 8188770375034683493}
   m_Layer: 5
   m_Name: InventorySlots
   m_TagString: Untagged
@@ -5119,7 +5116,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62c077f746464248b08aa479048ce37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelSlotIndex: 0
+  LevelSlotIndex: 0
+  CoinPerGemFee: 50
+  _sceneLoader: {fileID: 69117682}
   _levelSlots:
   - {fileID: 1571935394}
   - {fileID: 716817725}
@@ -5138,6 +5137,7 @@ MonoBehaviour:
   _atkBonusText: {fileID: 1519027557}
   _hPBonusText: {fileID: 1188398347}
   _moveSpeedBonusText: {fileID: 272025291}
+  _coinsCostText: {fileID: 1660782114}
   _oneShotSound: {fileID: 8188770375034683492}
 --- !u!114 &8188770375034683492
 MonoBehaviour:
@@ -5151,33 +5151,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f77a58954b299d489d4064d5695f91e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundMananger: {fileID: 8188770375034683493}
   SoundFile:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: SOUND FILE HERE
---- !u!114 &8188770375034683493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 617601906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53c4f91299ce1f1478ca63b620d20347, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MusicTrack:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 597295880
+      Data2: 1199491030
+      Data3: 477852346
+      Data4: -892676233
+    Path: event:/UI/PickUpDiamond
 --- !u!1 &622856384
 GameObject:
   m_ObjectHideFlags: 0
@@ -6507,7 +6487,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62c077f746464248b08aa479048ce37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelSlotIndex: 0
+  LevelSlotIndex: 0
+  CoinPerGemFee: 0
+  _sceneLoader: {fileID: 0}
   _levelSlots:
   - {fileID: 1015533083}
   - {fileID: 569333058}
@@ -6526,6 +6508,7 @@ MonoBehaviour:
   _atkBonusText: {fileID: 0}
   _hPBonusText: {fileID: 0}
   _moveSpeedBonusText: {fileID: 0}
+  _coinsCostText: {fileID: 0}
   _oneShotSound: {fileID: 0}
 --- !u!1 &849226716
 GameObject:
@@ -8250,7 +8233,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62c077f746464248b08aa479048ce37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelSlotIndex: 0
+  LevelSlotIndex: 0
+  CoinPerGemFee: 0
+  _sceneLoader: {fileID: 0}
   _levelSlots:
   - {fileID: 1761286544}
   - {fileID: 1647762038}
@@ -8269,6 +8254,7 @@ MonoBehaviour:
   _atkBonusText: {fileID: 0}
   _hPBonusText: {fileID: 0}
   _moveSpeedBonusText: {fileID: 0}
+  _coinsCostText: {fileID: 0}
   _oneShotSound: {fileID: 0}
 --- !u!1 &1015075542
 GameObject:
@@ -9402,7 +9388,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -169.1, y: -90.7}
+  m_AnchoredPosition: {x: -140, y: -165}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1188398348
@@ -9435,15 +9421,16 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'HP bonus: 0'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 28d1dd93e1b25e143b2e88fa1216a08a, type: 2}
+  m_sharedMaterial: {fileID: -2717891193415401434, guid: 28d1dd93e1b25e143b2e88fa1216a08a,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278674688
+  m_fontColor: {r: 0, g: 0.3962264, b: 0.027110256, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -9460,8 +9447,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -9939,7 +9926,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62c077f746464248b08aa479048ce37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelSlotIndex: 0
+  LevelSlotIndex: 0
+  CoinPerGemFee: 0
+  _sceneLoader: {fileID: 0}
   _levelSlots:
   - {fileID: 506984722}
   - {fileID: 878173110}
@@ -9958,6 +9947,7 @@ MonoBehaviour:
   _atkBonusText: {fileID: 0}
   _hPBonusText: {fileID: 0}
   _moveSpeedBonusText: {fileID: 0}
+  _coinsCostText: {fileID: 0}
   _oneShotSound: {fileID: 0}
 --- !u!1 &1236709760
 GameObject:
@@ -11897,7 +11887,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -406.9, y: -89.1}
+  m_AnchoredPosition: {x: -140, y: -115}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1519027558
@@ -11930,15 +11920,16 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Atk bonus: 0'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 28d1dd93e1b25e143b2e88fa1216a08a, type: 2}
+  m_sharedMaterial: {fileID: -2717891193415401434, guid: 28d1dd93e1b25e143b2e88fa1216a08a,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278714491
+  m_fontColor: {r: 0.4811321, g: 0, b: 0.03259623, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -11955,8 +11946,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -13002,6 +12993,142 @@ MonoBehaviour:
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
   m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &1660782112
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1660782113}
+  - component: {fileID: 1660782115}
+  - component: {fileID: 1660782114}
+  m_Layer: 5
+  m_Name: CoinsCostText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1660782113
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660782112}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1967969661834880863}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 263, y: -275}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1660782115
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660782112}
+  m_CullTransparentMesh: 1
+--- !u!114 &1660782114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660782112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 0 coins
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 28d1dd93e1b25e143b2e88fa1216a08a, type: 2}
+  m_sharedMaterial: {fileID: -2717891193415401434, guid: 28d1dd93e1b25e143b2e88fa1216a08a,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278226058
+  m_fontColor: {r: 0.5400831, g: 0.5471698, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 60
+  m_fontSizeBase: 60
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: -29.286987, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -14619,7 +14746,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62c077f746464248b08aa479048ce37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelSlotIndex: 0
+  LevelSlotIndex: 0
+  CoinPerGemFee: 0
+  _sceneLoader: {fileID: 0}
   _levelSlots:
   - {fileID: 382567172}
   - {fileID: 1270953230}
@@ -14638,6 +14767,7 @@ MonoBehaviour:
   _atkBonusText: {fileID: 0}
   _hPBonusText: {fileID: 0}
   _moveSpeedBonusText: {fileID: 0}
+  _coinsCostText: {fileID: 0}
   _oneShotSound: {fileID: 0}
 --- !u!1 &1966238581
 GameObject:
@@ -15902,6 +16032,7 @@ RectTransform:
   - {fileID: 1519027556}
   - {fileID: 1188398346}
   - {fileID: 272025290}
+  - {fileID: 1660782113}
   m_Father: {fileID: 1094526343412679647}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -31,14 +31,12 @@ public class LevelGemSlot : MonoBehaviour, IPointerClickHandler
             PlayerPrefs.SetInt(_item.GetItemID(), PlayerPrefs.GetInt(_item.GetItemID())-1);
             
            _slotManager.SlotGemInLevel(_item);
-           _slotManager.CalculateBonuses(_item, true);
 
             
         } else if(transform.parent.name.Contains("Gem"))
         {
+            _slotManager.UnSlotGemInLevel(_item,true,gameObject);
             Destroy(gameObject);
-            _slotManager.CalculateBonuses(_item, true);
-
 
         }
         _slotManager.LoadGemsFromInventory();

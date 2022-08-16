@@ -73,7 +73,7 @@ public class DebugSaveClear : MonoBehaviour
          if (materialItem.GetItemID().Contains("red") || materialItem.GetItemID().Contains("blue") ||
              materialItem.GetItemID().Contains("green"))
          {
-            PlayerPrefs.SetInt(materialItem.GetItemID(), PlayerPrefs.GetInt(materialItem.GetItemID())+1);
+            PlayerPrefs.SetInt(materialItem.GetItemID(), PlayerPrefs.GetInt(materialItem.GetItemID())+100);
             Debug.Log($"Current {materialItem.GetDisplayName()}: {PlayerPrefs.GetInt(materialItem.GetItemID())}"); 
          }
       }
@@ -110,6 +110,7 @@ public class DebugSaveClear : MonoBehaviour
       
    }
 
+   
    public void SetupTestPlayer()
    {
       ClearInventoryFromItems();
@@ -120,7 +121,6 @@ public class DebugSaveClear : MonoBehaviour
          AddMetal();
          AddCoins();
          AddButtons();
-         AddGems();
       }
    }
 }

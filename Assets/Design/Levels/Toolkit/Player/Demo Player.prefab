@@ -46,7 +46,7 @@ Transform:
   m_Children:
   - {fileID: 3616007790298403442}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1144139567602091071
 SpriteRenderer:
@@ -222,6 +222,7 @@ MonoBehaviour:
   EnemyLayers:
     serializedVersion: 2
     m_Bits: 128
+  _meleeDamage: 0
   _knockbackMultiplier: 1
   DebugProjectile: {fileID: 0}
   FirePoint: {fileID: 0}
@@ -253,8 +254,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinText: {fileID: 0}
-  coinValue: 5
+  coinValue: 1
   _coinCounter: 0
+  CollectCoinSoundFile:
+    Guid:
+      Data1: 1503992618
+      Data2: 1197633378
+      Data3: 2020082080
+      Data4: 1417607242
+    Path: event:/Game Play/Objects/PickUpCurrency
 --- !u!114 &5732464600212847612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,7 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _combat: {fileID: 4797520626450282201}
-  _attackDelaySec: 2
+  _attackDelaySec: 0.5
 --- !u!114 &3205524570191263563
 MonoBehaviour:
   m_ObjectHideFlags: 0

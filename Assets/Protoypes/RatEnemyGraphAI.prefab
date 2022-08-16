@@ -42,7 +42,7 @@ Transform:
   - {fileID: 2514420000038245237}
   - {fileID: 5532273777974675920}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4145445555190365527
 SpriteRenderer:
@@ -115,7 +115,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &7227939696916853654
 MonoBehaviour:
@@ -143,9 +143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62179065a33a8c43879a7035312207e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 2
+  _health: 3
   _invulnerablilityTime: 1
-  playerDies: {fileID: 0}
+  playerDies: {fileID: 11400000, guid: f8811dc9379df0744a45a2e15bd6f078, type: 2}
 --- !u!114 &2514419999941505764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,11 +160,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CamIntensity: 5
   CamTime: 0
-  AttackRange: 1
+  AttackRange: 2
   AttackPoint: {fileID: 2514420000038245237}
   EnemyLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 384
+  _meleeDamage: 0
   _knockbackMultiplier: 1
   DebugProjectile: {fileID: 0}
   FirePoint: {fileID: 0}
@@ -261,11 +262,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tree: {fileID: 11400000, guid: 0b881e22c19ad7a4998b93c6014da312, type: 2}
   readyToRun: 0
-  attackInterval: 3
-  baseMoveSpeed: 2.41
+  attackInterval: 0.01
+  baseMoveSpeed: 5.1
   pursueMoveSpeed: 6.94
-  turnDistance: 0.75
-  projectile: {fileID: 0}
+  turnDistance: 0.5
+  damageAmount: 0
+  projectileLifespan: 0
+  colliders: []
 --- !u!1 &2514420000038245236
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,12 +322,17 @@ PrefabInstance:
     - target: {fileID: 2476108946178221721, guid: 710f3cf467f8dbc46bd4a2768ad01818,
         type: 3}
       propertyPath: traceSize.x
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2476108946178221721, guid: 710f3cf467f8dbc46bd4a2768ad01818,
         type: 3}
       propertyPath: traceSize.y
-      value: 8
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2476108946178221721, guid: 710f3cf467f8dbc46bd4a2768ad01818,
+        type: 3}
+      propertyPath: traceInterval
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7189642783579227016, guid: 710f3cf467f8dbc46bd4a2768ad01818,
         type: 3}
