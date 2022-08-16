@@ -1,35 +1,78 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuAnimations : MonoBehaviour
 {
     public GameObject StillMenuImage;
-    public GameObject Animation;
-    public bool DisableAnimation = true;
+    public GameObject ForwardAnimation;
+    public GameObject ReverseAnimation;
+    public Button HideButton;
+    public Button TriggerButton;
     
-    private Animator _animator;
+    private Animator _forwardAnimator;
+    private Animator _reverseAnimator;
+
     private AnimatorStateInfo _animatorStateInfo;
     private float _nTime;
-    [SerializeField] private bool _animationFinished;
+    private bool _reverseAnim = false;
+    private bool _playingAnim = false;
+
+
+    private void Awake()
+    {
+        _forwardAnimator = ForwardAnimation.GetComponent<Animator>();
+        _reverseAnimator = ReverseAnimation.GetComponent<Animator>();
+        TriggerButton.onClick.AddListener(PlayForwardAnim);
+        HideButton.onClick.AddListener(PlayReverseAnim);
+    }
+
     
-
-    private void Awake() => _animator = Animation.GetComponent<Animator>();
-
-
+    
     private void Update()
     {
-        _animatorStateInfo = _animator.GetCurrentAnimatorStateInfo(0);
-        _nTime = _animatorStateInfo.normalizedTime;
+        if (!_playingAnim) return;
 
-        if (_nTime <= 0) _animationFinished = false;
-        else if (_nTime > 1.0f) _animationFinished = true;
+        if (_playingAnim && !_reverseAnim)
+            _animatorStateInfo = _forwardAnimator.GetCurrentAnimatorStateInfo(0);
         
-        if (!DisableAnimation) return;
+        
+        else if (_playingAnim && _reverseAnim)
+            _animatorStateInfo = _reverseAnimator.GetCurrentAnimatorStateInfo(0);
 
-        if (_animationFinished)
+        _nTime = _animatorStateInfo.normalizedTime; 
+
+        
+        switch (_nTime)
         {
-            StillMenuImage.SetActive(true);
-            Animation.SetActive(false);
+            case > 1.0f when !_reverseAnim:
+                StillMenuImage.SetActive(true);
+                ForwardAnimation.SetActive(false);
+                _playingAnim = false;
+                break;
+            case > 1.0f when _reverseAnim:
+                StillMenuImage.SetActive(false);
+                ReverseAnimation.SetActive(false);
+                _playingAnim = false;
+                break;
         }
+    }
+
+    
+
+    private void PlayForwardAnim()
+    {
+        _playingAnim = true;
+        _reverseAnim = false;
+        ForwardAnimation.SetActive(true);
+    }
+
+    
+    
+    private void PlayReverseAnim()
+    {
+        _playingAnim = true;
+        _reverseAnim = true;
+        ReverseAnimation.SetActive(true);
         
     }
 }
