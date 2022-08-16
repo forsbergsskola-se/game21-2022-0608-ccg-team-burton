@@ -77,7 +77,6 @@ public class SelectNode : CompositeNode
                 var dir = agent.enemyTransform.right.x > 0;
                 agent.currentDestination = ground.end;
             }
-            Debug.Log(comp);
         }
 
         _choiceMade = true;
