@@ -11,7 +11,7 @@ public class GemLevelInventoryManager : MonoBehaviour
 {
     
     //Public fields
-    public int _levelSlotIndex = 0;
+    [HideInInspector]public int LevelSlotIndex = 0;
 
     //Private fields
     [SerializeField] private GameObject[] _levelSlots;
@@ -89,24 +89,26 @@ public class GemLevelInventoryManager : MonoBehaviour
         for (var i = 0; i < _levelSlots.Length; i++)
         {
             if (_currentSlottedGems[i] != null) continue;
-            _levelSlotIndex = i;
+            LevelSlotIndex = i;
             break;
         }
-        _currentSlottedGems[_levelSlotIndex] = gemInSlot;
+        _currentSlottedGems[LevelSlotIndex] = gemInSlot;
         
-        gemInSlot.transform.position = _levelSlots[_levelSlotIndex].transform.position;
+        gemInSlot.transform.position = _levelSlots[LevelSlotIndex].transform.position;
         gemInSlot.GetComponent<LevelGemSlot>().SetItemSlot(gem);
         gemInSlot.GetComponentInChildren<TMP_Text>().SetText("");
         gemInSlot.transform.parent = _levelSlotParentTransform;
         
         CalculateBonuses(gem, false);
-        _oneShotSound.PlaySound();
+        _oneShotSound.PlayStackingSound();
     }
 
 
     public void CalculateBonuses(MaterialItem item, bool subtraction)
     {
-     
+        Debug.Log(item +"," +subtraction);
+        Debug.Log(item.LevelBonus);
+        Debug.Log(item.LevelBonusID);
             if (item.GetItemID().Contains("red"))
             {
                 if (subtraction)
@@ -136,11 +138,11 @@ public class GemLevelInventoryManager : MonoBehaviour
         
     }
 
-    public void UpdateBonusTexts(float atkBonus, float hPBonus, float moveSpeedBonus)
+    private void UpdateBonusTexts(float atkBonus, float hPBonus, float moveSpeedBonus)
     {
         _atkBonusText.SetText("Atk bonus: " +atkBonus);
         _hPBonusText.SetText("HP bonus: " +hPBonus);
-        _moveSpeedBonusText.SetText("Move speed bonus: " +moveSpeedBonus);
+        _moveSpeedBonusText.SetText("Speed bonus: " +moveSpeedBonus);
     }
     
     
@@ -152,7 +154,7 @@ public class GemLevelInventoryManager : MonoBehaviour
     
     private void OnDisable()
     {
-        _levelSlotIndex = 0;
+        LevelSlotIndex = 0;
         _calcHPBonus = 0;
         _calcAtkBonus = 0;
         _calcMoveSpeedBonus = 0;
