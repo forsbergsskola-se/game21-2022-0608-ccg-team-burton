@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -17,20 +18,10 @@ public class PauseMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     #endregion
 
     private void Awake() => PauseMenuOriginal = PauseMenuImage.sprite;
-
-    
-    
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        //PauseMenuImage.sprite = PauseMenuChange;
-    }
-
-    
-    
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        //PauseMenuImage.sprite = PauseMenuOriginal;
-    }
+    public void OnPointerEnter(PointerEventData eventData) => ChangeSprite();
+    public void OnPointerExit(PointerEventData eventData) => ResetSprite();
+    private void ResetSprite() => PauseMenuImage.sprite = PauseMenuOriginal;
+    public void ResumeGame() => PauseMenuGO.SetActive(false);
 
     
     
@@ -41,8 +32,20 @@ public class PauseMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     }
 
 
-    public void ResumeGame()
+    
+    public void ChangeSprite()
     {
-        PauseMenuGO.SetActive(false);
+        PauseMenuImage.sprite = PauseMenuChange;
+        
+        if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.Android)
+            StartCoroutine(WaitToResetSprite());
+    }
+
+
+
+    private IEnumerator WaitToResetSprite()
+    {
+        yield return new WaitForSeconds(0.25f);
+        ResetSprite();
     }
 }
