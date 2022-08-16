@@ -23,6 +23,7 @@ public class GemLevelInventoryManager : MonoBehaviour
     [SerializeField] private TMP_Text _atkBonusText;
     [SerializeField] private TMP_Text _hPBonusText;
     [SerializeField] private TMP_Text _moveSpeedBonusText;
+    [SerializeField] private TMP_Text _coinsCostText;
     [SerializeField] private PlayOneShotSound _oneShotSound;
     private List<GameObject> _currentItemsInInventory = new();
     private GameObject[] _currentSlottedGems;
@@ -98,10 +99,37 @@ public class GemLevelInventoryManager : MonoBehaviour
         gemInSlot.GetComponent<LevelGemSlot>().SetItemSlot(gem);
         gemInSlot.GetComponentInChildren<TMP_Text>().SetText("");
         gemInSlot.transform.parent = _levelSlotParentTransform;
-
+CalculateCoinCost();
         
         CalculateBonuses(gem, false);
         _oneShotSound.PlayStackingSound();
+    }
+
+    public void UnSlotGemInLevel(MaterialItem item, bool subtractionOfBonus, GameObject gemGO)
+    {
+        CalculateBonuses(item,subtractionOfBonus);
+        ClearSlottedGemFromArray(gemGO);
+    }
+
+    public void CalculateCoinCost()
+    {
+        foreach (var slottedGem in _currentSlottedGems)
+        {
+            if (slottedGem != null)
+            {
+                LevelStartCost = 500;
+                break;
+            }
+            LevelStartCost = 0;
+
+        }
+
+        UpdateCoinText(LevelStartCost);
+    }
+
+    private void UpdateCoinText(int cost)
+    {
+        _coinsCostText.SetText(LevelStartCost+" coins");
     }
 
 
@@ -142,8 +170,17 @@ public class GemLevelInventoryManager : MonoBehaviour
         _hPBonusText.SetText("HP bonus: " +hPBonus);
         _moveSpeedBonusText.SetText("Speed bonus: " +moveSpeedBonus);
     }
-    
-    
+
+    public void ClearSlottedGemFromArray(GameObject slottedGem)
+    {
+        for (int i = 0; i < _currentSlottedGems.Length; i++)
+        {
+            if (_currentSlottedGems[i] == slottedGem)
+            {
+                _currentSlottedGems[i] = null;
+            }
+        }
+    }
 
     public bool FreeSlotExist()
     {
@@ -171,12 +208,11 @@ public class GemLevelInventoryManager : MonoBehaviour
             var slottedGemData = slottedGem.GetComponent<LevelGemSlot>()._item;
             PlayerPrefs.SetFloat(slottedGemData.LevelBonusID, PlayerPrefs.GetFloat(slottedGemData.LevelBonusID)+slottedGemData.LevelBonus);
             PlayerPrefs.SetInt(slottedGemData.GetItemID(), PlayerPrefs.GetInt(slottedGemData.GetItemID()) -1);
-            LevelStartCost += CoinPerGemFee;
 
 
         }
-
-        Debug.Log(LevelStartCost);
+        //
+        // Debug.Log(LevelStartCost);
         PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(),
             PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) - LevelStartCost);
         Debug.Log("LEVEL START COST "+LevelStartCost); 
