@@ -921,7 +921,6 @@ GameObject:
   - component: {fileID: 8536243300012931608}
   - component: {fileID: 4161867315974066718}
   - component: {fileID: 2135628260}
-  - component: {fileID: 6075800328692194651}
   - component: {fileID: 5280854866029627457}
   m_Layer: 5
   m_Name: UpgradeScreen
@@ -1044,25 +1043,6 @@ MonoBehaviour:
   _neededMaterialText: {fileID: 1225281333}
   _haveMaterialText: {fileID: 1844787927}
   _upgradeButton: {fileID: 8250505879793259473}
---- !u!114 &6075800328692194651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5752209485782625474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53c4f91299ce1f1478ca63b620d20347, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MusicTrack:
-    Guid:
-      Data1: -606211590
-      Data2: 1274837012
-      Data3: -64651085
-      Data4: -664038866
-    Path: event:/Music/MusicTrack1
 --- !u!114 &5280854866029627457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1075,15 +1055,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f77a58954b299d489d4064d5695f91e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundMananger: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
-    type: 3}
+  _soundMananger: {fileID: 0}
   SoundFile:
     Guid:
-      Data1: 1503992618
-      Data2: 1197633378
-      Data3: 2020082080
-      Data4: 1417607242
-    Path: event:/Game Play/Objects/PickUpCurrency
+      Data1: 681013612
+      Data2: 1253119494
+      Data3: 309374610
+      Data4: -99601549
+    Path: event:/UI/PickUpCeramic
 --- !u!1 &6777631334143194772
 GameObject:
   m_ObjectHideFlags: 0
