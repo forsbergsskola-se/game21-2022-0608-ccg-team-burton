@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 
 public class PlayOneShotSound : MonoBehaviour
@@ -29,6 +31,12 @@ public class PlayOneShotSound : MonoBehaviour
     }
 
     public void PlayStackingSound()
+    {
+        _sound = FMODUnity.RuntimeManager.CreateInstance(SoundFile);
+        _soundMananger.PlayStackingSound(_sound);
+    }
+    
+    public void PlayStackingSound(EventReference SoundFile)
     {
         _sound = FMODUnity.RuntimeManager.CreateInstance(SoundFile);
         _soundMananger.PlayStackingSound(_sound);
