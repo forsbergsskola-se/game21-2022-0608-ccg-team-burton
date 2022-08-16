@@ -913,7 +913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62c077f746464248b08aa479048ce37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelSlotIndex: 0
+  LevelSlotIndex: 0
   _levelSlots:
   - {fileID: 340427494}
   - {fileID: 1284404204}
@@ -2491,7 +2491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62c077f746464248b08aa479048ce37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelSlotIndex: 0
+  LevelSlotIndex: 0
   _levelSlots:
   - {fileID: 1262849240}
   - {fileID: 598193846}
@@ -2563,7 +2563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62c077f746464248b08aa479048ce37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelSlotIndex: 0
+  LevelSlotIndex: 0
   _levelSlots:
   - {fileID: 1044616765}
   - {fileID: 339152853}
@@ -5077,7 +5077,6 @@ GameObject:
   - component: {fileID: 617601907}
   - component: {fileID: 3441949836686083656}
   - component: {fileID: 8188770375034683492}
-  - component: {fileID: 8188770375034683493}
   m_Layer: 5
   m_Name: InventorySlots
   m_TagString: Untagged
@@ -5120,7 +5119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62c077f746464248b08aa479048ce37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelSlotIndex: 0
+  LevelSlotIndex: 0
   _levelSlots:
   - {fileID: 1571935394}
   - {fileID: 716817725}
@@ -5152,33 +5151,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f77a58954b299d489d4064d5695f91e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundMananger: {fileID: 8188770375034683493}
+  _soundMananger: {fileID: 0}
   SoundFile:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: SOUND FILE HERE
---- !u!114 &8188770375034683493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 617601906}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53c4f91299ce1f1478ca63b620d20347, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MusicTrack:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 597295880
+      Data2: 1199491030
+      Data3: 477852346
+      Data4: -892676233
+    Path: event:/UI/PickUpDiamond
 --- !u!1 &622856384
 GameObject:
   m_ObjectHideFlags: 0
@@ -6508,7 +6488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62c077f746464248b08aa479048ce37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelSlotIndex: 0
+  LevelSlotIndex: 0
   _levelSlots:
   - {fileID: 1015533083}
   - {fileID: 569333058}
@@ -8251,7 +8231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62c077f746464248b08aa479048ce37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelSlotIndex: 0
+  LevelSlotIndex: 0
   _levelSlots:
   - {fileID: 1761286544}
   - {fileID: 1647762038}
@@ -9941,7 +9921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62c077f746464248b08aa479048ce37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelSlotIndex: 0
+  LevelSlotIndex: 0
   _levelSlots:
   - {fileID: 506984722}
   - {fileID: 878173110}
@@ -14622,7 +14602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62c077f746464248b08aa479048ce37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelSlotIndex: 0
+  LevelSlotIndex: 0
   _levelSlots:
   - {fileID: 382567172}
   - {fileID: 1270953230}
@@ -15884,7 +15864,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1967969661834880863
 RectTransform:
   m_ObjectHideFlags: 0

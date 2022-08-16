@@ -304,18 +304,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1183905743 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7539610026086093110, guid: 17a79eb4b08abb44fb34d3fd24039688,
-    type: 3}
-  m_PrefabInstance: {fileID: 3760054209158841079}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 789de8b76f8535e44b53212b96d899b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1495322439
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,41 +410,10 @@ PrefabInstance:
       propertyPath: _fusionManager
       value: 
       objectReference: {fileID: 765188601}
-    - target: {fileID: 5280854866029627457, guid: 1072aef07a42fa147b4c4f452910dc20,
-        type: 3}
-      propertyPath: _soundMananger
-      value: 
-      objectReference: {fileID: 8399020781266871726, guid: 9fb01ca92ed438e41bb9386c3dbbf2c3,
-        type: 3}
     - target: {fileID: 5752209485782625474, guid: 1072aef07a42fa147b4c4f452910dc20,
         type: 3}
       propertyPath: m_Name
       value: UpgradeScreen
-      objectReference: {fileID: 0}
-    - target: {fileID: 6075800328692194651, guid: 1072aef07a42fa147b4c4f452910dc20,
-        type: 3}
-      propertyPath: MusicTrack.Path
-      value: event:/Music/MusicTrack1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6075800328692194651, guid: 1072aef07a42fa147b4c4f452910dc20,
-        type: 3}
-      propertyPath: MusicTrack.Guid.Data1
-      value: -606211590
-      objectReference: {fileID: 0}
-    - target: {fileID: 6075800328692194651, guid: 1072aef07a42fa147b4c4f452910dc20,
-        type: 3}
-      propertyPath: MusicTrack.Guid.Data2
-      value: 1274837012
-      objectReference: {fileID: 0}
-    - target: {fileID: 6075800328692194651, guid: 1072aef07a42fa147b4c4f452910dc20,
-        type: 3}
-      propertyPath: MusicTrack.Guid.Data3
-      value: -64651085
-      objectReference: {fileID: 0}
-    - target: {fileID: 6075800328692194651, guid: 1072aef07a42fa147b4c4f452910dc20,
-        type: 3}
-      propertyPath: MusicTrack.Guid.Data4
-      value: -664038866
       objectReference: {fileID: 0}
     - target: {fileID: 7428781205555222994, guid: 1072aef07a42fa147b4c4f452910dc20,
         type: 3}
@@ -876,59 +833,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7539610026086093107, guid: 17a79eb4b08abb44fb34d3fd24039688,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7539610026086093107, guid: 17a79eb4b08abb44fb34d3fd24039688,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7539610026086093107, guid: 17a79eb4b08abb44fb34d3fd24039688,
-        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 179542608}
-    - target: {fileID: 7539610026086093107, guid: 17a79eb4b08abb44fb34d3fd24039688,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1183905743}
-    - target: {fileID: 7539610026086093107, guid: 17a79eb4b08abb44fb34d3fd24039688,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7539610026086093107, guid: 17a79eb4b08abb44fb34d3fd24039688,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CloseWindowOnClick
-      objectReference: {fileID: 0}
-    - target: {fileID: 7539610026086093107, guid: 17a79eb4b08abb44fb34d3fd24039688,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: LoadScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 7539610026086093107, guid: 17a79eb4b08abb44fb34d3fd24039688,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ButtonCloseWindow, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 7539610026086093107, guid: 17a79eb4b08abb44fb34d3fd24039688,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: SceneLoader, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 7539610026086093107, guid: 17a79eb4b08abb44fb34d3fd24039688,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 7539610026086093107, guid: 17a79eb4b08abb44fb34d3fd24039688,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 17a79eb4b08abb44fb34d3fd24039688, type: 3}

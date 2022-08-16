@@ -100,7 +100,7 @@ public class GemLevelInventoryManager : MonoBehaviour
         gemInSlot.transform.parent = _levelSlotParentTransform;
         
         CalculateBonuses(gem, false);
-        _oneShotSound.PlaySound();
+        _oneShotSound.PlayStackingSound();
     }
 
 
