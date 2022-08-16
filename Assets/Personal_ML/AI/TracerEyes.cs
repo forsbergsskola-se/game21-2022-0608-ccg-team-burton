@@ -27,6 +27,8 @@ public enum CompoundActions
     AwareOfPlayer = 1 << 13,
     EnemyDead = 1 << 14,
     WallInTurnRange = 1 << 15,
+    IgnoreTraceForSeconds = 1 << 16,
+    LowerGroundSeen = 1 << 17,
 }
 
 public enum EnemyType
@@ -44,6 +46,9 @@ public class TracerEyes : MonoBehaviour
     [SerializeField] private EnemyType enemyType;
     [SerializeField] private CapsuleCollider2D _collider2D;
 
+    [HideInInspector] public float ignoreSeconds;
+
+    private LevelGrid _grid;
     private int _groundMask;
     private int _boxMask;
     
@@ -66,6 +71,10 @@ public class TracerEyes : MonoBehaviour
 
     private void Start()
     {
+        _grid = GameObject.FindGameObjectsWithTag("LevelGrid")
+            .OrderBy(x => Vector2.Distance(x.transform.position, transform.position))
+            .ToArray()[0].GetComponent<LevelGrid>();
+        
         _enemyHealth = GetComponentInParent<Health>();
         _maxHealth = _enemyHealth.CurrentHealth;
         _enemyHealth.OnHealthChanged += RegisterAttack;
@@ -114,12 +123,9 @@ public class TracerEyes : MonoBehaviour
     {
         if (enemyType == EnemyType.Melee)
         {
-            var groundTrace = TraceForGround(new Vector3(0, -0.45f), 2);
-            var wallTrace = TraceForGround(new Vector3(0, 0), 8);
-                
-            if (groundTrace) compoundActions |= CompoundActions.GroundSeen;
-            else compoundActions &= ~CompoundActions.GroundSeen;
+            TraceForGround();
             
+            var wallTrace = BaseTrace(new Vector3(0, 0), 8);
             if (wallTrace) compoundActions |= CompoundActions.WallSeen;
             else compoundActions &= ~CompoundActions.WallSeen;
             
@@ -144,7 +150,45 @@ public class TracerEyes : MonoBehaviour
         }
     }
 
-    private bool TraceForGround(Vector3 dirMod, float traceDist)
+    private void TraceForGround()
+    {
+        var pos = transform.position;
+        var dir = transform.right + new Vector3(0, -0.95f);
+        var otherPos = pos + dir * 1.5f;
+ 
+        var groundTrace = BaseTrace(dir, 2);
+
+        if (groundTrace) compoundActions |= CompoundActions.GroundSeen;
+        else compoundActions &= ~CompoundActions.GroundSeen;
+
+        if (!compoundActions.HasFlag(CompoundActions.GroundSeen))
+        {
+            var groundTrace2 = SpecTrace(otherPos, new Vector2(0, -1), 5);
+            
+            if (groundTrace2) compoundActions |= CompoundActions.LowerGroundSeen;
+            else compoundActions &= ~CompoundActions.LowerGroundSeen;
+        }
+    }
+
+    private bool SpecTrace(Vector2 pos, Vector2 dir, float traceDist)
+    {
+        var hit = Physics2D.Raycast(pos, dir, traceDist, _groundMask);
+        
+        if (hit)
+        {
+            
+            Debug.DrawRay(pos, dir *hit.distance, Color.green, traceInterval);
+        }
+        else
+        {
+            
+            Debug.DrawRay(pos, dir *traceDist, Color.red, traceInterval);
+        }
+
+        return hit;
+    }
+    
+    private bool BaseTrace(Vector3 dirMod, float traceDist)
     {
         var pos = transform.position;
         var dir = transform.right + dirMod;

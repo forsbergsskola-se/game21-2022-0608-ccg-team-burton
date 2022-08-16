@@ -293,6 +293,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: c609f76e853bcc844853bebf2e80259c, type: 3}
+--- !u!1 &1472958614 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2241896657917019300, guid: c609f76e853bcc844853bebf2e80259c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1472958613}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1472958615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472958614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f939e43c719f2e846bdbf953b1fe986e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SoundFile:
+    Guid:
+      Data1: -606211590
+      Data2: 1274837012
+      Data3: -64651085
+      Data4: -664038866
+    Path: event:/Music/MusicTrack1
 --- !u!1 &1651856426
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,16 +581,6 @@ PrefabInstance:
       propertyPath: currencyUpdater
       value: 
       objectReference: {fileID: 2054798412}
-    - target: {fileID: 236905935625410424, guid: 1c9a3b07db90ccc4985c681aa62b3ec8,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1004655788964419635, guid: 1c9a3b07db90ccc4985c681aa62b3ec8,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8188770375977295125, guid: 1c9a3b07db90ccc4985c681aa62b3ec8,
         type: 3}
       propertyPath: m_Pivot.x

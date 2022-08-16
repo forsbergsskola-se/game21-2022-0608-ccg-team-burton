@@ -16,8 +16,7 @@ public class FusionManager : MonoBehaviour
             UpgradeRarity(equipmentData);
 
             UpgradeAttribute(equipmentData);
-            //TODO: IMplement when sound is working
-            // _soundOneShot.PlaySound();
+            _soundOneShot.PlayStackingSound();
     }
 
     private void UpgradeAttribute(EquipmentSO equipmentData)

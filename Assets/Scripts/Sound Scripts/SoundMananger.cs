@@ -12,6 +12,8 @@ public class SoundMananger : MonoBehaviour
 
     private FMOD.Studio.EventInstance MusicTrack_EventInst;
 
+    private string _currentMusic="";
+
     bool isPitched = false;
 
     // Start is called before the first frame update
@@ -35,10 +37,18 @@ public class SoundMananger : MonoBehaviour
         isPitched = !isPitched;
     }
 
-    public void StartMusic(FMODUnity.EventReference MusicTrack){
-        StopMusic();
-        MusicTrack_EventInst = FMODUnity.RuntimeManager.CreateInstance(MusicTrack);
-        MusicTrack_EventInst.start();
+    public void StartMusic(FMODUnity.EventReference MusicTrack)
+    {
+        if (_currentMusic != MusicTrack.Path)
+        {
+            _currentMusic = MusicTrack.Path;
+            StopMusic();
+            MusicTrack_EventInst = FMODUnity.RuntimeManager.CreateInstance(MusicTrack);
+            MusicTrack_EventInst.start(); 
+        }
+
+
+
     }
 
     public void StopMusic(){

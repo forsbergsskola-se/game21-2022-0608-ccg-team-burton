@@ -11,7 +11,7 @@ public class BehaviourTreeRunner : MonoBehaviour
     [HideInInspector] public bool readyToRun;
 
     [Header("Enemy Attributes")] 
-    [SerializeField, Range(0.5f, 4)]private float attackInterval;
+    [SerializeField, Range(0.01f, 4)]private float attackInterval;
     [SerializeField, Range(1f, 20)]private float baseMoveSpeed;
     [SerializeField, Range(5, 10)]private float pursueMoveSpeed;
     [SerializeField, Range(0.5f, 3f)]private float turnDistance;
