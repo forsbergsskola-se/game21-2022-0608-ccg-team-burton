@@ -1,3 +1,4 @@
+using System;
 using Entity;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,8 @@ public class HealthDisplay : MonoBehaviour
 
     void OnEnable() => playerHealth.OnHealthChanged += UpdateHealthUI;
     private void OnDisable() => playerHealth.OnHealthChanged -= UpdateHealthUI;
+
+   
 
     private void UpdateHealthUI(int health)
     {
