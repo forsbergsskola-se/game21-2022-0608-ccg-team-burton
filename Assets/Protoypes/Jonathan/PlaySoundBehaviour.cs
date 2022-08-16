@@ -12,7 +12,6 @@ public class PlaySoundBehaviour : StateMachineBehaviour
 
     public void OnDisable(){
         _soundMananger.StopSound(_sound);
-        Debug.Log("Hej hopp jättesnopp");
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state

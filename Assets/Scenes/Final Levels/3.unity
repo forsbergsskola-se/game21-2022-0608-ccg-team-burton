@@ -462,6 +462,11 @@ PrefabInstance:
       objectReference: {fileID: 5096428008762714202}
     - target: {fileID: 2604721245304753354, guid: a56e798c588094347b4fc82ce4ea2541,
         type: 3}
+      propertyPath: TextTimer
+      value: 
+      objectReference: {fileID: 390769034}
+    - target: {fileID: 2604721245304753354, guid: a56e798c588094347b4fc82ce4ea2541,
+        type: 3}
       propertyPath: WinScreen
       value: 
       objectReference: {fileID: 5096428008762714201}
@@ -508,6 +513,18 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: a56e798c588094347b4fc82ce4ea2541, type: 3}
+--- !u!114 &390769034 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1618414821, guid: 80bc8a34c4c44f94d8cfb2477fa07b95,
+    type: 3}
+  m_PrefabInstance: {fileID: 5096428008762714199}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &449154872
 GameObject:
   m_ObjectHideFlags: 0
