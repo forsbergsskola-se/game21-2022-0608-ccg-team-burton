@@ -80,7 +80,7 @@ public class TracerEyes : MonoBehaviour
         _maxHealth = _enemyHealth.CurrentHealth;
         _enemyHealth.OnHealthChanged += RegisterAttack;
 
-        _groundMask = 1 << 6 | 1 << 10; 
+        _groundMask = 1 << 6 | 1 << 10 | 1 << 11; 
         _boxMask = 1 << 8 | 1 << 13 | 1 << 7;
     }
 
