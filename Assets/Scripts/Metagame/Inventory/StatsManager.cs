@@ -26,7 +26,6 @@ public class StatsManager : MonoBehaviour
                 continue;
             
             PlayerPrefs.SetFloat(gem.LevelBonusID, 0);
-            Debug.Log($"GEM {gem.GetDisplayName()} with ID {gem.GetItemID()} and bonus id {gem.LevelBonusID} was reset to {PlayerPrefs.GetFloat(gem.LevelBonusID)}");
         }
         
         

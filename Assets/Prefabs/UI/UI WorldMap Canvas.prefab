@@ -824,18 +824,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 69117682}
-        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 3441949836686083656}
         m_TargetAssemblyTypeName: GemLevelInventoryManager, Assembly-CSharp
         m_MethodName: SaveGemModifiersOnPlay
@@ -914,6 +902,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelSlotIndex: 0
+  CoinPerGemFee: 0
+  _sceneLoader: {fileID: 0}
   _levelSlots:
   - {fileID: 340427494}
   - {fileID: 1284404204}
@@ -2492,6 +2482,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelSlotIndex: 0
+  CoinPerGemFee: 0
+  _sceneLoader: {fileID: 0}
   _levelSlots:
   - {fileID: 1262849240}
   - {fileID: 598193846}
@@ -2564,6 +2556,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelSlotIndex: 0
+  CoinPerGemFee: 0
+  _sceneLoader: {fileID: 0}
   _levelSlots:
   - {fileID: 1044616765}
   - {fileID: 339152853}
@@ -5120,6 +5114,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelSlotIndex: 0
+  CoinPerGemFee: 50
+  _sceneLoader: {fileID: 69117682}
   _levelSlots:
   - {fileID: 1571935394}
   - {fileID: 716817725}
@@ -5151,7 +5147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f77a58954b299d489d4064d5695f91e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundMananger: {fileID: 0}
   SoundFile:
     Guid:
       Data1: 597295880
@@ -6489,6 +6484,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelSlotIndex: 0
+  CoinPerGemFee: 0
+  _sceneLoader: {fileID: 0}
   _levelSlots:
   - {fileID: 1015533083}
   - {fileID: 569333058}
@@ -8232,6 +8229,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelSlotIndex: 0
+  CoinPerGemFee: 0
+  _sceneLoader: {fileID: 0}
   _levelSlots:
   - {fileID: 1761286544}
   - {fileID: 1647762038}
@@ -9922,6 +9921,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelSlotIndex: 0
+  CoinPerGemFee: 0
+  _sceneLoader: {fileID: 0}
   _levelSlots:
   - {fileID: 506984722}
   - {fileID: 878173110}
@@ -14603,6 +14604,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelSlotIndex: 0
+  CoinPerGemFee: 0
+  _sceneLoader: {fileID: 0}
   _levelSlots:
   - {fileID: 382567172}
   - {fileID: 1270953230}
@@ -17763,9 +17766,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 960, y: 540}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8188770375977295126
 Canvas:
   m_ObjectHideFlags: 0

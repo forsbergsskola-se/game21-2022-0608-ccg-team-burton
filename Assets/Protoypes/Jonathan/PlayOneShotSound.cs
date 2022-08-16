@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class PlayOneShotSound : MonoBehaviour
 {
-    [SerializeField] private SoundMananger _soundMananger;
     public FMODUnity.EventReference SoundFile;
-    private FMOD.Studio.EventInstance _sound;
 
+    private SoundMananger _soundMananger;
+    private FMOD.Studio.EventInstance _sound;
     private bool initiated;
 
     private void Awake()
