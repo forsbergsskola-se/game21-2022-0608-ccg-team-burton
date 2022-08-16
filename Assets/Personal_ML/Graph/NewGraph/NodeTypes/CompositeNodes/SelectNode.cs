@@ -75,7 +75,7 @@ public class SelectNode : CompositeNode
             if (!comp.HasFlag(CompoundActions.PlayerNoticed) && comp.HasFlag(CompoundActions.LowerGroundSeen))
             {
                 var dir = agent.enemyTransform.right.x > 0;
-                agent.currentDestination = ground.end;
+                agent.currentDestination = dir ? ground.end : ground.start;
             }
         }
 

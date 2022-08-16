@@ -22,6 +22,7 @@ namespace NewGraph.NodeTypes.ActionNodes
 
         private void RotateEnemy()
         {
+            Debug.Log("rotate");
             agent.enemyTransform.Rotate(new Vector3(0, 1,0), 180);
         }
         
