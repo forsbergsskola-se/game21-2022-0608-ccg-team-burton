@@ -479,17 +479,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 2500345112022825117, guid: 2b24a900e88c8a249914c1c1fe8e4510,
-        type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2500345112022825117, guid: 2b24a900e88c8a249914c1c1fe8e4510,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: aa4b1c1faa4c3bc488c72493458e41f0,
-        type: 3}
     - target: {fileID: 2500345112083868718, guid: 2b24a900e88c8a249914c1c1fe8e4510,
         type: 3}
       propertyPath: m_Layer
@@ -504,6 +493,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2500345112572535327, guid: 2b24a900e88c8a249914c1c1fe8e4510,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2500345112646941988, guid: 2b24a900e88c8a249914c1c1fe8e4510,
         type: 3}
@@ -659,7 +653,7 @@ PrefabInstance:
     - target: {fileID: 2543266220312297747, guid: 1ed1e2cdea434404884b3b7f5e190d19,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 2543266220312297747, guid: 1ed1e2cdea434404884b3b7f5e190d19,
         type: 3}
@@ -701,6 +695,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2543266220312297757, guid: 1ed1e2cdea434404884b3b7f5e190d19,
+        type: 3}
+      propertyPath: LootBoxSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 92b81e392647eeb4396a4dc25eb68d0a,
+        type: 2}
     - target: {fileID: 2543266220312297757, guid: 1ed1e2cdea434404884b3b7f5e190d19,
         type: 3}
       propertyPath: _itemInfoUI
