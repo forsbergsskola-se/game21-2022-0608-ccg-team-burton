@@ -29,6 +29,7 @@ public enum CompoundActions
     WallInTurnRange = 1 << 15,
     IgnoreTraceForSeconds = 1 << 16,
     LowerGroundSeen = 1 << 17,
+    HigherGroundSeen = 1 << 18,
 }
 
 public enum EnemyType
@@ -125,21 +126,7 @@ public class TracerEyes : MonoBehaviour
         {
             TraceForGround();
             
-            var wallTrace = BaseTrace(new Vector3(0, 0), 8);
-            if (wallTrace) compoundActions |= CompoundActions.WallSeen;
-            else compoundActions &= ~CompoundActions.WallSeen;
-            
-            if (compoundActions.HasFlag(CompoundActions.WallSeen))
-            {
-                if (distanceToWall < 0.9f)
-                {
-                    compoundActions |= CompoundActions.WallInTurnRange;
-                }
-            }
-            else
-            {
-                compoundActions &= ~CompoundActions.WallInTurnRange;
-            }
+            TraceForWalls();
             
             TraceBox();
         }
@@ -150,13 +137,41 @@ public class TracerEyes : MonoBehaviour
         }
     }
 
+    private void TraceForWalls()
+    {
+        var wallTrace = BaseTrace(new Vector3(0, 0), 8, true);
+        if (wallTrace) compoundActions |= CompoundActions.WallSeen;
+        else compoundActions &= ~CompoundActions.WallSeen;
+        
+        
+        if (compoundActions.HasFlag(CompoundActions.WallSeen))
+        {
+            var tracePos = transform.position + new Vector3(2, 8);
+            //SpecTrace(tracePos, Vector2.down, 12);
+
+            if (distanceToWall <= 2)
+            {
+                
+                if (distanceToWall < 0.5f)
+                {
+                    compoundActions |= CompoundActions.WallInTurnRange;
+                }
+            }
+        }
+        
+        else
+        {
+            compoundActions &= ~CompoundActions.WallInTurnRange;
+        }
+    }
+
     private void TraceForGround()
     {
         var pos = transform.position;
         var dir = transform.right + new Vector3(0, -0.95f);
         var otherPos = pos + dir * 1.5f;
  
-        var groundTrace = BaseTrace(dir, 2);
+        var groundTrace = BaseTrace(dir, 2, false);
 
         if (groundTrace) compoundActions |= CompoundActions.GroundSeen;
         else compoundActions &= ~CompoundActions.GroundSeen;
@@ -188,14 +203,14 @@ public class TracerEyes : MonoBehaviour
         return hit;
     }
     
-    private bool BaseTrace(Vector3 dirMod, float traceDist)
+    private bool BaseTrace(Vector3 dirMod, float traceDist, bool setWallDist)
     {
         var pos = transform.position;
         var dir = transform.right + dirMod;
         
         var hit = Physics2D.Raycast(pos, dir, traceDist, _groundMask);
-
-        distanceToWall = hit.distance;
+        
+        if(setWallDist) distanceToWall = hit.distance;
         
         if (hit)
         {
