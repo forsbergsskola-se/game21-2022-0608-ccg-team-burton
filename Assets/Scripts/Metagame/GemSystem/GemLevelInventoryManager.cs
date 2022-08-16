@@ -100,13 +100,15 @@ public class GemLevelInventoryManager : MonoBehaviour
         gemInSlot.transform.parent = _levelSlotParentTransform;
         
         CalculateBonuses(gem, false);
-        _oneShotSound.PlaySound();
+        // _oneShotSound.PlaySound();
     }
 
 
     public void CalculateBonuses(MaterialItem item, bool subtraction)
     {
-     
+        Debug.Log(item +"," +subtraction);
+        Debug.Log(item.LevelBonus);
+        Debug.Log(item.LevelBonusID);
             if (item.GetItemID().Contains("red"))
             {
                 if (subtraction)
@@ -136,11 +138,11 @@ public class GemLevelInventoryManager : MonoBehaviour
         
     }
 
-    public void UpdateBonusTexts(float atkBonus, float hPBonus, float moveSpeedBonus)
+    private void UpdateBonusTexts(float atkBonus, float hPBonus, float moveSpeedBonus)
     {
         _atkBonusText.SetText("Atk bonus: " +atkBonus);
         _hPBonusText.SetText("HP bonus: " +hPBonus);
-        _moveSpeedBonusText.SetText("Move speed bonus: " +moveSpeedBonus);
+        _moveSpeedBonusText.SetText("Speed bonus: " +moveSpeedBonus);
     }
     
     
