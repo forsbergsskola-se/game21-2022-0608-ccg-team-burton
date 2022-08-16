@@ -27,6 +27,7 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         public override void OnExit()
         {
+            Debug.Log("exit walk");
             agent.anim.SetBool(Animator.StringToHash("Enemy_Walk"), false);
         }
         
@@ -69,7 +70,15 @@ namespace NewGraph.NodeTypes.ActionNodes
             
             if (comp.HasFlag(CompoundActions.EnemyDead)) return State.Success;
             if (comp.HasFlag(CompoundActions.PlayerBehind)) return State.Success;
-            if (!comp.HasFlag(CompoundActions.GroundSeen))return State.Success;
+            if (!comp.HasFlag(CompoundActions.GroundSeen))
+            {
+                Debug.Log("no ground");
+                if (!comp.HasFlag(CompoundActions.LowerGroundSeen))
+                {
+                    Debug.Log("really no ground");
+                    return State.Success;
+                }    
+            }
             if (comp.HasFlag(CompoundActions.PlayerInAttackRange))return State.Success;
             if (ArrivedAtTarget()) return State.Success;
             
