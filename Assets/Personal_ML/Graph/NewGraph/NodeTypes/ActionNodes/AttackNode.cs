@@ -14,6 +14,7 @@ namespace NewGraph.NodeTypes.ActionNodes
 
         public override void OnExit()
         {
+            agent.body.constraints = RigidbodyConstraints2D.None;
             agent.body.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
         
