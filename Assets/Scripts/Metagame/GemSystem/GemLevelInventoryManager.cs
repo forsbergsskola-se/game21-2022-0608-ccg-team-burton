@@ -196,13 +196,15 @@ CalculateCoinCost();
         _calcAtkBonus = 0;
         _calcMoveSpeedBonus = 0;
         UpdateBonusTexts(_calcAtkBonus,_calcHPBonus,_calcMoveSpeedBonus);
+        UpdateCoinText(LevelStartCost);
+
     }
 
     public void SaveGemModifiersOnPlay() //Called on starting level button
     {
         foreach (var slottedGem in _currentSlottedGems)
         {
-            if (slottedGem?.GetComponent<LevelGemSlot>()== null)
+            if (slottedGem== null)
                 continue;
             
             
@@ -214,7 +216,7 @@ CalculateCoinCost();
         }
         
         PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) - LevelStartCost);
-        _sceneLoader.LoadScene();
 
+            _sceneLoader.LoadScene();
     }
 }
