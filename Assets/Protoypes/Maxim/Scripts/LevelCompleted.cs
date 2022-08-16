@@ -12,10 +12,10 @@ public class LevelCompleted : MonoBehaviour
     public Health PlayerHealth;
     public ItemCollector ItemCollector;
     public int CoinBonus = 500;
+    
     public int CurrentStarsNum;
     public int LevelIndex;
-    public GameObject[] Enemies;
-
+    
     public TMP_Text TextTimer;
     float _timer;
 
@@ -57,10 +57,27 @@ public class LevelCompleted : MonoBehaviour
 
     void StarsAchieved(){
         var healthLeft = PlayerHealth.CurrentHealth;
+       
 
-        if (healthLeft >= 6) CurrentStarsNum = 1;
+        if (healthLeft >= 6 )
+        {
+            CurrentStarsNum += 1;
+        }
 
-        if (_timer < 120f) CurrentStarsNum = 2;
+        if (_timer < 120f)
+        {
+            CurrentStarsNum += 1;
+        }
+
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        Debug.Log(enemies.Length);
+
+        if (enemies.Length <= 0)
+        {
+            CurrentStarsNum += 1;
+        }
+
+
     }
 
     void SaveStars(int starsNum){
