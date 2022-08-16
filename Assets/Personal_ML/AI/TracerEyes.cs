@@ -66,7 +66,7 @@ public class TracerEyes : MonoBehaviour
     [HideInInspector] public CompoundActions compoundActions;
     [HideInInspector] public float distanceToWall;
 
-    public bool lockGroundTrace;
+    [HideInInspector] public bool lockGroundTrace;
     
     
     private int _maxHealth;
