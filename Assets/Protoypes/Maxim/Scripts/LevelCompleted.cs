@@ -1,3 +1,4 @@
+using System;
 using Entity;
 using TMPro;
 using UnityEngine;
@@ -16,6 +17,22 @@ public class LevelCompleted : MonoBehaviour
     public int CurrentStarsNum = 0;
     public int LevelIndex;
     public GameObject[] Enemies;
+
+    public TMP_Text TextTimer;
+    private float _timer = 0.0f;
+
+    private void Update()
+    {
+        _timer += Time.deltaTime;
+        DisplayTimer();
+    }
+
+    public void DisplayTimer()
+    {
+        int minutes = Mathf.FloorToInt(_timer / 60.0f);
+        int seconds = Mathf.FloorToInt(_timer - minutes * 60);
+        TextTimer.text = String.Format("{0:00}:{1:00}", minutes, seconds);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -49,18 +66,15 @@ public class LevelCompleted : MonoBehaviour
     {
         var healthLeft = PlayerHealth.CurrentHealth;
 
-        if (healthLeft == 6)
+        if (healthLeft >= 6)
         {
             CurrentStarsNum = 1;
         }
-        // else if (healthLeft <= 4)
-        // {
-        //     currentStarsNum = 0;
-        // }
-        // else
-        // {
-        //     currentStarsNum = 0;
-        // }
+
+        if (_timer < 120f)
+        {
+            CurrentStarsNum = 2;
+        }
     }
 
         private void SaveStars(int starsNum)
