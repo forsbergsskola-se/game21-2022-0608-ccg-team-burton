@@ -82,9 +82,12 @@ public class TracerEyes : MonoBehaviour
     private void RegisterAttack(int currentHealth)
     {
         compoundActions |= CompoundActions.EnemyAttacked;
-
-        if (_somethingHit)
+        
+        if (enemyType == EnemyType.Cannon)
         {
+            if (_somethingHit)
+            {
+            }
         }
 
         if (currentHealth <= 0)

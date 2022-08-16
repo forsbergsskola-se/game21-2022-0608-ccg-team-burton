@@ -10,7 +10,6 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         public override void OnStart()
         {
-            Debug.Log("start walking");
             agent.anim.SetBool(Animator.StringToHash("Enemy_Walk"), true);
             waitForExit = 0;
             canTurn = true;
@@ -28,7 +27,6 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         public override void OnExit()
         {
-            Debug.Log("stop walking");
             agent.anim.SetBool(Animator.StringToHash("Enemy_Walk"), false);
         }
         
