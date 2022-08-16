@@ -40,7 +40,7 @@ public class LevelGrid : MonoBehaviour
     private Vector2 _max;
     private int _layerMask;
 
-    private float _traceTime = 0.5f;
+    private float _traceTime = 20.5f;
 
     private List<RaycastHit2D> _hitList = new();
     
@@ -78,8 +78,11 @@ public class LevelGrid : MonoBehaviour
                 var cube = _gridList[i][j];
                 AdvancedTrace(new Vector2(i,j));
                 ScanForEnemies(cube.location);
+                
             }
         }
+        //Debug.Log(_gridList[0].Count);
+       // Debug.Log(_gridList[1].Count);
     }
 
     public WalkableGround GetCurrentGround(Vector2 currentPos)
@@ -126,7 +129,14 @@ public class LevelGrid : MonoBehaviour
             if(aHit.point.x < _min.x) breakLoop = true;
         }
 
-        return newHits[^2];
+        if (newHits.Count > 1)
+        {
+            return newHits[^2];
+        }
+        else
+        {
+            return new Vector2();
+        }
     }
 
     private bool HasHitBeenRegistered(Vector2 point)
@@ -153,7 +163,7 @@ public class LevelGrid : MonoBehaviour
         
         for (var i = 0; i < numberTraces; i++)
         {
-            var aHit = SingleTrace(topCorner, new Vector2(0,-1), cubeSize.y * numberCubesY);
+            var aHit = SingleTrace(topCorner, new Vector2(0,-1), cubeSize.y);
             
             if (aHit)
             {
@@ -214,7 +224,7 @@ public class LevelGrid : MonoBehaviour
     {
         for (var i = 0; i < numberCubesY; i++)
         {
-            var newList = new List<CubeFacts>((int)numberCubesX);
+            var newList = new List<CubeFacts>(numberCubesX);
             for (var j = 0; j < numberCubesX; j++)
             {
                 var next = transform.position + new Vector3(j * cubeSize.x ,i * cubeSize.y);
