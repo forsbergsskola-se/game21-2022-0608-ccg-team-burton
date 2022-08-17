@@ -1,22 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 
 public class PlaySoundBehaviour : StateMachineBehaviour
 {
-    [SerializeField] private SoundMananger _soundMananger;
-    public FMODUnity.EventReference SoundFile;
-    private FMOD.Studio.EventInstance _sound;
+    [SerializeField] SoundMananger _soundMananger;
+    public EventReference SoundFile;
+    EventInstance _sound;
 
-    private bool initiated;
-    
+    bool initiated;
+
+    public void OnDisable(){
+        _soundMananger.StopSound(_sound);
+    }
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-      
-        if (!initiated)
-        {
-            _sound = FMODUnity.RuntimeManager.CreateInstance(SoundFile);
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex){
+        if (!initiated){
+            _sound = RuntimeManager.CreateInstance(SoundFile);
             initiated = true;
         }
 
@@ -30,8 +31,7 @@ public class PlaySoundBehaviour : StateMachineBehaviour
     //}
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex){
         _soundMananger.StopSound(_sound);
     }
 

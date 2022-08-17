@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 2604721245304753353}
   - component: {fileID: 2604721245304753354}
   - component: {fileID: 7574128599993746065}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Goal
-  m_TagString: Player
+  m_TagString: Goal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,16 +130,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d0a2988ccd9ba45bd8b1bd462e2506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalCoinText: {fileID: 0}
-  coinText: {fileID: 0}
-  winScreen: {fileID: 0}
-  stars:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  playerHealth: {fileID: 0}
-  itemCollector: {fileID: 0}
-  coinBonus: 500
+  TotalCoinText: {fileID: 0}
+  CoinText: {fileID: 0}
+  WinScreen: {fileID: 0}
+  Stars: []
+  PlayerHealth: {fileID: 0}
+  ItemCollector: {fileID: 0}
+  CoinBonus: 500
+  GoalTime: 120
+  CurrentStarsNum: 0
+  LevelIndex: 1
+  TextTimer: {fileID: 0}
+  PauseTimer: 0
 --- !u!114 &7574128599993746065
 MonoBehaviour:
   m_ObjectHideFlags: 0

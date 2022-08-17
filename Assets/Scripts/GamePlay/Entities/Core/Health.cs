@@ -7,10 +7,8 @@ namespace Entity
     /// <summary>
     /// Health class, which enables things to be damaged or healed.
     /// </summary>
-    public class Health : MonoBehaviour, IDamageable, I_Saveable
+    public class Health : MonoBehaviour, IDamageable
     {
-        
-                
         public Action<int> OnHealthChanged;
         [SerializeField]
         private int _health;
@@ -28,7 +26,6 @@ namespace Entity
 
         [SerializeField] GameEvent playerDies;
         
-        
         public int CurrentHealth
         {
             get => _health;
@@ -45,7 +42,9 @@ namespace Entity
 
         private void Start()
         {
-            CurrentHealth = _health;
+            var equipmentHealthModifier = PlayerPrefs.GetFloat("buequipment.chest.attributevalue") + PlayerPrefs.GetFloat("gems.greengem.bonusid");
+            CurrentHealth = _health+(int)equipmentHealthModifier;
+            OnHealthChanged?.Invoke(CurrentHealth);
         }
 
         public void ModifyHealth(int healthValueChange)
@@ -54,6 +53,11 @@ namespace Entity
                     return;  
                 
             CurrentHealth += healthValueChange;
+
+            //if statement for vibrate toggle bool = true vibrate
+            #if UNITY_ANDROID
+            Handheld.Vibrate();
+            #endif
             OnHealthChanged?.Invoke(CurrentHealth);
 
 
@@ -66,12 +70,9 @@ namespace Entity
                 }
                 
             }
-        
-            Debug.Log($"New health for {name}: {CurrentHealth}");
-
+            
             if (CurrentHealth <= 0)
             {
-                Debug.Log("Animtrigger");
                 _animator.SetTrigger(Animator.StringToHash("Dead"));
                 StartCoroutine(StartDeath());
             }
@@ -96,11 +97,12 @@ namespace Entity
             if (gameObject.CompareTag("Player")){
                 _itemCollector._coinCounter -= _itemCollector._coinCounter;
                 _itemCollector.UpdateCoinText(_itemCollector._coinCounter);
+                playerDies?.Invoke();
+
             }
-            playerDies.Invoke();
-            
             gameObject.SetActive(false);
             
+
             IsDead = true;
 
         }
@@ -114,18 +116,6 @@ namespace Entity
             yield return new WaitForSeconds(invulnFrameTimer);
             GetComponent<SpriteRenderer>().color = originalColor;             //Temp visualization for IFrame (Color stuff)
             _invulnerable = false;
-        }
-
-        public object CaptureState()
-        {
-            return CurrentHealth;
-        }
-
-        public void RestoreState(object state)
-        {
-            CurrentHealth = (int)state;
-            if (CurrentHealth <= 0)
-                OnDeath();
         }
     }
 }

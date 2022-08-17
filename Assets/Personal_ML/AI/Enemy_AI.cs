@@ -15,11 +15,6 @@ public class Enemy_AI : MonoBehaviour
 
     private void Start()
     {
-        if (EnemyVars.EnemyType == EnemyType.Ranged)
-        {
-            EnemyVars.firePoint = GetComponentsInChildren<Transform>()[^1];
-        }
-
         EnemyVars.enemyHealth = GetComponent<IDamageable>();
         EnemyVars.tracerEyes = GetComponentInChildren<TracerEyes>();
         EnemyVars.animator = GetComponent<Animator>();

@@ -1,15 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using TreeEditor;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
-using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
-using Vector2 = UnityEngine.Vector2;
+
 
 public abstract class State_ML 
 {
@@ -81,20 +72,7 @@ public class Idle : State_ML
     
     public override void Update()
     {
-        time += Time.deltaTime * Random.Range(0, 11);
-        if (time > 10)
-        {
-            if ((int) EnemyVarsMl.GetEnemyType < 2)
-            {
-                NextStateMl = new Patrol(EnemyVarsMl);
-            }
-            else
-            {
-                NextStateMl = new Sentry(EnemyVarsMl);
-            }
-
-            Stage = EVENT.Exit;
-        }
+        
     }
 
     public override void Exit()
@@ -144,30 +122,6 @@ public class Patrol : State_ML
 
     public override void Update()
     {
-        
-        if (EnemyVarsMl.tracerEyes.PlayerSeen)
-        {
-            Stage = EVENT.Exit;
-            Debug.Log("Player is seen");
-            NextStateMl = new Pursue(EnemyVarsMl);
-        }
-
-        else if (!EnemyVarsMl.tracerEyes.GroundSeen)
-        {
-           
-        }
-        
-        
-        if (EnemyVarsMl.tracerEyes.Actions == Actions.TurnAround)
-        {
-            TurnAround();    
-        }
-        
-        if (EnemyVarsMl.tracerEyes.Actions == Actions.PlatformJump)
-        {
-            Stage = EVENT.Exit;
-            NextStateMl = new PlatformJump(EnemyVarsMl);
-        }
 
         if (!stopMove)
         {
@@ -195,44 +149,14 @@ public class Pursue : State_ML
     public Pursue(EnemyVars_ML enemyVarsMl)
         : base(enemyVarsMl)
     {
-        Debug.Log("Pursue state");
         EnemyVarsMl.animator.SetBool(Animator.StringToHash("Enemy_Walk"), true);
         Name = STATE.Pursue;
     }
 
     public override void Update()
     {
-        var distance = Vector3.Distance(EnemyVarsMl.tracerEyes.PlayerTrans.position, EnemyVarsMl.enemyRef.gameObject.transform.position);
-        if (EnemyVarsMl.tracerEyes.PlayerInAttackRange)
-        {
-            Debug.Log("Player in attack range");
-            NextStateMl = new Attack(EnemyVarsMl);
-            Stage = EVENT.Exit;
-        }
-
-        if (EnemyVarsMl.tracerEyes.Actions == Actions.TurnAround)
-        {
-            TurnAround();
-        }
-
-        else if (distance > EnemyVarsMl.GetAttackDistance + 20)
-        {
-            Debug.Log("Player out of attack range");
-            NextStateMl = new Patrol(EnemyVarsMl);
-            Stage = EVENT.Exit;
-        }
-
-        else if(EnemyVarsMl.tracerEyes.GetPlayerHealth() <= 0)
-        {
-            Debug.Log("Player is dead");
-            NextStateMl = new Patrol(EnemyVarsMl);
-            Stage = EVENT.Exit;
-        }
+      
         
-        else
-        {
-            SimpleMove();
-        }
     }
     
     private void TurnAround()
@@ -270,43 +194,6 @@ public class Attack : State_ML
 
     public override void Update()
     {
-        if (!EnemyVarsMl.tracerEyes.PlayerSeen)
-        {
-            var dotProd = Vector3.Dot(EnemyVarsMl.enemyRef.transform.right, EnemyVarsMl.tracerEyes.PlayerTrans.position);
-            
-            if (dotProd < 1)
-            {
-                TurnAround();
-            }
-            else
-            {
-                Stage = EVENT.Exit;
-                NextStateMl = new Idle(EnemyVarsMl);
-            }
-        }
-
-        if (attackDelay >= EnemyVarsMl.GetAttackInterval)
-        {
-            EnemyVarsMl.animator.SetTrigger(Animator.StringToHash("Enemy_Attack")); //Should I put attack animation here?
-
-            if (EnemyVarsMl.GetEnemyType == EnemyType.Ranged)
-            {
-                AssetPool.RequestEffectStatic(EffectType.FireBall, EnemyVarsMl.firePoint.position, EnemyVarsMl.enemyRef.transform.right);
-            }
-
-            if (EnemyVarsMl.GetEnemyType == EnemyType.Melee && EnemyVarsMl.tracerEyes.PlayerSeen)
-            {
-               // Stage = EVENT.Exit;
-               // NextStateMl = new BackOff(EnemyVarsMl);
-            }
-            attackDelay -= EnemyVarsMl.GetAttackInterval;
-        }
-        
-        if (!EnemyVarsMl.tracerEyes.PlayerInAttackRange && EnemyVarsMl.tracerEyes.PlayerSeen)
-        {
-            Stage = EVENT.Exit;
-            NextStateMl = new Pursue(EnemyVarsMl);
-        }
 
         attackDelay +=  Time.deltaTime;
     }
@@ -398,17 +285,7 @@ public class PlatformJump : State_ML
 
     public override void Update()
     {
-        if (!jumped)
-        {
-            body.AddForce(EnemyVarsMl.tracerEyes.EstimatedJumpForce * new Vector2(1f, 5.5f), ForceMode2D.Impulse);
-            jumped = true;
-        }
-        
-        if (EnemyVarsMl.tracerEyes.GroundSeen && jumped)
-        {
-            Stage = EVENT.Exit;
-            NextStateMl = new Idle(EnemyVarsMl);
-        }
+       
 
     }
 }

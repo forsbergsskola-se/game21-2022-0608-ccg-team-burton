@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39dfbf302b7778a49888ed9ea44499f9, type: 3}
+  m_Name: Weapon
+  m_EditorClassIdentifier: 
+  ID: buequipment.weapon
+  Name: Scissor
+  Icon:
+  - {fileID: 21300000, guid: b3310268325db6045bfdc4e98640b1d0, type: 3}
+  - {fileID: 21300000, guid: 1749e8317100e6347ae18e236cd443d8, type: 3}
+  - {fileID: 21300000, guid: c2bb7bca28bc7834983dc7478a91e126, type: 3}
+  - {fileID: 21300000, guid: 5a0733002add46643a144afb598c4d25, type: 3}
+  - {fileID: 21300000, guid: 5a0733002add46643a144afb598c4d25, type: 3}
+  AttributeValueID: buequipment.weapon.attributevalue
+  AttributeDescription: 'Attack damage bonus:'
+  AttributeValue: 10
+  RarityID: buequipment.weapon.rarity
+  Rarity: 0
+  BaseUpgradeCost: 1
+  SoundFile:
+    Guid:
+      Data1: 1107788755
+      Data2: 1328281431
+      Data3: 75936908
+      Data4: -1934735782
+    Path: event:/Game Play/Info-Messages/UpgrSissor
+  AttributeUpgradeStepSize: 5

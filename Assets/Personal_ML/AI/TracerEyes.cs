@@ -9,41 +9,34 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [Flags]
-public enum TraceType
+public enum CompoundActions
 {
-    None = 0,
-    Ground = 1,
-    Wall = 2,
-    Player = 4,
-    Platform = 8,
-    Enemy = 16,
+    None = 1 << 0,
+    CanJump = 1 << 1,
+    WalkToTarget = 1 << 2,
+    KeepWalking = 1 << 3,
+    Rotate = 1 << 4,
+    GroundSeen = 1 << 5,
+    WallSeen = 1 << 6,
+    MakingJump = 1 << 7,
+    PlayerNoticed = 1 << 8,
+    PlayerBehind = 1 << 9,
+    PlayerInFront = 1 << 10,
+    PlayerInAttackRange = 1 << 11,
+    EnemyAttacked = 1 << 12,
+    AwareOfPlayer = 1 << 13,
+    EnemyDead = 1 << 14,
+    WallInTurnRange = 1 << 15,
+    IgnoreTraceForSeconds = 1 << 16,
+    LowerGroundSeen = 1 << 17,
+    HigherGroundSeen = 1 << 18,
+    ArrivedAtTarget = 1 << 19,
 }
 
-public enum Actions
+public enum EnemyType
 {
-    None,
-    TurnAround,
-    TestForJump,
-    Jump,
-    PlatformJump,
-    Pursue,
-    Stop
-}
-
-[Flags]
-public enum PlayerEncounter
-{
-    None = 0,
-    PlayerNoticed = 1,
-    PlayerBehind = 2,
-    PlayerInFront = 4
-}
-
-[Serializable]
-public class HitResults
-{
-    public RaycastHit2D theHit;
-    public TraceType theHitType;
+    Melee,
+    Cannon
 }
 
 public class TracerEyes : MonoBehaviour
@@ -51,43 +44,51 @@ public class TracerEyes : MonoBehaviour
     [Header("Eye values")]
     [SerializeField] public float pursueDistance;
     [SerializeField] public Vector2 traceSize;
-    
-    private int multiMask;
+    [SerializeField, Range(0.2f, 1.5f)]private float traceInterval = 0.4f;
+    [SerializeField] private EnemyType enemyType;
+    [SerializeField] private CapsuleCollider2D _collider2D;
 
-    private float traceInterval = 0.4f;
-    private float timeSinceTrace;
+    [HideInInspector] public float ignoreSeconds;
 
+    private LevelGrid _grid;
+    private int _groundMask;
+    private int _boxMask;
     
-    public bool WallSeen { get; private set;}
-    public bool GroundSeen { get; private set;}
-    public bool PlayerSeen { get; private set;}
-    public bool PlatformSeen { get; private set; }
-    public bool PlayerBehind { get; private set; }
-    public bool PlayerForgotten { get; private set; }
-    public Actions Actions { get; private set; }
-    public Vector2 EstimatedJumpForce { get; private set; }
-    public bool PlayerInAttackRange { get; private set;}
-    
-    public bool QuitNode { get; private set; }
-    
-    private bool UnderAttack;
-    [HideInInspector] public Transform PlayerTrans;
-    private List<HitResults> hitResultList = new();
-    
+    private float _timeSinceTrace;
+    public Vector2 PlayerPos { get; private set; }
+
+    private Vector2[] _debugPoints;
+
     private Health _playerHealth;
     private Health _enemyHealth;
+    private bool _somethingHit;
 
-    private bool JumpReady;
-
+    private List<RaycastHit2D> _pointsList = new();
+    [HideInInspector] public CompoundActions compoundActions;
+    [HideInInspector] public float distanceToWall;
+    [HideInInspector] public bool lockGroundTrace;
+    
+    private int _maxHealth;
     private void Awake()
     {
-        JumpReady = true;
+        _debugPoints = new Vector2[10];
+        compoundActions |= CompoundActions.GroundSeen;
+        compoundActions &= ~CompoundActions.EnemyAttacked;
+    }
+
+    private void Start()
+    {
+        _grid = GameObject.FindGameObjectsWithTag("LevelGrid")
+            .OrderBy(x => Vector2.Distance(x.transform.position, transform.position))
+            .ToArray()[0].GetComponent<LevelGrid>();
+        
         _enemyHealth = GetComponentInParent<Health>();
+        _maxHealth = _enemyHealth.CurrentHealth;
         _enemyHealth.OnHealthChanged += RegisterAttack;
 
-        PlayerForgotten = true;
-        multiMask = 1 << 6 | 1 << 8;
-        GroundSeen = true;
+        _groundMask = 1 << 6 | 1 << 10 | 1 << 11; 
+        _boxMask = 1 << 8 | 1 << 13 | 1 << 7;
+        compoundActions &= ~CompoundActions.EnemyAttacked;
     }
 
     private void OnDisable()
@@ -97,343 +98,312 @@ public class TracerEyes : MonoBehaviour
 
     private void RegisterAttack(int currentHealth)
     {
-        if (!PlayerSeen)
+        compoundActions |= CompoundActions.EnemyAttacked;
+        
+        if (enemyType == EnemyType.Cannon)
         {
-            UnderAttack = true;
+            if (_somethingHit)
+            {
+                _enemyHealth.CurrentHealth = _maxHealth;
+            }
+        }
+
+        if (currentHealth <= 0)
+        {
+            compoundActions = CompoundActions.EnemyDead;
         }
     }
-    
+
     void Update()
     {
-        timeSinceTrace += Time.deltaTime;
+        _timeSinceTrace += Time.deltaTime;
 
-        if (timeSinceTrace >= traceInterval)
+        if (_timeSinceTrace >= traceInterval)
         {
-            timeSinceTrace -= traceInterval;
-            //DoMultiTrace();
-            TraceForGround();
+            _timeSinceTrace -= traceInterval;
+            DoAllTraces();
         }
     }
 
     public int GetPlayerHealth()
         => _playerHealth.CurrentHealth;
-    
+
+    private void DoAllTraces()
+    {
+        if (enemyType == EnemyType.Melee)
+        {
+            TraceForGround();
+            TraceForWalls();
+            TraceForPlayer();
+        }
+        
+        else if (enemyType == EnemyType.Cannon)
+        {
+            CannonTrace();
+        }
+    }
+
+    private void TraceForWalls()
+    {
+        var wallTrace = BaseTrace(new Vector3(0, 0), 8, true);
+        if (wallTrace) compoundActions |= CompoundActions.WallSeen;
+        else compoundActions &= ~CompoundActions.WallSeen;
+        var pos = transform.position;
+       // Debug.Log(compoundActions);
+        
+        if (compoundActions.HasFlag(CompoundActions.WallSeen))
+        {
+            var right = transform.right;
+            var tracePos = pos + new Vector3(right.x * 5, 5);
+
+            if (distanceToWall is < 3 and > 0.5f)
+            {
+                var some =  _grid.GetCurrentGround(tracePos);
+                AddDebugPointAt(tracePos, 0);
+                
+                if (some != null)
+                {
+                    Debug.Log(some.start);
+                    if (Mathf.Abs(some.start.y - pos.y) < 4)
+                    {
+                        compoundActions |= CompoundActions.HigherGroundSeen;
+                    }
+                    else
+                    {
+                        compoundActions &= ~CompoundActions.HigherGroundSeen;
+                    }
+                }
+            }
+            
+            if (distanceToWall < 0.5f)
+            {
+                compoundActions |= CompoundActions.WallInTurnRange;
+                compoundActions &= ~CompoundActions.HigherGroundSeen;
+            }
+            
+            else
+            {
+                compoundActions &= ~CompoundActions.WallInTurnRange;
+            }
+        }
+        
+        else
+        {
+            compoundActions &= ~CompoundActions.WallInTurnRange;
+        }
+    }
+
+    private void AddDebugPointAt(Vector2 point, int index)
+    {
+        _debugPoints[index] = point;
+    }
     
     private void TraceForGround()
     {
         var pos = transform.position;
-        var dir = transform.right + new Vector3(0, -1);
-        var traceDist = 2;
-        var hit = Physics2D.Raycast(pos, dir, traceDist, multiMask);
+        var dir = transform.right + new Vector3(0, -0.95f);
+        var otherPos = pos + dir * 1.5f;
+        var otherPos2 = pos + new Vector3(transform.right.x * 3, -2);
+ 
+        var groundTrace = BaseTrace(dir, 2, false);
 
+        if (groundTrace) compoundActions |= CompoundActions.GroundSeen;
+        else compoundActions &= ~CompoundActions.GroundSeen;
+
+        if (!compoundActions.HasFlag(CompoundActions.GroundSeen))
+        {
+            var groundTrace2 = false;
+            AddDebugPointAt(otherPos2, 1);
+            var some = _grid.GetCurrentGround(otherPos2);
+
+            if (some != null)
+            {
+                if (Mathf.Abs(some.start.y - pos.y) < 4)
+                {
+                    groundTrace2 = true;
+                }
+            }
+
+            if (groundTrace2) compoundActions |= CompoundActions.LowerGroundSeen;
+            else compoundActions &= ~CompoundActions.LowerGroundSeen;
+        }
+    }
+
+    private bool SpecTrace(Vector2 pos, Vector2 dir, float traceDist)
+    {
+        var hit = Physics2D.Raycast(pos, dir, traceDist, _groundMask);
+        
         if (hit)
         {
+            
             Debug.DrawRay(pos, dir *hit.distance, Color.green, traceInterval);
-            QuitNode = true;
         }
         else
         {
+            
             Debug.DrawRay(pos, dir *traceDist, Color.red, traceInterval);
-            QuitNode = false;
         }
 
-        GroundSeen = hit;
+        return hit;
     }
     
-    private bool IsObjectBehind(Vector2 objectPos)
-    {
-        return Vector2.Dot(transform.TransformDirection(Vector3.right),
-            (Vector3)objectPos - transform.position) < 0;
-    }
-
-    private void DoMultiTrace()
-    {
-        var right = transform.right;
-        var pos = transform.position;
-        var increment = -0.5f;
-        Actions = Actions.None;
-        
-        hitResultList.Clear();
-        
-        var inc = 0.4f;
-        
-        for (int i = 0; i < 5; i++)
-        {
-            var dir = new Vector2(right.x, increment);
-            var traceDistance = pursueDistance;
-            
-            if (i == 0)
-            {
-                traceDistance = 2.5f;
-                dir = new Vector2(right.x, -0.7f);
-            }
-            else if (i == 1)
-            {
-                dir = new Vector2(right.x, 0);     
-            }
-            else
-            {
-                traceDistance = pursueDistance;
-            }
-            
-            if (i > 3)
-            {
-                dir = new Vector2(-right.x, 0);
-            }
-        
-            var traceHit = DoSingleTrace(dir, pos, traceDistance, out var hit);
-            
-            AnalyzeResults(i, traceHit);
-        
-            HitResults results = new HitResults()
-            {
-                theHitType = traceHit,
-                theHit = hit
-            };
-            hitResultList.Add(results);
-        
-            increment += inc;
-        }
-        
-        SetResults();
-    }   
-
-    private void SetResults()
-    {
-        if (UnderAttack)
-        {
-            Actions = Actions.TurnAround;
-            
-            UnderAttack = false;
-        }
-        
-        if (PlayerSeen)
-        {
-            PlayerInAttackRange = hitResultList[1].theHit.distance < 0.6f;
-            
-            if (PlayerTrans == default)
-            {
-                PlayerTrans = hitResultList[1].theHit.collider.gameObject.transform; 
-                _playerHealth = hitResultList[1].theHit.collider.gameObject.GetComponent<Health>();
-            }
-        }
-       
-        if (!PlayerSeen)
-        {
-            if (PlayerTrans != default)
-            {
-                if (PlayerBehind)
-                {
-                    Actions = Actions.TurnAround;
-                    PlayerBehind = false;
-                }
-            }
-        }
-
-        if (!GroundSeen)
-        {
-            var jumpForce = CheckForJumps(8);
-
-            if (jumpForce.x != 0)
-            {
-                EstimatedJumpForce =  jumpForce;
-                Actions = Actions.PlatformJump;
-            }
-            
-            else
-            {
-                Actions = Actions.TurnAround;
-            }
-        }
-        
-        if (PlatformSeen)
-        {
-            
-        }
-        
-        if (WallSeen)
-        {
-            if (hitResultList[1].theHit.distance < 1.5f && GroundSeen)
-            {
-                Actions = Actions.TurnAround;
-            }
-        }
-
-        UnderAttack = false;
-    }
-
-    private Vector2 CheckForJumps(int numberTraces)
+    private bool BaseTrace(Vector3 dirMod, float traceDist, bool setWallDist)
     {
         var pos = transform.position;
-        var dir = transform.right;
-        var traceDistance = 7;
-
-        FillHitResults(numberTraces, dir, pos, traceDistance, new Vector2(), new Vector2(0, 1));
-        var filter2 = hitResultList.Where(x => x.theHit).ToList();
+        var dir = transform.right + dirMod;
         
-        if (filter2.Count == numberTraces - 1)
+        var hit = Physics2D.Raycast(pos, dir, traceDist, _groundMask);
+        
+        if(setWallDist) distanceToWall = hit.distance;
+        
+        if (hit)
         {
-            return Vector2.zero;
-        }
-        
-        FillHitResults(numberTraces, new Vector2(0, -1), pos  + new Vector3(dir.x * 2, 5), traceDistance, new Vector2(), dir);
-        var filter = hitResultList.Where(x => x.theHit).ToList();
-
-        var theDistance = new Vector2();
-        
-        if (filter.Count > 3)
-        {
-            var yForce = Mathf.Clamp(theDistance.y, 1, 3);
-          
-            theDistance = filter[1].theHit.point -= (Vector2) pos;
-            return new Vector2(Mathf.Abs(theDistance.x) * dir.x, yForce * 3);
-        }
-        
-        return Vector2.zero;
-    }
-
-    private void FillHitResults(int numberTraces, Vector2 dir, Vector2 pos, float traceDistance, Vector2 dirMod = new Vector2(), Vector2 posMod = new Vector2())
-    {
-        hitResultList.Clear();
-
-        for (int i = 0; i < numberTraces; i++)
-        {
-            var traceHit = DoSingleTrace(dir, pos, traceDistance, out var hit);
             
-            HitResults results = new HitResults()
-            {
-                theHitType = traceHit,
-                theHit = hit
-            };
-            hitResultList.Add(results);
-            
-            pos += posMod;
-            dir += dirMod;
-        }
-    }
-
-    private void AnalyzeResults(int traceCount, TraceType type)
-    {
-        switch (type)
-        {
-            case TraceType.None:
-                switch (traceCount)
-                {
-                    case 0:
-                        GroundSeen = false;
-                        break;
-                    
-                    case 1:
-                        WallSeen = false;
-                        PlayerSeen = false;
-                        break;
-                    
-                    case 2:
-                        PlatformSeen = false;
-                        break;
-                    
-                    case 4:
-                        PlayerBehind = false;
-                        break;
-                }
-                break;
-            
-            case TraceType.Wall:
-            {
-                switch (traceCount)
-                {
-                    case 0:
-                        GroundSeen = true;
-                        break;
-                    
-                    case 1:
-                        WallSeen = true;
-                        break;
-                    
-                    case 2:
-                        PlatformSeen = true;
-                        break;
-                }
-                break;
-            }
-            
-            case TraceType.Player:
-            {
-                switch (traceCount)
-                {
-                    case 1:
-                        PlayerSeen = true;
-                        break;
-                    
-                    case 4:
-                        PlayerBehind = true;
-                        break;
-                }
-                break;
-            }
-            
-        }
-    }
-
-    private TraceType DoSingleTrace(Vector2 dir, Vector2 pos, float traceDistance, out RaycastHit2D outHit)
-    {
-        var hit = Physics2D.Raycast(pos, dir, traceDistance, multiMask);
-        outHit = hit;
-        
-        if (!hit)
-        {
-            Debug.DrawRay(pos, dir *traceDistance, Color.red, traceInterval);
-            return TraceType.None;
-        }
-        
-        var layer = hit.collider.gameObject.layer;
-        
-        if (layer is 6)
-        {
             Debug.DrawRay(pos, dir *hit.distance, Color.green, traceInterval);
-            
-            return TraceType.Ground | TraceType.Wall;
         }
-        else if(layer is 8)
+        else
         {
-            Debug.DrawRay(pos, dir *hit.distance, Color.blue, traceInterval);
             
-            return TraceType.Player;
+            Debug.DrawRay(pos, dir *traceDist, Color.red, traceInterval);
         }
 
-        return TraceType.None;
+        return hit;
+    }
+    
+    private void CannonTrace()
+    {
+        var newMask = 1 << 8;
+        var result = Physics2D.BoxCastAll(transform.position, 
+            traceSize, 0, transform.up, traceSize.y / 10, newMask);
+        _somethingHit = false;
+
+        _pointsList.Clear();
+        
+        foreach (var h in result)
+        {
+            var layer = h.collider.transform.gameObject.layer;
+            
+            if (layer == 8)
+            {
+                compoundActions |= CompoundActions.PlayerNoticed;
+                if (CheckIfLookingAtTarget(h.point))
+                {
+                    compoundActions |= CompoundActions.PlayerInFront;
+                    compoundActions  &= ~CompoundActions.PlayerBehind;
+                    _somethingHit = true;
+                }
+                else
+                {
+                    compoundActions |= CompoundActions.PlayerBehind;
+                    compoundActions  &= ~CompoundActions.PlayerNoticed;
+                    compoundActions  &= ~CompoundActions.PlayerInFront;
+                }
+            }
+        }
+
+        if (_somethingHit) return;
+
+        compoundActions  &= ~CompoundActions.PlayerNoticed;
+        compoundActions  &= ~CompoundActions.PlayerInFront;
     }
 
-    private void TraceBox()
+    private void TraceForPlayer()
     {
-        var sizeY = 7f;
-        var sizeX = pursueDistance;
-        var boxPlacement = transform.position + new Vector3(0, sizeY / 2 - 1);
-        var result = Physics2D.BoxCastAll(boxPlacement , 
-            new Vector2(pursueDistance * 2, sizeY), 0, transform.forward, 8, multiMask);
-        var playerSeen = false;
-        var playerIsHit = false;
+        var result = Physics2D.BoxCastAll(transform.position, 
+            traceSize, 0, transform.up, traceSize.y / 4, _boxMask);
+        _somethingHit = false;
+        var playerNoticed = false;
+
+        _pointsList.Clear();
 
         foreach (var h in result)
         {
-            Debug.Log(h.collider.transform.name);
-            Debug.Log(h.collider.transform.position);
+            _somethingHit = true;
+            var layer = h.collider.transform.gameObject.layer;
+
+            switch (layer)
+            {
+                case 7:
+                    Physics2D.IgnoreCollision(_collider2D, h.collider);
+                    break;
+                case 8:
+                    SetPlayerEncounter(h);
+                    playerNoticed = true;
+                    break;
+            }
+        }
+
+        if (playerNoticed) return;
+        compoundActions  &= ~CompoundActions.PlayerInFront;
+        compoundActions  &= ~CompoundActions.PlayerInAttackRange;
+        compoundActions  &= ~CompoundActions.PlayerBehind;
+        compoundActions  &= ~CompoundActions.PlayerNoticed;
+    }
+    
+
+    private void SetPlayerEncounter(RaycastHit2D hit)
+    {
+        var seeing = CheckIfLookingAtTarget(hit.point);
+        PlayerPos = hit.collider.transform.position;
+        var distance = Vector2.Distance(PlayerPos, transform.position);
+
+        if (seeing)
+        {
+            compoundActions |= CompoundActions.PlayerNoticed;
+            compoundActions |= CompoundActions.PlayerInFront;
+            compoundActions |= CompoundActions.AwareOfPlayer;
+            
+            compoundActions  &= ~CompoundActions.PlayerBehind;
+
+            if (distance < 2)
+            {
+                compoundActions |= CompoundActions.PlayerInAttackRange;
+            }
+            else
+            {
+                compoundActions  &= ~CompoundActions.PlayerInAttackRange;
+            }
+        }
+        
+        else
+        {
+            if (compoundActions.HasFlag(CompoundActions.EnemyAttacked))
+            {
+                compoundActions  &= ~CompoundActions.PlayerInFront;
+                compoundActions  &= ~CompoundActions.EnemyAttacked;
+                
+                compoundActions |= CompoundActions.AwareOfPlayer;
+                compoundActions |= CompoundActions.PlayerBehind;
+                compoundActions |= CompoundActions.PlayerNoticed;
+            }
+                    
+            if (compoundActions.HasFlag(CompoundActions.PlayerNoticed))
+            {
+                compoundActions |= CompoundActions.PlayerBehind;
+            }
         }
     }
 
-  
-    private IEnumerator JumpInProgress()
+    private bool CheckIfLookingAtTarget(Vector2 enemyPos)
     {
-        JumpReady = false;
-        yield return new WaitForSeconds(2f);
-        JumpReady = true;
+        var dirFromAtoB = ((Vector2)transform.position - enemyPos).normalized;
+        var dotProd = Vector2.Dot(dirFromAtoB, transform.right);
+        return dotProd < 0.9f;
     }
-
-    #if UNITY_EDITOR
+    
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
+        Gizmos.color = _somethingHit ? Color.green : Color.red;
+
         Gizmos.DrawWireCube(transform.position, traceSize);
+
+        if (!Application.isPlaying) return;
+        Gizmos.color = Color.yellow;
+        foreach (var d in _debugPoints)
+        {
+            Gizmos.DrawWireSphere(d, 0.5f);
+        }
     }
-    #endif
+#endif
 }

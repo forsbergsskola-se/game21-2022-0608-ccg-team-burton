@@ -10,17 +10,14 @@ public class UnlockLevel : MonoBehaviour
     public Image[] Stars;
 
     public Sprite fullStar;
-    SavingWrapper wrapper;
-
-    private void Start()
-    {
-        wrapper = FindObjectOfType<SavingWrapper>();
-    }
+    
     private void Update()
     {
         UpdateLevelImage(); 
         UpdateLevelStatus();
     } 
+    
+    
 
     private void UpdateLevelStatus()
     {
@@ -28,10 +25,8 @@ public class UnlockLevel : MonoBehaviour
         if (PlayerPrefs.GetInt("Lv" + previousLevelIndex) > 0)
         {
             Unlocked = true;
-            Debug.Log("Popped off");
             
         }
-        wrapper.Save();
     }
     
     private void UpdateLevelImage()
@@ -43,8 +38,7 @@ public class UnlockLevel : MonoBehaviour
             {
                 Stars[i].enabled = false;
             }
-            //save stats
-           
+
         }
         else
         {
@@ -59,7 +53,6 @@ public class UnlockLevel : MonoBehaviour
                 Stars[i].gameObject.GetComponent<Image>().sprite = fullStar;
             }
         }
-        wrapper.Save();
     }
     
 }

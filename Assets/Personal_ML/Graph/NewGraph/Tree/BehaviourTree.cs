@@ -1,10 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using NewGraph.NodeTypes.CompositeNodes;
 using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -26,7 +22,7 @@ public class BehaviourTree : ScriptableObject
 
         return state;
     }
-
+#if UNITY_EDITOR
     public BaseNode CreateNode(Type type)
     {
         var node = CreateInstance(type) as BaseNode;
@@ -84,6 +80,7 @@ public class BehaviourTree : ScriptableObject
         }
 
     }
+
     public void RemoveChild(BaseNode parent, BaseNode child)
     {
         var decorator = parent as DecoratorNode;
@@ -114,6 +111,7 @@ public class BehaviourTree : ScriptableObject
             EditorUtility.SetDirty(composite);
         }
     }
+#endif
     
     public List<BaseNode> GetChildren(BaseNode targetNode)
     {

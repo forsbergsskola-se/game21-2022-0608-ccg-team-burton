@@ -4,19 +4,30 @@ namespace NewGraph.NodeTypes.ActionNodes
 {
     public class TravelNode2D : ActionNode
     {
+        public float waitForExit;
+        public float waitForTurn;
+        public bool canTurn;
+        
         public override void OnStart()
         {
-            agent.anim.SetBool(Animator.StringToHash("Enemy_Walk2"), true);
+            agent.anim.SetBool(Animator.StringToHash("Enemy_Walk"), true);
+            waitForExit = 0;
+            canTurn = true;
          
-            if (CheckIfLookingAtTarget())
+            if (CheckIfLookingAtTarget() || agent.compoundAction.HasFlag(CompoundActions.Rotate))
             {
-                agent.enemyTransform.Rotate(new Vector3(0, 1,0), 180);
+                RotateEnemy();
             }
         }
 
+        private void RotateEnemy()
+        {
+            agent.enemyTransform.Rotate(new Vector3(0, 1,0), 180);
+        }
+        
         public override void OnExit()
         {
-            agent.anim.SetBool(Animator.StringToHash("Enemy_Walk2"), false);
+            agent.anim.SetBool(Animator.StringToHash("Enemy_Walk"), false);
         }
         
         private bool CheckIfLookingAtTarget()
@@ -29,30 +40,53 @@ namespace NewGraph.NodeTypes.ActionNodes
         
         private bool ArrivedAtTarget()
         {
-            return Vector3.Distance(agent.enemyTransform.position, agent.currentDestination) < 0.6f;
+            return Vector3.Distance(agent.attackPointTrans.position, agent.currentDestination) < agent.turnDistance;
         }
         
 
         public override State OnUpdate()
         {
-            agent.enemyTransform.position += agent.enemyTransform.right * (Time.deltaTime * 1);
-
-            if (!agent.keepWalking)
+            var comp = agent.enemyEyes.compoundActions;
+       
+            waitForExit += Time.deltaTime;
+            if (waitForExit < 0.5f) return State.Update;
+            
+            if (comp.HasFlag(CompoundActions.WallInTurnRange) && canTurn)
             {
-                if (ArrivedAtTarget() || agent.quitNode || agent.enemyEyes.QuitNode)
+                canTurn = false;
+                RotateEnemy();
+            }
+
+            if (!canTurn)
+            {
+                waitForTurn += Time.deltaTime;
+                if (waitForTurn > 0.9f)
                 {
-                    return State.Success;
+                    waitForTurn -= 0.9f;
+                    canTurn = true;
                 }
             }
             
-            else
+            if (comp.HasFlag(CompoundActions.EnemyDead)) return State.Success;
+            if (comp.HasFlag(CompoundActions.PlayerBehind)) return State.Success;
+            if (!comp.HasFlag(CompoundActions.GroundSeen))
             {
-                if (agent.quitNode || !agent.enemyEyes.GroundSeen)
+                if (!comp.HasFlag(CompoundActions.LowerGroundSeen))
                 {
+                    Debug.Log("no lower ground");
                     return State.Success;
-                }
+                }    
+            }
+            if (comp.HasFlag(CompoundActions.PlayerInAttackRange))return State.Success;
+            //if (comp.HasFlag(CompoundActions.HigherGroundSeen))return State.Success;
+            if (ArrivedAtTarget())
+            {
+                Debug.Log("target reached");
+                agent.enemyEyes.compoundActions |= CompoundActions.ArrivedAtTarget;
+                return State.Success;
             }
 
+            agent.enemyTransform.position += agent.enemyTransform.right * (Time.deltaTime * agent.moveSpeed);
             return State.Update;
         }
     }
