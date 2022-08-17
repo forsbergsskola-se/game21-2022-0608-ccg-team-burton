@@ -2604,13 +2604,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1785344488}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -8220,7 +8220,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 0}
-  m_Type: 1
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -8274,12 +8274,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
         m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -15906,7 +15906,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1785344489
 Transform:
   m_ObjectHideFlags: 0
@@ -15922,12 +15922,12 @@ Transform:
   - {fileID: 1018500235}
   - {fileID: 392506066}
   - {fileID: 1576379260}
-  - {fileID: 2205437998940834192}
-  - {fileID: 2205437998112398460}
   - {fileID: 1215214698}
   - {fileID: 480453864}
   - {fileID: 512705027}
   - {fileID: 1548268405}
+  - {fileID: 2205437998940834192}
+  - {fileID: 2205437998112398460}
   m_Father: {fileID: 1094526343412679647}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21172,7 +21172,7 @@ RectTransform:
   - {fileID: 2070805072}
   - {fileID: 1094526343412679647}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -22014,7 +22014,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8016145008278094624, guid: 37637f9d18580474e87e292a1cea860f,
         type: 3}
-      insertIndex: -1
+      insertIndex: 0
       addedObject: {fileID: 288515610}
   m_SourcePrefab: {fileID: 100100000, guid: 37637f9d18580474e87e292a1cea860f, type: 3}
 --- !u!224 &2205437998940834192 stripped

@@ -13,7 +13,7 @@ public class GemLevelInventoryManager : MonoBehaviour
 
  //Private fields
 
- [SerializeField] private SceneLoader _sceneLoader;
+    [SerializeField] private SceneLoader _sceneLoader;
     [SerializeField] private GameObject[] _levelSlots;
     [SerializeField] private GameObject[] _inventorySlots;
     [SerializeField] private Libraries _library;
@@ -101,6 +101,7 @@ public class GemLevelInventoryManager : MonoBehaviour
         gemInSlot.transform.parent = _levelSlotParentTransform;
 CalculateCoinCost();
         
+        LoadGemsFromInventory();
         CalculateBonuses(gem, false);
         _oneShotSound.PlayStackingSound();
     }
@@ -130,11 +131,11 @@ CalculateCoinCost();
 
     private void UpdateCoinText(int cost)
     {
-        _coinsCostText.SetText(LevelStartCost+" coins");
+        _coinsCostText.SetText(LevelStartCost+" Coins");
     }
 
 
-    public void CalculateBonuses(MaterialItem item, bool subtraction)
+    private void CalculateBonuses(MaterialItem item, bool subtraction)
     {
             if (item.GetItemID().Contains("red"))
             {
