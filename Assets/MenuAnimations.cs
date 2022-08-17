@@ -17,6 +17,7 @@ public class MenuAnimations : MonoBehaviour
     private float _nTime;
     private bool _reverseAnim = false;
     private bool _playingAnim = false;
+    public LevelCompleted LevelCompleted;
 
 
     private void Awake()
@@ -69,6 +70,9 @@ public class MenuAnimations : MonoBehaviour
         _playingAnim = true;
         _reverseAnim = true;
         ReverseAnimation.SetActive(true);
-        
     }
+
+
+
+    public void PauseTimer() => LevelCompleted.PauseTimer = true;
 }
