@@ -1,3 +1,4 @@
+using System;
 using Entity;
 using TMPro;
 using UnityEngine;
@@ -17,11 +18,21 @@ public class LevelCompleted : MonoBehaviour
     public int LevelIndex;
     
     public TMP_Text TextTimer;
-    float _timer;
+    private float _timer;
+    public bool PauseTimer;
 
-    void Update(){
-        _timer += Time.deltaTime;
-        DisplayTimer();
+
+    private void Awake() => PauseTimer = false;
+
+    private void Update()
+    {
+        if (PauseTimer) return;
+        else
+        {
+            _timer += Time.deltaTime;
+            DisplayTimer();
+        }
+        
     }
 
     void OnTriggerEnter2D(Collider2D collision){
@@ -49,7 +60,8 @@ public class LevelCompleted : MonoBehaviour
         }
     }
 
-    public void DisplayTimer(){
+    private void DisplayTimer()
+    {
         var minutes = Mathf.FloorToInt(_timer / 60.0f);
         var seconds = Mathf.FloorToInt(_timer - minutes * 60);
         TextTimer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
