@@ -10,6 +10,4 @@ public class MusicSelector : MonoBehaviour
         _soundMananger.StartMusic(SoundFile);
     }
 
-    void ReleaseAll(){
-    }
 }

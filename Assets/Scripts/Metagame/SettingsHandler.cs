@@ -39,6 +39,7 @@ namespace Metagame
         }
 
         public void LoadMusicVolume(){
+
             if (musicSlider.gameObject.name.Contains("Music")) musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
         }
 

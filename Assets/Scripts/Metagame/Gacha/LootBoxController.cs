@@ -51,7 +51,9 @@ public class LootBoxController : MonoBehaviour, IPointerClickHandler
          //Saving item
          PlayerPrefs.SetInt(_itemID, PlayerPrefs.GetInt(_itemID)+1);
       }
+      #if UNITY_ANDROID
       Handheld.Vibrate();
+      #endif
    }
 
    

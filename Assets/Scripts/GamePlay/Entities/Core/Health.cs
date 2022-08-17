@@ -55,7 +55,9 @@ namespace Entity
             CurrentHealth += healthValueChange;
 
             //if statement for vibrate toggle bool = true vibrate
+            #if UNITY_ANDROID
             Handheld.Vibrate();
+            #endif
             OnHealthChanged?.Invoke(CurrentHealth);
 
 
