@@ -13,6 +13,7 @@ public class LevelCompleted : MonoBehaviour
     public Health PlayerHealth;
     public ItemCollector ItemCollector;
     public int CoinBonus = 500;
+    public float GoalTime;
     
     public int CurrentStarsNum;
     public int LevelIndex;
@@ -76,7 +77,7 @@ public class LevelCompleted : MonoBehaviour
             CurrentStarsNum += 1;
         }
 
-        if (_timer < 120f)
+        if (_timer < GoalTime)
         {
             CurrentStarsNum += 1;
         }

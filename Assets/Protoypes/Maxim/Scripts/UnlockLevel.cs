@@ -25,7 +25,6 @@ public class UnlockLevel : MonoBehaviour
         if (PlayerPrefs.GetInt("Lv" + previousLevelIndex) > 0)
         {
             Unlocked = true;
-            Debug.Log("Popped off");
             
         }
     }
