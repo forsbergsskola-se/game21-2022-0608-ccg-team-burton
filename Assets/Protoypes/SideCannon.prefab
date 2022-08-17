@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 7711834838784952237}
   m_Layer: 7
   m_Name: SideCannon
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,7 +162,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 7
 --- !u!114 &4473914183425074144
 MonoBehaviour:
@@ -178,12 +178,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tree: {fileID: 11400000, guid: 9bd5a5207455ceb4380a8977e4c6136d, type: 2}
   readyToRun: 0
-  attackInterval: 4
-  baseMoveSpeed: 5
+  attackInterval: 1.5
+  baseMoveSpeed: 14
   pursueMoveSpeed: 5.74
   turnDistance: 0.75
   damageAmount: 1
-  projectileLifespan: 20
+  projectileLifespan: 5
   colliders: []
 --- !u!114 &1574117325642918125
 MonoBehaviour:
@@ -197,9 +197,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62179065a33a8c43879a7035312207e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 2
+  _health: 1
   _invulnerablilityTime: 1
-  playerDies: {fileID: 0}
+  playerDies: {fileID: 11400000, guid: f8811dc9379df0744a45a2e15bd6f078, type: 2}
 --- !u!114 &5811008003096749190
 MonoBehaviour:
   m_ObjectHideFlags: 0
