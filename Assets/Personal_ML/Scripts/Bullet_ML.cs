@@ -25,17 +25,6 @@ public class Bullet_ML : MonoBehaviour
         
         if (layer == 8)
         {
-            Debug.Log(col.transform.name);
-            
-            if (col.gameObject.GetComponent<IDamageable>() == null)
-            {
-                Debug.Log("no health");
-            }
-            else
-            {
-                Debug.Log("some health");
-            }
-            
             col.gameObject.GetComponent<IDamageable>().ModifyHealth(-damageAmount);
             gameObject.SetActive(false);
         }
