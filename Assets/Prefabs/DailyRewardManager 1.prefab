@@ -1,5 +1,42 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1344888387078343714
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5158388084136869291}
+  m_Layer: 0
+  m_Name: DailyPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5158388084136869291
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344888387078343714}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3329455860573182899}
+  - {fileID: 3329455860875994352}
+  - {fileID: 3329455861821207527}
+  - {fileID: 3329455862003962826}
+  - {fileID: 3329455861073990628}
+  - {fileID: 3329455860870772427}
+  m_Father: {fileID: 6466057535893537983}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3143936005772895659
 GameObject:
   m_ObjectHideFlags: 0
@@ -28,13 +65,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3329455860573182899}
   - {fileID: 3329455861888478459}
-  - {fileID: 3329455860875994352}
-  - {fileID: 3329455861821207527}
-  - {fileID: 3329455862003962826}
-  - {fileID: 3329455861073990628}
-  - {fileID: 3329455860870772427}
+  - {fileID: 5158388084136869291}
   m_Father: {fileID: 2533108124621848572}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -198,12 +230,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3329455860573182900}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6466057535893537983}
+  m_Father: {fileID: 5158388084136869291}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -274,12 +306,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3329455860870772428}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6466057535893537983}
+  m_Father: {fileID: 5158388084136869291}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -409,7 +441,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3329455860875994353}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -417,7 +449,7 @@ RectTransform:
   - {fileID: 3329455862561792062}
   - {fileID: 3329455860993121437}
   - {fileID: 3329455862181713126}
-  m_Father: {fileID: 6466057535893537983}
+  m_Father: {fileID: 5158388084136869291}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -756,12 +788,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3329455861073990629}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6466057535893537983}
+  m_Father: {fileID: 5158388084136869291}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1294,7 +1326,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3329455861821207528}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1302,7 +1334,7 @@ RectTransform:
   - {fileID: 3329455860428367505}
   - {fileID: 3329455861567757366}
   - {fileID: 3329455861791351054}
-  m_Father: {fileID: 6466057535893537983}
+  m_Father: {fileID: 5158388084136869291}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1375,7 +1407,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3329455861888478460}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1386,8 +1418,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -301}
-  m_SizeDelta: {x: 300, y: 70}
+  m_AnchoredPosition: {x: -326, y: -301}
+  m_SizeDelta: {x: 100.6106, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3329455861888478456
 CanvasRenderer:
@@ -1473,7 +1505,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3329455862177663426}
         m_TargetAssemblyTypeName: DailyRewardSystem, Assembly-CSharp
-        m_MethodName: DailyCheck
+        m_MethodName: OpenDailyPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1521,7 +1553,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3329455862003962827}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1529,7 +1561,7 @@ RectTransform:
   - {fileID: 3329455861102455891}
   - {fileID: 3329455862192844515}
   - {fileID: 3329455861073580786}
-  m_Father: {fileID: 6466057535893537983}
+  m_Father: {fileID: 5158388084136869291}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1586,7 +1618,7 @@ GameObject:
   - component: {fileID: 3329455862177663425}
   - component: {fileID: 3329455862177663426}
   m_Layer: 0
-  m_Name: DailyRewardManager
+  m_Name: DailyRewardManager 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1606,7 +1638,7 @@ Transform:
   m_Children:
   - {fileID: 2533108124621848572}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3329455862177663426
 MonoBehaviour:
@@ -1617,11 +1649,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3329455862177663427}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8356a4d18a582645baf89e1d12ff16e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f76b0e73d9e29742bafd04086345764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   url: www.google.com
-  urlDate: http://worldclockapi.com/api/json/utc/now
+  urlDate: http://worldclockapi.com/api/json/est/now
   sDate: 
   testCoinText: {fileID: 3329455860870772426}
   testRewardCoins: 0a00000046000000dc000000
@@ -1629,7 +1661,9 @@ MonoBehaviour:
   - {fileID: 3329455862181713123}
   - {fileID: 3329455861791351051}
   - {fileID: 3329455861073580783}
-  delete: 1
+  delete: 0
+  dailyButton: {fileID: 3329455861888478458}
+  dailyPanel: {fileID: 1344888387078343714}
 --- !u!1 &3329455862181713127
 GameObject:
   m_ObjectHideFlags: 0
@@ -1966,8 +2000,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Check Daily Rewards
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5a2584851740c7f48a27b9b537bcda1e, type: 2}
+  m_sharedMaterial: {fileID: -2717891193415401434, guid: 5a2584851740c7f48a27b9b537bcda1e,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1991,8 +2026,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -17,10 +17,12 @@ public class DailyRewardSystem : MonoBehaviour
     public List<int> testRewardCoins;
     public List<Button> testRewardButtons;
     public bool delete;
+    public Button dailyButton;
+    public GameObject dailyPanel;
     private void Start()
     {
         if (delete) PlayerPrefs.DeleteAll();
-        testCoinText.text = PlayerPrefs.GetInt("TestCoin").ToString();
+        testCoinText.text = PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()).ToString();
         StartCoroutine(CheckInternetConnection());
     }
     private IEnumerator CheckInternetConnection()
@@ -57,7 +59,7 @@ public class DailyRewardSystem : MonoBehaviour
             }      
         }
         Debug.Log(sDate);
-        //dailyButton.interactable = true;
+        dailyButton.interactable = true;
     }
 
     public void DailyCheck()
@@ -73,17 +75,17 @@ public class DailyRewardSystem : MonoBehaviour
         }
         else
         {
-            DateTime _dateNow = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
+            DateTime _dateNow = Convert.ToDateTime(sDate);
             DateTime _dateOld = Convert.ToDateTime(dateOld);
 
             TimeSpan diff = _dateNow.Subtract(_dateOld);
             if(diff.Days >= 1 && diff.Days < 2)
             {
-                int gameCount = PlayerPrefs.GetInt("PlayeDayGameCount");
+                int gameCount = PlayerPrefs.GetInt("PlayDayGameCount");
                 if(gameCount == 1)
                 {
                     testRewardButtons[1].interactable = true;
-                    PlayerPrefs.SetInt("PlayerGameCount", 2);
+                    PlayerPrefs.SetInt("PlayDayGameCount", 2);
                 }else if(gameCount == 2)
                 {
                     testRewardButtons[2].interactable = true;
@@ -94,7 +96,7 @@ public class DailyRewardSystem : MonoBehaviour
             }else if (diff.Days > 2)
             {
                 testRewardButtons[0].interactable = true;
-                PlayerPrefs.SetInt("PlayerGameCount", 1);
+                PlayerPrefs.SetInt("PlayDayGameCount", 1);
                 PlayerPrefs.SetString("PlayDateOld", _dateNow.ToString());
             }
         }
@@ -102,14 +104,25 @@ public class DailyRewardSystem : MonoBehaviour
 
     public void Reward(int count)
     {
-        int testCoins = PlayerPrefs.GetInt("TestCoin");
-        testCoins += testRewardCoins[count];
-        PlayerPrefs.SetInt("TestCoin", testCoins);
-        testCoinText.text = testCoins.ToString();
+        int coinReward = PlayerPrefs.GetInt("TestCoin");
+        coinReward += testRewardCoins[count];
+        PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString() + coinReward));
+        testCoinText.text = coinReward.ToString();
 
         Button clickedButton = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
         clickedButton.interactable = false;
 
+    }
+
+    public void OpenDailyPanel()
+    {
+        DailyCheck();
+        dailyPanel.SetActive(true);
+    }
+
+    public void ClosePanel()
+    {
+        dailyPanel.SetActive(false);
     }
 
 }
