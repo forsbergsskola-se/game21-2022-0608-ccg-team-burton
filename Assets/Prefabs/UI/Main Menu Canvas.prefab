@@ -172,7 +172,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.223}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -330.779, y: -4.193}
+  m_AnchoredPosition: {x: -330.779, y: -4.192993}
   m_SizeDelta: {x: 559.6813, y: 202.4616}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8657872584788777337
@@ -332,6 +332,7 @@ GameObject:
   - component: {fileID: 8657872585006274117}
   - component: {fileID: 8657872585006274119}
   - component: {fileID: 8657872585006274118}
+  - component: {fileID: 203953163}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -397,6 +398,26 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &203953163
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8657872585006274116}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 064e48eecf094ed43a6efd664abe6a90, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8657872585037499025
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,7 +818,7 @@ RectTransform:
   - {fileID: 4036983713409843584}
   - {fileID: 8657872585245947103}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1082,11 +1103,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8657872585037499027}
-    - target: {fileID: 1578492779084831602, guid: a2e376d3b51693b488cd3a48073060b3,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowCredits
-      objectReference: {fileID: 0}
     - target: {fileID: 1578492779742309795, guid: a2e376d3b51693b488cd3a48073060b3,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1196,11 +1212,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Credits Menu
-      objectReference: {fileID: 0}
-    - target: {fileID: 1578492779742309807, guid: a2e376d3b51693b488cd3a48073060b3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
