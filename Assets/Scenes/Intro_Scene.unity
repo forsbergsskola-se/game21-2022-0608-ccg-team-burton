@@ -520,26 +520,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 325576133467995936, guid: a1c8370e12db17a4fa07575f3b214c1b,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -202.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 325576133467995936, guid: a1c8370e12db17a4fa07575f3b214c1b,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: -127.47
-      objectReference: {fileID: 0}
-    - target: {fileID: 325576134062948481, guid: a1c8370e12db17a4fa07575f3b214c1b,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -6.782
-      objectReference: {fileID: 0}
-    - target: {fileID: 325576134062948481, guid: a1c8370e12db17a4fa07575f3b214c1b,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -3.3925781
-      objectReference: {fileID: 0}
     - target: {fileID: 325576134098800352, guid: a1c8370e12db17a4fa07575f3b214c1b,
         type: 3}
       propertyPath: m_Pivot.x
@@ -650,21 +630,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Intro Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 325576134098800364, guid: a1c8370e12db17a4fa07575f3b214c1b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 325576134098800366, guid: a1c8370e12db17a4fa07575f3b214c1b,
-        type: 3}
-      propertyPath: m_UiScaleMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6901190075868195650, guid: a1c8370e12db17a4fa07575f3b214c1b,
-        type: 3}
-      propertyPath: IntroAnim
-      value: 
-      objectReference: {fileID: 1695441873}
     - target: {fileID: 6901190075868195650, guid: a1c8370e12db17a4fa07575f3b214c1b,
         type: 3}
       propertyPath: CreditsMenu
@@ -1130,9 +1095,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1695441873 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 325576134098800364, guid: a1c8370e12db17a4fa07575f3b214c1b,
-    type: 3}
-  m_PrefabInstance: {fileID: 743009210}
-  m_PrefabAsset: {fileID: 0}
