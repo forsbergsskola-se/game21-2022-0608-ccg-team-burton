@@ -17,7 +17,7 @@ public class MenuAnimations : MonoBehaviour
     private float _nTime;
     private bool _reverseAnim = false;
     private bool _playingAnim = false;
-    public LevelCompleted LevelCompleted;
+    private LevelCompleted LevelCompleted;
 
 
     private void Awake()
@@ -26,6 +26,7 @@ public class MenuAnimations : MonoBehaviour
         _reverseAnimator = ReverseAnimation.GetComponent<Animator>();
         TriggerButton.onClick.AddListener(PlayForwardAnim);
         HideButton.onClick.AddListener(PlayReverseAnim);
+        LevelCompleted = FindObjectOfType<LevelCompleted>().GetComponent<LevelCompleted>();
     }
 
     
@@ -52,12 +53,15 @@ public class MenuAnimations : MonoBehaviour
         StillMenuImage.SetActive(!_reverseAnim);
         animGO.SetActive(false);
         _playingAnim = false;
+        
+        if (_reverseAnim) ResumeTimer();
     }
 
     
 
     private void PlayForwardAnim()
     {
+        PauseTimer();
         _playingAnim = true;
         _reverseAnim = false;
         ForwardAnimation.SetActive(true);
@@ -74,5 +78,8 @@ public class MenuAnimations : MonoBehaviour
 
 
 
-    public void PauseTimer() => LevelCompleted.PauseTimer = true;
+    private void PauseTimer() => LevelCompleted.PauseTimer = true;
+    
+    public void ResumeTimer() => LevelCompleted.PauseTimer = false;
+
 }

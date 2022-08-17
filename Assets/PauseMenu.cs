@@ -17,10 +17,14 @@ public class PauseMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public GameObject PauseMenuGO;
     #endregion
     
-    public LevelCompleted LevelCompleted;
+    private LevelCompleted LevelCompleted;
 
 
-    private void Awake() => PauseMenuOriginal = PauseMenuImage.sprite;
+    private void Awake()
+    {
+        PauseMenuOriginal = PauseMenuImage.sprite;
+        LevelCompleted = FindObjectOfType<LevelCompleted>().GetComponent<LevelCompleted>();
+    }
     public void OnPointerEnter(PointerEventData eventData) => ChangeSprite();
     public void OnPointerExit(PointerEventData eventData) => ResetSprite();
     private void ResetSprite() => PauseMenuImage.sprite = PauseMenuOriginal;
