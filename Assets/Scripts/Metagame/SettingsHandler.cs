@@ -50,7 +50,9 @@ namespace Metagame
 
         public void ToggleVibrate(){
             if (toggle.isOn){
+                #if UNITY_ANDROID
                 Handheld.Vibrate();
+                #endif
                 PlayerPrefs.SetInt("ToggleVibrate", 1);
             }
         }

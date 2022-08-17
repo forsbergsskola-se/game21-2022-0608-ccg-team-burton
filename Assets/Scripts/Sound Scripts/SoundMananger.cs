@@ -1,7 +1,6 @@
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 public class SoundMananger : MonoBehaviour
@@ -35,8 +34,8 @@ public class SoundMananger : MonoBehaviour
     }
 
     public void StartMusic(EventReference MusicTrack){
-        if (_currentMusic != MusicTrack.Path){
-            _currentMusic = MusicTrack.Path;
+        if (_currentMusic != MusicTrack.Guid.ToString()){
+            _currentMusic = MusicTrack.Guid.ToString();
             StopMusic();
             MusicTrack_EventInst = RuntimeManager.CreateInstance(MusicTrack);
             MusicTrack_EventInst.start();
