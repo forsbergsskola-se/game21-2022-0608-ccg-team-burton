@@ -20,12 +20,9 @@ public class SoundMananger : MonoBehaviour
 
         DontDestroyOnLoad(this);
 
-        SceneManager.sceneUnloaded += OnSceneChanged;
     }
 
-    void OnSceneChanged(UnityEngine.SceneManagement.Scene scene){
-        Debug.Log("Hello");
-    }
+ 
 
     public void SetMusicParam(float val){
         MusicTrack_EventInst.setParameterByName("test", val);

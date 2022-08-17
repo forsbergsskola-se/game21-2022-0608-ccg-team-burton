@@ -16,12 +16,20 @@ public class PauseMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public GameObject SettingsMenu;
     public GameObject PauseMenuGO;
     #endregion
+    
+    private LevelCompleted LevelCompleted;
 
-    private void Awake() => PauseMenuOriginal = PauseMenuImage.sprite;
+
+    private void Awake()
+    {
+        PauseMenuOriginal = PauseMenuImage.sprite;
+        LevelCompleted = FindObjectOfType<LevelCompleted>().GetComponent<LevelCompleted>();
+    }
     public void OnPointerEnter(PointerEventData eventData) => ChangeSprite();
     public void OnPointerExit(PointerEventData eventData) => ResetSprite();
     private void ResetSprite() => PauseMenuImage.sprite = PauseMenuOriginal;
     public void ResumeGame() => PauseMenuGO.SetActive(false);
+    
 
     
     
@@ -37,7 +45,7 @@ public class PauseMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         PauseMenuImage.sprite = PauseMenuChange;
         
-        if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.Android)
+        if (Application.platform is RuntimePlatform.IPhonePlayer or RuntimePlatform.Android)
             StartCoroutine(WaitToResetSprite());
     }
 
@@ -48,4 +56,6 @@ public class PauseMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         yield return new WaitForSeconds(0.25f);
         ResetSprite();
     }
+    
+    public void ResumeTimer() => LevelCompleted.PauseTimer = false;
 }

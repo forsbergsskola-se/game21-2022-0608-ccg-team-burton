@@ -1,8 +1,6 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using FMOD.Studio;
-using FMODUnity;
+
 
 public class FusionManager : MonoBehaviour
 {
@@ -57,7 +55,7 @@ public class FusionManager : MonoBehaviour
         PlayerPrefs.SetString(equipmentData.RarityID, currentRarity.ToString());
     }
 
-    private Rarity GetCurrentRarity(EquipmentSO equipmentData)
+    public Rarity GetCurrentRarity(EquipmentSO equipmentData)
     {
         var currentRarityString = PlayerPrefs.GetString(equipmentData.RarityID);
         Enum.TryParse(currentRarityString, out Rarity currentRarity);
