@@ -123,4 +123,8 @@ public class DebugSaveClear : MonoBehaviour
          AddButtons();
       }
    }
+   
+  public void ClearSave() { 
+  PlayerPrefs.DeleteAll();
+  }
 }
