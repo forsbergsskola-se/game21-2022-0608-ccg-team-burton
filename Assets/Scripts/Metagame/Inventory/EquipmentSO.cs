@@ -9,7 +9,7 @@ public class EquipmentSO : ScriptableObject
     [Header("GENERAL")]
     public string ID;
     public string Name;
-    public Sprite Icon;
+    public Sprite[] Icon;
     [Header("ATTRIBUTE")]
     public string AttributeValueID;
     public string AttributeDescription;

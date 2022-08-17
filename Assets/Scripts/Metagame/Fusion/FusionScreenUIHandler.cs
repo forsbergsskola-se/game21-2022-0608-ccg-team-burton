@@ -52,7 +52,8 @@ public class FusionScreenUIHandler : MonoBehaviour
     }
     private void UpdateUIElements()
     {
-        _equipmentIconGameObject.GetComponent<Image>().sprite = EquipmentSoData.Icon;
+        var rarityIndex = 0;
+        _equipmentIconGameObject.GetComponent<Image>().sprite = EquipmentSoData.Icon[rarityIndex];
         _rarityText.SetText("Rarity: "+PlayerPrefs.GetString(EquipmentSoData.RarityID));
         
         SetAttributeText();
