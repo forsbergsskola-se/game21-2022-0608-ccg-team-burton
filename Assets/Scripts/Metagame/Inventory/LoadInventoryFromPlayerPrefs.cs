@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -50,16 +51,13 @@ public class LoadInventoryFromPlayerPrefs : MonoBehaviour
         UpdateEquipmentIcons();
     }
 
-    public void UpdateEquipmentIcons()
+    private void UpdateEquipmentIcons()
     {
         foreach (var equipmentIcon in _equipmentIcons)
         {
-            foreach (var equipmentSo in _libraries.EquipmentLibrarySo.EquipablesLibrary)
+            foreach (var equipmentSo in _libraries.EquipmentLibrarySo.EquipablesLibrary.Where(equipmentSo => equipmentIcon.transform.name.Contains(equipmentSo.Name)))
             {
-                if (equipmentIcon.transform.name.Contains(equipmentSo.Name))
-                {       
-                    equipmentIcon.sprite = equipmentSo.Icon[(int)_fusionManager.GetCurrentRarity(equipmentSo)];
-                }
+                equipmentIcon.sprite = equipmentSo.Icon[(int)_fusionManager.GetCurrentRarity(equipmentSo)];
             }
         }
     }
