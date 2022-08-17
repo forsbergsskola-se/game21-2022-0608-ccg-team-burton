@@ -23,6 +23,16 @@ public class WalkableGround
     public Vector2 max;
 }
 
+public enum GridInfo
+{
+    Start,
+    End,
+    Min,
+    Max,
+    Center,
+    CenterGround
+}
+
 public class LevelGrid : MonoBehaviour
 {
     [Header("Grid values")]
@@ -78,11 +88,8 @@ public class LevelGrid : MonoBehaviour
                 var cube = _gridList[i][j];
                 AdvancedTrace(new Vector2(i,j));
                 ScanForEnemies(cube.location);
-                
             }
         }
-        //Debug.Log(_gridList[0].Count);
-       // Debug.Log(_gridList[1].Count);
     }
 
     public WalkableGround GetCurrentGround(Vector2 currentPos)

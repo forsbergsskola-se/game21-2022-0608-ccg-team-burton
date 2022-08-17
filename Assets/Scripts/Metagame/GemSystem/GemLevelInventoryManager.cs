@@ -2,13 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GemLevelInventoryManager : MonoBehaviour
 {
     
     //Public fields
     [HideInInspector]public int LevelSlotIndex = 0;
-    public int CoinPerGemFee; 
 
 
  //Private fields
@@ -24,6 +24,8 @@ public class GemLevelInventoryManager : MonoBehaviour
     [SerializeField] private TMP_Text _hPBonusText;
     [SerializeField] private TMP_Text _moveSpeedBonusText;
     [SerializeField] private TMP_Text _coinsCostText;
+    [SerializeField] private TMP_Text _startLevelText;
+    [SerializeField] private Image[] _startButtonImages;
     [SerializeField] private PlayOneShotSound _oneShotSound;
     private List<GameObject> _currentItemsInInventory = new();
     private GameObject[] _currentSlottedGems;
@@ -132,6 +134,31 @@ CalculateCoinCost();
     private void UpdateCoinText(int cost)
     {
         _coinsCostText.SetText(LevelStartCost+" Coins");
+        if (!AffordLevelStart())
+        {
+            _coinsCostText.color = new Color(147, 0, 0);
+            var disabledColor = new Color(166, 166, 166);
+            
+            _startLevelText.color = disabledColor;
+            foreach (var startButtonImage in _startButtonImages)
+            {
+                startButtonImage.color = disabledColor;
+            }
+        }
+        else
+        {
+            _coinsCostText.color = Color.white;
+            foreach (var startButtonImage in _startButtonImages)
+            {
+                startButtonImage.color = Color.white;
+            }
+            
+        }
+    }
+
+    public bool AffordLevelStart()
+    {
+        return PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) >= LevelStartCost;
     }
 
 
@@ -215,9 +242,18 @@ CalculateCoinCost();
 
 
         }
-        
-        PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) - LevelStartCost);
 
-            _sceneLoader.LoadScene();
+        if (PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) >= LevelStartCost)
+        {
+            PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) - LevelStartCost);
+        
+        
+            _sceneLoader.LoadScene(); 
+        }
+        else
+        {
+            Debug.Log("NO CASH MONEY");
+        }
+
     }
 }

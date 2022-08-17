@@ -148,22 +148,26 @@ public class TracerEyes : MonoBehaviour
         var wallTrace = BaseTrace(new Vector3(0, 0), 8, true);
         if (wallTrace) compoundActions |= CompoundActions.WallSeen;
         else compoundActions &= ~CompoundActions.WallSeen;
+        var pos = transform.position;
        // Debug.Log(compoundActions);
         
         if (compoundActions.HasFlag(CompoundActions.WallSeen))
         {
             var right = transform.right;
-            var tracePos = transform.position + new Vector3(right.x * 5, 5);
+            var tracePos = pos + new Vector3(right.x * 5, 5);
 
             if (distanceToWall is < 3 and > 0.5f)
             {
                 var some =  _grid.GetCurrentGround(tracePos);
                 AddDebugPointAt(tracePos, 0);
-              //  
-              //  if (some != null)
-              //  {
-              //      compoundActions |= CompoundActions.HigherGroundSeen;
-              //  }
+                
+                if (some != null)
+                {
+                    if (Mathf.Abs(some.start.y - pos.y) < 4)
+                    {
+                        compoundActions |= CompoundActions.HigherGroundSeen;
+                    }
+                }
             }
             
             if (distanceToWall < 0.5f)
