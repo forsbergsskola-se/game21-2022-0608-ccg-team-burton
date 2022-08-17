@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Metagame
 {
-    public class OpenLink : MonoBehaviour
+    public class OpenUrlLink : MonoBehaviour
     {
         [SerializeField] string url;
 
