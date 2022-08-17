@@ -163,9 +163,14 @@ public class TracerEyes : MonoBehaviour
                 
                 if (some != null)
                 {
+                    Debug.Log(some.start);
                     if (Mathf.Abs(some.start.y - pos.y) < 4)
                     {
                         compoundActions |= CompoundActions.HigherGroundSeen;
+                    }
+                    else
+                    {
+                        compoundActions &= ~CompoundActions.HigherGroundSeen;
                     }
                 }
             }
@@ -173,6 +178,7 @@ public class TracerEyes : MonoBehaviour
             if (distanceToWall < 0.5f)
             {
                 compoundActions |= CompoundActions.WallInTurnRange;
+                compoundActions &= ~CompoundActions.HigherGroundSeen;
             }
             
             else

@@ -27,7 +27,8 @@ public class SelectNode : CompositeNode
     private void CheckOptions()
     {
         var comp = agent.enemyEyes.compoundActions;
-
+        Debug.Log(comp);
+        
         if (comp.HasFlag(CompoundActions.EnemyDead))
         {
             agent.body.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -49,25 +50,52 @@ public class SelectNode : CompositeNode
                 }
             }
 
-           // else if (comp.HasFlag(CompoundActions.WallSeen))
-           // {
-           //     if (comp.HasFlag(CompoundActions.HigherGroundSeen))
-           //     {
-           //       //  currentCommand = CurrentCommand.Jump;
-           //       //  agent.enemyEyes.compoundActions &= ~CompoundActions.HigherGroundSeen;
-           //     }
-           //     
-           // }
-            
-            else if (!comp.HasFlag(CompoundActions.PlayerNoticed))
+            else if (!comp.HasFlag(CompoundActions.PlayerNoticed) && comp.HasFlag(CompoundActions.WallSeen))
             {
+                Debug.Log("wall seen");
+                
+                if (comp.HasFlag(CompoundActions.HigherGroundSeen))
+                {
+                    currentCommand = CurrentCommand.Jump;
+                    agent.enemyEyes.compoundActions &= ~CompoundActions.HigherGroundSeen;
+                    Debug.Log("higher ground seen");
+                }
+                
                 if (comp.HasFlag(CompoundActions.ArrivedAtTarget))
                 {
+                    Debug.Log("arrived at target");
                     agent.enemyEyes.compoundActions &= ~CompoundActions.ArrivedAtTarget;
                     GetTarget();
                 }
+                else
+                {
+                    Debug.Log("other");
+                    GetTarget();
+                }
+            }
+            
+            else if (!comp.HasFlag(CompoundActions.PlayerNoticed)&& !comp.HasFlag(CompoundActions.WallSeen))
+            {
+                if (comp.HasFlag(CompoundActions.HigherGroundSeen))
+                {
+                    currentCommand = CurrentCommand.Jump;
+                    agent.enemyEyes.compoundActions &= ~CompoundActions.HigherGroundSeen;
+                    Debug.Log("higher ground seen");
+                }
                 
-                GetTarget();
+                if (comp.HasFlag(CompoundActions.ArrivedAtTarget))
+                {
+                    Debug.Log("arrived at target");
+                    agent.enemyEyes.compoundActions &= ~CompoundActions.ArrivedAtTarget;
+                    GetTarget();
+                }
+                else
+                {
+                    Debug.Log("other");
+                    GetTarget();
+                }
+                
+              //  GetTarget();
             }
         }
         
@@ -97,38 +125,6 @@ public class SelectNode : CompositeNode
 
         _choiceMade = true;
     }
-
-    private void IfGroundSeen(CompoundActions comp)
-    {
-        if (comp.HasFlag(CompoundActions.PlayerNoticed))
-        {
-            if (comp.HasFlag(CompoundActions.PlayerInAttackRange))
-            {
-                currentCommand = CurrentCommand.Attack;
-            }
-            else if(!comp.HasFlag(CompoundActions.PlayerInAttackRange))
-            {
-                agent.currentDestination = agent.enemyEyes.PlayerPos;
-                currentCommand = CurrentCommand.MoveToPosition;
-            }
-        }
-
-        else if (comp.HasFlag(CompoundActions.WallSeen))
-        {
-            if (comp.HasFlag(CompoundActions.HigherGroundSeen))
-            {
-                //  currentCommand = CurrentCommand.Jump;
-                //  agent.enemyEyes.compoundActions &= ~CompoundActions.HigherGroundSeen;
-            }
-                
-        }
-            
-        else if (!comp.HasFlag(CompoundActions.PlayerNoticed))
-        {
-            GetTarget();
-        }
-    }
-    
     
     private void GetTarget()
     {
@@ -151,8 +147,6 @@ public class SelectNode : CompositeNode
         
         currentCommand = CurrentCommand.MoveToPosition;
     }
-    
-    
     
     private void SetPossibleNodes()
     {
@@ -203,6 +197,7 @@ public class SelectNode : CompositeNode
 
             case State.Success:
                 _choiceMade = false;
+                Debug.Log("exit node");
                 CheckOptions();
                 break;
         }
