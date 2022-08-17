@@ -136,22 +136,22 @@ CalculateCoinCost();
         _coinsCostText.SetText(LevelStartCost+" Coins");
         if (!AffordLevelStart())
         {
-            _coinsCostText.color = new Color(147, 0, 0);
-            var disabledColor = new Color(166, 166, 166);
-            
-            _startLevelText.color = disabledColor;
-            foreach (var startButtonImage in _startButtonImages)
-            {
-                startButtonImage.color = disabledColor;
-            }
+            _coinsCostText.color = Color.red;
+            // var disabledColor = new Color(166, 166, 166);
+            //
+            // _startLevelText.color = disabledColor;
+            // foreach (var startButtonImage in _startButtonImages)
+            // {
+            //     startButtonImage.color = disabledColor;
+            // }
         }
         else
         {
             _coinsCostText.color = Color.white;
-            foreach (var startButtonImage in _startButtonImages)
-            {
-                startButtonImage.color = Color.white;
-            }
+            // foreach (var startButtonImage in _startButtonImages)
+            // {
+            //     startButtonImage.color = Color.white;
+            // }
             
         }
     }
