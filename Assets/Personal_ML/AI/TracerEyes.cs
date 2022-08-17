@@ -30,6 +30,7 @@ public enum CompoundActions
     IgnoreTraceForSeconds = 1 << 16,
     LowerGroundSeen = 1 << 17,
     HigherGroundSeen = 1 << 18,
+    ArrivedAtTarget = 1 << 19,
 }
 
 public enum EnemyType
@@ -55,7 +56,9 @@ public class TracerEyes : MonoBehaviour
     
     private float _timeSinceTrace;
     public Vector2 PlayerPos { get; private set; }
-    
+
+    private Vector2[] _debugPoints;
+
     private Health _playerHealth;
     private Health _enemyHealth;
     private bool _somethingHit;
@@ -63,11 +66,14 @@ public class TracerEyes : MonoBehaviour
     private List<RaycastHit2D> _pointsList = new();
     [HideInInspector] public CompoundActions compoundActions;
     [HideInInspector] public float distanceToWall;
-
+    [HideInInspector] public bool lockGroundTrace;
+    
     private int _maxHealth;
     private void Awake()
     {
+        _debugPoints = new Vector2[10];
         compoundActions |= CompoundActions.GroundSeen;
+        compoundActions &= ~CompoundActions.EnemyAttacked;
     }
 
     private void Start()
@@ -82,6 +88,7 @@ public class TracerEyes : MonoBehaviour
 
         _groundMask = 1 << 6 | 1 << 10 | 1 << 11; 
         _boxMask = 1 << 8 | 1 << 13 | 1 << 7;
+        compoundActions &= ~CompoundActions.EnemyAttacked;
     }
 
     private void OnDisable()
@@ -97,6 +104,7 @@ public class TracerEyes : MonoBehaviour
         {
             if (_somethingHit)
             {
+                _enemyHealth.CurrentHealth = _maxHealth;
             }
         }
 
@@ -126,7 +134,7 @@ public class TracerEyes : MonoBehaviour
         {
             TraceForGround();
             TraceForWalls();
-            TraceBox();
+            TraceForPlayer();
         }
         
         else if (enemyType == EnemyType.Cannon)
@@ -140,20 +148,32 @@ public class TracerEyes : MonoBehaviour
         var wallTrace = BaseTrace(new Vector3(0, 0), 8, true);
         if (wallTrace) compoundActions |= CompoundActions.WallSeen;
         else compoundActions &= ~CompoundActions.WallSeen;
-        
+       // Debug.Log(compoundActions);
         
         if (compoundActions.HasFlag(CompoundActions.WallSeen))
         {
-            var tracePos = transform.position + new Vector3(2, 8);
+            var right = transform.right;
+            var tracePos = transform.position + new Vector3(right.x * 5, 5);
 
-            if (distanceToWall is < 4 and > 0.5f)
+            if (distanceToWall is < 3 and > 0.5f)
             {
-                SpecTrace(tracePos, Vector2.down, 12);
+                var some =  _grid.GetCurrentGround(tracePos);
+                AddDebugPointAt(tracePos, 0);
+              //  
+              //  if (some != null)
+              //  {
+              //      compoundActions |= CompoundActions.HigherGroundSeen;
+              //  }
             }
             
             if (distanceToWall < 0.5f)
             {
                 compoundActions |= CompoundActions.WallInTurnRange;
+            }
+            
+            else
+            {
+                compoundActions &= ~CompoundActions.WallInTurnRange;
             }
         }
         
@@ -163,11 +183,17 @@ public class TracerEyes : MonoBehaviour
         }
     }
 
+    private void AddDebugPointAt(Vector2 point, int index)
+    {
+        _debugPoints[index] = point;
+    }
+    
     private void TraceForGround()
     {
         var pos = transform.position;
         var dir = transform.right + new Vector3(0, -0.95f);
         var otherPos = pos + dir * 1.5f;
+        var otherPos2 = pos + new Vector3(transform.right.x * 3, -2);
  
         var groundTrace = BaseTrace(dir, 2, false);
 
@@ -176,8 +202,18 @@ public class TracerEyes : MonoBehaviour
 
         if (!compoundActions.HasFlag(CompoundActions.GroundSeen))
         {
-            var groundTrace2 = SpecTrace(otherPos, new Vector2(0, -1), 2.5f);
-            
+            var groundTrace2 = false;
+            AddDebugPointAt(otherPos2, 1);
+            var some = _grid.GetCurrentGround(otherPos2);
+
+            if (some != null)
+            {
+                if (Mathf.Abs(some.start.y - pos.y) < 4)
+                {
+                    groundTrace2 = true;
+                }
+            }
+
             if (groundTrace2) compoundActions |= CompoundActions.LowerGroundSeen;
             else compoundActions &= ~CompoundActions.LowerGroundSeen;
         }
@@ -239,15 +275,16 @@ public class TracerEyes : MonoBehaviour
             
             if (layer == 8)
             {
-                _somethingHit = true;
-
                 compoundActions |= CompoundActions.PlayerNoticed;
                 if (CheckIfLookingAtTarget(h.point))
                 {
                     compoundActions |= CompoundActions.PlayerInFront;
+                    compoundActions  &= ~CompoundActions.PlayerBehind;
+                    _somethingHit = true;
                 }
                 else
                 {
+                    compoundActions |= CompoundActions.PlayerBehind;
                     compoundActions  &= ~CompoundActions.PlayerNoticed;
                     compoundActions  &= ~CompoundActions.PlayerInFront;
                 }
@@ -260,7 +297,7 @@ public class TracerEyes : MonoBehaviour
         compoundActions  &= ~CompoundActions.PlayerInFront;
     }
 
-    private void TraceBox()
+    private void TraceForPlayer()
     {
         var result = Physics2D.BoxCastAll(transform.position, 
             traceSize, 0, transform.up, traceSize.y / 4, _boxMask);
@@ -350,6 +387,13 @@ public class TracerEyes : MonoBehaviour
         Gizmos.color = _somethingHit ? Color.green : Color.red;
 
         Gizmos.DrawWireCube(transform.position, traceSize);
+
+        if (!Application.isPlaying) return;
+        Gizmos.color = Color.yellow;
+        foreach (var d in _debugPoints)
+        {
+            Gizmos.DrawWireSphere(d, 0.5f);
+        }
     }
 #endif
 }

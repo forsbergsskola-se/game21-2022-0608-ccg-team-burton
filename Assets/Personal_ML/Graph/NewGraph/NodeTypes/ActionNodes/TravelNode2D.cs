@@ -22,7 +22,6 @@ namespace NewGraph.NodeTypes.ActionNodes
 
         private void RotateEnemy()
         {
-            Debug.Log("rotate");
             agent.enemyTransform.Rotate(new Vector3(0, 1,0), 180);
         }
         
@@ -78,8 +77,13 @@ namespace NewGraph.NodeTypes.ActionNodes
                 }    
             }
             if (comp.HasFlag(CompoundActions.PlayerInAttackRange))return State.Success;
-            if (ArrivedAtTarget()) return State.Success;
-            
+            //if (comp.HasFlag(CompoundActions.HigherGroundSeen))return State.Success;
+            if (ArrivedAtTarget())
+            {
+                agent.enemyEyes.compoundActions |= CompoundActions.ArrivedAtTarget;
+                return State.Success;
+            }
+
             agent.enemyTransform.position += agent.enemyTransform.right * (Time.deltaTime * agent.moveSpeed);
             return State.Update;
         }
