@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class SimpleAnimScript : MonoBehaviour
 {
-    public GameObject IntroAnim;
-    public GameObject CreditsMenu;
+    public GameObject Anim;
+    public GameObject Menu;
     
     private Animator _animator;
     private AnimatorStateInfo _animatorStateInfo;
@@ -18,7 +18,7 @@ public class SimpleAnimScript : MonoBehaviour
         
         if (!(_nTime > 1.0f)) return;
         
-        CreditsMenu.SetActive(true);
-        IntroAnim.SetActive(false);
+        Menu.SetActive(true);
+        Anim.SetActive(false);
     }
 }
