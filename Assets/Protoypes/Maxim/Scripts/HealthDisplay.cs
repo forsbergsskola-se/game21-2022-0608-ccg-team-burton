@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class HealthDisplay : MonoBehaviour
 {
-
     public int health;
     
     public Health playerHealth;
@@ -13,8 +12,6 @@ public class HealthDisplay : MonoBehaviour
 
     void OnEnable() => playerHealth.OnHealthChanged += UpdateHealthUI;
     private void OnDisable() => playerHealth.OnHealthChanged -= UpdateHealthUI;
-
-   
 
     private void UpdateHealthUI(int health)
     {

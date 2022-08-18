@@ -31,7 +31,10 @@ public class Combat : MonoBehaviour
 
      private void Start()
      {
-         _meleeDamage += (int)PlayerPrefs.GetFloat("buequipment.weapon.attributevalue") + (int)PlayerPrefs.GetFloat("gems.redgem.bonusid");
+         if (gameObject.CompareTag("Player"))
+         {
+             _meleeDamage += (int)PlayerPrefs.GetFloat("buequipment.weapon.attributevalue") + (int)PlayerPrefs.GetFloat("gems.redgem.bonusid");
+         }
      }
 
      public void MeleeAttack()
