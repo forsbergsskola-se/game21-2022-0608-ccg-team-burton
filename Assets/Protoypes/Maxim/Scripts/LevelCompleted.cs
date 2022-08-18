@@ -11,7 +11,6 @@ public class LevelCompleted : MonoBehaviour
     public TextMeshProUGUI CoinText;
     public GameObject WinScreen;
     public Image[] Stars;
-    public Sprite Star;
     public Health PlayerHealth;
     public ItemCollector ItemCollector;
     private int _coinBonus = 0;
