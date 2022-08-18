@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,14 +6,23 @@ using UnityEngine.UI;
 public class UnlockLevel : MonoBehaviour
 
 {
+    [SerializeField] private Button _levelButton;
     [SerializeField] public bool Unlocked;
     public Image LockImage;
     public Image[] Stars;
 
     public Sprite fullStar;
-    
+
+
+    private void Start()
+    {
+        _levelButton = GetComponent<Button>();
+
+    }
+
     private void Update()
     {
+
         UpdateLevelImage(); 
         UpdateLevelStatus();
     } 
@@ -25,7 +35,6 @@ public class UnlockLevel : MonoBehaviour
         if (PlayerPrefs.GetInt("Lv" + previousLevelIndex) > 0)
         {
             Unlocked = true;
-            
         }
     }
     
@@ -34,6 +43,7 @@ public class UnlockLevel : MonoBehaviour
         if (!Unlocked)// if unlock is false, the level is locked
         {
             LockImage.enabled = true;
+            _levelButton.interactable = false;
             for (int i = 0; i < Stars.Length; i++)
             {
                 Stars[i].enabled = false;
@@ -43,6 +53,8 @@ public class UnlockLevel : MonoBehaviour
         else
         {
             LockImage.enabled = false;
+           _levelButton.interactable =true;
+
             for (int i = 0; i < Stars.Length; i++)
             {
                 Stars[i].enabled = true;

@@ -29,6 +29,18 @@ public class PlayOneShotSound : MonoBehaviour
 
         _soundMananger.PlaySound(_sound);
     }
+    
+    public void PlaySound(EventReference SoundFile)
+    {
+      
+        if (!initiated)
+        {
+            _sound = FMODUnity.RuntimeManager.CreateInstance(SoundFile);
+            initiated = true;
+        }
+
+        _soundMananger.PlaySound(_sound);
+    }
 
     public void PlayStackingSound()
     {

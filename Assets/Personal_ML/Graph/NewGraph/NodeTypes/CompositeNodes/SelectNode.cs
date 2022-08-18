@@ -27,7 +27,7 @@ public class SelectNode : CompositeNode
     private void CheckOptions()
     {
         var comp = agent.enemyEyes.compoundActions;
-       // Debug.Log(comp);
+        Debug.Log(comp);
         
         if (comp.HasFlag(CompoundActions.EnemyDead))
         {

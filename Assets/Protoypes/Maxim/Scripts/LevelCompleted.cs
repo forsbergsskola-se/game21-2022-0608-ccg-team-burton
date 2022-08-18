@@ -6,13 +6,14 @@ using UnityEngine.UI;
 
 public class LevelCompleted : MonoBehaviour
 {
+    public TextMeshProUGUI BonusCoinsText;
     public TextMeshProUGUI TotalCoinText;
     public TextMeshProUGUI CoinText;
     public GameObject WinScreen;
     public Image[] Stars;
     public Health PlayerHealth;
     public ItemCollector ItemCollector;
-    public int CoinBonus = 500;
+    private int _coinBonus = 0;
     public float GoalTime;
     
     public int CurrentStarsNum;
@@ -38,24 +39,27 @@ public class LevelCompleted : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision){
         var currentCoins = ItemCollector._coinCounter;
+        var bonusCoins = _coinBonus;
 
         if (collision.CompareTag("Player")){
-            currentCoins += CoinBonus;
+            currentCoins += _coinBonus;
 
             //Save coins to inventory
             PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(),
                 PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) + currentCoins);
 
 
-            ItemCollector._coinCounter += CoinBonus;
+            ItemCollector._coinCounter += _coinBonus;
 
 
             WinScreen.SetActive(true);
 
 
             StarsAchieved();
+            ShowStars();
             UpdateCoinText(currentCoins);
             UpdateTotalCoinText(currentCoins);
+            UpdateBonusCoinsText(bonusCoins);
             SaveStars(CurrentStarsNum);
             collision.gameObject.SetActive(false); //disables the player
         }
@@ -70,24 +74,26 @@ public class LevelCompleted : MonoBehaviour
 
     void StarsAchieved(){
         var healthLeft = PlayerHealth.CurrentHealth;
-       
 
         if (healthLeft >= 6 )
         {
             CurrentStarsNum += 1;
+            _coinBonus += 150;
         }
 
         if (_timer < GoalTime)
         {
             CurrentStarsNum += 1;
+            _coinBonus += 150;
         }
 
         var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        Debug.Log(enemies.Length);
+        Debug.Log(enemies.Length + " Left to kill");
 
         if (enemies.Length <= 0)
         {
             CurrentStarsNum += 1;
+            _coinBonus += 150;
         }
 
 
@@ -103,11 +109,39 @@ public class LevelCompleted : MonoBehaviour
         }
     }
 
+    void ShowStars()
+    {
+        var starsNum = CurrentStarsNum;
+
+        if (starsNum == 1)
+        {
+
+            Stars[0].enabled = true;
+            Debug.Log(starsNum);
+        }
+        else if (starsNum == 2)
+        {
+            Stars[0].enabled = true;
+            Stars[1].enabled = true;
+        }
+        else if (starsNum == 3)
+        {
+            Stars[0].enabled = true;
+            Stars[1].enabled = true;
+            Stars[2].enabled = true;
+        }
+        Debug.Log("CurrentStars: " + CurrentStarsNum);
+    }
+
     void UpdateCoinText(int value){
         CoinText.text = $"{value}";
     }
 
     void UpdateTotalCoinText(int value){
         TotalCoinText.text = $"Total Coins : {value}";
+    }
+
+    void UpdateBonusCoinsText(int value) {
+        BonusCoinsText.text = $"Bonus Coins : {value}";
     }
 }
