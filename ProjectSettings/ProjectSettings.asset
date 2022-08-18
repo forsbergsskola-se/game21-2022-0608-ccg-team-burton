@@ -271,8 +271,8 @@ PlayerSettings:
     banner: {fileID: 0}
   androidGamepadSupportLevel: 0
   chromeosInputEmulation: 1
-  AndroidMinifyWithR8: 1
-  AndroidMinifyRelease: 0
+  AndroidMinifyWithR8: 0
+  AndroidMinifyRelease: 1
   AndroidMinifyDebug: 0
   AndroidValidateAppBundleSize: 1
   AndroidAppBundleSizeToValidate: 150
@@ -310,7 +310,8 @@ PlayerSettings:
       m_Height: 81
       m_Kind: 2
       m_SubKind: 
-    - m_Textures: []
+    - m_Textures:
+      - {fileID: 2800000, guid: 1ae09a341cfe75746b2fd2bf2a3fd01c, type: 3}
       m_Width: 192
       m_Height: 192
       m_Kind: 1
@@ -340,7 +341,8 @@ PlayerSettings:
       m_Height: 36
       m_Kind: 1
       m_SubKind: 
-    - m_Textures: []
+    - m_Textures:
+      - {fileID: 2800000, guid: 1ae09a341cfe75746b2fd2bf2a3fd01c, type: 3}
       m_Width: 192
       m_Height: 192
       m_Kind: 0
