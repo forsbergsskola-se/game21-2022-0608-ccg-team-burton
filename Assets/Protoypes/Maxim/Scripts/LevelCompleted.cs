@@ -107,6 +107,8 @@ public class LevelCompleted : MonoBehaviour
             Debug.Log("Saved as " + PlayerPrefs.GetInt("Lv" + LevelIndex, starsNum));
         }
     }
+    
+    
 
     void UpdateCoinText(int value){
         CoinText.text = $"{value}";
