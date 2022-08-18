@@ -1692,6 +1692,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: TimeLineHandler, Assembly-CSharp
+        m_MethodName: ResetTimelineActive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2002920839737705412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4274,6 +4286,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: TimeLineHandler, Assembly-CSharp
+        m_MethodName: ResetTimelineActive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6092907396048537525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6325,11 +6349,16 @@ PrefabInstance:
     - target: {fileID: 6260811574684852435, guid: 9028c8e81c300a64aaded3c0f94edee4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6260811574684852435, guid: 9028c8e81c300a64aaded3c0f94edee4,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260811574684852435, guid: 9028c8e81c300a64aaded3c0f94edee4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6260811574684852435, guid: 9028c8e81c300a64aaded3c0f94edee4,
@@ -6344,8 +6373,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6260811574684852435, guid: 9028c8e81c300a64aaded3c0f94edee4,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260811574684852435, guid: 9028c8e81c300a64aaded3c0f94edee4,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_MethodName
       value: ResumeTimer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260811574684852435, guid: 9028c8e81c300a64aaded3c0f94edee4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_MethodName
+      value: ResetTimelineActive
       objectReference: {fileID: 0}
     - target: {fileID: 6260811574684852435, guid: 9028c8e81c300a64aaded3c0f94edee4,
         type: 3}
@@ -6354,7 +6393,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6260811574684852435, guid: 9028c8e81c300a64aaded3c0f94edee4,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_TargetAssemblyTypeName
+      value: TimeLineHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260811574684852435, guid: 9028c8e81c300a64aaded3c0f94edee4,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260811574684852435, guid: 9028c8e81c300a64aaded3c0f94edee4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6260811575137809482, guid: 9028c8e81c300a64aaded3c0f94edee4,
