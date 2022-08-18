@@ -76,7 +76,7 @@ Broken Strings when purchased or downloaded through the Services, is licensed to
 
   
 
-Broken Strings ('**Licensed Application**') is a piece of software created to Mobile phone game made for a school project — and customised for Android mobile devices ('**D****evices**'). It is used to Play it for enjoyment.
+Broken Strings ('**Licensed Application**') is a piece of software created to Mobile phone game made for a school project — and customised for Android mobile devices ('**Devices**'). It is used to Play it for enjoyment.
 
   
 
