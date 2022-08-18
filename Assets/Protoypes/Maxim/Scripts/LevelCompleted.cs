@@ -1,4 +1,3 @@
-using System;
 using Entity;
 using TMPro;
 using UnityEngine;
@@ -24,7 +23,7 @@ public class LevelCompleted : MonoBehaviour
     public bool PauseTimer;
 
 
-    private void Awake() => PauseTimer = false;
+    private void Awake() => PauseTimer = true;
 
     private void Update()
     {
