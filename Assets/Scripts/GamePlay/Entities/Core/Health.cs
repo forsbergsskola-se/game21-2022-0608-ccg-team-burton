@@ -37,13 +37,16 @@ namespace Entity
             _itemCollector = FindObjectOfType<ItemCollector>();
 
             _animator = GetComponent<Animator>();
-
         }
 
         private void Start()
         {
             var equipmentHealthModifier = PlayerPrefs.GetFloat("buequipment.chest.attributevalue") + PlayerPrefs.GetFloat("gems.greengem.bonusid");
-            CurrentHealth = _health+(int)equipmentHealthModifier;
+            CurrentHealth = _health;
+            if (gameObject.CompareTag("Player"))
+            {
+                CurrentHealth += (int)equipmentHealthModifier;
+            }
             OnHealthChanged?.Invoke(CurrentHealth);
         }
 

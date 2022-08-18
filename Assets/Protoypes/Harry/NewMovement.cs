@@ -132,7 +132,15 @@ namespace Protoypes.Harry
 
         private void CalculateWalking()
         {
-            var equipmentSpeedModifier = 1+(PlayerPrefs.GetFloat("buequipment.legs.attributevalue")/100)+(PlayerPrefs.GetFloat("gems.bluegem.bonusid")/100);
+            var equipmentSpeedModifier = 1f;
+            if (gameObject.CompareTag("Player"))
+            {
+                equipmentSpeedModifier = 1+(PlayerPrefs.GetFloat("buequipment.legs.attributevalue")/100)+(PlayerPrefs.GetFloat("gems.bluegem.bonusid")/100);
+
+            }
+
+            Debug.Log($"GameObject: {gameObject.name} speed: {equipmentSpeedModifier}");
+            
             if (_walkCommand != 0 || _horizontal != 0) 
             {
                 if (_horizontal is > 0 or < 0)
