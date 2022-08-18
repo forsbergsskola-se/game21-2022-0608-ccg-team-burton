@@ -123,83 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &273141869
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 2
-    m_TransformParent: {fileID: 8188770375034683488}
-    m_Modifications:
-    - target: {fileID: 3329455862177663425, guid: 44a470895e9f6b44f95e42f33035b6d2,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3329455862177663425, guid: 44a470895e9f6b44f95e42f33035b6d2,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2787
-      objectReference: {fileID: 0}
-    - target: {fileID: 3329455862177663425, guid: 44a470895e9f6b44f95e42f33035b6d2,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1408
-      objectReference: {fileID: 0}
-    - target: {fileID: 3329455862177663425, guid: 44a470895e9f6b44f95e42f33035b6d2,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.32485
-      objectReference: {fileID: 0}
-    - target: {fileID: 3329455862177663425, guid: 44a470895e9f6b44f95e42f33035b6d2,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3329455862177663425, guid: 44a470895e9f6b44f95e42f33035b6d2,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3329455862177663425, guid: 44a470895e9f6b44f95e42f33035b6d2,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3329455862177663425, guid: 44a470895e9f6b44f95e42f33035b6d2,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3329455862177663425, guid: 44a470895e9f6b44f95e42f33035b6d2,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3329455862177663425, guid: 44a470895e9f6b44f95e42f33035b6d2,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3329455862177663425, guid: 44a470895e9f6b44f95e42f33035b6d2,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3329455862177663427, guid: 44a470895e9f6b44f95e42f33035b6d2,
-        type: 3}
-      propertyPath: m_Name
-      value: DailyRewardManager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_AddedGameObjects: []
-  m_SourcePrefab: {fileID: 100100000, guid: 44a470895e9f6b44f95e42f33035b6d2, type: 3}
---- !u!4 &273141870 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3329455862177663425, guid: 44a470895e9f6b44f95e42f33035b6d2,
-    type: 3}
-  m_PrefabInstance: {fileID: 273141869}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &882015593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,21 +1196,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 8188770375977295125, guid: 1c9a3b07db90ccc4985c681aa62b3ec8,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 273141870}
     - targetCorrespondingSourceObject: {fileID: 1326428408, guid: 1c9a3b07db90ccc4985c681aa62b3ec8,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1484955432}
   m_SourcePrefab: {fileID: 100100000, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
---- !u!224 &8188770375034683488 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8188770375977295125, guid: 1c9a3b07db90ccc4985c681aa62b3ec8,
-    type: 3}
-  m_PrefabInstance: {fileID: 8188770375034683487}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8188770375034683489 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1326428408, guid: 1c9a3b07db90ccc4985c681aa62b3ec8,
