@@ -1,4 +1,6 @@
+using System.Collections;
 using Entity;
+using Protoypes.Harry;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +15,8 @@ public class LevelCompleted : MonoBehaviour
     public Image[] Stars;
     public Health PlayerHealth;
     public ItemCollector ItemCollector;
+    public GameObject LevelCompletedAnim;
+    public float WaitTime = 0.5f;
    
     private int _coinBonus = 0;
     public float GoalTime;
@@ -46,26 +50,35 @@ public class LevelCompleted : MonoBehaviour
         {
             PauseTimer = true;
             ItemCollector._coinCounter += _coinBonus;
-            
-            WinScreen.SetActive(true);
-            
-            StarsAchieved();
-            ShowStars();
-            UpdateCoinText(currentCoins);
-            UpdateBonusCoinsText(_coinBonus);
-            SaveStars(CurrentStarsNum);
-            collision.gameObject.SetActive(false); //disables the player
-            
-            currentCoins += _coinBonus;
-            UpdateTotalCoinText(currentCoins);
-            
-            //Save coins to inventory
-            PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(),
-                PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) + currentCoins);
-
-            Debug.Log(currentCoins);
+            //WinScreen.SetActive(true);
+            LevelCompletedAnim.SetActive(true);
+            StartCoroutine(WinGameLogic(currentCoins));
         }
     }
+
+    
+
+    private IEnumerator WinGameLogic(int currentCoins)
+    {
+        yield return new WaitForSecondsRealtime(WaitTime);
+
+        StarsAchieved();
+        ShowStars();
+        UpdateCoinText(currentCoins);
+        UpdateBonusCoinsText(_coinBonus);
+        SaveStars(CurrentStarsNum);
+        FindObjectOfType<NewMovement>().gameObject.GetComponent<NewMovement>().enabled = false;
+        currentCoins += _coinBonus;
+        UpdateTotalCoinText(currentCoins);
+            
+        //Save coins to inventory
+        PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(),
+            PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) + currentCoins);
+
+        Debug.Log(currentCoins);
+    }
+    
+    
 
     private void DisplayTimer()
     {
