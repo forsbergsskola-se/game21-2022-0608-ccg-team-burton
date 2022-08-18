@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,10 +12,16 @@ public class UnlockLevel : MonoBehaviour
     public Image[] Stars;
 
     public Sprite fullStar;
-    
+
+
     private void Start()
     {
         _levelButton = GetComponent<Button>();
+
+    }
+
+    private void Update()
+    {
 
         UpdateLevelImage(); 
         UpdateLevelStatus();
