@@ -11,6 +11,7 @@ public class LevelCompleted : MonoBehaviour
     public TextMeshProUGUI CoinText;
     public GameObject WinScreen;
     public Image[] Stars;
+    public Sprite Star;
     public Health PlayerHealth;
     public ItemCollector ItemCollector;
     private int _coinBonus = 0;
@@ -56,6 +57,7 @@ public class LevelCompleted : MonoBehaviour
 
 
             StarsAchieved();
+            ShowStars();
             UpdateCoinText(currentCoins);
             UpdateTotalCoinText(currentCoins);
             UpdateBonusCoinsText(bonusCoins);
@@ -87,7 +89,7 @@ public class LevelCompleted : MonoBehaviour
         }
 
         var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        Debug.Log(enemies.Length);
+        Debug.Log(enemies.Length + " Left to kill");
 
         if (enemies.Length <= 0)
         {
@@ -108,17 +110,29 @@ public class LevelCompleted : MonoBehaviour
         }
     }
 
-    // void ShowStarsOnComplete(int starsNum)
-    // {
-    //     CurrentStarsNum = starsNum;
-    //
-    //     foreach (var  in CurrentStarsNum)
-    //     {
-    //         
-    //     }
-    //     
-    //     
-    // }
+    void ShowStars()
+    {
+        var starsNum = CurrentStarsNum;
+
+        if (starsNum == 1)
+        {
+
+            Stars[0].enabled = true;
+            Debug.Log(starsNum);
+        }
+        else if (starsNum == 2)
+        {
+            Stars[0].enabled = true;
+            Stars[1].enabled = true;
+        }
+        else if (starsNum == 3)
+        {
+            Stars[0].enabled = true;
+            Stars[1].enabled = true;
+            Stars[2].enabled = true;
+        }
+        Debug.Log("CurrentStars: " + CurrentStarsNum);
+    }
 
     void UpdateCoinText(int value){
         CoinText.text = $"{value}";
