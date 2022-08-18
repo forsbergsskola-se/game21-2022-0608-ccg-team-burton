@@ -123,6 +123,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &179187477 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 325576134098800364, guid: a1c8370e12db17a4fa07575f3b214c1b,
+    type: 3}
+  m_PrefabInstance: {fileID: 743009210}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &554859815
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -368,6 +374,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Intro Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6901190075868195650, guid: a1c8370e12db17a4fa07575f3b214c1b,
+        type: 3}
+      propertyPath: Anim
+      value: 
+      objectReference: {fileID: 179187477}
+    - target: {fileID: 6901190075868195650, guid: a1c8370e12db17a4fa07575f3b214c1b,
+        type: 3}
+      propertyPath: Menu
+      value: 
+      objectReference: {fileID: 705780628}
     - target: {fileID: 6901190075868195650, guid: a1c8370e12db17a4fa07575f3b214c1b,
         type: 3}
       propertyPath: CreditsMenu
