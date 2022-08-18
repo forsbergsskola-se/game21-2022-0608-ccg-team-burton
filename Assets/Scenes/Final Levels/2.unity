@@ -843,6 +843,11 @@ PrefabInstance:
       objectReference: {fileID: 855866161}
     - target: {fileID: 2604721245304753354, guid: 52249ec9a916f48269f6b7adee2d72a5,
         type: 3}
+      propertyPath: GoalTime
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 2604721245304753354, guid: 52249ec9a916f48269f6b7adee2d72a5,
+        type: 3}
       propertyPath: TextTimer
       value: 
       objectReference: {fileID: 1878046}
@@ -871,6 +876,31 @@ PrefabInstance:
       propertyPath: TotalCoinText
       value: 
       objectReference: {fileID: 855866160}
+    - target: {fileID: 2604721245304753354, guid: 52249ec9a916f48269f6b7adee2d72a5,
+        type: 3}
+      propertyPath: BonusCoinsText
+      value: 
+      objectReference: {fileID: 2106432209}
+    - target: {fileID: 2604721245304753354, guid: 52249ec9a916f48269f6b7adee2d72a5,
+        type: 3}
+      propertyPath: Stars.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2604721245304753354, guid: 52249ec9a916f48269f6b7adee2d72a5,
+        type: 3}
+      propertyPath: Stars.Array.data[0]
+      value: 
+      objectReference: {fileID: 374904351}
+    - target: {fileID: 2604721245304753354, guid: 52249ec9a916f48269f6b7adee2d72a5,
+        type: 3}
+      propertyPath: Stars.Array.data[1]
+      value: 
+      objectReference: {fileID: 374904350}
+    - target: {fileID: 2604721245304753354, guid: 52249ec9a916f48269f6b7adee2d72a5,
+        type: 3}
+      propertyPath: Stars.Array.data[2]
+      value: 
+      objectReference: {fileID: 374904349}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 52249ec9a916f48269f6b7adee2d72a5, type: 3}
@@ -1529,6 +1559,42 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 355740795}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &374904349 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4939079197889894604, guid: 017552a38a6d0df448d65fee96f65c91,
+    type: 3}
+  m_PrefabInstance: {fileID: 855866159}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &374904350 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4939079198463102160, guid: 017552a38a6d0df448d65fee96f65c91,
+    type: 3}
+  m_PrefabInstance: {fileID: 855866159}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &374904351 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2002920839842213972, guid: 017552a38a6d0df448d65fee96f65c91,
+    type: 3}
+  m_PrefabInstance: {fileID: 855866159}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &380465649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15933,6 +15999,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &2106432209 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2002920839901797347, guid: 017552a38a6d0df448d65fee96f65c91,
+    type: 3}
+  m_PrefabInstance: {fileID: 855866159}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2116568191
 PrefabInstance:
   m_ObjectHideFlags: 0
