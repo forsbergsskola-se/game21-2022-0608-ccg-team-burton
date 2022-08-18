@@ -20,9 +20,6 @@ public class BehaviourTreeRunner : MonoBehaviour
     
     [Header("Ranged Specific")]
     [SerializeField, Range(0.5f, 20)]private float projectileLifespan;
-    
-    [SerializeField] private PolygonCollider2D[] colliders;
-    private int currentColliderIndex = 0;
 
     void Start()
     {
