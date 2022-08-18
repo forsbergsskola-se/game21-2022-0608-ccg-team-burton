@@ -1,3 +1,4 @@
+using FMODUnity;
 using GamePlay.Entities.Movement;
 using GamePlay.Entities.Player;
 using UnityEngine;
@@ -56,6 +57,7 @@ namespace Protoypes.Harry
             [Header("BOUNCING")]
         public float BounceHeight = 25;
         public float SuperBounceHeight = 40;
+        [SerializeField] private EventReference _mushroomJumpSound;
 
         //Inputs
         private float _walkCommand;
@@ -71,7 +73,8 @@ namespace Protoypes.Harry
         private bool _leftWallHit;
         private bool _rightWallHit;
 
-
+        //Sound
+        [SerializeField] private PlayOneShotSound _oneshotSoundPlayer;
         private void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
@@ -194,10 +197,15 @@ namespace Protoypes.Harry
         private void CheckForBouncing()
         {
             if (_isBouncing)
+            {
                 _currentVerticalSpeed = BounceHeight;
+                _oneshotSoundPlayer.PlaySound(_mushroomJumpSound);                
+            }
 
             if (!_isSuperBouncing) return;
             _currentVerticalSpeed = SuperBounceHeight;
+            _oneshotSoundPlayer.PlaySound(_mushroomJumpSound);                
+
         }
 
         
