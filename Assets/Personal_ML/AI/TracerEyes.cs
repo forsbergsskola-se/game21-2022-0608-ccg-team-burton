@@ -150,8 +150,7 @@ public class TracerEyes : MonoBehaviour
         if (wallTrace) compoundActions |= CompoundActions.WallSeen;
         else compoundActions &= ~CompoundActions.WallSeen;
         var pos = transform.position;
-       // Debug.Log(compoundActions);
-        
+
         if (compoundActions.HasFlag(CompoundActions.WallSeen))
         {
             var right = transform.right;
