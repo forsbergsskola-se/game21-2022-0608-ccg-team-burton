@@ -44,6 +44,7 @@ public class LevelCompleted : MonoBehaviour
 
         if (collision.CompareTag("Player"))
         {
+            PauseTimer = true;
             ItemCollector._coinCounter += _coinBonus;
             
             WinScreen.SetActive(true);
