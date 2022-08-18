@@ -888,6 +888,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2604721245304753354, guid: 52249ec9a916f48269f6b7adee2d72a5,
         type: 3}
+      propertyPath: LevelCompletedAnim
+      value: 
+      objectReference: {fileID: 1344589748}
+    - target: {fileID: 2604721245304753354, guid: 52249ec9a916f48269f6b7adee2d72a5,
+        type: 3}
       propertyPath: Stars.Array.data[0]
       value: 
       objectReference: {fileID: 374904351}
@@ -13920,6 +13925,12 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1344589748 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2114129520, guid: 017552a38a6d0df448d65fee96f65c91,
+    type: 3}
+  m_PrefabInstance: {fileID: 855866159}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1416654881
 GameObject:
   m_ObjectHideFlags: 0
