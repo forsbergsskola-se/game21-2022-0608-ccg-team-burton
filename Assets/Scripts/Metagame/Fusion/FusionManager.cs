@@ -42,7 +42,7 @@ public class FusionManager : MonoBehaviour
         } 
         else if (equipmentData.ID.Contains("weapon"))
         {
-            var newAttributeValue = 10 + (int) GetCurrentRarity(equipmentData)*equipmentData.AttributeUpgradeStepSize;
+            var newAttributeValue = equipmentData.AttributeValue + (int) GetCurrentRarity(equipmentData)*equipmentData.AttributeUpgradeStepSize;
             PlayerPrefs.SetFloat(equipmentData.AttributeValueID, newAttributeValue);
         }
     }

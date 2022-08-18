@@ -139,8 +139,6 @@ namespace Protoypes.Harry
 
             }
 
-            Debug.Log($"GameObject: {gameObject.name} speed: {equipmentSpeedModifier}");
-            
             if (_walkCommand != 0 || _horizontal != 0) 
             {
                 if (_horizontal is > 0 or < 0)
