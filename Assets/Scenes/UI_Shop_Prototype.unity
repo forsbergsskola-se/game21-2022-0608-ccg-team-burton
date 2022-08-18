@@ -261,6 +261,7 @@ MonoBehaviour:
   _buttonsRecivedText: {fileID: 1617906498}
   _coinsUIText: {fileID: 2108242223}
   _buttonsUIText: {fileID: 1887524496}
+  _oneShotSound: {fileID: 35780852}
 --- !u!114 &35780849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,18 +309,6 @@ MonoBehaviour:
       - m_Target: {fileID: 35780848}
         m_TargetAssemblyTypeName: CurrencyExchange, Assembly-CSharp
         m_MethodName: ExchangeCoinsForButtons
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 35780852}
-        m_TargetAssemblyTypeName: PlayOneShotSound, Assembly-CSharp
-        m_MethodName: PlaySound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1582,18 +1571,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1142860362}
-        m_TargetAssemblyTypeName: PlayOneShotSound, Assembly-CSharp
-        m_MethodName: PlaySound
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1142860359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1650,6 +1627,7 @@ MonoBehaviour:
   _buttonsRecivedText: {fileID: 2007755367}
   _coinsUIText: {fileID: 2108242223}
   _buttonsUIText: {fileID: 1887524496}
+  _oneShotSound: {fileID: 1142860362}
 --- !u!114 &1142860362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2453,6 +2431,7 @@ MonoBehaviour:
   _buttonsRecivedText: {fileID: 949990878}
   _coinsUIText: {fileID: 2108242223}
   _buttonsUIText: {fileID: 1887524496}
+  _oneShotSound: {fileID: 1450438349}
 --- !u!114 &1450438346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2500,18 +2479,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1450438345}
         m_TargetAssemblyTypeName: CurrencyExchange, Assembly-CSharp
         m_MethodName: ExchangeCoinsForButtons
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1450438349}
-        m_TargetAssemblyTypeName: PlayOneShotSound, Assembly-CSharp
-        m_MethodName: PlaySound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

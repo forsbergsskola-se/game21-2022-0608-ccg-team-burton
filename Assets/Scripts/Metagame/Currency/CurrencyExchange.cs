@@ -1,3 +1,4 @@
+using FMODUnity;
 using TMPro;
 using UnityEngine;
 
@@ -10,6 +11,9 @@ public class CurrencyExchange : MonoBehaviour
     [SerializeField] private TMP_Text _buttonsRecivedText;
     [SerializeField] private TMP_Text _coinsUIText;
     [SerializeField] private TMP_Text _buttonsUIText;
+
+    [SerializeField] private PlayOneShotSound _oneShotSound;
+    
 
     private void Start()
     {
@@ -30,6 +34,7 @@ public class CurrencyExchange : MonoBehaviour
         _coinsUIText.SetText(PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()).ToString());
         _buttonsUIText.SetText(PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentButtons.ToString()).ToString());
         
+        _oneShotSound.PlaySound();
         
     }
     
