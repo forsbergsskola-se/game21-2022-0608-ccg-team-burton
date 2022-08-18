@@ -107,8 +107,18 @@ public class LevelCompleted : MonoBehaviour
             Debug.Log("Saved as " + PlayerPrefs.GetInt("Lv" + LevelIndex, starsNum));
         }
     }
-    
-    
+
+    // void ShowStarsOnComplete(int starsNum)
+    // {
+    //     CurrentStarsNum = starsNum;
+    //
+    //     foreach (var  in CurrentStarsNum)
+    //     {
+    //         
+    //     }
+    //     
+    //     
+    // }
 
     void UpdateCoinText(int value){
         CoinText.text = $"{value}";
