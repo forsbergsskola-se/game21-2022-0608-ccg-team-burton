@@ -73,7 +73,6 @@ namespace NewGraph.NodeTypes.ActionNodes
             {
                 if (!comp.HasFlag(CompoundActions.LowerGroundSeen))
                 {
-                    Debug.Log("no lower ground");
                     return State.Success;
                 }    
             }
@@ -81,7 +80,6 @@ namespace NewGraph.NodeTypes.ActionNodes
             //if (comp.HasFlag(CompoundActions.HigherGroundSeen))return State.Success;
             if (ArrivedAtTarget())
             {
-                Debug.Log("target reached");
                 agent.enemyEyes.compoundActions |= CompoundActions.ArrivedAtTarget;
                 return State.Success;
             }

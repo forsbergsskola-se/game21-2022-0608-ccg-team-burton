@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GemLevelInventoryManager : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class GemLevelInventoryManager : MonoBehaviour
     [HideInInspector]public int LevelSlotIndex = 0;
 
 
- //Private fields
+    //Private fields
 
     [SerializeField] private SceneLoader _sceneLoader;
     [SerializeField] private GameObject[] _levelSlots;
@@ -24,12 +23,10 @@ public class GemLevelInventoryManager : MonoBehaviour
     [SerializeField] private TMP_Text _hPBonusText;
     [SerializeField] private TMP_Text _moveSpeedBonusText;
     [SerializeField] private TMP_Text _coinsCostText;
-    [SerializeField] private TMP_Text _startLevelText;
-    [SerializeField] private Image[] _startButtonImages;
     [SerializeField] private PlayOneShotSound _oneShotSound;
     private List<GameObject> _currentItemsInInventory = new();
     private GameObject[] _currentSlottedGems;
-    private int LevelStartCost;
+    private int _levelStartCost;
     private float _calcAtkBonus;
     private float  _calcHPBonus;
     private float _calcMoveSpeedBonus;
@@ -42,7 +39,6 @@ public class GemLevelInventoryManager : MonoBehaviour
     private void OnEnable()
     {
         LoadGemsFromInventory();   
-
     }
 
     public void LoadGemsFromInventory()
@@ -83,10 +79,8 @@ public class GemLevelInventoryManager : MonoBehaviour
 
     public void SlotGemInLevel(MaterialItem gem)
     {
-        
         if (!FreeSlotExist())
             return;
-
 
         var gemInSlot = Instantiate(_inventoryItem, Vector2.zero, Quaternion.identity);
         for (var i = 0; i < _levelSlots.Length; i++)
@@ -95,13 +89,13 @@ public class GemLevelInventoryManager : MonoBehaviour
             LevelSlotIndex = i;
             break;
         }
-        _currentSlottedGems[LevelSlotIndex] = gemInSlot;
         
+        _currentSlottedGems[LevelSlotIndex] = gemInSlot;
         gemInSlot.transform.position = _levelSlots[LevelSlotIndex].transform.position;
         gemInSlot.GetComponent<LevelGemSlot>().SetItemSlot(gem);
         gemInSlot.GetComponentInChildren<TMP_Text>().SetText("");
         gemInSlot.transform.parent = _levelSlotParentTransform;
-CalculateCoinCost();
+        CalculateCoinCost();
         
         LoadGemsFromInventory();
         CalculateBonuses(gem, false);
@@ -115,50 +109,37 @@ CalculateCoinCost();
         CalculateCoinCost();
     }
 
-    public void CalculateCoinCost()
+    private void CalculateCoinCost()
     {
         foreach (var slottedGem in _currentSlottedGems)
         {
             if (slottedGem != null)
             {
-                LevelStartCost = 500;
+                _levelStartCost = 500;
                 break;
             }
-            LevelStartCost = 0;
-
+            _levelStartCost = 0;
         }
 
-        UpdateCoinText(LevelStartCost);
+        UpdateCoinText(_levelStartCost);
     }
 
     private void UpdateCoinText(int cost)
     {
-        _coinsCostText.SetText(LevelStartCost+" Coins");
+        _coinsCostText.SetText(_levelStartCost+" Coins");
         if (!AffordLevelStart())
         {
             _coinsCostText.color = Color.red;
-            // var disabledColor = new Color(166, 166, 166);
-            //
-            // _startLevelText.color = disabledColor;
-            // foreach (var startButtonImage in _startButtonImages)
-            // {
-            //     startButtonImage.color = disabledColor;
-            // }
         }
         else
         {
             _coinsCostText.color = Color.white;
-            // foreach (var startButtonImage in _startButtonImages)
-            // {
-            //     startButtonImage.color = Color.white;
-            // }
-            
         }
     }
 
-    public bool AffordLevelStart()
+    private bool AffordLevelStart()
     {
-        return PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) >= LevelStartCost;
+        return PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) >= _levelStartCost;
     }
 
 
@@ -190,7 +171,6 @@ CalculateCoinCost();
             }
             
             UpdateBonusTexts(_calcAtkBonus,_calcHPBonus,_calcMoveSpeedBonus);
-        
     }
 
     private void UpdateBonusTexts(float atkBonus, float hPBonus, float moveSpeedBonus)
@@ -200,7 +180,7 @@ CalculateCoinCost();
         _moveSpeedBonusText.SetText("Speed bonus: " +moveSpeedBonus);
     }
 
-    public void ClearSlottedGemFromArray(GameObject slottedGem)
+    private void ClearSlottedGemFromArray(GameObject slottedGem)
     {
         for (int i = 0; i < _currentSlottedGems.Length; i++)
         {
@@ -218,13 +198,13 @@ CalculateCoinCost();
     
     private void OnDisable()
     {
-        LevelStartCost = 0;
+        _levelStartCost = 0;
         LevelSlotIndex = 0;
         _calcHPBonus = 0;
         _calcAtkBonus = 0;
         _calcMoveSpeedBonus = 0;
         UpdateBonusTexts(_calcAtkBonus,_calcHPBonus,_calcMoveSpeedBonus);
-        UpdateCoinText(LevelStartCost);
+        UpdateCoinText(_levelStartCost);
 
     }
 
@@ -235,25 +215,14 @@ CalculateCoinCost();
             if (slottedGem== null)
                 continue;
             
-            
             var slottedGemData = slottedGem.GetComponent<LevelGemSlot>()._item;
             PlayerPrefs.SetFloat(slottedGemData.LevelBonusID, PlayerPrefs.GetFloat(slottedGemData.LevelBonusID)+slottedGemData.LevelBonus);
             PlayerPrefs.SetInt(slottedGemData.GetItemID(), PlayerPrefs.GetInt(slottedGemData.GetItemID()) -1);
-
-
         }
 
-        if (PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) >= LevelStartCost)
-        {
-            PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) - LevelStartCost);
+        if (PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) < _levelStartCost) return;
         
-        
-            _sceneLoader.LoadScene(); 
-        }
-        else
-        {
-            Debug.Log("NO CASH MONEY");
-        }
-
+        PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) - _levelStartCost);
+        _sceneLoader.LoadScene();
     }
 }

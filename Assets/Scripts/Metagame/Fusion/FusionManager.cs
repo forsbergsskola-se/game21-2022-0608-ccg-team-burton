@@ -12,12 +12,12 @@ public class FusionManager : MonoBehaviour
         if (PlayerPrefs.GetInt(PlayerPrefsKeys.NeededUpgradeMaterial.ToString()) > PlayerPrefs.GetInt(upgradeMaterial.GetItemID()))
             return;
         
-            CalculateNewMaterialBalance(upgradeMaterial);
-            UpgradeRarity(equipmentData);
+        CalculateNewMaterialBalance(upgradeMaterial);
+        UpgradeRarity(equipmentData);
 
-            UpgradeAttribute(equipmentData);
+        UpgradeAttribute(equipmentData);
             
-            _soundOneShot.PlayStackingSound(equipmentData.SoundFile);
+        _soundOneShot.PlayStackingSound(equipmentData.SoundFile);
     }
 
     private void UpgradeAttribute(EquipmentSO equipmentData)
