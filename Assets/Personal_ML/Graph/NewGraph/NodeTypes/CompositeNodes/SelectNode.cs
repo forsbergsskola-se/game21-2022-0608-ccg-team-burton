@@ -27,7 +27,7 @@ public class SelectNode : CompositeNode
     private void CheckOptions()
     {
         var comp = agent.enemyEyes.compoundActions;
-        Debug.Log(comp);
+       // Debug.Log(comp);
         
         if (comp.HasFlag(CompoundActions.EnemyDead))
         {
@@ -52,24 +52,19 @@ public class SelectNode : CompositeNode
 
             else if (!comp.HasFlag(CompoundActions.PlayerNoticed) && comp.HasFlag(CompoundActions.WallSeen))
             {
-                Debug.Log("wall seen");
-                
                 if (comp.HasFlag(CompoundActions.HigherGroundSeen))
                 {
                     currentCommand = CurrentCommand.Jump;
                     agent.enemyEyes.compoundActions &= ~CompoundActions.HigherGroundSeen;
-                    Debug.Log("higher ground seen");
                 }
                 
-                if (comp.HasFlag(CompoundActions.ArrivedAtTarget))
+                else if (comp.HasFlag(CompoundActions.ArrivedAtTarget))
                 {
-                    Debug.Log("arrived at target");
                     agent.enemyEyes.compoundActions &= ~CompoundActions.ArrivedAtTarget;
                     GetTarget();
                 }
                 else
                 {
-                    Debug.Log("other");
                     GetTarget();
                 }
             }
@@ -80,18 +75,15 @@ public class SelectNode : CompositeNode
                 {
                     currentCommand = CurrentCommand.Jump;
                     agent.enemyEyes.compoundActions &= ~CompoundActions.HigherGroundSeen;
-                    Debug.Log("higher ground seen");
                 }
                 
                 if (comp.HasFlag(CompoundActions.ArrivedAtTarget))
                 {
-                    Debug.Log("arrived at target");
                     agent.enemyEyes.compoundActions &= ~CompoundActions.ArrivedAtTarget;
                     GetTarget();
                 }
                 else
                 {
-                    Debug.Log("other");
                     GetTarget();
                 }
                 
@@ -197,7 +189,6 @@ public class SelectNode : CompositeNode
 
             case State.Success:
                 _choiceMade = false;
-                Debug.Log("exit node");
                 CheckOptions();
                 break;
         }

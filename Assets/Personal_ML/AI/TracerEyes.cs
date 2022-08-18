@@ -44,7 +44,7 @@ public class TracerEyes : MonoBehaviour
     [Header("Eye values")]
     [SerializeField] public float pursueDistance;
     [SerializeField] public Vector2 traceSize;
-    [SerializeField, Range(0.2f, 1.5f)]private float traceInterval = 0.4f;
+    [SerializeField, Range(0.01f, 1.5f)]private float traceInterval = 0.4f;
     [SerializeField] private EnemyType enemyType;
     [SerializeField] private CapsuleCollider2D _collider2D;
 
@@ -67,6 +67,7 @@ public class TracerEyes : MonoBehaviour
     [HideInInspector] public CompoundActions compoundActions;
     [HideInInspector] public float distanceToWall;
     [HideInInspector] public bool lockGroundTrace;
+    [HideInInspector] public Vector2 estimatedJumpForce;
     
     private int _maxHealth;
     private void Awake()
@@ -163,9 +164,10 @@ public class TracerEyes : MonoBehaviour
                 
                 if (some != null)
                 {
-                    Debug.Log(some.start);
-                    if (Mathf.Abs(some.start.y - pos.y) < 4)
+                    var diff = Mathf.Abs(some.start.y - pos.y); 
+                    if (diff < 4)
                     {
+                        estimatedJumpForce = new Vector2( 10, 10 + diff * 2);
                         compoundActions |= CompoundActions.HigherGroundSeen;
                     }
                     else
