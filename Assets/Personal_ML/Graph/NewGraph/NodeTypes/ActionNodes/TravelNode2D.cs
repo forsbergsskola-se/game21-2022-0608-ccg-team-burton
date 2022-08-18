@@ -7,9 +7,11 @@ namespace NewGraph.NodeTypes.ActionNodes
         public float waitForExit;
         public float waitForTurn;
         public bool canTurn;
-        
+        private WalkableGround _currentGround;
+
         public override void OnStart()
         {
+            _currentGround = agent.grid.GetCurrentGround(agent.enemyTransform.position);
             agent.anim.SetBool(Animator.StringToHash("Enemy_Walk"), true);
             waitForExit = 0;
             canTurn = true;
@@ -42,7 +44,13 @@ namespace NewGraph.NodeTypes.ActionNodes
         {
             return Vector3.Distance(agent.attackPointTrans.position, agent.currentDestination) < agent.turnDistance;
         }
-        
+
+        private bool InsideArea()
+        {
+            Vector2 futurePos = agent.attackPointTrans.position 
+                                + new Vector3(agent.enemyTransform.right.x * agent.turnDistance, 0);
+            return agent.grid.IsPointInCube(_currentGround, futurePos);
+        }
 
         public override State OnUpdate()
         {
@@ -78,8 +86,16 @@ namespace NewGraph.NodeTypes.ActionNodes
             }
             if (comp.HasFlag(CompoundActions.PlayerInAttackRange))return State.Success;
             //if (comp.HasFlag(CompoundActions.HigherGroundSeen))return State.Success;
+            if (!InsideArea())
+            {
+                Debug.Log($"arrived at target: {agent.enemyTransform.name}");
+                agent.enemyEyes.compoundActions |= CompoundActions.ArrivedAtTarget;
+                return State.Success;
+            }
+            
             if (ArrivedAtTarget())
             {
+                Debug.Log($"arrived at target: {agent.enemyTransform.name}");
                 agent.enemyEyes.compoundActions |= CompoundActions.ArrivedAtTarget;
                 return State.Success;
             }

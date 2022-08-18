@@ -106,6 +106,19 @@ public class LevelGrid : MonoBehaviour
         }
         return null;
     }
+
+    public bool IsPointInCube(WalkableGround ground, Vector2 currentPos)
+    {
+        if (currentPos.x > ground.min.x && currentPos.x < ground.max.x)
+        {
+            if (currentPos.y >= ground.min.y && currentPos.y < ground.max.y)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
     
     public CubeFacts GetSquareFromPoint(Vector2 thePoint)
     {
