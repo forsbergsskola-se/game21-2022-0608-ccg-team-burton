@@ -212,6 +212,7 @@ GameObject:
   - component: {fileID: 35780850}
   - component: {fileID: 35780849}
   - component: {fileID: 35780848}
+  - component: {fileID: 35780852}
   m_Layer: 5
   m_Name: 2500Exchange
   m_TagString: Untagged
@@ -260,6 +261,7 @@ MonoBehaviour:
   _buttonsRecivedText: {fileID: 1617906498}
   _coinsUIText: {fileID: 2108242223}
   _buttonsUIText: {fileID: 1887524496}
+  _oneShotSound: {fileID: 35780852}
 --- !u!114 &35780849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,6 +356,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 35780846}
   m_CullTransparentMesh: 1
+--- !u!114 &35780852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 35780846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f77a58954b299d489d4064d5695f91e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SoundFile:
+    Guid:
+      Data1: 1503992618
+      Data2: 1197633378
+      Data3: 2020082080
+      Data4: 1417607242
+    Path: event:/Game Play/Objects/PickUpCurrency
+  _soundMananger: {fileID: 0}
 --- !u!1 &142322971
 GameObject:
   m_ObjectHideFlags: 0
@@ -1462,6 +1484,7 @@ GameObject:
   - component: {fileID: 1142860359}
   - component: {fileID: 1142860358}
   - component: {fileID: 1142860361}
+  - component: {fileID: 1142860362}
   m_Layer: 5
   m_Name: 1000Exchange
   m_TagString: Untagged
@@ -1604,6 +1627,27 @@ MonoBehaviour:
   _buttonsRecivedText: {fileID: 2007755367}
   _coinsUIText: {fileID: 2108242223}
   _buttonsUIText: {fileID: 1887524496}
+  _oneShotSound: {fileID: 1142860362}
+--- !u!114 &1142860362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142860356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f77a58954b299d489d4064d5695f91e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SoundFile:
+    Guid:
+      Data1: 1503992618
+      Data2: 1197633378
+      Data3: 2020082080
+      Data4: 1417607242
+    Path: event:/Game Play/Objects/PickUpCurrency
+  _soundMananger: {fileID: 0}
 --- !u!1 &1166922899
 GameObject:
   m_ObjectHideFlags: 0
@@ -2338,6 +2382,7 @@ GameObject:
   - component: {fileID: 1450438347}
   - component: {fileID: 1450438346}
   - component: {fileID: 1450438345}
+  - component: {fileID: 1450438349}
   m_Layer: 5
   m_Name: 4000Exchange
   m_TagString: Untagged
@@ -2386,6 +2431,7 @@ MonoBehaviour:
   _buttonsRecivedText: {fileID: 949990878}
   _coinsUIText: {fileID: 2108242223}
   _buttonsUIText: {fileID: 1887524496}
+  _oneShotSound: {fileID: 1450438349}
 --- !u!114 &1450438346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2480,6 +2526,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1450438343}
   m_CullTransparentMesh: 1
+--- !u!114 &1450438349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450438343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f77a58954b299d489d4064d5695f91e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SoundFile:
+    Guid:
+      Data1: 1503992618
+      Data2: 1197633378
+      Data3: 2020082080
+      Data4: 1417607242
+    Path: event:/Game Play/Objects/PickUpCurrency
+  _soundMananger: {fileID: 0}
 --- !u!1 &1485101648
 GameObject:
   m_ObjectHideFlags: 0
