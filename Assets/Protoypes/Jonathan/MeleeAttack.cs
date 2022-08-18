@@ -17,6 +17,16 @@ public class MeleeAttack : MonoBehaviour
 
  }
 
+ private void Start()
+ {
+  var delayModifier =1f;
+  
+  if (gameObject.CompareTag("Player"))
+   delayModifier = 1f + PlayerPrefs.GetFloat("buequipment.head.attributevalue")/100;
+  
+  _attackDelaySec /= delayModifier;
+ }
+
  private void Update()
  {
   if (!_allowAttack) return;
