@@ -1,3 +1,4 @@
+using System;
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
@@ -20,8 +21,6 @@ public class SoundMananger : MonoBehaviour
         DontDestroyOnLoad(this);
 
     }
-
- 
 
     public void SetMusicParam(float val){
         MusicTrack_EventInst.setParameterByName("test", val);

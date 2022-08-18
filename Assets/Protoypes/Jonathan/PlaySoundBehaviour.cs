@@ -11,17 +11,27 @@ public class PlaySoundBehaviour : StateMachineBehaviour
     bool initiated;
 
     public void OnDisable(){
-        _soundMananger.StopSound(_sound);
+        if(_soundMananger != null)
+            _soundMananger.StopSound(_sound);
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex){
-        if (!initiated){
-            _sound = RuntimeManager.CreateInstance(SoundFile);
-            initiated = true;
-        }
+        
 
-        _soundMananger.PlaySound(_sound);
+        if (_soundMananger != null)
+        {
+            if (!initiated){
+                _sound = RuntimeManager.CreateInstance(SoundFile);
+                initiated = true;
+            }
+            _soundMananger.PlaySound(_sound);
+            
+        }
+        else
+        {
+            Debug.Log("No soundmanager present!");
+        }
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -32,7 +42,8 @@ public class PlaySoundBehaviour : StateMachineBehaviour
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex){
-        _soundMananger.StopSound(_sound);
+        if(_soundMananger != null)
+            _soundMananger.StopSound(_sound);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
