@@ -356,6 +356,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: c609f76e853bcc844853bebf2e80259c, type: 3}
+--- !u!1 &1574337106 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5195096, guid: 1c9a3b07db90ccc4985c681aa62b3ec8,
+    type: 3}
+  m_PrefabInstance: {fileID: 8188770375034683487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1574337107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574337106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f77a58954b299d489d4064d5695f91e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SoundFile:
+    Guid:
+      Data1: 1872213622
+      Data2: 1270982975
+      Data3: 1306688649
+      Data4: -1283059612
+    Path: event:/UI/SelectButton3
 --- !u!1 &1651856426
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,6 +728,34 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5195098, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5195098, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5195098, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1574337107}
+    - target: {fileID: 5195098, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5195098, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlaySound
+      objectReference: {fileID: 0}
+    - target: {fileID: 5195098, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: PlayOneShotSound, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5195098, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: Metagame.SettingsHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 326720953, guid: 1c9a3b07db90ccc4985c681aa62b3ec8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
