@@ -17,7 +17,6 @@ public class ThornDamage : MonoBehaviour
         {
             if ((Time.time - _savedTime) > _delayTime)
             {
-                Debug.Log($"{name} dealt damage to {other.gameObject.name}");
                 other.gameObject.GetComponent<IDamageable>().ModifyHealth(-_damage);
             }
         }
