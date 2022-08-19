@@ -141,7 +141,6 @@ PlayerSettings:
   preloadedAssets:
   - {fileID: 11400000, guid: 71d9b036918898345b22f628fb0fc932, type: 2}
   - {fileID: -3942377618458248919, guid: 2d8e978da4d52d944a7f1bf6a50afa01, type: 2}
-  - {fileID: 11400000, guid: 42d0e5d4f74e3e84a829041137c96a80, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -271,7 +270,7 @@ PlayerSettings:
     banner: {fileID: 0}
   androidGamepadSupportLevel: 0
   chromeosInputEmulation: 1
-  AndroidMinifyWithR8: 0
+  AndroidMinifyWithR8: 1
   AndroidMinifyRelease: 1
   AndroidMinifyDebug: 0
   AndroidValidateAppBundleSize: 1
@@ -824,7 +823,8 @@ PlayerSettings:
   scriptingBackend:
     Android: 1
   il2cppCompilerConfiguration: {}
-  il2cppCodeGeneration: {}
+  il2cppCodeGeneration:
+    Android: 1
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}
   suppressCommonWarnings: 1
