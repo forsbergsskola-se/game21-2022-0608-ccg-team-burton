@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -68,11 +69,15 @@ namespace Metagame
         public float RewardSkippedMultiplier;
         #endregion
         
+        private GameObject Goal;
+
+        
         private void Start()
         {
             itemCollector = FindObjectOfType<ItemCollector>().gameObject.GetComponent<ItemCollector>();
             ShowRewardAdButton = GetComponent<Button>();
             _movementButtonsHitboxManager = FindObjectOfType<MovementButtonsHitboxManager>();
+            Goal = GameObject.FindWithTag("Goal");
             
             //if (!Advertisement.isInitialized)
                 InitializeAds();
@@ -88,6 +93,7 @@ namespace Metagame
 
         private void InitializeAds()
         {
+            Goal.SetActive(false);
             // Get the Ad Unit ID for the current platform:
             _placementID = (Application.platform == RuntimePlatform.IPhonePlayer)
                 ? _iOSId
@@ -262,7 +268,7 @@ namespace Metagame
         public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
         {
             itemCollector = FindObjectOfType<ItemCollector>().gameObject.GetComponent<ItemCollector>();
-            Coins = itemCollector._coinCounter;
+            //Coins = itemCollector._coinCounter;
 
             if (placementId == _interstitialID && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
                 CalculateReward(placementId, showCompletionState, "watching", InterstitialMultiplier, InterstitialAmount);
@@ -306,11 +312,13 @@ namespace Metagame
 
         private void RewardPlayerSum(int rewardType)
         {
+            var totalCoins = totalCoinText.text;
+            Coins = Int32.Parse(totalCoins);
+            
             Debug.Log($"Coins before Ad {Coins}");
             Debug.Log($"Total Coins before Ad {PlayerPrefsKeys.CurrentCoins.ToString()}");
 
             Coins += rewardType;
-            coinText.text = $"{Coins}";
             totalCoinText.text = $"{Coins}";
             Debug.Log($"Coins after Ad {Coins}");
             Debug.Log($"Total Coins before Ad {PlayerPrefsKeys.CurrentCoins.ToString()}");
@@ -322,16 +330,17 @@ namespace Metagame
         
         private void RewardPlayerCalc(float rewardType)
         {
+            var totalCoins = totalCoinText.text.Substring(14);
+            Coins = Int32.Parse(totalCoins);
+
             Debug.Log($"Coins before Ad {Coins}");
             Debug.Log($"Total Coins before Ad {PlayerPrefsKeys.CurrentCoins.ToString()}");
             
             var newCoinValue = Mathf.CeilToInt(Coins * rewardType);
-            coinText.text = $"{newCoinValue}";
             totalCoinText.text = $"Total Coins : {newCoinValue}";
             Debug.Log($"Coins after Ad {newCoinValue}");
             var difference = newCoinValue - Coins;
             Debug.Log($"Difference = {difference}");
-            
             PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(), PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) + difference);
         }
     }
