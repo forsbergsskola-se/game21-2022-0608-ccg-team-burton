@@ -1,4 +1,6 @@
+using System.Collections;
 using Entity;
+using Protoypes.Harry;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,16 +10,20 @@ public class LevelCompleted : MonoBehaviour
     public TextMeshProUGUI BonusCoinsText;
     public TextMeshProUGUI TotalCoinText;
     public TextMeshProUGUI CoinText;
+    
     public GameObject WinScreen;
     public Image[] Stars;
     public Health PlayerHealth;
     public ItemCollector ItemCollector;
+    public GameObject LevelCompletedAnim;
+    public float WaitTime = 0.5f;
+   
     private int _coinBonus = 0;
     public float GoalTime;
-    
+
     public int CurrentStarsNum;
     public int LevelIndex;
-    
+
     public TMP_Text TextTimer;
     private float _timer;
     public bool PauseTimer;
@@ -33,36 +39,46 @@ public class LevelCompleted : MonoBehaviour
             _timer += Time.deltaTime;
             DisplayTimer();
         }
-        
+
     }
 
-    void OnTriggerEnter2D(Collider2D collision){
+    void OnTriggerEnter2D(Collider2D collision)
+    {
         var currentCoins = ItemCollector._coinCounter;
-        var bonusCoins = _coinBonus;
 
-        if (collision.CompareTag("Player")){
-            currentCoins += _coinBonus;
-
-            //Save coins to inventory
-            PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(),
-                PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) + currentCoins);
-
-
+        if (collision.CompareTag("Player"))
+        {
+            PauseTimer = true;
             ItemCollector._coinCounter += _coinBonus;
-
-
-            WinScreen.SetActive(true);
-
-
-            StarsAchieved();
-            ShowStars();
-            UpdateCoinText(currentCoins);
-            UpdateTotalCoinText(currentCoins);
-            UpdateBonusCoinsText(bonusCoins);
-            SaveStars(CurrentStarsNum);
-            collision.gameObject.SetActive(false); //disables the player
+            //WinScreen.SetActive(true);
+            LevelCompletedAnim.SetActive(true);
+            StartCoroutine(WinGameLogic(currentCoins));
         }
     }
+
+    
+
+    private IEnumerator WinGameLogic(int currentCoins)
+    {
+        yield return new WaitForSecondsRealtime(WaitTime);
+
+        StarsAchieved();
+        ShowStars();
+        UpdateCoinText(currentCoins);
+        UpdateBonusCoinsText(_coinBonus);
+        SaveStars(CurrentStarsNum);
+        FindObjectOfType<NewMovement>().gameObject.GetComponent<NewMovement>().enabled = false;
+        currentCoins += _coinBonus;
+        UpdateTotalCoinText(currentCoins);
+            
+        //Save coins to inventory
+        PlayerPrefs.SetInt(PlayerPrefsKeys.CurrentCoins.ToString(),
+            PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) + currentCoins);
+
+        Debug.Log(currentCoins);
+    }
+    
+    
 
     private void DisplayTimer()
     {
@@ -71,10 +87,11 @@ public class LevelCompleted : MonoBehaviour
         TextTimer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    void StarsAchieved(){
+    void StarsAchieved()
+    {
         var healthLeft = PlayerHealth.CurrentHealth;
 
-        if (healthLeft >= 6 )
+        if (healthLeft >= 6)
         {
             CurrentStarsNum += 1;
             _coinBonus += 150;
@@ -98,13 +115,14 @@ public class LevelCompleted : MonoBehaviour
 
     }
 
-    void SaveStars(int starsNum){
+    void SaveStars(int starsNum)
+    {
         CurrentStarsNum = starsNum;
 
 
-        if (CurrentStarsNum > PlayerPrefs.GetInt("Lv" + LevelIndex)){
+        if (CurrentStarsNum > PlayerPrefs.GetInt("Lv" + LevelIndex))
+        {
             PlayerPrefs.SetInt("Lv" + LevelIndex, starsNum);
-            Debug.Log("Saved as " + PlayerPrefs.GetInt("Lv" + LevelIndex, starsNum));
         }
     }
 
@@ -114,9 +132,7 @@ public class LevelCompleted : MonoBehaviour
 
         if (starsNum == 1)
         {
-
             Stars[0].enabled = true;
-            Debug.Log(starsNum);
         }
         else if (starsNum == 2)
         {
@@ -129,18 +145,22 @@ public class LevelCompleted : MonoBehaviour
             Stars[1].enabled = true;
             Stars[2].enabled = true;
         }
-        Debug.Log("CurrentStars: " + CurrentStarsNum);
     }
 
-    void UpdateCoinText(int value){
+    void UpdateCoinText(int value)
+    {
         CoinText.text = $"{value}";
     }
 
-    void UpdateTotalCoinText(int value){
+    void UpdateTotalCoinText(int value)
+    {
         TotalCoinText.text = $"Total Coins : {value}";
     }
 
-    void UpdateBonusCoinsText(int value) {
+    void UpdateBonusCoinsText(int value)
+    {
         BonusCoinsText.text = $"Bonus Coins : {value}";
+        Debug.Log(BonusCoinsText.text);
+        Debug.Log("bonus coins = " + _coinBonus);
     }
 }

@@ -272,6 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinText: {fileID: 0}
   coinValue: 1
+  _oneShotSound: {fileID: 4285247507320686622}
   _coinCounter: 0
   CollectCoinSoundFile:
     Guid:
@@ -524,11 +525,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SoundFile:
     Guid:
-      Data1: -1728539902
-      Data2: 1169222615
-      Data3: 591892380
-      Data4: -306102303
-    Path: event:/Game Play/Objects/SpoongJump
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  _soundMananger: {fileID: 0}
 --- !u!1 &7745896864445978379
 GameObject:
   m_ObjectHideFlags: 0

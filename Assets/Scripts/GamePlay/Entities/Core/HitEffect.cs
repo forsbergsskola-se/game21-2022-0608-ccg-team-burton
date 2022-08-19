@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -11,6 +12,9 @@ public class HitEffect : MonoBehaviour{
 
     Vector3 camPosOriginal;
     bool _stopping;
+
+
+    private void Awake() => cam = GameObject.FindGameObjectWithTag("PlayerCamera").transform;
 
     public void TimeStop(){
         if (!_stopping){

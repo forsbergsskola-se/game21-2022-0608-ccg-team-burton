@@ -39,9 +39,18 @@ namespace GamePlay.Entities.Player
         
         private void GatherKeyboardInputs()
         {
+            #if UNITY_EDITOR
             _commandContainer.SpaceDownCommand = Input.GetButton("Jump");
             _commandContainer.ArrowCommand = Input.GetAxisRaw("Horizontal");
             _commandContainer.AttackMouseCommand = Input.GetButton("Fire2");
+
+            #endif
+            
+            #if UNITY_STANDALONE_WIN
+            _commandContainer.SpaceDownCommand = Input.GetButton("Jump");
+            _commandContainer.ArrowCommand = Input.GetAxisRaw("Horizontal");
+            _commandContainer.AttackMouseCommand = Input.GetButton("Fire2");
+            #endif
         }
         
         

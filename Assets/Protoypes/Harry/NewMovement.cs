@@ -199,12 +199,17 @@ namespace Protoypes.Harry
             if (_isBouncing)
             {
                 _currentVerticalSpeed = BounceHeight;
-                _oneshotSoundPlayer.PlaySound(_mushroomJumpSound);                
+                if(!_mushroomJumpSound.IsNull)
+                    _oneshotSoundPlayer.PlaySound(_mushroomJumpSound);                
             }
 
             if (!_isSuperBouncing) return;
             _currentVerticalSpeed = SuperBounceHeight;
-            _oneshotSoundPlayer.PlaySound(_mushroomJumpSound);                
+            
+            if (!_mushroomJumpSound.IsNull)
+            {
+                _oneshotSoundPlayer.PlaySound(_mushroomJumpSound);                
+            }
 
         }
 

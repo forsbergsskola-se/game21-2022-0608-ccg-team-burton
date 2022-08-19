@@ -7,19 +7,18 @@ public class ItemCollector : MonoBehaviour
 {
     [SerializeField] public TextMeshProUGUI coinText;
     [SerializeField] public int coinValue;
+    [SerializeField] PlayOneShotSound _oneShotSound;
+
     [HideInInspector] public int _coinCounter;
-    public EventReference CollectCoinSoundFile;
-    EventInstance _collectCoinSound;
+    [SerializeField] EventReference CollectCoinSoundFile;
 
 
-    SoundMananger _soundManager;
+
 
     void Awake(){
-        _soundManager = FindObjectOfType<SoundMananger>();
     }
 
     void Start(){
-        _collectCoinSound = RuntimeManager.CreateInstance(CollectCoinSoundFile);
         UpdateCoinText(0);
     }
 
@@ -28,7 +27,7 @@ public class ItemCollector : MonoBehaviour
         if (!col.gameObject.CompareTag("Coin")) return;
 
         Destroy(col.gameObject);
-        _soundManager.PlayStackingSound(_collectCoinSound);
+        _oneShotSound.PlayStackingSound(CollectCoinSoundFile);
         _coinCounter += coinValue;
         UpdateCoinText(_coinCounter);
     }

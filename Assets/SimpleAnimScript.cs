@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SimpleAnimScript : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class SimpleAnimScript : MonoBehaviour
     private float _nTime;
 
     private void Awake() => _animator = GetComponent<Animator>();
+    public bool Intro = false;
 
     private void Update()
     {
@@ -19,8 +21,13 @@ public class SimpleAnimScript : MonoBehaviour
 
         
         if (!(_nTime > 1.0f)) return;
-        
-        Menu.SetActive(true);
-        Anim.SetActive(false);
+
+        if (!Intro)
+        {
+            Menu.SetActive(true);
+            Anim.SetActive(false);
+        }
+        else
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

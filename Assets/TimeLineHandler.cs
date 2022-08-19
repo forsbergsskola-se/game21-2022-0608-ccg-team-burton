@@ -12,6 +12,11 @@ public class TimeLineHandler : MonoBehaviour
     private GameObject RightButton;
     private GameObject JumpButton;
     private GameObject AttackButton;
+    private GameObject Timer;
+    private GameObject PauseMenu;
+    private GameObject Coin;
+    private GameObject Health;
+    
     private LevelCompleted _levelCompleted;
     
     [SerializeField] float _secondsToActivate;
@@ -23,6 +28,10 @@ public class TimeLineHandler : MonoBehaviour
         RightButton = HUD.transform.Find("Right Button").gameObject;
         AttackButton = HUD.transform.Find("Attack Button").gameObject;
         JumpButton = HUD.transform.Find("Jump Button").gameObject;
+        Timer = HUD.transform.Find("Time").gameObject;
+        PauseMenu = HUD.transform.Find("Pause Menu").gameObject;
+        Coin = HUD.transform.Find("Coin Image").gameObject;
+        Health = HUD.transform.Find("Health").gameObject;
         _levelCompleted = FindObjectOfType<LevelCompleted>();
     }
 
@@ -37,8 +46,7 @@ public class TimeLineHandler : MonoBehaviour
         }
 
         //If timeline has been run on this level previously
-        _playerMovement.enabled = true;
-        ToggleTimerAndButtons(true);
+        ToggleMovementTimerAndUI(true);
     }
     
     
@@ -47,20 +55,24 @@ public class TimeLineHandler : MonoBehaviour
     {
         //Wait for 14 secs. 
         yield return new WaitForSeconds(_secondsToActivate);
-        _playerMovement.enabled = true;
-        ToggleTimerAndButtons(true);
+        ToggleMovementTimerAndUI(true);
         PlayerPrefs.SetInt(PlayerPrefsKeys.TimeLineActive.ToString(), 1);
     }
 
     
 
-    private void ToggleTimerAndButtons(bool toggle)
+    private void ToggleMovementTimerAndUI(bool toggle)
     {
+        _playerMovement.enabled = true;
         LeftButton.SetActive(toggle);
         RightButton.SetActive(toggle);
         JumpButton.SetActive(toggle);
         AttackButton.SetActive(toggle);
+        Timer.SetActive(toggle);
         _levelCompleted.PauseTimer = !toggle;
+        PauseMenu.SetActive(toggle);
+        Coin.SetActive(toggle);
+        Health.SetActive(toggle);
     }
     
     public void ResetTimelineActive() => PlayerPrefs.SetInt(PlayerPrefsKeys.TimeLineActive.ToString(), 0);
