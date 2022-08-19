@@ -1,4 +1,4 @@
-# {game-title}
+# Broken Strings
 
 {video}
 
@@ -48,9 +48,7 @@ Mattias Lönnqvist | [LinkedIn](linkedin.com/in/mattias-lönnqvist-a12929230/)
 
 Maxim Thellenberg 
 
-Nadia Dahlberg | [LinkedIn](https://www.linkedin.com/in/nadia-dahlberg-681663237/)
-
-Pavel Sarmiento | [LinkedIn](https://www.linkedin.com/in/pavel-sarmiento-5483661a3/) 
+Pavel Sarmiento Kochersky | [LinkedIn](https://www.linkedin.com/in/pavel-sarmiento-5483661a3/) 
 
 Toofan Tahmouresi | [LinkedIn](https://www.linkedin.com/in/toofantah/)
 
@@ -60,6 +58,8 @@ Toofan Tahmouresi | [LinkedIn](https://www.linkedin.com/in/toofantah/)
 # Design Documents
 
 [Level Design Document](https://docs.google.com/document/d/175BH6Gn55kEokYSTSJycJg5dB4U4uDsKR7SMqzGB4cQ/)
+
+[Programming Documentation](http://www.teamburtondocs.team/)
 
 {tdd}
 
