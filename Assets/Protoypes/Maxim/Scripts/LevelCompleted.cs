@@ -27,6 +27,7 @@ public class LevelCompleted : MonoBehaviour
     public TMP_Text TextTimer;
     private float _timer;
     public bool PauseTimer;
+    private bool OnlyOnce = false;
 
 
     private void Awake() => PauseTimer = true;
@@ -52,6 +53,7 @@ public class LevelCompleted : MonoBehaviour
             ItemCollector._coinCounter += _coinBonus;
             //WinScreen.SetActive(true);
             LevelCompletedAnim.SetActive(true);
+            if (OnlyOnce) return;
             StartCoroutine(WinGameLogic(currentCoins));
         }
     }
@@ -67,7 +69,9 @@ public class LevelCompleted : MonoBehaviour
         UpdateCoinText(currentCoins);
         UpdateBonusCoinsText(_coinBonus);
         SaveStars(CurrentStarsNum);
-        FindObjectOfType<NewMovement>().gameObject.GetComponent<NewMovement>().enabled = false;
+        var Player = FindObjectOfType<NewMovement>().gameObject;
+        Player.GetComponent<NewMovement>().enabled = false;
+        Player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         currentCoins += _coinBonus;
         UpdateTotalCoinText(currentCoins);
             
@@ -76,6 +80,7 @@ public class LevelCompleted : MonoBehaviour
             PlayerPrefs.GetInt(PlayerPrefsKeys.CurrentCoins.ToString()) + currentCoins);
 
         Debug.Log(currentCoins);
+        OnlyOnce = true;
     }
     
     
