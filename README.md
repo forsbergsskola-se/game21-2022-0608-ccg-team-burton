@@ -1,8 +1,13 @@
 # Broken Strings
 
-{video}
+Broken Strings is a simplistic 2D platformer with an average playtime of 60-120 seconds per level. 
+![Start Screen](https://user-images.githubusercontent.com/90158105/185649235-efd83657-d3ff-4509-850d-5572556df906.png)
 
-{description}
+###
+
+[Intro Sequence](https://user-images.githubusercontent.com/90158105/185648853-b66df4b3-973c-4771-a08c-052cd419a563.mp4)
+
+
 
 # Team Burton
 
@@ -61,8 +66,14 @@ Toofan Tahmouresi | [LinkedIn](https://www.linkedin.com/in/toofantah/)
 
 [Programming Documentation](http://www.teamburtondocs.team/)
 
-{tdd}
+[Technical Design Doc](https://docs.google.com/document/d/1p0rSSAo_xGowY0U_heoOFds6sgMqKpRAWWFGuMlpBxQ/edit?usp=sharing)
 
-{art-bible}
+[Art Moodboard](https://docs.google.com/presentation/d/1rbxY0zsHUPIKDrT7yQuGW6S8pEXaYyIu3tKmhJt8XL8/edit?usp=sharing)
 
-## Media
+[Concept Art](https://docs.google.com/presentation/d/1x1gtZXtvImnFmGCBroETn3o78qjVVuOMMSxriGcO-Sg/edit?usp=sharing)
+
+
+# Builds
+[APK](https://docs.google.com/presentation/d/1x1gtZXtvImnFmGCBroETn3o78qjVVuOMMSxriGcO-Sg/edit?usp=sharing)
+
+[ZIP](https://drive.google.com/file/d/1FHo66Zg_YzMaIQTqq7VCJmRa4lZiLiMu/view?usp=sharing)
