@@ -417,8 +417,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4556720898412921285}
-  - component: {fileID: 5820873186222527833}
-  - component: {fileID: 6940437302752825568}
   m_Layer: 0
   m_Name: Buttons Medium Exchange
   m_TagString: Untagged
@@ -433,42 +431,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2411537328696542833}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.75, y: -87.55, z: 32.93}
-  m_LocalScale: {x: 0.29373544, y: 0.29373544, z: 0.110150784}
+  m_LocalScale: {x: 0.33970135, y: 0.33970135, z: 0.127388}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5820873187309638224}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5820873186222527833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2411537328696542833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 789de8b76f8535e44b53212b96d899b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sceneName: OpenRareLootBox
---- !u!114 &6940437302752825568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2411537328696542833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 945b999eb68868d4fb4cac899629f260, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneLoader: {fileID: 5820873186222527833}
-  _price: 25
 --- !u!1 &3030958529887848676
 GameObject:
   m_ObjectHideFlags: 0

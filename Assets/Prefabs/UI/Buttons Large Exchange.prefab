@@ -417,8 +417,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4371175504771008739}
-  - component: {fileID: 6004094518903725183}
-  - component: {fileID: 7188962720957356510}
   m_Layer: 0
   m_Name: Buttons Large Exchange
   m_TagString: Untagged
@@ -433,42 +431,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2513766265538924375}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 143.5, y: -88.442, z: 32.93}
-  m_LocalScale: {x: 0.29373544, y: 0.29373544, z: 0.110150784}
+  m_LocalScale: {x: 0.33970135, y: 0.33970135, z: 0.127388}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6004094517784632182}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6004094518903725183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2513766265538924375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 789de8b76f8535e44b53212b96d899b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sceneName: OpenEpicLootBox
---- !u!114 &7188962720957356510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2513766265538924375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 945b999eb68868d4fb4cac899629f260, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneLoader: {fileID: 6004094518903725183}
-  _price: 40
 --- !u!1 &2991817097755247042
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,7 +720,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7188962720957356510}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PurchaseItemButtons, Assembly-CSharp
         m_MethodName: PressBuy
         m_Mode: 1

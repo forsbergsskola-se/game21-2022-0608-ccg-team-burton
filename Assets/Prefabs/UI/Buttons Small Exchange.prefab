@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1139954482201366152}
-  - component: {fileID: 6929547097659775509}
-  - component: {fileID: 6929547097659775508}
   m_Layer: 0
   m_Name: Buttons Small Exchange
   m_TagString: Untagged
@@ -25,42 +23,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1268563052487706940}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -136, y: -85.989, z: 32.93}
-  m_LocalScale: {x: 0.29373544, y: 0.29373544, z: 0.110150784}
+  m_LocalScale: {x: 0.33970135, y: 0.33970135, z: 0.127388}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6929547096631909661}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6929547097659775509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1268563052487706940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4449f2a88bd9099438bc646180ad120f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneLoader: {fileID: 6929547097659775508}
-  _price: 1000
---- !u!114 &6929547097659775508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1268563052487706940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 789de8b76f8535e44b53212b96d899b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sceneName: OpenCommonLootBox
 --- !u!1 &1944842233632884649
 GameObject:
   m_ObjectHideFlags: 0
