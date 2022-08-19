@@ -44,8 +44,9 @@ namespace Metagame
         [Header("Reward Type")]
         public bool Multiplier = true;
 
+        private MovementButtonsHitboxManager _movementButtonsHitboxManager;
         public bool InterstitialAd = false;
-        public bool RewardAd = false;
+        public bool RewardAd = true;
         public bool BannerAd = false;
         public TextMeshProUGUI coinText;
         public TextMeshProUGUI totalCoinText;
@@ -70,6 +71,9 @@ namespace Metagame
         private void Start()
         {
             itemCollector = FindObjectOfType<ItemCollector>().gameObject.GetComponent<ItemCollector>();
+            ShowRewardAdButton = GetComponent<Button>();
+            _movementButtonsHitboxManager = FindObjectOfType<MovementButtonsHitboxManager>();
+            
             //if (!Advertisement.isInitialized)
                 InitializeAds();
 
@@ -257,6 +261,7 @@ namespace Metagame
         
         public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
         {
+            itemCollector = FindObjectOfType<ItemCollector>().gameObject.GetComponent<ItemCollector>();
             Coins = itemCollector._coinCounter;
 
             if (placementId == _interstitialID && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
