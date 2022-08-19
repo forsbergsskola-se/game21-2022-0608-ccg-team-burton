@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10430,6 +10430,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1353994304}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1396449936 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1758904630, guid: 017552a38a6d0df448d65fee96f65c91,
+    type: 3}
+  m_PrefabInstance: {fileID: 1496985174}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103417640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f77a58954b299d489d4064d5695f91e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1415695228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10751,6 +10763,26 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1758904630, guid: 017552a38a6d0df448d65fee96f65c91, type: 3}
+      propertyPath: SoundFile.Path
+      value: event:/UI/PauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1758904630, guid: 017552a38a6d0df448d65fee96f65c91, type: 3}
+      propertyPath: SoundFile.Guid.Data1
+      value: -1605792505
+      objectReference: {fileID: 0}
+    - target: {fileID: 1758904630, guid: 017552a38a6d0df448d65fee96f65c91, type: 3}
+      propertyPath: SoundFile.Guid.Data2
+      value: 1169230344
+      objectReference: {fileID: 0}
+    - target: {fileID: 1758904630, guid: 017552a38a6d0df448d65fee96f65c91, type: 3}
+      propertyPath: SoundFile.Guid.Data3
+      value: -700745281
+      objectReference: {fileID: 0}
+    - target: {fileID: 1758904630, guid: 017552a38a6d0df448d65fee96f65c91, type: 3}
+      propertyPath: SoundFile.Guid.Data4
+      value: 337523988
+      objectReference: {fileID: 0}
     - target: {fileID: 2002920838589685192, guid: 017552a38a6d0df448d65fee96f65c91,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -10960,7 +10992,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[5].m_Target
       value: 
-      objectReference: {fileID: 2103417645}
+      objectReference: {fileID: 1396449936}
     - target: {fileID: 4390524016373135475, guid: 017552a38a6d0df448d65fee96f65c91,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[5].m_CallState
@@ -22188,11 +22220,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SoundFile:
     Guid:
-      Data1: -789689683
-      Data2: 1256915576
-      Data3: -720712002
-      Data4: 280729317
-    Path: event:/UI/SelectButton2
+      Data1: -1605792505
+      Data2: 1169230344
+      Data3: -700745281
+      Data4: 337523988
+    Path: event:/UI/PauseMenu
   _soundMananger: {fileID: 0}
 --- !u!114 &2103417646
 MonoBehaviour:
