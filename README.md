@@ -48,9 +48,7 @@ Mattias Lönnqvist | [LinkedIn](linkedin.com/in/mattias-lönnqvist-a12929230/)
 
 Maxim Thellenberg 
 
-Nadia Dahlberg | [LinkedIn](https://www.linkedin.com/in/nadia-dahlberg-681663237/)
-
-Pavel Sarmiento | [LinkedIn](https://www.linkedin.com/in/pavel-sarmiento-5483661a3/) 
+Pavel Sarmiento Kochersky | [LinkedIn](https://www.linkedin.com/in/pavel-sarmiento-5483661a3/) 
 
 Toofan Tahmouresi | [LinkedIn](https://www.linkedin.com/in/toofantah/)
 
