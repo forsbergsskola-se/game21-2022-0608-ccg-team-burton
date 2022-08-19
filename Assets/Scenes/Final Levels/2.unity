@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6236,6 +6236,26 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1758904630, guid: 017552a38a6d0df448d65fee96f65c91, type: 3}
+      propertyPath: SoundFile.Path
+      value: event:/UI/PauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1758904630, guid: 017552a38a6d0df448d65fee96f65c91, type: 3}
+      propertyPath: SoundFile.Guid.Data1
+      value: -1605792505
+      objectReference: {fileID: 0}
+    - target: {fileID: 1758904630, guid: 017552a38a6d0df448d65fee96f65c91, type: 3}
+      propertyPath: SoundFile.Guid.Data2
+      value: 1169230344
+      objectReference: {fileID: 0}
+    - target: {fileID: 1758904630, guid: 017552a38a6d0df448d65fee96f65c91, type: 3}
+      propertyPath: SoundFile.Guid.Data3
+      value: -700745281
+      objectReference: {fileID: 0}
+    - target: {fileID: 1758904630, guid: 017552a38a6d0df448d65fee96f65c91, type: 3}
+      propertyPath: SoundFile.Guid.Data4
+      value: 337523988
+      objectReference: {fileID: 0}
     - target: {fileID: 2002920838589685192, guid: 017552a38a6d0df448d65fee96f65c91,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
