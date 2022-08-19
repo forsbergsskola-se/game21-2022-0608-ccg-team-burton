@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Entity;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ProjectileHandler : MonoBehaviour, IEffects

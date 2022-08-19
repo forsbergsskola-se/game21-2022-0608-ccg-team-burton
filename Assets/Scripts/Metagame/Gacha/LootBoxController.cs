@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Meta.Gacha;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
