@@ -542,6 +542,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &168085527 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7188962721001036676, guid: 52f0e3905b9b6ca41b0c58c782bf6e9f,
+    type: 3}
+  m_PrefabInstance: {fileID: 7859340030641653244}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ee871c5925d12428cbceacd4a620a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &168085528 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7188962721001036677, guid: 52f0e3905b9b6ca41b0c58c782bf6e9f,
+    type: 3}
+  m_PrefabInstance: {fileID: 7859340030641653244}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f77a58954b299d489d4064d5695f91e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &203866537
 GameObject:
   m_ObjectHideFlags: 0
@@ -3087,6 +3111,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2133653552 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5058620203669807177, guid: 52f0e3905b9b6ca41b0c58c782bf6e9f,
+    type: 3}
+  m_PrefabInstance: {fileID: 7859340030641653244}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &801005144302769387
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3155,6 +3191,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6940437300890967700, guid: fb992fe2ad3a5ff46b12bdbd0eb85669,
+        type: 3}
+      propertyPath: SoundFile.Path
+      value: event:/Meta Game/Lootbox/LootboxRare
+      objectReference: {fileID: 0}
+    - target: {fileID: 6940437300890967700, guid: fb992fe2ad3a5ff46b12bdbd0eb85669,
+        type: 3}
+      propertyPath: SoundFile.Guid.Data1
+      value: -288123045
+      objectReference: {fileID: 0}
+    - target: {fileID: 6940437300890967700, guid: fb992fe2ad3a5ff46b12bdbd0eb85669,
+        type: 3}
+      propertyPath: SoundFile.Guid.Data2
+      value: 1120000097
+      objectReference: {fileID: 0}
+    - target: {fileID: 6940437300890967700, guid: fb992fe2ad3a5ff46b12bdbd0eb85669,
+        type: 3}
+      propertyPath: SoundFile.Guid.Data3
+      value: -1685693031
+      objectReference: {fileID: 0}
+    - target: {fileID: 6940437300890967700, guid: fb992fe2ad3a5ff46b12bdbd0eb85669,
+        type: 3}
+      propertyPath: SoundFile.Guid.Data4
+      value: 480234261
+      objectReference: {fileID: 0}
+    - target: {fileID: 6940437300890967701, guid: fb992fe2ad3a5ff46b12bdbd0eb85669,
+        type: 3}
+      propertyPath: _coinsUIText
+      value: 
+      objectReference: {fileID: 2108242223}
+    - target: {fileID: 6940437300890967701, guid: fb992fe2ad3a5ff46b12bdbd0eb85669,
+        type: 3}
+      propertyPath: _buttonsUIText
+      value: 
+      objectReference: {fileID: 1887524496}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: fb992fe2ad3a5ff46b12bdbd0eb85669, type: 3}
@@ -3971,6 +4042,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Buttons Small Exchange
       objectReference: {fileID: 0}
+    - target: {fileID: 5817584159758390677, guid: f07011eb143175649bd46d60b2926caa,
+        type: 3}
+      propertyPath: _coinsUIText
+      value: 
+      objectReference: {fileID: 2108242223}
+    - target: {fileID: 5817584159758390677, guid: f07011eb143175649bd46d60b2926caa,
+        type: 3}
+      propertyPath: _buttonsUIText
+      value: 
+      objectReference: {fileID: 1887524496}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: f07011eb143175649bd46d60b2926caa, type: 3}
@@ -3992,6 +4073,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Buttons Large Exchange
+      objectReference: {fileID: 0}
+    - target: {fileID: 2669258726459589926, guid: 52f0e3905b9b6ca41b0c58c782bf6e9f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 76
       objectReference: {fileID: 0}
     - target: {fileID: 4371175504771008739, guid: 52f0e3905b9b6ca41b0c58c782bf6e9f,
         type: 3}
@@ -4048,10 +4134,70 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5058620203669807177, guid: 52f0e3905b9b6ca41b0c58c782bf6e9f,
+        type: 3}
+      propertyPath: m_text
+      value: 50 Buttons!
+      objectReference: {fileID: 0}
     - target: {fileID: 6598815196156589983, guid: 52f0e3905b9b6ca41b0c58c782bf6e9f,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 168085527}
+    - target: {fileID: 6598815196156589983, guid: 52f0e3905b9b6ca41b0c58c782bf6e9f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ExchangeCoinsForButtons
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815196156589983, guid: 52f0e3905b9b6ca41b0c58c782bf6e9f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CurrencyExchange, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188962721001036676, guid: 52f0e3905b9b6ca41b0c58c782bf6e9f,
+        type: 3}
+      propertyPath: _coinsUIText
+      value: 
+      objectReference: {fileID: 2108242223}
+    - target: {fileID: 7188962721001036676, guid: 52f0e3905b9b6ca41b0c58c782bf6e9f,
+        type: 3}
+      propertyPath: _oneShotSound
+      value: 
+      objectReference: {fileID: 168085528}
+    - target: {fileID: 7188962721001036676, guid: 52f0e3905b9b6ca41b0c58c782bf6e9f,
+        type: 3}
+      propertyPath: _buttonsUIText
+      value: 
+      objectReference: {fileID: 1887524496}
+    - target: {fileID: 7188962721001036676, guid: 52f0e3905b9b6ca41b0c58c782bf6e9f,
+        type: 3}
+      propertyPath: _buttonsRecivedText
+      value: 
+      objectReference: {fileID: 2133653552}
+    - target: {fileID: 7188962721001036677, guid: 52f0e3905b9b6ca41b0c58c782bf6e9f,
+        type: 3}
+      propertyPath: SoundFile.Path
+      value: event:/Meta Game/Lootbox/LootboxEpic
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188962721001036677, guid: 52f0e3905b9b6ca41b0c58c782bf6e9f,
+        type: 3}
+      propertyPath: SoundFile.Guid.Data1
+      value: 947116701
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188962721001036677, guid: 52f0e3905b9b6ca41b0c58c782bf6e9f,
+        type: 3}
+      propertyPath: SoundFile.Guid.Data2
+      value: 1257528457
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188962721001036677, guid: 52f0e3905b9b6ca41b0c58c782bf6e9f,
+        type: 3}
+      propertyPath: SoundFile.Guid.Data3
+      value: 629715881
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188962721001036677, guid: 52f0e3905b9b6ca41b0c58c782bf6e9f,
+        type: 3}
+      propertyPath: SoundFile.Guid.Data4
+      value: 1117603458
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
