@@ -17,8 +17,8 @@ public class CurrencyExchange : MonoBehaviour
 
     private void Start()
     {
-        _coinsTextOnButton.SetText(_coinCost.ToString() +" Coins");
-        _buttonsRecivedText.SetText(_buttonsGained.ToString());
+        _coinsTextOnButton.SetText(_coinCost +" Coins");
+        _buttonsRecivedText.SetText(_buttonsGained+" Buttons!");
         
     }
 
