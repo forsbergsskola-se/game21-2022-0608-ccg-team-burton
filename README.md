@@ -100,9 +100,7 @@ Toofan Tahmouresi | [LinkedIn](https://www.linkedin.com/in/toofantah/)
 
 
 # Builds
-[APK](https://docs.google.com/presentation/d/1x1gtZXtvImnFmGCBroETn3o78qjVVuOMMSxriGcO-Sg/edit?usp=sharing)
-
-[ZIP](https://drive.google.com/file/d/1FHo66Zg_YzMaIQTqq7VCJmRa4lZiLiMu/view?usp=sharing)
+[APK](https://drive.google.com/file/d/1o8AlXN3_-kv8VF8OoYnBzrHbqaNYAI39/view?usp=sharing)
 
 ## Phone 16:9 Screenshots:
 
