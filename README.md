@@ -22,12 +22,6 @@ Upgrade Porcelina to get stronger and defeat what lurks within the shadows of th
 
 ###
 
-# Intro Sequence
-https://user-images.githubusercontent.com/90158105/186264635-77ca670a-e740-40e5-9772-21f3f0f4d970.mp4
-
-
-###
-
 # Trailer
 https://user-images.githubusercontent.com/90158105/186266899-50b0a3b1-9d27-48f3-b8ab-54e873a8c73b.mp4
 
