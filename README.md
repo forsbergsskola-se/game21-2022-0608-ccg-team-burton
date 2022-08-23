@@ -1,11 +1,29 @@
 # Broken Strings
 
-Broken Strings is a simplistic 2D platformer with an average playtime of 60-120 seconds per level. 
+**Broken Strings** is a simplistic 2D platformer with an average playtime of 60-120 seconds per level.
+
+#
+
+Short description: 
+*Help Porcelina find her way through a deep, dark forest.*
+
+#
+Long description: 
+
+*Play as Porceina, a cursed doll sprung to life. Help her through a deep forest by platforming and fighting your way forward. 
+Upgrade Porcelina to get stronger and defeat what lurks within the shadows of the old woods.*
+
+*Can you conquer the forest?*
+
+*Download for free!*
+
+# Title Screen
 ![Start Screen](https://user-images.githubusercontent.com/90158105/185649235-efd83657-d3ff-4509-850d-5572556df906.png)
 
 ###
 
-[Intro Sequence](https://user-images.githubusercontent.com/90158105/185648853-b66df4b3-973c-4771-a08c-052cd419a563.mp4)
+#Intro Sequence
+![Intro Sequence](https://user-images.githubusercontent.com/90158105/185648853-b66df4b3-973c-4771-a08c-052cd419a563.mp4)
 
 
 
@@ -13,7 +31,7 @@ Broken Strings is a simplistic 2D platformer with an average playtime of 60-120 
 
 ## Art
 
-Ava Blixt | [LinkedIn](https://www.linkedin.com/in/ava-blixt-6830aa195/) | [Portfolio]()
+Ava Blixt | [LinkedIn](https://www.linkedin.com/in/ava-blixt-6830aa195/)
 
 Ella Schoultz | [LinkedIn](https://www.linkedin.com/in/ella-schoultz/) 
 
@@ -77,3 +95,16 @@ Toofan Tahmouresi | [LinkedIn](https://www.linkedin.com/in/toofantah/)
 [APK](https://docs.google.com/presentation/d/1x1gtZXtvImnFmGCBroETn3o78qjVVuOMMSxriGcO-Sg/edit?usp=sharing)
 
 [ZIP](https://drive.google.com/file/d/1FHo66Zg_YzMaIQTqq7VCJmRa4lZiLiMu/view?usp=sharing)
+
+##Phone 16:9 Screenshots:
+
+![Screenshot 1](https://user-images.githubusercontent.com/90158105/186260538-f8ee7791-525d-44a3-95fb-b3cdb3a7d6bc.png)
+![Screenshot 2](https://user-images.githubusercontent.com/90158105/186260534-7cc1d2f0-7c71-41f8-9107-18a160ec9a5b.png)
+
+
+## Icon & Google Play Release
+
+![BrokenStringsAppIcon](https://user-images.githubusercontent.com/90158105/186263592-8d011d5a-2e6c-4441-8876-d4dee3e3fb26.png)
+
+![playstore](https://user-images.githubusercontent.com/90158105/186263665-9b2ea9c6-d893-4354-b45a-a1b59befdf02.png)
+![opentesting](https://user-images.githubusercontent.com/90158105/186263673-dc058c41-505e-4be7-b247-d00288f1cd98.png)
