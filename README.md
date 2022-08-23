@@ -96,6 +96,13 @@ Toofan Tahmouresi | [LinkedIn](https://www.linkedin.com/in/toofantah/)
 # Builds
 [APK](https://drive.google.com/file/d/1o8AlXN3_-kv8VF8OoYnBzrHbqaNYAI39/view?usp=sharing)
 
+[ALPHA Android](https://play.google.com/store/apps/details?id=com.TeamBurton.BrokenStrings)
+[ALPHA Web](https://play.google.com/apps/testing/com.TeamBurton.BrokenStrings)
+
+[BETA Android](https://play.google.com/store/apps/details?id=com.TeamBurton.BrokenStrings)
+[BETA Web](https://play.google.com/apps/testing/com.TeamBurton.BrokenStrings)
+
+
 ## Phone 16:9 Screenshots:
 
 ![Screenshot 1](https://user-images.githubusercontent.com/90158105/186260538-f8ee7791-525d-44a3-95fb-b3cdb3a7d6bc.png)
