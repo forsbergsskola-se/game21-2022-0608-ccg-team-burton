@@ -22,12 +22,20 @@ Upgrade Porcelina to get stronger and defeat what lurks within the shadows of th
 
 ###
 
-#Intro Sequence
-![Intro Sequence](https://user-images.githubusercontent.com/90158105/185648853-b66df4b3-973c-4771-a08c-052cd419a563.mp4)
+# Intro Sequence
+https://user-images.githubusercontent.com/90158105/186264635-77ca670a-e740-40e5-9772-21f3f0f4d970.mp4
 
+
+###
+
+# Trailer
+https://user-images.githubusercontent.com/90158105/186266899-50b0a3b1-9d27-48f3-b8ab-54e873a8c73b.mp4
 
 
 # Team Burton
+
+
+
 
 ## Art
 
@@ -96,9 +104,11 @@ Toofan Tahmouresi | [LinkedIn](https://www.linkedin.com/in/toofantah/)
 
 [ZIP](https://drive.google.com/file/d/1FHo66Zg_YzMaIQTqq7VCJmRa4lZiLiMu/view?usp=sharing)
 
-##Phone 16:9 Screenshots:
+## Phone 16:9 Screenshots:
 
 ![Screenshot 1](https://user-images.githubusercontent.com/90158105/186260538-f8ee7791-525d-44a3-95fb-b3cdb3a7d6bc.png)
+
+
 ![Screenshot 2](https://user-images.githubusercontent.com/90158105/186260534-7cc1d2f0-7c71-41f8-9107-18a160ec9a5b.png)
 
 
@@ -107,4 +117,5 @@ Toofan Tahmouresi | [LinkedIn](https://www.linkedin.com/in/toofantah/)
 ![BrokenStringsAppIcon](https://user-images.githubusercontent.com/90158105/186263592-8d011d5a-2e6c-4441-8876-d4dee3e3fb26.png)
 
 ![playstore](https://user-images.githubusercontent.com/90158105/186263665-9b2ea9c6-d893-4354-b45a-a1b59befdf02.png)
+
 ![opentesting](https://user-images.githubusercontent.com/90158105/186263673-dc058c41-505e-4be7-b247-d00288f1cd98.png)
