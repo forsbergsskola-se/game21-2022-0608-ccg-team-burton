@@ -85,8 +85,8 @@ namespace NewGraph.NodeTypes.ActionNodes
                 }    
             }
             if (comp.HasFlag(CompoundActions.PlayerInAttackRange))return State.Success;
-            //if (comp.HasFlag(CompoundActions.HigherGroundSeen))return State.Success;
-            if (!InsideArea())
+            if (comp.HasFlag(CompoundActions.HigherGroundSeen))return State.Success;
+            if (!InsideArea() && !comp.HasFlag(CompoundActions.LowerGroundSeen))
             {
                 Debug.Log($"arrived at target: {agent.enemyTransform.name}");
                 agent.enemyEyes.compoundActions |= CompoundActions.ArrivedAtTarget;
@@ -95,7 +95,7 @@ namespace NewGraph.NodeTypes.ActionNodes
             
             if (ArrivedAtTarget())
             {
-                Debug.Log($"arrived at target: {agent.enemyTransform.name}");
+             //   Debug.Log($"arrived at target: {agent.enemyTransform.name}");
                 agent.enemyEyes.compoundActions |= CompoundActions.ArrivedAtTarget;
                 return State.Success;
             }

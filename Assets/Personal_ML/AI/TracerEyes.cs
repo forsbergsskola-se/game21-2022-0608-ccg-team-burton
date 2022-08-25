@@ -156,7 +156,7 @@ public class TracerEyes : MonoBehaviour
             var right = transform.right;
             var tracePos = pos + new Vector3(right.x * 5, 5);
 
-            if (distanceToWall is < 3 and > 0.5f)
+            if (distanceToWall is < 4 and > 0.5f)
             {
                 var some =  _grid.GetCurrentGround(tracePos);
                 AddDebugPointAt(tracePos, 0);
@@ -166,7 +166,7 @@ public class TracerEyes : MonoBehaviour
                     var diff = Mathf.Abs(some.start.y - pos.y); 
                     if (diff < 4)
                     {
-                        estimatedJumpForce = new Vector2( 10, 10 + diff * 2);
+                        estimatedJumpForce = new Vector2( 10, 10 + diff * 1.7f);
                         compoundActions |= CompoundActions.HigherGroundSeen;
                     }
                     else
@@ -219,7 +219,7 @@ public class TracerEyes : MonoBehaviour
 
             if (some != null)
             {
-                if (Mathf.Abs(some.start.y - pos.y) < 4)
+                if (Mathf.Abs(some.start.y - pos.y) < 5)
                 {
                     groundTrace2 = true;
                 }

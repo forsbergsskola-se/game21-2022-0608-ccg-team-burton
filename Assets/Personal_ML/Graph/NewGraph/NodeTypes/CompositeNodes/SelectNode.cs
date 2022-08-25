@@ -27,7 +27,7 @@ public class SelectNode : CompositeNode
     private void CheckOptions()
     {
         var comp = agent.enemyEyes.compoundActions;
-        Debug.Log(comp);
+      //  Debug.Log(comp);
         
         if (comp.HasFlag(CompoundActions.EnemyDead))
         {
@@ -93,25 +93,28 @@ public class SelectNode : CompositeNode
         
         else if (!comp.HasFlag(CompoundActions.GroundSeen))
         {
-            var ground = agent.grid
-                .GetCurrentGround(agent.enemyTransform.position +
-                                  new Vector3(agent.enemyTransform.right.x * 9,0));
+            var pos = agent.enemyTransform.position;
+            var otherPos = pos + new Vector3(agent.enemyTransform.right.x * 3, -2);
+            var ground = agent.grid.GetCurrentGround(otherPos);
             if (!comp.HasFlag(CompoundActions.PlayerNoticed) && !comp.HasFlag(CompoundActions.LowerGroundSeen))
             {
+                GetTarget();
+            }
+            
+            if (!comp.HasFlag(CompoundActions.PlayerNoticed) && comp.HasFlag(CompoundActions.LowerGroundSeen))
+            {
+                Debug.Log("lower ground");
                 if (ground == null)
                 {
                     GetTarget();
                 }
                 else
                 {
-                    currentCommand = CurrentCommand.Jump;
+                    var dir = agent.enemyTransform.right.x > 0;
+                    agent.currentDestination = dir ? ground.end : ground.start;
+                    Debug.Log($"lower ground going{agent.currentDestination}");
+                    currentCommand = CurrentCommand.MoveToPosition;
                 }
-            }
-            
-            if (!comp.HasFlag(CompoundActions.PlayerNoticed) && comp.HasFlag(CompoundActions.LowerGroundSeen))
-            {
-                var dir = agent.enemyTransform.right.x > 0;
-                agent.currentDestination = dir ? ground.end : ground.start;
             }
         }
 
